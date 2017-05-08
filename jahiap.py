@@ -1,17 +1,23 @@
 #!/usr/local/bin/python
 
+from slugify import slugify
+
 import xml.dom.minidom
+import exporter
+
 
 # the path of the Jahia Site xml data file
-PATH = "/home/me/Downloads/jahia/dcsl/export_en.xml"
+XML_PATH = "/home/me/Downloads/jahia/dcsl/export_en.xml"
 
+# the output path
+OUT_PATH = "/tmp/dcsl"
 
 class Site:
 
     """A Jahia Site. Have 1 to N Jahia Pages"""
 
-    xml_path = ""
     pages = {}
+    xml_path = ""
 
     def __init__(self, xml_path):
 
@@ -62,6 +68,11 @@ class Page:
         self.template = element.getAttribute("jahia:template")
         self.title = element.getAttribute("jahia:title")
 
+        if "home" == self.template:
+            self.name = "index.html"
+        else:
+            self.name = slugify(self.title) + ".html"
+
     def __str__(self):
         return self.pid + " " + self.template + " " + self.title
 
@@ -70,8 +81,11 @@ class Box:
 
     """A Jahia Box. Can be of type text, infoscience, etc."""
 
+    # the box type
+    type = "unknown"
     content = ""
 
+    # the known box types
     types = {
         "epfl:textBox": "text",
         "epfl:infoscienceBox": "infoscience",
@@ -91,8 +105,6 @@ class Box:
 
         if self.types[type]:
             self.type = self.types[type]
-        else:
-            self.type = "unknown"
 
     def set_content(self, element):
 
@@ -103,12 +115,8 @@ class Box:
         return self.type + " " + self.title
 
 
-site = Site(PATH)
+site = Site(XML_PATH)
 
-for page in site.pages.values():
-    print(page)
+ex = exporter.Exporter(site, OUT_PATH)
 
-    for box in page.boxes:
-        print(box)
 
-    print("===========")
