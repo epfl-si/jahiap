@@ -10,7 +10,7 @@ import exporter
 XML_PATH = "/home/me/Downloads/jahia/dcsl/export_en.xml"
 
 # the output path
-OUT_PATH = "/tmp/dcsl"
+OUT_PATH = "/tmp/jahiap"
 
 class Site:
 
