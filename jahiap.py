@@ -5,12 +5,8 @@ from slugify import slugify
 import xml.dom.minidom
 import exporter
 
+from settings import *
 
-# the path of the Jahia Site xml data file
-XML_PATH = "/home/me/Downloads/jahia/dcsl/export_en.xml"
-
-# the output path
-OUT_PATH = "/tmp/jahiap"
 
 class Site:
 
@@ -111,12 +107,16 @@ class Box:
         if "text" == self.type:
             self.content = element.getElementsByTagName("text")[0].getAttribute("jahia:value")
 
+            # fix the links
+            old = "###file:/content/sites/%s/files/" % SITE_NAME
+            new = "/files/"
+
+            self.content = self.content.replace(old, new)
+
     def __str__(self):
         return self.type + " " + self.title
 
 
-site = Site(XML_PATH)
+site = Site(BASE_PATH + "/export_en.xml")
 
 ex = exporter.Exporter(site, OUT_PATH)
-
-
