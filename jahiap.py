@@ -45,6 +45,10 @@ class Site:
             boxes = []
 
             for xml_box in xml_boxes:
+
+                if not self.include_box(xml_box, page):
+                    continue
+
                 box = Box(xml_box)
                 boxes.append(box)
 
@@ -52,6 +56,15 @@ class Site:
 
         self.pages = pages
 
+    def include_box(self, xml_box, page):
+        """Check if the given box belongs to the given page"""
+
+        parent = xml_box.parentNode
+
+        while "jahia:page" != parent.nodeName:
+            parent = parent.parentNode
+
+        return page.pid == parent.getAttribute("jahia:pid")
 
 class Page:
 

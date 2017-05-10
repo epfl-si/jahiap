@@ -1,0 +1,4 @@
+- sitemap
+- infoscience box
+- clean css
+- use python commands for managing files

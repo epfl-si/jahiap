@@ -10,7 +10,7 @@ pip install -r requirements/base.txt
 
 ~~~
 python jahiap.py
-docker run -p 8080:80 --name jahiap -v /tmp/jahiap:/usr/share/nginx/html -d nginx
+docker run -p 8080:80 -v /tmp/jahiap:/usr/share/nginx/html -d nginx
 Then go to http://localhost:8080
 ~~~
 
