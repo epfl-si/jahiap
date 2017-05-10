@@ -9,6 +9,11 @@ from settings import *
 
 class Exporter:
 
+    env = Environment(
+        loader=PackageLoader('exporter', 'templates'),
+        autoescape=select_autoescape(['html', 'xml'])
+    )
+
     def __init__(self, site, out_path):
 
         self.site = site
@@ -23,26 +28,32 @@ class Exporter:
         self.extract_files()
 
     def generate_pages(self):
-        """Generate the pages"""
+        """Generate the pages & the sitemap"""
 
-        env = Environment(
-            loader=PackageLoader('exporter', 'templates'),
-            autoescape=select_autoescape(['html', 'xml'])
-        )
-
-        template = env.get_template('epfl-en.html')
+        # pages
+        template = self.env.get_template('epfl-en.html')
 
         for page in self.site.pages.values():
-
-            path = "%s/%s" % (self.out_path, page.name)
-
             content = template.render(page=page)
 
-            html_file = open(path, "w")
+            self.generate_page(page.name, content)
 
-            html_file.write(content)
+        # generate the sitemap
+        template = self.env.get_template('epfl-sitemap-en.html')
 
-            html_file.close()
+        content = template.render(site=self.site)
+
+        self.generate_page("sitemap.html", content)
+
+    def generate_page(self, name, content):
+        """Generate a page"""
+        path = "%s/%s" % (self.out_path, name)
+
+        file = open(path, "w")
+
+        file.write(content)
+
+        file.close()
 
     def extract_files(self):
         """Extract the files"""

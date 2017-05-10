@@ -5,7 +5,7 @@
 <!--[if IE 9]><html lang="en" class="no-js ie9 lt-ie10"><![endif]-->
 <!--[if !IE]><!--><html xmlns="http://www.w3.org/1999/xhtml" lang="en" class="no-js"><!--<![endif]-->
 <head>
-  <title>{{ page.title}}</title>
+  <title>Sitemap</title>
   <meta charset="utf-8" />
   <meta name="description" content="" />
 
@@ -71,13 +71,12 @@
     </header>
 
       <div>
-        <h1>{{ page.title }}</h1>
-  {% for box in page.boxes %}
-  <h2>{{ box.title }}</h2>
-  <div>
-      {{ box.content|safe }}
-  </div>
-  {% endfor %}
+          <h1>Sitemap</h1>
+        <ul>
+          {% for page in site.pages.values() %}
+          <li><a href="/{{ page.name }}">{{ page.title }}</a></li>
+          {% endfor %}
+        </ul>
       </div>
 
     <!-- The site footer -->
