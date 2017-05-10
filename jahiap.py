@@ -117,6 +117,7 @@ class Box:
 
     def set_content(self, element):
 
+        # text
         if "text" == self.type:
             self.content = element.getElementsByTagName("text")[0].getAttribute("jahia:value")
 
@@ -125,6 +126,14 @@ class Box:
             new = "/files/"
 
             self.content = self.content.replace(old, new)
+
+        # infoscience
+        elif "infoscience" == self.type:
+
+            url = element.getElementsByTagName("url")[0].getAttribute("jahia:value")
+
+            self.content = "[infoscience url=%s]" % url
+
 
     def __str__(self):
         return self.type + " " + self.title
