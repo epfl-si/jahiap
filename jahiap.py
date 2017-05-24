@@ -4,6 +4,7 @@ from slugify import slugify
 
 import xml.dom.minidom
 import exporter
+import os
 
 from settings import *
 
@@ -16,32 +17,38 @@ class Site:
 
         self.xml_path = xml_path
 
-        # the Site pages. Key is the pid, value is the page itself
+        # the pages. The dict key is the page id, the dict value is the page itself
         self.pages = {}
+
+        # the files
+        self.files = []
 
         # TODO parse the site title
         self.title = "DATA CENTER SYSTEMS LABORATORY DCSL"
 
-        # TODO the css is specific for the site faculty
+        # TODO the css is specific to the site faculty
         self.css = "//static.epfl.ch/v0.23.0/styles/ic-built.css"
 
-        self.load_data()
+        # parse the data
+        self.parse_data()
 
+        # generate the report
         self.report = ""
 
         self.generate_report()
 
-    def load_data(self):
+    def parse_data(self):
         """
-        Generates the yaml file
+        Parse the Site data
         """
 
-        file = open(self.xml_path, "r")
+        xml_file = open(self.xml_path, "r")
 
-        dom = xml.dom.minidom.parseString(file.read())
+        dom = xml.dom.minidom.parseString(xml_file.read())
 
         xml_pages = dom.getElementsByTagName("jahia:page")
 
+        # parse the pages
         pages = {}
 
         for xml_page in xml_pages:
@@ -70,6 +77,9 @@ class Site:
 
         self.pages = pages
 
+        # parse the files
+        File.parse_files(self)
+
     def include_box(self, xml_box, page):
         """Check if the given box belongs to the given page"""
 
@@ -82,6 +92,8 @@ class Site:
 
     def generate_report(self):
         """Generate the report of what have been parsed"""
+
+        num_files = len(self.files)
 
         num_pages = len(self.pages)
 
@@ -99,9 +111,11 @@ class Site:
         self.report = """
 Parsed :
 
+  - %s files 
+  
   - %s pages :
   
-""" % num_pages
+""" % (num_files, num_pages)
 
         for num, count in num_boxes.items():
             self.report += "    - %s %s boxes\n" % (count, num)
@@ -177,6 +191,29 @@ class Box:
 
     def __str__(self):
         return self.type + " " + self.title
+
+
+class File:
+    """A Jahia File"""
+
+    def __init__(self, name, path):
+        self.name = name
+        self.path = path
+
+    @staticmethod
+    def parse_files(site):
+        """Parse the site files"""
+        start = "%s/content/sites/%s/files" % (BASE_PATH, SITE_NAME)
+
+        for (path, dirs, files) in os.walk(start):
+            for file in files:
+                # we exclude the thumbnails
+                if "thumbnail" == file or "thumbnail2" == file:
+                    continue
+
+                file = File(name=file, path=path)
+
+                site.files.append(file)
 
 
 site = Site(BASE_PATH + "/export_en.xml")
