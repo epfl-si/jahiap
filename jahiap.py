@@ -27,6 +27,10 @@ class Site:
 
         self.load_data()
 
+        self.report = ""
+
+        self.generate_report()
+
     def load_data(self):
         """
         Generates the yaml file
@@ -75,6 +79,33 @@ class Site:
             parent = parent.parentNode
 
         return page.pid == parent.getAttribute("jahia:pid")
+
+    def generate_report(self):
+        """Generate the report of what have been parsed"""
+
+        num_pages = len(self.pages)
+
+        # calculate the total number of boxes by type
+        # dict key is the box type, dict value is the number of boxes
+        num_boxes = {}
+
+        for page in self.pages.values():
+            for box in page.boxes:
+                if box.type in num_boxes:
+                    num_boxes[box.type] = num_boxes[box.type] + 1
+                else:
+                    num_boxes[box.type] = 1
+
+        self.report = """
+Parsed :
+
+  - %s pages :
+  
+""" % num_pages
+
+        for num, count in num_boxes.items():
+            self.report += "    - %s %s boxes\n" % (count, num)
+
 
 class Page:
 
@@ -144,11 +175,12 @@ class Box:
 
             self.content = "[infoscience url=%s]" % url
 
-
     def __str__(self):
         return self.type + " " + self.title
 
 
 site = Site(BASE_PATH + "/export_en.xml")
+
+print(site.report)
 
 ex = exporter.Exporter(site, OUT_PATH)
