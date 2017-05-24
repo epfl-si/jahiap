@@ -12,12 +12,17 @@ class Site:
 
     """A Jahia Site. Have 1 to N Jahia Pages"""
 
-    pages = {}
-    xml_path = ""
-
     def __init__(self, xml_path):
 
         self.xml_path = xml_path
+
+        self.pages = {}
+
+        # TODO parse the site title
+        self.title = "DATA CENTER SYSTEMS LABORATORY DCSL"
+
+        # TODO the css is specific for the site faculty
+        self.css = "//static.epfl.ch/v0.23.0/styles/ic-built.css"
 
         self.load_data()
 

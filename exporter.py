@@ -31,10 +31,10 @@ class Exporter:
         """Generate the pages & the sitemap"""
 
         # pages
-        template = self.env.get_template('epfl-en.html')
+        template = self.env.get_template('epfl-sidebar-en.html')
 
         for page in self.site.pages.values():
-            content = template.render(page=page)
+            content = template.render(page=page, site=self.site)
 
             self.generate_page(page.name, content)
 

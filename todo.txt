@@ -1,3 +1,6 @@
-- infoscience box
+- breadcrumps
+- side box
 - clean css
 - use python commands for managing files
+- site faculty
+- site title
