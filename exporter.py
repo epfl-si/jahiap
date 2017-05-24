@@ -41,7 +41,7 @@ class Exporter:
         # generate the sitemap
         template = self.env.get_template('epfl-sitemap-en.html')
 
-        content = template.render(site=self.site)
+        content = template.render(page=None, site=self.site)
 
         self.generate_page("sitemap.html", content)
 

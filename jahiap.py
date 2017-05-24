@@ -16,6 +16,7 @@ class Site:
 
         self.xml_path = xml_path
 
+        # the Site pages. Key is the pid, value is the page itself
         self.pages = {}
 
         # TODO parse the site title
@@ -42,6 +43,10 @@ class Site:
         for xml_page in xml_pages:
 
             page = Page(xml_page)
+
+            # we don't include the sitemap as it's not a real page
+            if "sitemap" == page.template:
+                continue
 
             pages[page.pid] = page
 
