@@ -17,17 +17,17 @@ class Site:
 
         self.xml_path = xml_path
 
+        # site params that are parsed later
+        self.title = ""
+        self.acronym = ""
+        self.theme = ""
+        self.css_url = ""
+
         # the pages. The dict key is the page id, the dict value is the page itself
         self.pages = {}
 
         # the files
         self.files = []
-
-        # TODO parse the site title
-        self.title = "DATA CENTER SYSTEMS LABORATORY DCSL"
-
-        # TODO the css is specific to the site faculty
-        self.css = "//static.epfl.ch/v0.23.0/styles/ic-built.css"
 
         # parse the data
         self.parse_data()
@@ -45,6 +45,11 @@ class Site:
         xml_file = open(self.xml_path, "r")
 
         dom = xml.dom.minidom.parseString(xml_file.read())
+
+        self.title = dom.getElementsByTagName("siteName").getAttribute("jahia:value")
+        self.theme = dom.getElementsByTagName("theme").getAttribute("jahia:value")
+        self.acronym = dom.getElementsByTagName("acronym").getAttribute("jahia:value")
+        self.css_url = "//static.epfl.ch/v0.23.0/styles/%s-built.css" % self.theme
 
         xml_pages = dom.getElementsByTagName("jahia:page")
 
