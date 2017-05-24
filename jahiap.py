@@ -46,9 +46,10 @@ class Site:
 
         dom = xml.dom.minidom.parseString(xml_file.read())
 
-        self.title = dom.getElementsByTagName("siteName").getAttribute("jahia:value")
-        self.theme = dom.getElementsByTagName("theme").getAttribute("jahia:value")
-        self.acronym = dom.getElementsByTagName("acronym").getAttribute("jahia:value")
+        # site params
+        self.title = dom.getElementsByTagName("siteName")[0].getAttribute("jahia:value")
+        self.theme = dom.getElementsByTagName("theme")[0].getAttribute("jahia:value")
+        self.acronym = dom.getElementsByTagName("acronym")[0].getAttribute("jahia:value")
         self.css_url = "//static.epfl.ch/v0.23.0/styles/%s-built.css" % self.theme
 
         xml_pages = dom.getElementsByTagName("jahia:page")
