@@ -10,11 +10,9 @@ from settings import *
 
 
 class Site:
-
-    """A Jahia Site. Have 1 to N Jahia Pages"""
+    """A Jahia Site. Have 1 to N Pages"""
 
     def __init__(self, xml_path):
-
         self.xml_path = xml_path
 
         # site params that are parsed later
@@ -38,23 +36,29 @@ class Site:
         self.generate_report()
 
     def parse_data(self):
-        """
-        Parse the Site data
-        """
+        """Parse the Site data"""
 
+        # load the xml
         xml_file = open(self.xml_path, "r")
 
         dom = xml.dom.minidom.parseString(xml_file.read())
 
-        # site params
+        # do the parsing
+        self.parse_site_params(dom)
+        self.parse_pages(dom)
+        self.parse_files()
+
+    def parse_site_params(self, dom):
+        """Parse the site params"""
         self.title = dom.getElementsByTagName("siteName")[0].getAttribute("jahia:value")
         self.theme = dom.getElementsByTagName("theme")[0].getAttribute("jahia:value")
         self.acronym = dom.getElementsByTagName("acronym")[0].getAttribute("jahia:value")
         self.css_url = "//static.epfl.ch/v0.23.0/styles/%s-built.css" % self.theme
 
+    def parse_pages(self, dom):
+        """Parse the pages"""
         xml_pages = dom.getElementsByTagName("jahia:page")
 
-        # parse the pages
         pages = {}
 
         for xml_page in xml_pages:
@@ -83,8 +87,19 @@ class Site:
 
         self.pages = pages
 
-        # parse the files
-        File.parse_files(self)
+    def parse_files(self):
+        """Parse the files"""
+        start = "%s/content/sites/%s/files" % (BASE_PATH, SITE_NAME)
+
+        for (path, dirs, files) in os.walk(start):
+            for file in files:
+                # we exclude the thumbnails
+                if "thumbnail" == file or "thumbnail2" == file:
+                    continue
+
+                file = File(name=file, path=path)
+
+                self.files.append(file)
 
     def include_box(self, xml_box, page):
         """Check if the given box belongs to the given page"""
@@ -97,7 +112,7 @@ class Site:
         return page.pid == parent.getAttribute("jahia:pid")
 
     def generate_report(self):
-        """Generate the report of what have been parsed"""
+        """Generate the report of what has been parsed"""
 
         num_files = len(self.files)
 
@@ -127,8 +142,13 @@ Parsed :
             self.report += "    - %s %s boxes\n" % (count, num)
 
 
-class Page:
+class Sidebar:
+    """A Jahia Sidebar"""
 
+    boxes = []
+
+
+class Page:
     """A Jahia Page. Has 1 to N Jahia Boxes"""
 
     boxes = []
@@ -148,7 +168,6 @@ class Page:
 
 
 class Box:
-
     """A Jahia Box. Can be of type text, infoscience, etc."""
 
     # the box type
@@ -205,21 +224,6 @@ class File:
     def __init__(self, name, path):
         self.name = name
         self.path = path
-
-    @staticmethod
-    def parse_files(site):
-        """Parse the site files"""
-        start = "%s/content/sites/%s/files" % (BASE_PATH, SITE_NAME)
-
-        for (path, dirs, files) in os.walk(start):
-            for file in files:
-                # we exclude the thumbnails
-                if "thumbnail" == file or "thumbnail2" == file:
-                    continue
-
-                file = File(name=file, path=path)
-
-                site.files.append(file)
 
 
 site = Site(BASE_PATH + "/export_en.xml")
