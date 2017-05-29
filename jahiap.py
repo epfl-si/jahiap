@@ -9,7 +9,12 @@ class Utils:
     @staticmethod
     def get_tag_attribute(dom, tag, attribute):
         """Returns the given attribute of the given tag"""
-        return dom.getElementsByTagName(tag)[0].getAttribute(attribute)
+        elements = dom.getElementsByTagName(tag)
+
+        if not elements:
+            return ""
+
+        return elements[0].getAttribute(attribute)
 
 
 class Site:
@@ -187,7 +192,8 @@ class Box:
     """A Jahia Box. Can be of type text, infoscience, etc."""
 
     # the box type
-    type = "unknown"
+    type = ""
+    # the box content
     content = ""
 
     # the known box types
@@ -195,6 +201,7 @@ class Box:
         "epfl:textBox": "text",
         "epfl:coloredTextBox": "coloredText",
         "epfl:infoscienceBox": "infoscience",
+        "epfl:actuBox": "actu"
     }
 
     def __init__(self, site, element):
@@ -210,26 +217,49 @@ class Box:
 
         type = element.getAttribute("jcr:primaryType")
 
-        if self.types[type]:
+        if type in self.types:
             self.type = self.types[type]
+        else:
+            self.type = "unknown '" + type + "'"
 
     def set_content(self, element):
+        """set the box attributes"""
 
         # text
         if "text" == self.type or "coloredText" == self.type:
-            self.content = Utils.get_tag_attribute(element, "text", "jahia:value")
-
-            # fix the links
-            old = "###file:/content/sites/%s/files/" % self.site.name
-            new = "/files/"
-
-            self.content = self.content.replace(old, new)
-
+            self.set_box_text(element)
         # infoscience
         elif "infoscience" == self.type:
-            url = Utils.get_tag_attribute(element, "url", "jahia:value")
+            self.set_box_infoscience(element)
+        # actu
+        elif "actu" == self.type:
+            self.set_box_actu(element)
 
-            self.content = "[infoscience url=%s]" % url
+
+    def set_box_text(self, element):
+        """set the attributes of a text box"""
+        self.content = Utils.get_tag_attribute(element, "text", "jahia:value")
+
+        if not self.content:
+            return
+
+        # fix the links
+        old = "###file:/content/sites/%s/files/" % self.site.name
+        new = "/files/"
+
+        self.content = self.content.replace(old, new)
+
+    def set_box_actu(self, element):
+        """set the attributes of an actu box"""
+        url = Utils.get_tag_attribute(element, "url", "jahia:value")
+
+        self.content = "[actu url=%s]" % url
+
+    def set_box_infoscience(self, element):
+        """set the attributes of a infoscience box"""
+        url = Utils.get_tag_attribute(element, "url", "jahia:value")
+
+        self.content = "[infoscience url=%s]" % url
 
     def __str__(self):
         return self.type + " " + self.title
@@ -313,6 +343,8 @@ def main(argv):
     zip_ref_with_files.extractall(base_path)
 
     site = Site(base_path, site_name)
+
+    print(site.report)
 
     exporter.Exporter(site, output_dir + "/html")
 
