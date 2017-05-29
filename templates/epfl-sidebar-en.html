@@ -84,7 +84,7 @@
 
       <!-- The site title -->
       <h1 class="site-title" itemprop="isPartOf" itemscope itemtype="http://schema.org/CollectionPage">
-        <a href="..." itemprop="url" accesskey="1" rel="home">
+        <a href="/" itemprop="url" accesskey="1" rel="home">
           <span itemprop="name">
               {{ site.title }} <abbr>{{ site.acronym}}</abbr>
           </span>
@@ -290,12 +290,16 @@
       <div class="g-span-1_3 g-span-s-1_1">
         <aside id="sidebar" class="sidebar" role="complementary">
 
-          <!-- A sidebar box -->
+          {% for box in site.sidebar.boxes %}
           <section class="panel">
-            <div class="panel-content">
-              <!-- ... -->
+            <div class="panel-header">
+              {{ box.title }}
+            </div>
+            <div class="panel-content local-bg-color1">
+              {{ box.content|safe }}
             </div>
           </section>
+          {% endfor %}
 
         </aside>
       </div>

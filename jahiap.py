@@ -9,6 +9,14 @@ import os
 from settings import *
 
 
+class Utils:
+    """Various utilities"""
+    @staticmethod
+    def get_tag_attribute(dom, tag, attribute):
+        """Returns the given attribute of the given tag"""
+        return dom.getElementsByTagName(tag)[0].getAttribute(attribute)
+
+
 class Site:
     """A Jahia Site. Have 1 to N Pages"""
 
@@ -26,6 +34,9 @@ class Site:
 
         # the files
         self.files = []
+
+        # the sidebar
+        self.sidebar = Sidebar()
 
         # parse the data
         self.parse_data()
@@ -46,13 +57,14 @@ class Site:
         # do the parsing
         self.parse_site_params(dom)
         self.parse_pages(dom)
+        self.parse_sidebar(dom)
         self.parse_files()
 
     def parse_site_params(self, dom):
         """Parse the site params"""
-        self.title = dom.getElementsByTagName("siteName")[0].getAttribute("jahia:value")
-        self.theme = dom.getElementsByTagName("theme")[0].getAttribute("jahia:value")
-        self.acronym = dom.getElementsByTagName("acronym")[0].getAttribute("jahia:value")
+        self.title = Utils.get_tag_attribute(dom, "siteName", "jahia:value")
+        self.theme = Utils.get_tag_attribute(dom, "theme", "jahia:value")
+        self.acronym = Utils.get_tag_attribute(dom, "acronym", "jahia:value")
         self.css_url = "//static.epfl.ch/v0.23.0/styles/%s-built.css" % self.theme
 
     def parse_pages(self, dom):
@@ -76,7 +88,6 @@ class Site:
             boxes = []
 
             for xml_box in xml_boxes:
-
                 if not self.include_box(xml_box, page):
                     continue
 
@@ -86,6 +97,14 @@ class Site:
             page.boxes = boxes
 
         self.pages = pages
+
+    def parse_sidebar(self, dom):
+        """Parse the sidebar"""
+        extra = dom.getElementsByTagName("extra")
+
+        for element in extra:
+            box = Box(element)
+            self.sidebar.boxes.append(box)
 
     def parse_files(self):
         """Parse the files"""
@@ -177,12 +196,13 @@ class Box:
     # the known box types
     types = {
         "epfl:textBox": "text",
+        "epfl:coloredTextBox": "coloredText",
         "epfl:infoscienceBox": "infoscience",
     }
 
     def __init__(self, element):
         self.set_type(element)
-        self.title = element.getElementsByTagName("boxTitle")[0].getAttribute("jahia:value")
+        self.title = Utils.get_tag_attribute(element, "boxTitle", "jahia:value")
         self.set_content(element)
 
     def set_type(self, element):
@@ -198,8 +218,8 @@ class Box:
     def set_content(self, element):
 
         # text
-        if "text" == self.type:
-            self.content = element.getElementsByTagName("text")[0].getAttribute("jahia:value")
+        if "text" == self.type or "coloredText" == self.type:
+            self.content = Utils.get_tag_attribute(element, "text", "jahia:value")
 
             # fix the links
             old = "###file:/content/sites/%s/files/" % SITE_NAME
@@ -209,8 +229,7 @@ class Box:
 
         # infoscience
         elif "infoscience" == self.type:
-
-            url = element.getElementsByTagName("url")[0].getAttribute("jahia:value")
+            url = Utils.get_tag_attribute(element, "url", "jahia:value")
 
             self.content = "[infoscience url=%s]" % url
 
