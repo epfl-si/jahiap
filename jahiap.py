@@ -1,12 +1,7 @@
-#!/usr/local/bin/python
-
 from slugify import slugify
 
 import xml.dom.minidom
-import exporter
-import os
-
-from settings import BASE_PATH, OUT_PATH, SITE_NAME
+import sys, getopt, os, zipfile, exporter
 
 
 class Utils:
@@ -20,8 +15,10 @@ class Utils:
 class Site:
     """A Jahia Site. Have 1 to N Pages"""
 
-    def __init__(self, xml_path):
-        self.xml_path = xml_path
+    def __init__(self, base_path, name):
+        self.base_path = base_path
+        self.name = name
+        self.xml_path = base_path + "/export_en.xml"
 
         # site params that are parsed later
         self.title = ""
@@ -91,7 +88,7 @@ class Site:
                 if not self.include_box(xml_box, page):
                     continue
 
-                box = Box(xml_box)
+                box = Box(self, xml_box)
                 boxes.append(box)
 
             page.boxes = boxes
@@ -103,12 +100,12 @@ class Site:
         extra = dom.getElementsByTagName("extra")
 
         for element in extra:
-            box = Box(element)
+            box = Box(self, element)
             self.sidebar.boxes.append(box)
 
     def parse_files(self):
         """Parse the files"""
-        start = "%s/content/sites/%s/files" % (BASE_PATH, SITE_NAME)
+        start = "%s/content/sites/%s/files" % (self.base_path, self.name)
 
         for (path, dirs, files) in os.walk(start):
             for file in files:
@@ -200,7 +197,8 @@ class Box:
         "epfl:infoscienceBox": "infoscience",
     }
 
-    def __init__(self, element):
+    def __init__(self, site, element):
+        self.site = site
         self.set_type(element)
         self.title = Utils.get_tag_attribute(element, "boxTitle", "jahia:value")
         self.set_content(element)
@@ -222,7 +220,7 @@ class Box:
             self.content = Utils.get_tag_attribute(element, "text", "jahia:value")
 
             # fix the links
-            old = "###file:/content/sites/%s/files/" % SITE_NAME
+            old = "###file:/content/sites/%s/files/" % self.site.name
             new = "/files/"
 
             self.content = self.content.replace(old, new)
@@ -245,8 +243,79 @@ class File:
         self.path = path
 
 
-site = Site(BASE_PATH + "/export_en.xml")
+def print_usage():
+    """Print the command line usage"""
+    print('usage : python jahiap.py -i <export_file> -o <output_dir>')
 
-print(site.report)
 
-ex = exporter.Exporter(site, OUT_PATH)
+def main(argv):
+    export_file = ""
+    output_dir = ""
+
+    try:
+        opts, args = getopt.getopt(argv,"hi:o:")
+    except getopt.GetoptError:
+        print_usage()
+        sys.exit(2)
+
+    # parse the opts
+    for opt, arg in opts:
+        if opt == '-h':
+            print_usage()
+            sys.exit()
+        elif opt == "-i":
+            export_file = arg
+        elif opt == "-o":
+            output_dir = arg
+
+    # check the args
+    if not export_file or not output_dir:
+        print_usage()
+        sys.exit(2)
+
+    # check if the input file exists
+    if not os.path.isfile(export_file):
+        print("Cannot find export file : %s" % export_file)
+        print_usage()
+        sys.exit(2)
+
+    # check if the output dir exists
+    if not os.path.isdir(output_dir):
+        os.mkdir(output_dir)
+
+    # extract the export zip file
+    export_zip = zipfile.ZipFile(export_file, 'r')
+    export_zip.extractall(output_dir)
+    export_zip.close()
+
+    # find the zip containing the site files
+    zip_with_files = ""
+
+    for file in os.listdir(output_dir):
+        if not file.endswith(".zip"):
+            continue
+
+        if file != "shared.zip":
+            zip_with_files = file
+            break
+
+    if zip_with_files == "":
+        print("Could not find zip with files")
+        sys.exit(2)
+
+    # get the site name
+    site_name = zip_with_files[:zip_with_files.index(".")]
+
+    base_path = "%s/%s" % (output_dir, site_name)
+
+    # unzip the zip with the files
+    zip_ref_with_files = zipfile.ZipFile(output_dir + "/" + zip_with_files, 'r')
+    zip_ref_with_files.extractall(base_path)
+
+    site = Site(base_path, site_name)
+
+    exporter.Exporter(site, output_dir + "/html")
+
+
+if __name__ == "__main__":
+    main(sys.argv[1:])

@@ -4,8 +4,6 @@ from jinja2 import Environment, PackageLoader, select_autoescape
 
 import os
 
-from settings import BASE_PATH, OUT_PATH, SITE_NAME
-
 
 class Exporter:
 
@@ -21,8 +19,7 @@ class Exporter:
 
         # create the output path if necessary
         if not os.path.exists(self.out_path):
-            cmd = "mkdir %s" % self.out_path
-            os.system(cmd)
+            os.mkdir(self.out_path)
 
         self.generate_pages()
         self.extract_files()
@@ -58,7 +55,7 @@ class Exporter:
     def extract_files(self):
         """Extract the files"""
 
-        start = "%s/content/sites/%s/files" % (BASE_PATH, SITE_NAME)
+        start = "%s/content/sites/%s/files" % (self.site.base_path, self.site.name)
 
         for (path, dirs, files) in os.walk(start):
             for file in files:
@@ -68,7 +65,7 @@ class Exporter:
 
                 src = "%s/%s" % (path, file)
 
-                dst = OUT_PATH + src[src.index("files/") - 1:]
+                dst = self.out_path + src[src.index("files/") - 1:]
 
                 dst = dst[:dst.rindex("/")]
 
