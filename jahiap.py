@@ -6,7 +6,7 @@ import xml.dom.minidom
 import exporter
 import os
 
-from settings import *
+from settings import BASE_PATH, OUT_PATH, SITE_NAME
 
 
 class Utils:
@@ -149,12 +149,12 @@ class Site:
                     num_boxes[box.type] = 1
 
         self.report = """
-Parsed :
+Found :
 
-  - %s files 
-  
+  - %s files
+
   - %s pages :
-  
+
 """ % (num_files, num_pages)
 
         for num, count in num_boxes.items():
