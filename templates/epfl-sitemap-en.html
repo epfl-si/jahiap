@@ -273,7 +273,7 @@
         <div class="page-content">
 
         <ul>
-          {% for page in site.pages.values() %}
+          {% for page in site.pages %}
           <li><a href="/{{ page.name }}">{{ page.title }}</a></li>
           {% endfor %}
         </ul>

@@ -2,7 +2,11 @@
 from slugify import slugify
 
 import xml.dom.minidom
-import sys, getopt, os, zipfile, exporter
+import sys
+import getopt
+import os
+import zipfile
+import exporter
 
 
 class Utils:
@@ -33,7 +37,7 @@ class Site:
         self.css_url = ""
 
         # the pages. The dict key is the page id, the dict value is the page itself
-        self.pages = {}
+        self.pages = []
 
         # the files
         self.files = []
@@ -74,7 +78,7 @@ class Site:
         """Parse the pages"""
         xml_pages = dom.getElementsByTagName("jahia:page")
 
-        pages = {}
+        pages = []
 
         for xml_page in xml_pages:
 
@@ -84,7 +88,7 @@ class Site:
             if "sitemap" == page.template:
                 continue
 
-            pages[page.pid] = page
+            pages.append(page)
 
             xml_boxes = xml_page.getElementsByTagName("main")
 
@@ -144,7 +148,7 @@ class Site:
         # dict key is the box type, dict value is the number of boxes
         num_boxes = {}
 
-        for page in self.pages.values():
+        for page in self.pages:
             for box in page.boxes:
                 if box.type in num_boxes:
                     num_boxes[box.type] = num_boxes[box.type] + 1
@@ -180,13 +184,19 @@ class Page:
         self.template = element.getAttribute("jahia:template")
         self.title = element.getAttribute("jahia:title")
 
-        if "home" == self.template:
+        if self.is_homepage():
             self.name = "index.html"
         else:
             self.name = slugify(self.title) + ".html"
 
     def __str__(self):
         return self.pid + " " + self.template + " " + self.title
+
+    def is_homepage(self):
+        """
+        Return True if the page is the homepage of site
+        """
+        return self.template == "home"
 
 
 class Box:
@@ -284,7 +294,7 @@ def main(argv):
     output_dir = ""
 
     try:
-        opts, args = getopt.getopt(argv,"hi:o:")
+        opts, args = getopt.getopt(argv, "hi:o:")
     except getopt.GetoptError:
         print_usage()
         sys.exit(2)
