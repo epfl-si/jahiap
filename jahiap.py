@@ -1,12 +1,14 @@
 """(c) All rights reserved. ECOLE POLYTECHNIQUE FEDERALE DE LAUSANNE, Switzerland, VPSI, 2017"""
-from slugify import slugify
 
-import xml.dom.minidom
-import sys
 import getopt
 import os
+import sys
+import xml.dom.minidom
 import zipfile
-import exporter
+
+from slugify import slugify
+
+from wp_exporter import WP_Exporter
 
 
 class Utils:
@@ -357,7 +359,7 @@ def main(argv):
 
     print(site.report)
 
-    exporter.Exporter(site, output_dir + "/html")
+    WP_Exporter(site=site)
 
 
 if __name__ == "__main__":
