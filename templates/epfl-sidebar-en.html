@@ -137,7 +137,15 @@
                 <span class="hidden-xxs hidden-xs icon icon-inline icon-big icon-home" role="presentation" hidden="hidden"></span>
                 <span class="hidden-s hidden-m hidden-l hidden-xl hidden-xxl">Homepage</span>
               </a>
-            </li><!-- TODO the navigation
+            </li>
+              {% for page in site.pages %}
+                  {%  if not page.is_homepage() %}
+                  <li class="nav-item">
+                    <a class="nav-link" href="/{{ page.name }}">{{ page.title }}</a>
+                  </li>
+                  {% endif %}
+              {% endfor %}
+              <!-- TODO the navigation
             <li class="nav-item">
               <span class="nav-link" data-widget="collapse">Menu 1 [dropdown]</span>
               <ul class="nav-list nav-vertical" data-widget="menu" data-items=".nav-link">

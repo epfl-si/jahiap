@@ -30,7 +30,7 @@ class Exporter:
         # pages
         template = self.env.get_template('epfl-sidebar-en.html')
 
-        for page in self.site.pages.values():
+        for page in self.site.pages:
             content = template.render(page=page, site=self.site)
 
             self.generate_page(page.name, content)
