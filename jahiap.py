@@ -95,10 +95,14 @@ class Site:
             boxes = []
 
             for xml_box in xml_boxes:
+
+                # Check if the box belongs to the current page
                 if not self.include_box(xml_box, page):
                     continue
 
-                box = Box(self, xml_box)
+                # Check if xml_box contains many boxes
+                multibox = xml_box.getElementsByTagName("text").length > 1
+                box = Box(self, xml_box, multibox=multibox)
                 boxes.append(box)
 
             page.boxes = boxes
@@ -215,11 +219,11 @@ class Box:
         "epfl:actuBox": "actu"
     }
 
-    def __init__(self, site, element):
+    def __init__(self, site, element, multibox=False):
         self.site = site
         self.set_type(element)
         self.title = Utils.get_tag_attribute(element, "boxTitle", "jahia:value")
-        self.set_content(element)
+        self.set_content(element, multibox)
 
     def set_type(self, element):
         """
@@ -233,12 +237,12 @@ class Box:
         else:
             self.type = "unknown '" + type + "'"
 
-    def set_content(self, element):
+    def set_content(self, element, multibox=False):
         """set the box attributes"""
 
         # text
         if "text" == self.type or "coloredText" == self.type:
-            self.set_box_text(element)
+            self.set_box_text(element, multibox)
         # infoscience
         elif "infoscience" == self.type:
             self.set_box_infoscience(element)
@@ -246,10 +250,18 @@ class Box:
         elif "actu" == self.type:
             self.set_box_actu(element)
 
-
-    def set_box_text(self, element):
+    def set_box_text(self, element, multibox=False):
         """set the attributes of a text box"""
-        self.content = Utils.get_tag_attribute(element, "text", "jahia:value")
+
+        if not multibox:
+            self.content = Utils.get_tag_attribute(element, "text", "jahia:value")
+        else:
+            # Concatenate HTML content of many boxes
+            content = ""
+            elements = element.getElementsByTagName("text")
+            for element in elements:
+                content += element.getAttribute("jahia:value")
+            self.content = content
 
         if not self.content:
             return
