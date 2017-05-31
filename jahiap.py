@@ -248,7 +248,6 @@ class Box:
         elif "actu" == self.type:
             self.set_box_actu(element)
 
-
     def set_box_text(self, element):
         """set the attributes of a text box"""
         self.content = Utils.get_tag_attribute(element, "text", "jahia:value")
@@ -359,7 +358,9 @@ def main(argv):
 
     print(site.report)
 
-    WP_Exporter(site=site)
+    exporter = WP_Exporter(site=site)
+
+    exporter.import_all_data_in_wordpress()
 
 
 if __name__ == "__main__":
