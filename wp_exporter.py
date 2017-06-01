@@ -7,6 +7,12 @@ from wordpress_json import WordpressJsonWrapper
 
 class WP_Exporter:
 
+    report = {
+        'pages': 0,
+        'files': 0,
+        'menus': 0,
+    }
+
     @staticmethod
     def convert_bytes(num):
         """
@@ -34,6 +40,7 @@ class WP_Exporter:
     def import_all_data_in_wordpress(self):
         self.import_medias()
         self.import_pages()
+        self.display_report()
 
     def import_media(self, media):
 
@@ -87,6 +94,7 @@ class WP_Exporter:
         for media in self.site.files:
             wp_media = self.import_media(media)
             self.replace_links(wp_media)
+            self.report['files'] += 1
 
     def import_pages(self):
 
@@ -118,5 +126,15 @@ class WP_Exporter:
             }
 
             page = self.wp.post_pages(data=wp_page_info)
-            os.system('docker exec wpcli wp menu item add-post Main %s' % page['id'])
+            self.report['pages'] += 1
 
+            # Add menu element
+            os.system('docker exec wpcli wp menu item add-post Main %s' % page['id'])
+            self.report['menus'] += 1
+
+    def display_report(self):
+
+        str = ""
+        for key, value in self.report.items():
+            str += key + ": " + value
+        print(str)
