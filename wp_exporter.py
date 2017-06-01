@@ -29,7 +29,7 @@ class WP_Exporter:
     def __init__(self, site):
         self.site = site
         url = "http://test-web-wordpress.epfl.ch/index.php/wp-json/wp/v2"
-        self.wp = WordpressJsonWrapper(url, 'admin', 'admin')
+        self.wp = WordpressJsonWrapper(url, 'admin', 'passw0rd')
 
     def import_all_data_in_wordpress(self):
         self.import_medias()
