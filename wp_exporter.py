@@ -118,5 +118,5 @@ class WP_Exporter:
             }
 
             page = self.wp.post_pages(data=wp_page_info)
-            os.system('dwp menu item add-post Main %s' % page['id'])
+            os.system('docker exec wpcli wp menu item add-post Main %s' % page['id'])
 
