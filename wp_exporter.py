@@ -117,4 +117,6 @@ class WP_Exporter:
                 # tags
             }
 
-            self.wp.post_pages(data=wp_page_info)
+            page = self.wp.post_pages(data=wp_page_info)
+            os.system('dwp menu item add-post Main %s' % page['id'])
+
