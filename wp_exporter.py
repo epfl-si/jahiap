@@ -136,7 +136,15 @@ class WP_Exporter:
 
     def display_report(self):
 
-        str = ""
-        for key, value in self.report.items():
-            str += key + ": " + value
-        print(str)
+        result = """
+Found in wordpress :
+
+  - %s files
+
+  - %s pages
+
+  - %s menus
+
+""" % (self.report['files'], self.report['pages'], self.report['menus'])
+
+        print(result)

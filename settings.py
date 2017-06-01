@@ -1,3 +1,3 @@
-DOMAIN = 'http://test-web-wordpress.epfl.ch'
+DOMAIN = 'http://localhost'
 WP_USER = 'admin'
 WP_PASSWORD = 'passw0rd'
