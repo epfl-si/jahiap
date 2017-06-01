@@ -4,6 +4,8 @@ import os
 from bs4 import BeautifulSoup
 from wordpress_json import WordpressJsonWrapper
 
+from settings import DOMAIN, WP_USER, WP_PASSWORD
+
 
 class WP_Exporter:
 
@@ -34,8 +36,8 @@ class WP_Exporter:
 
     def __init__(self, site):
         self.site = site
-        url = "http://test-web-wordpress.epfl.ch/index.php/wp-json/wp/v2"
-        self.wp = WordpressJsonWrapper(url, 'admin', 'passw0rd')
+        url = DOMAIN + "/index.php/wp-json/wp/v2"
+        self.wp = WordpressJsonWrapper(url, WP_USER, WP_PASSWORD)
 
     def import_all_data_in_wordpress(self):
         self.import_medias()
