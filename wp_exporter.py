@@ -28,7 +28,7 @@ class WP_Exporter:
 
     def __init__(self, site):
         self.site = site
-        url = "http://localhost/monsiteweb/index.php/wp-json/wp/v2"
+        url = "http://test-web-wordpress.epfl.ch/index.php/wp-json/wp/v2"
         self.wp = WordpressJsonWrapper(url, 'admin', 'admin')
 
     def import_all_data_in_wordpress(self):
