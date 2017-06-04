@@ -19,6 +19,11 @@ class WP_Exporter:
 
     @classmethod
     def wp_cli(cls, command):
+        """
+            Wrapper around the WP-CLI (wp-cli.org),
+            official wordpress command line interface)
+            available in the docker container wpcli
+        """
         os.system('docker exec wpcli %s'% command)
 
     @classmethod
@@ -31,12 +36,16 @@ class WP_Exporter:
             return cls.convert_bytes(file_info.st_size)
 
     def __init__(self, site, domain):
+        """
+            site is the python object resulting from the parsing of Jahia XML
+            domain is the wordpress domain where to push the content
+        """
         self.site = site
         url = "http://%s/index.php/wp-json/wp/v2"% domain
         self.wp = WordpressJsonWrapper(url, 'admin', 'passw0rd')
 
     def import_all_data_in_wordpress(self):
-        #self.import_medias()
+        self.import_medias()
         self.import_pages()
         self.set_frontpage()
         self.populate_menu('Main')

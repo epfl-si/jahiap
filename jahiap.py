@@ -43,6 +43,9 @@ class Site:
 
         # the pages.
         self.pages = []
+
+        # set for conveniency, to avoid:
+        #   [p for p in self.pages if p.is_homepage()][0]
         self.homepage = None
 
         # the files
@@ -94,7 +97,7 @@ class Site:
             if "sitemap" == page.template:
                 continue
 
-            # flag out homepage for convenency purppose
+            # flag out homepage for conveniency purppose
             if page.is_homepage():
                 self.homepage = page
 
@@ -314,7 +317,9 @@ def print_usage():
 def main(argv):
     export_file = ""
     output_dir = ""
+    # avoid to hardcode domain too hard
     domain = "test-web-wordpress.epfl.ch"
+    # do not force generation of static files
     generate_static_files = False
 
     try:
@@ -393,8 +398,10 @@ def main(argv):
     wp_exporter = WP_Exporter(site=site, domain=domain)
     wp_exporter.import_all_data_in_wordpress()
 
+    # generate static files only if output_dir is provided
     if generate_static_files:
         Exporter(site, output_dir + "/html")
+    # otherwise, just get rid of temporary files
     else:
         shutil.rmtree(output_dir)
 
