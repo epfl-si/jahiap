@@ -5,6 +5,8 @@ import os
 import sys
 import xml.dom.minidom
 import zipfile
+import tempfile
+import shutil
 
 from slugify import slugify
 
@@ -39,8 +41,9 @@ class Site:
         self.theme = ""
         self.css_url = ""
 
-        # the pages. The dict key is the page id, the dict value is the page itself
+        # the pages.
         self.pages = []
+        self.homepage = None
 
         # the files
         self.files = []
@@ -90,6 +93,10 @@ class Site:
             # we don't include the sitemap as it's not a real page
             if "sitemap" == page.template:
                 continue
+
+            # flag out homepage for convenency purppose
+            if page.is_homepage():
+                self.homepage = page
 
             pages.append(page)
 
@@ -307,9 +314,13 @@ def print_usage():
 def main(argv):
     export_file = ""
     output_dir = ""
+    domain = "test-web-wordpress.epfl.ch"
+    generate_static_files = False
 
     try:
-        opts, args = getopt.getopt(argv, "hi:o:")
+        # TODO: use optparse instead ?
+        # https://docs.python.org/3.1/library/optparse.html
+        opts, args = getopt.getopt(argv, "hi:o:d:")
     except getopt.GetoptError:
         print_usage()
         sys.exit(2)
@@ -323,9 +334,11 @@ def main(argv):
             export_file = arg
         elif opt == "-o":
             output_dir = arg
+        elif opt == "-d":
+            domain = arg
 
-    # check the args
-    if not export_file or not output_dir:
+    # make sure we have an input file
+    if not export_file:
         print_usage()
         sys.exit(2)
 
@@ -335,9 +348,14 @@ def main(argv):
         print_usage()
         sys.exit(2)
 
-    # check if the output dir exists
-    if not os.path.isdir(output_dir):
-        os.mkdir(output_dir)
+    # create static export if output_dir is given
+    if output_dir:
+        generate_static_files = True
+        # check if the output dir exists
+        if not os.path.isdir(output_dir):
+            os.mkdir(output_dir)
+    else:
+        output_dir = tempfile.mkdtemp()
 
     # extract the export zip file
     export_zip = zipfile.ZipFile(export_file, 'r')
@@ -372,10 +390,13 @@ def main(argv):
 
     print(site.report)
 
-    Exporter(site, output_dir + "/html")
-
-    wp_exporter = WP_Exporter(site=site)
+    wp_exporter = WP_Exporter(site=site, domain=domain)
     wp_exporter.import_all_data_in_wordpress()
+
+    if generate_static_files:
+        Exporter(site, output_dir + "/html")
+    else:
+        shutil.rmtree(output_dir)
 
 
 if __name__ == "__main__":

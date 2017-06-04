@@ -18,6 +18,10 @@ class WP_Exporter:
             num /= 1024.0
 
     @classmethod
+    def wp_cli(cls, command):
+        os.system('docker exec wpcli %s'% command)
+
+    @classmethod
     def file_size(cls, file_path):
         """
         this function will return the file size
@@ -26,14 +30,16 @@ class WP_Exporter:
             file_info = os.stat(file_path)
             return cls.convert_bytes(file_info.st_size)
 
-    def __init__(self, site):
+    def __init__(self, site, domain):
         self.site = site
-        url = "http://test-web-wordpress.epfl.ch/index.php/wp-json/wp/v2"
+        url = "http://%s/index.php/wp-json/wp/v2"% domain
         self.wp = WordpressJsonWrapper(url, 'admin', 'passw0rd')
 
     def import_all_data_in_wordpress(self):
-        self.import_medias()
+        #self.import_medias()
         self.import_pages()
+        self.set_frontpage()
+        self.populate_menu('Main')
 
     def import_media(self, media):
 
@@ -117,6 +123,32 @@ class WP_Exporter:
                 # tags
             }
 
-            page = self.wp.post_pages(data=wp_page_info)
-            os.system('docker exec wpcli wp menu item add-post Main %s' % page['id'])
+            wp_page = self.wp.post_pages(data=wp_page_info)
 
+            # keep wordpress ID for further usages
+            page.wp_id = wp_page['id']
+
+    def populate_menu(self, menu_name):
+        """
+            Add pages into the menu in wordpress with given menu_name.
+            This menu needs to be created before hand
+        """
+        for page in self.site.pages:
+            # add page to menu
+            self.wp_cli('wp menu item add-post %s %s' \
+                % (menu_name, page.wp_id))
+
+    def set_frontpage(self):
+        """
+            Use wp-cli to set the two worpress options needed fotr the job
+        """
+        # sanity check on homepage
+        if not self.site.homepage:
+            raise Exception("No homepage defined for site")
+        # make sure that we have a worpress id
+        if not getattr(self.site.homepage, 'wp_id'):
+            raise Exception("Run 'import_pages' before 'set_frontpage'")
+        # call wp-cli
+        frontpage_id = self.site.homepage.wp_id
+        self.wp_cli('wp option update show_on_front page')
+        self.wp_cli('wp option update page_on_front %s' % frontpage_id)
