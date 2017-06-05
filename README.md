@@ -25,3 +25,26 @@ $ python jahiap.py -i <export_file>
 
 Then go to http://test-web-wordpress.epfl.ch
 ~~~
+
+
+## Testing
+
+The testing tool [pytest](https://docs.pytest.org/en/latest/contents.html) comes with the requirements. You can run the full suite with
+
+```
+$ pytest
+...
+```
+
+Or you might choose to target some of those specific areas:
+
+* TestSiteProperties
+* TestSiteStructure
+* TestSidebar
+* TestHomepage
+
+
+```
+$ pytest -k TestSiteStructure
+...
+```
