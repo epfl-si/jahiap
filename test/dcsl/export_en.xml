@@ -1,0 +1,1305 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jahia:page xmlns:jahia="http://www.jahia.org/" xmlns:jcr="http://www.jcp.org/jcr/1.0" jahia:template="home" jcr:primaryType="epfl:home" jahia:title="DCSL" jahia:urlMappings="/dcsl$$$true$$$true===" jcr:uuid="51cc1e42-e0d6-4103-8688-2c3f5a31645a" jahia:originalUuid="99b07ab2-69d7-493d-adb7-bf1c0f4bbb3c" jcr:lastModified="2016-08-08T17:34:52" jahia:lastModifiedBy="196571" jahia:lastPublisher="196571" jahia:lastPublishingDate="2017-03-09T15:13:16" jahia:acl="u:223767:rwa|u:229105:rwa|u:196571:rwa|u:190526:rwa|g:DCSL-unit:rwa|g:guest:r--|g:jahia-admins:rwa|none" jahia:workflow="external" jahia:workflowName="N-Step" jahia:workflowProcess="one_validation_step_workflow" jahia:pid="115349">
+    <pageTitleListList jcr:primaryType="epfl:pageTitleContainerList" jcr:uuid="af3b6a88-07c1-483b-a022-8bbac2b808ba" jahia:originalUuid="facb85eb-da7b-45b8-bb41-15501c5def8d" jcr:lastModified="2012-11-22T09:10:53" jahia:createdBy="root" jcr:created="2012-11-22T09:10:53" jahia:lastModifiedBy="root" jahia:lastPublisher="196571" jahia:lastPublishingDate="2016-08-08T17:35:02">
+        <pageTitleList jcr:primaryType="epfl:pageTitleContainer" jcr:uuid="6ff35b18-c4a9-4e37-8bde-39f3592b3e47" jahia:originalUuid="8ef9f2ae-c640-4e05-930e-62636f08de63" jcr:lastModified="2012-11-22T09:10:53" jahia:createdBy="root" jcr:created="2012-11-22T09:10:53" jahia:lastModifiedBy="root" jahia:lastPublisher="196571" jahia:lastPublishingDate="2016-08-08T17:35:02">
+            <pageTitle jahia:value="" jcr:uuid="7e67f206-5759-4031-bcf9-589956b99aa4" jahia:originalUuid="7aa3435b-f761-4451-8dda-eb1d1102ba16"></pageTitle>
+        </pageTitleList>
+    </pageTitleListList>
+    <socialLinksList jcr:primaryType="epfl:socialContainerList" jcr:uuid="8f27a71f-4061-4389-8c80-660534a6ba88" jcr:lastModified="2014-11-19T13:27:15" jahia:lastModifiedBy="root" jcr:created="2014-11-19T13:27:15" jahia:createdBy="root"></socialLinksList>
+    <portal_topRightList jcr:primaryType="jnt:boxList" jcr:uuid="4f93a80a-9cf1-4755-afa6-baddadc58b6b" jcr:created="2014-11-19T13:27:15" jahia:createdBy="root" jcr:lastModified="2014-11-19T13:27:15" jahia:lastModifiedBy="root"></portal_topRightList>
+    <bannerList jcr:primaryType="jnt:boxList" jcr:uuid="b3a7d96b-9415-4439-bf46-50a029d38b0e" jahia:originalUuid="8bf9fc24-696d-44d6-9b84-e4fed4b8f0b1" jcr:lastModified="2012-11-22T09:10:53" jahia:createdBy="root" jcr:created="2012-11-22T09:10:53" jahia:lastModifiedBy="root"></bannerList>
+    <footerLinkListList jcr:primaryType="epfl:bottomLinksContainerList" jcr:uuid="8c91c7f5-8ef6-45cf-a486-4f71667a0b72" jahia:originalUuid="14b95fb2-2148-4471-a50b-c00ac7f98952" jcr:lastModified="2012-11-22T09:10:53" jahia:createdBy="root" jcr:created="2012-11-22T09:10:53" jahia:lastModifiedBy="root"></footerLinkListList>
+    <breadCrumbLinksListList jcr:primaryType="epfl:breadCrumbLinksContainerList" jcr:uuid="c02697da-0109-4900-899c-1a9093d73f78" jahia:originalUuid="3d277b4c-825b-45f8-8a75-82c882cac4d5" jcr:lastModified="2014-11-19T13:33:09" jahia:createdBy="root" jcr:created="2012-11-22T09:10:53" jahia:lastModifiedBy="root" jahia:lastPublisher="196571" jahia:lastPublishingDate="2016-08-08T17:35:02">
+        <breadCrumbLinksList jcr:primaryType="epfl:breadCrumbLinksContainer" jcr:uuid="2ca84586-2d66-4ed6-9ce9-e35e984b28f9" jcr:created="2014-11-19T13:33:09" jcr:lastModified="2014-11-19T13:33:09" jahia:createdBy="root" jahia:lastModifiedBy="root" jahia:lastPublisher="196571" jahia:lastPublishingDate="2016-08-08T17:35:02">
+            <breadCrumbLink jcr:uuid="bd80ebbd-06a7-4031-8920-c737b4c2f6f6">
+                <jahia:url jahia:value="http://ic.epfl.ch" jahia:title="IC" jcr:uuid="f2b4361b-a96d-4548-bd52-6a40a096066f" jahia:pid="115351"></jahia:url>
+            </breadCrumbLink>
+        </breadCrumbLinksList>
+    </breadCrumbLinksListList>
+    <actuLinksList jcr:primaryType="jnt:boxList" jcr:uuid="1e26780b-94d6-4b31-acff-d820146a0660" jcr:created="2014-11-19T13:27:15" jahia:createdBy="root" jahia:lastModifiedBy="root" jcr:lastModified="2014-11-19T13:27:15"></actuLinksList>
+    <portal_bigPictureList jcr:primaryType="epfl:imageContainerList" jcr:uuid="97359904-8a05-4d0a-8a2f-b916b98e0de6" jahia:createdBy="root" jcr:created="2014-11-19T13:27:15" jcr:lastModified="2014-11-19T13:27:15" jahia:lastModifiedBy="root"></portal_bigPictureList>
+    <pageMetadatasListList jcr:primaryType="epfl:pageMetadatasContainerList" jcr:uuid="e17b34d2-7d4b-4760-b91c-d267b63e86f0" jahia:originalUuid="27700153-9031-4797-9187-fb6c80237b9f" jcr:lastModified="2012-11-22T09:10:53" jahia:createdBy="root" jcr:created="2012-11-22T09:10:53" jahia:lastModifiedBy="root" jahia:lastPublisher="196571" jahia:lastPublishingDate="2016-08-08T17:35:02">
+        <pageMetadatasList jcr:primaryType="epfl:pageMetadatasContainer" jcr:uuid="fe4db8ee-80f0-4422-89d4-ff712f948ec6" jahia:originalUuid="ea092d3d-d456-4404-b654-b2875160d2e6" jcr:lastModified="2012-11-22T09:10:53" jahia:createdBy="root" jcr:created="2012-11-22T09:10:53" jahia:lastModifiedBy="root" jahia:lastPublisher="196571" jahia:lastPublishingDate="2016-08-08T17:35:02">
+            <pageJS jahia:value="" jcr:uuid="a59957f6-13a8-44fd-9d57-d63a94d55ed9" jahia:originalUuid="3c8e0a66-3a22-495b-978a-2c953dc53a01"></pageJS>
+            <metadataKeywords jahia:value="" jcr:uuid="ea109d7f-c0d6-4a1f-bb03-dffad22a25a2" jahia:originalUuid="fdb400d3-4eeb-432d-93cb-2b12033ac599"></metadataKeywords>
+            <metadataDescription jahia:value="" jcr:uuid="ae034d0e-8892-4453-b0e8-06413c2ed765" jahia:originalUuid="78264eef-34a9-402f-b38e-fff5e903bd00"></metadataDescription>
+            <pageCSS jahia:value="" jcr:uuid="23086919-19fb-4cab-b40f-3490e621f54b" jahia:originalUuid="e9ad1b70-db0c-4bb3-8602-75b5148d5ac8"></pageCSS>
+        </pageMetadatasList>
+    </pageMetadatasListList>
+    <col6List jcr:primaryType="jnt:boxList" jcr:uuid="a9a28ca5-88fa-4411-a47f-759881b878bf" jahia:originalUuid="bc0edbd9-3804-4897-94c4-5cb72c33c15e" jcr:lastModified="2012-11-22T09:10:54" jahia:createdBy="root" jcr:created="2012-11-22T09:10:54" jahia:lastModifiedBy="root"></col6List>
+    <navigationListList jcr:primaryType="epfl:navigationContainerList" jahia:sortHandler="" jcr:uuid="fa5d6aed-3c1d-4d61-9074-9b045be280fd" jahia:originalUuid="95b0474f-b396-48e1-ae0f-a05cdaaa1fd9" jcr:lastModified="2015-10-30T13:54:22" jahia:lastModifiedBy="196571" jahia:createdBy="root" jcr:created="2012-11-22T09:10:54" jahia:lastPublisher="196571" jahia:lastPublishingDate="2017-03-09T15:13:16">
+        <navigationList jcr:primaryType="epfl:navigationContainer" jcr:uuid="235ba716-bf9c-49b4-b145-74b1aac88b37" jahia:originalUuid="1375a7fb-ea3b-42f1-aee8-e8c370aa0bb9" jcr:lastModified="2012-11-22T09:10:53" jahia:createdBy="root" jcr:created="2012-11-22T09:10:53" jahia:lastModifiedBy="root" jahia:lastPublisher="196571" jahia:lastPublishingDate="2016-08-08T17:37:10">
+            <navigationPage jcr:uuid="1c019334-0b1a-4198-b50d-cd7018646767" jahia:originalUuid="1c5c1215-8a37-43be-9473-98e8bb737034">
+                <jahia:page jahia:template="sitemap" jcr:primaryType="epfl:sitemap" jahia:title="Sitemap" jahia:urlMappings="/sitemap$$$true$$$true===" jahia:hideFromNavigationMenu="true" jcr:uuid="6a4faa36-5c92-454e-924a-9737c25c3c23" jahia:originalUuid="52dd6ca0-c3f2-4cf5-9698-b92d8480f984" jahia:lastModifiedBy="229105" jcr:lastModified="2016-08-08T16:32:02" jahia:createdBy="root" jcr:created="2010-11-23T14:46:30" jahia:lastPublisher="196571" jahia:lastPublishingDate="2016-08-08T17:37:10" jahia:acl="none" jahia:pid="115350">
+                    <bottomLinksListList jcr:primaryType="epfl:bottomLinksContainerList" jcr:uuid="5f4ac5d2-648f-4420-8570-e14d2ca074ea" jahia:originalUuid="b8d1c722-3ec6-4d33-a4f4-7075a354435b" jcr:lastModified="2012-11-22T09:10:53" jahia:createdBy="root" jcr:created="2012-11-22T09:10:53" jahia:lastModifiedBy="root"></bottomLinksListList>
+                    <pageMetadatasListList jcr:primaryType="epfl:pageMetadatasContainerList" jcr:uuid="9b136a36-802f-4f96-b617-614a98c6688d" jahia:originalUuid="75419456-96ae-4d5d-8ce2-c5729109ae63" jcr:lastModified="2012-11-22T09:10:53" jahia:createdBy="root" jcr:created="2012-11-22T09:10:53" jahia:lastModifiedBy="root" jahia:lastPublishingDate="2016-08-08T17:37:10" jahia:lastPublisher="196571">
+                        <pageMetadatasList jcr:primaryType="epfl:pageMetadatasContainer" jcr:uuid="d5861a36-2cfd-4dd8-9af8-e71a9bf9edde" jahia:originalUuid="d7c91fe7-0754-4dbb-a07c-247d3b7f9403" jcr:lastModified="2012-11-22T09:10:53" jahia:createdBy="root" jcr:created="2012-11-22T09:10:53" jahia:lastModifiedBy="root" jahia:lastPublisher="196571" jahia:lastPublishingDate="2016-08-08T17:37:10">
+                            <metadataKeywords jahia:value="" jcr:uuid="db5e584c-b949-468e-983d-0978ec2fc394" jahia:originalUuid="9bdf6272-6459-4121-9575-0d0618468555"></metadataKeywords>
+                            <pageCSS jahia:value="" jcr:uuid="d726584b-3dff-4db2-ae21-6b0e7ed2758c" jahia:originalUuid="6a71fa31-4e26-4f6a-ade5-52697d96578f"></pageCSS>
+                            <metadataDescription jahia:value="" jcr:uuid="d37b1ba5-ca1d-46bb-96f7-9a79d11e43e3" jahia:originalUuid="a7aeba21-a2a0-4ffe-9876-8fd42fe9c71f"></metadataDescription>
+                            <pageJS jahia:value="" jcr:uuid="7e622f92-e157-4323-a4fd-f79085dafc21" jahia:originalUuid="67f6e04c-3389-4f5c-979b-77553a05edc7"></pageJS>
+                        </pageMetadatasList>
+                    </pageMetadatasListList>
+                    <mainList jcr:primaryType="jnt:boxList" jcr:uuid="30b5d31f-2882-4fbd-b1a8-abd1302c4daf" jahia:originalUuid="c032c766-b86f-4c5c-a29f-7a8600978fa8" jcr:lastModified="2012-11-22T09:10:53" jahia:createdBy="root" jcr:created="2012-11-22T09:10:53" jahia:lastModifiedBy="root"></mainList>
+                    <breadCrumbLinksListList jcr:primaryType="epfl:breadCrumbLinksContainerList" jcr:uuid="2bee1c87-5bca-459c-bd3f-ec1670ad1e64" jahia:originalUuid="46245bc9-0872-48c8-8cce-23b894a47be9" jcr:lastModified="2012-11-22T09:10:53" jahia:createdBy="root" jcr:created="2012-11-22T09:10:53" jahia:lastModifiedBy="root"></breadCrumbLinksListList>
+                    <pageTitleListList jcr:primaryType="epfl:pageTitleContainerList" jcr:uuid="23d2f1df-80e9-46d8-91f1-30ae430aab6c" jahia:originalUuid="d261c0f6-843a-4ee3-a4fd-092a4873841a" jcr:lastModified="2012-11-22T09:10:53" jahia:createdBy="root" jcr:created="2012-11-22T09:10:53" jahia:lastModifiedBy="root" jahia:lastPublisher="196571" jahia:lastPublishingDate="2016-08-08T17:37:10">
+                        <pageTitleList jcr:primaryType="epfl:pageTitleContainer" jcr:uuid="ffbedad0-5ec5-413e-a4d0-cce595c10316" jahia:originalUuid="8510ac64-d3f1-417a-9d32-1eda84b26858" jcr:lastModified="2012-11-22T09:10:53" jahia:createdBy="root" jcr:created="2012-11-22T09:10:53" jahia:lastModifiedBy="root" jahia:lastPublishingDate="2016-08-08T17:37:10" jahia:lastPublisher="196571">
+                            <pageTitle jahia:value="" jcr:uuid="e1a2b0cf-2f35-4040-bf49-d8db1adb0d19" jahia:originalUuid="0c987583-d417-4311-b037-107bd9ff4d54"></pageTitle>
+                        </pageTitleList>
+                    </pageTitleListList>
+                    <footerLinkListList jcr:primaryType="epfl:bottomLinksContainerList" jcr:uuid="63df95ab-94dd-4ec5-a3fe-a6d75ea622ca" jahia:originalUuid="25d7c700-d077-4e61-804f-8a3c551868a8" jcr:lastModified="2012-11-22T09:10:53" jahia:createdBy="root" jcr:created="2012-11-22T09:10:53" jahia:lastModifiedBy="root"></footerLinkListList>
+                    <navigationListList jcr:primaryType="epfl:navigationContainerList" jcr:uuid="249d83be-c857-42b6-aa34-824319d7140d" jahia:originalUuid="609c925a-efab-4e28-bf65-7398184bd108" jcr:lastModified="2012-11-22T09:10:53" jahia:createdBy="root" jcr:created="2012-11-22T09:10:53" jahia:lastModifiedBy="root"></navigationListList>
+                    <siteSettingsListList jcr:primaryType="epfl:siteSettingsContainerList" jcr:uuid="82535a60-1818-4bf3-ab2b-3e3dc7927a59" jahia:originalUuid="2a67941a-ede3-4cac-9060-79512701df51" jcr:lastModified="2012-11-22T09:10:53" jahia:createdBy="root" jcr:created="2012-11-22T09:10:53" jahia:lastModifiedBy="root"></siteSettingsListList>
+                    <extraList jcr:primaryType="jnt:boxList" jcr:uuid="a8880c1f-92c7-4c26-a304-c31c784312a0" jahia:originalUuid="07b5d0f1-0de3-4ae8-ad7b-1b1f7f6e96be" jcr:lastModified="2012-11-22T09:10:53" jahia:createdBy="root" jcr:created="2012-11-22T09:10:53" jahia:lastModifiedBy="root"></extraList>
+                    <oneCol_up_linksList jcr:primaryType="epfl:oneColContainerList" jcr:uuid="3fb2090c-59ad-4c92-944c-b847fcc8dcdb" jcr:lastModified="2016-08-08T16:32:02" jahia:lastModifiedBy="229105" jcr:created="2016-08-08T16:32:02" jahia:createdBy="229105"></oneCol_up_linksList>
+                    <oneCol_right_linksList jcr:primaryType="epfl:oneColContainerList" jcr:uuid="0bba397b-222c-40e6-8f1b-6a38ff3a6a6f" jahia:lastModifiedBy="229105" jahia:createdBy="229105" jcr:created="2016-08-08T16:32:02" jcr:lastModified="2016-08-08T16:32:02"></oneCol_right_linksList>
+                    <oneCol_left_linksList jcr:primaryType="epfl:oneColContainerList" jcr:uuid="7db318a2-80a2-4948-b134-04d71070a25c" jcr:lastModified="2016-08-08T16:32:02" jcr:created="2016-08-08T16:32:02" jahia:lastModifiedBy="229105" jahia:createdBy="229105"></oneCol_left_linksList>
+                    <oneCol_down_linksList jcr:primaryType="epfl:oneColContainerList" jcr:uuid="51704287-f3bd-4be7-8f88-54791ff992bb" jahia:createdBy="229105" jcr:created="2016-08-08T16:32:02" jahia:lastModifiedBy="229105" jcr:lastModified="2016-08-08T16:32:02"></oneCol_down_linksList>
+                </jahia:page>
+            </navigationPage>
+        </navigationList>
+        <navigationList jcr:primaryType="epfl:navigationContainer" jcr:uuid="48e60f63-1bdf-414a-bfdb-6239d2c6e9a6" jcr:lastModified="2015-10-08T15:58:56" jahia:createdBy="196571" jcr:created="2015-10-08T15:58:56" jahia:lastModifiedBy="196571" jahia:lastPublisher="196571" jahia:lastPublishingDate="2017-03-09T15:00:46">
+            <navigationPage jcr:uuid="45346f60-b3b1-43de-889b-32e17a1c1534">
+                <jahia:page jahia:template="simple" jcr:primaryType="epfl:simple" jahia:title="Team" jcr:uuid="7875ad37-c72c-468c-91d1-123a49e3102b" jcr:lastModified="2017-03-09T14:59:35" jahia:lastModifiedBy="196571" jahia:createdBy="196571" jcr:created="2015-10-08T15:58:56" jahia:lastPublisher="196571" jahia:lastPublishingDate="2017-03-09T15:00:46" jahia:acl="none" jahia:pid="125741">
+                    <mainList jcr:primaryType="jnt:boxList" jahia:sortHandler="" jcr:uuid="760ea518-9a6b-400a-a877-c705cf22e845" jcr:lastModified="2016-06-03T16:43:34" jahia:lastModifiedBy="196571" jahia:createdBy="196571" jcr:created="2015-10-08T15:58:56" jahia:lastPublisher="196571" jahia:lastPublishingDate="2017-03-09T15:00:46">
+                        <main jcr:primaryType="epfl:textBox" jcr:uuid="4ed38e5c-2dd7-4dda-bc8e-e47a15b051b8" jcr:lastModified="2015-10-09T11:21:57" jahia:createdBy="196571" jcr:created="2015-10-09T11:21:57" jahia:lastModifiedBy="196571" jahia:lastPublisher="196571" jahia:lastPublishingDate="2017-03-09T15:00:46">
+                            <jcr_primaryType jahia:value="epfl:textBox" jcr:uuid="79526133-613c-47ff-aa75-3d4b62b58fbe"></jcr_primaryType>
+                            <boxTitle jahia:value="Prof. Edouard Bugnion" jcr:uuid="c3c5dfff-3a9a-4f1d-ab1e-37ffd4cc6724"></boxTitle>
+                            <comboListList jcr:primaryType="epfl:comboContainerList" jcr:uuid="cfc92f9c-9e12-417a-8099-f67263ea9201" jcr:lastModified="2017-03-09T14:47:52" jahia:lastModifiedBy="196571" jahia:createdBy="196571" jcr:created="2015-10-09T11:22:04" jahia:lastPublisher="196571" jahia:lastPublishingDate="2017-03-09T15:00:46">
+                                <comboList jcr:primaryType="epfl:comboContainer" jcr:uuid="8300c4b9-0f63-4581-a2c2-26f75ee58a2e" jcr:lastModified="2017-03-09T14:47:52" jahia:createdBy="196571" jcr:created="2015-10-09T12:15:43" jahia:lastModifiedBy="196571" jahia:lastPublisher="196571" jahia:lastPublishingDate="2017-03-09T15:00:46">
+                                    <text jahia:value="&lt;p&gt;&lt;img alt=&quot;&quot; style=&quot;float: left; margin: 5px;&quot; src=&quot;###file:/content/sites/dcsl/files/Staff/Edouard Bugnion 2015.jpg?uuid=default:29c40c6f-8e18-4a6c-8ce8-094d218d16dd&quot; height=&quot;125&quot; width=&quot;100&quot; border=&quot;5&quot; /&gt;EPFL IC DCSL &lt;br /&gt;
+	&lt;br /&gt;
+	INN 237 (B&amp;acirc;timent INN) - Station 14 &lt;br /&gt;
+	CH-1015 Lausanne - Switzerland
+&lt;/p&gt;
+&lt;p&gt;Phone: +41 21 693 47 07&lt;br /&gt;
+	&lt;a href=&quot;http://edouard.bugnion@epfl.ch&quot;&gt;edouard.bugnion@epfl.ch&lt;/a&gt;&lt;br /&gt;
+	&lt;br /&gt;
+	&lt;br /&gt;
+	Edouard Bugnion joined EPFL in 2012, where his focus is on datacenter systems. His areas of interest include operating systems, datacenter infrastructure (systems and networking), and computer architecture.&lt;br /&gt;
+	&lt;br /&gt;
+	Before joining EPFL, Edouard spent 18 years in the US, where he studied at Stanford and co-founded two startups: VMware and Nuova Systems (acquired by Cisco). At VMware from 1998 until 2005, he played many roles including CTO. At Nuova/Cisco from 2005 until 2011, he helped build the core engineering team and became the VP/CTO of Cisco&amp;rsquo;s Server, Access, and Virtualization Technology Group, a group that brought to market Cisco&amp;rsquo;s Unified Computing System (UCS) platform for virtualized datacenters.&lt;br /&gt;
+	&lt;br /&gt;
+	Together with his colleagues, he received the &lt;a href=&quot;http://awards.acm.org/software_system/&quot;&gt;ACM Software System Award&lt;/a&gt; for VMware 1.0 in 2009. His paper &lt;a href=&quot;http://dl.acm.org/citation.cfm?doid=265924.265930&quot;&gt;&amp;quot;Disco: Running Commodity Operating Systems on Scalable Multiprocessors&amp;quot;&lt;/a&gt; received a Best Paper Award at SOSP '97 and was entered into the &lt;a href=&quot;http://www.sigops.org/award-hof.html&quot;&gt;ACM SIGOPS Hall of Fame Award&lt;/a&gt; in 2008. At EPFL, he received the OSDI 2014 Best Paper Award for his work on the IX dataplane operating system.
+&lt;/p&gt;
+" jcr:uuid="8975bc8f-843c-44df-830f-fb333e19f3d1"></text>
+                                    <filesList jcr:primaryType="jnt:fileContainerList" jcr:uuid="136e04d8-245b-4c3d-8fe8-b5c3e1cf8324" jcr:lastModified="2015-10-09T12:15:50" jcr:created="2015-10-09T12:15:50" jahia:lastModifiedBy="196571" jahia:createdBy="196571"></filesList>
+                                    <linksList jcr:primaryType="jnt:linkContainerList" jcr:uuid="6ad3e040-9732-42fb-a692-8b404941da27" jcr:created="2015-10-09T12:15:50" jahia:createdBy="196571" jcr:lastModified="2015-10-09T12:15:50" jahia:lastModifiedBy="196571"></linksList>
+                                </comboList>
+                            </comboListList>
+                        </main>
+                        <main jcr:primaryType="epfl:textBox" jcr:uuid="c60de725-affd-458a-bf77-e54b978a2755" jcr:created="2015-10-21T10:48:18" jcr:lastModified="2015-10-21T10:48:18" jahia:lastModifiedBy="196571" jahia:createdBy="196571" jahia:lastPublisher="196571" jahia:lastPublishingDate="2017-03-09T15:00:46">
+                            <jcr_primaryType jahia:value="epfl:textBox" jcr:uuid="6cf1b81c-f8bd-4402-bcef-5a08d2d136ee"></jcr_primaryType>
+                            <boxTitle jahia:value="Jonas Fietz" jcr:uuid="88d4580e-b83e-4cac-95f8-c99f9ded4fb9"></boxTitle>
+                            <comboListList jcr:primaryType="epfl:comboContainerList" jcr:uuid="82153496-1ac9-43c9-b78e-b2489ff3c07b" jcr:lastModified="2015-11-20T13:09:26" jahia:lastModifiedBy="196571" jahia:createdBy="196571" jcr:created="2015-10-21T10:48:22" jahia:lastPublisher="196571" jahia:lastPublishingDate="2017-03-09T15:00:46">
+                                <comboList jcr:primaryType="epfl:comboContainer" jcr:uuid="d20bfc60-d4b3-4e66-a9ab-eb139bad1d45" jcr:lastModified="2015-11-20T13:09:26" jahia:lastModifiedBy="196571" jcr:created="2015-10-21T10:57:03" jahia:createdBy="196571" jahia:lastPublisher="196571" jahia:lastPublishingDate="2017-03-09T15:00:46">
+                                    <text jahia:value="&lt;p&gt;&lt;img width=&quot;100&quot; height=&quot;133&quot; border=&quot;5&quot; alt=&quot;&quot; style=&quot;float: left; margin: 5px;&quot; src=&quot;###file:/content/sites/dcsl/files/Staff/Jonas Fietz.jpg?uuid=default:73dc52fd-0541-4295-ac2a-548453741ec0&quot; /&gt;EPFL IC DCSL&lt;br /&gt;
+	&lt;br /&gt;
+	BC 124 (B&amp;acirc;timent BC) - Station 14 &lt;br /&gt;
+	CH-1015 Lausanne - Switzerland
+&lt;/p&gt;
+&lt;p&gt;Phone: +41 21 693 66 69&lt;br /&gt;
+	&lt;a href=&quot;http://jonas.fietz@epfl.ch&quot;&gt;jonas.fietz@epfl.ch&lt;/a&gt;
+&lt;/p&gt;
+&lt;p&gt;&amp;nbsp;&lt;/p&gt;
+&lt;p&gt;Jonas Fietz received his Diploma in Mathematics as well as in Computer Science from the Karlsruhe Institute of Technology (KIT). After joining the Data Center Systems Laboratory and the Networking Architecture Group &lt;a href=&quot;http://nal.epfl.ch/&quot;&gt;NAL&lt;/a&gt;&amp;nbsp;at EPFL in 2013, he has been working on virtual overlay networks and software defined networking for his PhD.&lt;/p&gt;
+" jcr:uuid="fa986053-800b-4aec-a9dc-24edd8bf37a4"></text>
+                                    <filesList jcr:primaryType="jnt:fileContainerList" jcr:uuid="ad0d6793-9343-4268-9e49-6e30103bb2eb" jahia:createdBy="196571" jcr:created="2015-10-21T10:57:04" jahia:lastModifiedBy="196571" jcr:lastModified="2015-10-21T10:57:04"></filesList>
+                                    <linksList jcr:primaryType="jnt:linkContainerList" jcr:uuid="c4c0a0a3-9544-4609-bc24-6dec53b7de4c" jahia:lastModifiedBy="196571" jcr:lastModified="2015-10-21T10:57:04" jcr:created="2015-10-21T10:57:04" jahia:createdBy="196571"></linksList>
+                                </comboList>
+                            </comboListList>
+                        </main>
+                        <main jcr:primaryType="epfl:textBox" jcr:uuid="1bdb0b46-1ce5-43f5-96fa-c56f2d07c6b9" jahia:lastModifiedBy="196571" jcr:created="2015-11-20T12:57:44" jcr:lastModified="2015-11-20T12:57:44" jahia:createdBy="196571" jahia:lastPublisher="196571" jahia:lastPublishingDate="2017-03-09T15:00:46">
+                            <jcr_primaryType jahia:value="epfl:textBox" jcr:uuid="a29f6f1a-1c04-41dc-91a0-ac277e8545c5"></jcr_primaryType>
+                            <boxTitle jahia:value="Marios Kogias" jcr:uuid="2970ccae-1975-429b-8503-cd261eb8c2c9"></boxTitle>
+                            <comboListList jcr:primaryType="epfl:comboContainerList" jcr:uuid="ef6ff603-19f8-4df2-9e31-cf2a038e3878" jcr:lastModified="2017-03-09T14:53:45" jahia:createdBy="196571" jahia:lastModifiedBy="196571" jcr:created="2015-11-20T12:57:48" jahia:lastPublisher="196571" jahia:lastPublishingDate="2017-03-09T15:00:46">
+                                <comboList jcr:primaryType="epfl:comboContainer" jcr:uuid="cfb23a3e-8b21-4a27-8597-63da33840d9c" jcr:lastModified="2017-03-09T14:53:45" jcr:created="2015-11-20T13:02:31" jahia:lastModifiedBy="196571" jahia:createdBy="196571" jahia:lastPublisher="196571" jahia:lastPublishingDate="2017-03-09T15:00:46">
+                                    <text jahia:value="&lt;p&gt;&lt;img alt=&quot;&quot; style=&quot;float: left; margin: 5px;&quot; src=&quot;###file:/content/sites/dcsl/files/Staff/Marios Kogias.jpg?uuid=default:9783b418-413c-40da-b85a-ad4aceb7d75d&quot; height=&quot;118&quot; width=&quot;95&quot; border=&quot;5&quot; /&gt;EPFL IC DCSL &lt;br /&gt;
+	&lt;br /&gt;
+	INN 235 (B&amp;acirc;timent INN) - Station 14&lt;br /&gt;
+	CH-1015 Lausanne - Switzerland &lt;br /&gt;
+	&lt;br /&gt;
+	Phone: +41 21 693 40 16&lt;br /&gt;
+	&lt;a href=&quot;http://marios.kogias@epfl.ch&quot;&gt;marios.kogias@epfl.ch&lt;/a&gt;
+&lt;/p&gt;
+&lt;p&gt;&amp;nbsp;Marios Kogias received his M.Sc. in Electrical and Computer Engineering from the National Technical University of Athens in 2014. He is a second-year PhD student working with Edouard Bugnion @DCSL on tools and methodologies for latency measurement.&lt;/p&gt;
+" jcr:uuid="457566ca-bf58-4052-895c-ad7ff139f1d3"></text>
+                                    <filesList jcr:primaryType="jnt:fileContainerList" jcr:uuid="550575cc-a9ff-4caf-b55d-ef9fe338b7b5" jahia:createdBy="196571" jahia:lastModifiedBy="196571" jcr:created="2015-11-20T13:02:34" jcr:lastModified="2015-11-20T13:02:34"></filesList>
+                                    <linksList jcr:primaryType="jnt:linkContainerList" jcr:uuid="9405a22d-e1dd-418c-9f57-d562084c2d8b" jcr:created="2015-11-20T13:02:34" jcr:lastModified="2015-11-20T13:02:34" jahia:createdBy="196571" jahia:lastModifiedBy="196571"></linksList>
+                                </comboList>
+                            </comboListList>
+                        </main>
+                        <main jcr:primaryType="epfl:textBox" jcr:uuid="37cbd912-9818-4968-bb25-d4d0391ae310" jcr:lastModified="2015-10-09T12:23:49" jahia:createdBy="196571" jcr:created="2015-10-09T12:23:49" jahia:lastModifiedBy="196571" jahia:lastPublisher="196571" jahia:lastPublishingDate="2017-03-09T15:00:46">
+                            <jcr_primaryType jahia:value="epfl:textBox" jcr:uuid="3bb980a4-3e33-4e18-861a-15b62faf3f63"></jcr_primaryType>
+                            <boxTitle jahia:value="Stanko Novakovic" jcr:uuid="a566ad09-26fe-46cc-b637-1bff9d985993"></boxTitle>
+                            <comboListList jcr:primaryType="epfl:comboContainerList" jcr:uuid="ecce640f-e279-47eb-b3c6-648711f80d8b" jahia:lastModifiedBy="196571" jcr:lastModified="2017-03-09T14:53:07" jahia:createdBy="196571" jcr:created="2015-10-09T12:23:57" jahia:lastPublisher="196571" jahia:lastPublishingDate="2017-03-09T15:00:46">
+                                <comboList jcr:primaryType="epfl:comboContainer" jcr:uuid="136c24e5-6242-4b90-9da6-1bb00fa37ef2" jcr:lastModified="2017-03-09T14:53:07" jahia:lastModifiedBy="196571" jahia:createdBy="196571" jcr:created="2015-10-09T12:43:58" jahia:lastPublisher="196571" jahia:lastPublishingDate="2017-03-09T15:00:46">
+                                    <text jahia:value="&lt;p&gt;
+	&lt;!--[if gte mso 9]&gt;&lt;xml&gt;
+		&lt;o:OfficeDocumentSettings&gt;
+		&lt;o:AllowPNG /&gt;
+		&lt;/o:OfficeDocumentSettings&gt;
+		&lt;/xml&gt;&lt;![endif]--&gt;
+&lt;/p&gt;
+&lt;p&gt;
+	&lt;!--[if gte mso 9]&gt;&lt;xml&gt;
+		&lt;w:WordDocument&gt;
+		&lt;w:View&gt;Normal&lt;/w:View&gt;
+		&lt;w:Zoom&gt;0&lt;/w:Zoom&gt;
+		&lt;w:TrackMoves /&gt;
+		&lt;w:TrackFormatting /&gt;
+		&lt;w:HyphenationZone&gt;21&lt;/w:HyphenationZone&gt;
+		&lt;w:PunctuationKerning /&gt;
+		&lt;w:ValidateAgainstSchemas /&gt;
+		&lt;w:SaveIfXMLInvalid&gt;false&lt;/w:SaveIfXMLInvalid&gt;
+		&lt;w:IgnoreMixedContent&gt;false&lt;/w:IgnoreMixedContent&gt;
+		&lt;w:AlwaysShowPlaceholderText&gt;false&lt;/w:AlwaysShowPlaceholderText&gt;
+		&lt;w:DoNotPromoteQF /&gt;
+		&lt;w:LidThemeOther&gt;FR-CH&lt;/w:LidThemeOther&gt;
+		&lt;w:LidThemeAsian&gt;X-NONE&lt;/w:LidThemeAsian&gt;
+		&lt;w:LidThemeComplexScript&gt;X-NONE&lt;/w:LidThemeComplexScript&gt;
+		&lt;w:Compatibility&gt;
+		&lt;w:BreakWrappedTables /&gt;
+		&lt;w:SnapToGridInCell /&gt;
+		&lt;w:WrapTextWithPunct /&gt;
+		&lt;w:UseAsianBreakRules /&gt;
+		&lt;w:DontGrowAutofit /&gt;
+		&lt;w:SplitPgBreakAndParaMark /&gt;
+		&lt;w:EnableOpenTypeKerning /&gt;
+		&lt;w:DontFlipMirrorIndents /&gt;
+		&lt;w:OverrideTableStyleHps /&gt;
+		&lt;/w:Compatibility&gt;
+		&lt;m:mathPr&gt;
+		&lt;m:mathFont m:val=&quot;Cambria Math&quot; /&gt;
+		&lt;m:brkBin m:val=&quot;before&quot; /&gt;
+		&lt;m:brkBinSub m:val=&quot;&amp;#45;-&quot; /&gt;
+		&lt;m:smallFrac m:val=&quot;off&quot; /&gt;
+		&lt;m:dispDef /&gt;
+		&lt;m:lMargin m:val=&quot;0&quot; /&gt;
+		&lt;m:rMargin m:val=&quot;0&quot; /&gt;
+		&lt;m:defJc m:val=&quot;centerGroup&quot; /&gt;
+		&lt;m:wrapIndent m:val=&quot;1440&quot; /&gt;
+		&lt;m:intLim m:val=&quot;subSup&quot; /&gt;
+		&lt;m:naryLim m:val=&quot;undOvr&quot; /&gt;
+		&lt;/m:mathPr&gt;&lt;/w:WordDocument&gt;
+		&lt;/xml&gt;&lt;![endif]--&gt;&lt;!--[if gte mso 9]&gt;&lt;xml&gt;
+		&lt;w:LatentStyles DefLockedState=&quot;false&quot; DefUnhideWhenUsed=&quot;false&quot;
+		DefSemiHidden=&quot;false&quot; DefQFormat=&quot;false&quot; DefPriority=&quot;99&quot;
+		LatentStyleCount=&quot;371&quot;&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;0&quot; QFormat=&quot;true&quot; Name=&quot;Normal&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;9&quot; QFormat=&quot;true&quot; Name=&quot;heading 1&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;9&quot; SemiHidden=&quot;true&quot;
+		UnhideWhenUsed=&quot;true&quot; QFormat=&quot;true&quot; Name=&quot;heading 2&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;9&quot; SemiHidden=&quot;true&quot;
+		UnhideWhenUsed=&quot;true&quot; QFormat=&quot;true&quot; Name=&quot;heading 3&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;9&quot; SemiHidden=&quot;true&quot;
+		UnhideWhenUsed=&quot;true&quot; QFormat=&quot;true&quot; Name=&quot;heading 4&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;9&quot; SemiHidden=&quot;true&quot;
+		UnhideWhenUsed=&quot;true&quot; QFormat=&quot;true&quot; Name=&quot;heading 5&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;9&quot; SemiHidden=&quot;true&quot;
+		UnhideWhenUsed=&quot;true&quot; QFormat=&quot;true&quot; Name=&quot;heading 6&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;9&quot; SemiHidden=&quot;true&quot;
+		UnhideWhenUsed=&quot;true&quot; QFormat=&quot;true&quot; Name=&quot;heading 7&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;9&quot; SemiHidden=&quot;true&quot;
+		UnhideWhenUsed=&quot;true&quot; QFormat=&quot;true&quot; Name=&quot;heading 8&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;9&quot; SemiHidden=&quot;true&quot;
+		UnhideWhenUsed=&quot;true&quot; QFormat=&quot;true&quot; Name=&quot;heading 9&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;index 1&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;index 2&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;index 3&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;index 4&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;index 5&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;index 6&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;index 7&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;index 8&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;index 9&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;39&quot; SemiHidden=&quot;true&quot;
+		UnhideWhenUsed=&quot;true&quot; Name=&quot;toc 1&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;39&quot; SemiHidden=&quot;true&quot;
+		UnhideWhenUsed=&quot;true&quot; Name=&quot;toc 2&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;39&quot; SemiHidden=&quot;true&quot;
+		UnhideWhenUsed=&quot;true&quot; Name=&quot;toc 3&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;39&quot; SemiHidden=&quot;true&quot;
+		UnhideWhenUsed=&quot;true&quot; Name=&quot;toc 4&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;39&quot; SemiHidden=&quot;true&quot;
+		UnhideWhenUsed=&quot;true&quot; Name=&quot;toc 5&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;39&quot; SemiHidden=&quot;true&quot;
+		UnhideWhenUsed=&quot;true&quot; Name=&quot;toc 6&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;39&quot; SemiHidden=&quot;true&quot;
+		UnhideWhenUsed=&quot;true&quot; Name=&quot;toc 7&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;39&quot; SemiHidden=&quot;true&quot;
+		UnhideWhenUsed=&quot;true&quot; Name=&quot;toc 8&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;39&quot; SemiHidden=&quot;true&quot;
+		UnhideWhenUsed=&quot;true&quot; Name=&quot;toc 9&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;Normal Indent&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;footnote text&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;annotation text&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;header&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;footer&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;index heading&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;35&quot; SemiHidden=&quot;true&quot;
+		UnhideWhenUsed=&quot;true&quot; QFormat=&quot;true&quot; Name=&quot;caption&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;table of figures&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;envelope address&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;envelope return&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;footnote reference&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;annotation reference&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;line number&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;page number&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;endnote reference&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;endnote text&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;table of authorities&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;macro&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;toa heading&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;List&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;List Bullet&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;List Number&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;List 2&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;List 3&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;List 4&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;List 5&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;List Bullet 2&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;List Bullet 3&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;List Bullet 4&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;List Bullet 5&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;List Number 2&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;List Number 3&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;List Number 4&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;List Number 5&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;10&quot; QFormat=&quot;true&quot; Name=&quot;Title&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;Closing&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;Signature&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;1&quot; SemiHidden=&quot;true&quot;
+		UnhideWhenUsed=&quot;true&quot; Name=&quot;Default Paragraph Font&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;Body Text&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;Body Text Indent&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;List Continue&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;List Continue 2&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;List Continue 3&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;List Continue 4&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;List Continue 5&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;Message Header&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;11&quot; QFormat=&quot;true&quot; Name=&quot;Subtitle&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;Salutation&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;Date&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;Body Text First Indent&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;Body Text First Indent 2&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;Note Heading&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;Body Text 2&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;Body Text 3&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;Body Text Indent 2&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;Body Text Indent 3&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;Block Text&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;Hyperlink&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;FollowedHyperlink&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;22&quot; QFormat=&quot;true&quot; Name=&quot;Strong&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;20&quot; QFormat=&quot;true&quot; Name=&quot;Emphasis&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;Document Map&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;Plain Text&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;E-mail Signature&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;HTML Top of Form&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;HTML Bottom of Form&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;Normal (Web)&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;HTML Acronym&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;HTML Address&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;HTML Cite&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;HTML Code&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;HTML Definition&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;HTML Keyboard&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;HTML Preformatted&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;HTML Sample&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;HTML Typewriter&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;HTML Variable&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;Normal Table&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;annotation subject&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;No List&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;Outline List 1&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;Outline List 2&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;Outline List 3&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;Table Simple 1&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;Table Simple 2&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;Table Simple 3&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;Table Classic 1&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;Table Classic 2&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;Table Classic 3&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;Table Classic 4&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;Table Colorful 1&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;Table Colorful 2&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;Table Colorful 3&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;Table Columns 1&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;Table Columns 2&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;Table Columns 3&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;Table Columns 4&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;Table Columns 5&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;Table Grid 1&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;Table Grid 2&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;Table Grid 3&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;Table Grid 4&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;Table Grid 5&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;Table Grid 6&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;Table Grid 7&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;Table Grid 8&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;Table List 1&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;Table List 2&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;Table List 3&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;Table List 4&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;Table List 5&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;Table List 6&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;Table List 7&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;Table List 8&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;Table 3D effects 1&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;Table 3D effects 2&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;Table 3D effects 3&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;Table Contemporary&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;Table Elegant&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;Table Professional&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;Table Subtle 1&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;Table Subtle 2&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;Table Web 1&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;Table Web 2&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;Table Web 3&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;Balloon Text&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;39&quot; Name=&quot;Table Grid&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; UnhideWhenUsed=&quot;true&quot;
+		Name=&quot;Table Theme&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; Name=&quot;Placeholder Text&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;1&quot; QFormat=&quot;true&quot; Name=&quot;No Spacing&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;60&quot; Name=&quot;Light Shading&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;61&quot; Name=&quot;Light List&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;62&quot; Name=&quot;Light Grid&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;63&quot; Name=&quot;Medium Shading 1&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;64&quot; Name=&quot;Medium Shading 2&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;65&quot; Name=&quot;Medium List 1&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;66&quot; Name=&quot;Medium List 2&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;67&quot; Name=&quot;Medium Grid 1&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;68&quot; Name=&quot;Medium Grid 2&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;69&quot; Name=&quot;Medium Grid 3&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;70&quot; Name=&quot;Dark List&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;71&quot; Name=&quot;Colorful Shading&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;72&quot; Name=&quot;Colorful List&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;73&quot; Name=&quot;Colorful Grid&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;60&quot; Name=&quot;Light Shading Accent 1&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;61&quot; Name=&quot;Light List Accent 1&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;62&quot; Name=&quot;Light Grid Accent 1&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;63&quot; Name=&quot;Medium Shading 1 Accent 1&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;64&quot; Name=&quot;Medium Shading 2 Accent 1&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;65&quot; Name=&quot;Medium List 1 Accent 1&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; SemiHidden=&quot;true&quot; Name=&quot;Revision&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;34&quot; QFormat=&quot;true&quot;
+		Name=&quot;List Paragraph&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;29&quot; QFormat=&quot;true&quot; Name=&quot;Quote&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;30&quot; QFormat=&quot;true&quot;
+		Name=&quot;Intense Quote&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;66&quot; Name=&quot;Medium List 2 Accent 1&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;67&quot; Name=&quot;Medium Grid 1 Accent 1&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;68&quot; Name=&quot;Medium Grid 2 Accent 1&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;69&quot; Name=&quot;Medium Grid 3 Accent 1&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;70&quot; Name=&quot;Dark List Accent 1&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;71&quot; Name=&quot;Colorful Shading Accent 1&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;72&quot; Name=&quot;Colorful List Accent 1&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;73&quot; Name=&quot;Colorful Grid Accent 1&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;60&quot; Name=&quot;Light Shading Accent 2&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;61&quot; Name=&quot;Light List Accent 2&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;62&quot; Name=&quot;Light Grid Accent 2&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;63&quot; Name=&quot;Medium Shading 1 Accent 2&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;64&quot; Name=&quot;Medium Shading 2 Accent 2&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;65&quot; Name=&quot;Medium List 1 Accent 2&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;66&quot; Name=&quot;Medium List 2 Accent 2&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;67&quot; Name=&quot;Medium Grid 1 Accent 2&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;68&quot; Name=&quot;Medium Grid 2 Accent 2&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;69&quot; Name=&quot;Medium Grid 3 Accent 2&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;70&quot; Name=&quot;Dark List Accent 2&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;71&quot; Name=&quot;Colorful Shading Accent 2&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;72&quot; Name=&quot;Colorful List Accent 2&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;73&quot; Name=&quot;Colorful Grid Accent 2&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;60&quot; Name=&quot;Light Shading Accent 3&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;61&quot; Name=&quot;Light List Accent 3&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;62&quot; Name=&quot;Light Grid Accent 3&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;63&quot; Name=&quot;Medium Shading 1 Accent 3&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;64&quot; Name=&quot;Medium Shading 2 Accent 3&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;65&quot; Name=&quot;Medium List 1 Accent 3&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;66&quot; Name=&quot;Medium List 2 Accent 3&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;67&quot; Name=&quot;Medium Grid 1 Accent 3&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;68&quot; Name=&quot;Medium Grid 2 Accent 3&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;69&quot; Name=&quot;Medium Grid 3 Accent 3&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;70&quot; Name=&quot;Dark List Accent 3&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;71&quot; Name=&quot;Colorful Shading Accent 3&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;72&quot; Name=&quot;Colorful List Accent 3&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;73&quot; Name=&quot;Colorful Grid Accent 3&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;60&quot; Name=&quot;Light Shading Accent 4&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;61&quot; Name=&quot;Light List Accent 4&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;62&quot; Name=&quot;Light Grid Accent 4&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;63&quot; Name=&quot;Medium Shading 1 Accent 4&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;64&quot; Name=&quot;Medium Shading 2 Accent 4&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;65&quot; Name=&quot;Medium List 1 Accent 4&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;66&quot; Name=&quot;Medium List 2 Accent 4&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;67&quot; Name=&quot;Medium Grid 1 Accent 4&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;68&quot; Name=&quot;Medium Grid 2 Accent 4&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;69&quot; Name=&quot;Medium Grid 3 Accent 4&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;70&quot; Name=&quot;Dark List Accent 4&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;71&quot; Name=&quot;Colorful Shading Accent 4&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;72&quot; Name=&quot;Colorful List Accent 4&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;73&quot; Name=&quot;Colorful Grid Accent 4&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;60&quot; Name=&quot;Light Shading Accent 5&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;61&quot; Name=&quot;Light List Accent 5&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;62&quot; Name=&quot;Light Grid Accent 5&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;63&quot; Name=&quot;Medium Shading 1 Accent 5&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;64&quot; Name=&quot;Medium Shading 2 Accent 5&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;65&quot; Name=&quot;Medium List 1 Accent 5&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;66&quot; Name=&quot;Medium List 2 Accent 5&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;67&quot; Name=&quot;Medium Grid 1 Accent 5&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;68&quot; Name=&quot;Medium Grid 2 Accent 5&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;69&quot; Name=&quot;Medium Grid 3 Accent 5&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;70&quot; Name=&quot;Dark List Accent 5&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;71&quot; Name=&quot;Colorful Shading Accent 5&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;72&quot; Name=&quot;Colorful List Accent 5&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;73&quot; Name=&quot;Colorful Grid Accent 5&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;60&quot; Name=&quot;Light Shading Accent 6&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;61&quot; Name=&quot;Light List Accent 6&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;62&quot; Name=&quot;Light Grid Accent 6&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;63&quot; Name=&quot;Medium Shading 1 Accent 6&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;64&quot; Name=&quot;Medium Shading 2 Accent 6&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;65&quot; Name=&quot;Medium List 1 Accent 6&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;66&quot; Name=&quot;Medium List 2 Accent 6&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;67&quot; Name=&quot;Medium Grid 1 Accent 6&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;68&quot; Name=&quot;Medium Grid 2 Accent 6&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;69&quot; Name=&quot;Medium Grid 3 Accent 6&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;70&quot; Name=&quot;Dark List Accent 6&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;71&quot; Name=&quot;Colorful Shading Accent 6&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;72&quot; Name=&quot;Colorful List Accent 6&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;73&quot; Name=&quot;Colorful Grid Accent 6&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;19&quot; QFormat=&quot;true&quot;
+		Name=&quot;Subtle Emphasis&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;21&quot; QFormat=&quot;true&quot;
+		Name=&quot;Intense Emphasis&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;31&quot; QFormat=&quot;true&quot;
+		Name=&quot;Subtle Reference&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;32&quot; QFormat=&quot;true&quot;
+		Name=&quot;Intense Reference&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;33&quot; QFormat=&quot;true&quot; Name=&quot;Book Title&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;37&quot; SemiHidden=&quot;true&quot;
+		UnhideWhenUsed=&quot;true&quot; Name=&quot;Bibliography&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;39&quot; SemiHidden=&quot;true&quot;
+		UnhideWhenUsed=&quot;true&quot; QFormat=&quot;true&quot; Name=&quot;TOC Heading&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;41&quot; Name=&quot;Plain Table 1&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;42&quot; Name=&quot;Plain Table 2&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;43&quot; Name=&quot;Plain Table 3&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;44&quot; Name=&quot;Plain Table 4&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;45&quot; Name=&quot;Plain Table 5&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;40&quot; Name=&quot;Grid Table Light&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;46&quot; Name=&quot;Grid Table 1 Light&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;47&quot; Name=&quot;Grid Table 2&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;48&quot; Name=&quot;Grid Table 3&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;49&quot; Name=&quot;Grid Table 4&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;50&quot; Name=&quot;Grid Table 5 Dark&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;51&quot; Name=&quot;Grid Table 6 Colorful&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;52&quot; Name=&quot;Grid Table 7 Colorful&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;46&quot;
+		Name=&quot;Grid Table 1 Light Accent 1&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;47&quot; Name=&quot;Grid Table 2 Accent 1&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;48&quot; Name=&quot;Grid Table 3 Accent 1&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;49&quot; Name=&quot;Grid Table 4 Accent 1&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;50&quot; Name=&quot;Grid Table 5 Dark Accent 1&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;51&quot;
+		Name=&quot;Grid Table 6 Colorful Accent 1&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;52&quot;
+		Name=&quot;Grid Table 7 Colorful Accent 1&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;46&quot;
+		Name=&quot;Grid Table 1 Light Accent 2&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;47&quot; Name=&quot;Grid Table 2 Accent 2&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;48&quot; Name=&quot;Grid Table 3 Accent 2&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;49&quot; Name=&quot;Grid Table 4 Accent 2&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;50&quot; Name=&quot;Grid Table 5 Dark Accent 2&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;51&quot;
+		Name=&quot;Grid Table 6 Colorful Accent 2&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;52&quot;
+		Name=&quot;Grid Table 7 Colorful Accent 2&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;46&quot;
+		Name=&quot;Grid Table 1 Light Accent 3&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;47&quot; Name=&quot;Grid Table 2 Accent 3&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;48&quot; Name=&quot;Grid Table 3 Accent 3&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;49&quot; Name=&quot;Grid Table 4 Accent 3&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;50&quot; Name=&quot;Grid Table 5 Dark Accent 3&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;51&quot;
+		Name=&quot;Grid Table 6 Colorful Accent 3&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;52&quot;
+		Name=&quot;Grid Table 7 Colorful Accent 3&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;46&quot;
+		Name=&quot;Grid Table 1 Light Accent 4&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;47&quot; Name=&quot;Grid Table 2 Accent 4&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;48&quot; Name=&quot;Grid Table 3 Accent 4&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;49&quot; Name=&quot;Grid Table 4 Accent 4&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;50&quot; Name=&quot;Grid Table 5 Dark Accent 4&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;51&quot;
+		Name=&quot;Grid Table 6 Colorful Accent 4&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;52&quot;
+		Name=&quot;Grid Table 7 Colorful Accent 4&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;46&quot;
+		Name=&quot;Grid Table 1 Light Accent 5&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;47&quot; Name=&quot;Grid Table 2 Accent 5&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;48&quot; Name=&quot;Grid Table 3 Accent 5&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;49&quot; Name=&quot;Grid Table 4 Accent 5&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;50&quot; Name=&quot;Grid Table 5 Dark Accent 5&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;51&quot;
+		Name=&quot;Grid Table 6 Colorful Accent 5&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;52&quot;
+		Name=&quot;Grid Table 7 Colorful Accent 5&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;46&quot;
+		Name=&quot;Grid Table 1 Light Accent 6&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;47&quot; Name=&quot;Grid Table 2 Accent 6&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;48&quot; Name=&quot;Grid Table 3 Accent 6&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;49&quot; Name=&quot;Grid Table 4 Accent 6&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;50&quot; Name=&quot;Grid Table 5 Dark Accent 6&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;51&quot;
+		Name=&quot;Grid Table 6 Colorful Accent 6&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;52&quot;
+		Name=&quot;Grid Table 7 Colorful Accent 6&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;46&quot; Name=&quot;List Table 1 Light&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;47&quot; Name=&quot;List Table 2&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;48&quot; Name=&quot;List Table 3&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;49&quot; Name=&quot;List Table 4&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;50&quot; Name=&quot;List Table 5 Dark&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;51&quot; Name=&quot;List Table 6 Colorful&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;52&quot; Name=&quot;List Table 7 Colorful&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;46&quot;
+		Name=&quot;List Table 1 Light Accent 1&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;47&quot; Name=&quot;List Table 2 Accent 1&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;48&quot; Name=&quot;List Table 3 Accent 1&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;49&quot; Name=&quot;List Table 4 Accent 1&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;50&quot; Name=&quot;List Table 5 Dark Accent 1&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;51&quot;
+		Name=&quot;List Table 6 Colorful Accent 1&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;52&quot;
+		Name=&quot;List Table 7 Colorful Accent 1&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;46&quot;
+		Name=&quot;List Table 1 Light Accent 2&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;47&quot; Name=&quot;List Table 2 Accent 2&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;48&quot; Name=&quot;List Table 3 Accent 2&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;49&quot; Name=&quot;List Table 4 Accent 2&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;50&quot; Name=&quot;List Table 5 Dark Accent 2&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;51&quot;
+		Name=&quot;List Table 6 Colorful Accent 2&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;52&quot;
+		Name=&quot;List Table 7 Colorful Accent 2&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;46&quot;
+		Name=&quot;List Table 1 Light Accent 3&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;47&quot; Name=&quot;List Table 2 Accent 3&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;48&quot; Name=&quot;List Table 3 Accent 3&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;49&quot; Name=&quot;List Table 4 Accent 3&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;50&quot; Name=&quot;List Table 5 Dark Accent 3&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;51&quot;
+		Name=&quot;List Table 6 Colorful Accent 3&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;52&quot;
+		Name=&quot;List Table 7 Colorful Accent 3&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;46&quot;
+		Name=&quot;List Table 1 Light Accent 4&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;47&quot; Name=&quot;List Table 2 Accent 4&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;48&quot; Name=&quot;List Table 3 Accent 4&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;49&quot; Name=&quot;List Table 4 Accent 4&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;50&quot; Name=&quot;List Table 5 Dark Accent 4&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;51&quot;
+		Name=&quot;List Table 6 Colorful Accent 4&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;52&quot;
+		Name=&quot;List Table 7 Colorful Accent 4&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;46&quot;
+		Name=&quot;List Table 1 Light Accent 5&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;47&quot; Name=&quot;List Table 2 Accent 5&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;48&quot; Name=&quot;List Table 3 Accent 5&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;49&quot; Name=&quot;List Table 4 Accent 5&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;50&quot; Name=&quot;List Table 5 Dark Accent 5&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;51&quot;
+		Name=&quot;List Table 6 Colorful Accent 5&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;52&quot;
+		Name=&quot;List Table 7 Colorful Accent 5&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;46&quot;
+		Name=&quot;List Table 1 Light Accent 6&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;47&quot; Name=&quot;List Table 2 Accent 6&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;48&quot; Name=&quot;List Table 3 Accent 6&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;49&quot; Name=&quot;List Table 4 Accent 6&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;50&quot; Name=&quot;List Table 5 Dark Accent 6&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;51&quot;
+		Name=&quot;List Table 6 Colorful Accent 6&quot; /&gt;
+		&lt;w:LsdException Locked=&quot;false&quot; Priority=&quot;52&quot;
+		Name=&quot;List Table 7 Colorful Accent 6&quot; /&gt;
+		&lt;/w:LatentStyles&gt;
+		&lt;/xml&gt;&lt;![endif]--&gt;&lt;!--[if gte mso 10]&gt;
+		&lt;style&gt;
+		/* Style Definitions */
+		table.MsoNormalTable
+		{mso-style-name:&quot;Table Normal&quot;;
+		mso-tstyle-rowband-size:0;
+		mso-tstyle-colband-size:0;
+		mso-style-noshow:yes;
+		mso-style-priority:99;
+		mso-style-parent:&quot;&quot;;
+		mso-padding-alt:0cm 5.4pt 0cm 5.4pt;
+		mso-para-margin-top:0cm;
+		mso-para-margin-right:0cm;
+		mso-para-margin-bottom:8.0pt;
+		mso-para-margin-left:0cm;
+		line-height:107%;
+		mso-pagination:widow-orphan;
+		font-size:11.0pt;
+		font-family:&quot;Calibri&quot;,sans-serif;
+		mso-ascii-font-family:Calibri;
+		mso-ascii-theme-font:minor-latin;
+		mso-hansi-font-family:Calibri;
+		mso-hansi-theme-font:minor-latin;
+		mso-fareast-language:EN-US;}
+		&lt;/style&gt;
+		&lt;![endif]--&gt;
+&lt;/p&gt;
+&lt;p class=&quot;MsoNormal&quot;&gt;&lt;img src=&quot;###file:/content/sites/dcsl/files/Staff/stanko novakovic 2015.jpg?uuid=default:c6f751bf-c372-434a-88d6-6c11ee3dd95b&quot; style=&quot;float: left; margin: 5px;&quot; alt=&quot;&quot; height=&quot;139&quot; width=&quot;100&quot; border=&quot;5&quot; /&gt;EPFL IC DCSL &lt;br /&gt;
+	&lt;br /&gt;
+	INN 233 (B&amp;acirc;timent INN) - Station 14 &lt;br /&gt;
+	CH-1015 Lausanne - Switzerland
+&lt;/p&gt;
+&lt;p class=&quot;MsoNormal&quot;&gt;Phone: +41 21 693 37 61&lt;br /&gt;
+	&lt;a href=&quot;http://stanko.novakovic@epfl.ch&quot;&gt;stanko.novakovic@epfl.ch&lt;/a&gt;
+&lt;/p&gt;
+&lt;p class=&quot;MsoNormal&quot;&gt;&lt;br /&gt;
+	&lt;br /&gt;
+	&lt;span style=&quot;mso-ansi-language:EN-US&quot; lang=&quot;EN-US&quot;&gt;&lt;a href=&quot;http://parsa.epfl.ch/~snovakov/&quot;&gt;Stanko Novakovic&lt;/a&gt; is a PhD student under the supervision of Edouard Bugnion and Babak Falsafi. His interests encompass many aspects of computer systems, with an emphasis on operating systems, distributed systems, and computer architecture. His ongoing research efforts focus on hardware and software systems designed for datacenter-scale applications and services, such as analytics and data serving. &lt;/span&gt;
+&lt;/p&gt;
+&lt;p class=&quot;MsoNormal&quot;&gt;&lt;span style=&quot;mso-ansi-language:EN-US&quot; lang=&quot;EN-US&quot;&gt;Stanko received his B.S. and M.S. degrees in electrical and computer engineering from the &lt;a href=&quot;http://www2.uns.ac.rs/en/&quot;&gt;University of Novi Sad&lt;/a&gt;, Serbia, in 2010 and 2011, respectively. In 2013 he interned at &lt;a href=&quot;http://research.microsoft.com/en-us/groups/camsys/default.aspx&quot;&gt;Microsoft Research&lt;/a&gt; in Cambridge, UK, and in 2014 at &lt;a href=&quot;http://www.hpl.hp.com/&quot;&gt;HP Labs&lt;/a&gt; in Palo Alto, USA. His research is sponsored by the &lt;a href=&quot;https://www.youtube.com/watch?v=48GkxP1tO_U&quot;&gt;Microsoft Research Swiss JRC&lt;/a&gt;.&lt;/span&gt;&lt;/p&gt;
+" jcr:uuid="7511fa85-1cd7-4198-8557-aa796a0386a3"></text>
+                                    <filesList jcr:primaryType="jnt:fileContainerList" jcr:uuid="374b8cc8-56d7-4b06-8a5d-9743a10bd1e9" jahia:createdBy="196571" jcr:lastModified="2015-10-09T12:44:06" jcr:created="2015-10-09T12:44:06" jahia:lastModifiedBy="196571"></filesList>
+                                    <linksList jcr:primaryType="jnt:linkContainerList" jcr:uuid="5e726a35-fadd-4fb4-a8cd-c96df3367ffb" jcr:created="2015-10-09T12:44:06" jahia:lastModifiedBy="196571" jahia:createdBy="196571" jcr:lastModified="2015-10-09T12:44:06"></linksList>
+                                </comboList>
+                            </comboListList>
+                        </main>
+                        <main jcr:primaryType="epfl:textBox" jcr:uuid="37e01a24-ab47-42eb-9dd7-7af010362f03" jcr:lastModified="2015-10-09T12:47:37" jahia:createdBy="196571" jcr:created="2015-10-09T12:47:37" jahia:lastModifiedBy="196571" jahia:lastPublisher="196571" jahia:lastPublishingDate="2017-03-09T15:00:46">
+                            <jcr_primaryType jahia:value="epfl:textBox" jcr:uuid="390ca909-ca65-462f-b563-59c53ce2a0db"></jcr_primaryType>
+                            <boxTitle jahia:value="George Prekas" jcr:uuid="9f4dd4e3-172d-4de3-81db-b20d846328e4"></boxTitle>
+                            <comboListList jcr:primaryType="epfl:comboContainerList" jcr:uuid="3dc7ba13-87fb-4191-b567-ce969a87d8eb" jcr:lastModified="2017-03-09T14:55:12" jahia:createdBy="196571" jahia:lastModifiedBy="196571" jcr:created="2015-10-09T12:47:40" jahia:lastPublisher="196571" jahia:lastPublishingDate="2017-03-09T15:00:46">
+                                <comboList jcr:primaryType="epfl:comboContainer" jcr:uuid="74e13309-5881-4e32-b8e2-7d2b9054ef99" jcr:lastModified="2017-03-09T14:55:12" jahia:createdBy="196571" jcr:created="2015-10-09T13:21:17" jahia:lastModifiedBy="196571" jahia:lastPublisher="196571" jahia:lastPublishingDate="2017-03-09T15:00:46">
+                                    <text jahia:value="&lt;p&gt;&lt;img alt=&quot;&quot; style=&quot;margin: 5px; float: left;&quot; src=&quot;###file:/content/sites/dcsl/files/Staff/Georges Prekas 2015.jpg?uuid=default:1958ca70-c2ab-4e59-97f3-19aabf2d0610&quot; height=&quot;125&quot; width=&quot;94&quot; border=&quot;5&quot; /&gt;EPFL IC DCSL &lt;br /&gt;
+	&lt;br /&gt;
+	INN 235 (B&amp;acirc;timent INN) - Station 14 &lt;br /&gt;
+	CH-1015 Lausanne - Switzerland
+&lt;/p&gt;
+&lt;p&gt;Phone: +41 21 693 40 16&lt;br /&gt;
+	&lt;a href=&quot;http://george.prekas@epfl.ch&quot;&gt;george.prekas@epfl.ch&lt;/a&gt;&lt;br /&gt;
+	&lt;br /&gt;
+	&lt;br /&gt;
+	George Prekas received his M.Sc. in Electrical and Computer Engineering from the National Technical University of Athens in 2010. As of September 2013, he joined the Data Center Systems Laboratory to pursue a PhD and also contributes to the IX project. He has been awarded a &lt;a href=&quot;http://googleresearch.blogspot.ch/2015/06/announcing-2015-google-european.html&quot;&gt;Google European Fellowship&lt;/a&gt; for 2015.
+&lt;/p&gt;
+" jcr:uuid="3caa1aa9-983b-47c2-852a-03e519d99874"></text>
+                                    <filesList jcr:primaryType="jnt:fileContainerList" jcr:uuid="e76b7035-6c9a-4771-9a80-19332d194712" jcr:created="2015-10-09T13:21:25" jahia:lastModifiedBy="196571" jcr:lastModified="2015-10-09T13:21:25" jahia:createdBy="196571"></filesList>
+                                    <linksList jcr:primaryType="jnt:linkContainerList" jcr:uuid="5042485b-d5f6-4a6c-b96c-8284738c1d58" jcr:created="2015-10-09T13:21:25" jahia:lastModifiedBy="196571" jcr:lastModified="2015-10-09T13:21:25" jahia:createdBy="196571"></linksList>
+                                </comboList>
+                            </comboListList>
+                        </main>
+                        <main jcr:primaryType="epfl:textBox" jcr:uuid="d410f2d5-0014-41a4-b04e-808363cfe70a" jcr:lastModified="2015-10-09T13:25:11" jahia:createdBy="196571" jcr:created="2015-10-09T13:25:11" jahia:lastModifiedBy="196571" jahia:lastPublisher="196571" jahia:lastPublishingDate="2017-03-09T15:00:46">
+                            <jcr_primaryType jahia:value="epfl:textBox" jcr:uuid="886640d7-45ef-4b90-9cb5-68380405e79b"></jcr_primaryType>
+                            <boxTitle jahia:value="Mia Primorac" jcr:uuid="2d65b83d-6fc0-422c-8a7c-66b599df91b3"></boxTitle>
+                            <comboListList jcr:primaryType="epfl:comboContainerList" jcr:uuid="10a0181f-56fe-4d2f-8c04-2f0330a2c627" jcr:lastModified="2017-03-09T14:56:17" jahia:createdBy="196571" jahia:lastModifiedBy="196571" jcr:created="2015-10-09T13:25:15" jahia:lastPublisher="196571" jahia:lastPublishingDate="2017-03-09T15:00:46">
+                                <comboList jcr:primaryType="epfl:comboContainer" jcr:uuid="be5fb886-a182-4f2a-9c62-96d852b8e17e" jcr:lastModified="2017-03-09T14:56:17" jahia:createdBy="196571" jcr:created="2015-10-09T13:28:29" jahia:lastModifiedBy="196571" jahia:lastPublisher="196571" jahia:lastPublishingDate="2017-03-09T15:00:46">
+                                    <text jahia:value="&lt;p&gt;&lt;img src=&quot;###file:/content/sites/dcsl/files/Staff/mia.jpg?uuid=default:adf9e713-b8fc-4bb0-ab07-74ffcaca0284&quot; style=&quot;margin: 5px; float: left;&quot; alt=&quot;&quot; height=&quot;130&quot; width=&quot;110&quot; border=&quot;5&quot; /&gt;EPFL IC DCSL &lt;br /&gt;
+	&lt;br /&gt;
+	INN 231 (B&amp;acirc;timent INN) - Station 14 &lt;br /&gt;
+	CH-1015 Lausanne - Switzerland  &lt;br /&gt;
+	&lt;br /&gt;
+	Phone: +41 21 693 31 49&lt;br /&gt;
+	&lt;a href=&quot;http://mia.primorac@epfl.ch&quot;&gt;mia.primorac@epfl.ch&lt;/a&gt;
+&lt;/p&gt;
+&lt;p&gt;&lt;br /&gt;
+	Mia Primorac received her BSc and MSc degree in Computing from University of Zagreb in 2012 and 2014. In 2013 she completed a summer internship at Operating Systems Laboratory at EPFL. She joined the IX project in the Data Center Systems Laboratory at EPFL in September 2014 to pursue a PhD.
+&lt;/p&gt;
+" jcr:uuid="80759b66-f147-4a4b-9c74-e4c1c62ac273"></text>
+                                    <filesList jcr:primaryType="jnt:fileContainerList" jcr:uuid="0f54afb5-fcd6-4407-9429-765cb4627106" jahia:lastModifiedBy="196571" jahia:createdBy="196571" jcr:lastModified="2015-10-09T13:28:33" jcr:created="2015-10-09T13:28:33"></filesList>
+                                    <linksList jcr:primaryType="jnt:linkContainerList" jcr:uuid="22944e19-f582-461e-bb2a-27d9f6dc0189" jahia:createdBy="196571" jahia:lastModifiedBy="196571" jcr:created="2015-10-09T13:28:33" jcr:lastModified="2015-10-09T13:28:33"></linksList>
+                                </comboList>
+                            </comboListList>
+                        </main>
+                        <main jcr:primaryType="epfl:textBox" jcr:uuid="d4cc0da6-068c-4de6-aea0-0eb093d72701" jahia:createdBy="196571" jcr:lastModified="2016-06-03T16:43:32" jcr:created="2016-06-03T16:43:32" jahia:lastModifiedBy="196571" jahia:lastPublisher="196571" jahia:lastPublishingDate="2017-03-09T15:00:46">
+                            <jcr_primaryType jahia:value="epfl:textBox" jcr:uuid="4f86e72f-a5f4-4c40-8e05-97a8af667f5f"></jcr_primaryType>
+                            <boxTitle jahia:value="Dmitrii Ustiugov  " jcr:uuid="ddc03842-1a24-473f-ac43-797779fb6670"></boxTitle>
+                            <comboListList jcr:primaryType="epfl:comboContainerList" jcr:uuid="744c973d-7cb0-4a91-b826-c48a53d4cb46" jcr:lastModified="2016-06-03T16:56:26" jahia:createdBy="196571" jcr:created="2016-06-03T16:43:34" jahia:lastModifiedBy="196571" jahia:lastPublisher="196571" jahia:lastPublishingDate="2017-03-09T15:00:46">
+                                <comboList jcr:primaryType="epfl:comboContainer" jcr:uuid="2f2029c2-ee0c-4ad0-970c-58960cf02947" jahia:createdBy="196571" jcr:lastModified="2016-06-03T16:56:26" jahia:lastModifiedBy="196571" jcr:created="2016-06-03T16:54:46" jahia:lastPublisher="196571" jahia:lastPublishingDate="2017-03-09T15:00:46">
+                                    <text jahia:value="&lt;p&gt;&lt;img width=&quot;101&quot; height=&quot;135&quot; border=&quot;5&quot; alt=&quot;&quot; style=&quot;float: left; margin: 5px;&quot; src=&quot;###file:/content/sites/dcsl/files/Staff/Dmitrii Ustiugov.jpg?uuid=default:d0f2abd0-9d40-474d-a6b2-e049536f3969&quot; /&gt;EPFL IC DCSL&lt;br /&gt;
+	&lt;br /&gt;
+	INJ 215 (B&amp;acirc;timent INJ) - Station 14 &lt;br /&gt;
+	CH-1015 Lausanne - Switzerland&lt;br /&gt;
+	&lt;br /&gt;
+	Phone: +41 21 693 67 08&lt;br /&gt;
+	&lt;a href=&quot;mailto:dmitrii.ustiugov@epfl.ch&quot;&gt;dmitrii.ustiugov@epfl.ch&lt;/a&gt;
+&lt;/p&gt;
+&lt;p&gt;&amp;nbsp;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://parsa.epfl.ch/~ustiugov/&quot;&gt;Dmitrii Ustiugov&lt;/a&gt; received his M.S. and B.S. in Applied Mathematics and Physics from Moscow institute of Physics and Technology. After spending 4 years in semiconductor and Big Data industry, Dmitrii joined EPFL as a Ph.D. student co-advised by Prof. Babak Falsafi and Prof. Edouard Bugnion. Dmitrii is interested in architecture support for datacenter systems and rack-scale computing.&lt;br /&gt;
+	&amp;nbsp;
+&lt;/p&gt;
+" jcr:uuid="2ad0ca24-8392-49ab-bbd5-9bca65accb32"></text>
+                                    <filesList jcr:primaryType="jnt:fileContainerList" jcr:uuid="3ad1c167-a71a-46b1-ad97-e5c44d295556" jahia:lastModifiedBy="196571" jahia:createdBy="196571" jcr:created="2016-06-03T16:54:49" jcr:lastModified="2016-06-03T16:54:49"></filesList>
+                                    <linksList jcr:primaryType="jnt:linkContainerList" jcr:uuid="9a008deb-603b-4872-91e5-e0c94c13725a" jahia:lastModifiedBy="196571" jcr:lastModified="2016-06-03T16:54:49" jahia:createdBy="196571" jcr:created="2016-06-03T16:54:49"></linksList>
+                                </comboList>
+                            </comboListList>
+                        </main>
+                        <main jcr:primaryType="epfl:textBox" jcr:uuid="14ed2608-7e9d-4bb6-a128-c249aa8b14e7" jcr:lastModified="2015-10-09T13:29:21" jahia:createdBy="196571" jcr:created="2015-10-09T13:29:21" jahia:lastModifiedBy="196571" jahia:lastPublisher="196571" jahia:lastPublishingDate="2017-03-09T15:00:46">
+                            <jcr_primaryType jahia:value="epfl:textBox" jcr:uuid="76d8b0e6-f155-4e12-989e-440521a8f062"></jcr_primaryType>
+                            <boxTitle jahia:value="Sam Whitlock" jcr:uuid="08e31607-c4d8-452d-a19a-795c5aca7423"></boxTitle>
+                            <comboListList jcr:primaryType="epfl:comboContainerList" jcr:uuid="4e72cc67-81ad-431d-9cb7-0e6c4e6888aa" jcr:lastModified="2017-03-09T14:58:26" jahia:lastModifiedBy="196571" jahia:createdBy="196571" jcr:created="2015-10-09T13:29:22" jahia:lastPublisher="196571" jahia:lastPublishingDate="2017-03-09T15:00:46">
+                                <comboList jcr:primaryType="epfl:comboContainer" jcr:uuid="d288c511-0c16-4a42-a4ac-dc01098fff97" jcr:lastModified="2017-03-09T14:58:26" jahia:createdBy="196571" jcr:created="2015-10-09T13:32:24" jahia:lastModifiedBy="196571" jahia:lastPublisher="196571" jahia:lastPublishingDate="2017-03-09T15:00:46">
+                                    <text jahia:value="&lt;p&gt;&lt;img alt=&quot;&quot; style=&quot;margin: 5px; float: left;&quot; src=&quot;###file:/content/sites/dcsl/files/Staff/Sam Whitlock 2015a.jpeg?uuid=default:28581c9d-2cb4-4e26-9de0-73d2927d223a&quot; height=&quot;135&quot; width=&quot;92&quot; border=&quot;5&quot; /&gt;EPFL IC DCSL &lt;br /&gt;
+	&lt;br /&gt;
+	INN 231 (B&amp;acirc;timent INN) - Station 14 &lt;br /&gt;
+	CH-1015 Lausanne - Switzerland &lt;br /&gt;
+	&lt;br /&gt;
+	Phone: +41 21 693 31 49&lt;br /&gt;
+	&lt;a href=&quot;http://sam.whitlock@epfl.ch&quot;&gt;sam.whitlock@epfl.ch&lt;/a&gt;&lt;br /&gt;
+	&lt;br /&gt;
+	&lt;br /&gt;
+	Sam Whitlock began his PhD in September 2013 after receiving his B.S. from UC Berkeley in EECS. He has worked on cluster management systems (Mesos) and Software-defined Networking (SDN Troubleshooting). He now focuses on hardware acceleration for software-defined networking in the datacenter and is pursuing a PhD in the Data Center Systems Laboratory.
+&lt;/p&gt;
+" jcr:uuid="2bc247ca-5f87-4405-958f-d34295e23779"></text>
+                                    <filesList jcr:primaryType="jnt:fileContainerList" jcr:uuid="89d6558c-c9f3-4ada-a7b9-c79e43ed4a2d" jahia:createdBy="196571" jcr:created="2015-10-09T13:32:26" jcr:lastModified="2015-10-09T13:32:26" jahia:lastModifiedBy="196571"></filesList>
+                                    <linksList jcr:primaryType="jnt:linkContainerList" jcr:uuid="da9aa2b8-eb99-49f8-b186-48fdc6a406a6" jahia:lastModifiedBy="196571" jahia:createdBy="196571" jcr:lastModified="2015-10-09T13:32:26" jcr:created="2015-10-09T13:32:26"></linksList>
+                                </comboList>
+                            </comboListList>
+                        </main>
+                        <main jcr:primaryType="epfl:textBox" jcr:uuid="17c486b3-cb70-40a7-b44e-2d1903353d67" jcr:lastModified="2015-10-09T13:39:28" jahia:createdBy="196571" jcr:created="2015-10-09T13:39:28" jahia:lastModifiedBy="196571" jahia:lastPublisher="196571" jahia:lastPublishingDate="2017-03-09T15:00:46">
+                            <jcr_primaryType jahia:value="epfl:textBox" jcr:uuid="79b15e1b-1a25-415a-b669-1bd43f144d53"></jcr_primaryType>
+                            <boxTitle jahia:value="Margaret Escandari" jcr:uuid="5b363c9b-7cfc-4e76-b682-ff8902a42ad3"></boxTitle>
+                            <comboListList jcr:primaryType="epfl:comboContainerList" jcr:uuid="57fa4345-285b-406c-8033-a1ba61a5885c" jcr:lastModified="2017-03-09T14:59:35" jcr:created="2015-10-09T13:39:36" jahia:lastModifiedBy="196571" jahia:createdBy="196571" jahia:lastPublisher="196571" jahia:lastPublishingDate="2017-03-09T15:00:46">
+                                <comboList jcr:primaryType="epfl:comboContainer" jcr:uuid="7aed7efd-02d1-4763-916d-579f29f6647c" jcr:lastModified="2017-03-09T14:59:35" jahia:createdBy="196571" jcr:created="2015-10-09T13:43:22" jahia:lastModifiedBy="196571" jahia:lastPublisher="196571" jahia:lastPublishingDate="2017-03-09T15:00:46">
+                                    <text jahia:value="&lt;p&gt;&lt;img alt=&quot;&quot; src=&quot;###file:/content/sites/dcsl/files/Staff/margaret escandari church.jpg?uuid=default:814f3c68-0c45-4368-994d-8138a8e4aa32&quot; style=&quot;margin: 5px; float: left;&quot; height=&quot;135&quot; width=&quot;94&quot; border=&quot;5&quot; /&gt;EPFL IC DCSL - Administration &amp;amp; Web&lt;br /&gt;
+	&lt;br /&gt;
+	INN 236 (B&amp;acirc;timent INN) - Station 14 &lt;br /&gt;
+	CH-1015 Lausanne - Switzerland&lt;br /&gt;
+	&lt;br /&gt;
+	Phone: +41 21 693 79 97&lt;br /&gt;
+	&lt;a href=&quot;http://margaret.escandari@epfl.ch&quot;&gt;margaret.escandari@epfl.ch&lt;/a&gt;
+&lt;/p&gt;
+" jcr:uuid="cf04ca70-a95e-4eb3-9214-5ce859c6782b"></text>
+                                    <filesList jcr:primaryType="jnt:fileContainerList" jcr:uuid="9a2b7ed7-a278-4b3f-aa19-cf10f7ca75a7" jahia:lastModifiedBy="196571" jcr:lastModified="2015-10-09T13:43:26" jcr:created="2015-10-09T13:43:26" jahia:createdBy="196571"></filesList>
+                                    <linksList jcr:primaryType="jnt:linkContainerList" jcr:uuid="98c79f6d-658b-4038-a986-475ce1af84bf" jcr:lastModified="2015-10-09T13:43:26" jahia:lastModifiedBy="196571" jahia:createdBy="196571" jcr:created="2015-10-09T13:43:26"></linksList>
+                                </comboList>
+                            </comboListList>
+                        </main>
+                    </mainList>
+                    <pageTitleListList jcr:primaryType="epfl:pageTitleContainerList" jcr:uuid="2f326682-1722-4765-a26f-f780094c31b6" jahia:createdBy="196571" jcr:lastModified="2015-10-08T15:58:56" jcr:created="2015-10-08T15:58:56" jahia:lastModifiedBy="196571" jahia:lastPublisher="196571" jahia:lastPublishingDate="2017-03-09T15:00:46">
+                        <pageTitleList jcr:primaryType="epfl:pageTitleContainer" jcr:uuid="de14c91a-b7af-469a-a6e3-a37c84cb35f7" jahia:createdBy="196571" jcr:lastModified="2015-10-08T15:58:56" jcr:created="2015-10-08T15:58:56" jahia:lastModifiedBy="196571" jahia:lastPublisher="196571" jahia:lastPublishingDate="2017-03-09T15:00:46">
+                            <pageTitle jahia:value="" jcr:uuid="6cec11bd-1926-417d-b8a2-64b16643e677"></pageTitle>
+                        </pageTitleList>
+                    </pageTitleListList>
+                    <footerLinkListList jcr:primaryType="epfl:bottomLinksContainerList" jcr:uuid="8b1efe24-1f9d-417f-815d-19a00aa1a910" jahia:lastModifiedBy="196571" jcr:lastModified="2015-10-08T15:58:56" jcr:created="2015-10-08T15:58:56" jahia:createdBy="196571"></footerLinkListList>
+                    <breadCrumbLinksListList jcr:primaryType="epfl:breadCrumbLinksContainerList" jcr:uuid="d46fd687-943b-49f5-92e7-5d6b374e3f71" jahia:lastModifiedBy="196571" jahia:createdBy="196571" jcr:created="2015-10-08T15:58:56" jcr:lastModified="2015-10-08T15:58:56"></breadCrumbLinksListList>
+                    <navigationListList jcr:primaryType="epfl:navigationContainerList" jcr:uuid="ef6e890f-ae47-4cdb-a809-3a9a4b9a7325" jahia:createdBy="196571" jahia:lastModifiedBy="196571" jcr:created="2015-10-08T15:58:56" jcr:lastModified="2015-10-08T15:58:56"></navigationListList>
+                    <extraList jcr:primaryType="jnt:boxList" jcr:uuid="eea0d733-4b83-40fc-a990-800e403f314d" jcr:lastModified="2015-10-08T15:58:56" jcr:created="2015-10-08T15:58:56" jahia:createdBy="196571" jahia:lastModifiedBy="196571"></extraList>
+                    <pageMetadatasListList jcr:primaryType="epfl:pageMetadatasContainerList" jcr:uuid="4553ab22-c67a-47af-b538-13d41fd459b4" jcr:created="2015-10-08T15:58:56" jahia:createdBy="196571" jcr:lastModified="2015-10-08T15:58:56" jahia:lastModifiedBy="196571" jahia:lastPublisher="196571" jahia:lastPublishingDate="2017-03-09T15:00:46">
+                        <pageMetadatasList jcr:primaryType="epfl:pageMetadatasContainer" jcr:uuid="89d95b92-69e9-4dac-8aad-60f88e884215" jahia:createdBy="196571" jcr:created="2015-10-08T15:58:56" jahia:lastModifiedBy="196571" jcr:lastModified="2015-10-08T15:58:56" jahia:lastPublisher="196571" jahia:lastPublishingDate="2017-03-09T15:00:46">
+                            <pageCSS jahia:value="" jcr:uuid="a211686b-8a30-48a4-af14-b236020483af"></pageCSS>
+                            <metadataDescription jahia:value="" jcr:uuid="46f72823-3704-4a45-b7cc-134e16dc8de2"></metadataDescription>
+                            <metadataKeywords jahia:value="" jcr:uuid="4e1c90d9-4a14-421b-af02-407e2826a485"></metadataKeywords>
+                            <pageJS jahia:value="" jcr:uuid="d831345f-8e58-4b9b-b610-62f2380417a4"></pageJS>
+                        </pageMetadatasList>
+                    </pageMetadatasListList>
+                    <siteSettingsListList jcr:primaryType="epfl:siteSettingsContainerList" jcr:uuid="7a63c065-1f71-489e-a97c-faa3ae8508d6" jahia:createdBy="196571" jcr:created="2015-10-08T15:58:56" jahia:lastModifiedBy="196571" jcr:lastModified="2015-10-08T15:58:56"></siteSettingsListList>
+                    <bottomLinksListList jcr:primaryType="epfl:bottomLinksContainerList" jcr:uuid="43af8b33-6e99-476c-b9d3-a7dd23088a1b" jcr:lastModified="2015-10-08T15:58:56" jahia:createdBy="196571" jahia:lastModifiedBy="196571" jcr:created="2015-10-08T15:58:56"></bottomLinksListList>
+                    <oneCol_up_linksList jcr:primaryType="epfl:oneColContainerList" jcr:uuid="28a60b10-cad0-4cf9-85c8-8f3e2ca0335a" jcr:created="2016-08-08T17:31:16" jahia:createdBy="196571" jcr:lastModified="2016-08-08T17:31:16" jahia:lastModifiedBy="196571"></oneCol_up_linksList>
+                    <oneCol_right_linksList jcr:primaryType="epfl:oneColContainerList" jcr:uuid="db9c83a9-9a40-470e-9cb0-ba1166df885e" jcr:created="2016-08-08T17:31:16" jahia:createdBy="196571" jahia:lastModifiedBy="196571" jcr:lastModified="2016-08-08T17:31:16"></oneCol_right_linksList>
+                    <oneCol_left_linksList jcr:primaryType="epfl:oneColContainerList" jcr:uuid="a01831c4-0bad-4d4e-aba9-d43f565b4ddd" jcr:created="2016-08-08T17:31:16" jcr:lastModified="2016-08-08T17:31:16" jahia:lastModifiedBy="196571" jahia:createdBy="196571"></oneCol_left_linksList>
+                    <oneCol_down_linksList jcr:primaryType="epfl:oneColContainerList" jcr:uuid="ea450f8f-d233-4d9d-b3d2-72467bd1682d" jcr:created="2016-08-08T17:31:16" jcr:lastModified="2016-08-08T17:31:16" jahia:createdBy="196571" jahia:lastModifiedBy="196571"></oneCol_down_linksList>
+                </jahia:page>
+            </navigationPage>
+        </navigationList>
+        <navigationList jcr:primaryType="epfl:navigationContainer" jcr:uuid="8c5561d5-2958-4d9d-b391-0d4eea8144a2" jcr:lastModified="2014-11-20T15:33:31" jahia:lastModifiedBy="229105" jahia:createdBy="229105" jcr:created="2014-11-20T15:33:31" jahia:lastPublisher="196571" jahia:lastPublishingDate="2016-08-08T17:35:50">
+            <navigationPage jcr:uuid="702d0202-682c-404d-959d-4b62cd59138b">
+                <jahia:page jahia:template="simple" jcr:primaryType="epfl:simple" jahia:title="Publications" jcr:uuid="93bfd081-e570-4bf7-a1d7-612c3928bd08" jcr:lastModified="2016-08-08T16:31:41" jahia:lastModifiedBy="229105" jcr:created="2014-11-20T15:33:31" jahia:createdBy="229105" jahia:lastPublisher="196571" jahia:lastPublishingDate="2016-08-08T17:35:50" jahia:acl="none" jahia:pid="115407">
+                    <mainList jcr:primaryType="jnt:boxList" jcr:uuid="4276a881-6252-4986-8ab4-6250e85d15a3" jcr:created="2014-11-20T15:33:31" jahia:createdBy="229105" jcr:lastModified="2014-11-20T15:37:09" jahia:lastModifiedBy="229105" jahia:lastPublishingDate="2016-08-08T17:35:50" jahia:lastPublisher="196571">
+                        <main jcr:primaryType="epfl:infoscienceBox" jcr:uuid="84e1c3c5-5390-4fa7-bd01-63843b50b850" jahia:createdBy="229105" jcr:created="2014-11-20T15:37:07" jahia:lastModifiedBy="229105" jcr:lastModified="2014-11-20T15:37:07" jahia:lastPublishingDate="2016-08-08T17:35:50" jahia:lastPublisher="196571">
+                            <jcr_primaryType jahia:value="epfl:infoscienceBox" jcr:uuid="92bb603a-07a9-4468-9cbc-f7394ad38644"></jcr_primaryType>
+                            <boxTitle jahia:value="" jcr:uuid="6dd6b95c-daee-4ff5-8a68-5d24858e7d0c"></boxTitle>
+                            <infoscienceListList jcr:primaryType="epfl:infoscienceContainerList" jcr:uuid="b804e77c-7bee-4ad5-8512-532a6cb4e7b9" jcr:lastModified="2014-11-25T17:55:33" jahia:lastModifiedBy="229105" jahia:createdBy="229105" jcr:created="2014-11-20T15:37:09" jahia:lastPublisher="196571" jahia:lastPublishingDate="2016-08-08T17:35:50">
+                                <infoscienceList jcr:primaryType="epfl:infoscienceContainer" jcr:uuid="ec35a1d7-01e5-4930-a002-ba122ec0ec2c" jcr:lastModified="2014-11-25T17:55:33" jahia:lastModifiedBy="229105" jahia:createdBy="229105" jcr:created="2014-11-20T15:37:09" jahia:lastPublisher="196571" jahia:lastPublishingDate="2016-08-08T17:35:50">
+                                    <moreUrl jcr:uuid="ea844078-4212-4cec-b106-8195993859a3"></moreUrl>
+                                    <errorMessage jahia:value="" jcr:uuid="eb05a534-899f-4b4d-9acc-8accfbb4fbe3"></errorMessage>
+                                    <url jahia:value="http://infoscience.epfl.ch/curator/export/9665/?ln=en" jcr:uuid="d7ebc972-11ea-4e1a-a532-a2f2cba10c94"></url>
+                                </infoscienceList>
+                            </infoscienceListList>
+                        </main>
+                    </mainList>
+                    <pageTitleListList jcr:primaryType="epfl:pageTitleContainerList" jcr:uuid="e900af8f-482d-4c63-a647-98979839583b" jcr:created="2014-11-20T15:33:31" jahia:createdBy="229105" jahia:lastModifiedBy="229105" jcr:lastModified="2014-11-20T15:33:31" jahia:lastPublisher="196571" jahia:lastPublishingDate="2016-08-08T17:35:50">
+                        <pageTitleList jcr:primaryType="epfl:pageTitleContainer" jcr:uuid="53bde6de-a926-4255-a584-0e52c518318a" jahia:createdBy="229105" jahia:lastModifiedBy="229105" jcr:lastModified="2014-11-20T15:33:31" jcr:created="2014-11-20T15:33:31" jahia:lastPublisher="196571" jahia:lastPublishingDate="2016-08-08T17:35:50">
+                            <pageTitle jahia:value="" jcr:uuid="56ecb044-d09a-422d-b5d3-acc46c4d22cf"></pageTitle>
+                        </pageTitleList>
+                    </pageTitleListList>
+                    <footerLinkListList jcr:primaryType="epfl:bottomLinksContainerList" jcr:uuid="4f63fe31-31ef-4298-924b-1e661aac5185" jahia:lastModifiedBy="229105" jcr:lastModified="2014-11-20T15:33:31" jcr:created="2014-11-20T15:33:31" jahia:createdBy="229105"></footerLinkListList>
+                    <breadCrumbLinksListList jcr:primaryType="epfl:breadCrumbLinksContainerList" jcr:uuid="6bbc4721-9c19-46b3-b670-4c5f00f53b9d" jcr:lastModified="2014-11-20T15:33:31" jahia:lastModifiedBy="229105" jcr:created="2014-11-20T15:33:31" jahia:createdBy="229105"></breadCrumbLinksListList>
+                    <navigationListList jcr:primaryType="epfl:navigationContainerList" jcr:uuid="0294fbff-67e4-43d6-ba54-07f07708362e" jcr:lastModified="2014-11-20T15:33:31" jcr:created="2014-11-20T15:33:31" jahia:lastModifiedBy="229105" jahia:createdBy="229105"></navigationListList>
+                    <extraList jcr:primaryType="jnt:boxList" jcr:uuid="79237e68-ca6a-4cd9-8ff8-718f29ab367e" jahia:createdBy="229105" jcr:lastModified="2014-11-20T15:33:31" jcr:created="2014-11-20T15:33:31" jahia:lastModifiedBy="229105"></extraList>
+                    <pageMetadatasListList jcr:primaryType="epfl:pageMetadatasContainerList" jcr:uuid="c57ec728-e470-4c32-92a1-f505bc1af786" jcr:lastModified="2014-11-20T15:33:31" jcr:created="2014-11-20T15:33:31" jahia:createdBy="229105" jahia:lastModifiedBy="229105" jahia:lastPublishingDate="2016-08-08T17:35:50" jahia:lastPublisher="196571">
+                        <pageMetadatasList jcr:primaryType="epfl:pageMetadatasContainer" jcr:uuid="2fc547b8-383f-461c-aa86-41cb679847a1" jahia:createdBy="229105" jahia:lastModifiedBy="229105" jcr:lastModified="2014-11-20T15:33:31" jcr:created="2014-11-20T15:33:31" jahia:lastPublisher="196571" jahia:lastPublishingDate="2016-08-08T17:35:50">
+                            <pageCSS jahia:value="" jcr:uuid="5968fe16-fb31-44ec-8a5c-118f56f10b59"></pageCSS>
+                            <metadataDescription jahia:value="" jcr:uuid="5cf0de7e-0170-400c-ae74-85012a460449"></metadataDescription>
+                            <metadataKeywords jahia:value="" jcr:uuid="ef480a6a-bad9-4a5d-95c1-f77f06c570ec"></metadataKeywords>
+                            <pageJS jahia:value="" jcr:uuid="71b35390-e0cb-4cd4-bf65-15731a2a4315"></pageJS>
+                        </pageMetadatasList>
+                    </pageMetadatasListList>
+                    <siteSettingsListList jcr:primaryType="epfl:siteSettingsContainerList" jcr:uuid="5b1ad737-5741-4830-b41a-f290c78889e2" jcr:lastModified="2014-11-20T15:33:31" jahia:createdBy="229105" jahia:lastModifiedBy="229105" jcr:created="2014-11-20T15:33:31"></siteSettingsListList>
+                    <bottomLinksListList jcr:primaryType="epfl:bottomLinksContainerList" jcr:uuid="86abbd26-df5b-4281-a2d9-8f9cf33c0ba8" jahia:lastModifiedBy="229105" jcr:created="2014-11-20T15:33:31" jahia:createdBy="229105" jcr:lastModified="2014-11-20T15:33:31"></bottomLinksListList>
+                    <oneCol_up_linksList jcr:primaryType="epfl:oneColContainerList" jcr:uuid="2f580fd7-50eb-46d5-ae60-0778a2cfb6ea" jahia:createdBy="229105" jcr:lastModified="2016-08-08T16:31:41" jahia:lastModifiedBy="229105" jcr:created="2016-08-08T16:31:41"></oneCol_up_linksList>
+                    <oneCol_right_linksList jcr:primaryType="epfl:oneColContainerList" jcr:uuid="da0b5d74-57e6-4310-b982-e3f59647688b" jcr:lastModified="2016-08-08T16:31:41" jcr:created="2016-08-08T16:31:41" jahia:createdBy="229105" jahia:lastModifiedBy="229105"></oneCol_right_linksList>
+                    <oneCol_left_linksList jcr:primaryType="epfl:oneColContainerList" jcr:uuid="6c00a421-0cdc-4d2b-bb00-9d27cab67dee" jahia:lastModifiedBy="229105" jcr:lastModified="2016-08-08T16:31:41" jcr:created="2016-08-08T16:31:41" jahia:createdBy="229105"></oneCol_left_linksList>
+                    <oneCol_down_linksList jcr:primaryType="epfl:oneColContainerList" jcr:uuid="0e9ca8b5-7ccd-4a09-add9-923dd4898535" jahia:createdBy="229105" jcr:created="2016-08-08T16:31:41" jcr:lastModified="2016-08-08T16:31:41" jahia:lastModifiedBy="229105"></oneCol_down_linksList>
+                </jahia:page>
+            </navigationPage>
+        </navigationList>
+        <navigationList jcr:primaryType="epfl:navigationContainer" jcr:uuid="67920f68-475e-4a0d-b499-7d7fd04b31a4" jcr:created="2015-10-23T15:25:54" jahia:createdBy="196571" jahia:lastModifiedBy="196571" jcr:lastModified="2015-10-23T15:25:54" jahia:lastPublisher="196571" jahia:lastPublishingDate="2017-03-09T15:13:16">
+            <navigationPage jcr:uuid="1f7fef26-bdd1-4d85-a1a4-fcb87b0c58bb">
+                <jahia:page jahia:template="simple" jcr:primaryType="epfl:simple" jahia:title="Teaching" jcr:uuid="c3119a19-7cfe-4598-b344-2705d78407a1" jcr:lastModified="2017-03-09T15:12:56" jcr:created="2015-10-23T15:25:54" jahia:lastModifiedBy="196571" jahia:createdBy="196571" jahia:lastPublisher="196571" jahia:lastPublishingDate="2017-03-09T15:13:16" jahia:acl="none" jahia:pid="126135">
+                    <mainList jcr:primaryType="jnt:boxList" jcr:uuid="87631a66-b7d3-4b9b-8a8c-6e6cec9701e1" jahia:createdBy="196571" jcr:lastModified="2015-10-23T15:27:36" jahia:lastModifiedBy="196571" jcr:created="2015-10-23T15:25:54" jahia:lastPublisher="196571" jahia:lastPublishingDate="2017-03-09T15:13:16">
+                        <main jcr:primaryType="epfl:textBox" jcr:uuid="f67d91b9-c8dc-42ee-a3b8-2095f567a8db" jcr:created="2015-10-23T15:27:34" jahia:lastModifiedBy="196571" jcr:lastModified="2015-10-23T15:27:34" jahia:createdBy="196571" jahia:lastPublisher="196571" jahia:lastPublishingDate="2017-03-09T15:13:16">
+                            <jcr_primaryType jahia:value="epfl:textBox" jcr:uuid="4c269261-2633-4e82-838a-a49b379f8672"></jcr_primaryType>
+                            <boxTitle jahia:value="" jcr:uuid="f17b0d35-a7ed-4764-abbe-9ba8a8efc295"></boxTitle>
+                            <comboListList jcr:primaryType="epfl:comboContainerList" jcr:uuid="36a85df7-06b9-4bde-b0f7-3b9240f4923c" jcr:lastModified="2017-03-09T15:12:56" jcr:created="2015-10-23T15:27:36" jahia:lastModifiedBy="196571" jahia:createdBy="196571" jahia:lastPublisher="196571" jahia:lastPublishingDate="2017-03-09T15:13:16">
+                                <comboList jcr:primaryType="epfl:comboContainer" jcr:uuid="ad1dcc18-3838-4119-b556-eac8ffe3f7e8" jcr:lastModified="2017-03-09T15:12:56" jahia:lastModifiedBy="196571" jahia:createdBy="196571" jcr:created="2015-10-23T15:42:55" jahia:lastPublisher="196571" jahia:lastPublishingDate="2017-03-09T15:13:16">
+                                    <text jahia:value="&lt;h4&gt;&lt;strong&gt;&lt;br /&gt;
+	&lt;/strong&gt;&lt;strong&gt;Courses 2016 - 2017&lt;/strong&gt;
+&lt;/h4&gt;
+&lt;p&gt;&amp;nbsp;&lt;/p&gt;
+&lt;p&gt;
+	&lt;a href=&quot;http://isa.epfl.ch/imoniteur_ISAP/!itffichecours.htm?ww_i_matiere=1501687491&amp;amp;ww_x_anneeacad=355925344&amp;amp;ww_i_section=2139068&amp;amp;ww_i_niveau=&amp;amp;ww_c_langue=fr&quot;&gt;&lt;strong&gt;Principles of Computer Systems&lt;/strong&gt;&lt;/a&gt;&lt;br /&gt;
+	&lt;br /&gt;
+	This advanced graduate course focuses on key design principles underlying successful computer and communication systems, and teaches how to solve real problems using ideas, techniques, and algorithms from operating systems, networks, databases, programming... &lt;a href=&quot;http://isa.epfl.ch/imoniteur_ISAP/!itffichecours.htm?ww_i_matiere=1501687491&amp;amp;ww_x_anneeacad=355925344&amp;amp;ww_i_section=2139068&amp;amp;ww_i_niveau=&amp;amp;ww_c_langue=fr&quot;&gt;&lt;strong&gt;&amp;gt;&amp;gt;&lt;/strong&gt;&lt;/a&gt;&lt;!--[if gte mso 9]&gt;&lt;xml&gt;
+		&lt;o:OfficeDocumentSettings&gt;
+		&lt;o:AllowPNG /&gt;
+		&lt;/o:OfficeDocumentSettings&gt;
+		&lt;/xml&gt;&lt;![endif]--&gt;
+&lt;/p&gt;
+&lt;p&gt;Doctoral Program in Computer and Communication Sciences, 2015-2016, English&lt;br /&gt;
+	Section of Communication Systems, 2016-2017, Master semester 1, English&lt;br /&gt;
+	Section of Communication Systems, 2016-2017, Master semester 3, English&lt;br /&gt;
+	Section of Computer Science, 2016-2017, Master semester 1, English&lt;br /&gt;
+	Section of Computer Science, 2016-2017, Master semester 3, English&lt;br /&gt;
+	&lt;br /&gt;
+	&lt;a href=&quot;http://isa.epfl.ch/imoniteur_ISAP/!itffichecours.htm?ww_i_matiere=1888789713&amp;amp;ww_x_anneeacad=355925344&amp;amp;ww_i_section=946228&amp;amp;ww_i_niveau=6683117&amp;amp;ww_c_langue=en&quot;&gt;&lt;strong&gt;&lt;br /&gt;
+	&lt;/strong&gt;&lt;strong&gt;System Programming Projec&lt;/strong&gt;&lt;strong&gt;t&lt;/strong&gt;&lt;/a&gt;&lt;br /&gt;
+	&lt;br /&gt;
+	The objective of this project-based course is to give students extensive practice with writing, debugging, reading, understanding and improving systems programs. &lt;a href=&quot;http://isa.epfl.ch/imoniteur_ISAP/!itffichecours.htm?ww_i_matiere=1888789713&amp;amp;ww_x_anneeacad=355925344&amp;amp;ww_i_section=946228&amp;amp;ww_i_niveau=6683117&amp;amp;ww_c_langue=en&quot;&gt;&lt;strong&gt;&amp;gt;&amp;gt;&lt;/strong&gt;&lt;/a&gt;&lt;br /&gt;
+	Section of Communication Systems, 2016-2017, Bachelor semester 4, French&lt;br /&gt;
+	Section of Computer Science, 2016-2017, Bachelor semester 4, French&lt;br /&gt;
+	Section of Computer Science, 2016-2017, Spring semester, French&lt;br /&gt;
+	Minor, 2016-2017 Spring semester, French
+&lt;/p&gt;
+" jcr:uuid="68ad54c6-ff8c-49ba-bbe6-3edb0d35f59b"></text>
+                                    <filesList jcr:primaryType="jnt:fileContainerList" jcr:uuid="7d83d4bd-c752-4d5a-a224-259c78a477f7" jcr:lastModified="2015-10-23T15:42:59" jcr:created="2015-10-23T15:42:59" jahia:lastModifiedBy="196571" jahia:createdBy="196571"></filesList>
+                                    <linksList jcr:primaryType="jnt:linkContainerList" jcr:uuid="906f12e5-6481-42a1-a6db-e59ec1035808" jcr:created="2015-10-23T15:42:59" jcr:lastModified="2015-10-23T15:42:59" jahia:lastModifiedBy="196571" jahia:createdBy="196571"></linksList>
+                                </comboList>
+                            </comboListList>
+                        </main>
+                    </mainList>
+                    <pageTitleListList jcr:primaryType="epfl:pageTitleContainerList" jcr:uuid="b5dd86ce-9947-4c30-a641-a4a58d96501c" jahia:lastModifiedBy="196571" jcr:lastModified="2015-10-23T15:46:25" jahia:createdBy="196571" jcr:created="2015-10-23T15:25:54" jahia:lastPublisher="196571" jahia:lastPublishingDate="2017-03-09T15:13:16">
+                        <pageTitleList jcr:primaryType="epfl:pageTitleContainer" jcr:uuid="e980bb82-5be3-476a-a03c-2e79fb8e76d2" jahia:lastModifiedBy="196571" jcr:created="2015-10-23T15:25:54" jcr:lastModified="2015-10-23T15:46:25" jahia:createdBy="196571" jahia:lastPublisher="196571" jahia:lastPublishingDate="2017-03-09T15:13:16">
+                            <pageTitle jahia:value="" jcr:uuid="741c18b0-ce96-412a-973b-a9d156053e1a"></pageTitle>
+                        </pageTitleList>
+                    </pageTitleListList>
+                    <footerLinkListList jcr:primaryType="epfl:bottomLinksContainerList" jcr:uuid="ce3e93c7-3787-4e0c-92d0-25603d2c9e38" jahia:lastModifiedBy="196571" jcr:created="2015-10-23T15:25:54" jahia:createdBy="196571" jcr:lastModified="2015-10-23T15:25:54"></footerLinkListList>
+                    <breadCrumbLinksListList jcr:primaryType="epfl:breadCrumbLinksContainerList" jcr:uuid="d4b3aa27-0634-4089-adf8-f6526bd27dee" jcr:lastModified="2015-10-23T15:25:54" jcr:created="2015-10-23T15:25:54" jahia:lastModifiedBy="196571" jahia:createdBy="196571"></breadCrumbLinksListList>
+                    <navigationListList jcr:primaryType="epfl:navigationContainerList" jcr:uuid="1f48288a-2a4b-4e7f-8a69-3fde28bb99c0" jahia:lastModifiedBy="196571" jcr:created="2015-10-23T15:25:54" jcr:lastModified="2015-10-23T15:25:54" jahia:createdBy="196571"></navigationListList>
+                    <extraList jcr:primaryType="jnt:boxList" jcr:uuid="c2eb3010-ad68-4679-bec5-89aa6fd6ec59" jahia:createdBy="196571" jcr:created="2015-10-23T15:25:53" jahia:lastModifiedBy="196571" jcr:lastModified="2015-10-23T15:25:53"></extraList>
+                    <pageMetadatasListList jcr:primaryType="epfl:pageMetadatasContainerList" jcr:uuid="2ce26fa0-aa3b-4e80-b199-72e093733879" jahia:lastModifiedBy="196571" jcr:lastModified="2015-10-23T15:25:53" jcr:created="2015-10-23T15:25:53" jahia:createdBy="196571" jahia:lastPublisher="196571" jahia:lastPublishingDate="2017-03-09T15:13:16">
+                        <pageMetadatasList jcr:primaryType="epfl:pageMetadatasContainer" jcr:uuid="e2508b73-eb00-4a4a-b1ee-896580f6b6f3" jcr:created="2015-10-23T15:25:53" jahia:createdBy="196571" jcr:lastModified="2015-10-23T15:25:53" jahia:lastModifiedBy="196571" jahia:lastPublisher="196571" jahia:lastPublishingDate="2017-03-09T15:13:16">
+                            <pageCSS jahia:value="" jcr:uuid="8455b6cc-8c7d-48e7-8a2e-a8333e8388da"></pageCSS>
+                            <metadataDescription jahia:value="" jcr:uuid="38a64ffa-bd4e-4204-aa50-25249fd9c8d1"></metadataDescription>
+                            <metadataKeywords jahia:value="" jcr:uuid="24189e9f-6290-402e-b9d5-0707019856e8"></metadataKeywords>
+                            <pageJS jahia:value="" jcr:uuid="d3d30bda-b201-402c-8e57-c13973c4b785"></pageJS>
+                        </pageMetadatasList>
+                    </pageMetadatasListList>
+                    <siteSettingsListList jcr:primaryType="epfl:siteSettingsContainerList" jcr:uuid="6e85c6db-d383-4d13-8380-1de0461deef7" jahia:createdBy="196571" jahia:lastModifiedBy="196571" jcr:lastModified="2015-10-23T15:25:53" jcr:created="2015-10-23T15:25:53"></siteSettingsListList>
+                    <bottomLinksListList jcr:primaryType="epfl:bottomLinksContainerList" jcr:uuid="9626ae30-7ec9-4124-bbf3-441ed89921d4" jcr:lastModified="2015-10-23T15:25:53" jahia:createdBy="196571" jahia:lastModifiedBy="196571" jcr:created="2015-10-23T15:25:53"></bottomLinksListList>
+                    <oneCol_up_linksList jcr:primaryType="epfl:oneColContainerList" jcr:uuid="6223ef22-0c44-444f-9589-ec8a27fbdeac" jahia:lastModifiedBy="196571" jcr:lastModified="2016-08-08T17:30:34" jahia:createdBy="196571" jcr:created="2016-08-08T17:30:34"></oneCol_up_linksList>
+                    <oneCol_right_linksList jcr:primaryType="epfl:oneColContainerList" jcr:uuid="79f8b7cb-576a-4f8d-a3b1-32ec897dad83" jahia:createdBy="196571" jahia:lastModifiedBy="196571" jcr:created="2016-08-08T17:30:34" jcr:lastModified="2016-08-08T17:30:34"></oneCol_right_linksList>
+                    <oneCol_left_linksList jcr:primaryType="epfl:oneColContainerList" jcr:uuid="f83c9ac0-df8f-48e5-ad5f-ece6f665c2b1" jcr:created="2016-08-08T17:30:34" jcr:lastModified="2016-08-08T17:30:34" jahia:createdBy="196571" jahia:lastModifiedBy="196571"></oneCol_left_linksList>
+                    <oneCol_down_linksList jcr:primaryType="epfl:oneColContainerList" jcr:uuid="fcce4f1e-271a-42da-9941-f6cad5fb8dd5" jahia:lastModifiedBy="196571" jcr:lastModified="2016-08-08T17:30:34" jahia:createdBy="196571" jcr:created="2016-08-08T17:30:34"></oneCol_down_linksList>
+                </jahia:page>
+            </navigationPage>
+        </navigationList>
+        <navigationList jcr:primaryType="epfl:navigationContainer" jcr:uuid="587229a2-4261-4733-8472-ce439dac734f" jcr:created="2015-10-30T13:29:31" jahia:createdBy="196571" jcr:lastModified="2015-10-30T13:29:31" jahia:lastModifiedBy="196571" jahia:lastPublisher="196571" jahia:lastPublishingDate="2016-08-08T17:38:12">
+            <navigationPage jcr:uuid="0e309ebc-0a33-45e4-b4c0-cf999eb62ad1">
+                <jahia:page jahia:template="simple" jcr:primaryType="epfl:simple" jahia:title="soNUMA" jcr:uuid="9a489215-083b-4ebc-a3db-4e7373699e16" jcr:lastModified="2016-08-08T17:36:55" jahia:createdBy="196571" jahia:lastModifiedBy="196571" jcr:created="2015-10-30T13:29:31" jahia:lastPublisher="196571" jahia:lastPublishingDate="2016-08-08T17:38:12" jahia:acl="none" jahia:pid="126290">
+                    <mainList jcr:primaryType="jnt:boxList" jcr:uuid="3d17cb6f-a231-45a6-97a7-4b73f09422ed" jahia:createdBy="196571" jcr:lastModified="2015-10-30T13:31:22" jcr:created="2015-10-30T13:29:31" jahia:lastModifiedBy="196571" jahia:lastPublisher="196571" jahia:lastPublishingDate="2016-08-08T17:38:12">
+                        <main jcr:primaryType="epfl:textBox" jcr:uuid="0f9591c8-a46a-471f-a143-9c50e4fa409b" jahia:lastModifiedBy="196571" jahia:createdBy="196571" jcr:lastModified="2015-10-30T13:30:20" jcr:created="2015-10-30T13:30:20" jahia:lastPublisher="196571" jahia:lastPublishingDate="2016-08-08T17:38:12">
+                            <jcr_primaryType jahia:value="epfl:textBox" jcr:uuid="5df1ebf3-2129-4669-9182-b80416108a16"></jcr_primaryType>
+                            <boxTitle jahia:value="" jcr:uuid="cd7db951-7f7f-4e7b-8a77-9feef36507cd"></boxTitle>
+                            <comboListList jcr:primaryType="epfl:comboContainerList" jcr:uuid="0219b8e3-657f-416a-9929-1ba0b32ff7a9" jcr:lastModified="2015-10-30T13:45:41" jahia:lastModifiedBy="196571" jcr:created="2015-10-30T13:30:22" jahia:createdBy="196571" jahia:lastPublisher="196571" jahia:lastPublishingDate="2016-08-08T17:38:12">
+                                <comboList jcr:primaryType="epfl:comboContainer" jcr:uuid="0317d590-0aa6-47f3-92e5-2f52247ae089" jahia:createdBy="196571" jcr:created="2015-10-30T13:30:58" jcr:lastModified="2015-10-30T13:45:41" jahia:lastModifiedBy="196571" jahia:lastPublisher="196571" jahia:lastPublishingDate="2016-08-08T17:38:12">
+                                    <text jahia:value="&lt;p&gt;&lt;strong&gt;Scale-out NUMA (soNUMA&lt;/strong&gt;) is a high-performance rack-scale system for scale-out analytics and data serving. Each soNUMA server relies on a locally cache coherent, integrated Remote Memory Controller (RMC) to access non-local data. The RMC exposes a set of one-sided, RDMA-like operations implemented via in-memory queue-pairs. The RMC protocol is layered on top of a conventional NUMA transport.&lt;/p&gt;
+&lt;p&gt;&amp;nbsp;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://parsa.epfl.ch/sonuma/sonuma.html&quot;&gt;&lt;strong&gt;Scale-out NUMA (soNUMA)&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+" jcr:uuid="f3083e0b-2fbe-4e34-a61a-def1a06fee3f"></text>
+                                    <filesList jcr:primaryType="jnt:fileContainerList" jcr:uuid="01a1e52a-c093-4e4a-89ab-b5325465a4ad" jcr:created="2015-10-30T13:31:00" jahia:createdBy="196571" jcr:lastModified="2015-10-30T13:31:00" jahia:lastModifiedBy="196571"></filesList>
+                                    <linksList jcr:primaryType="jnt:linkContainerList" jcr:uuid="f0b37386-94f9-4e12-9338-bad3aca2dbf0" jcr:lastModified="2015-10-30T13:30:59" jahia:lastModifiedBy="196571" jahia:createdBy="196571" jcr:created="2015-10-30T13:30:59"></linksList>
+                                </comboList>
+                            </comboListList>
+                        </main>
+                        <main jcr:primaryType="epfl:textBox" jcr:uuid="b91cea7c-5c38-415f-ad3a-586565ba336b" jahia:createdBy="196571" jahia:lastModifiedBy="196571" jcr:lastModified="2015-10-30T13:31:21" jcr:created="2015-10-30T13:31:21" jahia:lastPublisher="196571" jahia:lastPublishingDate="2016-08-08T17:38:12">
+                            <jcr_primaryType jahia:value="epfl:textBox" jcr:uuid="31fcc0f3-b3d6-4e86-b1ef-25e9f2ce6bca"></jcr_primaryType>
+                            <boxTitle jahia:value="" jcr:uuid="371f6f52-37fc-4697-a24f-03f97bc56f43"></boxTitle>
+                            <comboListList jcr:primaryType="epfl:comboContainerList" jcr:uuid="72380d15-d8ee-45b6-9133-40aa4dc0fe66" jcr:created="2015-10-30T13:31:22" jcr:lastModified="2015-10-30T13:38:29" jahia:lastModifiedBy="196571" jahia:createdBy="196571" jahia:lastPublisher="196571" jahia:lastPublishingDate="2016-08-08T17:38:12">
+                                <comboList jcr:primaryType="epfl:comboContainer" jcr:uuid="e7a0495d-244b-4869-ac58-80573c8ffd38" jcr:lastModified="2015-10-30T13:38:29" jahia:lastModifiedBy="196571" jahia:createdBy="196571" jcr:created="2015-10-30T13:37:06" jahia:lastPublisher="196571" jahia:lastPublishingDate="2016-08-08T17:38:12">
+                                    <text jahia:value="&lt;p&gt;&lt;img width=&quot;611&quot; height=&quot;240&quot; border=&quot;5&quot; alt=&quot;&quot; style=&quot;float: left; margin: 5px;&quot; src=&quot;###file:/content/sites/dcsl/files/sonuma1.png?uuid=default:aad25c7d-c6f6-4685-bff8-a26f64b010a3&quot; /&gt;&lt;/p&gt;
+" jcr:uuid="cc443b82-094b-41ea-bfe6-4383206b767f"></text>
+                                    <filesList jcr:primaryType="jnt:fileContainerList" jcr:uuid="085f94a0-7525-4c0b-93cf-d6ee06326141" jahia:lastModifiedBy="196571" jcr:lastModified="2015-10-30T13:37:09" jahia:createdBy="196571" jcr:created="2015-10-30T13:37:09"></filesList>
+                                    <linksList jcr:primaryType="jnt:linkContainerList" jcr:uuid="f8e3736c-a238-4db7-9f9e-260ba716fb95" jahia:createdBy="196571" jcr:created="2015-10-30T13:37:09" jahia:lastModifiedBy="196571" jcr:lastModified="2015-10-30T13:37:09"></linksList>
+                                </comboList>
+                            </comboListList>
+                        </main>
+                    </mainList>
+                    <pageTitleListList jcr:primaryType="epfl:pageTitleContainerList" jcr:uuid="0265cb3d-0a2a-4624-a526-92a17e691ec8" jahia:createdBy="196571" jcr:created="2015-10-30T13:29:31" jcr:lastModified="2015-10-30T13:29:31" jahia:lastModifiedBy="196571" jahia:lastPublisher="196571" jahia:lastPublishingDate="2016-08-08T17:38:12">
+                        <pageTitleList jcr:primaryType="epfl:pageTitleContainer" jcr:uuid="0ac7656b-4bbb-48b2-a647-102fdeb78a46" jcr:lastModified="2015-10-30T13:29:31" jahia:createdBy="196571" jahia:lastModifiedBy="196571" jcr:created="2015-10-30T13:29:31" jahia:lastPublisher="196571" jahia:lastPublishingDate="2016-08-08T17:38:12">
+                            <pageTitle jahia:value="" jcr:uuid="ce7f96bd-49f3-49fb-809d-1699e9398468"></pageTitle>
+                        </pageTitleList>
+                    </pageTitleListList>
+                    <footerLinkListList jcr:primaryType="epfl:bottomLinksContainerList" jcr:uuid="891f6dfa-1f99-4370-9656-0ec6700c9a09" jcr:created="2015-10-30T13:29:31" jahia:createdBy="196571" jahia:lastModifiedBy="196571" jcr:lastModified="2015-10-30T13:29:31"></footerLinkListList>
+                    <breadCrumbLinksListList jcr:primaryType="epfl:breadCrumbLinksContainerList" jcr:uuid="b8936271-d984-47e1-ab67-a486b2648ee5" jcr:created="2015-10-30T13:29:31" jahia:createdBy="196571" jcr:lastModified="2015-10-30T13:29:31" jahia:lastModifiedBy="196571"></breadCrumbLinksListList>
+                    <navigationListList jcr:primaryType="epfl:navigationContainerList" jcr:uuid="106d3875-85e8-4d2c-a9b8-f4b70639f6fc" jahia:lastModifiedBy="196571" jcr:created="2015-10-30T13:29:31" jahia:createdBy="196571" jcr:lastModified="2015-10-30T13:29:31"></navigationListList>
+                    <extraList jcr:primaryType="jnt:boxList" jcr:uuid="b459c531-4d80-4325-b4ae-75dbb7de0900" jcr:lastModified="2015-10-30T13:29:31" jahia:createdBy="196571" jahia:lastModifiedBy="196571" jcr:created="2015-10-30T13:29:31"></extraList>
+                    <pageMetadatasListList jcr:primaryType="epfl:pageMetadatasContainerList" jcr:uuid="2ec0460e-1db6-4981-a62d-2bc13d86eebd" jahia:lastModifiedBy="196571" jcr:lastModified="2015-10-30T13:29:31" jahia:createdBy="196571" jcr:created="2015-10-30T13:29:31" jahia:lastPublisher="196571" jahia:lastPublishingDate="2016-08-08T17:38:12">
+                        <pageMetadatasList jcr:primaryType="epfl:pageMetadatasContainer" jcr:uuid="5e1a0816-8a93-4f34-a273-58a9c05934f6" jcr:created="2015-10-30T13:29:31" jcr:lastModified="2015-10-30T13:29:31" jahia:lastModifiedBy="196571" jahia:createdBy="196571" jahia:lastPublisher="196571" jahia:lastPublishingDate="2016-08-08T17:38:12">
+                            <pageCSS jahia:value="" jcr:uuid="772408fa-dcda-4a68-b2c7-f04518033fe2"></pageCSS>
+                            <metadataDescription jahia:value="" jcr:uuid="e1196eb9-a6ea-4a7b-9eb6-9e477ca1f89d"></metadataDescription>
+                            <metadataKeywords jahia:value="" jcr:uuid="cb3f322c-f77a-4876-aa24-a42506fd01da"></metadataKeywords>
+                            <pageJS jahia:value="" jcr:uuid="9dec49e1-4593-49b2-be07-736d9c33f24d"></pageJS>
+                        </pageMetadatasList>
+                    </pageMetadatasListList>
+                    <siteSettingsListList jcr:primaryType="epfl:siteSettingsContainerList" jcr:uuid="ae8b3014-ef6d-4d87-a9b5-3097da7f39aa" jahia:lastModifiedBy="196571" jahia:createdBy="196571" jcr:lastModified="2015-10-30T13:29:31" jcr:created="2015-10-30T13:29:31"></siteSettingsListList>
+                    <bottomLinksListList jcr:primaryType="epfl:bottomLinksContainerList" jcr:uuid="8a2617b4-d9b0-4c39-ab2b-9e79a10674d8" jcr:created="2015-10-30T13:29:31" jahia:lastModifiedBy="196571" jahia:createdBy="196571" jcr:lastModified="2015-10-30T13:29:31"></bottomLinksListList>
+                    <oneCol_up_linksList jcr:primaryType="epfl:oneColContainerList" jcr:uuid="84404914-799c-4cda-9423-f695c420a829" jahia:createdBy="196571" jcr:lastModified="2016-08-08T17:36:55" jahia:lastModifiedBy="196571" jcr:created="2016-08-08T17:36:55"></oneCol_up_linksList>
+                    <oneCol_right_linksList jcr:primaryType="epfl:oneColContainerList" jcr:uuid="cff19d17-9eca-4c12-ad07-23080136e1a5" jcr:lastModified="2016-08-08T17:36:55" jahia:lastModifiedBy="196571" jahia:createdBy="196571" jcr:created="2016-08-08T17:36:55"></oneCol_right_linksList>
+                    <oneCol_left_linksList jcr:primaryType="epfl:oneColContainerList" jcr:uuid="dec86c20-5ba0-4789-b1d1-23a7475a43cf" jahia:createdBy="196571" jahia:lastModifiedBy="196571" jcr:lastModified="2016-08-08T17:36:55" jcr:created="2016-08-08T17:36:55"></oneCol_left_linksList>
+                    <oneCol_down_linksList jcr:primaryType="epfl:oneColContainerList" jcr:uuid="f7c3d3dc-aa0a-42d3-97f9-8731f8f5423f" jcr:lastModified="2016-08-08T17:36:55" jahia:lastModifiedBy="196571" jcr:created="2016-08-08T17:36:55" jahia:createdBy="196571"></oneCol_down_linksList>
+                </jahia:page>
+            </navigationPage>
+        </navigationList>
+        <navigationList jcr:primaryType="epfl:navigationContainer" jcr:uuid="4a12f7be-b881-48ae-a32f-716bc391f848" jahia:lastModifiedBy="196571" jcr:lastModified="2015-10-30T13:54:22" jahia:createdBy="196571" jcr:created="2015-10-30T13:54:22" jahia:lastPublisher="196571" jahia:lastPublishingDate="2016-08-08T17:38:37">
+            <navigationPage jcr:uuid="a9c7a0ca-1cf1-43b4-a9c1-45582dfbf6d3">
+                <jahia:page jahia:template="simple" jcr:primaryType="epfl:simple" jahia:title="IX Dataplane Operating System" jcr:uuid="14cd7dfd-bd30-4b73-b92f-a3c4b3860c31" jcr:lastModified="2016-08-08T17:36:58" jcr:created="2015-10-30T13:54:22" jahia:createdBy="196571" jahia:lastModifiedBy="196571" jahia:lastPublisher="196571" jahia:lastPublishingDate="2016-08-08T17:38:37" jahia:acl="none" jahia:pid="126292">
+                    <mainList jcr:primaryType="jnt:boxList" jcr:uuid="be36376d-4200-46e2-b463-78188630ad89" jcr:created="2015-10-30T13:54:22" jcr:lastModified="2015-10-30T13:59:59" jahia:lastModifiedBy="196571" jahia:createdBy="196571" jahia:lastPublisher="196571" jahia:lastPublishingDate="2016-08-08T17:38:37">
+                        <main jcr:primaryType="epfl:textBox" jcr:uuid="117bca50-af48-4a0c-989d-83c5d94671cd" jahia:lastModifiedBy="196571" jcr:created="2015-10-30T13:55:38" jcr:lastModified="2015-10-30T13:55:38" jahia:createdBy="196571" jahia:lastPublisher="196571" jahia:lastPublishingDate="2016-08-08T17:38:37">
+                            <jcr_primaryType jahia:value="epfl:textBox" jcr:uuid="b383e04e-520a-4a95-86c8-d3a4059100a3"></jcr_primaryType>
+                            <boxTitle jahia:value="" jcr:uuid="b33d9b00-7e7e-4967-9a29-e6b861caeca7"></boxTitle>
+                            <comboListList jcr:primaryType="epfl:comboContainerList" jcr:uuid="67d342aa-9943-406a-9c00-45c2c2f7cac1" jcr:lastModified="2016-06-03T17:02:29" jcr:created="2015-10-30T13:55:40" jahia:lastModifiedBy="196571" jahia:createdBy="196571" jahia:lastPublisher="196571" jahia:lastPublishingDate="2016-08-08T17:38:37">
+                                <comboList jcr:primaryType="epfl:comboContainer" jcr:uuid="4f5108db-5a8c-4c46-9887-3fccf770ee6b" jcr:lastModified="2016-06-03T17:02:29" jahia:createdBy="196571" jahia:lastModifiedBy="196571" jcr:created="2015-10-30T13:57:37" jahia:lastPublisher="196571" jahia:lastPublishingDate="2016-08-08T17:38:37">
+                                    <text jahia:value="&lt;div&gt;&amp;nbsp;&lt;/div&gt;
+&lt;div&gt;IX is an open-source project available at &lt;a href=&quot;https://github.com/ix-project&quot;&gt;&lt;strong&gt;ix-project&lt;/strong&gt;&lt;/a&gt;&lt;br /&gt;
+	&lt;br /&gt;
+	Commodity operating systems fail in maintaining the high throughput and low (tail) latency when applications require millions of operations per second and just hundreds of microseconds for slowest requests. However, these requirements are not rare in today's datacenters (e.g. for key-value stores) where every individual slack off in latency effects multiple requests due to distributed fan-out computational model. Overprovisioning of resources is often the big hammer of taming the latency curve which leads to low utilization of datacenters.&lt;br /&gt;
+	&lt;br /&gt;
+	IX is a specialized dataplane library operating system that solves the 4-way trade-off between high throughput, low latency, strong protection and energy efficiency. IX separates the control plane from the dataplane using hardware virtualization, therefore maintaining the strong protection offered by existing kernels. The control plane implements resource allocation policies while the dataplane provides high networking I/O performance.&lt;br /&gt;
+	&lt;br /&gt;
+	The network processing is optimized for both throughput and latency of event-driven latency critical applications by processing to completion bounded batches of packets, and by minimizing coherence traffic and multi-core synchronization. The control plane dynamically manages the resources (cores and frequency) driven by different policies (e.g. energy proportionality).&lt;br /&gt;
+	&lt;br /&gt;
+	&amp;nbsp;
+&lt;/div&gt;
+" jcr:uuid="d883f6e6-a9ab-4ac0-8098-438f461afa11"></text>
+                                    <filesList jcr:primaryType="jnt:fileContainerList" jcr:uuid="ac7f568c-23dc-44a2-8009-a46ead159b5f" jahia:createdBy="196571" jcr:created="2015-10-30T13:57:39" jahia:lastModifiedBy="196571" jcr:lastModified="2015-10-30T13:57:39"></filesList>
+                                    <linksList jcr:primaryType="jnt:linkContainerList" jcr:uuid="60c6ef93-130a-4637-ba9c-82e2bbb2cb54" jcr:created="2015-10-30T13:57:39" jcr:lastModified="2015-10-30T13:57:39" jahia:lastModifiedBy="196571" jahia:createdBy="196571"></linksList>
+                                </comboList>
+                            </comboListList>
+                        </main>
+                        <main jcr:primaryType="epfl:textBox" jcr:uuid="3174b31d-46a3-4ad9-9ad1-694614c2d490" jahia:lastModifiedBy="196571" jahia:createdBy="196571" jcr:lastModified="2015-10-30T13:58:55" jcr:created="2015-10-30T13:58:55" jahia:lastPublisher="196571" jahia:lastPublishingDate="2016-08-08T17:38:37">
+                            <jcr_primaryType jahia:value="epfl:textBox" jcr:uuid="d04851d9-465a-480d-87d8-c1d38ea004e2"></jcr_primaryType>
+                            <boxTitle jahia:value="" jcr:uuid="46473f96-5fb4-4174-9bb6-c44342969cf9"></boxTitle>
+                            <comboListList jcr:primaryType="epfl:comboContainerList" jcr:uuid="9441ee59-f6a7-452f-9364-a1aa942369c2" jahia:lastPublisher="196571" jcr:lastModified="2015-10-30T14:05:22" jahia:lastModifiedBy="196571" jahia:createdBy="196571" jcr:created="2015-10-30T13:58:56" jahia:lastPublishingDate="2016-08-08T17:38:37">
+                                <comboList jcr:primaryType="epfl:comboContainer" jcr:uuid="61f447bf-20f7-4450-9172-875742abfcd8" jahia:lastModifiedBy="196571" jcr:lastModified="2015-10-30T14:05:22" jcr:created="2015-10-30T13:59:33" jahia:createdBy="196571" jahia:lastPublisher="196571" jahia:lastPublishingDate="2016-08-08T17:38:37">
+                                    <text jahia:value="&lt;p&gt;&amp;nbsp;&lt;img width=&quot;535&quot; height=&quot;394&quot; border=&quot;5&quot; src=&quot;###file:/content/sites/dcsl/files/ix-architecture.jpg?uuid=default:968f6b2f-8a7b-4c81-83d8-3b15aff8838c&quot; style=&quot;float: left; margin: 5px;&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+" jcr:uuid="ac99d80a-11fc-478d-a2f2-50c32fab2618"></text>
+                                    <filesList jcr:primaryType="jnt:fileContainerList" jcr:uuid="c90a3b6a-6750-4c17-861e-d34dd5cfcaf4" jcr:created="2015-10-30T13:59:34" jahia:createdBy="196571" jahia:lastModifiedBy="196571" jcr:lastModified="2015-10-30T13:59:34"></filesList>
+                                    <linksList jcr:primaryType="jnt:linkContainerList" jcr:uuid="87a167aa-3710-441c-8300-135e793dbb2c" jcr:lastModified="2015-10-30T13:59:34" jcr:created="2015-10-30T13:59:34" jahia:lastModifiedBy="196571" jahia:createdBy="196571"></linksList>
+                                </comboList>
+                            </comboListList>
+                        </main>
+                        <main jcr:primaryType="epfl:textBox" jcr:uuid="550972e5-2d0a-45a7-88fc-4e83d250b6da" jcr:lastModified="2015-10-30T13:59:58" jcr:created="2015-10-30T13:59:58" jahia:createdBy="196571" jahia:lastModifiedBy="196571" jahia:lastPublisher="196571" jahia:lastPublishingDate="2016-08-08T17:38:37">
+                            <jcr_primaryType jahia:value="epfl:textBox" jcr:uuid="398a04ca-3ab5-4ca4-a8b9-5b08b3282c8e"></jcr_primaryType>
+                            <boxTitle jahia:value="" jcr:uuid="35df5258-7036-4c82-bd90-659dd7ed096b"></boxTitle>
+                            <comboListList jcr:primaryType="epfl:comboContainerList" jcr:uuid="a1bf30dd-b525-4d3d-9d4e-1a4b40be9707" jcr:lastModified="2016-06-03T16:19:35" jahia:lastModifiedBy="196571" jahia:createdBy="196571" jcr:created="2015-10-30T13:59:59" jahia:lastPublisher="196571" jahia:lastPublishingDate="2016-08-08T17:38:37">
+                                <comboList jcr:primaryType="epfl:comboContainer" jcr:uuid="07108080-cedd-4127-b351-29d56ab2c230" jcr:lastModified="2016-06-03T16:19:35" jcr:created="2015-10-30T14:00:14" jahia:lastModifiedBy="196571" jahia:createdBy="196571" jahia:lastPublisher="196571" jahia:lastPublishingDate="2016-08-08T17:38:37">
+                                    <text jahia:value="&lt;p&gt;Prekas, George; Belay, Adam; Primorac, Mia; Klimovic, Ana; Grossman, Samuel; Kogias, Marios; G&amp;uuml;termann, Bernard; Kozyrakis, Christos; Bugnion, Edouard. IX Open-source version 1.0 - Deployment and Evaluation Guide. EPFL Technical Report, 2016. &lt;a href=&quot;https://infoscience.epfl.ch/record/218568?ln=en&quot;&gt;Publication&lt;/a&gt;&lt;br /&gt;
+	&lt;br /&gt;
+	&lt;span class=&quot;infoscience_authors&quot;&gt;G. Prekas, M. Primorac, A. Belay, C. Kozyrakis and E. Bugnion&lt;/span&gt;. &lt;span class=&quot;infoscience_title&quot;&gt;Energy Proportionality and Workload Consolidation for Latency-Critical Applications. &lt;/span&gt;&lt;span class=&quot;infoscience_conference&quot;&gt;2015 ACM Symposium on Cloud Computing, Kohala Coast, HI, USA&lt;/span&gt;, 2015. &lt;a href=&quot;http://infoscience.epfl.ch/record/210138/files/ix-energy-socc15.pdf?version=1&quot;&gt;Publication&lt;/a&gt;
+&lt;/p&gt;
+&lt;p&gt;&lt;span class=&quot;infoscience_authors&quot;&gt;A. Belay, G. Prekas, A. Klimovic, S. Grossman and C. Kozyrakis et al&lt;/span&gt;. &lt;span class=&quot;infoscience_title&quot;&gt;IX: A Protected Dataplane Operating System for High Throughput and Low Latency. &lt;/span&gt;&lt;span class=&quot;infoscience_conference&quot;&gt;11th Symposium on Operating System Design and Implementation (OSDI), Broomfield, CO, USA&lt;/span&gt;, 2014. &lt;a href=&quot;http://infoscience.epfl.ch/record/201671/files/osdi14-ix.pdf?version=1&quot;&gt;Publication&lt;/a&gt;&lt;/p&gt;
+" jcr:uuid="74276790-34d5-4b9c-9de6-f9c3a2988a14"></text>
+                                    <filesList jcr:primaryType="jnt:fileContainerList" jcr:uuid="312b44fd-c3ce-4635-b18f-27fcf14adce9" jcr:lastModified="2015-10-30T14:00:16" jcr:created="2015-10-30T14:00:16" jahia:createdBy="196571" jahia:lastModifiedBy="196571"></filesList>
+                                    <linksList jcr:primaryType="jnt:linkContainerList" jcr:uuid="9be2c0a1-ae4f-4657-ac14-cc6142d72f30" jcr:lastModified="2015-10-30T14:00:16" jcr:created="2015-10-30T14:00:16" jahia:lastModifiedBy="196571" jahia:createdBy="196571"></linksList>
+                                </comboList>
+                            </comboListList>
+                        </main>
+                    </mainList>
+                    <pageTitleListList jcr:primaryType="epfl:pageTitleContainerList" jcr:uuid="e287ff5c-dff7-4d44-908c-0dda6e0ed4fc" jahia:createdBy="196571" jcr:lastModified="2015-10-30T13:54:22" jahia:lastModifiedBy="196571" jcr:created="2015-10-30T13:54:22" jahia:lastPublisher="196571" jahia:lastPublishingDate="2016-08-08T17:38:37">
+                        <pageTitleList jcr:primaryType="epfl:pageTitleContainer" jcr:uuid="93dbbaa2-71af-49e6-b2f8-4bf3eb8a5999" jcr:created="2015-10-30T13:54:22" jahia:createdBy="196571" jahia:lastModifiedBy="196571" jcr:lastModified="2015-10-30T13:54:22" jahia:lastPublisher="196571" jahia:lastPublishingDate="2016-08-08T17:38:37">
+                            <pageTitle jahia:value="" jcr:uuid="1fcb2da2-6621-42d0-9194-9a4dac70e9b3"></pageTitle>
+                        </pageTitleList>
+                    </pageTitleListList>
+                    <footerLinkListList jcr:primaryType="epfl:bottomLinksContainerList" jcr:uuid="8f971c14-3d65-47d4-bd47-45bc9478c159" jahia:createdBy="196571" jahia:lastModifiedBy="196571" jcr:lastModified="2015-10-30T13:54:22" jcr:created="2015-10-30T13:54:22"></footerLinkListList>
+                    <breadCrumbLinksListList jcr:primaryType="epfl:breadCrumbLinksContainerList" jcr:uuid="b1a380a0-5bd2-4bb9-a4ae-f56c1717cc87" jcr:lastModified="2015-10-30T13:54:22" jcr:created="2015-10-30T13:54:22" jahia:createdBy="196571" jahia:lastModifiedBy="196571"></breadCrumbLinksListList>
+                    <navigationListList jcr:primaryType="epfl:navigationContainerList" jcr:uuid="a824dc17-5161-4f15-bf96-cbb07de4a3e2" jcr:lastModified="2015-10-30T13:54:22" jcr:created="2015-10-30T13:54:22" jahia:createdBy="196571" jahia:lastModifiedBy="196571"></navigationListList>
+                    <extraList jcr:primaryType="jnt:boxList" jcr:uuid="edadf278-fdaa-45f5-a2a1-ec19b2be40bc" jcr:lastModified="2015-10-30T13:54:22" jahia:createdBy="196571" jcr:created="2015-10-30T13:54:22" jahia:lastModifiedBy="196571"></extraList>
+                    <pageMetadatasListList jcr:primaryType="epfl:pageMetadatasContainerList" jcr:uuid="f21e58e2-b85d-4543-ab6a-1d9144191dd5" jcr:created="2015-10-30T13:54:22" jahia:createdBy="196571" jahia:lastModifiedBy="196571" jcr:lastModified="2015-10-30T13:54:22" jahia:lastPublisher="196571" jahia:lastPublishingDate="2016-08-08T17:38:37">
+                        <pageMetadatasList jcr:primaryType="epfl:pageMetadatasContainer" jcr:uuid="979f9675-b8f2-44f0-9c9b-b2376b4be28b" jahia:lastModifiedBy="196571" jahia:createdBy="196571" jcr:created="2015-10-30T13:54:22" jcr:lastModified="2015-10-30T13:54:22" jahia:lastPublisher="196571" jahia:lastPublishingDate="2016-08-08T17:38:37">
+                            <pageCSS jahia:value="" jcr:uuid="bae44ab4-fce3-4245-950e-3158f0e680a5"></pageCSS>
+                            <metadataDescription jahia:value="" jcr:uuid="6126afe7-eed4-4f0a-bb11-9560e6be4029"></metadataDescription>
+                            <metadataKeywords jahia:value="" jcr:uuid="544f3fd9-743c-4a87-8fff-52dcd134354f"></metadataKeywords>
+                            <pageJS jahia:value="" jcr:uuid="b6f53ef1-73f3-403c-ba48-da7155b52976"></pageJS>
+                        </pageMetadatasList>
+                    </pageMetadatasListList>
+                    <siteSettingsListList jcr:primaryType="epfl:siteSettingsContainerList" jcr:uuid="e16f53d5-b6d5-4251-a926-4708483a7d3d" jcr:created="2015-10-30T13:54:22" jahia:lastModifiedBy="196571" jahia:createdBy="196571" jcr:lastModified="2015-10-30T13:54:22"></siteSettingsListList>
+                    <bottomLinksListList jcr:primaryType="epfl:bottomLinksContainerList" jcr:uuid="ed7ec48d-d0e2-45fd-91b4-5c7271e35c31" jahia:lastModifiedBy="196571" jahia:createdBy="196571" jcr:created="2015-10-30T13:54:22" jcr:lastModified="2015-10-30T13:54:22"></bottomLinksListList>
+                    <oneCol_up_linksList jcr:primaryType="epfl:oneColContainerList" jcr:uuid="7534a7dd-e93a-48dd-9cf5-9d03e87d03db" jahia:lastModifiedBy="196571" jahia:createdBy="196571" jcr:lastModified="2016-08-08T17:36:58" jcr:created="2016-08-08T17:36:58"></oneCol_up_linksList>
+                    <oneCol_right_linksList jcr:primaryType="epfl:oneColContainerList" jcr:uuid="ff906b41-02df-460f-9d79-a05d1fe2f094" jcr:lastModified="2016-08-08T17:36:58" jahia:lastModifiedBy="196571" jahia:createdBy="196571" jcr:created="2016-08-08T17:36:58"></oneCol_right_linksList>
+                    <oneCol_left_linksList jcr:primaryType="epfl:oneColContainerList" jcr:uuid="fdb6dd10-cc37-4d07-a8d4-a7c5dda4ba5d" jahia:createdBy="196571" jcr:created="2016-08-08T17:36:58" jcr:lastModified="2016-08-08T17:36:58" jahia:lastModifiedBy="196571"></oneCol_left_linksList>
+                    <oneCol_down_linksList jcr:primaryType="epfl:oneColContainerList" jcr:uuid="484f3920-b0b1-4fb1-8f47-f880dedd3a23" jcr:lastModified="2016-08-08T17:36:58" jcr:created="2016-08-08T17:36:58" jahia:createdBy="196571" jahia:lastModifiedBy="196571"></oneCol_down_linksList>
+                </jahia:page>
+            </navigationPage>
+        </navigationList>
+    </navigationListList>
+    <col7List jcr:primaryType="jnt:boxList" jcr:uuid="a4b69d5c-cd7d-46d2-be2f-dbcc64d6188f" jahia:originalUuid="ddbe926c-ffb8-4421-b5f5-0d48e74ad0a5" jcr:lastModified="2012-11-22T09:10:54" jahia:createdBy="root" jcr:created="2012-11-22T09:10:54" jahia:lastModifiedBy="root"></col7List>
+    <col8List jcr:primaryType="jnt:boxList" jcr:uuid="ca0d6733-fc04-45e3-9021-0896e44321b9" jahia:originalUuid="1e5fc755-4d69-4aeb-8bc8-86346dc0928f" jcr:lastModified="2012-11-22T09:10:54" jahia:createdBy="root" jcr:created="2012-11-22T09:10:54" jahia:lastModifiedBy="root"></col8List>
+    <bottomLinksListList jcr:primaryType="epfl:bottomLinksContainerList" jcr:uuid="e8f073a7-e93b-439d-b609-6781e0edccf1" jahia:originalUuid="8c0994a4-622b-4908-ae6e-68d0c970e6b1" jcr:lastModified="2012-11-22T09:10:53" jahia:createdBy="root" jcr:created="2012-11-22T09:10:53" jahia:lastModifiedBy="root"></bottomLinksListList>
+    <portalLinksList jcr:primaryType="epfl:portalLinkContainerList" jcr:uuid="f8777373-502b-45b8-b0eb-5c350cc4a4e4" jcr:lastModified="2014-11-19T13:27:15" jcr:created="2014-11-19T13:27:15" jahia:createdBy="root" jahia:lastModifiedBy="root"></portalLinksList>
+    <col1List jcr:primaryType="jnt:boxList" jcr:uuid="dd74a8f8-e360-45c1-b55e-9620e997e608" jahia:originalUuid="072ceab8-36a6-4e44-aa56-26a996d20e9a" jcr:lastModified="2012-11-22T09:10:53" jahia:createdBy="root" jcr:created="2012-11-22T09:10:53" jahia:lastModifiedBy="root"></col1List>
+    <col2List jcr:primaryType="jnt:boxList" jcr:uuid="701e3d43-58ab-49f2-93df-75e2c731c1ca" jahia:originalUuid="34fefd9b-41e7-4282-9c49-4b28f62f743e" jcr:lastModified="2012-11-22T09:10:53" jahia:createdBy="root" jcr:created="2012-11-22T09:10:53" jahia:lastModifiedBy="root"></col2List>
+    <col3List jcr:primaryType="jnt:boxList" jcr:uuid="ad085910-e691-41d2-b025-8d8cee4c889a" jahia:originalUuid="3cf9e999-733f-4e43-9fe1-3b9428c4cd19" jcr:lastModified="2012-11-22T09:10:53" jahia:createdBy="root" jcr:created="2012-11-22T09:10:53" jahia:lastModifiedBy="root"></col3List>
+    <singleNewsListList jcr:primaryType="epfl:singleNewsContainerList" jcr:uuid="9b7003aa-c215-42bf-ad94-035b02ae880d" jahia:originalUuid="ba9fe240-0658-43c1-8bdb-a47c65909e10" jcr:lastModified="2012-11-22T09:10:53" jahia:createdBy="root" jcr:created="2012-11-22T09:10:53" jahia:lastModifiedBy="root" jahia:lastPublisher="196571" jahia:lastPublishingDate="2016-08-08T17:35:02">
+        <singleNewsList jcr:primaryType="epfl:singleNewsContainer" jcr:uuid="86f4801a-f0fc-4d15-86c6-e9b76fbd65b6" jahia:originalUuid="2b01ed11-7599-4fad-b5e4-b86ea8eaab4b" jcr:lastModified="2012-11-22T09:10:53" jahia:createdBy="root" jcr:created="2012-11-22T09:10:53" jahia:lastModifiedBy="root" jahia:lastPublisher="196571" jahia:lastPublishingDate="2016-08-08T17:35:02">
+            <singleNewsTitle jahia:value="" jcr:uuid="0808d527-3fa6-4dc2-aadd-51c47de23df5" jahia:originalUuid="68b49aef-2c15-4d4b-8088-1cbf4134585d"></singleNewsTitle>
+            <singleNewsDescription jahia:value="" jcr:uuid="6d904eb6-0875-4bc8-965b-c6fbcee510e2" jahia:originalUuid="66c9836e-e814-4a2a-a26d-c79a0588ac32"></singleNewsDescription>
+            <singleNewsImage jahia:value="" jcr:uuid="7a9563c3-5883-4e53-9798-4f2c0980e073" jahia:originalUuid="343307c3-385d-4630-8250-3bb2eca161bc"></singleNewsImage>
+        </singleNewsList>
+    </singleNewsListList>
+    <portal_topLeftList jcr:primaryType="jnt:boxList" jcr:uuid="28027194-da6b-46f1-874b-892e72d8c709" jcr:created="2014-11-19T13:27:15" jcr:lastModified="2014-11-19T13:27:15" jahia:createdBy="root" jahia:lastModifiedBy="root"></portal_topLeftList>
+    <mainList jcr:primaryType="jnt:boxList" jcr:uuid="90d11bc2-49d6-4d75-a4c4-179f6cf0adea" jahia:originalUuid="c83a87b2-6265-4505-8d15-ecbcbde8468a" jcr:lastModified="2015-11-06T12:49:51" jahia:lastModifiedBy="196571" jahia:createdBy="root" jcr:created="2012-11-22T09:10:53" jahia:lastPublisher="196571" jahia:lastPublishingDate="2016-08-08T17:35:02">
+        <main jcr:primaryType="epfl:textBox" jcr:uuid="d217eae9-dfd3-4491-9a35-780d374b5f72" jahia:originalUuid="d221b641-bc02-4551-8d0b-5ab7cd2dd83a" jcr:lastModified="2012-11-22T09:10:53" jahia:createdBy="root" jcr:created="2012-11-22T09:10:53" jahia:lastModifiedBy="root" jahia:lastPublisher="196571" jahia:lastPublishingDate="2016-08-08T17:35:02">
+            <jcr_primaryType jahia:value="epfl:textBox" jcr:uuid="a63177b9-df63-4440-a6c2-509ff9875024" jahia:originalUuid="69f42a75-f613-49a6-afbd-14e6866b7307"></jcr_primaryType>
+            <boxTitle jahia:value="" jcr:uuid="f77293cd-4ebd-41e1-b875-bcf1ddeb9e6d" jahia:originalUuid="81078153-563d-4d73-bd06-45a4264bed02"></boxTitle>
+            <comboListList jcr:primaryType="epfl:comboContainerList" jcr:uuid="41c6b603-d065-418b-8ee4-0c67dd333916" jahia:originalUuid="420dc6e9-e4c3-4622-ae05-381adadc9c95" jcr:lastModified="2014-12-08T13:54:41" jahia:lastModifiedBy="229105" jahia:createdBy="root" jcr:created="2012-11-22T09:10:53" jahia:lastPublisher="196571" jahia:lastPublishingDate="2016-08-08T17:35:02">
+                <comboList jcr:primaryType="epfl:comboContainer" jcr:uuid="9c199640-5c34-48d8-9714-d6219ab82446" jahia:originalUuid="0c4cf131-1892-4482-8cda-eadd948deccf" jahia:lastModifiedBy="229105" jcr:lastModified="2014-12-08T13:54:41" jahia:createdBy="root" jcr:created="2012-11-22T09:10:53" jahia:lastPublisher="196571" jahia:lastPublishingDate="2016-08-08T17:35:02">
+                    <text jahia:value="&lt;div&gt;&lt;img width=&quot;651&quot; height=&quot;235&quot; src=&quot;###file:/content/sites/dcsl/files/Servers lab pic.jpg?uuid=default:c7f6d830-bd42-4843-bcc8-d7e817744dc3&quot; alt=&quot;&quot; /&gt;&lt;/div&gt;
+" jcr:uuid="fa1734ac-324b-4d36-9918-87986f7bd03b" jahia:originalUuid="bbc1e8ee-d453-4e90-96bc-066e2126a47d"></text>
+                    <filesList jcr:primaryType="jnt:fileContainerList" jcr:uuid="acb26d57-0b3d-4df0-93a4-ed5ac370e3c4" jahia:originalUuid="2bb79edc-93dd-44f8-a7ad-45377a27eb06" jcr:lastModified="2012-11-22T09:10:53" jahia:createdBy="root" jcr:created="2012-11-22T09:10:53" jahia:lastModifiedBy="root"></filesList>
+                    <linksList jcr:primaryType="jnt:linkContainerList" jcr:uuid="2a3f0760-92d1-4db2-a5ea-40589e9bf4a3" jahia:originalUuid="fe877692-e352-452b-9708-16195918242c" jcr:lastModified="2012-11-22T09:10:53" jahia:createdBy="root" jcr:created="2012-11-22T09:10:53" jahia:lastModifiedBy="root"></linksList>
+                </comboList>
+            </comboListList>
+        </main>
+        <main jcr:primaryType="epfl:textBox" jcr:uuid="6a0598a1-5fd6-46cb-8f82-187cba138bb1" jahia:createdBy="229105" jahia:lastModifiedBy="229105" jcr:lastModified="2014-11-20T15:28:10" jcr:created="2014-11-20T15:28:10" jahia:lastPublisher="196571" jahia:lastPublishingDate="2016-08-08T17:35:02">
+            <jcr_primaryType jahia:value="epfl:textBox" jcr:uuid="91a8f713-3477-49f3-ab85-de854cfa0670"></jcr_primaryType>
+            <boxTitle jahia:value="Projects" jcr:uuid="1dae2117-5604-4a35-b32c-3ca4d9a03559"></boxTitle>
+            <comboListList jcr:primaryType="epfl:comboContainerList" jcr:uuid="81841005-b1c8-47d7-93b3-a8509b58d90b" jcr:lastModified="2015-11-10T09:30:39" jahia:lastModifiedBy="196571" jcr:created="2014-11-20T15:28:12" jahia:createdBy="229105" jahia:lastPublisher="196571" jahia:lastPublishingDate="2016-08-08T17:35:02">
+                <comboList jcr:primaryType="epfl:comboContainer" jcr:uuid="04933e47-062c-4771-b208-842c20505d72" jcr:lastModified="2014-12-08T13:36:29" jahia:createdBy="229105" jahia:lastModifiedBy="229105" jcr:created="2014-11-20T15:29:24" jahia:lastPublisher="196571" jahia:lastPublishingDate="2016-08-08T17:35:02">
+                    <text jahia:value="&lt;ul&gt;
+	&lt;li&gt;
+		&lt;h4&gt;IX -- a specialized operating system for datacenter applications&lt;/h4&gt;
+	&lt;/li&gt;
+	&lt;li&gt;
+		&lt;h4&gt;soNUMA -- rack-scale computing&lt;/h4&gt;
+	&lt;/li&gt;
+	&lt;li&gt;
+		&lt;h4&gt;VDP -- rack-scale software-defined networking&amp;nbsp;&lt;/h4&gt;
+	&lt;/li&gt;
+&lt;/ul&gt;
+" jcr:uuid="41e223bc-06ed-45d8-b0fb-5be4bc8c4b93"></text>
+                    <filesList jcr:primaryType="jnt:fileContainerList" jcr:uuid="ad9207b8-8f32-45b9-8759-0a8eb1f40c58" jahia:lastModifiedBy="229105" jcr:lastModified="2014-11-20T15:29:26" jahia:createdBy="229105" jcr:created="2014-11-20T15:29:26"></filesList>
+                    <linksList jcr:primaryType="jnt:linkContainerList" jcr:uuid="8ea0f4d6-901c-45aa-9cc5-2c3119c7c3b2" jahia:createdBy="229105" jahia:lastModifiedBy="229105" jcr:lastModified="2014-11-20T15:29:26" jcr:created="2014-11-20T15:29:26"></linksList>
+                </comboList>
+                <comboList jcr:primaryType="epfl:comboContainer" jcr:uuid="56d6a851-72a4-4ce8-b19d-c8fc54aeda0f" jahia:lastModifiedBy="196571" jcr:lastModified="2015-11-10T09:30:39" jcr:created="2014-12-08T14:53:34" jahia:createdBy="229105" jahia:lastPublisher="196571" jahia:lastPublishingDate="2016-08-08T17:35:02">
+                    <text jahia:value="&lt;p&gt;&amp;nbsp;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=48GkxP1tO_U&quot;&gt;&lt;strong&gt;Microsoft Research Swiss Joint Research Center&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&amp;nbsp;&lt;/p&gt;
+&lt;p&gt;Contact information: &lt;a href=&quot;http://search.epfl.ch/ubrowse.action?acro=DCSL&quot;&gt;Laboratory Admin page&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&amp;nbsp;&lt;/p&gt;
+" jcr:uuid="5a79949c-6c9e-4ce0-ad7f-1ecbe7acdbe0"></text>
+                    <filesList jcr:primaryType="jnt:fileContainerList" jcr:uuid="461a2a21-db8c-4222-991e-65416fd2ec2b" jcr:created="2014-12-08T14:53:35" jahia:createdBy="229105" jahia:lastModifiedBy="229105" jcr:lastModified="2014-12-08T14:53:35"></filesList>
+                    <linksList jcr:primaryType="jnt:linkContainerList" jcr:uuid="dbb5928a-0526-4a32-97b4-61b19866c674" jcr:created="2014-12-08T14:53:35" jcr:lastModified="2014-12-08T14:53:35" jahia:lastModifiedBy="229105" jahia:createdBy="229105"></linksList>
+                </comboList>
+            </comboListList>
+        </main>
+        <main jcr:primaryType="epfl:textBox" jcr:uuid="b6007a08-8946-4b0d-a801-fc4de3d0aeb6" jahia:lastModifiedBy="196571" jcr:lastModified="2015-11-06T12:49:45" jcr:created="2015-11-06T12:49:45" jahia:createdBy="196571" jahia:lastPublisher="196571" jahia:lastPublishingDate="2016-08-08T17:35:02">
+            <jcr_primaryType jahia:value="epfl:textBox" jcr:uuid="3aabbc3c-6809-4fce-8968-0bf952f5a4ed"></jcr_primaryType>
+            <boxTitle jahia:value="" jcr:uuid="728a7d63-7d62-4614-9675-16b10ba2d644"></boxTitle>
+            <comboListList jcr:primaryType="epfl:comboContainerList" jcr:uuid="70a4056e-ac08-4179-8865-b8f290dd8017" jcr:lastModified="2015-11-06T12:57:35" jahia:lastModifiedBy="196571" jcr:created="2015-11-06T12:49:51" jahia:createdBy="196571" jahia:lastPublisher="196571" jahia:lastPublishingDate="2016-08-08T17:35:02">
+                <comboList jcr:primaryType="epfl:comboContainer" jcr:uuid="6319fef5-99c9-4655-840b-a79e3d3242c5" jcr:lastModified="2015-11-06T12:57:35" jahia:createdBy="196571" jahia:lastModifiedBy="196571" jcr:created="2015-11-06T12:50:53" jahia:lastPublisher="196571" jahia:lastPublishingDate="2016-08-08T17:35:02">
+                    <text jahia:value="&lt;p&gt;&lt;strong&gt;We would like to thank our sponsors for their support&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&amp;nbsp;&lt;/p&gt;
+&lt;p&gt;&amp;nbsp;&lt;img width=&quot;107&quot; height=&quot;61&quot; border=&quot;5&quot; alt=&quot;&quot; style=&quot;float: left; margin: 5px;&quot; src=&quot;###file:/content/sites/dcsl/files/Sponsors/nano tera .jpg?uuid=default:1c15eb32-4bd3-4878-9bfd-eadd03d21c0d&quot; /&gt;&lt;img width=&quot;123&quot; height=&quot;42&quot; border=&quot;5&quot; src=&quot;###file:/content/sites/dcsl/files/Sponsors/VMware_logo_wht_RGB_300dpi.jpg?uuid=default:20776c6f-cc87-4021-bdef-efd5e4852f99&quot; style=&quot;float: left; margin: 5px;&quot; alt=&quot;&quot; /&gt;&lt;img width=&quot;124&quot; height=&quot;40&quot; border=&quot;5&quot; src=&quot;###file:/content/sites/dcsl/files/Sponsors/Google_2015_logo.svg.png?uuid=default:ca85c79c-275b-436d-9637-365e9cc91d1d&quot; style=&quot;float: left; margin: 5px;&quot; alt=&quot;&quot; /&gt;&lt;img width=&quot;164&quot; height=&quot;35&quot; border=&quot;5&quot; src=&quot;###file:/content/sites/dcsl/files/Sponsors/Microsoft_logo_(2012).svg.png?uuid=default:83c15379-7f46-4582-9c49-2180ca286162&quot; style=&quot;float: left; margin: 5px;&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&amp;nbsp;&lt;/p&gt;
+" jcr:uuid="d48b1478-0d6d-42f5-8235-069d9017edd3"></text>
+                    <filesList jcr:primaryType="jnt:fileContainerList" jcr:uuid="62247163-c9b4-4c12-9375-293397c7cc3e" jahia:createdBy="196571" jahia:lastModifiedBy="196571" jcr:lastModified="2015-11-06T12:50:54" jcr:created="2015-11-06T12:50:54"></filesList>
+                    <linksList jcr:primaryType="jnt:linkContainerList" jcr:uuid="0e6f2d1d-bbfb-4194-8aee-e6f9fd76b877" jahia:createdBy="196571" jcr:created="2015-11-06T12:50:54" jcr:lastModified="2015-11-06T12:50:54" jahia:lastModifiedBy="196571"></linksList>
+                </comboList>
+            </comboListList>
+        </main>
+    </mainList>
+    <col4List jcr:primaryType="jnt:boxList" jcr:uuid="c83c0996-4183-4430-80f6-479aaa5bb92c" jahia:originalUuid="c8b8e1a1-eb56-4025-b10e-2de278592366" jcr:lastModified="2012-11-22T09:10:53" jahia:createdBy="root" jcr:created="2012-11-22T09:10:53" jahia:lastModifiedBy="root"></col4List>
+    <col5List jcr:primaryType="jnt:boxList" jcr:uuid="132d476d-131d-45de-b068-32177ece702d" jahia:originalUuid="9ca2c763-10c0-4320-a0b1-d56a0f98b602" jcr:lastModified="2012-11-22T09:10:53" jahia:createdBy="root" jcr:created="2012-11-22T09:10:53" jahia:lastModifiedBy="root"></col5List>
+    <extraList jcr:primaryType="jnt:boxList" jcr:uuid="72987784-71df-4d3d-b98f-49986b25dba5" jahia:originalUuid="7b0442c2-211b-4909-84b2-63ad944ae783" jcr:lastModified="2012-11-22T09:10:53" jahia:createdBy="root" jcr:created="2012-11-22T09:10:53" jahia:lastModifiedBy="root" jahia:lastPublisher="196571" jahia:lastPublishingDate="2016-08-08T17:35:02">
+        <extra jcr:primaryType="epfl:coloredTextBox" jcr:uuid="423c78fa-5d5e-4e04-9264-b9df498dd2b8" jahia:originalUuid="9fb66708-08e0-4bf3-ae74-51d7dff13909" jcr:lastModified="2012-11-22T09:10:53" jahia:createdBy="root" jcr:created="2012-11-22T09:10:53" jahia:lastModifiedBy="root" jahia:lastPublisher="196571" jahia:lastPublishingDate="2016-08-08T17:35:02">
+            <jcr_primaryType jahia:value="epfl:coloredTextBox" jcr:uuid="34891eb2-c42e-46af-bb7b-2da56cec17bc" jahia:originalUuid="640e83c3-14bc-4929-97fc-ea627848cb5c"></jcr_primaryType>
+            <boxTitle jahia:value="Competence or skills" jcr:uuid="aee4b9ee-89a1-4afc-85ff-fd4771c07531" jahia:originalUuid="7bb6b93c-a9fc-4b76-abc1-df764a71d584"></boxTitle>
+            <comboListList jcr:primaryType="epfl:comboContainerList" jcr:uuid="1754ee12-74c7-408a-b88d-10ab4b452307" jahia:originalUuid="31c4580c-33b5-47cd-ab0e-cc12bd106b31" jahia:lastModifiedBy="196571" jcr:lastModified="2016-08-08T17:34:52" jahia:createdBy="root" jcr:created="2012-11-22T09:10:53" jahia:lastPublisher="196571" jahia:lastPublishingDate="2016-08-08T17:35:02">
+                <comboList jcr:primaryType="epfl:comboContainer" jcr:uuid="5118787e-6940-4fcf-b633-a6ef9c794aad" jahia:originalUuid="f75c7661-58d0-450b-9410-7da20463a20f" jcr:lastModified="2016-08-08T17:34:52" jahia:lastModifiedBy="196571" jahia:createdBy="root" jcr:created="2012-11-22T09:10:53" jahia:lastPublisher="196571" jahia:lastPublishingDate="2016-08-08T17:35:02">
+                    <text jahia:value="&lt;p&gt;We focus on interdisciplinary systems problems found in modern, large-scale datacenters. &amp;nbsp; &amp;nbsp;Our current research projects include specialized operating systems for datacenter applications, hardware support for software-defined networking, and energy-efficient, rack-scale computing.&lt;/p&gt;
+&lt;p&gt;Key conferences : ASPLOS, ATC, ISCA, NSDI, SIGCOMM, SOCC, SOSP/OSDI.&lt;/p&gt;
+&lt;p&gt;&amp;nbsp;&lt;/p&gt;
+" jcr:uuid="87fd8ef5-dc49-41da-9fc4-b4774594f909" jahia:originalUuid="1eb0c98e-6c80-4e37-81e9-c7abb2e32a2f"></text>
+                    <filesList jcr:primaryType="jnt:fileContainerList" jcr:uuid="2863c82a-84c0-47fc-b750-6c1940bf3d48" jahia:originalUuid="e1486294-2ac3-46ec-8d85-6e05935adde3" jcr:lastModified="2012-11-22T09:10:53" jahia:createdBy="root" jcr:created="2012-11-22T09:10:53" jahia:lastModifiedBy="root"></filesList>
+                    <linksList jcr:primaryType="jnt:linkContainerList" jcr:uuid="3240c304-4e09-4cde-8689-6fd4ac2bae2c" jahia:originalUuid="a8fcf340-9fec-4558-bcf2-12a0b9617ff5" jcr:lastModified="2012-11-22T09:10:53" jahia:createdBy="root" jcr:created="2012-11-22T09:10:53" jahia:lastModifiedBy="root"></linksList>
+                </comboList>
+            </comboListList>
+        </extra>
+    </extraList>
+    <portal_bottomLinks3List jcr:primaryType="epfl:linksListList" jcr:uuid="faa1ef6e-35e9-4765-9d7b-cbec5bbad3bf" jcr:created="2014-11-19T13:27:15" jahia:createdBy="root" jahia:lastModifiedBy="root" jcr:lastModified="2014-11-19T13:27:15"></portal_bottomLinks3List>
+    <portal_bottomLinks2List jcr:primaryType="epfl:linksListList" jcr:uuid="b3187750-b745-4f5b-8ce4-7ffc94e7d28c" jahia:lastModifiedBy="root" jahia:createdBy="root" jcr:lastModified="2014-11-19T13:27:15" jcr:created="2014-11-19T13:27:15"></portal_bottomLinks2List>
+    <portal_bottomLinks1List jcr:primaryType="epfl:linksListList" jcr:uuid="c9f9b985-7895-438d-9b2e-61cfd9fd50f2" jcr:lastModified="2014-11-19T13:27:15" jahia:createdBy="root" jahia:lastModifiedBy="root" jcr:created="2014-11-19T13:27:15"></portal_bottomLinks1List>
+    <siteSettingsListList jcr:primaryType="epfl:siteSettingsContainerList" jcr:uuid="78ebeecd-08b4-4c9e-a88e-7256f7c8a4fb" jahia:originalUuid="49db624c-15ea-46f5-a7d0-2e927782d9b1" jahia:lastModifiedBy="116080" jcr:lastModified="2014-12-04T14:19:20" jahia:createdBy="root" jcr:created="2012-11-22T09:10:53" jahia:lastPublisher="196571" jahia:lastPublishingDate="2016-08-08T17:35:02">
+        <siteSettingsList jcr:primaryType="epfl:siteSettingsContainer" jcr:uuid="4c36dd2c-555a-47c5-9513-f5806b8a9a96" jahia:originalUuid="e82da5ca-3a5b-4b9a-a73b-4611e5a76434" jcr:lastModified="2014-12-04T14:19:20" jahia:lastModifiedBy="116080" jahia:createdBy="root" jcr:created="2012-11-22T09:10:53" jahia:lastPublisher="196571" jahia:lastPublishingDate="2016-08-08T17:35:02">
+            <footerHtml jahia:value="" jcr:uuid="7f333781-8373-461b-b092-3a239d6c9d0f" jahia:originalUuid="f463b495-60f9-4a3d-823a-24f07e86e002"></footerHtml>
+            <headerHtml jahia:value="" jcr:uuid="ed6673cb-cf5f-4b63-9a2a-dfd24acfab80" jahia:originalUuid="7041d961-a732-4aad-94e5-e253b103b7d7"></headerHtml>
+            <displayOnlyOneLevelInDropDownMenu jahia:value="false" jcr:uuid="d7701455-5b41-4035-b8b5-aa88e4786602" jahia:originalUuid="6a3f94fc-31f3-45cb-9be3-9f96c2d4e111"></displayOnlyOneLevelInDropDownMenu>
+            <theme jahia:value="ic" jcr:uuid="2e84a0d7-1e6f-46e7-96ef-2e70a5443b82" jahia:originalUuid="3aec713f-18ba-4d77-9e94-da15de9e6ef5"></theme>
+            <acronym jahia:value="DCSL" jcr:uuid="107da3d7-1ba3-4466-88de-0392e61d4409" jahia:originalUuid="0b8c8e27-a289-4546-8b0b-36fd6e849ccb"></acronym>
+            <siteName jahia:value="Data Center Systems Laboratory" jcr:uuid="925bddb0-d557-4d4d-92ce-237db0dcc96e" jahia:originalUuid="9abd9430-b326-4ae6-9f4f-da24afb3b452"></siteName>
+            <gaId jahia:value="" jcr:uuid="33822251-c6c5-4402-bcf1-a63660f40b2d"></gaId>
+            <siteJS jahia:value="" jcr:uuid="6c1240ed-5ce0-417f-9069-b69acf27ef2c"></siteJS>
+            <siteCSS jahia:value="" jcr:uuid="aae39698-78ac-477e-944b-1bda1a22d6ef"></siteCSS>
+            <homeLayout jahia:value="&lt;jahia-resource id=&quot;resources.EPFL&quot; key=&quot;epfl_siteSettingsContainer.homeLayout.standard&quot; default-value=&quot;standard&quot;/&gt;" jcr:uuid="e40fa72c-ef15-4598-877c-c5d9ba7169eb"></homeLayout>
+            <hideHomePageLinkOnNavMenu jahia:value="false" jcr:uuid="aa98d443-37d4-4c96-b6a9-c297fc61ccf2"></hideHomePageLinkOnNavMenu>
+            <gaType jahia:value="&lt;jahia-resource id=&quot;resources.EPFL&quot; key=&quot;epfl_siteSettingsContainer.gaType.ga&quot; default-value=&quot;ga&quot;/&gt;" jcr:uuid="21e4d051-163d-4152-a1b5-e4fed16e1113"></gaType>
+        </siteSettingsList>
+    </siteSettingsListList>
+    <socialBarList jcr:primaryType="epfl:socialBarContainerList" jcr:uuid="50f9c44d-7ae0-4897-b152-d2eedc708595" jahia:lastModifiedBy="196571" jcr:lastModified="2016-08-08T17:29:30" jahia:createdBy="196571" jcr:created="2016-08-08T17:29:30"></socialBarList>
+    <oneCol_down_linksList jcr:primaryType="epfl:oneColContainerList" jcr:uuid="37f11a5f-00a7-4d7c-a918-110ac76652db" jcr:created="2016-08-08T17:29:30" jahia:createdBy="196571" jcr:lastModified="2016-08-08T17:29:30" jahia:lastModifiedBy="196571"></oneCol_down_linksList>
+    <oneCol_left_linksList jcr:primaryType="epfl:oneColContainerList" jcr:uuid="196af84c-207b-46da-934d-fb8c1d4d481b" jahia:lastModifiedBy="196571" jcr:lastModified="2016-08-08T17:29:30" jahia:createdBy="196571" jcr:created="2016-08-08T17:29:30"></oneCol_left_linksList>
+    <oneCol_right_linksList jcr:primaryType="epfl:oneColContainerList" jcr:uuid="2aec4e52-cc31-41a4-a059-175c9770e2aa" jahia:createdBy="196571" jahia:lastModifiedBy="196571" jcr:created="2016-08-08T17:29:30" jcr:lastModified="2016-08-08T17:29:30"></oneCol_right_linksList>
+    <oneCol_up_linksList jcr:primaryType="epfl:oneColContainerList" jcr:uuid="2fd2d863-74fa-48e9-8499-3b16362aa7f7" jahia:createdBy="196571" jcr:lastModified="2016-08-08T17:29:30" jcr:created="2016-08-08T17:29:30" jahia:lastModifiedBy="196571"></oneCol_up_linksList>
+</jahia:page>
+

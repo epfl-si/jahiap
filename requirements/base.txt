@@ -1,5 +1,6 @@
 Jinja2==2.9.6
 python-slugify==1.2.4
 flake8==3.2.1
+pytest==3.0.7
 git+https://github.com/epfl-idevelop/python-wordpress-json.git
 beautifulsoup4==4.6.0
