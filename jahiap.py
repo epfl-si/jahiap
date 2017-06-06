@@ -442,31 +442,37 @@ if __name__ == '__main__':
 
     # "parse" command
     parser_parse = subparsers.add_parser('parse')
-    parser_parse.add_argument('site_name',
-                        help='name of sub directories that contain the site files')
-    parser_parse.add_argument('-r', '--print-report',
-                        dest='print_report',
-                        action='store_true',
-                        help='print report with parsed content')
+    parser_parse.add_argument(
+        'site_name',
+        help='name of sub directories that contain the site files')
+    parser_parse.add_argument(
+        '-r', '--print-report',
+        dest='print_report',
+        action='store_true',
+        help='print report with parsed content')
     parser_parse.set_defaults(command=main_parse)
 
     # "export" command
     parser_export = subparsers.add_parser('export')
-    parser_export.add_argument('site_name',
-                        help='name of sub directories that contain the site files')
-    parser_export.add_argument('-w', '--to-wordpress',
-                        dest='to_wordpress',
-                        action='store_true',
-                        help='export parsed data to Wordpress')
-    parser_export.add_argument('-s', '--to-static',
-                        dest='to_static',
-                        action='store_true',
-                        help='export parsed data to static HTML files')
-    parser_export.add_argument('-u', '--site-url',
-                        dest='site_url',
-                        metavar='URL',
-                        default=DOMAIN,
-                        help='wordpress URL where to export parsed content')
+    parser_export.add_argument(
+        'site_name',
+        help='name of sub directories that contain the site files')
+    parser_export.add_argument(
+        '-w', '--to-wordpress',
+        dest='to_wordpress',
+        action='store_true',
+        help='export parsed data to Wordpress')
+    parser_export.add_argument(
+        '-s', '--to-static',
+        dest='to_static',
+        action='store_true',
+        help='export parsed data to static HTML files')
+    parser_export.add_argument(
+        '-u', '--site-url',
+        dest='site_url',
+        metavar='URL',
+        default=DOMAIN,
+        help='wordpress URL where to export parsed content')
     parser_export.set_defaults(command=main_export)
 
     # forward to main function
