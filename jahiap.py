@@ -104,20 +104,32 @@ class Site:
 
             pages.append(page)
 
-            xml_boxes = xml_page.getElementsByTagName("main")
+            # main tag is the parent of all boxes types
+            main_elements = xml_page.getElementsByTagName("main")
 
             boxes = []
 
-            for xml_box in xml_boxes:
-
-                # Check if the box belongs to the current page
-                if not self.include_box(xml_box, page):
+            for main_element in main_elements:
+                # check if the box belongs to the current page
+                if not self.include_box(main_element, page):
                     continue
 
-                # Check if xml_box contains many boxes
-                multibox = xml_box.getElementsByTagName("text").length > 1
-                box = Box(self, xml_box, multibox=multibox)
-                boxes.append(box)
+                type = main_element.getAttribute("jcr:primaryType")
+
+                # the "epfl:faqBox" element contains one or more "epfl:faqList"
+                if "epfl:faqBox" == type:
+                    faq_list_elements = main_element.getElementsByTagName("faqList")
+
+                    for faq_list_element in faq_list_elements:
+                        box = Box(self, page, faq_list_element, multibox=False)
+                        boxes.append(box)
+
+                else:
+                    # TODO remove the multibox parameter and check for combo boxes instead
+                    # Check if xml_box contains many boxes
+                    multibox = main_element.getElementsByTagName("text").length > 1
+                    box = Box(self, page, main_element, multibox=multibox)
+                    boxes.append(box)
 
             page.boxes = boxes
 
@@ -128,7 +140,7 @@ class Site:
         extra = dom.getElementsByTagName("extra")
 
         for element in extra:
-            box = Box(self, element)
+            box = Box(self, None, element)
             self.sidebar.boxes.append(box)
 
     def parse_files(self):
@@ -230,11 +242,13 @@ class Box:
         "epfl:textBox": "text",
         "epfl:coloredTextBox": "coloredText",
         "epfl:infoscienceBox": "infoscience",
-        "epfl:actuBox": "actu"
+        "epfl:actuBox": "actu",
+        "epfl:faqContainer": "faq"
     }
 
-    def __init__(self, site, element, multibox=False):
+    def __init__(self, site, page, element, multibox=False):
         self.site = site
+        self.page = page
         self.set_type(element)
         self.title = Utils.get_tag_attribute(element, "boxTitle", "jahia:value")
         self.set_content(element, multibox)
@@ -263,6 +277,10 @@ class Box:
         # actu
         elif "actu" == self.type:
             self.set_box_actu(element)
+        # faq
+        elif "faq" == self.type:
+            self.set_box_faq(element)
+
 
     def set_box_text(self, element, multibox=False):
         """set the attributes of a text box"""
@@ -297,6 +315,14 @@ class Box:
         url = Utils.get_tag_attribute(element, "url", "jahia:value")
 
         self.content = "[infoscience url=%s]" % url
+
+    def set_box_faq(self, element):
+        """set the attributes of a faq box"""
+        self.question = Utils.get_tag_attribute(element, "question", "jahia:value")
+
+        self.answer = Utils.get_tag_attribute(element, "answer", "jahia:value")
+
+        self.content = "<h2>%s</h2><p>%s</p>" % (self.question, self.answer)
 
     def __str__(self):
         return self.type + " " + self.title
