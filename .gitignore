@@ -1,4 +1,9 @@
-.idea
 *.pyc
-demo.md
+
+# dev env
+.idea
 exports
+demo.md
+
+# pytest
+.cache
