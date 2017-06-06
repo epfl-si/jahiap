@@ -11,6 +11,7 @@ import shutil
 from slugify import slugify
 
 from exporter import Exporter
+from settings import DOMAIN
 from wp_exporter import WP_Exporter
 
 
@@ -318,7 +319,7 @@ def main(argv):
     export_file = ""
     output_dir = ""
     # avoid to hardcode domain too hard
-    domain = "test-web-wordpress.epfl.ch"
+    domain = DOMAIN
     # do not force generation of static files
     generate_static_files = False
 

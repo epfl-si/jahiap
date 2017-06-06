@@ -4,8 +4,16 @@ import os
 from bs4 import BeautifulSoup
 from wordpress_json import WordpressJsonWrapper
 
+from settings import WP_USER, WP_PASSWORD
+
 
 class WP_Exporter:
+
+    report = {
+        'pages': 0,
+        'files': 0,
+        'menus': 0,
+    }
 
     @staticmethod
     def convert_bytes(num):
@@ -42,13 +50,14 @@ class WP_Exporter:
         """
         self.site = site
         url = "http://%s/index.php/wp-json/wp/v2"% domain
-        self.wp = WordpressJsonWrapper(url, 'admin', 'passw0rd')
+        self.wp = WordpressJsonWrapper(url, WP_USER, WP_PASSWORD)
 
     def import_all_data_in_wordpress(self):
         self.import_medias()
         self.import_pages()
         self.set_frontpage()
         self.populate_menu('Main')
+        self.display_report()
 
     def import_media(self, media):
 
@@ -102,6 +111,7 @@ class WP_Exporter:
         for media in self.site.files:
             wp_media = self.import_media(media)
             self.replace_links(wp_media)
+            self.report['files'] += 1
 
     def import_pages(self):
 
@@ -136,6 +146,7 @@ class WP_Exporter:
 
             # keep wordpress ID for further usages
             page.wp_id = wp_page['id']
+            self.report['pages'] += 1
 
     def populate_menu(self, menu_name):
         """
@@ -146,6 +157,7 @@ class WP_Exporter:
             # add page to menu
             self.wp_cli('wp menu item add-post %s %s' \
                 % (menu_name, page.wp_id))
+            self.report['menus'] += 1
 
     def set_frontpage(self):
         """
@@ -161,3 +173,18 @@ class WP_Exporter:
         frontpage_id = self.site.homepage.wp_id
         self.wp_cli('wp option update show_on_front page')
         self.wp_cli('wp option update page_on_front %s' % frontpage_id)
+
+    def display_report(self):
+
+        result = """
+Found in wordpress :
+
+  - %s files
+
+  - %s pages
+
+  - %s menus
+
+""" % (self.report['files'], self.report['pages'], self.report['menus'])
+
+        print(result)
