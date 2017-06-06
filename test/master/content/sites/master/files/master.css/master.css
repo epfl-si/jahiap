@@ -1,0 +1,27 @@
+.fleche {color: white;
+font-size: 20px; 
+font-weight:bold;
+background-color:#999999;
+background-image: url('/files/content/sites/master/files/buttons/Pointe_fleche_claire.jpg');
+background-repeat:no-repeat;
+background-position: right; 
+background-size:contain;
+padding: 3px;
+padding-right: 20px;
+line-height:25px;
+text-transform: uppercase;}
+
+.fleche:hover {color:#cccccc;
+padding-left: 35px;}
+
+
+.sous-titre-rouge {color: #ae0010;
+font-weight:bold;
+font-size:20px}
+
+@media only screen and (max-width:1136px) {
+    .fleche {
+font-size:14px}
+.sous-titre-rouge {
+font-size:16px}
+}

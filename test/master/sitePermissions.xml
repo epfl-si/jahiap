@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jahia:sitePermissions xmlns:jahia="http://www.jahia.org/">
+    <jahia:sitePermission jahia:name="admin.JahiaAdministration" jahia:acl="g:jahia-super-admins"></jahia:sitePermission>
+    <jahia:sitePermission jahia:name="admin.analytics.ManageAnalytics"></jahia:sitePermission>
+    <jahia:sitePermission jahia:name="admin.htmleditors.HtmlEditorsAdmin"></jahia:sitePermission>
+    <jahia:sitePermission jahia:name="admin.integrity.IntegrityChecks" jahia:acl="g:jahia-super-admins"></jahia:sitePermission>
+    <jahia:sitePermission jahia:name="admin.languages.ManageSiteLanguages" jahia:acl="g:jahia-super-admins"></jahia:sitePermission>
+    <jahia:sitePermission jahia:name="admin.permissions.ManageSitePermissions"></jahia:sitePermission>
+    <jahia:sitePermission jahia:name="admin.production.ManageSiteProduction"></jahia:sitePermission>
+    <jahia:sitePermission jahia:name="admin.search.ManageSearch"></jahia:sitePermission>
+    <jahia:sitePermission jahia:name="admin.templates.ManageTemplates"></jahia:sitePermission>
+    <jahia:sitePermission jahia:name="admin.themes.ManageThemes"></jahia:sitePermission>
+    <jahia:sitePermission jahia:name="admin.urlmapping.Urlmapping" jahia:acl="g:jahia-super-admins"></jahia:sitePermission>
+    <jahia:sitePermission jahia:name="admin.users.ManageGroups"></jahia:sitePermission>
+    <jahia:sitePermission jahia:name="admin.users.ManageUsers"></jahia:sitePermission>
+    <jahia:sitePermission jahia:name="engines.actions.add" jahia:acl="g:jahia-super-admins|g:users|g:jahia-admins"></jahia:sitePermission>
+    <jahia:sitePermission jahia:name="engines.actions.copy" jahia:acl="g:jahia-super-admins|g:jahia-admins|g:users"></jahia:sitePermission>
+    <jahia:sitePermission jahia:name="engines.actions.delete" jahia:acl="g:jahia-admins|g:users|g:jahia-super-admins"></jahia:sitePermission>
+    <jahia:sitePermission jahia:name="engines.actions.editMode" jahia:acl="g:jahia-admins|g:jahia-super-admins|g:users"></jahia:sitePermission>
+    <jahia:sitePermission jahia:name="engines.actions.hideFromNavigationMenu" jahia:acl="g:jahia-admins|g:users|g:jahia-super-admins"></jahia:sitePermission>
+    <jahia:sitePermission jahia:name="engines.actions.immediateCron"></jahia:sitePermission>
+    <jahia:sitePermission jahia:name="engines.actions.paste" jahia:acl="g:users|g:jahia-super-admins|g:jahia-admins"></jahia:sitePermission>
+    <jahia:sitePermission jahia:name="engines.actions.publishAll" jahia:acl="g:jahia-admins|g:jahia-super-admins"></jahia:sitePermission>
+    <jahia:sitePermission jahia:name="engines.actions.update" jahia:acl="g:jahia-super-admins|g:users|g:jahia-admins"></jahia:sitePermission>
+    <jahia:sitePermission jahia:name="engines.actions.urlKey"></jahia:sitePermission>
+    <jahia:sitePermission jahia:name="engines.actions.urlMapping" jahia:acl="g:jahia-super-admins|g:users|g:jahia-admins"></jahia:sitePermission>
+    <jahia:sitePermission jahia:name="engines.audit.ManageLogs_Engine" jahia:acl="g:jahia-super-admins"></jahia:sitePermission>
+    <jahia:sitePermission jahia:name="engines.containerlistproperties.FieldRightsEngine" jahia:acl="g:jahia-super-admins"></jahia:sitePermission>
+    <jahia:sitePermission jahia:name="engines.content.Edit" jahia:acl="g:users|g:jahia-admins|g:jahia-super-admins"></jahia:sitePermission>
+    <jahia:sitePermission jahia:name="engines.filemanager" jahia:acl="g:users|g:jahia-admins|g:jahia-super-admins"></jahia:sitePermission>
+    <jahia:sitePermission jahia:name="engines.importexport.ManageContentPicker" jahia:acl="g:jahia-admins|g:users|g:jahia-super-admins"></jahia:sitePermission>
+    <jahia:sitePermission jahia:name="engines.importexport.ManageExport" jahia:acl="g:jahia-super-admins|g:jahia-admins"></jahia:sitePermission>
+    <jahia:sitePermission jahia:name="engines.importexport.ManageImport" jahia:acl="g:jahia-super-admins"></jahia:sitePermission>
+    <jahia:sitePermission jahia:name="engines.languages.en" jahia:acl="g:jahia-super-admins|g:users|g:jahia-admins"></jahia:sitePermission>
+    <jahia:sitePermission jahia:name="engines.languages.fr" jahia:acl="g:jahia-super-admins|g:jahia-admins|g:users"></jahia:sitePermission>
+    <jahia:sitePermission jahia:name="engines.mashupmanager"></jahia:sitePermission>
+    <jahia:sitePermission jahia:name="engines.metadata.Metadata_Engine" jahia:acl="g:jahia-super-admins"></jahia:sitePermission>
+    <jahia:sitePermission jahia:name="engines.rights.ManageRights" jahia:acl="g:users|g:jahia-super-admins|g:jahia-admins"></jahia:sitePermission>
+    <jahia:sitePermission jahia:name="engines.timebasedpublishing.TimeBasedPublishingEngine" jahia:acl="g:jahia-admins|g:users|g:jahia-super-admins"></jahia:sitePermission>
+    <jahia:sitePermission jahia:name="engines.versioning.PagesVersioningAction" jahia:acl="g:jahia-super-admins|g:jahia-admins"></jahia:sitePermission>
+    <jahia:sitePermission jahia:name="engines.workflow.ManageWorkflow" jahia:acl="g:jahia-admins|g:jahia-super-admins"></jahia:sitePermission>
+    <jahia:sitePermission jahia:name="extensions.linkchecker" jahia:acl="g:jahia-super-admins"></jahia:sitePermission>
+    <jahia:sitePermission jahia:name="htmlsettings.toolbar.Basic" jahia:acl="g:users"></jahia:sitePermission>
+    <jahia:sitePermission jahia:name="htmlsettings.toolbar.Default"></jahia:sitePermission>
+    <jahia:sitePermission jahia:name="htmlsettings.toolbar.Full" jahia:acl="g:jahia-admins|g:jahia-super-admins"></jahia:sitePermission>
+    <jahia:sitePermission jahia:name="htmlsettings.toolbar.Light"></jahia:sitePermission>
+    <jahia:sitePermission jahia:name="integrity.LinkIntegrity"></jahia:sitePermission>
+    <jahia:sitePermission jahia:name="integrity.WaiCompliance"></jahia:sitePermission>
+    <jahia:sitePermission jahia:name="toolbar.bookmarks"></jahia:sitePermission>
+    <jahia:sitePermission jahia:name="toolbar.caches"></jahia:sitePermission>
+    <jahia:sitePermission jahia:name="toolbar.switchingmode"></jahia:sitePermission>
+    <jahia:sitePermission jahia:name="toolbar.workflow"></jahia:sitePermission>
+</jahia:sitePermissions>
+
