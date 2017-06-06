@@ -32,7 +32,7 @@ class WP_Exporter:
             official wordpress command line interface)
             available in the docker container wpcli
         """
-        os.system('docker exec wpcli %s'% command)
+        os.system('docker exec wpcli %s' % command)
 
     @classmethod
     def file_size(cls, file_path):
@@ -49,7 +49,7 @@ class WP_Exporter:
             domain is the wordpress domain where to push the content
         """
         self.site = site
-        url = "http://%s/index.php/wp-json/wp/v2"% domain
+        url = "http://%s/index.php/wp-json/wp/v2" % domain
         self.wp = WordpressJsonWrapper(url, WP_USER, WP_PASSWORD)
 
     def import_all_data_in_wordpress(self):
@@ -155,8 +155,7 @@ class WP_Exporter:
         """
         for page in self.site.pages:
             # add page to menu
-            self.wp_cli('wp menu item add-post %s %s' \
-                % (menu_name, page.wp_id))
+            self.wp_cli('wp menu item add-post %s %s' % (menu_name, page.wp_id))
             self.report['menus'] += 1
 
     def set_frontpage(self):

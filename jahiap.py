@@ -42,10 +42,12 @@ class Site:
         self.theme = ""
         self.css_url = ""
 
-        # the pages.
+        # the pages. We have a both list and a dict.
+        # The dict key is the page id, and the dict value is the page itself
         self.pages = []
+        self.pages_dict = {}
 
-        # set for conveniency, to avoid:
+        # set for convenience, to avoid:
         #   [p for p in self.pages if p.is_homepage()][0]
         self.homepage = None
 
@@ -88,21 +90,20 @@ class Site:
         """Parse the pages"""
         xml_pages = dom.getElementsByTagName("jahia:page")
 
-        pages = []
-
         for xml_page in xml_pages:
-
-            page = Page(xml_page)
+            page = Page(self, xml_page)
 
             # we don't include the sitemap as it's not a real page
             if "sitemap" == page.template:
                 continue
 
-            # flag out homepage for conveniency purppose
+            # flag out homepage for convenience
             if page.is_homepage():
                 self.homepage = page
 
-            pages.append(page)
+            # add the pages to the Site
+            self.pages.append(page)
+            self.pages_dict[page.pid] = page
 
             # main tag is the parent of all boxes types
             main_elements = xml_page.getElementsByTagName("main")
@@ -111,7 +112,7 @@ class Site:
 
             for main_element in main_elements:
                 # check if the box belongs to the current page
-                if not self.include_box(main_element, page):
+                if not self.belongs_to(main_element, page):
                     continue
 
                 type = main_element.getAttribute("jcr:primaryType")
@@ -132,8 +133,6 @@ class Site:
                     boxes.append(box)
 
             page.boxes = boxes
-
-        self.pages = pages
 
     def parse_sidebar(self, dom):
         """Parse the sidebar"""
@@ -157,10 +156,9 @@ class Site:
 
                 self.files.append(file)
 
-    def include_box(self, xml_box, page):
-        """Check if the given box belongs to the given page"""
-
-        parent = xml_box.parentNode
+    def belongs_to(self, element, page):
+        """Check if the given element belongs to the given page"""
+        parent = element.parentNode
 
         while "jahia:page" != parent.nodeName:
             parent = parent.parentNode
@@ -209,24 +207,47 @@ class Page:
 
     boxes = []
 
-    def __init__(self, element):
+    def __init__(self, site, element):
+        self.site = site
         self.pid = element.getAttribute("jahia:pid")
         self.template = element.getAttribute("jahia:template")
         self.title = element.getAttribute("jahia:title")
+        self.parent = None
+        self.children = []
 
         if self.is_homepage():
             self.name = "index.html"
         else:
             self.name = slugify(self.title) + ".html"
 
+        # find the parent
+        element_parent = element.parentNode
+
+        while "jahia:page" != element_parent.nodeName:
+            element_parent = element_parent.parentNode
+
+            # we reached the top of the document
+            if not element_parent:
+                break
+
+        if element_parent:
+            self.parent = self.site.pages_dict[element_parent.getAttribute("jahia:pid")]
+            self.parent.children.append(self)
+
     def __str__(self):
         return self.pid + " " + self.template + " " + self.title
 
     def is_homepage(self):
         """
-        Return True if the page is the homepage of site
+        Return True if the page is the homepage
         """
         return self.template == "home"
+
+    def has_children(self):
+        """
+        Return True if the page has children
+        """
+        return len(self.children) > 0
 
 
 class Box:
@@ -280,7 +301,6 @@ class Box:
         # faq
         elif "faq" == self.type:
             self.set_box_faq(element)
-
 
     def set_box_text(self, element, multibox=False):
         """set the attributes of a text box"""
