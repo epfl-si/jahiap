@@ -6,6 +6,7 @@ import zipfile
 import tempfile
 import argparse
 import logging
+import pickle
 
 from slugify import slugify
 
@@ -367,21 +368,38 @@ def main_unzip(parser, args):
 def main_parse(parser, args):
     logging.info("Parsing...")
 
-    base_path = "%s/%s" % (args.output_dir, args.site_name)
+    base_path = os.path.join(args.output_dir, args.site_name)
 
     site = Site(base_path, args.site_name)
 
     if args.print_report:
         print(site.report)
 
+    # save parsed site on file system
+    file_name = os.path.join(
+        args.output_dir,
+        'parsed_%s.pkl'% args.site_name)
+
+    with open(file_name, 'wb') as output:
+        pickle.dump(site, output, pickle.HIGHEST_PROTOCOL)
+
     # return site object
-    logging.info("Site successfully parsed")
+    logging.info("Site successfully parsed, and saved into %s"% file_name)
     return site
 
 def main_export(parser, args):
-    # TODO: use a dump/restore mechanism to cache the result of the parsing
-    args.print_report = False
-    site = main_parse(parser, args)
+    # restore parsed site from file system
+    file_name = os.path.join(
+        args.output_dir,
+        'parsed_%s.pkl'% args.site_name)
+    if os.path.exists(file_name):
+        with open(file_name, 'rb') as input:
+            site = pickle.load(input)
+        logging.info("Loaded parsed site from %s"% file_name)
+    # or parse it again
+    else:
+        args.print_report = False
+        site = main_parse(parser, args)
 
     logging.info("Exporting...")
 
