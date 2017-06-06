@@ -215,6 +215,11 @@ class Page:
         self.parent = None
         self.children = []
 
+        # if we have a sitemap we don't want to parse the
+        # page and add it to it's parent, so we stop here
+        if "sitemap" == self.template:
+            return
+
         if self.is_homepage():
             self.name = "index.html"
         else:
