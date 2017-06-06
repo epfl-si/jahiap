@@ -271,13 +271,7 @@
 
         <!-- The page content -->
         <div class="page-content">
-
-        <ul>
-          {% for page in site.pages %}
-          <li><a href="/{{ page.name }}">{{ page.title }}</a></li>
-          {% endfor %}
-        </ul>
-
+          {{ sitemap_content|safe }}
         </div>
 
         <!-- The page footer -->
