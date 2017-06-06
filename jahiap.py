@@ -1,18 +1,16 @@
 """(c) All rights reserved. ECOLE POLYTECHNIQUE FEDERALE DE LAUSANNE, Switzerland, VPSI, 2017"""
 
 import os
-import sys
 import xml.dom.minidom
 import zipfile
 import tempfile
-import shutil
 import argparse
 import logging
 
 from slugify import slugify
 
-from exporter import Exporter
 from settings import DOMAIN
+from exporter import Exporter
 from wp_exporter import WP_Exporter
 
 
@@ -96,7 +94,7 @@ class Site:
             page = Page(xml_page)
 
             # we don't include the sitemap as it's not a real page
-            if "sitemap" == page.template:
+            if page.template == "sitemap":
                 continue
 
             # flag out homepage for conveniency purppose
@@ -137,14 +135,12 @@ class Site:
         start = "%s/content/sites/%s/files" % (self.base_path, self.name)
 
         for (path, dirs, files) in os.walk(start):
-            for file in files:
+            for file_name in files:
                 # we exclude the thumbnails
-                if "thumbnail" == file or "thumbnail2" == file:
+                if file_name in ["thumbnail", "thumbnail2"]:
                     continue
 
-                file = File(name=file, path=path)
-
-                self.files.append(file)
+                self.files.append(File(name=file_name, path=path))
 
     def include_box(self, xml_box, page):
         """Check if the given box belongs to the given page"""
@@ -315,13 +311,7 @@ def main(parser, args):
     """
         Setup context (e.g debug level) and forward to command-dedicated main function
     """
-    logging.info("Setting up context...")
-    if args.quiet:
-        logging.basicConfig(level=logging.WARNING)
-    elif args.debug:
-        logging.basicConfig(level=logging.DEBUG)
-    else:
-        logging.basicConfig(level=logging.INFO)
+    logging.info("Starting jahiap script...")
 
     # mkdir from output_dir or as temporary dir
     if args.output_dir:
@@ -383,9 +373,9 @@ def main_parse(parser, args):
 
     if args.print_report:
         print(site.report)
-    else:
-        logging.info("Site successfully parsed")
 
+    # return site object
+    logging.info("Site successfully parsed")
     return site
 
 def main_export(parser, args):
@@ -406,7 +396,6 @@ def main_export(parser, args):
 
 
 if __name__ == '__main__':
-    logging.info("Starting jahiap script...")
     # declare parsers for command line arguments
     parser = argparse.ArgumentParser(
         description='Unzip, parse and export Jahia XML')
@@ -464,5 +453,13 @@ if __name__ == '__main__':
 
     # forward to main function
     args = parser.parse_args()
+
+    # set logging config before anything else
+    if args.quiet:
+        logging.basicConfig(level=logging.WARNING)
+    elif args.debug:
+        logging.basicConfig(level=logging.DEBUG)
+    else:
+        logging.basicConfig(level=logging.INFO)
+
     main(parser, args)
- 
