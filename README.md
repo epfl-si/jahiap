@@ -87,7 +87,7 @@ optional arguments:
 
 ## Testing
 
-The testing tool [pytest](https://docs.pytest.org/en/latest/contents.html) comes with the requirements. You can run the full suite with
+The testing tool [pytest](https://docs.pytest.org/en/latest/contents.html) comes with the requirements. You can run the full suite with :
 
 ```
 $ pytest

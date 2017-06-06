@@ -42,10 +42,12 @@ class Site:
         self.theme = ""
         self.css_url = ""
 
-        # the pages.
+        # the pages. We have a both list and a dict.
+        # The dict key is the page id, and the dict value is the page itself
         self.pages = []
+        self.pages_dict = {}
 
-        # set for conveniency, to avoid:
+        # set for convenience, to avoid:
         #   [p for p in self.pages if p.is_homepage()][0]
         self.homepage = None
 
@@ -88,47 +90,56 @@ class Site:
         """Parse the pages"""
         xml_pages = dom.getElementsByTagName("jahia:page")
 
-        pages = []
-
         for xml_page in xml_pages:
-
-            page = Page(xml_page)
+            page = Page(self, xml_page)
 
             # we don't include the sitemap as it's not a real page
             if page.template == "sitemap":
                 continue
 
-            # flag out homepage for conveniency purppose
+            # flag out homepage for convenience
             if page.is_homepage():
                 self.homepage = page
 
-            pages.append(page)
+            # add the pages to the Site
+            self.pages.append(page)
+            self.pages_dict[page.pid] = page
 
-            xml_boxes = xml_page.getElementsByTagName("main")
+            # main tag is the parent of all boxes types
+            main_elements = xml_page.getElementsByTagName("main")
 
             boxes = []
 
-            for xml_box in xml_boxes:
-
-                # Check if the box belongs to the current page
-                if not self.include_box(xml_box, page):
+            for main_element in main_elements:
+                # check if the box belongs to the current page
+                if not self.belongs_to(main_element, page):
                     continue
 
-                # Check if xml_box contains many boxes
-                multibox = xml_box.getElementsByTagName("text").length > 1
-                box = Box(self, xml_box, multibox=multibox)
-                boxes.append(box)
+                type = main_element.getAttribute("jcr:primaryType")
+
+                # the "epfl:faqBox" element contains one or more "epfl:faqList"
+                if "epfl:faqBox" == type:
+                    faq_list_elements = main_element.getElementsByTagName("faqList")
+
+                    for faq_list_element in faq_list_elements:
+                        box = Box(self, page, faq_list_element, multibox=False)
+                        boxes.append(box)
+
+                else:
+                    # TODO remove the multibox parameter and check for combo boxes instead
+                    # Check if xml_box contains many boxes
+                    multibox = main_element.getElementsByTagName("text").length > 1
+                    box = Box(self, page, main_element, multibox=multibox)
+                    boxes.append(box)
 
             page.boxes = boxes
-
-        self.pages = pages
 
     def parse_sidebar(self, dom):
         """Parse the sidebar"""
         extra = dom.getElementsByTagName("extra")
 
         for element in extra:
-            box = Box(self, element)
+            box = Box(self, None, element)
             self.sidebar.boxes.append(box)
 
     def parse_files(self):
@@ -143,10 +154,9 @@ class Site:
 
                 self.files.append(File(name=file_name, path=path))
 
-    def include_box(self, xml_box, page):
-        """Check if the given box belongs to the given page"""
-
-        parent = xml_box.parentNode
+    def belongs_to(self, element, page):
+        """Check if the given element belongs to the given page"""
+        parent = element.parentNode
 
         while "jahia:page" != parent.nodeName:
             parent = parent.parentNode
@@ -195,24 +205,47 @@ class Page:
 
     boxes = []
 
-    def __init__(self, element):
+    def __init__(self, site, element):
+        self.site = site
         self.pid = element.getAttribute("jahia:pid")
         self.template = element.getAttribute("jahia:template")
         self.title = element.getAttribute("jahia:title")
+        self.parent = None
+        self.children = []
 
         if self.is_homepage():
             self.name = "index.html"
         else:
             self.name = slugify(self.title) + ".html"
 
+        # find the parent
+        element_parent = element.parentNode
+
+        while "jahia:page" != element_parent.nodeName:
+            element_parent = element_parent.parentNode
+
+            # we reached the top of the document
+            if not element_parent:
+                break
+
+        if element_parent:
+            self.parent = self.site.pages_dict[element_parent.getAttribute("jahia:pid")]
+            self.parent.children.append(self)
+
     def __str__(self):
         return self.pid + " " + self.template + " " + self.title
 
     def is_homepage(self):
         """
-        Return True if the page is the homepage of site
+        Return True if the page is the homepage
         """
         return self.template == "home"
+
+    def has_children(self):
+        """
+        Return True if the page has children
+        """
+        return len(self.children) > 0
 
 
 class Box:
@@ -228,11 +261,13 @@ class Box:
         "epfl:textBox": "text",
         "epfl:coloredTextBox": "coloredText",
         "epfl:infoscienceBox": "infoscience",
-        "epfl:actuBox": "actu"
+        "epfl:actuBox": "actu",
+        "epfl:faqContainer": "faq"
     }
 
-    def __init__(self, site, element, multibox=False):
+    def __init__(self, site, page, element, multibox=False):
         self.site = site
+        self.page = page
         self.set_type(element)
         self.title = Utils.get_tag_attribute(element, "boxTitle", "jahia:value")
         self.set_content(element, multibox)
@@ -261,6 +296,9 @@ class Box:
         # actu
         elif "actu" == self.type:
             self.set_box_actu(element)
+        # faq
+        elif "faq" == self.type:
+            self.set_box_faq(element)
 
     def set_box_text(self, element, multibox=False):
         """set the attributes of a text box"""
@@ -295,6 +333,14 @@ class Box:
         url = Utils.get_tag_attribute(element, "url", "jahia:value")
 
         self.content = "[infoscience url=%s]" % url
+
+    def set_box_faq(self, element):
+        """set the attributes of a faq box"""
+        self.question = Utils.get_tag_attribute(element, "question", "jahia:value")
+
+        self.answer = Utils.get_tag_attribute(element, "answer", "jahia:value")
+
+        self.content = "<h2>%s</h2><p>%s</p>" % (self.question, self.answer)
 
     def __str__(self):
         return self.type + " " + self.title
