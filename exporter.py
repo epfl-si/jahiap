@@ -31,6 +31,9 @@ class Exporter:
     def generate_pages(self):
         """Generate the pages & the sitemap"""
 
+        # update the boxes data
+        self.update_boxes_data()
+
         # navigation
         self.generate_navigation(self.site.homepage)
 
@@ -50,6 +53,26 @@ class Exporter:
         content = template.render(page=None, site=self.site, exporter=self)
 
         self.generate_page("sitemap.html", content)
+
+    def update_boxes_data(self):
+        """Update the boxes data"""
+        for page in self.site.pages:
+            for box in page.boxes:
+                # toggle box : add EPFL bootstrap specific code
+                if box.type == "toggle":
+                    # toggle title
+                    content = "<h3 data-widget='collapse'>%s</h3>" % box.title
+                    # toggle content
+                    content += "<div>%s</div>" % box.content
+
+                    box.content = content
+
+                    # we don't want to show the box title
+                    box.title = None
+
+                # all other box types, we just enclose them in a div
+                else:
+                    box.content = "<div>" + box.content + "</div>"
 
     def generate_page(self, name, content):
         """Generate a page"""

@@ -273,10 +273,11 @@
 
         <!-- The page content -->
         <div class="page-content">
-
           {% for box in page.boxes %}
-          <h2>{{ box.title }}</h2>
-          <div>{{ box.content|safe }}</div>
+            {% if box.title != None %}
+              <h2>{{ box.title }}</h2>
+            {% endif %}
+            {{ box.content|safe }}
           {% endfor %}
 
         </div>
