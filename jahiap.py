@@ -160,7 +160,6 @@ class Site:
         while currentNode.ELEMENT_NODE != currentNode.nodeType or 'extraList' != currentNode.tagName:
             currentNode = currentNode.nextSibling
 
-
         extra_list = currentNode.getElementsByTagName("extra")
         for extra in extra_list:
             box = Box(self, None, extra)
@@ -227,7 +226,7 @@ class Sidebar:
 
 class Page:
     """A Jahia Page. Has 1 to N Jahia Boxes"""
-    
+
     def __init__(self, site, element):
         self.site = site
         self.pid = element.getAttribute("jahia:pid")
@@ -250,7 +249,7 @@ class Page:
             self.name = "index.html"
         else:
             self.name = slugify(self.title) + ".html"
-            
+
         # find the parent
         element_parent = element.parentNode
 
@@ -274,7 +273,7 @@ class Page:
                 self.level += 1
 
                 parent_page = parent_page.parent
-        
+
         # sidebar
         if not self.is_homepage():
             # parse the sidebar
@@ -283,13 +282,13 @@ class Page:
         if len(self.sidebar.boxes) == 0:
             # get the sidebar of parent page
             pass
-            
+
     def parse_sidebar(self, element):
         extra_list = element.getElementsByTagName("extra")
         for extra in extra_list:
-            box = Box(self, extra)
+            box = Box(self, element, extra)
             self.sidebar.boxes.append(box)
-            
+
     def __str__(self):
         return self.pid + " " + self.template + " " + self.title
 
@@ -317,7 +316,7 @@ class Box:
         "epfl:actuBox": "actu",
         "epfl:faqContainer": "faq"
     }
-    
+
     def __init__(self, site, page, element, multibox=False):
         self.site = site
         self.page = page
