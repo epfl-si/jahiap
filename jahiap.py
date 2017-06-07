@@ -280,7 +280,8 @@ class Box:
         "epfl:coloredTextBox": "coloredText",
         "epfl:infoscienceBox": "infoscience",
         "epfl:actuBox": "actu",
-        "epfl:faqContainer": "faq"
+        "epfl:faqContainer": "faq",
+        "epfl:toggleBox": "toggle"
     }
 
     def __init__(self, site, page, element, multibox=False):
@@ -317,6 +318,9 @@ class Box:
         # faq
         elif "faq" == self.type:
             self.set_box_faq(element)
+        # toggle
+        elif "toggle" == self.type:
+            self.set_box_toggle(element)
 
     def set_box_text(self, element, multibox=False):
         """set the attributes of a text box"""
@@ -359,6 +363,12 @@ class Box:
         self.answer = Utils.get_tag_attribute(element, "answer", "jahia:value")
 
         self.content = "<h2>%s</h2><p>%s</p>" % (self.question, self.answer)
+
+    def set_box_toggle(self, element):
+        """set the attributes of a toggle box"""
+        self.opened = Utils.get_tag_attribute(element, "opened", "jahia:value")
+
+        self.content = Utils.get_tag_attribute(element, "content", "jahia:value")
 
     def __str__(self):
         return self.type + " " + self.title
