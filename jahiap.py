@@ -27,6 +27,49 @@ class Utils:
 
         return elements[0].getAttribute(attribute)
 
+    @staticmethod
+    def generate_data(site):
+        """Generate data for tests"""
+        data = {}
+
+        # properties
+        data['properties'] = {
+            'name': site.name,
+            'title': site.title,
+            'acronym': site.acronym,
+            'theme': site.theme,
+            'breadcrumb_title': site.breadcrumb_title,
+            'breadcrumb_url': site.breadcrumb_url,
+            'css_url': site.css_url
+        }
+
+        # pages
+        #
+        data['pages'] = []
+        for page in site.pages:
+
+            box_list = []
+            for box in page.sidebar.boxes:
+                box_dict = {
+                    'title': box.title,
+                    'content': box.content,
+                    'type': box.type
+                }
+                box_list.append(box_dict)
+
+            page_dict = {
+                'pid': page.pid,
+                'title': page.title,
+                'nb_boxes': len(page.boxes),
+                'sidebar': box_list
+            }
+            data['pages'].append(page_dict)
+
+        # files
+        data['files'] = len(site.files)
+
+        print(data)
+
 
 class Site:
     """A Jahia Site. Have 1 to N Pages"""
@@ -58,9 +101,6 @@ class Site:
         # the files
         self.files = []
 
-        # the sidebar
-        self.sidebar = Sidebar()
-
         # parse the data
         self.parse_data()
 
@@ -68,6 +108,8 @@ class Site:
         self.report = ""
 
         self.generate_report()
+
+        Utils.generate_data(site=self)
 
     def parse_data(self):
         """Parse the Site data"""
@@ -81,7 +123,6 @@ class Site:
         self.parse_site_params(dom)
         self.parse_breadcrumb(dom)
         self.parse_pages(dom)
-        self.parse_sidebar(dom)
         self.parse_files()
 
     def parse_site_params(self, dom):
@@ -274,20 +315,29 @@ class Page:
 
                 parent_page = parent_page.parent
 
-        # sidebar
-        if not self.is_homepage():
-            # parse the sidebar
-            self.parse_sidebar(element)
-
-        if len(self.sidebar.boxes) == 0:
-            # get the sidebar of parent page
-            pass
+        # Sidebar
+        self.parse_sidebar(element)
 
     def parse_sidebar(self, element):
-        extra_list = element.getElementsByTagName("extra")
-        for extra in extra_list:
-            box = Box(self, element, extra)
-            self.sidebar.boxes.append(box)
+        """ Parse sidebar """
+
+        # Search sidebar in the page xml content
+        childs = element.childNodes
+        for child in childs:
+            if child.nodeName == "extraList":
+                for extra in child.childNodes:
+                    if extra.ELEMENT_NODE != extra.nodeType:
+                        continue
+                    box = Box(self, element, extra)
+                    self.sidebar.boxes.append(box)
+
+        # if not find, search the sidebar of a parent
+        nb_boxes = len(self.sidebar.boxes)
+        if nb_boxes == 0:
+            while nb_boxes == 0:
+                sidebar = self.parent.sidebar
+                nb_boxes = len(sidebar.boxes)
+            self.sidebar = sidebar
 
     def __str__(self):
         return self.pid + " " + self.template + " " + self.title
