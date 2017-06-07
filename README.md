@@ -106,3 +106,29 @@ Or you might choose to target some of those specific areas:
 $ pytest -k TestSiteStructure
 ...
 ```
+
+
+### How to start a static site nginx ? ###
+
+start docker nginx with optinals paratemers port=xxx and name=xxx
+default port=9090 
+name=demo-static
+
+```
+make start
+make start port=9090 name=demo-static
+```
+
+stop and remove nginix container
+
+```
+make stop
+make stop name=demo-static
+```
+
+stop and restart nginix
+
+```
+make restart
+make restart name=demo-static port=9090
+```
