@@ -1,17 +1,17 @@
 """(c) All rights reserved. ECOLE POLYTECHNIQUE FEDERALE DE LAUSANNE, Switzerland, VPSI, 2017"""
 
-import getopt
 import os
-import sys
 import xml.dom.minidom
 import zipfile
 import tempfile
-import shutil
+import argparse
+import logging
+import pickle
 
 from slugify import slugify
 
-from exporter import Exporter
 from settings import DOMAIN
+from exporter import Exporter
 from wp_exporter import WP_Exporter
 
 
@@ -94,7 +94,7 @@ class Site:
             page = Page(self, xml_page)
 
             # we don't include the sitemap as it's not a real page
-            if "sitemap" == page.template:
+            if page.template == "sitemap":
                 continue
 
             # flag out homepage for convenience
@@ -147,14 +147,12 @@ class Site:
         start = "%s/content/sites/%s/files" % (self.base_path, self.name)
 
         for (path, dirs, files) in os.walk(start):
-            for file in files:
+            for file_name in files:
                 # we exclude the thumbnails
-                if "thumbnail" == file or "thumbnail2" == file:
+                if file_name in ["thumbnail", "thumbnail2"]:
                     continue
 
-                file = File(name=file, path=path)
-
-                self.files.append(file)
+                self.files.append(File(name=file_name, path=path))
 
     def belongs_to(self, element, page):
         """Check if the given element belongs to the given page"""
@@ -361,68 +359,40 @@ class File:
         self.path = path
 
 
-def print_usage():
-    """Print the command line usage"""
-    print('usage : python jahiap.py -i <export_file> -o <output_dir>')
+def main(parser, args):
+    """
+        Setup context (e.g debug level) and forward to command-dedicated main function
+    """
+    logging.info("Starting jahiap script...")
 
+    # mkdir from output_dir or as temporary dir
+    if args.output_dir:
+        if not os.path.isdir(args.output_dir):
+            os.mkdir(args.output_dir)
+    else:
+        args.output_dir = tempfile.mkdtemp()
+        logging.warning("Created temporary directory %s, please remove it when done"% args.output_dir)
 
-def main(argv):
-    export_file = ""
-    output_dir = ""
-    # avoid to hardcode domain too hard
-    domain = DOMAIN
-    # do not force generation of static files
-    generate_static_files = False
+    # forward to appropriate main function
+    args.command(parser, args)
 
-    try:
-        # TODO: use optparse instead ?
-        # https://docs.python.org/3.1/library/optparse.html
-        opts, args = getopt.getopt(argv, "hi:o:d:")
-    except getopt.GetoptError:
-        print_usage()
-        sys.exit(2)
-
-    # parse the opts
-    for opt, arg in opts:
-        if opt == '-h':
-            print_usage()
-            sys.exit()
-        elif opt == "-i":
-            export_file = arg
-        elif opt == "-o":
-            output_dir = arg
-        elif opt == "-d":
-            domain = arg
+def main_unzip(parser, args):
+    logging.info("Unzipping...")
 
     # make sure we have an input file
-    if not export_file:
-        print_usage()
-        sys.exit(2)
-
-    # check if the input file exists
-    if not os.path.isfile(export_file):
-        print("Cannot find export file : %s" % export_file)
-        print_usage()
-        sys.exit(2)
-
-    # create static export if output_dir is given
-    if output_dir:
-        generate_static_files = True
-        # check if the output dir exists
-        if not os.path.isdir(output_dir):
-            os.mkdir(output_dir)
-    else:
-        output_dir = tempfile.mkdtemp()
+    if not args.xml_file or not os.path.isfile(args.xml_file):
+        parser.print_help()
+        raise SystemExit("Jahia XML file not found")
 
     # extract the export zip file
-    export_zip = zipfile.ZipFile(export_file, 'r')
-    export_zip.extractall(output_dir)
+    export_zip = zipfile.ZipFile(args.xml_file, 'r')
+    export_zip.extractall(args.output_dir)
     export_zip.close()
 
     # find the zip containing the site files
     zip_with_files = ""
 
-    for file in os.listdir(output_dir):
+    for file in os.listdir(args.output_dir):
         if not file.endswith(".zip"):
             continue
 
@@ -431,32 +401,140 @@ def main(argv):
             break
 
     if zip_with_files == "":
-        print("Could not find zip with files")
-        sys.exit(2)
+        raise SystemExit("Could not find zip with files")
 
     # get the site name
     site_name = zip_with_files[:zip_with_files.index(".")]
 
-    base_path = "%s/%s" % (output_dir, site_name)
+    base_path = "%s/%s" % (args.output_dir, site_name)
 
     # unzip the zip with the files
-    zip_ref_with_files = zipfile.ZipFile(output_dir + "/" + zip_with_files, 'r')
+    zip_ref_with_files = zipfile.ZipFile(args.output_dir + "/" + zip_with_files, 'r')
     zip_ref_with_files.extractall(base_path)
 
-    site = Site(base_path, site_name)
+    # return site path & name
+    logging.info("Site successfully extracted in %s" % base_path)
+    return (base_path, site_name)
 
-    print(site.report)
+def main_parse(parser, args):
+    logging.info("Parsing...")
 
-    wp_exporter = WP_Exporter(site=site, domain=domain)
-    wp_exporter.import_all_data_in_wordpress()
+    base_path = os.path.join(args.output_dir, args.site_name)
 
-    # generate static files only if output_dir is provided
-    if generate_static_files:
-        Exporter(site, output_dir + "/html")
-    # otherwise, just get rid of temporary files
+    site = Site(base_path, args.site_name)
+
+    if args.print_report:
+        print(site.report)
+
+    # save parsed site on file system
+    file_name = os.path.join(
+        args.output_dir,
+        'parsed_%s.pkl'% args.site_name)
+
+    with open(file_name, 'wb') as output:
+        pickle.dump(site, output, pickle.HIGHEST_PROTOCOL)
+
+    # return site object
+    logging.info("Site successfully parsed, and saved into %s"% file_name)
+    return site
+
+def main_export(parser, args):
+    # restore parsed site from file system
+    file_name = os.path.join(
+        args.output_dir,
+        'parsed_%s.pkl'% args.site_name)
+    if os.path.exists(file_name):
+        with open(file_name, 'rb') as input:
+            site = pickle.load(input)
+        logging.info("Loaded parsed site from %s"% file_name)
+    # or parse it again
     else:
-        shutil.rmtree(output_dir)
+        args.print_report = False
+        site = main_parse(parser, args)
+
+    logging.info("Exporting...")
+
+    if args.to_wordpress:
+        wp_exporter = WP_Exporter(site=site, domain=args.site_url)
+        wp_exporter.import_all_data_in_wordpress()
+        logging.info("Site successfully exported to Wordpress")
+
+    if args.to_static:
+        Exporter(site, args.output_dir + "/html")
+        logging.info("Site successfully exported to HTML files")
 
 
-if __name__ == "__main__":
-    main(sys.argv[1:])
+if __name__ == '__main__':
+    # declare parsers for command line arguments
+    parser = argparse.ArgumentParser(
+        description='Unzip, parse and export Jahia XML')
+    subparsers = parser.add_subparsers()
+
+    # logging-related agruments
+    parser.add_argument('--debug',
+                        dest='debug',
+                        action='store_true',
+                        help='Set logging level to DEBUG (default is INFO)')
+    parser.add_argument('--quiet',
+                        dest='quiet',
+                        action='store_true',
+                        help='Set logging level to WARNING (default is INFO)')
+
+    # common arguments for all commands
+    parser.add_argument('-o', '--output-dir',
+                        dest='output_dir',
+                        help='directory where to unzip, parse, export Jahia XML')
+
+    # "unzip" command
+    parser_unzip = subparsers.add_parser('unzip')
+    parser_unzip.add_argument('xml_file',
+                        help='path to Jahia XML file')
+    parser_unzip.set_defaults(command=main_unzip)
+
+    # "parse" command
+    parser_parse = subparsers.add_parser('parse')
+    parser_parse.add_argument(
+        'site_name',
+        help='name of sub directories that contain the site files')
+    parser_parse.add_argument(
+        '-r', '--print-report',
+        dest='print_report',
+        action='store_true',
+        help='print report with parsed content')
+    parser_parse.set_defaults(command=main_parse)
+
+    # "export" command
+    parser_export = subparsers.add_parser('export')
+    parser_export.add_argument(
+        'site_name',
+        help='name of sub directories that contain the site files')
+    parser_export.add_argument(
+        '-w', '--to-wordpress',
+        dest='to_wordpress',
+        action='store_true',
+        help='export parsed data to Wordpress')
+    parser_export.add_argument(
+        '-s', '--to-static',
+        dest='to_static',
+        action='store_true',
+        help='export parsed data to static HTML files')
+    parser_export.add_argument(
+        '-u', '--site-url',
+        dest='site_url',
+        metavar='URL',
+        default=DOMAIN,
+        help='wordpress URL where to export parsed content')
+    parser_export.set_defaults(command=main_export)
+
+    # forward to main function
+    args = parser.parse_args()
+
+    # set logging config before anything else
+    if args.quiet:
+        logging.basicConfig(level=logging.WARNING)
+    elif args.debug:
+        logging.basicConfig(level=logging.DEBUG)
+    else:
+        logging.basicConfig(level=logging.INFO)
+
+    main(parser, args)

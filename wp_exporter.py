@@ -176,7 +176,7 @@ class WP_Exporter:
     def display_report(self):
 
         result = """
-Found in wordpress :
+Imported in WordPress :
 
   - %s files
 
