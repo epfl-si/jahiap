@@ -11,9 +11,9 @@ def site(request):
     from jahiap import Site
 
     if request.param == 'dcsl':
-        return Site("./test/sites/dcsl", "dcsl")
+        return Site("./test/jahiap-data/dcsl", "dcsl")
     elif request.param == 'master':
-        return Site("./test/sites/master", "master")
+        return Site("./test/jahiap-data/master", "master")
 
 
 @pytest.fixture()
