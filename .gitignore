@@ -4,6 +4,7 @@
 .idea
 exports
 demo.md
+build
 
 # pytest
 .cache
