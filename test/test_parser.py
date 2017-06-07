@@ -115,7 +115,7 @@ class TestSidebar:
 #     assert site.homepage.title == "DCSL"
 #
 #   def test_acl(self, site):
-#     assert site.homepage.acl == "u:223767:rwa|u:229105:rwa|u:196571:rwa|u:190526:rwa|g:DCSL-unit:rwa|g:guest:r--|g:jahia-admins:rwa|none"                 'content': """<p><strong><a href="https://isa.epfl.ch/imoniteur_ISAP/!farforms.htm?x=master">Applications</a> for starting a Master's program are open from mid-November to January 15th and from January 16th to April 15th</strong></p> """, # noqa
+#     assert site.homepage.acl == "u:223767:rwa|u:229105:rwa|u:196571:rwa|u:190526:rwa|g:DCSL-unit:rwa|g:guest:r--|g:jahia-admins:rwa|none" # noqa
 #
 #   def test_content(self, site):
 #     contents = [box.content for box in site.homepage.boxes]

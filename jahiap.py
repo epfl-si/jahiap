@@ -225,11 +225,26 @@ class Page:
         self.template = element.getAttribute("jahia:template")
         self.title = element.getAttribute("jahia:title")
         self.boxes = []
+        self.sidebar = Sidebar()
 
         if self.is_homepage():
             self.name = "index.html"
         else:
             self.name = slugify(self.title) + ".html"
+
+        if not self.is_homepage():
+            # parse the sidebar
+            self.parse_sidebar(element)
+
+        if len(self.sidebar.boxes) == 0:
+            # get the sidebar of parent page
+            pass
+
+    def parse_sidebar(self, element):
+        extra_list = element.getElementsByTagName("extra")
+        for extra in extra_list:
+            box = Box(self, extra)
+            self.sidebar.boxes.append(box)
 
     def __str__(self):
         return self.pid + " " + self.template + " " + self.title
