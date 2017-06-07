@@ -94,6 +94,15 @@ $ pytest
 ...
 ```
 
+Or you migth run a specific file or class or test with
+
+```
+$ pytest test/test_parser.py
+$ pytest test/test_parser.py::TestSiteProperties
+$ pytest test/test_parser.py::TestSiteProperties::test_name
+...
+```
+
 Or you might choose to target some of those specific areas:
 
 * TestSiteProperties

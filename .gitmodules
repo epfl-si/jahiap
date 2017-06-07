@@ -1,0 +1,3 @@
+[submodule "test/jahiap-data"]
+	path = test/jahiap-data
+	url = git@github.com:epfl-idevelop/jahiap-data.git

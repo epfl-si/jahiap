@@ -42,6 +42,10 @@ class Site:
         self.theme = ""
         self.css_url = ""
 
+        # breadcrumb
+        self.breadcrumb_title = ""
+        self.breadcrumb_url = ""
+
         # the pages. We have a both list and a dict.
         # The dict key is the page id, and the dict value is the page itself
         self.pages = []
@@ -75,6 +79,7 @@ class Site:
 
         # do the parsing
         self.parse_site_params(dom)
+        self.parse_breadcrumb(dom)
         self.parse_pages(dom)
         self.parse_sidebar(dom)
         self.parse_files()
@@ -85,6 +90,19 @@ class Site:
         self.theme = Utils.get_tag_attribute(dom, "theme", "jahia:value")
         self.acronym = Utils.get_tag_attribute(dom, "acronym", "jahia:value")
         self.css_url = "//static.epfl.ch/v0.23.0/styles/%s-built.css" % self.theme
+
+    def parse_breadcrumb(self, dom):
+        """Parse the breadcrumb"""
+        breadcrumb_link = dom.getElementsByTagName("breadCrumbLink")[0]
+
+        for child in breadcrumb_link.childNodes:
+            if child.ELEMENT_NODE != child.nodeType:
+                continue
+
+            if 'jahia:url' == child.nodeName:
+                self.breadcrumb_url = child.getAttribute('jahia:value')
+                self.breadcrumb_title = child.getAttribute('jahia:title')
+                break
 
     def parse_pages(self, dom):
         """Parse the pages"""
@@ -136,10 +154,15 @@ class Site:
 
     def parse_sidebar(self, dom):
         """Parse the sidebar"""
-        extra = dom.getElementsByTagName("extra")
+        col5List = dom.getElementsByTagName("col5List")[0]
 
-        for element in extra:
-            box = Box(self, None, element)
+        currentNode = col5List.nextSibling
+        while currentNode.ELEMENT_NODE != currentNode.nodeType or 'extraList' != currentNode.tagName:
+            currentNode = currentNode.nextSibling
+
+        extra_list = currentNode.getElementsByTagName("extra")
+        for extra in extra_list:
+            box = Box(self, None, extra)
             self.sidebar.boxes.append(box)
 
     def parse_files(self):
@@ -197,19 +220,20 @@ Found :
 class Sidebar:
     """A Jahia Sidebar"""
 
-    boxes = []
+    def __init__(self):
+        self.boxes = []
 
 
 class Page:
     """A Jahia Page. Has 1 to N Jahia Boxes"""
-
-    boxes = []
 
     def __init__(self, site, element):
         self.site = site
         self.pid = element.getAttribute("jahia:pid")
         self.template = element.getAttribute("jahia:template")
         self.title = element.getAttribute("jahia:title")
+        self.boxes = []
+        self.sidebar = Sidebar()
         self.parent = None
         self.children = []
         # the page level. 0 is for the homepage, direct children are
@@ -250,6 +274,21 @@ class Page:
 
                 parent_page = parent_page.parent
 
+        # sidebar
+        if not self.is_homepage():
+            # parse the sidebar
+            self.parse_sidebar(element)
+
+        if len(self.sidebar.boxes) == 0:
+            # get the sidebar of parent page
+            pass
+
+    def parse_sidebar(self, element):
+        extra_list = element.getElementsByTagName("extra")
+        for extra in extra_list:
+            box = Box(self, element, extra)
+            self.sidebar.boxes.append(box)
+
     def __str__(self):
         return self.pid + " " + self.template + " " + self.title
 
@@ -268,11 +307,6 @@ class Page:
 
 class Box:
     """A Jahia Box. Can be of type text, infoscience, etc."""
-
-    # the box type
-    type = ""
-    # the box content
-    content = ""
 
     # the known box types
     types = {
