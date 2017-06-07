@@ -267,9 +267,10 @@
       <div class="g-span-2_3 g-span-s-1_1">
 
         <!-- The page header -->
+        {% if page.template != 'home' %}
         <header class="page-header">
           <h1 class="page-title">{{ page.title}}</h1>
-        </header>
+        </header>{% endif %}
 
         <!-- The page content -->
         <div class="page-content">
