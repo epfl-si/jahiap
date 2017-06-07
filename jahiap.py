@@ -212,6 +212,9 @@ class Page:
         self.title = element.getAttribute("jahia:title")
         self.parent = None
         self.children = []
+        # the page level. 0 is for the homepage, direct children are
+        # at level 1, grandchildren at level 2, etc.
+        self.level = 0
 
         # if we have a sitemap we don't want to parse the
         # page and add it to it's parent, so we stop here
@@ -236,6 +239,16 @@ class Page:
         if element_parent:
             self.parent = self.site.pages_dict[element_parent.getAttribute("jahia:pid")]
             self.parent.children.append(self)
+
+            # calculate the page level
+            self.level = 1
+
+            parent_page = self.parent
+
+            while not parent_page.is_homepage():
+                self.level += 1
+
+                parent_page = parent_page.parent
 
     def __str__(self):
         return self.pid + " " + self.template + " " + self.title
@@ -371,10 +384,11 @@ def main(parser, args):
             os.mkdir(args.output_dir)
     else:
         args.output_dir = tempfile.mkdtemp()
-        logging.warning("Created temporary directory %s, please remove it when done"% args.output_dir)
+        logging.warning("Created temporary directory %s, please remove it when done" % args.output_dir)
 
     # forward to appropriate main function
     args.command(parser, args)
+
 
 def main_unzip(parser, args):
     logging.info("Unzipping...")
@@ -416,6 +430,7 @@ def main_unzip(parser, args):
     logging.info("Site successfully extracted in %s" % base_path)
     return (base_path, site_name)
 
+
 def main_parse(parser, args):
     logging.info("Parsing...")
 
@@ -429,24 +444,25 @@ def main_parse(parser, args):
     # save parsed site on file system
     file_name = os.path.join(
         args.output_dir,
-        'parsed_%s.pkl'% args.site_name)
+        'parsed_%s.pkl' % args.site_name)
 
     with open(file_name, 'wb') as output:
         pickle.dump(site, output, pickle.HIGHEST_PROTOCOL)
 
     # return site object
-    logging.info("Site successfully parsed, and saved into %s"% file_name)
+    logging.info("Site successfully parsed, and saved into %s" % file_name)
     return site
+
 
 def main_export(parser, args):
     # restore parsed site from file system
     file_name = os.path.join(
         args.output_dir,
-        'parsed_%s.pkl'% args.site_name)
+        'parsed_%s.pkl' % args.site_name)
     if os.path.exists(file_name):
         with open(file_name, 'rb') as input:
             site = pickle.load(input)
-        logging.info("Loaded parsed site from %s"% file_name)
+        logging.info("Loaded parsed site from %s" % file_name)
     # or parse it again
     else:
         args.print_report = False
@@ -487,8 +503,7 @@ if __name__ == '__main__':
 
     # "unzip" command
     parser_unzip = subparsers.add_parser('unzip')
-    parser_unzip.add_argument('xml_file',
-                        help='path to Jahia XML file')
+    parser_unzip.add_argument('xml_file', help='path to Jahia XML file')
     parser_unzip.set_defaults(command=main_unzip)
 
     # "parse" command

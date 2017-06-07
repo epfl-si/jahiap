@@ -18,22 +18,27 @@ class Exporter:
         self.site = site
         self.out_path = out_path
         self.sitemap_content = ""
+        self.navigation = "<!-- START NAVIGATION -->\n"
 
         # create the output path if necessary
         if not os.path.exists(self.out_path):
             os.mkdir(self.out_path)
 
         self.generate_pages()
+
         self.extract_files()
 
     def generate_pages(self):
         """Generate the pages & the sitemap"""
 
+        # navigation
+        self.generate_navigation(self.site.homepage)
+
         # regular pages
         template = self.env.get_template('epfl-sidebar-en.html')
 
         for page in self.site.pages:
-            content = template.render(page=page, site=self.site)
+            content = template.render(page=page, site=self.site, exporter=self)
 
             self.generate_page(page.name, content)
 
@@ -42,7 +47,7 @@ class Exporter:
 
         self.generate_sitemap_content(self.site.homepage)
 
-        content = template.render(page=None, site=self.site, sitemap_content=self.sitemap_content)
+        content = template.render(page=None, site=self.site, exporter=self)
 
         self.generate_page("sitemap.html", content)
 
@@ -55,6 +60,37 @@ class Exporter:
         file.write(content)
 
         file.close()
+
+    def generate_navigation(self, page):
+        """
+        Generate the navigation content. This is a recursive method
+        """
+        if not page.is_homepage():
+            # current page
+            self.navigation_spacer(page)
+            self.navigation += "<li class='nav-item'><a class='nav-link' href='/%s'>%s</a>" % (page.name, page.title)
+
+        if page.has_children():
+            if not page.is_homepage():
+                self.navigation += "\n"
+                self.navigation_spacer(page)
+                self.navigation += "<ul class='nav-list nav-vertical' data-widget='menu'>\n"
+
+            for child in page.children:
+                # recursive call
+                self.generate_navigation(child)
+
+            if not page.is_homepage():
+                self.navigation_spacer(page)
+                self.navigation += "</ul>\n</li>\n"
+        else:
+            if not page.is_homepage():
+                self.navigation += "</li>\n"
+
+    def navigation_spacer(self, page):
+        """Add spaces according to the page level"""
+        for i in range(page.level - 1):
+            self.navigation += "  "
 
     def generate_sitemap_content(self, page):
         """

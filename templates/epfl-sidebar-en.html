@@ -138,11 +138,7 @@
                 <span class="hidden-s hidden-m hidden-l hidden-xl hidden-xxl">Homepage</span>
               </a>
             </li>
-              {% for page in site.homepage.children %}
-                  <li class="nav-item">
-                    <a class="nav-link" href="/{{ page.name }}">{{ page.title }}</a>
-                  </li>
-              {% endfor %}
+              {{ exporter.navigation|safe }}
               <!-- TODO the navigation
             <li class="nav-item">
               <span class="nav-link" data-widget="collapse">Menu 1 [dropdown]</span>
