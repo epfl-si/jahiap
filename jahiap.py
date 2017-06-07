@@ -35,7 +35,10 @@ class Site:
     def __init__(self, base_path, name):
         self.base_path = base_path
         self.name = name
-        self.xml_path = base_path + "/export_en.xml"
+
+        # hardcoded language and xml path for now
+        self.language = "en"
+        self.xml_path = base_path + "/export_%s.xml" % self.language
 
         # site params that are parsed later
         self.title = ""
@@ -225,10 +228,15 @@ class Page:
         if "sitemap" == self.template:
             return
 
+        # set URL (either vanity URL or page-ID-{en,fr}.html)
         if self.is_homepage():
             self.name = "index.html"
         else:
-            self.name = slugify(self.title) + ".html"
+            vanity_url = element.getAttribute("jahia:urlMappings")
+            if vanity_url:
+                self.name = vanity_url.split('$$$')[0].strip('/') + ".html"
+            else:
+                self.name = self.regular_url()
 
         # find the parent
         element_parent = element.parentNode
@@ -256,6 +264,9 @@ class Page:
 
     def __str__(self):
         return self.pid + " " + self.template + " " + self.title
+
+    def regular_url(self):
+        return "page-%s-%s.html" % (self.pid, self.site.language)
 
     def is_homepage(self):
         """
