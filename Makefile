@@ -8,6 +8,7 @@ all: clean start generate
 
 clean:
 	rm -rf $(output_dir)/$(site_name)*
+	rm -rf $(output_dir)/parsed_$(site_name).pkl
 
 generate:
 	python jahiap.py -o $(output_dir) unzip $(zip_file)
