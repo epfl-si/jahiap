@@ -6,20 +6,77 @@ site).
 
 pip install -r requirements/base.txt
 
-## Usage
+## the 30-seconds tutorial (for dcsl)
 
-The script might be used for different actions: unzipping an Jahia file, parsing it, or exporting its content. Here is a 10-seconds example, which
+```
+$ cd jahiap
+$ make all
+...
+```
 
-* makes use of a JAHIA zip file in `exports/dcsl_export_2017-05-30-09-44.zip`
-* works in the `build` sub-directory
+You now can access the content on [http://localhost:9090](http://localhost:9090).
+
+Again ?
+
+```
+$ make stop all
+...
+```
+
+For another website, e.g master ?
+
+```
+$ make all port=9091 site_name=master zip_file=exports/master_export_2017-05-29-10-53.zip
+```
+This one will be available on [http://localhost:9091](http://localhost:9091).
+
+## More details on usage
+
+The `make` command does a few things for you :
+
+* unzip an Jahia file
+* parse it
+* export its content
+* run a nginx docker image to serve the exported content
+
+The details command will look like this
 
 ```
 python jahiap.py -o build unzip exports/dcsl_export_2017-05-30-09-44.zip
 python jahiap.py -o build parse dcsl -r
 python jahiap.py -o build export dcsl -s
+docker run -d \
+    --name docker-dcsl \
+    -p 9090:80 \
+    -v $(PWD)/build/dcsl_html:/usr/share/nginx/html \
+    nginx
 ```
 
-You might use the option `-h` to get the following help:
+## nginx
+
+the `make` command starts docker nginx with optinals paratemers site_name=dcsl,  port=xxx (default=9090),  docker_name=xxx (default=demo-dcsl) and servers file from $(PWD)/$(output_dir)/$(site_name)_html (default=./build/dcsl_html)
+
+```
+make start
+make start site_name=dcsl port=9090 docker_name=demo-dcsl output_dir=build
+```
+
+stop and remove nginix container
+
+```
+make stop
+make stop docker_name=demo-dcsl
+```
+
+stop and restart nginix
+
+```
+make restart
+```
+
+## jahiap
+
+You might use the option `-h` on the jahiap script to get the following help:
 
 ```
 $ python jahiap.py  -h
@@ -105,30 +162,4 @@ Or you might choose to target some of those specific areas:
 ```
 $ pytest -k TestSiteStructure
 ...
-```
-
-
-### How to start a static site nginx ? ###
-
-start docker nginx with optinals paratemers port=xxx and name=xxx
-default port=9090 
-name=demo-static
-
-```
-make start
-make start port=9090 name=demo-static
-```
-
-stop and remove nginix container
-
-```
-make stop
-make stop name=demo-static
-```
-
-stop and restart nginix
-
-```
-make restart
-make restart name=demo-static port=9090
 ```
