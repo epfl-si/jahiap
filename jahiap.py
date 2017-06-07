@@ -9,8 +9,9 @@ import logging
 import pickle
 
 from slugify import slugify
+from datetime import datetime
 
-from settings import DOMAIN
+from settings import DOMAIN, JAHIA_DATE_FORMAT
 from exporter import Exporter
 from wp_exporter import WP_Exporter
 
@@ -210,6 +211,9 @@ class Page:
         self.pid = element.getAttribute("jahia:pid")
         self.template = element.getAttribute("jahia:template")
         self.title = element.getAttribute("jahia:title")
+        self.last_update = datetime.strptime(
+            element.getAttribute("jcr:lastModified"),
+            JAHIA_DATE_FORMAT)
         self.parent = None
         self.children = []
         # the page level. 0 is for the homepage, direct children are
