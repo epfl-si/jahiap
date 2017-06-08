@@ -6,20 +6,75 @@ site).
 
 pip install -r requirements/base.txt
 
-## Usage
+## The 30-seconds tutorial (for dcsl)
 
-The script might be used for different actions: unzipping an Jahia file, parsing it, or exporting its content. Here is a 10-seconds example, which
+```
+$ cd jahiap
+$ make all
+```
 
-* makes use of a JAHIA zip file in `exports/dcsl_export_2017-05-30-09-44.zip`
-* works in the `build` sub-directory
+You now can access the content at [http://localhost:9090](http://localhost:9090).
+
+Again ?
+
+```
+$ make stop all
+```
+
+For another website, e.g master?
+
+```
+$ make all port=9091 site_name=master zip_file=exports/master_export_2017-05-29-10-53.zip
+```
+This one will be available at [http://localhost:9091](http://localhost:9091).
+
+## More details on usage
+
+The `make` command does a few things for you :
+
+* unzip a Jahia file
+* parse it
+* export its content
+* run a nginx docker image to serve the exported content
+
+The detailed commands look like this :
 
 ```
 python jahiap.py -o build unzip exports/dcsl_export_2017-05-30-09-44.zip
 python jahiap.py -o build parse dcsl -r
 python jahiap.py -o build export dcsl -s
+docker run -d \
+    --name docker-dcsl \
+    -p 9090:80 \
+    -v $(PWD)/build/dcsl_html:/usr/share/nginx/html \
+    nginx
 ```
 
-You might use the option `-h` to get the following help:
+## nginx
+
+the `make` command starts docker nginx with optionals parameters site_name=dcsl, port=xxx (default=9090), docker_name=xxx (default=demo-dcsl) and static files from $(PWD)/$(output_dir)/$(site_name)_html (default=./build/dcsl_html)
+
+```
+make start
+make start site_name=dcsl port=9090 docker_name=demo-dcsl output_dir=build
+```
+
+stop and remove nginx container
+
+```
+make stop
+make stop docker_name=demo-dcsl
+```
+
+stop and restart nginx
+
+```
+make restart
+```
+
+## jahiap
+
+You might use the option `-h` on the jahiap script to get the following help:
 
 ```
 $ python jahiap.py  -h
@@ -45,10 +100,10 @@ More help on each command can be displayed with the command name followed by `-h
 
 ```
 $ python jahiap.py unzip -h
-usage: jahiap.py unzip [-h] xml_file
+usage: jahiap.py unzip [-h] zip_file
 
 positional arguments:
-  xml_file    path to Jahia XML file
+  zip_file    path to Jahia zip file
 
 optional arguments:
   -h, --help  show this help message and exit
@@ -79,10 +134,10 @@ positional arguments:
 
 optional arguments:
   -h, --help            show this help message and exit
-  -w, --to-wordpress    export parsed data to Wordpress
+  -w, --to-wordpress    export parsed data to WordPress
   -s, --to-static       export parsed data to static HTML files
   -u URL, --site-url URL
-                        wordpress URL where to export parsed content
+                        WordPress URL where to export parsed content
 ```
 
 ## Testing
@@ -91,7 +146,6 @@ The testing tool [pytest](https://docs.pytest.org/en/latest/contents.html) comes
 
 ```
 $ pytest
-...
 ```
 
 Or you migth run a specific file or class or test with
@@ -113,31 +167,4 @@ Or you might choose to target some of those specific areas:
 
 ```
 $ pytest -k TestSiteStructure
-...
-```
-
-
-### How to start a static site nginx ? ###
-
-start docker nginx with optinals paratemers port=xxx and name=xxx
-default port=9090 
-name=demo-static
-
-```
-make start
-make start port=9090 name=demo-static
-```
-
-stop and remove nginix container
-
-```
-make stop
-make stop name=demo-static
-```
-
-stop and restart nginix
-
-```
-make restart
-make restart name=demo-static port=9090
 ```

@@ -435,39 +435,36 @@ def main(parser, args):
 
 
 def main_unzip(parser, args):
-    logging.info("Unzipping...")
+    logging.info("Unzipping %s..." % args.zip_file)
 
     # make sure we have an input file
-    if not args.xml_file or not os.path.isfile(args.xml_file):
+    if not args.zip_file or not os.path.isfile(args.zip_file):
         parser.print_help()
-        raise SystemExit("Jahia XML file not found")
+        raise SystemExit("Jahia zip file not found")
 
-    # extract the export zip file
-    export_zip = zipfile.ZipFile(args.xml_file, 'r')
-    export_zip.extractall(args.output_dir)
-    export_zip.close()
+    # create zipFile to manipulate / extract zip content
+    export_zip = zipfile.ZipFile(args.zip_file, 'r')
 
     # find the zip containing the site files
-    zip_with_files = ""
+    zips = [name for name in export_zip.namelist()
+        if name.endswith(".zip") and name != "shared.zip"]
+    if len(zips) != 1:
+        logging.error("Should have one and only one zip file in %s" % zips)
+        raise SystemExit("Could not find appropriate zip with files")
+    zip_with_files = zips[0]
 
-    for file in os.listdir(args.output_dir):
-        if not file.endswith(".zip"):
-            continue
-
-        if file != "shared.zip":
-            zip_with_files = file
-            break
-
-    if zip_with_files == "":
-        raise SystemExit("Could not find zip with files")
+    # extract the export zip file
+    export_zip.extractall(args.output_dir)
+    export_zip.close()
 
     # get the site name
     site_name = zip_with_files[:zip_with_files.index(".")]
 
-    base_path = "%s/%s" % (args.output_dir, site_name)
+    base_path = os.path.join(args.output_dir, site_name)
 
     # unzip the zip with the files
-    zip_ref_with_files = zipfile.ZipFile(args.output_dir + "/" + zip_with_files, 'r')
+    zip_path = os.path.join(args.output_dir, zip_with_files)
+    zip_ref_with_files = zipfile.ZipFile(zip_path, 'r')
     zip_ref_with_files.extractall(base_path)
 
     # return site path & name
@@ -520,7 +517,9 @@ def main_export(parser, args):
         logging.info("Site successfully exported to Wordpress")
 
     if args.to_static:
-        Exporter(site, args.output_dir + "/html")
+        export_path = os.path.join(
+            args.output_dir, "%s_html" % args.site_name)
+        Exporter(site, export_path)
         logging.info("Site successfully exported to HTML files")
 
 
@@ -547,7 +546,7 @@ if __name__ == '__main__':
 
     # "unzip" command
     parser_unzip = subparsers.add_parser('unzip')
-    parser_unzip.add_argument('xml_file', help='path to Jahia XML file')
+    parser_unzip.add_argument('zip_file', help='path to Jahia XML file')
     parser_unzip.set_defaults(command=main_unzip)
 
     # "parse" command
