@@ -96,19 +96,19 @@ class TestSidebar:
                     assert len(data_page['sidebar']) == len(page.sidebar.boxes)
 
                     # Box title
-                    l = [box.title for box in page.sidebar.boxes]
-                    k = [data_box['title'] for data_box in data_page['sidebar']]
-                    assert l == k
+                    titles = [box.title for box in page.sidebar.boxes]
+                    expected_titles = [data_box['title'] for data_box in data_page['sidebar']]
+                    assert titles == expected_titles
 
                     # Box content
-                    l = [box.content for box in page.sidebar.boxes]
-                    k = [data_box['content'] for data_box in data_page['sidebar']]
-                    assert l == k
+                    contents = [box.content for box in page.sidebar.boxes]
+                    expected_contents = [data_box['content'] for data_box in data_page['sidebar']]
+                    assert contents == expected_contents
 
                     # Box type
-                    l = [box.type for box in page.sidebar.boxes]
-                    k = [data_box['type'] for data_box in data_page['sidebar']]
-                    assert l == k
+                    expected_type = [box.type for box in page.sidebar.boxes]
+                    type = [data_box['type'] for data_box in data_page['sidebar']]
+                    assert expected_type == type
 
 
 # class TestHomepage:
