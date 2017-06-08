@@ -8,7 +8,6 @@ import tempfile
 import xml.dom.minidom
 import zipfile
 
-from slugify import slugify
 from datetime import datetime
 
 from exporter.dict_exporter import DictExporter
@@ -467,8 +466,7 @@ def main_unzip(parser, args):
     export_zip = zipfile.ZipFile(args.zip_file, 'r')
 
     # find the zip containing the site files
-    zips = [name for name in export_zip.namelist()
-        if name.endswith(".zip") and name != "shared.zip"]
+    zips = [name for name in export_zip.namelist() if name.endswith(".zip") and name != "shared.zip"]
     if len(zips) != 1:
         logging.error("Should have one and only one zip file in %s" % zips)
         raise SystemExit("Could not find appropriate zip with files")
