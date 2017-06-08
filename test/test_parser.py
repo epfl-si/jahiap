@@ -79,12 +79,28 @@ class TestSidebar:
       Check content of sidebar
     """
     def test_box(self, site, data):
+
         for data_page in data['pages']:
             for page in site.pages:
                 if page.pid == data_page['pid']:
 
                     # Nb boxes
                     assert len(data_page['sidebar']) == len(page.sidebar.boxes)
+
+                    # Box title
+                    l = [box.title for box in page.sidebar.boxes]
+                    k = [data_box['title'] for data_box in data_page['sidebar']]
+                    assert l == k
+
+                    # Box content
+                    l = [box.content for box in page.sidebar.boxes]
+                    k = [data_box['content'] for data_box in data_page['sidebar']]
+                    assert l == k
+
+                    # Box type
+                    l = [box.type for box in page.sidebar.boxes]
+                    k = [data_box['type'] for data_box in data_page['sidebar']]
+                    assert l == k
 
 
 # class TestHomepage:
