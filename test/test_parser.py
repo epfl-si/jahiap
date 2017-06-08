@@ -58,35 +58,34 @@ class TestSiteStructure:
     """
 
     def test_nb_pages(self, site, data):
-        assert len(site.pages) == len(data['structure']['boxes_per_pages'])
+        assert len(site.pages) == len(data['pages'])
 
     def test_page_titles(self, site, data):
-        expected_titles = set(data['structure']['boxes_per_pages'].keys())
+        expected_titles = set([page['title'] for page in data['pages']])
         titles = set([p.title for p in site.pages])
         assert expected_titles == titles
 
     def test_nb_boxes(self, site, data):
-        expected_boxes = sum(data['structure']['boxes_per_pages'].values())
+        expected_boxes = sum([page['nb_boxes'] for page in data['pages']])
         boxes = sum([len(p.boxes) for p in site.pages])
         assert expected_boxes == boxes
 
     def test_nb_files(self, site, data):
-        assert len(site.files) == data['structure']['nb_files']
+        assert len(site.files) == data['files']
 
 
 class TestSidebar:
     """
       Check content of sidebar
     """
-
-    def get_boxes(self, site):
-        return site.sidebar.boxes
-
     def test_box(self, site, data):
-        for index, box in enumerate(self.get_boxes(site)):
-            assert box.type == data['sidebar']['boxes'][index]['type']
-            assert box.title == data['sidebar']['boxes'][index]['title']
-            assert box.content == data['sidebar']['boxes'][index]['content']
+        for data_page in data['pages']:
+            for page in site.pages:
+                if page.pid == data_page['pid']:
+
+                    # Nb boxes
+                    assert len(data_page['sidebar']) == len(page.sidebar.boxes)
+
 
 # class TestHomepage:
 #   """

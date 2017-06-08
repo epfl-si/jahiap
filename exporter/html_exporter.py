@@ -6,7 +6,7 @@ from jinja2 import Environment, PackageLoader, select_autoescape
 import os
 
 
-class Exporter:
+class HTMLExporter:
 
     env = Environment(
         loader=PackageLoader('exporter', 'templates'),

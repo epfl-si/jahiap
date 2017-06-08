@@ -1,18 +1,19 @@
 """(c) All rights reserved. ECOLE POLYTECHNIQUE FEDERALE DE LAUSANNE, Switzerland, VPSI, 2017"""
 
-import os
-import xml.dom.minidom
-import zipfile
-import tempfile
 import argparse
 import logging
+import os
 import pickle
+import tempfile
+import xml.dom.minidom
+import zipfile
 
 from slugify import slugify
 
+from exporter.dict_exporter import DictExporter
+from exporter.html_exporter import HTMLExporter
+from exporter.wp_exporter import WPExporter
 from settings import DOMAIN
-from exporter import Exporter
-from wp_exporter import WP_Exporter
 
 
 class Utils:
@@ -58,9 +59,6 @@ class Site:
         # the files
         self.files = []
 
-        # the sidebar
-        self.sidebar = Sidebar()
-
         # parse the data
         self.parse_data()
 
@@ -81,7 +79,6 @@ class Site:
         self.parse_site_params(dom)
         self.parse_breadcrumb(dom)
         self.parse_pages(dom)
-        self.parse_sidebar(dom)
         self.parse_files()
 
     def parse_site_params(self, dom):
@@ -274,20 +271,29 @@ class Page:
 
                 parent_page = parent_page.parent
 
-        # sidebar
-        if not self.is_homepage():
-            # parse the sidebar
-            self.parse_sidebar(element)
-
-        if len(self.sidebar.boxes) == 0:
-            # get the sidebar of parent page
-            pass
+        # Sidebar
+        self.parse_sidebar(element)
 
     def parse_sidebar(self, element):
-        extra_list = element.getElementsByTagName("extra")
-        for extra in extra_list:
-            box = Box(self, element, extra)
-            self.sidebar.boxes.append(box)
+        """ Parse sidebar """
+
+        # Search sidebar in the page xml content
+        childs = element.childNodes
+        for child in childs:
+            if child.nodeName == "extraList":
+                for extra in child.childNodes:
+                    if extra.ELEMENT_NODE != extra.nodeType:
+                        continue
+                    box = Box(self, element, extra)
+                    self.sidebar.boxes.append(box)
+
+        # if not find, search the sidebar of a parent
+        nb_boxes = len(self.sidebar.boxes)
+        if nb_boxes == 0:
+            while nb_boxes == 0:
+                sidebar = self.parent.sidebar
+                nb_boxes = len(sidebar.boxes)
+            self.sidebar = sidebar
 
     def __str__(self):
         return self.pid + " " + self.template + " " + self.title
@@ -512,15 +518,19 @@ def main_export(parser, args):
     logging.info("Exporting...")
 
     if args.to_wordpress:
-        wp_exporter = WP_Exporter(site=site, domain=args.site_url)
+        wp_exporter = WPExporter(site=site, domain=args.site_url)
         wp_exporter.import_all_data_in_wordpress()
         logging.info("Site successfully exported to Wordpress")
 
     if args.to_static:
         export_path = os.path.join(
             args.output_dir, "%s_html" % args.site_name)
-        Exporter(site, export_path)
+        HTMLExporter(site, export_path)
         logging.info("Site successfully exported to HTML files")
+
+    if args.to_dictionary:
+        DictExporter.generate_data(site)
+        logging.info("Site successfully exported to python dictionary")
 
 
 if __name__ == '__main__':
@@ -576,6 +586,11 @@ if __name__ == '__main__':
         dest='to_static',
         action='store_true',
         help='export parsed data to static HTML files')
+    parser_export.add_argument(
+        '-d', '--to-dictionary',
+        dest='to_dictionary',
+        action='store_true',
+        help='export parsed data to python dictionary')
     parser_export.add_argument(
         '-u', '--site-url',
         dest='site_url',
