@@ -1,18 +1,19 @@
 """(c) All rights reserved. ECOLE POLYTECHNIQUE FEDERALE DE LAUSANNE, Switzerland, VPSI, 2017"""
 
-import os
-import xml.dom.minidom
-import zipfile
-import tempfile
 import argparse
 import logging
+import os
 import pickle
+import tempfile
+import xml.dom.minidom
+import zipfile
 
 from slugify import slugify
 
+from exporter.dict_exporter import DictExporter
+from exporter.html_exporter import HTMLExporter
+from exporter.wp_exporter import WPExporter
 from settings import DOMAIN
-from exporter import Exporter
-from wp_exporter import WP_Exporter
 
 
 class Utils:
@@ -26,49 +27,6 @@ class Utils:
             return ""
 
         return elements[0].getAttribute(attribute)
-
-    @staticmethod
-    def generate_data(site):
-        """Generate data for tests"""
-        data = {}
-
-        # properties
-        data['properties'] = {
-            'name': site.name,
-            'title': site.title,
-            'acronym': site.acronym,
-            'theme': site.theme,
-            'breadcrumb_title': site.breadcrumb_title,
-            'breadcrumb_url': site.breadcrumb_url,
-            'css_url': site.css_url
-        }
-
-        # pages
-        #
-        data['pages'] = []
-        for page in site.pages:
-
-            box_list = []
-            for box in page.sidebar.boxes:
-                box_dict = {
-                    'title': box.title,
-                    'content': box.content,
-                    'type': box.type
-                }
-                box_list.append(box_dict)
-
-            page_dict = {
-                'pid': page.pid,
-                'title': page.title,
-                'nb_boxes': len(page.boxes),
-                'sidebar': box_list
-            }
-            data['pages'].append(page_dict)
-
-        # files
-        data['files'] = len(site.files)
-
-        print(data)
 
 
 class Site:
@@ -108,8 +66,6 @@ class Site:
         self.report = ""
 
         self.generate_report()
-
-        Utils.generate_data(site=self)
 
     def parse_data(self):
         """Parse the Site data"""
@@ -555,13 +511,17 @@ def main_export(parser, args):
     logging.info("Exporting...")
 
     if args.to_wordpress:
-        wp_exporter = WP_Exporter(site=site, domain=args.site_url)
+        wp_exporter = WPExporter(site=site, domain=args.site_url)
         wp_exporter.import_all_data_in_wordpress()
         logging.info("Site successfully exported to Wordpress")
 
     if args.to_static:
-        Exporter(site, args.output_dir + "/html")
+        HTMLExporter(site, args.output_dir + "/html")
         logging.info("Site successfully exported to HTML files")
+
+    if args.to_dictionary:
+        DictExporter.generate_data(site)
+        logging.info("Site successfully exported to python dictionary")
 
 
 if __name__ == '__main__':
@@ -617,6 +577,11 @@ if __name__ == '__main__':
         dest='to_static',
         action='store_true',
         help='export parsed data to static HTML files')
+    parser_export.add_argument(
+        '-d', '--to-dictionary',
+        dest='to_dictionary',
+        action='store_true',
+        help='export parsed data to python dictionary')
     parser_export.add_argument(
         '-u', '--site-url',
         dest='site_url',

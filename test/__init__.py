@@ -7,5 +7,4 @@ def get_sites():
     return [
         'master',
         'dcsl',
-
     ]

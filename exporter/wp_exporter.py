@@ -7,7 +7,7 @@ from wordpress_json import WordpressJsonWrapper
 from settings import WP_USER, WP_PASSWORD
 
 
-class WP_Exporter:
+class WPExporter:
 
     report = {
         'pages': 0,
