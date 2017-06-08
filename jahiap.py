@@ -8,12 +8,12 @@ import tempfile
 import xml.dom.minidom
 import zipfile
 
-from slugify import slugify
+from datetime import datetime
 
 from exporter.dict_exporter import DictExporter
 from exporter.html_exporter import HTMLExporter
 from exporter.wp_exporter import WPExporter
-from settings import DOMAIN
+from settings import DOMAIN, JAHIA_DATE_FORMAT
 
 
 class Utils:
@@ -35,7 +35,10 @@ class Site:
     def __init__(self, base_path, name):
         self.base_path = base_path
         self.name = name
-        self.xml_path = base_path + "/export_en.xml"
+
+        # hardcoded language and xml path for now
+        self.language = "en"
+        self.xml_path = base_path + "/export_%s.xml" % self.language
 
         # site params that are parsed later
         self.title = ""
@@ -231,6 +234,9 @@ class Page:
         self.title = element.getAttribute("jahia:title")
         self.boxes = []
         self.sidebar = Sidebar()
+        self.last_update = datetime.strptime(
+            element.getAttribute("jcr:lastModified"),
+            JAHIA_DATE_FORMAT)
         self.parent = None
         self.children = []
         # the page level. 0 is for the homepage, direct children are
@@ -242,10 +248,15 @@ class Page:
         if "sitemap" == self.template:
             return
 
+        # set URL (either vanity URL or page-ID-{en,fr}.html)
         if self.is_homepage():
             self.name = "index.html"
         else:
-            self.name = slugify(self.title) + ".html"
+            vanity_url = element.getAttribute("jahia:urlMappings")
+            if vanity_url:
+                self.name = vanity_url.split('$$$')[0].strip('/') + ".html"
+            else:
+                self.name = self.regular_url()
 
         # find the parent
         element_parent = element.parentNode
@@ -297,6 +308,9 @@ class Page:
 
     def __str__(self):
         return self.pid + " " + self.template + " " + self.title
+
+    def regular_url(self):
+        return "page-%s-%s.html" % (self.pid, self.site.language)
 
     def is_homepage(self):
         """
@@ -452,8 +466,7 @@ def main_unzip(parser, args):
     export_zip = zipfile.ZipFile(args.zip_file, 'r')
 
     # find the zip containing the site files
-    zips = [name for name in export_zip.namelist()
-        if name.endswith(".zip") and name != "shared.zip"]
+    zips = [name for name in export_zip.namelist() if name.endswith(".zip") and name != "shared.zip"]
     if len(zips) != 1:
         logging.error("Should have one and only one zip file in %s" % zips)
         raise SystemExit("Could not find appropriate zip with files")
