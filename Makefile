@@ -4,7 +4,7 @@ port=9090
 output_dir=build
 docker_name="demo-$(site_name)"
 
-all: clean start generate
+all: clean generate start
 
 clean:
 	rm -rf $(output_dir)/$(site_name)*
