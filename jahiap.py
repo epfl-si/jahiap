@@ -295,7 +295,7 @@ class Page:
                 for extra in child.childNodes:
                     if extra.ELEMENT_NODE != extra.nodeType:
                         continue
-                    box = Box(self, element, extra)
+                    box = Box(site=self.site, page=element, element=extra)
                     self.sidebar.boxes.append(box)
 
         # if not find, search the sidebar of a parent
@@ -395,7 +395,6 @@ class Box:
         # fix the links
         old = "###file:/content/sites/%s/files/" % self.site.name
         new = "/files/"
-
         self.content = self.content.replace(old, new)
 
     def set_box_actu(self, element):
