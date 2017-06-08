@@ -70,8 +70,9 @@
 
     </header>
 
-      <div>
-        <h1>{{ page.title }}</h1>
+      <div>{% if page.template != 'home' %}
+        <h1>{{ page.title }}</h1>{% endif %}
+
   {% for box in page.boxes %}
   <h2>{{ box.title }}</h2>
   <div>
@@ -87,16 +88,19 @@
         <nav class="nav nav-inline" role="navigation" aria-label="Footer links">
           <ul class="nav-list">
             <li class="nav-item">
-              <a class="nav-link" href="#header" accesskey="t">Back to top</a>
-            </li>
-            <li class="nav-item">
               <a class="nav-link" href="/sitemap.html" accesskey="3">Sitemap</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="mailto:webmaster@epfl.ch" accesskey="9">Webmaster</a>
+              <a class="nav-link" href="http://www.epfl.ch/accessibility.en.shtml">Accessibility</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="http://static.epfl.ch/latest/accessibility.en.html" accesskey="0"><meta itemprop="accessibilityAPI" content="ARIA"/>Accessibility</a>
+              <a class="nav-link"  title="Legal notice Legal notice" href="http://mediacom.epfl.ch/disclaimer-en">Legal notice</a>
+            </li>
+            <li class="visuallyhidden">
+              <a class="nav-link"  title="Jump to: Top of the page" href="#top">Top of the page</a>
+            </li>
+            <li class="nav-item secondary-content">
+              Updated&nbsp;{{ page.last_update }}
             </li>
             <li class="nav-item secondary-content"> &copy; <span itemprop="copyrightHolder">EPFL</span> <span itemprop="copyrightYear">2017</span></li>
           </ul>
