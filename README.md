@@ -6,40 +6,38 @@ site).
 
 pip install -r requirements/base.txt
 
-## the 30-seconds tutorial (for dcsl)
+## The 30-seconds tutorial (for dcsl)
 
 ```
 $ cd jahiap
 $ make all
-...
 ```
 
-You now can access the content on [http://localhost:9090](http://localhost:9090).
+You now can access the content at [http://localhost:9090](http://localhost:9090).
 
 Again ?
 
 ```
 $ make stop all
-...
 ```
 
-For another website, e.g master ?
+For another website, e.g master?
 
 ```
 $ make all port=9091 site_name=master zip_file=exports/master_export_2017-05-29-10-53.zip
 ```
-This one will be available on [http://localhost:9091](http://localhost:9091).
+This one will be available at [http://localhost:9091](http://localhost:9091).
 
 ## More details on usage
 
 The `make` command does a few things for you :
 
-* unzip an Jahia file
+* unzip a Jahia file
 * parse it
 * export its content
 * run a nginx docker image to serve the exported content
 
-The details command will look like this
+The detailed commands look like this :
 
 ```
 python jahiap.py -o build unzip exports/dcsl_export_2017-05-30-09-44.zip
@@ -54,21 +52,21 @@ docker run -d \
 
 ## nginx
 
-the `make` command starts docker nginx with optinals paratemers site_name=dcsl,  port=xxx (default=9090),  docker_name=xxx (default=demo-dcsl) and servers file from $(PWD)/$(output_dir)/$(site_name)_html (default=./build/dcsl_html)
+the `make` command starts docker nginx with optionals parameters site_name=dcsl, port=xxx (default=9090), docker_name=xxx (default=demo-dcsl) and static files from $(PWD)/$(output_dir)/$(site_name)_html (default=./build/dcsl_html)
 
 ```
 make start
 make start site_name=dcsl port=9090 docker_name=demo-dcsl output_dir=build
 ```
 
-stop and remove nginix container
+stop and remove nginx container
 
 ```
 make stop
 make stop docker_name=demo-dcsl
 ```
 
-stop and restart nginix
+stop and restart nginx
 
 ```
 make restart
@@ -102,10 +100,10 @@ More help on each command can be displayed with the command name followed by `-h
 
 ```
 $ python jahiap.py unzip -h
-usage: jahiap.py unzip [-h] xml_file
+usage: jahiap.py unzip [-h] zip_file
 
 positional arguments:
-  xml_file    path to Jahia XML file
+  zip_file    path to Jahia zip file
 
 optional arguments:
   -h, --help  show this help message and exit
@@ -136,10 +134,10 @@ positional arguments:
 
 optional arguments:
   -h, --help            show this help message and exit
-  -w, --to-wordpress    export parsed data to Wordpress
+  -w, --to-wordpress    export parsed data to WordPress
   -s, --to-static       export parsed data to static HTML files
   -u URL, --site-url URL
-                        wordpress URL where to export parsed content
+                        WordPress URL where to export parsed content
 ```
 
 ## Testing
@@ -148,7 +146,6 @@ The testing tool [pytest](https://docs.pytest.org/en/latest/contents.html) comes
 
 ```
 $ pytest
-...
 ```
 
 Or you might choose to target some of those specific areas:
@@ -161,5 +158,4 @@ Or you might choose to target some of those specific areas:
 
 ```
 $ pytest -k TestSiteStructure
-...
 ```
