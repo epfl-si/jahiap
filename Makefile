@@ -1,5 +1,5 @@
 site_name=dcsl
-zip_file=exports/dcsl_export_2017-06-07-08-08.zip
+zip_file=exports/dcsl_export_2017-06-09-18-20.zip
 port=9090
 output_dir=build
 docker_name="demo-$(site_name)"
@@ -12,7 +12,7 @@ clean:
 
 generate:
 	python jahiap.py -o $(output_dir) unzip $(zip_file)
-	python jahiap.py -o $(output_dir) export $(site_name) -s
+	python jahiap.py -o $(output_dir) export $(site_name) -s -d
 
 start:
 	docker run -d \

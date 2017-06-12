@@ -44,4 +44,4 @@ class DictExporter:
         # files
         data['files'] = len(site.files)
 
-        print(data)
+        return data
