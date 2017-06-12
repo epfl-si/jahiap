@@ -4,3 +4,5 @@ flake8==3.2.1
 pytest==3.0.7
 git+https://github.com/epfl-idevelop/python-wordpress-json.git
 beautifulsoup4==4.6.0
+requests==2.17.3
+clint==0.5.1

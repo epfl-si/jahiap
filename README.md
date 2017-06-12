@@ -140,6 +140,42 @@ optional arguments:
                         WordPress URL where to export parsed content
 ```
 
+## Downloading zip files
+
+The script `crawl.py` is provided to download the Jahia zip files. It relies on the following environment variables :
+
+```
+export JAHIA_HOST="localhost"
+export JAHIA_ROOT_USER='root'
+export JAHIA_ROOT_PASSWORD=xxx
+```
+The third one is mandatory, i.e the script will not run if it is not set. For the two first ones, the values above are used by default.
+
+Quick example to download dcsl zip:
+
+```
+python crawl.py dcsl
+```
+
+More options are available to change the output directory, the date of the snapshot or the level of logs. Use option `-h` to get the following help :
+
+```
+usage: crawl.py [-h] [--debug] [--quiet] [-o OUTPUT] [-d DATE] SITE
+
+Crawl Jahia zip files
+
+positional arguments:
+  SITE                  site name (in jahia admin) of site to get the zip for
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --debug               Set logging level to DEBUG (default is INFO)
+  --quiet               Set logging level to WARNING (default is INFO)
+  -o OUTPUT, --output OUTPUT
+                        path where to download files
+  -d DATE, --date DATE  date and time for the snapshot, e.g : 2017-01-15-23-00
+```
+
 ## Testing
 
 The testing tool [pytest](https://docs.pytest.org/en/latest/contents.html) comes with the requirements. You can run the full suite with :
