@@ -14,6 +14,7 @@ from datetime import datetime, timedelta
 
 import requests
 from clint.textui import progress
+from settings import JAHIA_SITES
 
 # define HOST
 if not os.environ.get("JAHIA_HOST"):
@@ -47,12 +48,12 @@ DWLD_GET_PARAMS = {
 FILE_PATTERN = "%s_export_%s.zip"
 
 
-def build_file_name(args):
-    return FILE_PATTERN % (args.site, args.date)
+def build_file_name(args, site):
+    return FILE_PATTERN % (site, args.date)
 
 
-def build_file_path(args):
-    return os.path.join(args.output, build_file_name(args))
+def build_file_path(args, site):
+    return os.path.join(args.output, build_file_name(args, site))
 
 
 def authenticate():
@@ -71,23 +72,23 @@ def authenticate():
     return session
 
 
-def download(args, session):
+def download(args, session, site):
     # pepare query
-    file_name = build_file_name(args)
+    file_name = build_file_name(args, site)
     params = DWLD_GET_PARAMS.copy()
-    params['sitebox'] = args.site
+    params['sitebox'] = site
 
     # set timer to measure execution time
     start_time = timeit.default_timer()
 
     # make query
-    logging.info("downloading %s...", file_name)
+    logging.debug("downloading %s...", file_name)
     response = session.post(
         "%s/%s/%s" % (HOST, DWLD_URI, file_name),
         params=params,
         stream=True
     )
-    logging.info("requested %s", response.url)
+    logging.debug("requested %s", response.url)
     logging.debug("returned %s", response.status_code)
 
     # raise exception in case of error
@@ -95,7 +96,7 @@ def download(args, session):
         response.raise_for_status()
 
     # adapt streaming function to content-length in header
-    logging.info("headers %s", response.headers)
+    logging.debug("headers %s", response.headers)
     total_length = response.headers.get('content-length')
     if total_length is not None:
         def read_stream():
@@ -107,7 +108,7 @@ def download(args, session):
             return response.iter_content(chunk_size=4096)
 
     # download file
-    file_path = build_file_path(args)
+    file_path = build_file_path(args, site)
     logging.info("saving response into %s...", file_path)
     with open(file_path, 'wb') as output:
         for chunk in read_stream():
@@ -124,10 +125,18 @@ def download(args, session):
 def main(args):
     logging.info("starting crawling...")
     logging.debug("HOST set to %s", HOST)
-    logging.debug("DATE set to %s", build_file_name(args))
+    logging.debug("DATE set to %s", args.date)
     try:
         session = authenticate()
-        download(args, session)
+        if args.site:
+            # download only given args.site
+            download(args, session, args.site)
+        else:
+            # download sites from JAHIA_SITES
+            start, end = args.start_at, int(args.start_at) + int(args.number)
+            sites = JAHIA_SITES[start:end]
+            for site in sites:
+                download(args, session, site)
     except requests.ConnectionError as err:
         logging.error(err)
 
@@ -135,7 +144,7 @@ def main(args):
 if __name__ == '__main__':
     # declare parsers for command line arguments
     parser = argparse.ArgumentParser(
-        description='Crawl Jahia zip files')
+        description="Crawl 'NUMBER' Jahia zip files from JAHIA_SITES, starting at 'START_AT' index. Or crawl given  'SITE'")
 
     # logging-related agruments
     parser.add_argument('--debug',
@@ -148,20 +157,28 @@ if __name__ == '__main__':
                         help='Set logging level to WARNING (default is INFO)')
 
     # Jahia related arguments
-    parser.add_argument('site',
+    parser.add_argument('--site',
                         action='store',
-                        metavar='SITE',
                         help='site name (in jahia admin) of site to get the zip for')
     parser.add_argument('-o', '--output',
                         action='store',
-                        dest='output',
-                        default='.',
+                        default='build',
                         help='path where to download files')
     parser.add_argument('-d', '--date',
                         action='store',
-                        dest='date',
                         default=datetime.today().strftime("%Y-%m-%d-%H-%M"),
                         help='date and time for the snapshot, e.g : 2017-01-15-23-00')
+    parser.add_argument('-n', '--number',
+                        action='store',
+                        type=int,
+                        default=1,
+                        help='number of sites to crawl in JAHIA_SITES')
+    parser.add_argument('-s', '--start-at',
+                        action='store',
+                        dest='start_at',
+                        type=int,
+                        default=0,
+                        help='(zero-)index where to start in JAHIA_SITES')
 
     args = parser.parse_args()
 
