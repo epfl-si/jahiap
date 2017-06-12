@@ -28,6 +28,21 @@ class Utils:
 
         return elements[0].getAttribute(attribute)
 
+    @staticmethod
+    def search_child(dom, parent_tag, child_tag):
+        """
+        Search child element in the xml DOM.
+        The element 'parent_tag' is present only once.
+        """
+        element = dom.getElementsByTagName(parent_tag)[0]
+
+        for child in element.childNodes:
+            if child.ELEMENT_NODE != child.nodeType:
+                continue
+
+            if child_tag == child.nodeName:
+                return child
+
 
 class Site:
     """A Jahia Site. Have 1 to N Pages"""
@@ -47,8 +62,10 @@ class Site:
         self.css_url = ""
 
         # breadcrumb
-        self.breadcrumb_title = ""
-        self.breadcrumb_url = ""
+        self.breadcrumb = None
+
+        # footer
+        self.footer = []
 
         # the pages. We have a both list and a dict.
         # The dict key is the page id, and the dict value is the page itself
@@ -81,6 +98,7 @@ class Site:
         # do the parsing
         self.parse_site_params(dom)
         self.parse_breadcrumb(dom)
+        self.parse_footer(dom)
         self.parse_pages(dom)
         self.parse_files()
 
@@ -91,18 +109,49 @@ class Site:
         self.acronym = Utils.get_tag_attribute(dom, "acronym", "jahia:value")
         self.css_url = "//static.epfl.ch/v0.23.0/styles/%s-built.css" % self.theme
 
-    def parse_breadcrumb(self, dom):
-        """Parse the breadcrumb"""
-        breadcrumb_link = dom.getElementsByTagName("breadCrumbLink")[0]
+    def parse_footer(self, dom):
+        """parse site footer"""
 
-        for child in breadcrumb_link.childNodes:
+        # is positioned on children of main jahia:page element
+        elements = dom.firstChild.childNodes
+
+        for child in elements:
+
             if child.ELEMENT_NODE != child.nodeType:
                 continue
 
-            if 'jahia:url' == child.nodeName:
-                self.breadcrumb_url = child.getAttribute('jahia:value')
-                self.breadcrumb_title = child.getAttribute('jahia:title')
-                break
+            if "bottomLinksListList" == child.nodeName:
+
+                nb_items_in_footer = len(child.getElementsByTagName("jahia:url"))
+
+                if nb_items_in_footer == 0:
+                    """ This site has the default footer"""
+                    break
+
+                elif nb_items_in_footer > 0:
+
+                    elements = child.getElementsByTagName("jahia:url")
+                    for element in elements:
+                        link = Link(
+                            url=element.getAttribute('jahia:value'),
+                            title=element.getAttribute('jahia:title')
+                        )
+                        self.footer.append(link)
+                    break
+
+    def parse_breadcrumb(self, dom):
+        """Parse the breadcrumb"""
+
+        child = Utils.search_child(
+            dom=dom,
+            parent_tag="breadCrumbLink",
+            child_tag="jahia:url"
+        )
+
+        self.breadcrumb = Link(
+            url=child.getAttribute('jahia:value'),
+            title=child.getAttribute('jahia:title')
+        )
 
     def parse_pages(self, dom):
         """Parse the pages"""
@@ -433,6 +482,14 @@ class File:
     def __init__(self, name, path):
         self.name = name
         self.path = path
+
+
+class Link:
+    """A link"""
+
+    def __init__(self, url, title):
+        self.url = url
+        self.title = title
 
 
 def main(parser, args):
