@@ -36,6 +36,17 @@ class Site:
         self.base_path = base_path
         self.name = name
 
+        # the export files containing the pages data.
+        # the dict key is the language code (e.g. "en") and
+        # the dict value is the file absolute path
+        self.export_files = {}
+
+        for file in os.listdir(base_path):
+            if file.startswith("export_"):
+                language = file[7:9]
+                path = base_path + "/" + file
+                self.export_files[language] = path
+
         # hardcoded language and xml path for now
         self.language = "en"
         self.xml_path = base_path + "/export_%s.xml" % self.language
@@ -108,20 +119,43 @@ class Site:
         """Parse the pages"""
         xml_pages = dom.getElementsByTagName("jahia:page")
 
-        for xml_page in xml_pages:
-            page = Page(self, xml_page)
+        # TODO support site with multiple languaes
+        language = "en"
 
-            # we don't include the sitemap as it's not a real page
-            if page.template == "sitemap":
+        # first we parse only the definition of the Page
+        for xml_page in xml_pages:
+            pid = xml_page.getAttribute("jahia:pid")
+            template = xml_page.getAttribute("jahia:template")
+
+            # we don't parse the sitemap as it's not a real page
+            if template == "sitemap":
                 continue
 
-            # flag out homepage for convenience
+            # check if we already parsed the page
+            if pid in self.pages_dict:
+                continue
+
+            page = Page(self, xml_page)
+
+            # flag the homepage for convenience
             if page.is_homepage():
                 self.homepage = page
 
-            # add the pages to the Site
+            # add the Page to the Site
             self.pages.append(page)
             self.pages_dict[page.pid] = page
+
+        # next we parse the PageContent
+        for xml_page in xml_pages:
+            pid = xml_page.getAttribute("jahia:pid")
+            template = xml_page.getAttribute("jahia:template")
+
+            # we don't parse the sitemap as it's not a real page
+            if template == "sitemap":
+                continue
+
+            # retrieve the Page that we already parsed
+            page = self.pages_dict[pid]
 
             # main tag is the parent of all boxes types
             main_elements = xml_page.getElementsByTagName("main")
@@ -133,6 +167,8 @@ class Site:
                 if not self.belongs_to(main_element, page):
                     continue
 
+                page_content = PageContent(page, language, xml_page)
+
                 type = main_element.getAttribute("jcr:primaryType")
 
                 # the "epfl:faqBox" element contains one or more "epfl:faqList"
@@ -140,30 +176,17 @@ class Site:
                     faq_list_elements = main_element.getElementsByTagName("faqList")
 
                     for faq_list_element in faq_list_elements:
-                        box = Box(self, page, faq_list_element, multibox=False)
+                        box = Box(site=self, page_content=page_content, element=faq_list_element)
                         boxes.append(box)
 
                 else:
                     # TODO remove the multibox parameter and check for combo boxes instead
                     # Check if xml_box contains many boxes
                     multibox = main_element.getElementsByTagName("text").length > 1
-                    box = Box(self, page, main_element, multibox=multibox)
+                    box = Box(site=self, page_content=page_content, element=main_element, multibox=multibox)
                     boxes.append(box)
 
-            page.boxes = boxes
-
-    def parse_sidebar(self, dom):
-        """Parse the sidebar"""
-        col5List = dom.getElementsByTagName("col5List")[0]
-
-        currentNode = col5List.nextSibling
-        while currentNode.ELEMENT_NODE != currentNode.nodeType or 'extraList' != currentNode.tagName:
-            currentNode = currentNode.nextSibling
-
-        extra_list = currentNode.getElementsByTagName("extra")
-        for extra in extra_list:
-            box = Box(self, None, extra)
-            self.sidebar.boxes.append(box)
+            page_content.boxes = boxes
 
     def parse_files(self):
         """Parse the files"""
@@ -198,11 +221,12 @@ class Site:
         num_boxes = {}
 
         for page in self.pages:
-            for box in page.boxes:
-                if box.type in num_boxes:
-                    num_boxes[box.type] = num_boxes[box.type] + 1
-                else:
-                    num_boxes[box.type] = 1
+            for page_content in page.contents.values():
+                for box in page_content.boxes:
+                    if box.type in num_boxes:
+                        num_boxes[box.type] = num_boxes[box.type] + 1
+                    else:
+                        num_boxes[box.type] = 1
 
         self.report = """
 Found :
@@ -228,37 +252,44 @@ class Page:
     """A Jahia Page. Has 1 to N Jahia Boxes"""
 
     def __init__(self, site, element):
-        self.site = site
+        # common data for all languages
         self.pid = element.getAttribute("jahia:pid")
+        self.site = site
         self.template = element.getAttribute("jahia:template")
-        self.title = element.getAttribute("jahia:title")
-        self.boxes = []
-        self.sidebar = Sidebar()
-        self.last_update = datetime.strptime(
-            element.getAttribute("jcr:lastModified"),
-            JAHIA_DATE_FORMAT)
         self.parent = None
         self.children = []
         # the page level. 0 is for the homepage, direct children are
         # at level 1, grandchildren at level 2, etc.
         self.level = 0
 
+        # the PageContents, one for each language. The dict key is the
+        # language, the dict value is the PageContent
+        self.contents = {}
+
         # if we have a sitemap we don't want to parse the
         # page and add it to it's parent, so we stop here
         if "sitemap" == self.template:
             return
 
-        # set URL (either vanity URL or page-ID-{en,fr}.html)
-        if self.is_homepage():
-            self.name = "index.html"
-        else:
-            vanity_url = element.getAttribute("jahia:urlMappings")
-            if vanity_url:
-                self.name = vanity_url.split('$$$')[0].strip('/') + ".html"
-            else:
-                self.name = self.regular_url()
+        # find the Page parent
+        self.set_parent(element)
 
-        # find the parent
+    def is_homepage(self):
+        """
+        Return True if the page is the homepage
+        """
+        return self.template == "home"
+
+    def has_children(self):
+        """
+        Return True if the page has children
+        """
+        return len(self.children) > 0
+
+    def set_parent(self, element):
+        """
+        Find the page parent
+        """
         element_parent = element.parentNode
 
         while "jahia:page" != element_parent.nodeName:
@@ -282,48 +313,69 @@ class Page:
 
                 parent_page = parent_page.parent
 
-        # Sidebar
+    def __str__(self):
+        return self.pid + " " + self.template
+
+
+class PageContent:
+    """
+    The language specific data of a Page
+    """
+    def __init__(self, page, language, element):
+        self.page = page
+        self.language = language
+        # the relative path, e.g. /team.html
+        self.path = ""
+        self.title = element.getAttribute("jahia:title")
+        self.boxes = []
+        self.sidebar = Sidebar()
+        self.last_update = datetime.strptime(
+            element.getAttribute("jcr:lastModified"),
+            JAHIA_DATE_FORMAT)
+
+        # sidebar
         self.parse_sidebar(element)
+
+        # path
+        self.set_path(element)
 
     def parse_sidebar(self, element):
         """ Parse sidebar """
 
-        # Search sidebar in the page xml content
-        childs = element.childNodes
-        for child in childs:
+        # search the sidebar in the page xml content
+        children = element.childNodes
+        for child in children:
             if child.nodeName == "extraList":
                 for extra in child.childNodes:
                     if extra.ELEMENT_NODE != extra.nodeType:
                         continue
-                    box = Box(self, element, extra)
+                    box = Box(site=self.page.site, page_content=self, element=element, multibox=extra)
                     self.sidebar.boxes.append(box)
 
-        # if not find, search the sidebar of a parent
+        # if not found, search the sidebar of a parent
         nb_boxes = len(self.sidebar.boxes)
         if nb_boxes == 0:
             while nb_boxes == 0:
-                sidebar = self.parent.sidebar
+                sidebar = self.page.parent.contents[self.language].sidebar
                 nb_boxes = len(sidebar.boxes)
             self.sidebar = sidebar
 
-    def __str__(self):
-        return self.pid + " " + self.template + " " + self.title
-
-    def regular_url(self):
-        return "page-%s-%s.html" % (self.pid, self.site.language)
-
-    def is_homepage(self):
+    def set_path(self, element):
         """
-        Return True if the page is the homepage
+        Set the page path
         """
-        return self.template == "home"
 
-    def has_children(self):
-        """
-        Return True if the page has children
-        """
-        return len(self.children) > 0
+        if self.page.is_homepage():
+            self.path = "/index-%s.html" % self.language
+        else:
+            vanity_url = element.getAttribute("jahia:urlMappings")
+            if vanity_url:
+                self.path = vanity_url.split('$$$')[0].strip('/') + ".html"
+            else:
+                self.path = self.regular_path()
 
+    def regular_path(self):
+        return "/page-%s-%s.html" % (self.page.pid, self.language)
 
 class Box:
     """A Jahia Box. Can be of type text, infoscience, etc."""
@@ -338,11 +390,12 @@ class Box:
         "epfl:toggleBox": "toggle"
     }
 
-    def __init__(self, site, page, element, multibox=False):
+    def __init__(self, site, page_content, element, multibox=False):
         self.site = site
-        self.page = page
+        self.page_content = page_content
         self.set_type(element)
         self.title = Utils.get_tag_attribute(element, "boxTitle", "jahia:value")
+        self.content = ""
         self.set_content(element, multibox)
 
     def set_type(self, element):

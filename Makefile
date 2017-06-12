@@ -1,4 +1,4 @@
-site_name=dcsl
+site_name=master
 zip_file=exports/dcsl_export_2017-06-07-08-08.zip
 port=9090
 output_dir=build
