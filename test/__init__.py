@@ -120,7 +120,7 @@ class Data:
                 'theme': 'ic',
                 'title': 'Data Center Systems Laboratory'}}
 
-    master_data = {'files': 171,
+    master_data = {'files': 180,
         'pages': [{'nb_boxes': 1,
             'pid': '94489',
             'sidebar': [{'content': '<p><strong><a '
