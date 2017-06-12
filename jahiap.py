@@ -8,6 +8,7 @@ import tempfile
 import xml.dom.minidom
 import zipfile
 
+from pprint import pprint, pformat
 from datetime import datetime
 
 from exporter.dict_exporter import DictExporter
@@ -598,7 +599,14 @@ def main_export(parser, args):
         logging.info("Site successfully exported to HTML files")
 
     if args.to_dictionary:
-        DictExporter.generate_data(site)
+        export_path = os.path.join(
+            args.output_dir, "%s_dict.py" % args.site_name)
+        data = DictExporter.generate_data(site)
+        pprint(data)
+        with open(export_path, 'w') as output:
+            output.write("%s_data = " % args.site_name)
+            output.write(pformat(data))
+            output.flush()
         logging.info("Site successfully exported to python dictionary")
 
 
