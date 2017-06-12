@@ -15,6 +15,9 @@ class HTMLExporter:
 
     def __init__(self, site, out_path):
 
+        # TODO handle site with multiple languages
+        self.language = "en"
+
         self.site = site
         self.out_path = out_path
         self.sitemap_content = ""
@@ -41,9 +44,10 @@ class HTMLExporter:
         template = self.env.get_template('epfl-sidebar-en.html')
 
         for page in self.site.pages:
-            content = template.render(page=page, site=self.site, exporter=self)
+            page_content = page.contents[self.language]
+            content = template.render(page_content=page_content, site=self.site, exporter=self)
 
-            self.generate_page(page.name, content)
+            self.generate_page(path=page_content.path, content=content)
 
         # sitemap
         template = self.env.get_template('epfl-sitemap-en.html')
@@ -52,12 +56,16 @@ class HTMLExporter:
 
         content = template.render(page=None, site=self.site, exporter=self)
 
-        self.generate_page("sitemap.html", content)
+        self.generate_page(path="/sitemap-%s.html" % self.language, content=content)
 
     def update_boxes_data(self):
         """Update the boxes data"""
         for page in self.site.pages:
-            for box in page.boxes:
+
+            if self.language not in page.contents:
+                continue
+
+            for box in page.contents[self.language].boxes:
                 # toggle box : add EPFL bootstrap specific code
                 if box.type == "toggle":
                     # toggle title
@@ -74,9 +82,9 @@ class HTMLExporter:
                 else:
                     box.content = "<div>" + box.content + "</div>"
 
-    def generate_page(self, name, content):
+    def generate_page(self, path, content):
         """Generate a page"""
-        path = "%s/%s" % (self.out_path, name)
+        path = "%s/%s" % (self.out_path, path)
 
         file = open(path, "w")
 
@@ -91,7 +99,7 @@ class HTMLExporter:
         if not page.is_homepage():
             # current page
             self.navigation_spacer(page)
-            self.navigation += "<li class='nav-item'><a class='nav-link' href='/%s'>%s</a>" % (page.name, page.title)
+            self.navigation += "<li class='nav-item'><a class='nav-link' href='%s'>%s</a>" % (page.contents[self.language].path, page.contents[self.language].title)
 
         if page.has_children():
             if not page.is_homepage():
@@ -124,7 +132,7 @@ class HTMLExporter:
             self.sitemap_content += "<ul>"
 
         # current page
-        self.sitemap_content += "<li><a href='/%s'>%s</a>" % (page.name, page.title)
+        self.sitemap_content += "<li><a href='%s'>%s</a>" % (page.contents[self.language].path, page.contents[self.language].title)
 
         if page.has_children():
             self.sitemap_content += "<ul>"
