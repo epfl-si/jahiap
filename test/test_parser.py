@@ -1,6 +1,16 @@
+import os
 import pytest
 
-from test import dcsl_data, master_data, get_sites
+from settings import DATA_PATH
+from test import Data
+
+
+def get_sites():
+    """
+    Return the list of jahia sites
+    """
+    for top, dirs, files in os.walk(DATA_PATH):
+        return dirs
 
 
 @pytest.fixture(scope='module', params=get_sites())
@@ -9,20 +19,18 @@ def site(request):
     Load site only once
     """
     from jahiap import Site
-
-    if request.param == 'dcsl':
-        return Site("./test/jahiap-data/dcsl", "dcsl")
-    elif request.param == 'master':
-        return Site("./test/jahiap-data/master", "master")
+    site_name = request.param
+    site_data_path = DATA_PATH + request.param
+    return Site(site_data_path, site_name)
 
 
 @pytest.fixture()
 def data(site):
-    if site.name == 'dcsl':
-        data = dcsl_data
-    elif site.name == 'master':
-        data = master_data
-    return data
+    """
+    return the data of one jahia site
+    """
+    dictionary_name = site.name + "_data"
+    return Data.__getattribute__(Data, dictionary_name)
 
 
 class TestSiteProperties:
@@ -79,12 +87,28 @@ class TestSidebar:
       Check content of sidebar
     """
     def test_box(self, site, data):
+
         for data_page in data['pages']:
             for page in site.pages:
                 if page.pid == data_page['pid']:
 
                     # Nb boxes
                     assert len(data_page['sidebar']) == len(page.sidebar.boxes)
+
+                    # Box title
+                    titles = [box.title for box in page.sidebar.boxes]
+                    expected_titles = [data_box['title'] for data_box in data_page['sidebar']]
+                    assert titles == expected_titles
+
+                    # Box content
+                    contents = [box.content for box in page.sidebar.boxes]
+                    expected_contents = [data_box['content'] for data_box in data_page['sidebar']]
+                    assert contents == expected_contents
+
+                    # Box type
+                    expected_type = [box.type for box in page.sidebar.boxes]
+                    type = [data_box['type'] for data_box in data_page['sidebar']]
+                    assert expected_type == type
 
 
 # class TestHomepage:

@@ -12,7 +12,7 @@ clean:
 
 generate:
 	python jahiap.py -o $(output_dir) unzip $(zip_file)
-	python jahiap.py -o $(output_dir) export $(site_name) -s
+	python jahiap.py -o $(output_dir) export $(site_name) -s -d
 
 start:
 	docker run -d \
