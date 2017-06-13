@@ -1,3 +1,4 @@
+"""(c) All rights reserved. ECOLE POLYTECHNIQUE FEDERALE DE LAUSANNE, Switzerland, VPSI, 2017"""
 DOMAIN = 'localhost'
 WP_USER = 'admin'
 WP_PASSWORD = 'passw0rd'

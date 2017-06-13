@@ -11,20 +11,20 @@ clean:
 	rm -rf $(output_dir)/parsed_$(site_name).pkl
 
 unzip:
-	python jahiap.py -o $(output_dir) unzip $(zip_file)
+	python src/jahiap.py -o $(output_dir) unzip $(zip_file)
 
 parse:
-	python jahiap.py -o $(output_dir) parse $(site_name)
+	python src/jahiap.py -o $(output_dir) parse $(site_name)
 
 dict:
 	python jahiap.py -o $(output_dir) export $(site_name) -d
 
 static:
-	python jahiap.py -o $(output_dir) export $(site_name) -s
+	python src/jahiap.py -o $(output_dir) export $(site_name) -s
 
 generate:
-	python jahiap.py -o $(output_dir) unzip $(zip_file)
-	python jahiap.py -o $(output_dir) export $(site_name) -s
+	python src/jahiap.py -o $(output_dir) unzip $(zip_file)
+	python src/jahiap.py -o $(output_dir) export $(site_name) -s
 
 start:
 	docker run -d \

@@ -1,6 +1,6 @@
 """(c) All rights reserved. ECOLE POLYTECHNIQUE FEDERALE DE LAUSANNE, Switzerland, VPSI, 2017"""
-
 from settings import LINE_LENGTH_ON_PPRINT
+
 
 class DictExporter:
 
