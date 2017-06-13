@@ -206,6 +206,7 @@ class Site:
 
             # retrieve the Page that we already parsed
             page = self.pages_dict[pid]
+            page_content = PageContent(page, language, xml_page)
 
             # main tag is the parent of all boxes types
             main_elements = xml_page.getElementsByTagName("main")
@@ -216,8 +217,6 @@ class Site:
                 # check if the box belongs to the current page
                 if not self.belongs_to(main_element, page):
                     continue
-
-                page_content = PageContent(page, language, xml_page)
 
                 type = main_element.getAttribute("jcr:primaryType")
 
@@ -237,6 +236,7 @@ class Site:
                     boxes.append(box)
 
             page_content.boxes = boxes
+            page.contents[language] = page_content
 
     def parse_files(self):
         """Parse the files"""
@@ -416,11 +416,14 @@ class PageContent:
         """
 
         if self.page.is_homepage():
-            self.path = "/index-%s.html" % self.language
+            if "en" == self.language:
+                self.path = "/index.html"
+            else:
+                self.path = "/index-%s.html" % self.language
         else:
             vanity_url = element.getAttribute("jahia:urlMappings")
             if vanity_url:
-                self.path = vanity_url.split('$$$')[0].strip('/') + ".html"
+                self.path = vanity_url.split('$$$')[0] + ".html"
             else:
                 self.path = self.regular_path()
 

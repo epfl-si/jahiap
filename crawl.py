@@ -10,6 +10,7 @@ import os
 import logging
 import timeit
 import argparse
+from pathlib import Path
 from datetime import datetime, timedelta
 
 import requests
@@ -56,6 +57,11 @@ def build_file_path(args, site):
     return os.path.join(args.output, build_file_name(args, site))
 
 
+def already_downloaded(args, site):
+    p = Path(args.output)
+    return list(p.glob("%s*" % site))
+
+
 def authenticate():
     """
         Make a POST on Jahia administration to get a valid session cookie
@@ -73,6 +79,14 @@ def authenticate():
 
 
 def download(args, session, site):
+    # do not download twice if not --force
+    existing = already_downloaded(args, site)
+    if existing and not args.force:
+        file_path = existing[-1].as_posix()
+        logging.warning("%s already downloaded %sx. Last is %s", 
+            site, len(existing), file_path)
+        return file_path
+
     # pepare query
     file_name = build_file_name(args, site)
     params = DWLD_GET_PARAMS.copy()
@@ -117,10 +131,13 @@ def download(args, session, site):
                 output.flush()
 
     # log execution time and return path to downloaded file
-    elapsed = timeit.default_timer() - start_time
-    logging.info("file downloaded in %s", timedelta(seconds=elapsed))
+    elapsed = timedelta(seconds=timeit.default_timer() - start_time)
+    logging.info("file downloaded in %s", elapsed)
+    tracer_path = os.path.join(args.output, "tracer_crawling.txt")
+    with open(tracer_path, 'a') as tracer:
+        tracer.write("%s;%s\n" % (file_path, elapsed))
+        tracer.flush()
     return file_path
-
 
 def main(args):
     logging.info("starting crawling...")
@@ -164,6 +181,10 @@ if __name__ == '__main__':
                         action='store',
                         default='build',
                         help='path where to download files')
+    parser.add_argument('-f', '--force',
+                        dest='force',
+                        action='store_true',
+                        help='Force download even if exisiting files for same site')
     parser.add_argument('-d', '--date',
                         action='store',
                         default=datetime.today().strftime("%Y-%m-%d-%H-%M"),
