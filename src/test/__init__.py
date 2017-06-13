@@ -1,2977 +1,3205 @@
-class Data:
-    dcsl_data = {'files': 27,
-     'pages': [{'nb_boxes': 3,
-            'pid': '115349',
-            'sidebar': [{'content': '<p>We focus on interdisciplinary systems '
-                                    'problems found in modern, large-scale '
-                                    'datacenters. &nbsp; &nbsp;Our current '
-                                    'research projects include specialized '
-                                    'operating systems for datacenter '
-                                    'applications, hardware support for '
-                                    'software-defined networking, and '
-                                    'energy-efficient, rack-scale '
-                                    'computing.</p> <p>Key conferences : '
-                                    'ASPLOS, ATC, ISCA, NSDI, SIGCOMM, SOCC, '
-                                    'SOSP/OSDI.</p> <p>&nbsp;</p> ',
-                         'title': 'Competence or skills',
-                         'type': 'coloredText'}],
-            'title': 'DCSL'},
-           {'nb_boxes': 9,
-            'pid': '125741',
-            'sidebar': [{'content': '<p>We focus on interdisciplinary systems '
-                                    'problems found in modern, large-scale '
-                                    'datacenters. &nbsp; &nbsp;Our current '
-                                    'research projects include specialized '
-                                    'operating systems for datacenter '
-                                    'applications, hardware support for '
-                                    'software-defined networking, and '
-                                    'energy-efficient, rack-scale '
-                                    'computing.</p> <p>Key conferences : '
-                                    'ASPLOS, ATC, ISCA, NSDI, SIGCOMM, SOCC, '
-                                    'SOSP/OSDI.</p> <p>&nbsp;</p> ',
-                         'title': 'Competence or skills',
-                         'type': 'coloredText'}],
-            'title': 'Team'},
-           {'nb_boxes': 1,
-            'pid': '126135',
-            'sidebar': [{'content': '<p>We focus on interdisciplinary systems '
-                                    'problems found in modern, large-scale '
-                                    'datacenters. &nbsp; &nbsp;Our current '
-                                    'research projects include specialized '
-                                    'operating systems for datacenter '
-                                    'applications, hardware support for '
-                                    'software-defined networking, and '
-                                    'energy-efficient, rack-scale '
-                                    'computing.</p> <p>Key conferences : '
-                                    'ASPLOS, ATC, ISCA, NSDI, SIGCOMM, SOCC, '
-                                    'SOSP/OSDI.</p> <p>&nbsp;</p> ',
-                         'title': 'Competence or skills',
-                         'type': 'coloredText'}],
-            'title': 'Teaching'},
-           {'nb_boxes': 2,
-            'pid': '145099',
-            'sidebar': [{'content': '<p>We focus on interdisciplinary systems '
-                                    'problems found in modern, large-scale '
-                                    'datacenters. &nbsp; &nbsp;Our current '
-                                    'research projects include specialized '
-                                    'operating systems for datacenter '
-                                    'applications, hardware support for '
-                                    'software-defined networking, and '
-                                    'energy-efficient, rack-scale '
-                                    'computing.</p> <p>Key conferences : '
-                                    'ASPLOS, ATC, ISCA, NSDI, SIGCOMM, SOCC, '
-                                    'SOSP/OSDI.</p> <p>&nbsp;</p> ',
-                         'title': 'Competence or skills',
-                         'type': 'coloredText'}],
-            'title': 'Master & Semester Projects'},
-           {'nb_boxes': 1,
-            'pid': '115407',
-            'sidebar': [{'content': '<p>We focus on interdisciplinary systems '
-                                    'problems found in modern, large-scale '
-                                    'datacenters. &nbsp; &nbsp;Our current '
-                                    'research projects include specialized '
-                                    'operating systems for datacenter '
-                                    'applications, hardware support for '
-                                    'software-defined networking, and '
-                                    'energy-efficient, rack-scale '
-                                    'computing.</p> <p>Key conferences : '
-                                    'ASPLOS, ATC, ISCA, NSDI, SIGCOMM, SOCC, '
-                                    'SOSP/OSDI.</p> <p>&nbsp;</p> ',
-                         'title': 'Competence or skills',
-                         'type': 'coloredText'}],
-            'title': 'Publications'},
-           {'nb_boxes': 2,
-            'pid': '126290',
-            'sidebar': [{'content': '<p>We focus on interdisciplinary systems '
-                                    'problems found in modern, large-scale '
-                                    'datacenters. &nbsp; &nbsp;Our current '
-                                    'research projects include specialized '
-                                    'operating systems for datacenter '
-                                    'applications, hardware support for '
-                                    'software-defined networking, and '
-                                    'energy-efficient, rack-scale '
-                                    'computing.</p> <p>Key conferences : '
-                                    'ASPLOS, ATC, ISCA, NSDI, SIGCOMM, SOCC, '
-                                    'SOSP/OSDI.</p> <p>&nbsp;</p> ',
-                         'title': 'Competence or skills',
-                         'type': 'coloredText'}],
-            'title': 'soNUMA'},
-           {'nb_boxes': 3,
-            'pid': '126292',
-            'sidebar': [{'content': '<p>We focus on interdisciplinary systems '
-                                    'problems found in modern, large-scale '
-                                    'datacenters. &nbsp; &nbsp;Our current '
-                                    'research projects include specialized '
-                                    'operating systems for datacenter '
-                                    'applications, hardware support for '
-                                    'software-defined networking, and '
-                                    'energy-efficient, rack-scale '
-                                    'computing.</p> <p>Key conferences : '
-                                    'ASPLOS, ATC, ISCA, NSDI, SIGCOMM, SOCC, '
-                                    'SOSP/OSDI.</p> <p>&nbsp;</p> ',
-                         'title': 'Competence or skills',
-                         'type': 'coloredText'}],
-            'title': 'IX Dataplane Operating System'}],
-      'properties': {'acronym': 'DCSL',
-                'breadcrumb_title': 'IC',
-                'breadcrumb_url': 'http://ic.epfl.ch',
-                'css_url': '//static.epfl.ch/v0.23.0/styles/ic-built.css',
-                'name': 'dcsl',
-                'theme': 'ic',
-                'title': 'Data Center Systems Laboratory'}}
+import datetime
 
-    master_data = {'files': 180,
-        'pages': [{'nb_boxes': 1,
-            'pid': '94489',
-            'sidebar': [{'content': '<p><strong><a '
-                                    'href="https://isa.epfl.ch/imoniteur_ISAP/!farforms.htm?x=master">Applications</a> '
-                                    "for starting a Master's program are open "
-                                    'from mid-November to January 15th and '
-                                    'from January 16th to April '
-                                    '15th</strong></p> ',
-                         'title': 'Application',
-                         'type': 'coloredText'},
-                        {'content': '<p style="text-align: left;">In case of '
-                                    'questions, please contact the student '
-                                    'helpdesk:</p> <div class="button mail"><a '
-                                    'href="mailto:student.services@epfl.ch"> '
-                                    '<button class="icon"></button> <span '
-                                    'class="label">student.services@epfl.ch</span></a></div> '
-                                    '<p>&nbsp;</p> <div class="button '
-                                    'contact"><button class="icon"></button> '
-                                    '<span class="label">+41 (0)21 693 43 '
-                                    '45</span></div> ',
-                         'title': 'Contact',
-                         'type': 'text'},
-                        {'content': '<p><a href="http://virtualtour.epfl.ch" '
-                                    'target="_blank"><img width="300" '
-                                    'height="157" src="/files/buttons/virtual '
-                                    'tour '
-                                    'thumbnail.png?uuid=default:1ecf5f72-58c7-40f6-a15d-5ca0ffd2c419" '
-                                    'alt="virtual tour" /></a></p> ',
-                         'title': 'Discover the campus',
-                         'type': 'text'},
-                        {'content': '<p style="text-align: left;"><a '
-                                    'target="_blank" '
-                                    'href="http://www.youtube.com/EPFLstudents"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'YouTube" '
-                                    'src="/files/buttons/YouTube-social-square_red_48px.png?uuid=default:f9ad6a38-48ec-4629-befe-080249712f3d" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://www.facebook.com/EPFL.ch"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'Facebook" '
-                                    'src="/files/buttons/FB-f-Logo__blue_58.png?uuid=default:187bafe8-c769-4aee-879b-7d2920600f30" '
-                                    '/></a>&nbsp; &nbsp; &nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://twitter.com/EPFL_en"><img '
-                                    'width="25" height="21" alt="EPFL on '
-                                    'Twitter" '
-                                    'src="/files/buttons/Twitter_logo_blue.png?uuid=default:7b12cfa6-30f8-4d08-9849-1096739f5eb2" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="https://instagram.com/epflcampus/"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'Instagram" '
-                                    'src="/files/buttons/insta_logo.jpg?uuid=default:8002075d-fb77-46dd-bdaf-79cd4855a818" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://studyingatepfl.tumblr.com/"><img '
-                                    'width="25" height="25" alt="tumblr" '
-                                    'src="/files/buttons/tumblr.png?uuid=default:073896a0-c6cd-46cb-82ce-342f5d293110" '
-                                    '/></a></p> ',
-                         'title': 'FOLLOW EPFL',
-                         'type': 'text'}],
-            'title': 'Master'},
-           {'nb_boxes': 2,
-            'pid': '94567',
-            'sidebar': [{'content': "<ul>  <li><strong>10'281 Students (of "
-                                    "which 2'077 PhD)</strong></li>  "
-                                    '<li><strong>338 Faculty '
-                                    'members</strong></li>  <li><strong>340 '
-                                    'Laboratories</strong></li>  '
-                                    '<li><strong>Over 120 nationalities<br '
-                                    '/>   </strong>  </li> </ul> ',
-                         'title': 'Facts & Figures (2014-2015)',
-                         'type': 'coloredText'},
-                        {'content': '<p style="text-align: left;">In case of '
-                                    'questions, please contact the student '
-                                    'helpdesk:</p> <div class="button mail"><a '
-                                    'href="mailto:student.services@epfl.ch"> '
-                                    '<button class="icon"></button> <span '
-                                    'class="label">student.services@epfl.ch</span></a></div> '
-                                    '<p>&nbsp;</p> <div class="button '
-                                    'contact"><button class="icon"></button> '
-                                    '<span class="label">+41 (0)21 693 43 '
-                                    '45</span></div> ',
-                         'title': 'Contact',
-                         'type': 'text'},
-                        {'content': '<p><a href="http://virtualtour.epfl.ch" '
-                                    'target="_blank"><img width="300" '
-                                    'height="157" src="/files/buttons/virtual '
-                                    'tour '
-                                    'thumbnail.png?uuid=default:1ecf5f72-58c7-40f6-a15d-5ca0ffd2c419" '
-                                    'alt="virtual tour" /></a></p> ',
-                         'title': 'Discover the campus',
-                         'type': 'text'},
-                        {'content': '<p style="text-align: left;"><a '
-                                    'target="_blank" '
-                                    'href="http://www.youtube.com/EPFLstudents"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'YouTube" '
-                                    'src="/files/buttons/YouTube-social-square_red_48px.png?uuid=default:f9ad6a38-48ec-4629-befe-080249712f3d" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://www.facebook.com/EPFL.ch"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'Facebook" '
-                                    'src="/files/buttons/FB-f-Logo__blue_58.png?uuid=default:187bafe8-c769-4aee-879b-7d2920600f30" '
-                                    '/></a>&nbsp; &nbsp; &nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://twitter.com/EPFL_en"><img '
-                                    'width="25" height="21" alt="EPFL on '
-                                    'Twitter" '
-                                    'src="/files/buttons/Twitter_logo_blue.png?uuid=default:7b12cfa6-30f8-4d08-9849-1096739f5eb2" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="https://instagram.com/epflcampus/"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'Instagram" '
-                                    'src="/files/buttons/insta_logo.jpg?uuid=default:8002075d-fb77-46dd-bdaf-79cd4855a818" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://studyingatepfl.tumblr.com/"><img '
-                                    'width="25" height="25" alt="tumblr" '
-                                    'src="/files/buttons/tumblr.png?uuid=default:073896a0-c6cd-46cb-82ce-342f5d293110" '
-                                    '/></a></p> ',
-                         'title': 'FOLLOW EPFL',
-                         'type': 'text'}],
-            'title': 'Why choose EPFL?'},
-           {'nb_boxes': 1,
-            'pid': '96878',
-            'sidebar': [{'content': "<ul>  <li><strong>10'281 Students (of "
-                                    "which 2'077 PhD)</strong></li>  "
-                                    '<li><strong>338 Faculty '
-                                    'members</strong></li>  <li><strong>340 '
-                                    'Laboratories</strong></li>  '
-                                    '<li><strong>Over 120 nationalities<br '
-                                    '/>   </strong>  </li> </ul> ',
-                         'title': 'Facts & Figures (2014-2015)',
-                         'type': 'coloredText'},
-                        {'content': '<p style="text-align: left;">In case of '
-                                    'questions, please contact the student '
-                                    'helpdesk:</p> <div class="button mail"><a '
-                                    'href="mailto:student.services@epfl.ch"> '
-                                    '<button class="icon"></button> <span '
-                                    'class="label">student.services@epfl.ch</span></a></div> '
-                                    '<p>&nbsp;</p> <div class="button '
-                                    'contact"><button class="icon"></button> '
-                                    '<span class="label">+41 (0)21 693 43 '
-                                    '45</span></div> ',
-                         'title': 'Contact',
-                         'type': 'text'},
-                        {'content': '<p><a href="http://virtualtour.epfl.ch" '
-                                    'target="_blank"><img width="300" '
-                                    'height="157" src="/files/buttons/virtual '
-                                    'tour '
-                                    'thumbnail.png?uuid=default:1ecf5f72-58c7-40f6-a15d-5ca0ffd2c419" '
-                                    'alt="virtual tour" /></a></p> ',
-                         'title': 'Discover the campus',
-                         'type': 'text'},
-                        {'content': '<p style="text-align: left;"><a '
-                                    'target="_blank" '
-                                    'href="http://www.youtube.com/EPFLstudents"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'YouTube" '
-                                    'src="/files/buttons/YouTube-social-square_red_48px.png?uuid=default:f9ad6a38-48ec-4629-befe-080249712f3d" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://www.facebook.com/EPFL.ch"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'Facebook" '
-                                    'src="/files/buttons/FB-f-Logo__blue_58.png?uuid=default:187bafe8-c769-4aee-879b-7d2920600f30" '
-                                    '/></a>&nbsp; &nbsp; &nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://twitter.com/EPFL_en"><img '
-                                    'width="25" height="21" alt="EPFL on '
-                                    'Twitter" '
-                                    'src="/files/buttons/Twitter_logo_blue.png?uuid=default:7b12cfa6-30f8-4d08-9849-1096739f5eb2" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="https://instagram.com/epflcampus/"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'Instagram" '
-                                    'src="/files/buttons/insta_logo.jpg?uuid=default:8002075d-fb77-46dd-bdaf-79cd4855a818" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://studyingatepfl.tumblr.com/"><img '
-                                    'width="25" height="25" alt="tumblr" '
-                                    'src="/files/buttons/tumblr.png?uuid=default:073896a0-c6cd-46cb-82ce-342f5d293110" '
-                                    '/></a></p> ',
-                         'title': 'FOLLOW EPFL',
-                         'type': 'text'}],
-            'title': 'International Rankings'},
-           {'nb_boxes': 4,
-            'pid': '100358',
-            'sidebar': [{'content': "<ul>  <li><strong>10'281 Students (of "
-                                    "which 2'077 PhD)</strong></li>  "
-                                    '<li><strong>338 Faculty '
-                                    'members</strong></li>  <li><strong>340 '
-                                    'Laboratories</strong></li>  '
-                                    '<li><strong>Over 120 nationalities<br '
-                                    '/>   </strong>  </li> </ul> ',
-                         'title': 'Facts & Figures (2014-2015)',
-                         'type': 'coloredText'},
-                        {'content': '<p style="text-align: left;">In case of '
-                                    'questions, please contact the student '
-                                    'helpdesk:</p> <div class="button mail"><a '
-                                    'href="mailto:student.services@epfl.ch"> '
-                                    '<button class="icon"></button> <span '
-                                    'class="label">student.services@epfl.ch</span></a></div> '
-                                    '<p>&nbsp;</p> <div class="button '
-                                    'contact"><button class="icon"></button> '
-                                    '<span class="label">+41 (0)21 693 43 '
-                                    '45</span></div> ',
-                         'title': 'Contact',
-                         'type': 'text'},
-                        {'content': '<p><a href="http://virtualtour.epfl.ch" '
-                                    'target="_blank"><img width="300" '
-                                    'height="157" src="/files/buttons/virtual '
-                                    'tour '
-                                    'thumbnail.png?uuid=default:1ecf5f72-58c7-40f6-a15d-5ca0ffd2c419" '
-                                    'alt="virtual tour" /></a></p> ',
-                         'title': 'Discover the campus',
-                         'type': 'text'},
-                        {'content': '<p style="text-align: left;"><a '
-                                    'target="_blank" '
-                                    'href="http://www.youtube.com/EPFLstudents"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'YouTube" '
-                                    'src="/files/buttons/YouTube-social-square_red_48px.png?uuid=default:f9ad6a38-48ec-4629-befe-080249712f3d" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://www.facebook.com/EPFL.ch"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'Facebook" '
-                                    'src="/files/buttons/FB-f-Logo__blue_58.png?uuid=default:187bafe8-c769-4aee-879b-7d2920600f30" '
-                                    '/></a>&nbsp; &nbsp; &nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://twitter.com/EPFL_en"><img '
-                                    'width="25" height="21" alt="EPFL on '
-                                    'Twitter" '
-                                    'src="/files/buttons/Twitter_logo_blue.png?uuid=default:7b12cfa6-30f8-4d08-9849-1096739f5eb2" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="https://instagram.com/epflcampus/"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'Instagram" '
-                                    'src="/files/buttons/insta_logo.jpg?uuid=default:8002075d-fb77-46dd-bdaf-79cd4855a818" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://studyingatepfl.tumblr.com/"><img '
-                                    'width="25" height="25" alt="tumblr" '
-                                    'src="/files/buttons/tumblr.png?uuid=default:073896a0-c6cd-46cb-82ce-342f5d293110" '
-                                    '/></a></p> ',
-                         'title': 'FOLLOW EPFL',
-                         'type': 'text'}],
-            'title': 'Fairs calendar'},
-           {'nb_boxes': 1,
-            'pid': '110995',
-            'sidebar': [{'content': "<ul>  <li><strong>10'281 Students (of "
-                                    "which 2'077 PhD)</strong></li>  "
-                                    '<li><strong>338 Faculty '
-                                    'members</strong></li>  <li><strong>340 '
-                                    'Laboratories</strong></li>  '
-                                    '<li><strong>Over 120 nationalities<br '
-                                    '/>   </strong>  </li> </ul> ',
-                         'title': 'Facts & Figures (2014-2015)',
-                         'type': 'coloredText'},
-                        {'content': '<p style="text-align: left;">In case of '
-                                    'questions, please contact the student '
-                                    'helpdesk:</p> <div class="button mail"><a '
-                                    'href="mailto:student.services@epfl.ch"> '
-                                    '<button class="icon"></button> <span '
-                                    'class="label">student.services@epfl.ch</span></a></div> '
-                                    '<p>&nbsp;</p> <div class="button '
-                                    'contact"><button class="icon"></button> '
-                                    '<span class="label">+41 (0)21 693 43 '
-                                    '45</span></div> ',
-                         'title': 'Contact',
-                         'type': 'text'},
-                        {'content': '<p><a href="http://virtualtour.epfl.ch" '
-                                    'target="_blank"><img width="300" '
-                                    'height="157" src="/files/buttons/virtual '
-                                    'tour '
-                                    'thumbnail.png?uuid=default:1ecf5f72-58c7-40f6-a15d-5ca0ffd2c419" '
-                                    'alt="virtual tour" /></a></p> ',
-                         'title': 'Discover the campus',
-                         'type': 'text'},
-                        {'content': '<p style="text-align: left;"><a '
-                                    'target="_blank" '
-                                    'href="http://www.youtube.com/EPFLstudents"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'YouTube" '
-                                    'src="/files/buttons/YouTube-social-square_red_48px.png?uuid=default:f9ad6a38-48ec-4629-befe-080249712f3d" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://www.facebook.com/EPFL.ch"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'Facebook" '
-                                    'src="/files/buttons/FB-f-Logo__blue_58.png?uuid=default:187bafe8-c769-4aee-879b-7d2920600f30" '
-                                    '/></a>&nbsp; &nbsp; &nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://twitter.com/EPFL_en"><img '
-                                    'width="25" height="21" alt="EPFL on '
-                                    'Twitter" '
-                                    'src="/files/buttons/Twitter_logo_blue.png?uuid=default:7b12cfa6-30f8-4d08-9849-1096739f5eb2" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="https://instagram.com/epflcampus/"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'Instagram" '
-                                    'src="/files/buttons/insta_logo.jpg?uuid=default:8002075d-fb77-46dd-bdaf-79cd4855a818" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://studyingatepfl.tumblr.com/"><img '
-                                    'width="25" height="25" alt="tumblr" '
-                                    'src="/files/buttons/tumblr.png?uuid=default:073896a0-c6cd-46cb-82ce-342f5d293110" '
-                                    '/></a></p> ',
-                         'title': 'FOLLOW EPFL',
-                         'type': 'text'}],
-            'title': 'Meet our students'},
-           {'nb_boxes': 1,
-            'pid': '94569',
-            'sidebar': [{'content': '<p><strong><a '
-                                    'href="https://isa.epfl.ch/imoniteur_ISAP/!farforms.htm?x=master">Applications</a> '
-                                    "for starting a Master's program are open "
-                                    'from mid-November to January 15th and '
-                                    'from January 16th to April '
-                                    '15th</strong></p> ',
-                         'title': 'Application',
-                         'type': 'coloredText'},
-                        {'content': '<p style="text-align: left;">In case of '
-                                    'questions, please contact the student '
-                                    'helpdesk:</p> <div class="button mail"><a '
-                                    'href="mailto:student.services@epfl.ch"> '
-                                    '<button class="icon"></button> <span '
-                                    'class="label">student.services@epfl.ch</span></a></div> '
-                                    '<p>&nbsp;</p> <div class="button '
-                                    'contact"><button class="icon"></button> '
-                                    '<span class="label">+41 (0)21 693 43 '
-                                    '45</span></div> ',
-                         'title': 'Contact',
-                         'type': 'text'},
-                        {'content': '<p><a href="http://virtualtour.epfl.ch" '
-                                    'target="_blank"><img width="300" '
-                                    'height="157" src="/files/buttons/virtual '
-                                    'tour '
-                                    'thumbnail.png?uuid=default:1ecf5f72-58c7-40f6-a15d-5ca0ffd2c419" '
-                                    'alt="virtual tour" /></a></p> ',
-                         'title': 'Discover the campus',
-                         'type': 'text'},
-                        {'content': '<p style="text-align: left;"><a '
-                                    'target="_blank" '
-                                    'href="http://www.youtube.com/EPFLstudents"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'YouTube" '
-                                    'src="/files/buttons/YouTube-social-square_red_48px.png?uuid=default:f9ad6a38-48ec-4629-befe-080249712f3d" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://www.facebook.com/EPFL.ch"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'Facebook" '
-                                    'src="/files/buttons/FB-f-Logo__blue_58.png?uuid=default:187bafe8-c769-4aee-879b-7d2920600f30" '
-                                    '/></a>&nbsp; &nbsp; &nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://twitter.com/EPFL_en"><img '
-                                    'width="25" height="21" alt="EPFL on '
-                                    'Twitter" '
-                                    'src="/files/buttons/Twitter_logo_blue.png?uuid=default:7b12cfa6-30f8-4d08-9849-1096739f5eb2" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="https://instagram.com/epflcampus/"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'Instagram" '
-                                    'src="/files/buttons/insta_logo.jpg?uuid=default:8002075d-fb77-46dd-bdaf-79cd4855a818" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://studyingatepfl.tumblr.com/"><img '
-                                    'width="25" height="25" alt="tumblr" '
-                                    'src="/files/buttons/tumblr.png?uuid=default:073896a0-c6cd-46cb-82ce-342f5d293110" '
-                                    '/></a></p> ',
-                         'title': 'FOLLOW EPFL',
-                         'type': 'text'}],
-            'title': "Master's Programs"},
-           {'nb_boxes': 3,
-            'pid': '103766',
-            'sidebar': [{'content': '<p><strong><a '
-                                    'href="https://isa.epfl.ch/imoniteur_ISAP/!farforms.htm?x=master">Applications</a> '
-                                    "for starting a Master's program are open "
-                                    'from mid-November to January 15th and '
-                                    'from January 16th to April '
-                                    '15th</strong></p> ',
-                         'title': 'Application',
-                         'type': 'coloredText'},
-                        {'content': '<p style="text-align: left;">In case of '
-                                    'questions, please contact the student '
-                                    'helpdesk:</p> <div class="button mail"><a '
-                                    'href="mailto:student.services@epfl.ch"> '
-                                    '<button class="icon"></button> <span '
-                                    'class="label">student.services@epfl.ch</span></a></div> '
-                                    '<p>&nbsp;</p> <div class="button '
-                                    'contact"><button class="icon"></button> '
-                                    '<span class="label">+41 (0)21 693 43 '
-                                    '45</span></div> ',
-                         'title': 'Contact',
-                         'type': 'text'},
-                        {'content': '<p><a href="http://virtualtour.epfl.ch" '
-                                    'target="_blank"><img width="300" '
-                                    'height="157" src="/files/buttons/virtual '
-                                    'tour '
-                                    'thumbnail.png?uuid=default:1ecf5f72-58c7-40f6-a15d-5ca0ffd2c419" '
-                                    'alt="virtual tour" /></a></p> ',
-                         'title': 'Discover the campus',
-                         'type': 'text'},
-                        {'content': '<p style="text-align: left;"><a '
-                                    'target="_blank" '
-                                    'href="http://www.youtube.com/EPFLstudents"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'YouTube" '
-                                    'src="/files/buttons/YouTube-social-square_red_48px.png?uuid=default:f9ad6a38-48ec-4629-befe-080249712f3d" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://www.facebook.com/EPFL.ch"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'Facebook" '
-                                    'src="/files/buttons/FB-f-Logo__blue_58.png?uuid=default:187bafe8-c769-4aee-879b-7d2920600f30" '
-                                    '/></a>&nbsp; &nbsp; &nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://twitter.com/EPFL_en"><img '
-                                    'width="25" height="21" alt="EPFL on '
-                                    'Twitter" '
-                                    'src="/files/buttons/Twitter_logo_blue.png?uuid=default:7b12cfa6-30f8-4d08-9849-1096739f5eb2" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="https://instagram.com/epflcampus/"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'Instagram" '
-                                    'src="/files/buttons/insta_logo.jpg?uuid=default:8002075d-fb77-46dd-bdaf-79cd4855a818" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://studyingatepfl.tumblr.com/"><img '
-                                    'width="25" height="25" alt="tumblr" '
-                                    'src="/files/buttons/tumblr.png?uuid=default:073896a0-c6cd-46cb-82ce-342f5d293110" '
-                                    '/></a></p> ',
-                         'title': 'FOLLOW EPFL',
-                         'type': 'text'}],
-            'title': 'Specialized Masters Day'},
-           {'nb_boxes': 1,
-            'pid': '94578',
-            'sidebar': [{'content': '<p><strong><a '
-                                    'href="https://isa.epfl.ch/imoniteur_ISAP/!farforms.htm?x=master">Applications</a> '
-                                    "for starting a Master's program are open "
-                                    'from mid-November to January 15th and '
-                                    'from January 16th to April '
-                                    '15th</strong></p> ',
-                         'title': 'Application',
-                         'type': 'coloredText'},
-                        {'content': '<p style="text-align: left;">In case of '
-                                    'questions, please contact the student '
-                                    'helpdesk:</p> <div class="button mail"><a '
-                                    'href="mailto:student.services@epfl.ch"> '
-                                    '<button class="icon"></button> <span '
-                                    'class="label">student.services@epfl.ch</span></a></div> '
-                                    '<p>&nbsp;</p> <div class="button '
-                                    'contact"><button class="icon"></button> '
-                                    '<span class="label">+41 (0)21 693 43 '
-                                    '45</span></div> ',
-                         'title': 'Contact',
-                         'type': 'text'},
-                        {'content': '<p><a href="http://virtualtour.epfl.ch" '
-                                    'target="_blank"><img width="300" '
-                                    'height="157" src="/files/buttons/virtual '
-                                    'tour '
-                                    'thumbnail.png?uuid=default:1ecf5f72-58c7-40f6-a15d-5ca0ffd2c419" '
-                                    'alt="virtual tour" /></a></p> ',
-                         'title': 'Discover the campus',
-                         'type': 'text'},
-                        {'content': '<p style="text-align: left;"><a '
-                                    'target="_blank" '
-                                    'href="http://www.youtube.com/EPFLstudents"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'YouTube" '
-                                    'src="/files/buttons/YouTube-social-square_red_48px.png?uuid=default:f9ad6a38-48ec-4629-befe-080249712f3d" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://www.facebook.com/EPFL.ch"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'Facebook" '
-                                    'src="/files/buttons/FB-f-Logo__blue_58.png?uuid=default:187bafe8-c769-4aee-879b-7d2920600f30" '
-                                    '/></a>&nbsp; &nbsp; &nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://twitter.com/EPFL_en"><img '
-                                    'width="25" height="21" alt="EPFL on '
-                                    'Twitter" '
-                                    'src="/files/buttons/Twitter_logo_blue.png?uuid=default:7b12cfa6-30f8-4d08-9849-1096739f5eb2" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="https://instagram.com/epflcampus/"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'Instagram" '
-                                    'src="/files/buttons/insta_logo.jpg?uuid=default:8002075d-fb77-46dd-bdaf-79cd4855a818" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://studyingatepfl.tumblr.com/"><img '
-                                    'width="25" height="25" alt="tumblr" '
-                                    'src="/files/buttons/tumblr.png?uuid=default:073896a0-c6cd-46cb-82ce-342f5d293110" '
-                                    '/></a></p> ',
-                         'title': 'FOLLOW EPFL',
-                         'type': 'text'}],
-            'title': 'Programs Overview'},
-           {'nb_boxes': 1,
-            'pid': '94579',
-            'sidebar': [{'content': '<p><strong><a '
-                                    'href="https://isa.epfl.ch/imoniteur_ISAP/!farforms.htm?x=master">Applications</a> '
-                                    "for starting a Master's program are open "
-                                    'from mid-November to January 15th and '
-                                    'from January 16th to April '
-                                    '15th</strong></p> ',
-                         'title': 'Application',
-                         'type': 'coloredText'},
-                        {'content': '<p style="text-align: left;">In case of '
-                                    'questions, please contact the student '
-                                    'helpdesk:</p> <div class="button mail"><a '
-                                    'href="mailto:student.services@epfl.ch"> '
-                                    '<button class="icon"></button> <span '
-                                    'class="label">student.services@epfl.ch</span></a></div> '
-                                    '<p>&nbsp;</p> <div class="button '
-                                    'contact"><button class="icon"></button> '
-                                    '<span class="label">+41 (0)21 693 43 '
-                                    '45</span></div> ',
-                         'title': 'Contact',
-                         'type': 'text'},
-                        {'content': '<p><a href="http://virtualtour.epfl.ch" '
-                                    'target="_blank"><img width="300" '
-                                    'height="157" src="/files/buttons/virtual '
-                                    'tour '
-                                    'thumbnail.png?uuid=default:1ecf5f72-58c7-40f6-a15d-5ca0ffd2c419" '
-                                    'alt="virtual tour" /></a></p> ',
-                         'title': 'Discover the campus',
-                         'type': 'text'},
-                        {'content': '<p style="text-align: left;"><a '
-                                    'target="_blank" '
-                                    'href="http://www.youtube.com/EPFLstudents"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'YouTube" '
-                                    'src="/files/buttons/YouTube-social-square_red_48px.png?uuid=default:f9ad6a38-48ec-4629-befe-080249712f3d" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://www.facebook.com/EPFL.ch"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'Facebook" '
-                                    'src="/files/buttons/FB-f-Logo__blue_58.png?uuid=default:187bafe8-c769-4aee-879b-7d2920600f30" '
-                                    '/></a>&nbsp; &nbsp; &nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://twitter.com/EPFL_en"><img '
-                                    'width="25" height="21" alt="EPFL on '
-                                    'Twitter" '
-                                    'src="/files/buttons/Twitter_logo_blue.png?uuid=default:7b12cfa6-30f8-4d08-9849-1096739f5eb2" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="https://instagram.com/epflcampus/"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'Instagram" '
-                                    'src="/files/buttons/insta_logo.jpg?uuid=default:8002075d-fb77-46dd-bdaf-79cd4855a818" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://studyingatepfl.tumblr.com/"><img '
-                                    'width="25" height="25" alt="tumblr" '
-                                    'src="/files/buttons/tumblr.png?uuid=default:073896a0-c6cd-46cb-82ce-342f5d293110" '
-                                    '/></a></p> ',
-                         'title': 'FOLLOW EPFL',
-                         'type': 'text'}],
-            'title': 'Minors and Specializations'},
-           {'nb_boxes': 6,
-            'pid': '95076',
-            'sidebar': [{'content': '<p>In case of specific questions about '
-                                    'this program, please contact the '
-                                    'Mathematics section:</p> <div '
-                                    'class="button mail"><a '
-                                    'href="mailto:simone.deparis@epfl.ch"><button '
-                                    'class="icon"></button> <span '
-                                    'class="label">Dr. Simone Deparis <br />  '
-                                    '</span></a> </div> <p>&nbsp;</p> <div '
-                                    'class="button information"><a '
-                                    'href="http://sb.epfl.ch/page-2971-en.html"><button '
-                                    'class="icon"></button> <span '
-                                    'class="label">See the section\'s '
-                                    'website</span></a></div> ',
-                         'title': 'Contact',
-                         'type': 'text'},
-                        {'content': '<p><a href="http://phd.epfl.ch/home" '
-                                    'target="_blank"><span '
-                                    'class="fleche">phd.epfl.ch</span></a></p> ',
-                         'title': 'Also interested in a PhD? ',
-                         'type': 'text'},
-                        {'content': '<p style="text-align: left;"><a '
-                                    'target="_blank" '
-                                    'href="http://www.youtube.com/EPFLstudents"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'YouTube" '
-                                    'src="/files/buttons/YouTube-social-square_red_48px.png?uuid=default:f9ad6a38-48ec-4629-befe-080249712f3d" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://www.facebook.com/EPFL.ch"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'Facebook" '
-                                    'src="/files/buttons/FB-f-Logo__blue_58.png?uuid=default:187bafe8-c769-4aee-879b-7d2920600f30" '
-                                    '/></a>&nbsp; &nbsp; &nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://twitter.com/EPFL_en"><img '
-                                    'width="25" height="21" alt="EPFL on '
-                                    'Twitter" '
-                                    'src="/files/buttons/Twitter_logo_blue.png?uuid=default:7b12cfa6-30f8-4d08-9849-1096739f5eb2" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="https://instagram.com/epflcampus/"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'Instagram" '
-                                    'src="/files/buttons/insta_logo.jpg?uuid=default:8002075d-fb77-46dd-bdaf-79cd4855a818" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://studyingatepfl.tumblr.com/"><img '
-                                    'width="25" height="25" alt="tumblr" '
-                                    'src="/files/buttons/tumblr.png?uuid=default:073896a0-c6cd-46cb-82ce-342f5d293110" '
-                                    '/></a></p> ',
-                         'title': 'FOLLOW EPFL',
-                         'type': 'text'}],
-            'title': 'Applied Mathematics'},
-           {'nb_boxes': 9,
-            'pid': '94953',
-            'sidebar': [{'content': '<p>In case of specific questions about '
-                                    'this program, please contact the '
-                                    'Architecture Section:</p> <div '
-                                    'class="button mail"><a '
-                                    'href="mailto:laure.palluel@epfl.ch"><button '
-                                    'class="icon"></button> <span '
-                                    'class="label">Laure Kochnitzky Palluel<br '
-                                    '/>  </span></a> </div> <p>&nbsp;</p> <div '
-                                    'class="button information"><a '
-                                    'href="http://sar.epfl.ch"><button '
-                                    'class="icon"></button> <span '
-                                    'class="label">See the section\'s '
-                                    'website</span></a></div> ',
-                         'title': 'Contact',
-                         'type': 'text'},
-                        {'content': '<p style="text-align: center;"><a '
-                                    'target="_blank" '
-                                    'onclick="_gaq.push([\'_trackEvent\', '
-                                    '\'ENAC_ARCHI_MA\', \'download\']);" '
-                                    'href="/files/brochures/ENAC_ARCHI_MA.pdf?uuid=default:fcde6d9a-2737-45c0-8cb9-50c23db49f11"><img '
-                                    'width="150" height="212" '
-                                    'alt="Architecture brochure" '
-                                    'src="/files/brochures/covers/ENAC_ARCHI_MA.jpg?uuid=default:ece8d224-4873-4ac9-8b93-8262dac23efb" '
-                                    '/></a></p> ',
-                         'title': 'Download',
-                         'type': 'text'},
-                        {'content': '<p><a href="http://phd.epfl.ch/home" '
-                                    'target="_blank"><span '
-                                    'class="fleche">phd.epfl.ch</span></a></p> ',
-                         'title': 'Also interested in a PhD? ',
-                         'type': 'text'},
-                        {'content': '<p style="text-align: left;"><a '
-                                    'target="_blank" '
-                                    'href="http://www.youtube.com/EPFLstudents"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'YouTube" '
-                                    'src="/files/buttons/YouTube-social-square_red_48px.png?uuid=default:f9ad6a38-48ec-4629-befe-080249712f3d" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://www.facebook.com/EPFL.ch"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'Facebook" '
-                                    'src="/files/buttons/FB-f-Logo__blue_58.png?uuid=default:187bafe8-c769-4aee-879b-7d2920600f30" '
-                                    '/></a>&nbsp; &nbsp; &nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://twitter.com/EPFL_en"><img '
-                                    'width="25" height="21" alt="EPFL on '
-                                    'Twitter" '
-                                    'src="/files/buttons/Twitter_logo_blue.png?uuid=default:7b12cfa6-30f8-4d08-9849-1096739f5eb2" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="https://instagram.com/epflcampus/"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'Instagram" '
-                                    'src="/files/buttons/insta_logo.jpg?uuid=default:8002075d-fb77-46dd-bdaf-79cd4855a818" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://studyingatepfl.tumblr.com/"><img '
-                                    'width="25" height="25" alt="tumblr" '
-                                    'src="/files/buttons/tumblr.png?uuid=default:073896a0-c6cd-46cb-82ce-342f5d293110" '
-                                    '/></a></p> ',
-                         'title': 'FOLLOW EPFL',
-                         'type': 'text'}],
-            'title': 'Architecture'},
-           {'nb_boxes': 9,
-            'pid': '95040',
-            'sidebar': [{'content': '<p>In case of specific questions about '
-                                    'this program, please contact the Life '
-                                    'Sciences and Technology section:</p> <div '
-                                    'class="button mail"><a '
-                                    'href="mailto:master-stv@epfl.ch"><button '
-                                    'class="icon"></button> <span '
-                                    'class="label">master-stv@epfl.ch<br />  '
-                                    '</span></a> </div> <p>&nbsp;</p> <div '
-                                    'class="button information"><a '
-                                    'href="http://ssv.epfl.ch/home"><button '
-                                    'class="icon"></button> <span '
-                                    'class="label">See the section\'s '
-                                    'website</span></a></div> ',
-                         'title': 'Contact',
-                         'type': 'text'},
-                        {'content': '<p><a href="http://phd.epfl.ch/home" '
-                                    'target="_blank"><span '
-                                    'class="fleche">phd.epfl.ch</span></a></p> ',
-                         'title': 'Also interested in a PhD? ',
-                         'type': 'text'},
-                        {'content': '<p style="text-align: left;"><a '
-                                    'target="_blank" '
-                                    'href="http://www.youtube.com/EPFLstudents"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'YouTube" '
-                                    'src="/files/buttons/YouTube-social-square_red_48px.png?uuid=default:f9ad6a38-48ec-4629-befe-080249712f3d" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://www.facebook.com/EPFL.ch"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'Facebook" '
-                                    'src="/files/buttons/FB-f-Logo__blue_58.png?uuid=default:187bafe8-c769-4aee-879b-7d2920600f30" '
-                                    '/></a>&nbsp; &nbsp; &nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://twitter.com/EPFL_en"><img '
-                                    'width="25" height="21" alt="EPFL on '
-                                    'Twitter" '
-                                    'src="/files/buttons/Twitter_logo_blue.png?uuid=default:7b12cfa6-30f8-4d08-9849-1096739f5eb2" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="https://instagram.com/epflcampus/"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'Instagram" '
-                                    'src="/files/buttons/insta_logo.jpg?uuid=default:8002075d-fb77-46dd-bdaf-79cd4855a818" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://studyingatepfl.tumblr.com/"><img '
-                                    'width="25" height="25" alt="tumblr" '
-                                    'src="/files/buttons/tumblr.png?uuid=default:073896a0-c6cd-46cb-82ce-342f5d293110" '
-                                    '/></a></p> ',
-                         'title': 'FOLLOW EPFL',
-                         'type': 'text'}],
-            'title': 'Bioengineering'},
-           {'nb_boxes': 6,
-            'pid': '139831',
-            'sidebar': [{'content': '<p>In case of specific questions about '
-                                    'this program, please contact the School '
-                                    'of Computer and Communication '
-                                    'Sciences:</p> <div class="button mail"><a '
-                                    'href="mailto:sylviane.dalmas@epfl.ch"><button '
-                                    'class="icon"></button> <span '
-                                    'class="label">Sylviane Dal Mas<br />  '
-                                    '</span></a> </div> <p>&nbsp;</p> <div '
-                                    'class="button information"><a '
-                                    'href="http://ic.epfl.ch/data-science"><button '
-                                    'class="icon"></button> <span '
-                                    'class="label">See the school\'s '
-                                    'website</span></a></div> ',
-                         'title': 'Contact',
-                         'type': 'text'},
-                        {'content': '<p><a href="http://phd.epfl.ch"><span '
-                                    'class="fleche">phd.epfl.ch</span></a></p> ',
-                         'title': 'Also interested in a PhD ?',
-                         'type': 'text'},
-                        {'content': '<p style="text-align: left;"><a '
-                                    'target="_blank" '
-                                    'href="http://www.youtube.com/EPFLstudents"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'YouTube" '
-                                    'src="/files/buttons/YouTube-social-square_red_48px.png?uuid=default:f9ad6a38-48ec-4629-befe-080249712f3d" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://www.facebook.com/EPFL.ch"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'Facebook" '
-                                    'src="/files/buttons/FB-f-Logo__blue_58.png?uuid=default:187bafe8-c769-4aee-879b-7d2920600f30" '
-                                    '/></a>&nbsp; &nbsp; &nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://twitter.com/EPFL"><img '
-                                    'width="25" height="21" alt="EPFL on '
-                                    'Twitter" '
-                                    'src="/files/buttons/Twitter_logo_blue.png?uuid=default:7b12cfa6-30f8-4d08-9849-1096739f5eb2" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="https://instagram.com/epflcampus/"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'Instagram" '
-                                    'src="/files/buttons/insta_logo.jpg?uuid=default:8002075d-fb77-46dd-bdaf-79cd4855a818" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://studyingatepfl.tumblr.com/"><img '
-                                    'width="25" height="25" alt="tumblr" '
-                                    'src="/files/buttons/tumblr.png?uuid=default:073896a0-c6cd-46cb-82ce-342f5d293110" '
-                                    '/></a></p> ',
-                         'title': 'Follow EPFL',
-                         'type': 'text'}],
-            'title': 'Data Science'},
-           {'nb_boxes': 8,
-            'pid': '95166',
-            'sidebar': [{'content': '<p>In case of specific questions about '
-                                    'this program, please contact the '
-                                    'Chemistry section:</p> <div class="button '
-                                    'mail"><a '
-                                    'href="mailto:scgc@epfl.ch"><button '
-                                    'class="icon"></button> <span '
-                                    'class="label">Dr. Jean-Luc Marendaz <br '
-                                    '/>  </span></a> </div> <p>&nbsp;</p> <div '
-                                    'class="button information"><a '
-                                    'href="http://scgc.epfl.ch/undergraduate"><button '
-                                    'class="icon"></button> <span '
-                                    'class="label">See the section\'s '
-                                    'website</span></a></div> ',
-                         'title': 'Contact',
-                         'type': 'text'},
-                        {'content': '<p style="text-align: center;"><a '
-                                    'href="/files/brochures/SB_CBE_MA.pdf?uuid=default:8af788fd-df7a-4c8a-a91d-938422799246" '
-                                    'onclick="_gaq.push([\'_trackEvent\', '
-                                    '\'SB_CBE_MA\', \'download\']);" '
-                                    'target="_blank"><img width="150" '
-                                    'height="212" '
-                                    'src="/files/brochures/covers/SB_CBE_MA.jpg?uuid=default:42ba4a5c-ccda-4a1d-9cda-382ca9fcc5c6" '
-                                    'alt="Chemical Engineering brochure" '
-                                    '/></a></p> ',
-                         'title': 'Download',
-                         'type': 'text'},
-                        {'content': '<p><a href="http://phd.epfl.ch/home" '
-                                    'target="_blank"><span '
-                                    'class="fleche">phd.epfl.ch</span></a></p> ',
-                         'title': 'Also interested in a PhD? ',
-                         'type': 'text'},
-                        {'content': '<p style="text-align: left;"><a '
-                                    'target="_blank" '
-                                    'href="http://www.youtube.com/EPFLstudents"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'YouTube" '
-                                    'src="/files/buttons/YouTube-social-square_red_48px.png?uuid=default:f9ad6a38-48ec-4629-befe-080249712f3d" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://www.facebook.com/EPFL.ch"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'Facebook" '
-                                    'src="/files/buttons/FB-f-Logo__blue_58.png?uuid=default:187bafe8-c769-4aee-879b-7d2920600f30" '
-                                    '/></a>&nbsp; &nbsp; &nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://twitter.com/EPFL_en"><img '
-                                    'width="25" height="21" alt="EPFL on '
-                                    'Twitter" '
-                                    'src="/files/buttons/Twitter_logo_blue.png?uuid=default:7b12cfa6-30f8-4d08-9849-1096739f5eb2" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="https://instagram.com/epflcampus/"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'Instagram" '
-                                    'src="/files/buttons/insta_logo.jpg?uuid=default:8002075d-fb77-46dd-bdaf-79cd4855a818" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://studyingatepfl.tumblr.com/"><img '
-                                    'width="25" height="25" alt="tumblr" '
-                                    'src="/files/buttons/tumblr.png?uuid=default:073896a0-c6cd-46cb-82ce-342f5d293110" '
-                                    '/></a></p> ',
-                         'title': 'FOLLOW EPFL',
-                         'type': 'text'}],
-            'title': 'Chemical Engineering and Biotechnology'},
-           {'nb_boxes': 8,
-            'pid': '94947',
-            'sidebar': [{'content': '<p>In case of specific questions about '
-                                    'this program, please contact the Civil '
-                                    'Engineering Section:</p> <div '
-                                    'class="button mail"><a '
-                                    'href="http://enac.epfl.ch/page-2845-en.html"><button '
-                                    'class="icon"></button> <span '
-                                    'class="label">list of contacts<br />  '
-                                    '</span></a> </div> <p>&nbsp;</p> <div '
-                                    'class="button information"><a '
-                                    'href="http://sgc.epfl.ch"><button '
-                                    'class="icon"></button> <span '
-                                    'class="label">See the section\'s '
-                                    'website</span></a></div> ',
-                         'title': 'Contact',
-                         'type': 'text'},
-                        {'content': '<p style="text-align: center;"><a '
-                                    'target="_blank" '
-                                    'onclick="_gaq.push([\'_trackEvent\', '
-                                    '\'ENAC_CE_MA\', \'download\']);" '
-                                    'href="/files/brochures/ENAC_CE_MA.pdf?uuid=default:86b40975-0349-47df-87a1-6a47224d86bb"><img '
-                                    'width="150" height="212" alt="brochure" '
-                                    'src="/files/brochures/covers/ENAC_CE_MA.jpg?uuid=default:7e622094-cccc-4ea7-a615-aef6e16bb706" '
-                                    '/></a></p> ',
-                         'title': 'Download',
-                         'type': 'text'},
-                        {'content': '<p><a href="http://phd.epfl.ch/home" '
-                                    'target="_blank"><span '
-                                    'class="fleche">phd.epfl.ch</span></a></p> ',
-                         'title': 'Also interested in a PhD? ',
-                         'type': 'text'},
-                        {'content': '<p style="text-align: left;"><a '
-                                    'href="http://www.youtube.com/EPFLstudents" '
-                                    'target="_blank"><img width="25" '
-                                    'height="25" alt="EPFL on YouTube" '
-                                    'src="/files/buttons/YouTube-social-square_red_48px.png?uuid=default:f9ad6a38-48ec-4629-befe-080249712f3d" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://www.facebook.com/EPFL.ch"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'Facebook" '
-                                    'src="/files/buttons/FB-f-Logo__blue_58.png?uuid=default:187bafe8-c769-4aee-879b-7d2920600f30" '
-                                    '/></a>&nbsp; &nbsp; &nbsp; <a '
-                                    'href="http://twitter.com/EPFL_en" '
-                                    'target="_blank"><img width="25" '
-                                    'height="21" alt="EPFL on Twitter" '
-                                    'src="/files/buttons/Twitter_logo_blue.png?uuid=default:7b12cfa6-30f8-4d08-9849-1096739f5eb2" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://instagram.com/epflcampus#"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'Instagram" '
-                                    'src="/files/buttons/insta_logo.jpg?uuid=default:8002075d-fb77-46dd-bdaf-79cd4855a818" '
-                                    '/></a></p> ',
-                         'title': 'FOLLOW EPFL',
-                         'type': 'text'}],
-            'title': 'Civil Engineering'},
-           {'nb_boxes': 8,
-            'pid': '95030',
-            'sidebar': [{'content': '<p>In case of specific questions about '
-                                    'this program, please contact the '
-                                    'Communication Systems section:</p> <div '
-                                    'class="button mail"><a '
-                                    'href="mailto:sylviane.dalmas@epfl.ch"><button '
-                                    'class="icon"></button> <span '
-                                    'class="label">Sylviane Dal Mas<br />  '
-                                    '</span></a> </div> <p>&nbsp;</p> <div '
-                                    'class="button information"><a '
-                                    'href="http://ic.epfl.ch/communication-systems"><button '
-                                    'class="icon"></button> <span '
-                                    'class="label">See the section\'s '
-                                    'website</span></a></div> ',
-                         'title': 'Contact',
-                         'type': 'text'},
-                        {'content': '<p style="text-align: center;"><a '
-                                    'target="_blank" '
-                                    'onclick="_gaq.push([\'_trackEvent\', '
-                                    '\'IC_SYSCOM_MA\', \'download\']);" '
-                                    'href="/files/brochures/IC_COM_MA.pdf?uuid=default:7f6dc40c-eccf-46bb-b5f8-3718898599b9"><img '
-                                    'width="150" height="212" alt="brochure" '
-                                    'src="/files/brochures/covers/IC_COM_MA.jpg?uuid=default:d98f3f7f-05ea-4afe-bf16-0d1fbf1c4e85" '
-                                    '/></a></p> ',
-                         'title': 'Download',
-                         'type': 'text'},
-                        {'content': '<p><a href="http://phd.epfl.ch/home" '
-                                    'target="_blank"><span '
-                                    'class="fleche">phd.epfl.ch</span></a></p> ',
-                         'title': 'Also interested in a PhD? ',
-                         'type': 'text'},
-                        {'content': '<p style="text-align: left;"><a '
-                                    'target="_blank" '
-                                    'href="http://www.youtube.com/EPFLstudents"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'YouTube" '
-                                    'src="/files/buttons/YouTube-social-square_red_48px.png?uuid=default:f9ad6a38-48ec-4629-befe-080249712f3d" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://www.facebook.com/EPFL.ch"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'Facebook" '
-                                    'src="/files/buttons/FB-f-Logo__blue_58.png?uuid=default:187bafe8-c769-4aee-879b-7d2920600f30" '
-                                    '/></a>&nbsp; &nbsp; &nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://twitter.com/EPFL_en"><img '
-                                    'width="25" height="21" alt="EPFL on '
-                                    'Twitter" '
-                                    'src="/files/buttons/Twitter_logo_blue.png?uuid=default:7b12cfa6-30f8-4d08-9849-1096739f5eb2" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="https://instagram.com/epflcampus/"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'Instagram" '
-                                    'src="/files/buttons/insta_logo.jpg?uuid=default:8002075d-fb77-46dd-bdaf-79cd4855a818" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://studyingatepfl.tumblr.com/"><img '
-                                    'width="25" height="25" alt="tumblr" '
-                                    'src="/files/buttons/tumblr.png?uuid=default:073896a0-c6cd-46cb-82ce-342f5d293110" '
-                                    '/></a></p> ',
-                         'title': 'FOLLOW EPFL',
-                         'type': 'text'}],
-            'title': 'Communication Systems'},
-           {'nb_boxes': 8,
-            'pid': '95077',
-            'sidebar': [{'content': '<p>In case of specific questions about '
-                                    'this program, please contact the '
-                                    'Computational Science and Enginnering '
-                                    'group:</p> <div class="button mail"><a '
-                                    'href="mailto:simone.deparis@epfl.ch"><button '
-                                    'class="icon"></button> <span '
-                                    'class="label">Dr. Simone Deparis <br />  '
-                                    '</span></a> </div> <p>&nbsp;</p> <div '
-                                    'class="button information"><a '
-                                    'href="http://cse.epfl.ch/Master"><button '
-                                    'class="icon"></button> <span '
-                                    'class="label">See the group\'s website<br '
-                                    '/>  </span></a> </div> ',
-                         'title': 'Contact',
-                         'type': 'text'},
-                        {'content': '<p style="text-align: center;"><a '
-                                    'href="/files/brochures/SB_CSE_MA.pdf?uuid=default:5c1725f9-299a-41be-a5cb-209268733032" '
-                                    'onclick="_gaq.push([\'_trackEvent\', '
-                                    '\'SB_CSE_MA\', \'download\']);" '
-                                    'target="_blank"><img width="150" '
-                                    'height="212" '
-                                    'src="/files/brochures/covers/SB_CSE_MA.jpg?uuid=default:0d279cfa-d644-4c35-ac7f-bbdcb527e711" '
-                                    'alt="brochure" /></a></p> ',
-                         'title': 'Download',
-                         'type': 'text'},
-                        {'content': '<p><a href="http://phd.epfl.ch/home" '
-                                    'target="_blank"><span '
-                                    'class="fleche">phd.epfl.ch</span></a></p> ',
-                         'title': 'Also interested in a PhD? ',
-                         'type': 'text'},
-                        {'content': '<p style="text-align: left;"><a '
-                                    'target="_blank" '
-                                    'href="http://www.youtube.com/EPFLstudents"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'YouTube" '
-                                    'src="/files/buttons/YouTube-social-square_red_48px.png?uuid=default:f9ad6a38-48ec-4629-befe-080249712f3d" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://www.facebook.com/EPFL.ch"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'Facebook" '
-                                    'src="/files/buttons/FB-f-Logo__blue_58.png?uuid=default:187bafe8-c769-4aee-879b-7d2920600f30" '
-                                    '/></a>&nbsp; &nbsp; &nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://twitter.com/EPFL_en"><img '
-                                    'width="25" height="21" alt="EPFL on '
-                                    'Twitter" '
-                                    'src="/files/buttons/Twitter_logo_blue.png?uuid=default:7b12cfa6-30f8-4d08-9849-1096739f5eb2" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="https://instagram.com/epflcampus/"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'Instagram" '
-                                    'src="/files/buttons/insta_logo.jpg?uuid=default:8002075d-fb77-46dd-bdaf-79cd4855a818" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://studyingatepfl.tumblr.com/"><img '
-                                    'width="25" height="25" alt="tumblr" '
-                                    'src="/files/buttons/tumblr.png?uuid=default:073896a0-c6cd-46cb-82ce-342f5d293110" '
-                                    '/></a></p> ',
-                         'title': 'FOLLOW EPFL',
-                         'type': 'text'}],
-            'title': 'Computational Science and Engineering'},
-           {'nb_boxes': 8,
-            'pid': '95033',
-            'sidebar': [{'content': '<p>In case of specific questions about '
-                                    'this program, please contact the '
-                                    'Communication Systems section:</p> <div '
-                                    'class="button mail"><a '
-                                    'href="mailto:sylviane.dalmas@epfl.ch"><button '
-                                    'class="icon"></button> <span '
-                                    'class="label">Sylviane Dal Mas<br />  '
-                                    '</span></a> </div> <p>&nbsp;</p> <div '
-                                    'class="button information"><a '
-                                    'href="http://ic.epfl.ch/computer-science"><button '
-                                    'class="icon"></button> <span '
-                                    'class="label">See the section\'s '
-                                    'website</span></a></div> ',
-                         'title': 'Contact',
-                         'type': 'text'},
-                        {'content': '<p style="text-align: center;"><a '
-                                    'href="/files/brochures/IC_INFO_MA.pdf?uuid=default:7832962d-54ba-4111-9d08-00d4b4925d0e" '
-                                    'onclick="_gaq.push([\'_trackEvent\', '
-                                    '\'IC_INFO_MA\', \'download\']);" '
-                                    'target="_blank"><img width="150" '
-                                    'height="212" '
-                                    'src="/files/brochures/covers/IC_INFO_MA.jpg?uuid=default:508d851d-3217-4862-95d5-0373bff1b82d" '
-                                    'alt="brochure" /></a></p> ',
-                         'title': 'Download',
-                         'type': 'text'},
-                        {'content': '<p><a href="http://phd.epfl.ch/home" '
-                                    'target="_blank"><span '
-                                    'class="fleche">phd.epfl.ch</span></a></p> ',
-                         'title': 'Also interested in a PhD? ',
-                         'type': 'text'},
-                        {'content': '<p style="text-align: left;"><a '
-                                    'target="_blank" '
-                                    'href="http://www.youtube.com/EPFLstudents"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'YouTube" '
-                                    'src="/files/buttons/YouTube-social-square_red_48px.png?uuid=default:f9ad6a38-48ec-4629-befe-080249712f3d" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://www.facebook.com/EPFL.ch"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'Facebook" '
-                                    'src="/files/buttons/FB-f-Logo__blue_58.png?uuid=default:187bafe8-c769-4aee-879b-7d2920600f30" '
-                                    '/></a>&nbsp; &nbsp; &nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://twitter.com/EPFL_en"><img '
-                                    'width="25" height="21" alt="EPFL on '
-                                    'Twitter" '
-                                    'src="/files/buttons/Twitter_logo_blue.png?uuid=default:7b12cfa6-30f8-4d08-9849-1096739f5eb2" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="https://instagram.com/epflcampus/"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'Instagram" '
-                                    'src="/files/buttons/insta_logo.jpg?uuid=default:8002075d-fb77-46dd-bdaf-79cd4855a818" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://studyingatepfl.tumblr.com/"><img '
-                                    'width="25" height="25" alt="tumblr" '
-                                    'src="/files/buttons/tumblr.png?uuid=default:073896a0-c6cd-46cb-82ce-342f5d293110" '
-                                    '/></a></p> ',
-                         'title': 'FOLLOW EPFL',
-                         'type': 'text'}],
-            'title': 'Computer Science'},
-           {'nb_boxes': 7,
-            'pid': '128190',
-            'sidebar': [{'content': '<p>In case of specific questions about '
-                                    'this program, please contact:</p> <div '
-                                    'class="button mail"><button '
-                                    'class="icon"></button><a '
-                                    'href="mailto:master-dh@epfl.ch"><span '
-                                    'class="label">master-dh@epfl.ch  '
-                                    '</span></a></div> <p>&nbsp;</p> <div '
-                                    'class="button information"><a '
-                                    'href="http://cdh.epfl.ch/dh-master" '
-                                    'target="_blank"><button '
-                                    'class="icon"></button> <span '
-                                    'class="label">See the section\'s '
-                                    'website</span></a></div> ',
-                         'title': 'Contact',
-                         'type': 'text'},
-                        {'content': '<p style="text-align: center;"><a '
-                                    'target="_blank" '
-                                    'onclick="_gaq.push([\'_trackEvent\', '
-                                    '\'CDH_DH_MA\', \'download\']);" '
-                                    'href="/files/brochures/CDH_DH_MA.pdf?uuid=default:f99edb0f-69d9-44eb-9c77-880633d9c86e">  '
-                                    '<img width="150" height="212" '
-                                    'alt="Digital Humanities" '
-                                    'src="/files/brochures/covers/CDH_DH_MA_COVER.jpg?uuid=default:5f2d245c-34c1-4d9b-bca7-20891d14610b" '
-                                    '/></a></p> ',
-                         'title': 'DOWNLOAD',
-                         'type': 'text'}],
-            'title': 'Digital Humanities'},
-           {'nb_boxes': 8,
-            'pid': '95013',
-            'sidebar': [{'content': '<p>In case of specific questions about '
-                                    'this program, please contact the '
-                                    'Electrical Engineering section:</p> <div '
-                                    'class="button mail"><a '
-                                    'href="mailto:philippe.gay-balmaz@epfl.ch"><button '
-                                    'class="icon"></button> <span '
-                                    'class="label">Dr. Philippe Gay-Balmaz<br '
-                                    '/>  </span></a> </div> <p>&nbsp;</p> <div '
-                                    'class="button information"><a '
-                                    'href="http://sti.epfl.ch/page-1546-en.html"><button '
-                                    'class="icon"></button> <span '
-                                    'class="label">See the section\'s '
-                                    'website</span></a></div> ',
-                         'title': 'Contact',
-                         'type': 'text'},
-                        {'content': '<p style="text-align: center;"><a '
-                                    'target="_blank" '
-                                    'onclick="_gaq.push([\'_trackEvent\', '
-                                    '\'STI_EL_MA\', \'download\']);" '
-                                    'href="/files/brochures/STI_EL_MA.pdf?uuid=default:6bcac223-8b4b-4bcd-a42e-bcdb232400ff"><img '
-                                    'width="150" height="212" alt="brochure" '
-                                    'src="/files/brochures/covers/STI_EL_MA.jpg?uuid=default:c5289a04-cd44-4ad7-b7c6-aa3abe723b67" '
-                                    '/></a></p> ',
-                         'title': 'Download',
-                         'type': 'text'},
-                        {'content': '<p><a href="http://phd.epfl.ch/home" '
-                                    'target="_blank"><span '
-                                    'class="fleche">phd.epfl.ch</span></a></p> ',
-                         'title': 'Also interested in a PhD? ',
-                         'type': 'text'},
-                        {'content': '<p style="text-align: left;"><a '
-                                    'target="_blank" '
-                                    'href="http://www.youtube.com/EPFLstudents"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'YouTube" '
-                                    'src="/files/buttons/YouTube-social-square_red_48px.png?uuid=default:f9ad6a38-48ec-4629-befe-080249712f3d" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://www.facebook.com/EPFL.ch"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'Facebook" '
-                                    'src="/files/buttons/FB-f-Logo__blue_58.png?uuid=default:187bafe8-c769-4aee-879b-7d2920600f30" '
-                                    '/></a>&nbsp; &nbsp; &nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://twitter.com/EPFL_en"><img '
-                                    'width="25" height="21" alt="EPFL on '
-                                    'Twitter" '
-                                    'src="/files/buttons/Twitter_logo_blue.png?uuid=default:7b12cfa6-30f8-4d08-9849-1096739f5eb2" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="https://instagram.com/epflcampus/"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'Instagram" '
-                                    'src="/files/buttons/insta_logo.jpg?uuid=default:8002075d-fb77-46dd-bdaf-79cd4855a818" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://studyingatepfl.tumblr.com/"><img '
-                                    'width="25" height="25" alt="tumblr" '
-                                    'src="/files/buttons/tumblr.png?uuid=default:073896a0-c6cd-46cb-82ce-342f5d293110" '
-                                    '/></a></p> ',
-                         'title': 'FOLLOW EPFL',
-                         'type': 'text'}],
-            'title': 'Electrical and Electronic Engineering'},
-           {'nb_boxes': 7,
-            'pid': '95060',
-            'sidebar': [{'content': '<p>In case of specific questions about '
-                                    'this program, please contact EPFL Middle '
-                                    'East:</p> <div class="button mail"><a '
-                                    'href="mailto:suzanne.buffat@epfl.ch"><button '
-                                    'class="icon"></button> <span '
-                                    'class="label">Ms. Suzanne Buffat<br />  '
-                                    '</span></a> </div> <p>&nbsp;</p> <div '
-                                    'class="button information"><a '
-                                    'href="http://www.epfl.ae/content/msc-phd-education/msc-programs"><button '
-                                    'class="icon"></button> <span '
-                                    'class="label">See EPFL Middle East\'s '
-                                    'website</span></a></div> ',
-                         'title': 'Contact',
-                         'type': 'text'},
-                        {'content': '<p style="text-align: center;"><a '
-                                    'target="_blank" '
-                                    'onclick="_gaq.push([\'_trackEvent\', '
-                                    '\'STI_MES_MA\', \'download\']);" '
-                                    'href="/files/brochures/STI_MES_MA.pdf?uuid=default:1c3a6e30-3b76-4463-8f13-ca242f89eefa"><img '
-                                    'width="150" height="212" alt="brochure" '
-                                    'src="/files/brochures/covers/STI_MES_MA.jpg?uuid=default:00fd9c26-c051-433e-973d-6c8950e4265b" '
-                                    '/></a></p> ',
-                         'title': 'Download',
-                         'type': 'text'},
-                        {'content': '<p><a href="http://phd.epfl.ch/home" '
-                                    'target="_blank"><span '
-                                    'class="fleche">phd.epfl.ch</span></a></p> ',
-                         'title': 'Also interested in a PhD? ',
-                         'type': 'text'},
-                        {'content': '<p style="text-align: left;"><a '
-                                    'href="http://www.youtube.com/EPFLstudents" '
-                                    'target="_blank"><img width="25" '
-                                    'height="25" alt="EPFL on YouTube" '
-                                    'src="/files/buttons/YouTube-social-square_red_48px.png?uuid=default:f9ad6a38-48ec-4629-befe-080249712f3d" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://www.facebook.com/EPFL.ch"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'Facebook" '
-                                    'src="/files/buttons/FB-f-Logo__blue_58.png?uuid=default:187bafe8-c769-4aee-879b-7d2920600f30" '
-                                    '/></a>&nbsp; &nbsp; &nbsp; <a '
-                                    'href="http://twitter.com/EPFL_en" '
-                                    'target="_blank"><img width="25" '
-                                    'height="21" alt="EPFL on Twitter" '
-                                    'src="/files/buttons/Twitter_logo_blue.png?uuid=default:7b12cfa6-30f8-4d08-9849-1096739f5eb2" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://instagram.com/epflcampus#"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'Instagram" '
-                                    'src="/files/buttons/insta_logo.jpg?uuid=default:8002075d-fb77-46dd-bdaf-79cd4855a818" '
-                                    '/></a></p> ',
-                         'title': 'FOLLOW EPFL',
-                         'type': 'text'}],
-            'title': 'Energy Management and Sustainability'},
-           {'nb_boxes': 7,
-            'pid': '94769',
-            'sidebar': [{'content': '<p>In case of specific questions about '
-                                    'this program, please contact the '
-                                    'Environmental Engineering Section:</p> '
-                                    '<div class="button mail"><a '
-                                    'href="mailto:secretariat.ssie@epfl.ch"><button '
-                                    'class="icon"></button>     <span '
-                                    'class="label">secretariat.ssie@epfl.ch</span></a></div> '
-                                    '<p>&nbsp;</p> <div class="button '
-                                    'information"><a '
-                                    'href="http://ssie.epfl.ch"><button '
-                                    'class="icon"></button> <span '
-                                    'class="label">See the section\'s '
-                                    'website</span></a></div> ',
-                         'title': 'Contact',
-                         'type': 'text'},
-                        {'content': '<p style="text-align: center;"><a '
-                                    'target="_blank" '
-                                    'onclick="_gaq.push([\'_trackEvent\', '
-                                    '\'ENAC_SIE_MA\', \'download\']);" '
-                                    'href="/files/brochures/ENAC_SIE_MA.pdf?uuid=default:53f97457-749e-4ee7-a370-931c14415463"><img '
-                                    'width="150" height="212" alt="SIE '
-                                    'brochure" '
-                                    'src="/files/brochures/covers/ENAC_SIE_MA.jpg?uuid=default:f5389764-7d9d-4087-ae09-dc242f2a2d05" '
-                                    '/></a></p> ',
-                         'title': 'Download',
-                         'type': 'text'},
-                        {'content': '<p><a href="http://phd.epfl.ch/home" '
-                                    'target="_blank"><span '
-                                    'class="fleche">phd.epfl.ch</span></a></p> ',
-                         'title': 'Also interested in a PhD? ',
-                         'type': 'text'},
-                        {'content': '<p style="text-align: left;"><a '
-                                    'target="_blank" '
-                                    'href="http://www.youtube.com/EPFLstudents"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'YouTube" '
-                                    'src="/files/buttons/YouTube-social-square_red_48px.png?uuid=default:f9ad6a38-48ec-4629-befe-080249712f3d" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://www.facebook.com/EPFL.ch"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'Facebook" '
-                                    'src="/files/buttons/FB-f-Logo__blue_58.png?uuid=default:187bafe8-c769-4aee-879b-7d2920600f30" '
-                                    '/></a>&nbsp; &nbsp; &nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://twitter.com/EPFL_en"><img '
-                                    'width="25" height="21" alt="EPFL on '
-                                    'Twitter" '
-                                    'src="/files/buttons/Twitter_logo_blue.png?uuid=default:7b12cfa6-30f8-4d08-9849-1096739f5eb2" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="https://instagram.com/epflcampus/"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'Instagram" '
-                                    'src="/files/buttons/insta_logo.jpg?uuid=default:8002075d-fb77-46dd-bdaf-79cd4855a818" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://studyingatepfl.tumblr.com/"><img '
-                                    'width="25" height="25" alt="tumblr" '
-                                    'src="/files/buttons/tumblr.png?uuid=default:073896a0-c6cd-46cb-82ce-342f5d293110" '
-                                    '/></a></p> ',
-                         'title': 'FOLLOW EPFL',
-                         'type': 'text'}],
-            'title': 'Environmental Sciences and Engineering'},
-           {'nb_boxes': 7,
-            'pid': '95046',
-            'sidebar': [{'content': '<p>In case of specific questions about '
-                                    'this program, please contact the Swiss '
-                                    'Finance Institute:</p> <div class="button '
-                                    'mail"><a '
-                                    'href="mailto:julien.hugonnier@epfl.ch"><button '
-                                    'class="icon"></button> <span '
-                                    'class="label">Prof. Julien Hugonnier<br '
-                                    '/>  </span></a> </div> <p>&nbsp;</p> <div '
-                                    'class="button information"><a '
-                                    'href="http://sfi.epfl.ch/mfe"><button '
-                                    'class="icon"></button> <span '
-                                    'class="label">See the institute\'s '
-                                    'website</span></a></div> ',
-                         'title': 'Contact',
-                         'type': 'text'},
-                        {'content': '<p style="text-align: center;"><a '
-                                    'target="_blank" '
-                                    'onclick="_gaq.push([\'_trackEvent\', '
-                                    '\'CDM_FE_MA\', \'download\']);" '
-                                    'href="/files/brochures/CDM_FE_MA.pdf?uuid=default:6677fcee-b85c-43af-817e-91ce153d7f88"><img '
-                                    'width="150" height="212" alt="FE '
-                                    'brochure" '
-                                    'src="/files/brochures/covers/CDM_FE_MA.jpg?uuid=default:25b67f47-c4e0-45e7-918a-ace14517749d" '
-                                    '/></a></p> ',
-                         'title': 'Download',
-                         'type': 'text'},
-                        {'content': '<p><a href="http://phd.epfl.ch/home" '
-                                    'target="_blank"><span '
-                                    'class="fleche">phd.epfl.ch</span></a></p> ',
-                         'title': 'Also interested in a PhD? ',
-                         'type': 'text'},
-                        {'content': '<p style="text-align: left;"><a '
-                                    'target="_blank" '
-                                    'href="http://www.youtube.com/EPFLstudents"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'YouTube" '
-                                    'src="/files/buttons/YouTube-social-square_red_48px.png?uuid=default:f9ad6a38-48ec-4629-befe-080249712f3d" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://www.facebook.com/EPFL.ch"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'Facebook" '
-                                    'src="/files/buttons/FB-f-Logo__blue_58.png?uuid=default:187bafe8-c769-4aee-879b-7d2920600f30" '
-                                    '/></a>&nbsp; &nbsp; &nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://twitter.com/EPFL_en"><img '
-                                    'width="25" height="21" alt="EPFL on '
-                                    'Twitter" '
-                                    'src="/files/buttons/Twitter_logo_blue.png?uuid=default:7b12cfa6-30f8-4d08-9849-1096739f5eb2" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="https://instagram.com/epflcampus/"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'Instagram" '
-                                    'src="/files/buttons/insta_logo.jpg?uuid=default:8002075d-fb77-46dd-bdaf-79cd4855a818" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://studyingatepfl.tumblr.com/"><img '
-                                    'width="25" height="25" alt="tumblr" '
-                                    'src="/files/buttons/tumblr.png?uuid=default:073896a0-c6cd-46cb-82ce-342f5d293110" '
-                                    '/></a></p> ',
-                         'title': 'FOLLOW EPFL',
-                         'type': 'text'}],
-            'title': 'Financial Engineering'},
-           {'nb_boxes': 9,
-            'pid': '95037',
-            'sidebar': [{'content': '<p>In case of specific questions about '
-                                    'this program, please contact the Life '
-                                    'Sciences and Technology section:</p> <div '
-                                    'class="button mail"><a '
-                                    'href="mailto:master-stv@epfl.ch"><button '
-                                    'class="icon"></button> <span '
-                                    'class="label">master-stv@epfl.ch<br />  '
-                                    '</span></a> </div> <p>&nbsp;</p> <div '
-                                    'class="button information"><a '
-                                    'href="http://ssv.epfl.ch/home"><button '
-                                    'class="icon"></button> <span '
-                                    'class="label">See the section\'s '
-                                    'website</span></a></div> ',
-                         'title': 'Contact',
-                         'type': 'text'},
-                        {'content': '<p><a href="http://phd.epfl.ch/home" '
-                                    'target="_blank"><span '
-                                    'class="fleche">phd.epfl.ch</span></a></p> ',
-                         'title': 'Also interested in a PhD? ',
-                         'type': 'text'},
-                        {'content': '<p style="text-align: left;"><a '
-                                    'target="_blank" '
-                                    'href="http://www.youtube.com/EPFLstudents"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'YouTube" '
-                                    'src="/files/buttons/YouTube-social-square_red_48px.png?uuid=default:f9ad6a38-48ec-4629-befe-080249712f3d" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://www.facebook.com/EPFL.ch"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'Facebook" '
-                                    'src="/files/buttons/FB-f-Logo__blue_58.png?uuid=default:187bafe8-c769-4aee-879b-7d2920600f30" '
-                                    '/></a>&nbsp; &nbsp; &nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://twitter.com/EPFL_en"><img '
-                                    'width="25" height="21" alt="EPFL on '
-                                    'Twitter" '
-                                    'src="/files/buttons/Twitter_logo_blue.png?uuid=default:7b12cfa6-30f8-4d08-9849-1096739f5eb2" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="https://instagram.com/epflcampus/"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'Instagram" '
-                                    'src="/files/buttons/insta_logo.jpg?uuid=default:8002075d-fb77-46dd-bdaf-79cd4855a818" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://studyingatepfl.tumblr.com/"><img '
-                                    'width="25" height="25" alt="tumblr" '
-                                    'src="/files/buttons/tumblr.png?uuid=default:073896a0-c6cd-46cb-82ce-342f5d293110" '
-                                    '/></a></p> ',
-                         'title': 'FOLLOW EPFL',
-                         'type': 'text'},
-                        {'content': '<p style="text-align: center;"><a '
-                                    'target="_blank" '
-                                    'onclick="_gaq.push([\'_trackEvent\', '
-                                    '\'SV_LST_MA\', \'download\']);" '
-                                    'href="/files/brochures/SV_LST_MA.pdf?uuid=default:54a42680-a9ac-401c-944f-a41604ae56c6"><img '
-                                    'width="150" height="212" alt="LST '
-                                    'brochure" '
-                                    'src="/files/brochures/covers/SV_LST_MA.jpg?uuid=default:0e5b546b-7c92-44b2-a2ec-cf8b3ea36e81" '
-                                    '/></a></p> ',
-                         'title': 'Download',
-                         'type': 'text'}],
-            'title': 'Life Sciences and Technology'},
-           {'nb_boxes': 9,
-            'pid': '95042',
-            'sidebar': [{'content': '<p>In case of specific questions about '
-                                    'this program, please contact the '
-                                    'Management of Technology Institute:</p> '
-                                    '<div class="button mail"><a '
-                                    'href="mailto:francoise.jeannotat@epfl.ch"><button '
-                                    'class="icon"></button> <span '
-                                    'class="label">Ms. Fran&ccedil;oise '
-                                    'Jeannotat<br />  </span></a> </div> '
-                                    '<p>&nbsp;</p> <div class="button '
-                                    'information"><a '
-                                    'href="http://mtei.epfl.ch/master-mte"><button '
-                                    'class="icon"></button> <span '
-                                    'class="label">See the institute\'s '
-                                    'website</span></a></div> ',
-                         'title': 'Contact',
-                         'type': 'text'},
-                        {'content': '<p style="text-align: center;"><a '
-                                    'target="_blank" '
-                                    'onclick="_gaq.push([\'_trackEvent\', '
-                                    '\'CDM_MTE_MA\', \'download\']);" '
-                                    'href="/files/brochures/CDM_MTE_MA.pdf?uuid=default:b90cfe8d-167c-494c-97c2-db73ee4cf46e"><img '
-                                    'width="150" height="212" alt="MTE '
-                                    'brochure" '
-                                    'src="/files/brochures/covers/CDM_MTE_MA.jpg?uuid=default:6ec01e89-46dc-4046-a288-d161adc3259e" '
-                                    '/></a></p> ',
-                         'title': 'Download',
-                         'type': 'text'},
-                        {'content': '<p><a href="http://phd.epfl.ch/home" '
-                                    'target="_blank"><span '
-                                    'class="fleche">phd.epfl.ch</span></a></p> ',
-                         'title': 'Also interested in a PhD? ',
-                         'type': 'text'},
-                        {'content': '<p style="text-align: left;"><a '
-                                    'target="_blank" '
-                                    'href="http://www.youtube.com/EPFLstudents"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'YouTube" '
-                                    'src="/files/buttons/YouTube-social-square_red_48px.png?uuid=default:f9ad6a38-48ec-4629-befe-080249712f3d" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://www.facebook.com/EPFL.ch"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'Facebook" '
-                                    'src="/files/buttons/FB-f-Logo__blue_58.png?uuid=default:187bafe8-c769-4aee-879b-7d2920600f30" '
-                                    '/></a>&nbsp; &nbsp; &nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://twitter.com/EPFL_en"><img '
-                                    'width="25" height="21" alt="EPFL on '
-                                    'Twitter" '
-                                    'src="/files/buttons/Twitter_logo_blue.png?uuid=default:7b12cfa6-30f8-4d08-9849-1096739f5eb2" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="https://instagram.com/epflcampus/"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'Instagram" '
-                                    'src="/files/buttons/insta_logo.jpg?uuid=default:8002075d-fb77-46dd-bdaf-79cd4855a818" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://studyingatepfl.tumblr.com/"><img '
-                                    'width="25" height="25" alt="tumblr" '
-                                    'src="/files/buttons/tumblr.png?uuid=default:073896a0-c6cd-46cb-82ce-342f5d293110" '
-                                    '/></a></p> ',
-                         'title': 'FOLLOW EPFL',
-                         'type': 'text'}],
-            'title': 'Management, technology and entrepreneurship'},
-           {'nb_boxes': 9,
-            'pid': '95005',
-            'sidebar': [{'content': '<p>In case of specific questions about '
-                                    'this program, please contact the '
-                                    'Materials section:</p> <div class="button '
-                                    'mail"><a '
-                                    'href="mailto:homeira.sunderland@epfl.ch"><button '
-                                    'class="icon"></button> <span '
-                                    'class="label">Dr. Homeira Sunderland<br '
-                                    '/>  </span></a> </div> <p>&nbsp;</p> <div '
-                                    'class="button information"><a '
-                                    'href="http://sti.epfl.ch/smx/education"><button '
-                                    'class="icon"></button> <span '
-                                    'class="label">See the section\'s '
-                                    'website</span></a></div> ',
-                         'title': 'Contact',
-                         'type': 'text'},
-                        {'content': '<p style="text-align: center;"><a '
-                                    'href="/files/brochures/STI_MX_MA.pdf?uuid=default:abb5bc5c-a6ca-449f-a81c-2251dcdbb32c" '
-                                    'onclick="_gaq.push([\'_trackEvent\', '
-                                    '\'STI_MX_MA\', \'download\']);" '
-                                    'target="_blank"><img width="150" '
-                                    'height="212" '
-                                    'src="/files/brochures/covers/STI_MX_MA.jpg?uuid=default:54cd8b73-fff4-4019-91e6-0861c5745a90" '
-                                    'alt="Materials Science brochure" '
-                                    '/></a></p> ',
-                         'title': 'Download',
-                         'type': 'text'},
-                        {'content': '<p><a href="http://phd.epfl.ch/home" '
-                                    'target="_blank"><span '
-                                    'class="fleche">phd.epfl.ch</span></a></p> ',
-                         'title': 'Also interested in a PhD? ',
-                         'type': 'text'},
-                        {'content': '<p style="text-align: left;"><a '
-                                    'target="_blank" '
-                                    'href="http://www.youtube.com/EPFLstudents"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'YouTube" '
-                                    'src="/files/buttons/YouTube-social-square_red_48px.png?uuid=default:f9ad6a38-48ec-4629-befe-080249712f3d" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://www.facebook.com/EPFL.ch"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'Facebook" '
-                                    'src="/files/buttons/FB-f-Logo__blue_58.png?uuid=default:187bafe8-c769-4aee-879b-7d2920600f30" '
-                                    '/></a>&nbsp; &nbsp; &nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://twitter.com/EPFL_en"><img '
-                                    'width="25" height="21" alt="EPFL on '
-                                    'Twitter" '
-                                    'src="/files/buttons/Twitter_logo_blue.png?uuid=default:7b12cfa6-30f8-4d08-9849-1096739f5eb2" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="https://instagram.com/epflcampus/"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'Instagram" '
-                                    'src="/files/buttons/insta_logo.jpg?uuid=default:8002075d-fb77-46dd-bdaf-79cd4855a818" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://studyingatepfl.tumblr.com/"><img '
-                                    'width="25" height="25" alt="tumblr" '
-                                    'src="/files/buttons/tumblr.png?uuid=default:073896a0-c6cd-46cb-82ce-342f5d293110" '
-                                    '/></a></p> ',
-                         'title': 'FOLLOW EPFL',
-                         'type': 'text'}],
-            'title': 'Materials Science and Engineering'},
-           {'nb_boxes': 7,
-            'pid': '95075',
-            'sidebar': [{'content': '<p>In case of specific questions about '
-                                    'this program, please contact the '
-                                    'Mathematics section:</p> <div '
-                                    'class="button mail"><a '
-                                    'href="mailto:simone.deparis@epfl.ch"><button '
-                                    'class="icon"></button> <span '
-                                    'class="label">Dr. Simone Deparis <br />  '
-                                    '</span></a> </div> <p>&nbsp;</p> <div '
-                                    'class="button information"><a '
-                                    'href="http://sb.epfl.ch/page-2971-en.html"><button '
-                                    'class="icon"></button> <span '
-                                    'class="label">See the section\'s '
-                                    'website</span></a></div> ',
-                         'title': 'Contact',
-                         'type': 'text'},
-                        {'content': '<p><a href="http://phd.epfl.ch/home" '
-                                    'target="_blank"><span '
-                                    'class="fleche">phd.epfl.ch</span></a></p> ',
-                         'title': 'Also interested in a PhD? ',
-                         'type': 'text'},
-                        {'content': '<p style="text-align: left;"><a '
-                                    'target="_blank" '
-                                    'href="http://www.youtube.com/EPFLstudents"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'YouTube" '
-                                    'src="/files/buttons/YouTube-social-square_red_48px.png?uuid=default:f9ad6a38-48ec-4629-befe-080249712f3d" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://www.facebook.com/EPFL.ch"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'Facebook" '
-                                    'src="/files/buttons/FB-f-Logo__blue_58.png?uuid=default:187bafe8-c769-4aee-879b-7d2920600f30" '
-                                    '/></a>&nbsp; &nbsp; &nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://twitter.com/EPFL_en"><img '
-                                    'width="25" height="21" alt="EPFL on '
-                                    'Twitter" '
-                                    'src="/files/buttons/Twitter_logo_blue.png?uuid=default:7b12cfa6-30f8-4d08-9849-1096739f5eb2" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="https://instagram.com/epflcampus/"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'Instagram" '
-                                    'src="/files/buttons/insta_logo.jpg?uuid=default:8002075d-fb77-46dd-bdaf-79cd4855a818" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://studyingatepfl.tumblr.com/"><img '
-                                    'width="25" height="25" alt="tumblr" '
-                                    'src="/files/buttons/tumblr.png?uuid=default:073896a0-c6cd-46cb-82ce-342f5d293110" '
-                                    '/></a></p> ',
-                         'title': 'FOLLOW EPFL',
-                         'type': 'text'}],
-            'title': 'Mathematics'},
-           {'nb_boxes': 5,
-            'pid': '104644',
-            'sidebar': [{'content': '<p>In case of specific questions about '
-                                    'this program, please contact the '
-                                    'Mathematics section:</p> <div '
-                                    'class="button mail"><a '
-                                    'href="mailto:simone.deparis@epfl.ch"><button '
-                                    'class="icon"></button> <span '
-                                    'class="label">Dr. Simone Deparis<br />  '
-                                    '</span></a> </div> <p>&nbsp;</p> <div '
-                                    'class="button information"><a '
-                                    'href="http://sb.epfl.ch/page-2971-en.html"><button '
-                                    'class="icon"></button> <span '
-                                    'class="label">See the section\'s '
-                                    'website</span></a></div> ',
-                         'title': 'Contact',
-                         'type': 'text'},
-                        {'content': '<p><a href="http://phd.epfl.ch/home" '
-                                    'target="_blank"><span '
-                                    'class="fleche">phd.epfl.ch</span></a></p> ',
-                         'title': 'Also interested in a PhD? ',
-                         'type': 'text'},
-                        {'content': '<p style="text-align: left;"><a '
-                                    'target="_blank" '
-                                    'href="http://www.youtube.com/EPFLstudents"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'YouTube" '
-                                    'src="/files/buttons/YouTube-social-square_red_48px.png?uuid=default:f9ad6a38-48ec-4629-befe-080249712f3d" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://www.facebook.com/EPFL.ch"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'Facebook" '
-                                    'src="/files/buttons/FB-f-Logo__blue_58.png?uuid=default:187bafe8-c769-4aee-879b-7d2920600f30" '
-                                    '/></a>&nbsp; &nbsp; &nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://twitter.com/EPFL_en"><img '
-                                    'width="25" height="21" alt="EPFL on '
-                                    'Twitter" '
-                                    'src="/files/buttons/Twitter_logo_blue.png?uuid=default:7b12cfa6-30f8-4d08-9849-1096739f5eb2" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="https://instagram.com/epflcampus/"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'Instagram" '
-                                    'src="/files/buttons/insta_logo.jpg?uuid=default:8002075d-fb77-46dd-bdaf-79cd4855a818" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://studyingatepfl.tumblr.com/"><img '
-                                    'width="25" height="25" alt="tumblr" '
-                                    'src="/files/buttons/tumblr.png?uuid=default:073896a0-c6cd-46cb-82ce-342f5d293110" '
-                                    '/></a></p> ',
-                         'title': 'FOLLOW EPFL',
-                         'type': 'text'}],
-            'title': 'Mathematics for education (in French only)'},
-           {'nb_boxes': 9,
-            'pid': '94956',
-            'sidebar': [{'content': '<p>In case of specific questions about '
-                                    'this program, please contact the '
-                                    'Mechanical Engineering section:</p> <div '
-                                    'class="button mail"><a '
-                                    'href="mailto:sgm@epfl.ch"><button '
-                                    'class="icon"></button>     <span '
-                                    'class="label">sgm@epfl.ch</span></a>&nbsp;</div> '
-                                    '<div class="button information"><a '
-                                    'href="http://sti.epfl.ch/page-1593-en.html"><button '
-                                    'class="icon"></button> <span '
-                                    'class="label">See the section\'s '
-                                    'website</span></a></div> ',
-                         'title': 'Contact',
-                         'type': 'text'},
-                        {'content': '<p style="text-align: center;"><a '
-                                    'href="/files/brochures/STI_SGM_MA.pdf?uuid=default:40ebea13-3f7f-48e5-a673-2757ffed5867" '
-                                    'onclick="_gaq.push([\'_trackEvent\', '
-                                    '\'STI_SGM_MA\', \'download\']);" '
-                                    'target="_blank"><img width="150" '
-                                    'height="212" '
-                                    'src="/files/brochures/covers/STI_SGM_MA.jpg?uuid=default:d54c15ae-4952-4c95-90e5-d81dda800a98" '
-                                    'alt="brochure" /></a></p> ',
-                         'title': 'Download',
-                         'type': 'text'},
-                        {'content': '<p><a href="http://phd.epfl.ch/home" '
-                                    'target="_blank"><span '
-                                    'class="fleche">phd.epfl.ch</span></a></p> ',
-                         'title': 'Also interested in a PhD? ',
-                         'type': 'text'},
-                        {'content': '<p style="text-align: left;"><a '
-                                    'target="_blank" '
-                                    'href="http://www.youtube.com/EPFLstudents"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'YouTube" '
-                                    'src="/files/buttons/YouTube-social-square_red_48px.png?uuid=default:f9ad6a38-48ec-4629-befe-080249712f3d" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://www.facebook.com/EPFL.ch"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'Facebook" '
-                                    'src="/files/buttons/FB-f-Logo__blue_58.png?uuid=default:187bafe8-c769-4aee-879b-7d2920600f30" '
-                                    '/></a>&nbsp; &nbsp; &nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://twitter.com/EPFL_en"><img '
-                                    'width="25" height="21" alt="EPFL on '
-                                    'Twitter" '
-                                    'src="/files/buttons/Twitter_logo_blue.png?uuid=default:7b12cfa6-30f8-4d08-9849-1096739f5eb2" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="https://instagram.com/epflcampus/"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'Instagram" '
-                                    'src="/files/buttons/insta_logo.jpg?uuid=default:8002075d-fb77-46dd-bdaf-79cd4855a818" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://studyingatepfl.tumblr.com/"><img '
-                                    'width="25" height="25" alt="tumblr" '
-                                    'src="/files/buttons/tumblr.png?uuid=default:073896a0-c6cd-46cb-82ce-342f5d293110" '
-                                    '/></a></p> ',
-                         'title': 'FOLLOW EPFL',
-                         'type': 'text'}],
-            'title': 'Mechanical Engineering'},
-           {'nb_boxes': 9,
-            'pid': '94997',
-            'sidebar': [{'content': '<p>In case of specific questions about '
-                                    'this program, please contact the '
-                                    'Microengineering section:</p> <div '
-                                    'class="button mail"><a '
-                                    'href="mailto:guy.delacretaz@epfl.ch"><button '
-                                    'class="icon"></button> <span '
-                                    'class="label">Dr. Guy '
-                                    'Delacr&eacute;taz<br />  </span></a> '
-                                    '</div> <p>&nbsp;</p> <div class="button '
-                                    'information"><a '
-                                    'href="http://sti.epfl.ch/page-1675-en.html"><button '
-                                    'class="icon"></button> <span '
-                                    'class="label">See the section\'s '
-                                    'website</span></a></div> ',
-                         'title': 'Contact',
-                         'type': 'text'},
-                        {'content': '<p><a href="http://phd.epfl.ch/home" '
-                                    'target="_blank"><span '
-                                    'class="fleche">phd.epfl.ch</span></a></p> ',
-                         'title': 'Also interested in a PhD? ',
-                         'type': 'text'},
-                        {'content': '<p style="text-align: left;"><a '
-                                    'target="_blank" '
-                                    'href="http://www.youtube.com/EPFLstudents"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'YouTube" '
-                                    'src="/files/buttons/YouTube-social-square_red_48px.png?uuid=default:f9ad6a38-48ec-4629-befe-080249712f3d" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://www.facebook.com/EPFL.ch"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'Facebook" '
-                                    'src="/files/buttons/FB-f-Logo__blue_58.png?uuid=default:187bafe8-c769-4aee-879b-7d2920600f30" '
-                                    '/></a>&nbsp; &nbsp; &nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://twitter.com/EPFL_en"><img '
-                                    'width="25" height="21" alt="EPFL on '
-                                    'Twitter" '
-                                    'src="/files/buttons/Twitter_logo_blue.png?uuid=default:7b12cfa6-30f8-4d08-9849-1096739f5eb2" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="https://instagram.com/epflcampus/"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'Instagram" '
-                                    'src="/files/buttons/insta_logo.jpg?uuid=default:8002075d-fb77-46dd-bdaf-79cd4855a818" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://studyingatepfl.tumblr.com/"><img '
-                                    'width="25" height="25" alt="tumblr" '
-                                    'src="/files/buttons/tumblr.png?uuid=default:073896a0-c6cd-46cb-82ce-342f5d293110" '
-                                    '/></a></p> ',
-                         'title': 'FOLLOW EPFL',
-                         'type': 'text'}],
-            'title': 'Microengineering'},
-           {'nb_boxes': 8,
-            'pid': '95135',
-            'sidebar': [{'content': '<p>In case of specific questions about '
-                                    'this program, please contact the '
-                                    'Chemistry section:</p> <div class="button '
-                                    'mail"><a '
-                                    'href="mailto:scgc@epfl.ch"><button '
-                                    'class="icon"></button> <span '
-                                    'class="label">Dr. Jean-Luc Marendaz <br '
-                                    '/>  </span></a> </div> <p>&nbsp;</p> <div '
-                                    'class="button information"><a '
-                                    'href="http://scgc.epfl.ch/undergraduate"><button '
-                                    'class="icon"></button> <span '
-                                    'class="label">See the section\'s '
-                                    'website</span></a></div> ',
-                         'title': 'Contact',
-                         'type': 'text'},
-                        {'content': '<p style="text-align: center;"><a '
-                                    'target="_blank" '
-                                    'onclick="_gaq.push([\'_trackEvent\', '
-                                    '\'SB_MBC_MA\', \'download\']);" '
-                                    'href="/files/brochures/SB_MBC_MA.pdf?uuid=default:61170410-c85b-4eb5-98a5-3572edc7b39c"><img '
-                                    'width="150" height="212" alt="Chemistry" '
-                                    'src="/files/brochures/covers/SB_MBC_MA.jpg?uuid=default:c528fdbd-61b9-466d-9091-9df17f889f59" '
-                                    '/></a></p> ',
-                         'title': 'Download',
-                         'type': 'text'},
-                        {'content': '<p><a href="http://phd.epfl.ch/home" '
-                                    'target="_blank"><span '
-                                    'class="fleche">phd.epfl.ch</span></a></p> ',
-                         'title': 'Also interested in a PhD? ',
-                         'type': 'text'},
-                        {'content': '<p style="text-align: left;"><a '
-                                    'target="_blank" '
-                                    'href="http://www.youtube.com/EPFLstudents"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'YouTube" '
-                                    'src="/files/buttons/YouTube-social-square_red_48px.png?uuid=default:f9ad6a38-48ec-4629-befe-080249712f3d" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://www.facebook.com/EPFL.ch"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'Facebook" '
-                                    'src="/files/buttons/FB-f-Logo__blue_58.png?uuid=default:187bafe8-c769-4aee-879b-7d2920600f30" '
-                                    '/></a>&nbsp; &nbsp; &nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://twitter.com/EPFL_en"><img '
-                                    'width="25" height="21" alt="EPFL on '
-                                    'Twitter" '
-                                    'src="/files/buttons/Twitter_logo_blue.png?uuid=default:7b12cfa6-30f8-4d08-9849-1096739f5eb2" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="https://instagram.com/epflcampus/"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'Instagram" '
-                                    'src="/files/buttons/insta_logo.jpg?uuid=default:8002075d-fb77-46dd-bdaf-79cd4855a818" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://studyingatepfl.tumblr.com/"><img '
-                                    'width="25" height="25" alt="tumblr" '
-                                    'src="/files/buttons/tumblr.png?uuid=default:073896a0-c6cd-46cb-82ce-342f5d293110" '
-                                    '/></a></p> ',
-                         'title': 'FOLLOW EPFL',
-                         'type': 'text'}],
-            'title': 'Molecular and Biological Chemistry'},
-           {'nb_boxes': 8,
-            'pid': '95108',
-            'sidebar': [{'content': '<p>In case of specific questions about '
-                                    'this program, please use the following '
-                                    'contacts:</p> <div class="button mail"><a '
-                                    'href="mailto:andreas.pautz@epfl.ch"><button '
-                                    'class="icon"></button> <span '
-                                    'class="label">Prof. Andreas Pautz, EPFL '
-                                    '<br />  </span></a> </div> <p>&nbsp;</p> '
-                                    '<div class="button information"><a '
-                                    'href="http://www.master-nuclear.ch/"><button '
-                                    'class="icon"></button> <span '
-                                    'class="label">See the program\'s specific '
-                                    'website</span></a></div> ',
-                         'title': 'Contact',
-                         'type': 'text'},
-                        {'content': '<p style="text-align: center;"><a '
-                                    'href="/files/brochures/SB_NE_MA.pdf?uuid=default:bc94efd1-c355-42e2-8c85-1c0a2ec067f8" '
-                                    'onclick="_gaq.push([\'_trackEvent\', '
-                                    '\'SB_NE_MA\', \'download\']);" '
-                                    'target="_blank"><img width="150" '
-                                    'height="212" '
-                                    'src="/files/brochures/covers/SB_NE_MA.jpg?uuid=default:f13469f8-6bb0-48af-b3ab-0584160fa2f2" '
-                                    'alt="brochure" /></a></p> ',
-                         'title': 'Download',
-                         'type': 'text'},
-                        {'content': '<p><a href="http://phd.epfl.ch/home" '
-                                    'target="_blank"><span '
-                                    'class="fleche">phd.epfl.ch</span></a></p> ',
-                         'title': 'Also interested in a PhD? ',
-                         'type': 'text'},
-                        {'content': '<p style="text-align: left;"><a '
-                                    'target="_blank" '
-                                    'href="http://www.youtube.com/EPFLstudents"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'YouTube" '
-                                    'src="/files/buttons/YouTube-social-square_red_48px.png?uuid=default:f9ad6a38-48ec-4629-befe-080249712f3d" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://www.facebook.com/EPFL.ch"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'Facebook" '
-                                    'src="/files/buttons/FB-f-Logo__blue_58.png?uuid=default:187bafe8-c769-4aee-879b-7d2920600f30" '
-                                    '/></a>&nbsp; &nbsp; &nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://twitter.com/EPFL_en"><img '
-                                    'width="25" height="21" alt="EPFL on '
-                                    'Twitter" '
-                                    'src="/files/buttons/Twitter_logo_blue.png?uuid=default:7b12cfa6-30f8-4d08-9849-1096739f5eb2" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="https://instagram.com/epflcampus/"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'Instagram" '
-                                    'src="/files/buttons/insta_logo.jpg?uuid=default:8002075d-fb77-46dd-bdaf-79cd4855a818" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://studyingatepfl.tumblr.com/"><img '
-                                    'width="25" height="25" alt="tumblr" '
-                                    'src="/files/buttons/tumblr.png?uuid=default:073896a0-c6cd-46cb-82ce-342f5d293110" '
-                                    '/></a></p> ',
-                         'title': 'FOLLOW EPFL',
-                         'type': 'text'}],
-            'title': 'Nuclear Engineering'},
-           {'nb_boxes': 8,
-            'pid': '95079',
-            'sidebar': [{'content': '<p>In case of specific questions about '
-                                    'these programs, please contact the '
-                                    'Physics section:</p> <div class="button '
-                                    'mail"><a '
-                                    'href="mailto:daniele.mari@epfl.ch"><button '
-                                    'class="icon"></button> <span '
-                                    'class="label">Dr. Daniele Mari <br />  '
-                                    '</span></a> </div> <p>&nbsp;</p> <div '
-                                    'class="button information"><a '
-                                    'href="http://sb.epfl.ch/lang/en/sph"><button '
-                                    'class="icon"></button> <span '
-                                    'class="label">See the section\'s '
-                                    'website</span></a></div> ',
-                         'title': 'Contact',
-                         'type': 'text'},
-                        {'content': '<p><a href="http://phd.epfl.ch/home" '
-                                    'target="_blank"><span '
-                                    'class="fleche">phd.epfl.ch</span></a></p> ',
-                         'title': 'Also interested in a PhD? ',
-                         'type': 'text'},
-                        {'content': '<p style="text-align: left;"><a '
-                                    'target="_blank" '
-                                    'href="http://www.youtube.com/EPFLstudents"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'YouTube" '
-                                    'src="/files/buttons/YouTube-social-square_red_48px.png?uuid=default:f9ad6a38-48ec-4629-befe-080249712f3d" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://www.facebook.com/EPFL.ch"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'Facebook" '
-                                    'src="/files/buttons/FB-f-Logo__blue_58.png?uuid=default:187bafe8-c769-4aee-879b-7d2920600f30" '
-                                    '/></a>&nbsp; &nbsp; &nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://twitter.com/EPFL_en"><img '
-                                    'width="25" height="21" alt="EPFL on '
-                                    'Twitter" '
-                                    'src="/files/buttons/Twitter_logo_blue.png?uuid=default:7b12cfa6-30f8-4d08-9849-1096739f5eb2" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="https://instagram.com/epflcampus/"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'Instagram" '
-                                    'src="/files/buttons/insta_logo.jpg?uuid=default:8002075d-fb77-46dd-bdaf-79cd4855a818" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://studyingatepfl.tumblr.com/"><img '
-                                    'width="25" height="25" alt="tumblr" '
-                                    'src="/files/buttons/tumblr.png?uuid=default:073896a0-c6cd-46cb-82ce-342f5d293110" '
-                                    '/></a></p> ',
-                         'title': 'FOLLOW EPFL',
-                         'type': 'text'}],
-            'title': 'Physics and Applied Physics'},
-           {'nb_boxes': 1,
-            'pid': '106847',
-            'sidebar': [{'content': '<p><strong><a '
-                                    'href="https://isa.epfl.ch/imoniteur_ISAP/!farforms.htm?x=master">Applications</a> '
-                                    "for starting a Master's program are open "
-                                    'from mid-November to January 15th and '
-                                    'from January 16th to April '
-                                    '15th</strong></p> ',
-                         'title': 'Application',
-                         'type': 'coloredText'},
-                        {'content': '<p style="text-align: left;">In case of '
-                                    'questions, please contact the student '
-                                    'helpdesk:</p> <div class="button mail"><a '
-                                    'href="mailto:student.services@epfl.ch"> '
-                                    '<button class="icon"></button> <span '
-                                    'class="label">student.services@epfl.ch</span></a></div> '
-                                    '<p>&nbsp;</p> <div class="button '
-                                    'contact"><button class="icon"></button> '
-                                    '<span class="label">+41 (0)21 693 43 '
-                                    '45</span></div> ',
-                         'title': 'Contact',
-                         'type': 'text'},
-                        {'content': '<p><a href="http://virtualtour.epfl.ch" '
-                                    'target="_blank"><img width="300" '
-                                    'height="157" src="/files/buttons/virtual '
-                                    'tour '
-                                    'thumbnail.png?uuid=default:1ecf5f72-58c7-40f6-a15d-5ca0ffd2c419" '
-                                    'alt="virtual tour" /></a></p> ',
-                         'title': 'Discover the campus',
-                         'type': 'text'},
-                        {'content': '<p style="text-align: left;"><a '
-                                    'target="_blank" '
-                                    'href="http://www.youtube.com/EPFLstudents"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'YouTube" '
-                                    'src="/files/buttons/YouTube-social-square_red_48px.png?uuid=default:f9ad6a38-48ec-4629-befe-080249712f3d" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://www.facebook.com/EPFL.ch"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'Facebook" '
-                                    'src="/files/buttons/FB-f-Logo__blue_58.png?uuid=default:187bafe8-c769-4aee-879b-7d2920600f30" '
-                                    '/></a>&nbsp; &nbsp; &nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://twitter.com/EPFL_en"><img '
-                                    'width="25" height="21" alt="EPFL on '
-                                    'Twitter" '
-                                    'src="/files/buttons/Twitter_logo_blue.png?uuid=default:7b12cfa6-30f8-4d08-9849-1096739f5eb2" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="https://instagram.com/epflcampus/"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'Instagram" '
-                                    'src="/files/buttons/insta_logo.jpg?uuid=default:8002075d-fb77-46dd-bdaf-79cd4855a818" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://studyingatepfl.tumblr.com/"><img '
-                                    'width="25" height="25" alt="tumblr" '
-                                    'src="/files/buttons/tumblr.png?uuid=default:073896a0-c6cd-46cb-82ce-342f5d293110" '
-                                    '/></a></p> ',
-                         'title': 'FOLLOW EPFL',
-                         'type': 'text'}],
-            'title': 'Double Diplomas and Joint Degrees'},
-           {'nb_boxes': 7,
-            'pid': '113825',
-            'sidebar': [{'content': '<p><strong><a '
-                                    'href="https://isa.epfl.ch/imoniteur_ISAP/!farforms.htm?x=master">Applications</a> '
-                                    "for starting a Master's program are open "
-                                    'from mid-November to January 15th and '
-                                    'from January 16th to April '
-                                    '15th</strong></p> ',
-                         'title': 'Application',
-                         'type': 'coloredText'},
-                        {'content': '<p style="text-align: left;">In case of '
-                                    'questions, please contact the student '
-                                    'helpdesk:</p> <div class="button mail"><a '
-                                    'href="mailto:student.services@epfl.ch"> '
-                                    '<button class="icon"></button> <span '
-                                    'class="label">student.services@epfl.ch</span></a></div> '
-                                    '<p>&nbsp;</p> <div class="button '
-                                    'contact"><button class="icon"></button> '
-                                    '<span class="label">+41 (0)21 693 43 '
-                                    '45</span></div> ',
-                         'title': 'Contact',
-                         'type': 'text'},
-                        {'content': '<p><a href="http://virtualtour.epfl.ch" '
-                                    'target="_blank"><img width="300" '
-                                    'height="157" src="/files/buttons/virtual '
-                                    'tour '
-                                    'thumbnail.png?uuid=default:1ecf5f72-58c7-40f6-a15d-5ca0ffd2c419" '
-                                    'alt="virtual tour" /></a></p> ',
-                         'title': 'Discover the campus',
-                         'type': 'text'},
-                        {'content': '<p style="text-align: left;"><a '
-                                    'target="_blank" '
-                                    'href="http://www.youtube.com/EPFLstudents"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'YouTube" '
-                                    'src="/files/buttons/YouTube-social-square_red_48px.png?uuid=default:f9ad6a38-48ec-4629-befe-080249712f3d" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://www.facebook.com/EPFL.ch"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'Facebook" '
-                                    'src="/files/buttons/FB-f-Logo__blue_58.png?uuid=default:187bafe8-c769-4aee-879b-7d2920600f30" '
-                                    '/></a>&nbsp; &nbsp; &nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://twitter.com/EPFL_en"><img '
-                                    'width="25" height="21" alt="EPFL on '
-                                    'Twitter" '
-                                    'src="/files/buttons/Twitter_logo_blue.png?uuid=default:7b12cfa6-30f8-4d08-9849-1096739f5eb2" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="https://instagram.com/epflcampus/"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'Instagram" '
-                                    'src="/files/buttons/insta_logo.jpg?uuid=default:8002075d-fb77-46dd-bdaf-79cd4855a818" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://studyingatepfl.tumblr.com/"><img '
-                                    'width="25" height="25" alt="tumblr" '
-                                    'src="/files/buttons/tumblr.png?uuid=default:073896a0-c6cd-46cb-82ce-342f5d293110" '
-                                    '/></a></p> ',
-                         'title': 'FOLLOW EPFL',
-                         'type': 'text'}],
-            'title': "1:1 Master's EPFL-DTU"},
-           {'nb_boxes': 6,
-            'pid': '106849',
-            'sidebar': [{'content': '<p><strong><a '
-                                    'href="https://isa.epfl.ch/imoniteur_ISAP/!farforms.htm?x=master">Applications</a> '
-                                    "for starting a Master's program are open "
-                                    'from mid-November to January 15th and '
-                                    'from January 16th to April '
-                                    '15th</strong></p> ',
-                         'title': 'Application',
-                         'type': 'coloredText'},
-                        {'content': '<p style="text-align: left;">In case of '
-                                    'questions, please contact the student '
-                                    'helpdesk:</p> <div class="button mail"><a '
-                                    'href="mailto:student.services@epfl.ch"> '
-                                    '<button class="icon"></button> <span '
-                                    'class="label">student.services@epfl.ch</span></a></div> '
-                                    '<p>&nbsp;</p> <div class="button '
-                                    'contact"><button class="icon"></button> '
-                                    '<span class="label">+41 (0)21 693 43 '
-                                    '45</span></div> ',
-                         'title': 'Contact',
-                         'type': 'text'},
-                        {'content': '<p><a href="http://virtualtour.epfl.ch" '
-                                    'target="_blank"><img width="300" '
-                                    'height="157" src="/files/buttons/virtual '
-                                    'tour '
-                                    'thumbnail.png?uuid=default:1ecf5f72-58c7-40f6-a15d-5ca0ffd2c419" '
-                                    'alt="virtual tour" /></a></p> ',
-                         'title': 'Discover the campus',
-                         'type': 'text'},
-                        {'content': '<p style="text-align: left;"><a '
-                                    'target="_blank" '
-                                    'href="http://www.youtube.com/EPFLstudents"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'YouTube" '
-                                    'src="/files/buttons/YouTube-social-square_red_48px.png?uuid=default:f9ad6a38-48ec-4629-befe-080249712f3d" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://www.facebook.com/EPFL.ch"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'Facebook" '
-                                    'src="/files/buttons/FB-f-Logo__blue_58.png?uuid=default:187bafe8-c769-4aee-879b-7d2920600f30" '
-                                    '/></a>&nbsp; &nbsp; &nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://twitter.com/EPFL_en"><img '
-                                    'width="25" height="21" alt="EPFL on '
-                                    'Twitter" '
-                                    'src="/files/buttons/Twitter_logo_blue.png?uuid=default:7b12cfa6-30f8-4d08-9849-1096739f5eb2" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="https://instagram.com/epflcampus/"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'Instagram" '
-                                    'src="/files/buttons/insta_logo.jpg?uuid=default:8002075d-fb77-46dd-bdaf-79cd4855a818" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://studyingatepfl.tumblr.com/"><img '
-                                    'width="25" height="25" alt="tumblr" '
-                                    'src="/files/buttons/tumblr.png?uuid=default:073896a0-c6cd-46cb-82ce-342f5d293110" '
-                                    '/></a></p> ',
-                         'title': 'FOLLOW EPFL',
-                         'type': 'text'}],
-            'title': 'Double diploma EPFL-Polytechnique Montréal'},
-           {'nb_boxes': 6,
-            'pid': '113973',
-            'sidebar': [{'content': '<p><strong><a '
-                                    'href="https://isa.epfl.ch/imoniteur_ISAP/!farforms.htm?x=master">Applications</a> '
-                                    "for starting a Master's program are open "
-                                    'from mid-November to January 15th and '
-                                    'from January 16th to April '
-                                    '15th</strong></p> ',
-                         'title': 'Application',
-                         'type': 'coloredText'},
-                        {'content': '<p style="text-align: left;">In case of '
-                                    'questions, please contact the student '
-                                    'helpdesk:</p> <div class="button mail"><a '
-                                    'href="mailto:student.services@epfl.ch"> '
-                                    '<button class="icon"></button> <span '
-                                    'class="label">student.services@epfl.ch</span></a></div> '
-                                    '<p>&nbsp;</p> <div class="button '
-                                    'contact"><button class="icon"></button> '
-                                    '<span class="label">+41 (0)21 693 43 '
-                                    '45</span></div> ',
-                         'title': 'Contact',
-                         'type': 'text'},
-                        {'content': '<p><a href="http://virtualtour.epfl.ch" '
-                                    'target="_blank"><img width="300" '
-                                    'height="157" src="/files/buttons/virtual '
-                                    'tour '
-                                    'thumbnail.png?uuid=default:1ecf5f72-58c7-40f6-a15d-5ca0ffd2c419" '
-                                    'alt="virtual tour" /></a></p> ',
-                         'title': 'Discover the campus',
-                         'type': 'text'},
-                        {'content': '<p style="text-align: left;"><a '
-                                    'target="_blank" '
-                                    'href="http://www.youtube.com/EPFLstudents"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'YouTube" '
-                                    'src="/files/buttons/YouTube-social-square_red_48px.png?uuid=default:f9ad6a38-48ec-4629-befe-080249712f3d" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://www.facebook.com/EPFL.ch"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'Facebook" '
-                                    'src="/files/buttons/FB-f-Logo__blue_58.png?uuid=default:187bafe8-c769-4aee-879b-7d2920600f30" '
-                                    '/></a>&nbsp; &nbsp; &nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://twitter.com/EPFL_en"><img '
-                                    'width="25" height="21" alt="EPFL on '
-                                    'Twitter" '
-                                    'src="/files/buttons/Twitter_logo_blue.png?uuid=default:7b12cfa6-30f8-4d08-9849-1096739f5eb2" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="https://instagram.com/epflcampus/"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'Instagram" '
-                                    'src="/files/buttons/insta_logo.jpg?uuid=default:8002075d-fb77-46dd-bdaf-79cd4855a818" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://studyingatepfl.tumblr.com/"><img '
-                                    'width="25" height="25" alt="tumblr" '
-                                    'src="/files/buttons/tumblr.png?uuid=default:073896a0-c6cd-46cb-82ce-342f5d293110" '
-                                    '/></a></p> ',
-                         'title': 'FOLLOW EPFL',
-                         'type': 'text'}],
-            'title': 'Double Diploma EPFL-Centrale Lille'},
-           {'nb_boxes': 7,
-            'pid': '143834',
-            'sidebar': [{'content': '<p><strong><a '
-                                    'href="https://isa.epfl.ch/imoniteur_ISAP/!farforms.htm?x=master">Applications</a> '
-                                    "for starting a Master's program are open "
-                                    'from mid-November to January 15th and '
-                                    'from January 16th to April '
-                                    '15th</strong></p> ',
-                         'title': 'Application',
-                         'type': 'coloredText'},
-                        {'content': '<p style="text-align: left;">In case of '
-                                    'questions, please contact the student '
-                                    'helpdesk:</p> <div class="button mail"><a '
-                                    'href="mailto:student.services@epfl.ch"> '
-                                    '<button class="icon"></button> <span '
-                                    'class="label">student.services@epfl.ch</span></a></div> '
-                                    '<p>&nbsp;</p> <div class="button '
-                                    'contact"><button class="icon"></button> '
-                                    '<span class="label">+41 (0)21 693 43 '
-                                    '45</span></div> ',
-                         'title': 'Contact',
-                         'type': 'text'},
-                        {'content': '<p><a href="http://virtualtour.epfl.ch" '
-                                    'target="_blank"><img width="300" '
-                                    'height="157" src="/files/buttons/virtual '
-                                    'tour '
-                                    'thumbnail.png?uuid=default:1ecf5f72-58c7-40f6-a15d-5ca0ffd2c419" '
-                                    'alt="virtual tour" /></a></p> ',
-                         'title': 'Discover the campus',
-                         'type': 'text'},
-                        {'content': '<p style="text-align: left;"><a '
-                                    'target="_blank" '
-                                    'href="http://www.youtube.com/EPFLstudents"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'YouTube" '
-                                    'src="/files/buttons/YouTube-social-square_red_48px.png?uuid=default:f9ad6a38-48ec-4629-befe-080249712f3d" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://www.facebook.com/EPFL.ch"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'Facebook" '
-                                    'src="/files/buttons/FB-f-Logo__blue_58.png?uuid=default:187bafe8-c769-4aee-879b-7d2920600f30" '
-                                    '/></a>&nbsp; &nbsp; &nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://twitter.com/EPFL_en"><img '
-                                    'width="25" height="21" alt="EPFL on '
-                                    'Twitter" '
-                                    'src="/files/buttons/Twitter_logo_blue.png?uuid=default:7b12cfa6-30f8-4d08-9849-1096739f5eb2" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="https://instagram.com/epflcampus/"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'Instagram" '
-                                    'src="/files/buttons/insta_logo.jpg?uuid=default:8002075d-fb77-46dd-bdaf-79cd4855a818" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://studyingatepfl.tumblr.com/"><img '
-                                    'width="25" height="25" alt="tumblr" '
-                                    'src="/files/buttons/tumblr.png?uuid=default:073896a0-c6cd-46cb-82ce-342f5d293110" '
-                                    '/></a></p> ',
-                         'title': 'FOLLOW EPFL',
-                         'type': 'text'}],
-            'title': 'ENS de Lyon Informatique et Syscom'},
-           {'nb_boxes': 2,
-            'pid': '94570',
-            'sidebar': [{'content': '<p><strong><a '
-                                    'href="https://isa.epfl.ch/imoniteur_ISAP/!farforms.htm?x=master">Applications</a> '
-                                    "for starting a Master's program are open "
-                                    'from mid-November to January 15th and '
-                                    'from January 16th to April '
-                                    '15th</strong></p> ',
-                         'title': 'Application',
-                         'type': 'coloredText'},
-                        {'content': '<p style="text-align: left;">In case of '
-                                    'questions, please contact the student '
-                                    'helpdesk:</p> <div class="button mail"><a '
-                                    'href="mailto:student.services@epfl.ch"> '
-                                    '<button class="icon"></button> <span '
-                                    'class="label">student.services@epfl.ch</span></a></div> '
-                                    '<p>&nbsp;</p> <div class="button '
-                                    'contact"><button class="icon"></button> '
-                                    '<span class="label">+41 (0)21 693 43 '
-                                    '45</span></div> ',
-                         'title': 'Contact',
-                         'type': 'text'},
-                        {'content': '<p><a href="http://virtualtour.epfl.ch" '
-                                    'target="_blank"><img width="300" '
-                                    'height="157" src="/files/buttons/virtual '
-                                    'tour '
-                                    'thumbnail.png?uuid=default:1ecf5f72-58c7-40f6-a15d-5ca0ffd2c419" '
-                                    'alt="virtual tour" /></a></p> ',
-                         'title': 'Discover the campus',
-                         'type': 'text'},
-                        {'content': '<p style="text-align: left;"><a '
-                                    'target="_blank" '
-                                    'href="http://www.youtube.com/EPFLstudents"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'YouTube" '
-                                    'src="/files/buttons/YouTube-social-square_red_48px.png?uuid=default:f9ad6a38-48ec-4629-befe-080249712f3d" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://www.facebook.com/EPFL.ch"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'Facebook" '
-                                    'src="/files/buttons/FB-f-Logo__blue_58.png?uuid=default:187bafe8-c769-4aee-879b-7d2920600f30" '
-                                    '/></a>&nbsp; &nbsp; &nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://twitter.com/EPFL_en"><img '
-                                    'width="25" height="21" alt="EPFL on '
-                                    'Twitter" '
-                                    'src="/files/buttons/Twitter_logo_blue.png?uuid=default:7b12cfa6-30f8-4d08-9849-1096739f5eb2" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="https://instagram.com/epflcampus/"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'Instagram" '
-                                    'src="/files/buttons/insta_logo.jpg?uuid=default:8002075d-fb77-46dd-bdaf-79cd4855a818" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://studyingatepfl.tumblr.com/"><img '
-                                    'width="25" height="25" alt="tumblr" '
-                                    'src="/files/buttons/tumblr.png?uuid=default:073896a0-c6cd-46cb-82ce-342f5d293110" '
-                                    '/></a></p> ',
-                         'title': 'FOLLOW EPFL',
-                         'type': 'text'}],
-            'title': 'Admission Criteria & Application'},
-           {'nb_boxes': 6,
-            'pid': '94587',
-            'sidebar': [{'content': '<p><strong><a '
-                                    'href="https://isa.epfl.ch/imoniteur_ISAP/!farforms.htm?x=master">Applications</a> '
-                                    "for starting a Master's program are open "
-                                    'from mid-November to January 15th and '
-                                    'from January 16th to April '
-                                    '15th</strong></p> ',
-                         'title': 'Application',
-                         'type': 'coloredText'},
-                        {'content': '<p style="text-align: left;">In case of '
-                                    'questions, please contact the student '
-                                    'helpdesk:</p> <div class="button mail"><a '
-                                    'href="mailto:student.services@epfl.ch"> '
-                                    '<button class="icon"></button> <span '
-                                    'class="label">student.services@epfl.ch</span></a></div> '
-                                    '<p>&nbsp;</p> <div class="button '
-                                    'contact"><button class="icon"></button> '
-                                    '<span class="label">+41 (0)21 693 43 '
-                                    '45</span></div> ',
-                         'title': 'Contact',
-                         'type': 'text'},
-                        {'content': '<p><a href="http://virtualtour.epfl.ch" '
-                                    'target="_blank"><img width="300" '
-                                    'height="157" src="/files/buttons/virtual '
-                                    'tour '
-                                    'thumbnail.png?uuid=default:1ecf5f72-58c7-40f6-a15d-5ca0ffd2c419" '
-                                    'alt="virtual tour" /></a></p> ',
-                         'title': 'Discover the campus',
-                         'type': 'text'},
-                        {'content': '<p style="text-align: left;"><a '
-                                    'target="_blank" '
-                                    'href="http://www.youtube.com/EPFLstudents"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'YouTube" '
-                                    'src="/files/buttons/YouTube-social-square_red_48px.png?uuid=default:f9ad6a38-48ec-4629-befe-080249712f3d" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://www.facebook.com/EPFL.ch"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'Facebook" '
-                                    'src="/files/buttons/FB-f-Logo__blue_58.png?uuid=default:187bafe8-c769-4aee-879b-7d2920600f30" '
-                                    '/></a>&nbsp; &nbsp; &nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://twitter.com/EPFL_en"><img '
-                                    'width="25" height="21" alt="EPFL on '
-                                    'Twitter" '
-                                    'src="/files/buttons/Twitter_logo_blue.png?uuid=default:7b12cfa6-30f8-4d08-9849-1096739f5eb2" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="https://instagram.com/epflcampus/"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'Instagram" '
-                                    'src="/files/buttons/insta_logo.jpg?uuid=default:8002075d-fb77-46dd-bdaf-79cd4855a818" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://studyingatepfl.tumblr.com/"><img '
-                                    'width="25" height="25" alt="tumblr" '
-                                    'src="/files/buttons/tumblr.png?uuid=default:073896a0-c6cd-46cb-82ce-342f5d293110" '
-                                    '/></a></p> ',
-                         'title': 'FOLLOW EPFL',
-                         'type': 'text'}],
-            'title': 'Online application'},
-           {'nb_boxes': 1,
-            'pid': '94577',
-            'sidebar': [{'content': '<p><strong><a '
-                                    'href="https://isa.epfl.ch/imoniteur_ISAP/!farforms.htm?x=master">Applications</a> '
-                                    "for starting a Master's program are open "
-                                    'from mid-November to January 15th and '
-                                    'from January 16th to April '
-                                    '15th</strong></p> ',
-                         'title': 'Application',
-                         'type': 'coloredText'},
-                        {'content': '<p style="text-align: left;">In case of '
-                                    'questions, please contact the student '
-                                    'helpdesk:</p> <div class="button mail"><a '
-                                    'href="mailto:student.services@epfl.ch"> '
-                                    '<button class="icon"></button> <span '
-                                    'class="label">student.services@epfl.ch</span></a></div> '
-                                    '<p>&nbsp;</p> <div class="button '
-                                    'contact"><button class="icon"></button> '
-                                    '<span class="label">+41 (0)21 693 43 '
-                                    '45</span></div> ',
-                         'title': 'Contact',
-                         'type': 'text'},
-                        {'content': '<p><a href="http://virtualtour.epfl.ch" '
-                                    'target="_blank"><img width="300" '
-                                    'height="157" src="/files/buttons/virtual '
-                                    'tour '
-                                    'thumbnail.png?uuid=default:1ecf5f72-58c7-40f6-a15d-5ca0ffd2c419" '
-                                    'alt="virtual tour" /></a></p> ',
-                         'title': 'Discover the campus',
-                         'type': 'text'},
-                        {'content': '<p style="text-align: left;"><a '
-                                    'target="_blank" '
-                                    'href="http://www.youtube.com/EPFLstudents"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'YouTube" '
-                                    'src="/files/buttons/YouTube-social-square_red_48px.png?uuid=default:f9ad6a38-48ec-4629-befe-080249712f3d" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://www.facebook.com/EPFL.ch"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'Facebook" '
-                                    'src="/files/buttons/FB-f-Logo__blue_58.png?uuid=default:187bafe8-c769-4aee-879b-7d2920600f30" '
-                                    '/></a>&nbsp; &nbsp; &nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://twitter.com/EPFL_en"><img '
-                                    'width="25" height="21" alt="EPFL on '
-                                    'Twitter" '
-                                    'src="/files/buttons/Twitter_logo_blue.png?uuid=default:7b12cfa6-30f8-4d08-9849-1096739f5eb2" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="https://instagram.com/epflcampus/"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'Instagram" '
-                                    'src="/files/buttons/insta_logo.jpg?uuid=default:8002075d-fb77-46dd-bdaf-79cd4855a818" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://studyingatepfl.tumblr.com/"><img '
-                                    'width="25" height="25" alt="tumblr" '
-                                    'src="/files/buttons/tumblr.png?uuid=default:073896a0-c6cd-46cb-82ce-342f5d293110" '
-                                    '/></a></p> ',
-                         'title': 'FOLLOW EPFL',
-                         'type': 'text'}],
-            'title': 'Tuition Fees & Excellence Fellowships'},
-           {'nb_boxes': 1,
-            'pid': '95799',
-            'sidebar': [{'content': '<p><strong><a '
-                                    'href="https://isa.epfl.ch/imoniteur_ISAP/!farforms.htm?x=master">Applications</a> '
-                                    "for starting a Master's program are open "
-                                    'from mid-November to January 15th and '
-                                    'from January 16th to April '
-                                    '15th</strong></p> ',
-                         'title': 'Application',
-                         'type': 'coloredText'},
-                        {'content': '<p style="text-align: left;">In case of '
-                                    'questions, please contact the student '
-                                    'helpdesk:</p> <div class="button mail"><a '
-                                    'href="mailto:student.services@epfl.ch"> '
-                                    '<button class="icon"></button> <span '
-                                    'class="label">student.services@epfl.ch</span></a></div> '
-                                    '<p>&nbsp;</p> <div class="button '
-                                    'contact"><button class="icon"></button> '
-                                    '<span class="label">+41 (0)21 693 43 '
-                                    '45</span></div> ',
-                         'title': 'Contact',
-                         'type': 'text'},
-                        {'content': '<p><a href="http://virtualtour.epfl.ch" '
-                                    'target="_blank"><img width="300" '
-                                    'height="157" src="/files/buttons/virtual '
-                                    'tour '
-                                    'thumbnail.png?uuid=default:1ecf5f72-58c7-40f6-a15d-5ca0ffd2c419" '
-                                    'alt="virtual tour" /></a></p> ',
-                         'title': 'Discover the campus',
-                         'type': 'text'},
-                        {'content': '<p style="text-align: left;"><a '
-                                    'target="_blank" '
-                                    'href="http://www.youtube.com/EPFLstudents"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'YouTube" '
-                                    'src="/files/buttons/YouTube-social-square_red_48px.png?uuid=default:f9ad6a38-48ec-4629-befe-080249712f3d" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://www.facebook.com/EPFL.ch"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'Facebook" '
-                                    'src="/files/buttons/FB-f-Logo__blue_58.png?uuid=default:187bafe8-c769-4aee-879b-7d2920600f30" '
-                                    '/></a>&nbsp; &nbsp; &nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://twitter.com/EPFL_en"><img '
-                                    'width="25" height="21" alt="EPFL on '
-                                    'Twitter" '
-                                    'src="/files/buttons/Twitter_logo_blue.png?uuid=default:7b12cfa6-30f8-4d08-9849-1096739f5eb2" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="https://instagram.com/epflcampus/"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'Instagram" '
-                                    'src="/files/buttons/insta_logo.jpg?uuid=default:8002075d-fb77-46dd-bdaf-79cd4855a818" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://studyingatepfl.tumblr.com/"><img '
-                                    'width="25" height="25" alt="tumblr" '
-                                    'src="/files/buttons/tumblr.png?uuid=default:073896a0-c6cd-46cb-82ce-342f5d293110" '
-                                    '/></a></p> ',
-                         'title': 'FOLLOW EPFL',
-                         'type': 'text'}],
-            'title': 'Excellence Fellowships'},
-           {'nb_boxes': 1,
-            'pid': '94571',
-            'sidebar': [{'content': '<p><a href="http://virtualtour.epfl.ch" '
-                                    'target="_blank"><img width="300" '
-                                    'height="157" src="/files/buttons/virtual '
-                                    'tour '
-                                    'thumbnail.png?uuid=default:1ecf5f72-58c7-40f6-a15d-5ca0ffd2c419" '
-                                    'alt="virtual tour" /></a></p> ',
-                         'title': 'Discover the campus',
-                         'type': 'text'},
-                        {'content': '<p style="text-align: center;"><a '
-                                    'target="_blank" '
-                                    'onClick="_gaq.push([\'_trackEvent\', '
-                                    '\'generale_MA_eng\', \'download\']);" '
-                                    'href="/files/SPE_BrochGén_LowCost_2017_EN_prod_internet.pdf?uuid=default:7548889d-c4f7-402c-b9ea-15ef66f13bef"><img '
-                                    'width="150" height="215" alt="studying at '
-                                    'EPFL, brochure" '
-                                    'src="/files/brochures/covers/SPE_BrochGénérique_EN_web-cover.jpg?uuid=default:b3bffa9e-f633-474c-bfec-5e3d3cdc4b50" '
-                                    '/></a></p> ',
-                         'title': 'Brochure',
-                         'type': 'text'},
-                        {'content': '<p style="text-align: left;">In case of '
-                                    'questions, please contact the student '
-                                    'helpdesk:</p> <div class="button mail"><a '
-                                    'href="mailto:student.services@epfl.ch"> '
-                                    '<button class="icon"></button> <span '
-                                    'class="label">student.services@epfl.ch</span></a></div> '
-                                    '<p>&nbsp;</p> <div class="button '
-                                    'contact"><button class="icon"></button> '
-                                    '<span class="label">+41 (0)21 693 43 '
-                                    '45</span></div> ',
-                         'title': 'Contact',
-                         'type': 'text'},
-                        {'content': '<p style="text-align: left;"><a '
-                                    'target="_blank" '
-                                    'href="http://www.youtube.com/EPFLstudents"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'YouTube" '
-                                    'src="/files/buttons/YouTube-social-square_red_48px.png?uuid=default:f9ad6a38-48ec-4629-befe-080249712f3d" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://www.facebook.com/EPFL.ch"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'Facebook" '
-                                    'src="/files/buttons/FB-f-Logo__blue_58.png?uuid=default:187bafe8-c769-4aee-879b-7d2920600f30" '
-                                    '/></a>&nbsp; &nbsp; &nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://twitter.com/EPFL_en"><img '
-                                    'width="25" height="21" alt="EPFL on '
-                                    'Twitter" '
-                                    'src="/files/buttons/Twitter_logo_blue.png?uuid=default:7b12cfa6-30f8-4d08-9849-1096739f5eb2" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="https://instagram.com/epflcampus/"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'Instagram" '
-                                    'src="/files/buttons/insta_logo.jpg?uuid=default:8002075d-fb77-46dd-bdaf-79cd4855a818" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://studyingatepfl.tumblr.com/"><img '
-                                    'width="25" height="25" alt="tumblr" '
-                                    'src="/files/buttons/tumblr.png?uuid=default:073896a0-c6cd-46cb-82ce-342f5d293110" '
-                                    '/></a></p> ',
-                         'title': 'FOLLOW EPFL',
-                         'type': 'text'}],
-            'title': 'Practical Info & Useful Links'},
-           {'nb_boxes': 1,
-            'pid': '94605',
-            'sidebar': [{'content': '<p><a href="http://virtualtour.epfl.ch" '
-                                    'target="_blank"><img width="300" '
-                                    'height="157" src="/files/buttons/virtual '
-                                    'tour '
-                                    'thumbnail.png?uuid=default:1ecf5f72-58c7-40f6-a15d-5ca0ffd2c419" '
-                                    'alt="virtual tour" /></a></p> ',
-                         'title': 'Discover the campus',
-                         'type': 'text'},
-                        {'content': '<p style="text-align: center;"><a '
-                                    'target="_blank" '
-                                    'onClick="_gaq.push([\'_trackEvent\', '
-                                    '\'generale_MA_eng\', \'download\']);" '
-                                    'href="/files/SPE_BrochGén_LowCost_2017_EN_prod_internet.pdf?uuid=default:7548889d-c4f7-402c-b9ea-15ef66f13bef"><img '
-                                    'width="150" height="215" alt="studying at '
-                                    'EPFL, brochure" '
-                                    'src="/files/brochures/covers/SPE_BrochGénérique_EN_web-cover.jpg?uuid=default:b3bffa9e-f633-474c-bfec-5e3d3cdc4b50" '
-                                    '/></a></p> ',
-                         'title': 'Brochure',
-                         'type': 'text'},
-                        {'content': '<p style="text-align: left;">In case of '
-                                    'questions, please contact the student '
-                                    'helpdesk:</p> <div class="button mail"><a '
-                                    'href="mailto:student.services@epfl.ch"> '
-                                    '<button class="icon"></button> <span '
-                                    'class="label">student.services@epfl.ch</span></a></div> '
-                                    '<p>&nbsp;</p> <div class="button '
-                                    'contact"><button class="icon"></button> '
-                                    '<span class="label">+41 (0)21 693 43 '
-                                    '45</span></div> ',
-                         'title': 'Contact',
-                         'type': 'text'},
-                        {'content': '<p style="text-align: left;"><a '
-                                    'target="_blank" '
-                                    'href="http://www.youtube.com/EPFLstudents"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'YouTube" '
-                                    'src="/files/buttons/YouTube-social-square_red_48px.png?uuid=default:f9ad6a38-48ec-4629-befe-080249712f3d" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://www.facebook.com/EPFL.ch"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'Facebook" '
-                                    'src="/files/buttons/FB-f-Logo__blue_58.png?uuid=default:187bafe8-c769-4aee-879b-7d2920600f30" '
-                                    '/></a>&nbsp; &nbsp; &nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://twitter.com/EPFL_en"><img '
-                                    'width="25" height="21" alt="EPFL on '
-                                    'Twitter" '
-                                    'src="/files/buttons/Twitter_logo_blue.png?uuid=default:7b12cfa6-30f8-4d08-9849-1096739f5eb2" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="https://instagram.com/epflcampus/"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'Instagram" '
-                                    'src="/files/buttons/insta_logo.jpg?uuid=default:8002075d-fb77-46dd-bdaf-79cd4855a818" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://studyingatepfl.tumblr.com/"><img '
-                                    'width="25" height="25" alt="tumblr" '
-                                    'src="/files/buttons/tumblr.png?uuid=default:073896a0-c6cd-46cb-82ce-342f5d293110" '
-                                    '/></a></p> ',
-                         'title': 'FOLLOW EPFL',
-                         'type': 'text'}],
-            'title': 'Coming from abroad'},
-           {'nb_boxes': 1,
-            'pid': '94609',
-            'sidebar': [{'content': '<p><a href="http://virtualtour.epfl.ch" '
-                                    'target="_blank"><img width="300" '
-                                    'height="157" src="/files/buttons/virtual '
-                                    'tour '
-                                    'thumbnail.png?uuid=default:1ecf5f72-58c7-40f6-a15d-5ca0ffd2c419" '
-                                    'alt="virtual tour" /></a></p> ',
-                         'title': 'Discover the campus',
-                         'type': 'text'},
-                        {'content': '<p style="text-align: center;"><a '
-                                    'target="_blank" '
-                                    'onClick="_gaq.push([\'_trackEvent\', '
-                                    '\'generale_MA_eng\', \'download\']);" '
-                                    'href="/files/SPE_BrochGén_LowCost_2017_EN_prod_internet.pdf?uuid=default:7548889d-c4f7-402c-b9ea-15ef66f13bef"><img '
-                                    'width="150" height="215" alt="studying at '
-                                    'EPFL, brochure" '
-                                    'src="/files/brochures/covers/SPE_BrochGénérique_EN_web-cover.jpg?uuid=default:b3bffa9e-f633-474c-bfec-5e3d3cdc4b50" '
-                                    '/></a></p> ',
-                         'title': 'Brochure',
-                         'type': 'text'},
-                        {'content': '<p style="text-align: left;">In case of '
-                                    'questions, please contact the student '
-                                    'helpdesk:</p> <div class="button mail"><a '
-                                    'href="mailto:student.services@epfl.ch"> '
-                                    '<button class="icon"></button> <span '
-                                    'class="label">student.services@epfl.ch</span></a></div> '
-                                    '<p>&nbsp;</p> <div class="button '
-                                    'contact"><button class="icon"></button> '
-                                    '<span class="label">+41 (0)21 693 43 '
-                                    '45</span></div> ',
-                         'title': 'Contact',
-                         'type': 'text'},
-                        {'content': '<p style="text-align: left;"><a '
-                                    'target="_blank" '
-                                    'href="http://www.youtube.com/EPFLstudents"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'YouTube" '
-                                    'src="/files/buttons/YouTube-social-square_red_48px.png?uuid=default:f9ad6a38-48ec-4629-befe-080249712f3d" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://www.facebook.com/EPFL.ch"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'Facebook" '
-                                    'src="/files/buttons/FB-f-Logo__blue_58.png?uuid=default:187bafe8-c769-4aee-879b-7d2920600f30" '
-                                    '/></a>&nbsp; &nbsp; &nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://twitter.com/EPFL_en"><img '
-                                    'width="25" height="21" alt="EPFL on '
-                                    'Twitter" '
-                                    'src="/files/buttons/Twitter_logo_blue.png?uuid=default:7b12cfa6-30f8-4d08-9849-1096739f5eb2" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="https://instagram.com/epflcampus/"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'Instagram" '
-                                    'src="/files/buttons/insta_logo.jpg?uuid=default:8002075d-fb77-46dd-bdaf-79cd4855a818" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://studyingatepfl.tumblr.com/"><img '
-                                    'width="25" height="25" alt="tumblr" '
-                                    'src="/files/buttons/tumblr.png?uuid=default:073896a0-c6cd-46cb-82ce-342f5d293110" '
-                                    '/></a></p> ',
-                         'title': 'FOLLOW EPFL',
-                         'type': 'text'}],
-            'title': 'Teaching Languages'},
-           {'nb_boxes': 9,
-            'pid': '94611',
-            'sidebar': [{'content': '<p><a href="http://virtualtour.epfl.ch" '
-                                    'target="_blank"><img width="300" '
-                                    'height="157" src="/files/buttons/virtual '
-                                    'tour '
-                                    'thumbnail.png?uuid=default:1ecf5f72-58c7-40f6-a15d-5ca0ffd2c419" '
-                                    'alt="virtual tour" /></a></p> ',
-                         'title': 'Discover the campus',
-                         'type': 'text'},
-                        {'content': '<p style="text-align: center;"><a '
-                                    'target="_blank" '
-                                    'onClick="_gaq.push([\'_trackEvent\', '
-                                    '\'generale_MA_eng\', \'download\']);" '
-                                    'href="/files/SPE_BrochGén_LowCost_2017_EN_prod_internet.pdf?uuid=default:7548889d-c4f7-402c-b9ea-15ef66f13bef"><img '
-                                    'width="150" height="215" alt="studying at '
-                                    'EPFL, brochure" '
-                                    'src="/files/brochures/covers/SPE_BrochGénérique_EN_web-cover.jpg?uuid=default:b3bffa9e-f633-474c-bfec-5e3d3cdc4b50" '
-                                    '/></a></p> ',
-                         'title': 'Brochure',
-                         'type': 'text'},
-                        {'content': '<p style="text-align: left;">In case of '
-                                    'questions, please contact the student '
-                                    'helpdesk:</p> <div class="button mail"><a '
-                                    'href="mailto:student.services@epfl.ch"> '
-                                    '<button class="icon"></button> <span '
-                                    'class="label">student.services@epfl.ch</span></a></div> '
-                                    '<p>&nbsp;</p> <div class="button '
-                                    'contact"><button class="icon"></button> '
-                                    '<span class="label">+41 (0)21 693 43 '
-                                    '45</span></div> ',
-                         'title': 'Contact',
-                         'type': 'text'},
-                        {'content': '<p style="text-align: left;"><a '
-                                    'target="_blank" '
-                                    'href="http://www.youtube.com/EPFLstudents"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'YouTube" '
-                                    'src="/files/buttons/YouTube-social-square_red_48px.png?uuid=default:f9ad6a38-48ec-4629-befe-080249712f3d" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://www.facebook.com/EPFL.ch"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'Facebook" '
-                                    'src="/files/buttons/FB-f-Logo__blue_58.png?uuid=default:187bafe8-c769-4aee-879b-7d2920600f30" '
-                                    '/></a>&nbsp; &nbsp; &nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://twitter.com/EPFL_en"><img '
-                                    'width="25" height="21" alt="EPFL on '
-                                    'Twitter" '
-                                    'src="/files/buttons/Twitter_logo_blue.png?uuid=default:7b12cfa6-30f8-4d08-9849-1096739f5eb2" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="https://instagram.com/epflcampus/"><img '
-                                    'width="25" height="25" alt="EPFL on '
-                                    'Instagram" '
-                                    'src="/files/buttons/insta_logo.jpg?uuid=default:8002075d-fb77-46dd-bdaf-79cd4855a818" '
-                                    '/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a '
-                                    'target="_blank" '
-                                    'href="http://studyingatepfl.tumblr.com/"><img '
-                                    'width="25" height="25" alt="tumblr" '
-                                    'src="/files/buttons/tumblr.png?uuid=default:073896a0-c6cd-46cb-82ce-342f5d293110" '
-                                    '/></a></p> ',
-                         'title': 'FOLLOW EPFL',
-                         'type': 'text'}],
-            'title': 'FAQ'}],
-        'properties': {'acronym': 'EPFL',
-                'breadcrumb_title': 'Prospective students',
-                'breadcrumb_url': 'http://futuretudiant.epfl.ch/',
-                'css_url': '//static.epfl.ch/v0.23.0/styles/epfl-built.css',
+class Data:
+    dcsl_data = {'pages_dict': {'115349': {'children__len': 6,
+                           'contents': {'en': {'boxes': [{'content__start': '<div><img width="651" height="235" src="/files/Servers lab pic.jpg?uuid=default:c7f6d830-bd42-4843-bcc8-d7e817744dc3" alt="" /></div> ', 'title': '', 'type': 'text'},
+                                                         {'content__start': '<ul>  <li>   <h4>IX -- a specialized operating system for datacenter applications</h4>  </li>  <li>   <h4>soNUMA -- rack-scale computing</h4>  </li>  ',
+                                                          'title': 'Projects',
+                                                          'type': 'text'},
+                                                         {'content__start': '<p><strong>We would like to thank our sponsors for their support</strong></p> <p>&nbsp;</p> <p>&nbsp;<img width="107" height="61" border="5" alt="" st',
+                                                          'title': '',
+                                                          'type': 'text'}],
+                                               'language': 'en',
+                                               'last_update': datetime.datetime(2017, 5, 19, 15, 47, 23),
+                                               'path': '/index.html',
+                                               'sidebar__boxes': [{'content__start': '<p>We focus on interdisciplinary systems problems found in modern, large-scale datacenters. &nbsp; &nbsp;Our current research projects include special',
+                                                                   'title': 'Competence or skills',
+                                                                   'type': 'coloredText'}],
+                                               'title': 'DCSL'}},
+                           'contents__keys': ['en'],
+                           'level': 0,
+                           'pid': '115349',
+                           'template': 'home'},
+                '115407': {'children__len': 0,
+                           'contents': {'en': {'boxes': [{'content__start': '[infoscience url=http://infoscience.epfl.ch/curator/export/9665/?ln=en]', 'title': '', 'type': 'infoscience'}],
+                                               'language': 'en',
+                                               'last_update': datetime.datetime(2016, 8, 8, 16, 31, 41),
+                                               'path': '/page-115407-en.html',
+                                               'sidebar__boxes': [{'content__start': '<p>We focus on interdisciplinary systems problems found in modern, large-scale datacenters. &nbsp; &nbsp;Our current research projects include special',
+                                                                   'title': 'Competence or skills',
+                                                                   'type': 'coloredText'}],
+                                               'title': 'Publications'}},
+                           'contents__keys': ['en'],
+                           'level': 1,
+                           'pid': '115407',
+                           'template': 'simple'},
+                '125741': {'children__len': 0,
+                           'contents': {'en': {'boxes': [{'content__start': '<p><img alt="Edouard Bugnion" src="/files/Staff/Edouard Bugnion 2015.jpg?uuid=default:29c40c6f-8e18-4a6c-8ce8-094d218d16dd" style="float: left; margin',
+                                                          'title': 'Prof. Edouard Bugnion',
+                                                          'type': 'text'},
+                                                         {'content__start': '<p><img alt="" border="5" height="133" src="/files/Staff/Jonas Fietz.jpg?uuid=default:73dc52fd-0541-4295-ac2a-548453741ec0" style="float: left; margin',
+                                                          'title': 'Jonas Fietz',
+                                                          'type': 'text'},
+                                                         {'content__start': '<p><img alt="" style="float: left; margin: 5px;" src="/files/Staff/Marios Kogias.jpg?uuid=default:9783b418-413c-40da-b85a-ad4aceb7d75d" height="118" w',
+                                                          'title': 'Marios Kogias',
+                                                          'type': 'text'},
+                                                         {'content__start': '<p>  <!--[if gte mso 9]><xml>   <o:OfficeDocumentSettings>   <o:AllowPNG />   </o:OfficeDocumentSettings>   </xml><![endif]--> </p> <p>  <!--[if gte m',
+                                                          'title': 'Stanko Novakovic',
+                                                          'type': 'text'},
+                                                         {'content__start': '<p><img alt="" style="margin: 5px; float: left;" src="/files/Staff/Georges Prekas 2015.jpg?uuid=default:1958ca70-c2ab-4e59-97f3-19aabf2d0610" height="',
+                                                          'title': 'George Prekas',
+                                                          'type': 'text'},
+                                                         {'content__start': '<p><img src="/files/Staff/mia.jpg?uuid=default:adf9e713-b8fc-4bb0-ab07-74ffcaca0284" style="margin: 5px; float: left;" alt="" height="130" width="110"',
+                                                          'title': 'Mia Primorac',
+                                                          'type': 'text'},
+                                                         {'content__start': '<p><img width="101" height="135" border="5" alt="" style="float: left; margin: 5px;" src="/files/Staff/Dmitrii Ustiugov.jpg?uuid=default:d0f2abd0-9d40',
+                                                          'title': 'Dmitrii Ustiugov  ',
+                                                          'type': 'text'},
+                                                         {'content__start': '<p><img alt="" style="margin: 5px; float: left;" src="/files/Staff/Sam Whitlock 2015a.jpeg?uuid=default:28581c9d-2cb4-4e26-9de0-73d2927d223a" height="',
+                                                          'title': 'Sam Whitlock',
+                                                          'type': 'text'},
+                                                         {'content__start': '<p><img alt="" src="/files/Staff/margaret escandari church.jpg?uuid=default:814f3c68-0c45-4368-994d-8138a8e4aa32" style="margin: 5px; float: left;" he',
+                                                          'title': 'Margaret Escandari',
+                                                          'type': 'text'}],
+                                               'language': 'en',
+                                               'last_update': datetime.datetime(2017, 6, 7, 16, 24, 48),
+                                               'path': '/page-125741-en.html',
+                                               'sidebar__boxes': [{'content__start': '<p>We focus on interdisciplinary systems problems found in modern, large-scale datacenters. &nbsp; &nbsp;Our current research projects include special',
+                                                                   'title': 'Competence or skills',
+                                                                   'type': 'coloredText'}],
+                                               'title': 'Team'}},
+                           'contents__keys': ['en'],
+                           'level': 1,
+                           'pid': '125741',
+                           'template': 'simple'},
+                '126135': {'children__len': 0,
+                           'contents': {'en': {'boxes': [{'content__start': '<h4><strong><br />  </strong><strong>Courses 2016 - 2017</strong> </h4> <p>&nbsp;</p> <p>  <a href="http://isa.epfl.ch/imoniteur_ISAP/!itffichecours.h',
+                                                          'title': '',
+                                                          'type': 'text'}],
+                                               'language': 'en',
+                                               'last_update': datetime.datetime(2017, 3, 9, 15, 12, 56),
+                                               'path': '/page-126135-en.html',
+                                               'sidebar__boxes': [{'content__start': '<p>We focus on interdisciplinary systems problems found in modern, large-scale datacenters. &nbsp; &nbsp;Our current research projects include special',
+                                                                   'title': 'Competence or skills',
+                                                                   'type': 'coloredText'}],
+                                               'title': 'Teaching'}},
+                           'contents__keys': ['en'],
+                           'level': 1,
+                           'pid': '126135',
+                           'template': 'simple'},
+                '126290': {'children__len': 0,
+                           'contents': {'en': {'boxes': [{'content__start': '<p><strong>Scale-out NUMA (soNUMA</strong>) is a high-performance rack-scale system for scale-out analytics and data serving. Each soNUMA server relie',
+                                                          'title': '',
+                                                          'type': 'text'},
+                                                         {'content__start': '<p><img width="611" height="240" border="5" alt="" style="float: left; margin: 5px;" src="/files/sonuma1.png?uuid=default:aad25c7d-c6f6-4685-bff8-a26f',
+                                                          'title': '',
+                                                          'type': 'text'}],
+                                               'language': 'en',
+                                               'last_update': datetime.datetime(2016, 8, 8, 17, 36, 55),
+                                               'path': '/page-126290-en.html',
+                                               'sidebar__boxes': [{'content__start': '<p>We focus on interdisciplinary systems problems found in modern, large-scale datacenters. &nbsp; &nbsp;Our current research projects include special',
+                                                                   'title': 'Competence or skills',
+                                                                   'type': 'coloredText'}],
+                                               'title': 'soNUMA'}},
+                           'contents__keys': ['en'],
+                           'level': 1,
+                           'pid': '126290',
+                           'template': 'simple'},
+                '126292': {'children__len': 0,
+                           'contents': {'en': {'boxes': [{'content__start': '<div>&nbsp;</div> <div>IX is an open-source project available at <a href="https://github.com/ix-project"><strong>ix-project</strong></a><br />  <br />',
+                                                          'title': '',
+                                                          'type': 'text'},
+                                                         {'content__start': '<p>&nbsp;<img width="535" height="394" border="5" src="/files/ix-architecture.jpg?uuid=default:968f6b2f-8a7b-4c81-83d8-3b15aff8838c" style="float: lef',
+                                                          'title': '',
+                                                          'type': 'text'},
+                                                         {'content__start': '<p>Prekas, George; Belay, Adam; Primorac, Mia; Klimovic, Ana; Grossman, Samuel; Kogias, Marios; G&uuml;termann, Bernard; Kozyrakis, Christos; Bugnion,',
+                                                          'title': '',
+                                                          'type': 'text'}],
+                                               'language': 'en',
+                                               'last_update': datetime.datetime(2016, 8, 8, 17, 36, 58),
+                                               'path': '/page-126292-en.html',
+                                               'sidebar__boxes': [{'content__start': '<p>We focus on interdisciplinary systems problems found in modern, large-scale datacenters. &nbsp; &nbsp;Our current research projects include special',
+                                                                   'title': 'Competence or skills',
+                                                                   'type': 'coloredText'}],
+                                               'title': 'IX Dataplane Operating System'}},
+                           'contents__keys': ['en'],
+                           'level': 1,
+                           'pid': '126292',
+                           'template': 'simple'},
+                '145099': {'children__len': 0,
+                           'contents': {'en': {'boxes': [{'content__start': '<h4>Low-Latency measuring client</h4> <p>Latency is defined as the time it takes a system to respond. In datacenter applications with complex communic',
+                                                          'title': 'Master Thesis',
+                                                          'type': 'text'},
+                                                         {'content__start': '<h4>Evaluation of the QUIC protocol (Master)</h4> <p>QUIC is a new experimental transport protocol implemented by Google trying to overcome some of th',
+                                                          'title': 'Semester Projects',
+                                                          'type': 'text'}],
+                                               'language': 'en',
+                                               'last_update': datetime.datetime(2017, 5, 24, 15, 13, 1),
+                                               'path': '/page-145099-en.html',
+                                               'sidebar__boxes': [{'content__start': '<p>We focus on interdisciplinary systems problems found in modern, large-scale datacenters. &nbsp; &nbsp;Our current research projects include special',
+                                                                   'title': 'Competence or skills',
+                                                                   'type': 'coloredText'}],
+                                               'title': 'Master & Semester Projects'}},
+                           'contents__keys': ['en'],
+                           'level': 1,
+                           'pid': '145099',
+                           'template': 'simple'}},
+ 'properties': {'acronym': {'en': 'DCSL'},
+                'base_path': 'build/dcsl',
+                'breadcrumb_title': {'en': 'IC'},
+                'breadcrumb_url': {'en': 'http://ic.epfl.ch'},
+                'css_url': {'en': "//static.epfl.ch/v0.23.0/styles/{'en': 'ic'}-built.css"},
+                'export_files': {'en': 'build/dcsl/export_en.xml'},
+                'files__len': 27,
+                'homepage__pid': '115349',
+                'name': 'dcsl',
+                'pages__ids': ['115349', '125741', '126135', '145099', '115407', '126290', '126292'],
+                'theme': {'en': 'ic'},
+                'title': {'en': 'Data Center Systems Laboratory'}}}
+
+    master_data = {'pages_dict': {'100358': {'children__len': 0,
+                           'contents': {'en': {'boxes': [{'content__start': '', 'title': '', 'type': 'text'},
+                                                         {'content__start': '<p>&nbsp;<strong>October 2017</strong></p> <ul>  <li>   <div>EPFL Forum and International Fair, EPFL Campus, 13.10 (EPFL representatives)</div>  </li>',
+                                                          'title': '',
+                                                          'type': 'text'},
+                                                         {'content__start': '<p>&nbsp;<strong>October 2016</strong></p> <ul>  <li>EPFL Forum and International Fair, EPFL Campus, 14.10 (EPFL representatives)</li> </ul> <div>&nbs',
+                                                          'title': '2016 Calendar',
+                                                          'type': 'toggle'},
+                                                         {'content__start': '<p>&nbsp;</p> <div><strong>November 2015</strong></div> <ul>  <li>   <div>KU Leuven International Week, Leuven, 12.11 (EPFL exchange student)</div>  <',
+                                                          'title': '2015 Calendar',
+                                                          'type': 'toggle'}],
+                                               'language': 'en',
+                                               'last_update': datetime.datetime(2017, 3, 28, 14, 44, 31),
+                                               'path': '/fairs.html',
+                                               'sidebar__boxes': [{'content__start': "<ul>  <li><strong>10'281 Students (of which 2'077 PhD)</strong></li>  <li><strong>338 Faculty members</strong></li>  <li><strong>340 Laboratories</str",
+                                                                   'title': 'Facts & Figures (2014-2015)',
+                                                                   'type': 'coloredText'},
+                                                                  {'content__start': '<p style="text-align: left;">In case of questions, please contact the student helpdesk:</p> <div class="button mail"><a href="mailto:student.services@',
+                                                                   'title': 'Contact',
+                                                                   'type': 'text'},
+                                                                  {'content__start': '<p><a href="http://virtualtour.epfl.ch" target="_blank"><img width="300" height="157" src="/files/buttons/virtual tour thumbnail.png?uuid=default:1ecf',
+                                                                   'title': 'Discover the campus',
+                                                                   'type': 'text'},
+                                                                  {'content__start': '<p style="text-align: left;"><a target="_blank" href="http://www.youtube.com/EPFLstudents"><img width="25" height="25" alt="EPFL on YouTube" src="/fil',
+                                                                   'title': 'FOLLOW EPFL',
+                                                                   'type': 'text'}],
+                                               'title': 'Fairs calendar'},
+                                        'fr': {'boxes': [{'content__start': '', 'title': '', 'type': 'text'},
+                                                         {'content__start': '<p>&nbsp;<strong>October 2017</strong></p> <ul>  <li>   <div>EPFL Forum and International Fair, EPFL Campus, 13.10 (EPFL representatives)</div>  </li>',
+                                                          'title': '2017 Calendar',
+                                                          'type': 'text'},
+                                                         {'content__start': '<p>&nbsp;<strong>October 2016</strong></p> <ul>  <li>EPFL Forum and International Fair, EPFL Campus, 14.10 (EPFL representatives)</li> </ul> <div>&nbs',
+                                                          'title': '2016 Calendar',
+                                                          'type': 'toggle'},
+                                                         {'content__start': '<p>&nbsp;</p> <div><strong>November 2015</strong></div> <ul>  <li>   <div>KU Leuven International Week, Leuven, 12.11 (EPFL exchange student)</div>  <',
+                                                          'title': '2015 Calendar',
+                                                          'type': 'toggle'}],
+                                               'language': 'fr',
+                                               'last_update': datetime.datetime(2017, 3, 28, 14, 44, 31),
+                                               'path': '/forums.html',
+                                               'sidebar__boxes': [{'content__start': "<ul>  <li><strong>10'281 &Eacute;tudiants (dont 2077 doctorants)</strong></li>  <li><strong>338 Professeurs</strong></li>  <li><strong>350 Laboratoire",
+                                                                   'title': "L'EPFL en chiffres (2014-2015)",
+                                                                   'type': 'coloredText'},
+                                                                  {'content__start': '<p style="text-align: left;">Pour des questions d\'ordre g&eacute;n&eacute;ral, vous pouvez contacter les services aux &eacute;tudiants:</p> <div style',
+                                                                   'title': 'Contact',
+                                                                   'type': 'text'},
+                                                                  {'content__start': '<p><a href="http://virtualtour.epfl.ch" target="_blank"><img width="300" height="157" src="/files/buttons/virtual tour thumbnail.png?uuid=default:1ecf',
+                                                                   'title': 'Découvrir le campus',
+                                                                   'type': 'text'},
+                                                                  {'content__start': '<p style="text-align: left;"><a target="_blank" href="http://www.youtube.com/EPFLstudents"><img width="25" height="25" alt="EPFL on YouTube" src="/fil',
+                                                                   'title': "Suivre l'EPFL",
+                                                                   'type': 'text'}],
+                                               'title': "Rencontrer des représentants de l'EPFL"}},
+                           'contents__keys': ['en', 'fr'],
+                           'level': 2,
+                           'pid': '100358',
+                           'template': 'simple'},
+                '103766': {'children__len': 0,
+                           'contents': {'en': {'boxes': [{'content__start': '<div style="float:left; padding-right:35px"><img width="220" height="309" style="float: left;" src="/files/SPE_affichettes_A3_2017_draft.jpg?uuid=defa',
+                                                          'title': '',
+                                                          'type': 'text'},
+                                                         {'content__start': '<p><img width="650" height="282" src="/files/Programme_web.jpg?uuid=default:ac2d64db-6dbe-42fd-b6e4-3669c44f2126" alt="" /></p> ', 'title': 'Program', 'type': 'text'},
+                                                         {'content__start': '<p><img src="data:image/jpeg;base64,/9j/4Rs/RXhpZgAATU0AKgAAAAgABwESAAMAAAABAAEAAAEaAAUAAAABAAAAYgEbAAUAAAABAAAAagEoAAMAAAABAAIAAAExAAIAAAAcAAAAcgEyAA',
+                                                          'title': 'Campus map',
+                                                          'type': 'text'}],
+                                               'language': 'en',
+                                               'last_update': datetime.datetime(2017, 2, 10, 10, 25, 47),
+                                               'path': '/page-103766-en.html',
+                                               'sidebar__boxes': [{'content__start': '<p><strong><a href="https://isa.epfl.ch/imoniteur_ISAP/!farforms.htm?x=master">Applications</a> for starting a Master\'s program are open from mid-Nove',
+                                                                   'title': 'Application',
+                                                                   'type': 'coloredText'},
+                                                                  {'content__start': '<p style="text-align: left;">In case of questions, please contact the student helpdesk:</p> <div class="button mail"><a href="mailto:student.services@',
+                                                                   'title': 'Contact',
+                                                                   'type': 'text'},
+                                                                  {'content__start': '<p><a href="http://virtualtour.epfl.ch" target="_blank"><img width="300" height="157" src="/files/buttons/virtual tour thumbnail.png?uuid=default:1ecf',
+                                                                   'title': 'Discover the campus',
+                                                                   'type': 'text'},
+                                                                  {'content__start': '<p style="text-align: left;"><a target="_blank" href="http://www.youtube.com/EPFLstudents"><img width="25" height="25" alt="EPFL on YouTube" src="/fil',
+                                                                   'title': 'FOLLOW EPFL',
+                                                                   'type': 'text'}],
+                                               'title': 'Specialized Masters Day'},
+                                        'fr': {'boxes': [{'content__start': '<div style="float:left; padding-right:35px"><img width="211" height="297" src="/files/SPE_affichettes_A3_2017_draft.jpg?uuid=default:16ae0083-186e-4f2',
+                                                          'title': '         ',
+                                                          'type': 'text'},
+                                                         {'content__start': '<p>&nbsp;<img width="650" height="282" src="/files/Programme_web.jpg?uuid=default:ac2d64db-6dbe-42fd-b6e4-3669c44f2126" alt="" /></p> ',
+                                                          'title': 'Programme',
+                                                          'type': 'text'},
+                                                         {'content__start': '<p><img src="data:image/jpeg;base64,/9j/4Rs/RXhpZgAATU0AKgAAAAgABwESAAMAAAABAAEAAAEaAAUAAAABAAAAYgEbAAUAAAABAAAAagEoAAMAAAABAAIAAAExAAIAAAAcAAAAcgEyAA',
+                                                          'title': 'Nous trouver',
+                                                          'type': 'text'}],
+                                               'language': 'fr',
+                                               'last_update': datetime.datetime(2017, 2, 10, 10, 25, 47),
+                                               'path': '/journee-master.html',
+                                               'sidebar__boxes': [{'content__start': '<p><strong><a href="https://isa.epfl.ch/imoniteur_ISAP/!farforms.htm?x=master">Les inscriptions</a> pour d&eacute;buter un master sont ouvertes de mi-',
+                                                                   'title': 'Inscription',
+                                                                   'type': 'coloredText'},
+                                                                  {'content__start': '<p style="text-align: left;">Pour des questions d\'ordre g&eacute;n&eacute;ral, vous pouvez contacter les services aux &eacute;tudiants:</p> <div style',
+                                                                   'title': 'Contact',
+                                                                   'type': 'text'},
+                                                                  {'content__start': '<p><a href="http://virtualtour.epfl.ch" target="_blank"><img width="300" height="157" src="/files/buttons/virtual tour thumbnail.png?uuid=default:1ecf',
+                                                                   'title': 'Découvrir le campus',
+                                                                   'type': 'text'},
+                                                                  {'content__start': '<p style="text-align: left;"><a target="_blank" href="http://www.youtube.com/EPFLstudents"><img width="25" height="25" alt="EPFL on YouTube" src="/fil',
+                                                                   'title': "Suivre l'EPFL",
+                                                                   'type': 'text'}],
+                                               'title': 'Journée des masters spécialisés'}},
+                           'contents__keys': ['en', 'fr'],
+                           'level': 2,
+                           'pid': '103766',
+                           'template': 'simple'},
+                '104644': {'children__len': 0,
+                           'contents': {'en': {'boxes': [{'content__start': "<h2>Master en mathématiques pour l'enseignement, 120 crédits</h2><p><p>L'EPFL est l'un des principaux centres d'enseignement et de recherche dans le d",
+                                                          'title': '',
+                                                          'type': 'faq'},
+                                                         {'content__start': '<h2>Objectifs du programme</h2><p><p>Pour pouvoir enseigner les math&eacute;matiques dans le degr&eacute; secondaire II, il faut avoir effectu&eacute;',
+                                                          'title': '',
+                                                          'type': 'faq'},
+                                                         {'content__start': "<h2>Conditions d'admission</h2><p><p>Les candidats doivent &ecirc;tre titulaires d'un Bachelor en math&eacute;matiques, ou d'un titre jug&eacute; &eac",
+                                                          'title': '',
+                                                          'type': 'faq'},
+                                                         {'content__start': "<h2>Langue d'enseignement</h2><p><p>Anglais &agrave; l'EPFL (avec quelques cours en fran&ccedil;ais).<br />  Fran&ccedil;ais &agrave; la HEP Vaud. </p",
+                                                          'title': '',
+                                                          'type': 'faq'},
+                                                         {'content__start': '<h2>Structure du programme</h2><p><p><a href="###file:/content/sites/master/files/pdfs/SB_MATH_MA_HEP.pdf?uuid=default:8b056d46-261a-46ec-b8e4-4ca8ac3',
+                                                          'title': '',
+                                                          'type': 'faq'}],
+                                               'language': 'en',
+                                               'last_update': datetime.datetime(2016, 9, 12, 16, 23, 3),
+                                               'path': '/teaching-maths.html',
+                                               'sidebar__boxes': [{'content__start': '<p>In case of specific questions about this program, please contact the Mathematics section:</p> <div class="button mail"><a href="mailto:simone.depar',
+                                                                   'title': 'Contact',
+                                                                   'type': 'text'},
+                                                                  {'content__start': '<p><a href="http://phd.epfl.ch/home" target="_blank"><span class="fleche">phd.epfl.ch</span></a></p> ', 'title': 'Also interested in a PhD? ', 'type': 'text'},
+                                                                  {'content__start': '<p style="text-align: left;"><a target="_blank" href="http://www.youtube.com/EPFLstudents"><img width="25" height="25" alt="EPFL on YouTube" src="/fil',
+                                                                   'title': 'FOLLOW EPFL',
+                                                                   'type': 'text'}],
+                                               'title': 'Mathematics for education (in French only)'},
+                                        'fr': {'boxes': [{'content__start': "<h2>Master en mathématiques pour l'enseignement, 120 crédits</h2><p><p>L'EPFL est l'un des principaux centres d'enseignement et de recherche dans le d",
+                                                          'title': '',
+                                                          'type': 'faq'},
+                                                         {'content__start': '<h2>Objectifs du programme</h2><p><p>Pour pouvoir enseigner les math&eacute;matiques dans le degr&eacute; secondaire II, il faut avoir effectu&eacute;',
+                                                          'title': '',
+                                                          'type': 'faq'},
+                                                         {'content__start': "<h2>Conditions d'admission</h2><p><p>Les candidats doivent &ecirc;tre titulaires d'un Bachelor en math&eacute;matiques, ou d'un titre jug&eacute; &eac",
+                                                          'title': '',
+                                                          'type': 'faq'},
+                                                         {'content__start': "<h2>Langue d'enseignement</h2><p><p>Anglais &agrave; l'EPFL (avec quelques cours en fran&ccedil;ais).<br />  Fran&ccedil;ais &agrave; la HEP Vaud. </p",
+                                                          'title': '',
+                                                          'type': 'faq'},
+                                                         {'content__start': '<h2>Structure du programme</h2><p><p><a href="###file:/content/sites/master/files/pdfs/SB_MATH_MA_HEP.pdf?uuid=default:8b056d46-261a-46ec-b8e4-4ca8ac3',
+                                                          'title': '',
+                                                          'type': 'faq'}],
+                                               'language': 'fr',
+                                               'last_update': datetime.datetime(2016, 9, 12, 16, 23, 3),
+                                               'path': '/maths-enseignement.html',
+                                               'sidebar__boxes': [{'content__start': '<p>En cas de questions sp&eacute;cifiques au sujet de ce programme, vous pouvez  vous adresser &agrave; la section Math&eacute;matiques :</p> <div cla',
+                                                                   'title': 'Contact',
+                                                                   'type': 'text'},
+                                                                  {'content__start': '<p><a href="http://phd.epfl.ch" target="_blank"><span class="fleche">phd.epfl.ch</span></a></p> ', 'title': 'Et le doctorat ?', 'type': 'text'},
+                                                                  {'content__start': '<p style="text-align: left;"><a target="_blank" href="http://www.youtube.com/EPFLstudents"><img width="25" height="25" alt="EPFL on YouTube" src="/fil',
+                                                                   'title': "Suivre l'EPFL",
+                                                                   'type': 'text'}],
+                                               'title': "Mathématiques pour l'enseignement"}},
+                           'contents__keys': ['en', 'fr'],
+                           'level': 2,
+                           'pid': '104644',
+                           'template': 'simple'},
+                '106847': {'children__len': 5,
+                           'contents': {'en': {'boxes': [{'content__start': '<p>EPFL, via strategic alliances with certain international academic partners, offers to outstanding students the possibility to follow a double diplo',
+                                                          'title': '',
+                                                          'type': 'text'}],
+                                               'language': 'en',
+                                               'last_update': datetime.datetime(2015, 12, 3, 16, 4, 42),
+                                               'path': '/double-degrees.html',
+                                               'sidebar__boxes': [{'content__start': '<p><strong><a href="https://isa.epfl.ch/imoniteur_ISAP/!farforms.htm?x=master">Applications</a> for starting a Master\'s program are open from mid-Nove',
+                                                                   'title': 'Application',
+                                                                   'type': 'coloredText'},
+                                                                  {'content__start': '<p style="text-align: left;">In case of questions, please contact the student helpdesk:</p> <div class="button mail"><a href="mailto:student.services@',
+                                                                   'title': 'Contact',
+                                                                   'type': 'text'},
+                                                                  {'content__start': '<p><a href="http://virtualtour.epfl.ch" target="_blank"><img width="300" height="157" src="/files/buttons/virtual tour thumbnail.png?uuid=default:1ecf',
+                                                                   'title': 'Discover the campus',
+                                                                   'type': 'text'},
+                                                                  {'content__start': '<p style="text-align: left;"><a target="_blank" href="http://www.youtube.com/EPFLstudents"><img width="25" height="25" alt="EPFL on YouTube" src="/fil',
+                                                                   'title': 'FOLLOW EPFL',
+                                                                   'type': 'text'}],
+                                               'title': 'Double Diplomas and Joint Degrees'},
+                                        'fr': {'boxes': [{'content__start': '<p>L&rsquo;EPFL,  via des alliances strat&eacute;giques avec certains partenaires acad&eacute;miques internationaux, offre &agrave; des &eacute;tudian',
+                                                          'title': '',
+                                                          'type': 'text'}],
+                                               'language': 'fr',
+                                               'last_update': datetime.datetime(2015, 12, 3, 16, 4, 42),
+                                               'path': '/doubles-diplomes.html',
+                                               'sidebar__boxes': [{'content__start': '<p><strong><a href="https://isa.epfl.ch/imoniteur_ISAP/!farforms.htm?x=master">Les inscriptions</a> pour d&eacute;buter un master sont ouvertes de mi-',
+                                                                   'title': 'Inscription',
+                                                                   'type': 'coloredText'},
+                                                                  {'content__start': '<p style="text-align: left;">Pour des questions d\'ordre g&eacute;n&eacute;ral, vous pouvez contacter les services aux &eacute;tudiants:</p> <div style',
+                                                                   'title': 'Contact',
+                                                                   'type': 'text'},
+                                                                  {'content__start': '<p><a href="http://virtualtour.epfl.ch" target="_blank"><img width="300" height="157" src="/files/buttons/virtual tour thumbnail.png?uuid=default:1ecf',
+                                                                   'title': 'Découvrir le campus',
+                                                                   'type': 'text'},
+                                                                  {'content__start': '<p style="text-align: left;"><a target="_blank" href="http://www.youtube.com/EPFLstudents"><img width="25" height="25" alt="EPFL on YouTube" src="/fil',
+                                                                   'title': "Suivre l'EPFL",
+                                                                   'type': 'text'}],
+                                               'title': 'Doubles diplômes et diplômes conjoints'}},
+                           'contents__keys': ['en', 'fr'],
+                           'level': 2,
+                           'pid': '106847',
+                           'template': 'simple'},
+                '106849': {'children__len': 0,
+                           'contents': {'en': {'boxes': [{'content__start': '<p style="text-align: left;"><img width="640" height="181" alt="" src="/files/dd/DD_montreal2.jpg?uuid=default:228e83fa-6bb2-40b7-8251-e8f394318aa3" /',
+                                                          'title': '',
+                                                          'type': 'text'},
+                                                         {'content__start': "<h2>A qui s'adresse le programme ?</h2><p><p><strong>Etudiants EPFL:</strong></p> <p>Le candidat doit avoir obtenu un certificat de bachelor &agrave; ",
+                                                          'title': '',
+                                                          'type': 'faq'},
+                                                         {'content__start': '<h2>Délai de candidature</h2><p><p><strong>Etudiants EPFL:</strong></p> <p>Le d&eacute;lai de candidature est fix&eacute; au 1er d&eacute;cembre du pr',
+                                                          'title': '',
+                                                          'type': 'faq'},
+                                                         {'content__start': "<h2>Structure du programme et diplômes obtenus</h2><p><p><strong>Etudiants EPFL:</strong></p> <p><strong>Ce programme s'effectue au niveau master, sur",
+                                                          'title': '',
+                                                          'type': 'faq'},
+                                                         {'content__start': '<h2>Soutien financier</h2><p><p>  <!--[if gte mso 9]><xml>   <o:OfficeDocumentSettings>   <o:AllowPNG />   </o:OfficeDocumentSettings>   </xml><![endi',
+                                                          'title': '',
+                                                          'type': 'faq'},
+                                                         {'content__start': "<h2>Contacts spécifiques</h2><p><p><strong>Personne de contact &agrave; l'EPFL:</strong></p> <ul>  <li>Luisa Pizzillo, Bureau de la mobilit&eacute;, l",
+                                                          'title': '',
+                                                          'type': 'faq'}],
+                                               'language': 'en',
+                                               'last_update': datetime.datetime(2017, 4, 26, 16, 44, 35),
+                                               'path': '/page-106849-en.html',
+                                               'sidebar__boxes': [{'content__start': '<p><strong><a href="https://isa.epfl.ch/imoniteur_ISAP/!farforms.htm?x=master">Applications</a> for starting a Master\'s program are open from mid-Nove',
+                                                                   'title': 'Application',
+                                                                   'type': 'coloredText'},
+                                                                  {'content__start': '<p style="text-align: left;">In case of questions, please contact the student helpdesk:</p> <div class="button mail"><a href="mailto:student.services@',
+                                                                   'title': 'Contact',
+                                                                   'type': 'text'},
+                                                                  {'content__start': '<p><a href="http://virtualtour.epfl.ch" target="_blank"><img width="300" height="157" src="/files/buttons/virtual tour thumbnail.png?uuid=default:1ecf',
+                                                                   'title': 'Discover the campus',
+                                                                   'type': 'text'},
+                                                                  {'content__start': '<p style="text-align: left;"><a target="_blank" href="http://www.youtube.com/EPFLstudents"><img width="25" height="25" alt="EPFL on YouTube" src="/fil',
+                                                                   'title': 'FOLLOW EPFL',
+                                                                   'type': 'text'}],
+                                               'title': 'Double diploma EPFL-Polytechnique Montréal'},
+                                        'fr': {'boxes': [{'content__start': '<p style="text-align: left;"><img width="640" height="181" alt="" src="/files/dd/DD_montreal2.jpg?uuid=default:228e83fa-6bb2-40b7-8251-e8f394318aa3" /',
+                                                          'title': '',
+                                                          'type': 'text'},
+                                                         {'content__start': "<h2>A qui s'adresse le programme ?</h2><p><p><strong>Etudiants EPFL:</strong></p> <p>Le candidat doit avoir obtenu un certificat de bachelor &agrave; ",
+                                                          'title': '',
+                                                          'type': 'faq'},
+                                                         {'content__start': '<h2>Délai de candidature</h2><p><p><strong>Etudiants EPFL:</strong></p> <p>Le d&eacute;lai de candidature est fix&eacute; au 1er d&eacute;cembre du pr',
+                                                          'title': '',
+                                                          'type': 'faq'},
+                                                         {'content__start': "<h2>Structure du programme et diplômes obtenus</h2><p><p><strong>Etudiants EPFL:</strong></p> <p><strong>Ce programme s'effectue au niveau master, sur",
+                                                          'title': '',
+                                                          'type': 'faq'},
+                                                         {'content__start': '<h2>Soutien financier</h2><p><p>  <!--[if gte mso 9]><xml>   <o:OfficeDocumentSettings>   <o:AllowPNG />   </o:OfficeDocumentSettings>   </xml><![endi',
+                                                          'title': '',
+                                                          'type': 'faq'},
+                                                         {'content__start': "<h2>Contacts spécifiques</h2><p><p><strong>Personne de contact &agrave; l'EPFL:</strong></p> <ul>  <li>Luisa Pizzillo, Bureau de la mobilit&eacute;, l",
+                                                          'title': '',
+                                                          'type': 'faq'}],
+                                               'language': 'fr',
+                                               'last_update': datetime.datetime(2017, 4, 26, 16, 44, 35),
+                                               'path': '/poly-montreal.html',
+                                               'sidebar__boxes': [{'content__start': '<p><strong><a href="https://isa.epfl.ch/imoniteur_ISAP/!farforms.htm?x=master">Les inscriptions</a> pour d&eacute;buter un master sont ouvertes de mi-',
+                                                                   'title': 'Inscription',
+                                                                   'type': 'coloredText'},
+                                                                  {'content__start': '<p style="text-align: left;">Pour des questions d\'ordre g&eacute;n&eacute;ral, vous pouvez contacter les services aux &eacute;tudiants:</p> <div style',
+                                                                   'title': 'Contact',
+                                                                   'type': 'text'},
+                                                                  {'content__start': '<p><a href="http://virtualtour.epfl.ch" target="_blank"><img width="300" height="157" src="/files/buttons/virtual tour thumbnail.png?uuid=default:1ecf',
+                                                                   'title': 'Découvrir le campus',
+                                                                   'type': 'text'},
+                                                                  {'content__start': '<p style="text-align: left;"><a target="_blank" href="http://www.youtube.com/EPFLstudents"><img width="25" height="25" alt="EPFL on YouTube" src="/fil',
+                                                                   'title': "Suivre l'EPFL",
+                                                                   'type': 'text'}],
+                                               'title': 'Polytechnique Montréal global '}},
+                           'contents__keys': ['en', 'fr'],
+                           'level': 3,
+                           'pid': '106849',
+                           'template': 'simple'},
+                '110995': {'children__len': 0,
+                           'contents': {'en': {'boxes': [{'content__start': '<p>Here under, meet some of our students according to schools and departments. Note that not all study programs appear here.</p> <div class="toggler">',
+                                                          'title': '',
+                                                          'type': 'text'}],
+                                               'language': 'en',
+                                               'last_update': datetime.datetime(2016, 2, 15, 13, 28, 33),
+                                               'path': '/meet-our-students.html',
+                                               'sidebar__boxes': [{'content__start': "<ul>  <li><strong>10'281 Students (of which 2'077 PhD)</strong></li>  <li><strong>338 Faculty members</strong></li>  <li><strong>340 Laboratories</str",
+                                                                   'title': 'Facts & Figures (2014-2015)',
+                                                                   'type': 'coloredText'},
+                                                                  {'content__start': '<p style="text-align: left;">In case of questions, please contact the student helpdesk:</p> <div class="button mail"><a href="mailto:student.services@',
+                                                                   'title': 'Contact',
+                                                                   'type': 'text'},
+                                                                  {'content__start': '<p><a href="http://virtualtour.epfl.ch" target="_blank"><img width="300" height="157" src="/files/buttons/virtual tour thumbnail.png?uuid=default:1ecf',
+                                                                   'title': 'Discover the campus',
+                                                                   'type': 'text'},
+                                                                  {'content__start': '<p style="text-align: left;"><a target="_blank" href="http://www.youtube.com/EPFLstudents"><img width="25" height="25" alt="EPFL on YouTube" src="/fil',
+                                                                   'title': 'FOLLOW EPFL',
+                                                                   'type': 'text'}],
+                                               'title': 'Meet our students'},
+                                        'fr': {'boxes': [{'content__start': '<p>Ci-dessous, faites la connaissance de quelques uns de nos &eacute;tudiants, class&eacute;s en fonction de la facult&eacute; &agrave; laquelle leurs',
+                                                          'title': '',
+                                                          'type': 'text'}],
+                                               'language': 'fr',
+                                               'last_update': datetime.datetime(2016, 2, 15, 13, 28, 33),
+                                               'path': '/temoignages.html',
+                                               'sidebar__boxes': [{'content__start': "<ul>  <li><strong>10'281 &Eacute;tudiants (dont 2077 doctorants)</strong></li>  <li><strong>338 Professeurs</strong></li>  <li><strong>350 Laboratoire",
+                                                                   'title': "L'EPFL en chiffres (2014-2015)",
+                                                                   'type': 'coloredText'},
+                                                                  {'content__start': '<p style="text-align: left;">Pour des questions d\'ordre g&eacute;n&eacute;ral, vous pouvez contacter les services aux &eacute;tudiants:</p> <div style',
+                                                                   'title': 'Contact',
+                                                                   'type': 'text'},
+                                                                  {'content__start': '<p><a href="http://virtualtour.epfl.ch" target="_blank"><img width="300" height="157" src="/files/buttons/virtual tour thumbnail.png?uuid=default:1ecf',
+                                                                   'title': 'Découvrir le campus',
+                                                                   'type': 'text'},
+                                                                  {'content__start': '<p style="text-align: left;"><a target="_blank" href="http://www.youtube.com/EPFLstudents"><img width="25" height="25" alt="EPFL on YouTube" src="/fil',
+                                                                   'title': "Suivre l'EPFL",
+                                                                   'type': 'text'}],
+                                               'title': "Témoignages d'étudiants"}},
+                           'contents__keys': ['en', 'fr'],
+                           'level': 2,
+                           'pid': '110995',
+                           'template': 'simple'},
+                '113825': {'children__len': 0,
+                           'contents': {'en': {'boxes': [{'content__start': '<p><img width="652" height="184" src="/files/dd/DD_dtu.jpg?uuid=default:9c3b92b1-cd01-49c0-9f1a-fd2606f89514" alt="DTU-EPFL 1:1" /></p> ', 'title': '', 'type': 'text'},
+                                                         {'content__start': '<h2>DTU - EPFL 1:1 MSc Program in Environmental Engineering</h2><p><p>The Section of Environmental Sciences and Engineering offers a 1:1 program in En',
+                                                          'title': '',
+                                                          'type': 'faq'},
+                                                         {'content__start': "<h2>Program's structure</h2><p><p>&nbsp;Students enrolled in the 1:1 program must complete 1 year of study at each DTU and EPFL. Only students having ",
+                                                          'title': '',
+                                                          'type': 'faq'},
+                                                         {'content__start': '<h2>Title of the obtained degree</h2><p><p><font size="4">The student registered at DTU, will obtain the degree of &ldquo;MSc in Engineering, Environm',
+                                                          'title': '',
+                                                          'type': 'faq'},
+                                                         {'content__start': '<h2>Registration deadline</h2><p><p>For EPFL students: deadline for registration is set on November 15. during the student&rsquo;s first semester of M',
+                                                          'title': '',
+                                                          'type': 'faq'},
+                                                         {'content__start': '<h2>Tuition fees</h2><p><p>Students pay the standard tuition fees at their home university.</p> </p>', 'title': '', 'type': 'faq'},
+                                                         {'content__start': '<h2>Contacts for more info</h2><p><p><b><font size="4">MSc program coordinators:</font></b></p> <p><font size="4">Ms Chantal Seignez at EPFL: chantal.',
+                                                          'title': '',
+                                                          'type': 'faq'}],
+                                               'language': 'en',
+                                               'last_update': datetime.datetime(2016, 1, 8, 8, 47, 30),
+                                               'path': '/epfl-dtu.html',
+                                               'sidebar__boxes': [{'content__start': '<p><strong><a href="https://isa.epfl.ch/imoniteur_ISAP/!farforms.htm?x=master">Applications</a> for starting a Master\'s program are open from mid-Nove',
+                                                                   'title': 'Application',
+                                                                   'type': 'coloredText'},
+                                                                  {'content__start': '<p style="text-align: left;">In case of questions, please contact the student helpdesk:</p> <div class="button mail"><a href="mailto:student.services@',
+                                                                   'title': 'Contact',
+                                                                   'type': 'text'},
+                                                                  {'content__start': '<p><a href="http://virtualtour.epfl.ch" target="_blank"><img width="300" height="157" src="/files/buttons/virtual tour thumbnail.png?uuid=default:1ecf',
+                                                                   'title': 'Discover the campus',
+                                                                   'type': 'text'},
+                                                                  {'content__start': '<p style="text-align: left;"><a target="_blank" href="http://www.youtube.com/EPFLstudents"><img width="25" height="25" alt="EPFL on YouTube" src="/fil',
+                                                                   'title': 'FOLLOW EPFL',
+                                                                   'type': 'text'}],
+                                               'title': "1:1 Master's EPFL-DTU"},
+                                        'fr': {'boxes': [{'content__start': '<p><img width="652" height="184" src="/files/dd/DD_dtu.jpg?uuid=default:9c3b92b1-cd01-49c0-9f1a-fd2606f89514" alt="DTU-EPFL 1:1" /></p> ', 'title': '', 'type': 'text'},
+                                                         {'content__start': '<h2>DTU - EPFL 1:1 MSc Program in Environmental Engineering</h2><p><p>The Section of Environmental Sciences and Engineering offers a 1:1 program in En',
+                                                          'title': '',
+                                                          'type': 'faq'},
+                                                         {'content__start': "<h2>Program's structure</h2><p><p>Students enrolled in the 1:1 program must complete 1 year of study at each DTU and EPFL. Only students having fulfil",
+                                                          'title': '',
+                                                          'type': 'faq'},
+                                                         {'content__start': '<h2>Title of the obtained degree</h2><p><p><font size="4">The student registered at DTU, will obtain the degree of &ldquo;MSc in Engineering, Environm',
+                                                          'title': '',
+                                                          'type': 'faq'},
+                                                         {'content__start': '<h2>Registration deadline</h2><p><p>For EPFL students: deadline for registration is set on November 15. during the student&rsquo;s first semester of M',
+                                                          'title': '',
+                                                          'type': 'faq'},
+                                                         {'content__start': '<h2>Tuition fees</h2><p><p>Students pay the standard tuition fees at their home university.</p> </p>', 'title': '', 'type': 'faq'},
+                                                         {'content__start': '<h2>Contacts for more info</h2><p><p><b><font size="4">MSc program coordinators:</font></b></p> <p><font size="4">Ms Chantal Seignez at EPFL: chantal.',
+                                                          'title': '',
+                                                          'type': 'faq'}],
+                                               'language': 'fr',
+                                               'last_update': datetime.datetime(2016, 1, 8, 8, 47, 30),
+                                               'path': '/dtu.html',
+                                               'sidebar__boxes': [{'content__start': '<p><strong><a href="https://isa.epfl.ch/imoniteur_ISAP/!farforms.htm?x=master">Les inscriptions</a> pour d&eacute;buter un master sont ouvertes de mi-',
+                                                                   'title': 'Inscription',
+                                                                   'type': 'coloredText'},
+                                                                  {'content__start': '<p style="text-align: left;">Pour des questions d\'ordre g&eacute;n&eacute;ral, vous pouvez contacter les services aux &eacute;tudiants:</p> <div style',
+                                                                   'title': 'Contact',
+                                                                   'type': 'text'},
+                                                                  {'content__start': '<p><a href="http://virtualtour.epfl.ch" target="_blank"><img width="300" height="157" src="/files/buttons/virtual tour thumbnail.png?uuid=default:1ecf',
+                                                                   'title': 'Découvrir le campus',
+                                                                   'type': 'text'},
+                                                                  {'content__start': '<p style="text-align: left;"><a target="_blank" href="http://www.youtube.com/EPFLstudents"><img width="25" height="25" alt="EPFL on YouTube" src="/fil',
+                                                                   'title': "Suivre l'EPFL",
+                                                                   'type': 'text'}],
+                                               'title': 'Diplôme 1:1 EPFL-DTU'}},
+                           'contents__keys': ['en', 'fr'],
+                           'level': 3,
+                           'pid': '113825',
+                           'template': 'simple'},
+                '113973': {'children__len': 0,
+                           'contents': {'en': {'boxes': [{'content__start': '<p><img width="652" height="184" src="/files/dd/DD_ECLille.jpg?uuid=default:404da40b-64fa-4b24-9b15-151333be89e5" alt="EPFL-Centrale Lille" /></p> ',
+                                                          'title': '',
+                                                          'type': 'text'},
+                                                         {'content__start': '<h2>A qui s\'adresse le programme?</h2><p><p><b><font size="5">Etudiants EPFL</font></b></p> <div>Les &eacute;tudiants de l&rsquo;EPFL ayant obtenu une',
+                                                          'title': '',
+                                                          'type': 'faq'},
+                                                         {'content__start': '<h2>Délai de candidature</h2><p><div><b><font size="5">Etudiants EPFL</font></b></div> <div>Le d&eacute;lai de candidature pour ce double dipl&ocirc;m',
+                                                          'title': '',
+                                                          'type': 'faq'},
+                                                         {'content__start': '<h2>Structure du programme et diplômes obtenus</h2><p><p><b><font size="5">Etudiants EPFL</font></b></p> <div>A l&rsquo;issue de ce programme, l&rsquo',
+                                                          'title': '',
+                                                          'type': 'faq'},
+                                                         {'content__start': '<h2>Soutien financier</h2><p><p><b><font size="5">Etudiants EPFL</font></b></p> <div>L&rsquo;EPFL offre une bourse aux &eacute;tudiants OUT qui s&rsqu',
+                                                          'title': '',
+                                                          'type': 'faq'},
+                                                         {'content__start': '<h2>Contacts spécifiques</h2><p><p><strong>Personnes de contact &agrave; l&rsquo;EPFL&nbsp;:</strong></p> <ul>  <li>Coralie LINK, Bureau de la mobilit',
+                                                          'title': '',
+                                                          'type': 'faq'}],
+                                               'language': 'en',
+                                               'last_update': datetime.datetime(2015, 11, 5, 16, 55, 27),
+                                               'path': '/page-113973-en.html',
+                                               'sidebar__boxes': [{'content__start': '<p><strong><a href="https://isa.epfl.ch/imoniteur_ISAP/!farforms.htm?x=master">Applications</a> for starting a Master\'s program are open from mid-Nove',
+                                                                   'title': 'Application',
+                                                                   'type': 'coloredText'},
+                                                                  {'content__start': '<p style="text-align: left;">In case of questions, please contact the student helpdesk:</p> <div class="button mail"><a href="mailto:student.services@',
+                                                                   'title': 'Contact',
+                                                                   'type': 'text'},
+                                                                  {'content__start': '<p><a href="http://virtualtour.epfl.ch" target="_blank"><img width="300" height="157" src="/files/buttons/virtual tour thumbnail.png?uuid=default:1ecf',
+                                                                   'title': 'Discover the campus',
+                                                                   'type': 'text'},
+                                                                  {'content__start': '<p style="text-align: left;"><a target="_blank" href="http://www.youtube.com/EPFLstudents"><img width="25" height="25" alt="EPFL on YouTube" src="/fil',
+                                                                   'title': 'FOLLOW EPFL',
+                                                                   'type': 'text'}],
+                                               'title': 'Double Diploma EPFL-Centrale Lille'},
+                                        'fr': {'boxes': [{'content__start': '<p><img width="652" height="184" src="/files/dd/DD_ECLille.jpg?uuid=default:404da40b-64fa-4b24-9b15-151333be89e5" alt="EPFL-Centrale Lille" /></p> ',
+                                                          'title': '',
+                                                          'type': 'text'},
+                                                         {'content__start': '<h2>A qui s\'adresse le programme?</h2><p><p><b><font size="5">Etudiants EPFL</font></b></p> <div>Les &eacute;tudiants de l&rsquo;EPFL ayant obtenu une',
+                                                          'title': '',
+                                                          'type': 'faq'},
+                                                         {'content__start': '<h2>Délai de candidature</h2><p><div><b><font size="5">Etudiants EPFL</font></b></div> <div>Le d&eacute;lai de candidature pour ce double dipl&ocirc;m',
+                                                          'title': '',
+                                                          'type': 'faq'},
+                                                         {'content__start': '<h2>Structure du programme et diplômes obtenus</h2><p><p><b><font size="5">Etudiants EPFL</font></b></p> <div>A l&rsquo;issue de ce programme, l&rsquo',
+                                                          'title': '',
+                                                          'type': 'faq'},
+                                                         {'content__start': '<h2>Soutien financier</h2><p><p><b><font size="5">Etudiants EPFL</font></b></p> <div>L&rsquo;EPFL offre une bourse aux &eacute;tudiants OUT qui s&rsqu',
+                                                          'title': '',
+                                                          'type': 'faq'},
+                                                         {'content__start': '<h2>Contacts spécifiques</h2><p><p><strong>Personnes de contact &agrave; l&rsquo;EPFL&nbsp;:</strong></p> <ul>  <li>Coralie LINK, Bureau de la mobilit',
+                                                          'title': '',
+                                                          'type': 'faq'}],
+                                               'language': 'fr',
+                                               'last_update': datetime.datetime(2015, 11, 5, 16, 55, 27),
+                                               'path': '/EC-Lille.html',
+                                               'sidebar__boxes': [{'content__start': '<p><strong><a href="https://isa.epfl.ch/imoniteur_ISAP/!farforms.htm?x=master">Les inscriptions</a> pour d&eacute;buter un master sont ouvertes de mi-',
+                                                                   'title': 'Inscription',
+                                                                   'type': 'coloredText'},
+                                                                  {'content__start': '<p style="text-align: left;">Pour des questions d\'ordre g&eacute;n&eacute;ral, vous pouvez contacter les services aux &eacute;tudiants:</p> <div style',
+                                                                   'title': 'Contact',
+                                                                   'type': 'text'},
+                                                                  {'content__start': '<p><a href="http://virtualtour.epfl.ch" target="_blank"><img width="300" height="157" src="/files/buttons/virtual tour thumbnail.png?uuid=default:1ecf',
+                                                                   'title': 'Découvrir le campus',
+                                                                   'type': 'text'},
+                                                                  {'content__start': '<p style="text-align: left;"><a target="_blank" href="http://www.youtube.com/EPFLstudents"><img width="25" height="25" alt="EPFL on YouTube" src="/fil',
+                                                                   'title': "Suivre l'EPFL",
+                                                                   'type': 'text'}],
+                                               'title': 'Double diplôme EPFL-Centrale Lille'}},
+                           'contents__keys': ['en', 'fr'],
+                           'level': 3,
+                           'pid': '113973',
+                           'template': 'simple'},
+                '127116': {'children__len': 0,
+                           'contents': {'fr': {'boxes': [{'content__start': '<p>L’EPFL et l’ENS de Lyon se sont associées pour proposer à leurs étudiants un double-diplôme de master en Biologie, Bioingénierie et en Sciences et ',
+                                                          'title': '',
+                                                          'type': 'text'},
+                                                         {'content__start': '<h2>Objectifs</h2><p><p>Il s’agit d’un double cursus sur trois ans menant à l’obtention de deux diplômes de Master:</p> <ul>  <li>Master Biologie  de ',
+                                                          'title': '',
+                                                          'type': 'faq'},
+                                                         {'content__start': "<h2>A qui s'adresse le programme?</h2><p><p><strong>Etudiants EPFL:</strong></p> <p>Le candidat doit avoir obtenu un certificat de bachelor à l'EPFL a",
+                                                          'title': '',
+                                                          'type': 'faq'},
+                                                         {'content__start': '<h2>Délai de candidature</h2><p><p><strong>Etudiants EPFL:</strong></p> <ol>  <li>Le date limite de candidature est fix&eacute;e au 15 novembre du pre',
+                                                          'title': '',
+                                                          'type': 'faq'},
+                                                         {'content__start': '<h2>Structure du programme et diplômes obtenus</h2><p><p>Double cursus sur trois ans menant &agrave; l&rsquo;obtention de deux dipl&ocirc;mes de Maste',
+                                                          'title': '',
+                                                          'type': 'faq'},
+                                                         {'content__start': '<h2>Soutien financier</h2><p><p>Les &eacute;tudiants payent les frais d&rsquo;inscription pendant les 3 ans uniquement dans leur &eacute;tablissement ',
+                                                          'title': '',
+                                                          'type': 'faq'},
+                                                         {'content__start': '<h2>Contacts spécifiques</h2><p><p><strong>Pour l&rsquo;EPFL:</strong></p> <p>- <u>Pour les &eacute;tudiants IN</u>:<br />  Mme Pascale Zbinden, Respo',
+                                                          'title': '',
+                                                          'type': 'faq'}],
+                                               'language': 'fr',
+                                               'last_update': datetime.datetime(2015, 12, 3, 14, 51, 50),
+                                               'path': '/enslyon.html',
+                                               'sidebar__boxes': [{'content__start': '<p><strong><a href="https://isa.epfl.ch/imoniteur_ISAP/!farforms.htm?x=master">Les inscriptions</a> pour d&eacute;buter un master sont ouvertes de mi-',
+                                                                   'title': 'Inscription',
+                                                                   'type': 'coloredText'},
+                                                                  {'content__start': '<p style="text-align: left;">Pour des questions d\'ordre g&eacute;n&eacute;ral, vous pouvez contacter les services aux &eacute;tudiants:</p> <div style',
+                                                                   'title': 'Contact',
+                                                                   'type': 'text'},
+                                                                  {'content__start': '<p><a href="http://virtualtour.epfl.ch" target="_blank"><img width="300" height="157" src="/files/buttons/virtual tour thumbnail.png?uuid=default:1ecf',
+                                                                   'title': 'Découvrir le campus',
+                                                                   'type': 'text'},
+                                                                  {'content__start': '<p style="text-align: left;"><a target="_blank" href="http://www.youtube.com/EPFLstudents"><img width="25" height="25" alt="EPFL on YouTube" src="/fil',
+                                                                   'title': "Suivre l'EPFL",
+                                                                   'type': 'text'}],
+                                               'title': 'Double diplôme EPFL-ENS de Lyon'}},
+                           'contents__keys': ['fr'],
+                           'level': 3,
+                           'pid': '127116',
+                           'template': 'simple'},
+                '128190': {'children__len': 0,
+                           'contents': {'en': {'boxes': [{'content__start': '<p><img width="640" height="147" alt="Master\'s in Digital Humanities " src="/files/key-visuals/banner_digital_humanities.jpg?uuid=default:b07d96f1-f00',
+                                                          'title': '',
+                                                          'type': 'text'},
+                                                         {'content__start': '<h2>Interdisciplinary crossroad of opportunities</h2><p><p>As data proliferate and play an ever-growing role in our life decisions, the division betwe',
+                                                          'title': '',
+                                                          'type': 'faq'},
+                                                         {'content__start': '<h2>Program\'s Objectives</h2><p><p style="text-align: justify;">The program offers a high level qualification in Data Science as well as in Humanities',
+                                                          'title': '',
+                                                          'type': 'faq'},
+                                                         {'content__start': '<h2>Admissions</h2><p><p style="text-align: justify;">Admission to the Master will be on a case-by-case basis. Students will be evaluated based on the',
+                                                          'title': '',
+                                                          'type': 'faq'},
+                                                         {'content__start': '<h2>Teaching Language</h2><p><p>English</p> </p>', 'title': '', 'type': 'faq'},
+                                                         {'content__start': '<h2>Career Prospects</h2><p><p style="text-align: justify;">In this growing field, many opportunities in cultural institutions in Switzerland and abro',
+                                                          'title': '',
+                                                          'type': 'faq'},
+                                                         {'content__start': "<h2>Program's Structure</h2><p><p>You will find the <strong>complete curriculum</strong>, a list and <strong>description of courses</strong>, and othe",
+                                                          'title': '',
+                                                          'type': 'faq'}],
+                                               'language': 'en',
+                                               'last_update': datetime.datetime(2017, 3, 15, 9, 57, 53),
+                                               'path': '/digitalhumanities.html',
+                                               'sidebar__boxes': [{'content__start': '<p>In case of specific questions about this program, please contact:</p> <div class="button mail"><button class="icon"></button><a href="mailto:master',
+                                                                   'title': 'Contact',
+                                                                   'type': 'text'},
+                                                                  {'content__start': '<p style="text-align: center;"><a target="_blank" onclick="_gaq.push([\'_trackEvent\', \'CDH_DH_MA\', \'download\']);" href="/files/brochures/CDH_DH_MA.pdf?',
+                                                                   'title': 'DOWNLOAD',
+                                                                   'type': 'text'}],
+                                               'title': 'Digital Humanities'},
+                                        'fr': {'boxes': [{'content__start': '<p><img width="640" height="147" alt="Master\'s in Digital Humanities " src="/files/key-visuals/banner_digital_humanities.jpg?uuid=default:b07d96f1-f00',
+                                                          'title': '',
+                                                          'type': 'text'},
+                                                         {'content__start': '<h2>Carrefour interdisciplinaire d’opportunités</h2><p><p>Alors que les donn&eacute;es prolif&egrave;rent et jouent un r&ocirc;le de plus en plus impo',
+                                                          'title': '',
+                                                          'type': 'faq'},
+                                                         {'content__start': '<h2>Objectifs du Programme</h2><p><p style="text-align: left;">La formation offre une qualification de haut niveau en data sciences mais aussi en huma',
+                                                          'title': '',
+                                                          'type': 'faq'},
+                                                         {'content__start': '<h2>Conditions d’admission</h2><p><p style="text-align: justify;">Les admissions au Master en Digital Humanities seront faites sur dossier. Les &eacut',
+                                                          'title': '',
+                                                          'type': 'faq'},
+                                                         {'content__start': "<h2>Langue d'enseignement</h2><p><p>Anglais</p> </p>", 'title': '', 'type': 'faq'},
+                                                         {'content__start': '<h2>Perspectives professionnelles</h2><p><p style="text-align: justify;">Dans ce domaine en pleine expansion, il y a beaucoup d&rsquo;opportunit&eacut',
+                                                          'title': '',
+                                                          'type': 'faq'},
+                                                         {'content__start': "<h2>Structure du programme</h2><p><p>Vous trouverez un <strong>plan d'&eacute;tudes complet</strong> avec une liste et un <strong>descriptif des cours",
+                                                          'title': '',
+                                                          'type': 'faq'}],
+                                               'language': 'fr',
+                                               'last_update': datetime.datetime(2017, 3, 15, 9, 57, 53),
+                                               'path': '/humanitesdigitales.html',
+                                               'sidebar__boxes': [{'content__start': '<p>Pour toute question relative &agrave; ce programme, merci de contacter:</p> <div class="button mail"><button class="icon"></button><a href="mailto:',
+                                                                   'title': ' ',
+                                                                   'type': 'text'},
+                                                                  {'content__start': '<p style="text-align: center;"><a target="_blank" onclick="_gaq.push([\'_trackEvent\', \'CDH_DH_MA\', \'download\']);" href="/files/brochures/CDH_DH_MA_web_',
+                                                                   'title': 'BROCHURE A TELECHARGER',
+                                                                   'type': 'text'}],
+                                               'title': 'Humanités Digitales'}},
+                           'contents__keys': ['en', 'fr'],
+                           'level': 2,
+                           'pid': '128190',
+                           'template': 'simple'},
+                '139831': {'children__len': 0,
+                           'contents': {'en': {'boxes': [{'content__start': '<p><img src="/files/key-visuals/MA_Data_Science_web.jpg?uuid=default:cb5d5168-b886-41f7-bc1a-31e3cd885018" width="652" height="150" alt="" />&nbsp;</p',
+                                                          'title': '',
+                                                          'type': 'text'},
+                                                         {'content__start': '<h2>A revolution focused on "Big Data"</h2><p><p>We are now witnessing a revolution in IT, at the center of which is &quot;Big Data&rdquo;, wherein we',
+                                                          'title': '',
+                                                          'type': 'faq'},
+                                                         {'content__start': "<h2>Program's Objectives</h2><p><p>Data science extracts knowledge by analysis of large, noisy, complex, and often heterogeneous data. It is not only ",
+                                                          'title': '',
+                                                          'type': 'faq'},
+                                                         {'content__start': '<h2>Entry Requirements</h2><p><p><span lang="en">Candidates must have a certificate of Bachelor in Computer Science from a recognized university , wit',
+                                                          'title': '',
+                                                          'type': 'faq'},
+                                                         {'content__start': '<h2>Teaching Language</h2><p><p>English</p> </p>', 'title': '', 'type': 'faq'},
+                                                         {'content__start': '<h2>Program\'s Structure</h2><p><p><a href="http://ic.epfl.ch/page-139575-en.html"><span class="fleche">See the program\'s structure</span></a></p> <p>Y',
+                                                          'title': '',
+                                                          'type': 'faq'}],
+                                               'language': 'en',
+                                               'last_update': datetime.datetime(2016, 12, 12, 11, 12, 24),
+                                               'path': '/datascience.html',
+                                               'sidebar__boxes': [{'content__start': '<p>In case of specific questions about this program, please contact the School of Computer and Communication Sciences:</p> <div class="button mail"><a',
+                                                                   'title': 'Contact',
+                                                                   'type': 'text'},
+                                                                  {'content__start': '<p><a href="http://phd.epfl.ch"><span class="fleche">phd.epfl.ch</span></a></p> ', 'title': 'Also interested in a PhD ?', 'type': 'text'},
+                                                                  {'content__start': '<p style="text-align: left;"><a target="_blank" href="http://www.youtube.com/EPFLstudents"><img width="25" height="25" alt="EPFL on YouTube" src="/fil',
+                                                                   'title': 'Follow EPFL',
+                                                                   'type': 'text'}],
+                                               'title': 'Data Science'},
+                                        'fr': {'boxes': [{'content__start': '<p><img src="/files/key-visuals/MA_Data_Science_web.jpg?uuid=default:cb5d5168-b886-41f7-bc1a-31e3cd885018" width="652" height="150" alt="" />&nbsp;</p',
+                                                          'title': '',
+                                                          'type': 'text'},
+                                                         {'content__start': '<h2>Une révolution centrée sur le "Big Data"</h2><p><p>Nous assistons aujourd\'hui &agrave; une r&eacute;volution centr&eacute;e sur le  &laquo;Big Dat',
+                                                          'title': '',
+                                                          'type': 'faq'},
+                                                         {'content__start': "<h2>Objectifs du programme</h2><p><p>La Data Science extrait les connaissances par l'analyse de donn&eacute;es volumineuses, bruyantes, complexes et s",
+                                                          'title': '',
+                                                          'type': 'faq'},
+                                                         {'content__start': "<h2>Conditions d'admission</h2><p><p>Les candidats doivent poss&eacute;der un certificat de Bachelor en Informatique ou en syst&egrave;mes de communic",
+                                                          'title': '',
+                                                          'type': 'faq'},
+                                                         {'content__start': "<h2>Langue d'enseignement</h2><p><p>Anglais</p> </p>", 'title': '', 'type': 'faq'},
+                                                         {'content__start': '<h2>Structure du programme</h2><p><p><a href="http://ic.epfl.ch/page-139575-fr.html"><span class="fleche">Voir la structure du programme</span></a></p',
+                                                          'title': '',
+                                                          'type': 'faq'}],
+                                               'language': 'fr',
+                                               'last_update': datetime.datetime(2016, 12, 12, 11, 12, 24),
+                                               'path': '/sciences_donnees.html',
+                                               'sidebar__boxes': [{'content__start': '<p>En cas de questions sp&eacute;cifiques au sujet de ce programme, vous pouvez  vous adresser &agrave; la facult&eacute; Informatique et Communicatio',
+                                                                   'title': 'Contact',
+                                                                   'type': 'text'},
+                                                                  {'content__start': '<p><a href="http://phd.epfl.ch"><span class="fleche">phd.epfl.ch</span></a></p> ', 'title': 'Et le doctorat ?', 'type': 'text'},
+                                                                  {'content__start': '<p style="text-align: left;"><a target="_blank" href="http://www.youtube.com/EPFLstudents"><img width="25" height="25" alt="EPFL on YouTube" src="/fil',
+                                                                   'title': "Suivre l'EPFL",
+                                                                   'type': 'text'}],
+                                               'title': 'Data Science'}},
+                           'contents__keys': ['en', 'fr'],
+                           'level': 2,
+                           'pid': '139831',
+                           'template': 'simple'},
+                '143834': {'children__len': 0,
+                           'contents': {'en': {'boxes': [{'content__start': '<p>L&rsquo;EPFL et l&rsquo;ENS de Lyon se sont associ&eacute;es pour proposer &agrave; leurs &eacute;tudiants un double-dipl&ocirc;me de master en Inf',
+                                                          'title': '',
+                                                          'type': 'text'},
+                                                         {'content__start': '<h2>Objectifs  </h2><p><p>Il s&rsquo;agit d&rsquo;un double cursus sur trois ans menant &agrave; l&rsquo;obtention de deux dipl&ocirc;mes de Master :<',
+                                                          'title': '',
+                                                          'type': 'faq'},
+                                                         {'content__start': "<h2>À qui s'adresse le programme ?</h2><p><p><strong>Etudiants EPFL :</strong><br />  Le candidat doit avoir obtenu un certificat de bachelor &agrave;",
+                                                          'title': '',
+                                                          'type': 'faq'},
+                                                         {'content__start': '<h2>Délai de candidature</h2><p><p><strong>Etudiants EPFL :</strong><u><br />  </u> </p> <ol>  <li>L&rsquo;&eacute;tudiant doit s&rsquo;annoncer &agra',
+                                                          'title': '',
+                                                          'type': 'faq'},
+                                                         {'content__start': '<h2>Structure du programme et diplômes obtenus</h2><p><p>Double cursus sur trois ans menant &agrave; l&rsquo;obtention de deux dipl&ocirc;mes de Maste',
+                                                          'title': '',
+                                                          'type': 'faq'},
+                                                         {'content__start': '<h2>Soutien financier</h2><p><p>Les &eacute;tudiants payent les frais d&rsquo;inscription pendant les 3 ans uniquement dans leur &eacute;tablissement ',
+                                                          'title': '',
+                                                          'type': 'faq'},
+                                                         {'content__start': '<h2>Contacts spécifiques</h2><p><p><strong>Pour l&rsquo;EPFL </strong><br />  - Mme Sylviane Dal Mas, Adjointe de la section Syst&egrave;mes de Commun',
+                                                          'title': '',
+                                                          'type': 'faq'}],
+                                               'language': 'en',
+                                               'last_update': datetime.datetime(2017, 4, 19, 15, 48, 37),
+                                               'path': '/page-143834-en.html',
+                                               'sidebar__boxes': [{'content__start': '<p><strong><a href="https://isa.epfl.ch/imoniteur_ISAP/!farforms.htm?x=master">Applications</a> for starting a Master\'s program are open from mid-Nove',
+                                                                   'title': 'Application',
+                                                                   'type': 'coloredText'},
+                                                                  {'content__start': '<p style="text-align: left;">In case of questions, please contact the student helpdesk:</p> <div class="button mail"><a href="mailto:student.services@',
+                                                                   'title': 'Contact',
+                                                                   'type': 'text'},
+                                                                  {'content__start': '<p><a href="http://virtualtour.epfl.ch" target="_blank"><img width="300" height="157" src="/files/buttons/virtual tour thumbnail.png?uuid=default:1ecf',
+                                                                   'title': 'Discover the campus',
+                                                                   'type': 'text'},
+                                                                  {'content__start': '<p style="text-align: left;"><a target="_blank" href="http://www.youtube.com/EPFLstudents"><img width="25" height="25" alt="EPFL on YouTube" src="/fil',
+                                                                   'title': 'FOLLOW EPFL',
+                                                                   'type': 'text'}],
+                                               'title': 'ENS de Lyon Informatique et Syscom'},
+                                        'fr': {'boxes': [{'content__start': '<p>L&rsquo;EPFL et l&rsquo;ENS de Lyon se sont associ&eacute;es pour proposer &agrave; leurs &eacute;tudiants un double-dipl&ocirc;me de master en Inf',
+                                                          'title': '',
+                                                          'type': 'text'},
+                                                         {'content__start': '<h2>Objectifs  </h2><p><p>Il s&rsquo;agit d&rsquo;un double cursus sur trois ans menant &agrave; l&rsquo;obtention de deux dipl&ocirc;mes de Master :<',
+                                                          'title': '',
+                                                          'type': 'faq'},
+                                                         {'content__start': "<h2>À qui s'adresse le programme ?</h2><p><p><strong>Etudiants EPFL :</strong><br />  Le candidat doit avoir obtenu un certificat de bachelor &agrave;",
+                                                          'title': '',
+                                                          'type': 'faq'},
+                                                         {'content__start': '<h2>Délai de candidature</h2><p><p><strong>Etudiants EPFL :</strong><u><br />  </u> </p> <ol>  <li>L&rsquo;&eacute;tudiant doit s&rsquo;annoncer &agra',
+                                                          'title': '',
+                                                          'type': 'faq'},
+                                                         {'content__start': '<h2>Structure du programme et diplômes obtenus</h2><p><p>Double cursus sur trois ans menant &agrave; l&rsquo;obtention de deux dipl&ocirc;mes de Maste',
+                                                          'title': '',
+                                                          'type': 'faq'},
+                                                         {'content__start': '<h2>Soutien financier</h2><p><p>Les &eacute;tudiants payent les frais d&rsquo;inscription pendant les 3 ans uniquement dans leur &eacute;tablissement ',
+                                                          'title': '',
+                                                          'type': 'faq'},
+                                                         {'content__start': '<h2>Contacts spécifiques</h2><p><p><strong>Pour l&rsquo;EPFL </strong><br />  - Mme Sylviane Dal Mas, Adjointe de la section Syst&egrave;mes de Commun',
+                                                          'title': '',
+                                                          'type': 'faq'}],
+                                               'language': 'fr',
+                                               'last_update': datetime.datetime(2017, 4, 19, 15, 48, 37),
+                                               'path': '/page-143834-fr.html',
+                                               'sidebar__boxes': [{'content__start': '<p><strong><a href="https://isa.epfl.ch/imoniteur_ISAP/!farforms.htm?x=master">Les inscriptions</a> pour d&eacute;buter un master sont ouvertes de mi-',
+                                                                   'title': 'Inscription',
+                                                                   'type': 'coloredText'},
+                                                                  {'content__start': '<p style="text-align: left;">Pour des questions d\'ordre g&eacute;n&eacute;ral, vous pouvez contacter les services aux &eacute;tudiants:</p> <div style',
+                                                                   'title': 'Contact',
+                                                                   'type': 'text'},
+                                                                  {'content__start': '<p><a href="http://virtualtour.epfl.ch" target="_blank"><img width="300" height="157" src="/files/buttons/virtual tour thumbnail.png?uuid=default:1ecf',
+                                                                   'title': 'Découvrir le campus',
+                                                                   'type': 'text'},
+                                                                  {'content__start': '<p style="text-align: left;"><a target="_blank" href="http://www.youtube.com/EPFLstudents"><img width="25" height="25" alt="EPFL on YouTube" src="/fil',
+                                                                   'title': "Suivre l'EPFL",
+                                                                   'type': 'text'}],
+                                               'title': 'ENS de Lyon Informatique et Syscom'}},
+                           'contents__keys': ['en', 'fr'],
+                           'level': 3,
+                           'pid': '143834',
+                           'template': 'simple'},
+                '94489': {'children__len': 5,
+                          'contents': {'en': {'boxes': [{'content__start': '<p><img width="652" height="184" alt="Master\'s programs: shape the future" src="/files/key-visuals/MA-splash.jpg?uuid=default:fabd7281-874b-48a8-938c-',
+                                                         'title': '',
+                                                         'type': 'text'}],
+                                              'language': 'en',
+                                              'last_update': datetime.datetime(2017, 5, 5, 11, 8, 23),
+                                              'path': '/index.html',
+                                              'sidebar__boxes': [{'content__start': '<p><strong><a href="https://isa.epfl.ch/imoniteur_ISAP/!farforms.htm?x=master">Applications</a> for starting a Master\'s program are open from mid-Nove',
+                                                                  'title': 'Application',
+                                                                  'type': 'coloredText'},
+                                                                 {'content__start': '<p style="text-align: left;">In case of questions, please contact the student helpdesk:</p> <div class="button mail"><a href="mailto:student.services@',
+                                                                  'title': 'Contact',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p><a href="http://virtualtour.epfl.ch" target="_blank"><img width="300" height="157" src="/files/buttons/virtual tour thumbnail.png?uuid=default:1ecf',
+                                                                  'title': 'Discover the campus',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p style="text-align: left;"><a target="_blank" href="http://www.youtube.com/EPFLstudents"><img width="25" height="25" alt="EPFL on YouTube" src="/fil',
+                                                                  'title': 'FOLLOW EPFL',
+                                                                  'type': 'text'}],
+                                              'title': 'Master'},
+                                       'fr': {'boxes': [{'content__start': '<p><img width="652" height="184" alt="programmes master: shape the future" src="/files/key-visuals/MA-splash.jpg?uuid=default:fabd7281-874b-48a8-938c-',
+                                                         'title': '',
+                                                         'type': 'text'}],
+                                              'language': 'fr',
+                                              'last_update': datetime.datetime(2017, 5, 5, 11, 8, 23),
+                                              'path': '/index-fr.html',
+                                              'sidebar__boxes': [{'content__start': '<p><strong><a href="https://isa.epfl.ch/imoniteur_ISAP/!farforms.htm?x=master">Les inscriptions</a> pour d&eacute;buter un master sont ouvertes de mi-',
+                                                                  'title': 'Inscription',
+                                                                  'type': 'coloredText'},
+                                                                 {'content__start': '<p style="text-align: left;">Pour des questions d\'ordre g&eacute;n&eacute;ral, vous pouvez contacter les services aux &eacute;tudiants:</p> <div style',
+                                                                  'title': 'Contact',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p><a href="http://virtualtour.epfl.ch" target="_blank"><img width="300" height="157" src="/files/buttons/virtual tour thumbnail.png?uuid=default:1ecf',
+                                                                  'title': 'Découvrir le campus',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p style="text-align: left;"><a target="_blank" href="http://www.youtube.com/EPFLstudents"><img width="25" height="25" alt="EPFL on YouTube" src="/fil',
+                                                                  'title': "Suivre l'EPFL",
+                                                                  'type': 'text'}],
+                                              'title': 'Master'}},
+                          'contents__keys': ['en', 'fr'],
+                          'level': 0,
+                          'pid': '94489',
+                          'template': 'home'},
+                '94567': {'children__len': 3,
+                          'contents': {'en': {'boxes': [{'content__start': '<iframe width="648" height="365" src="https://www.youtube.com/embed/2LwFg8_YARI" frameborder="0" allowfullscreen></iframe> <p>By all metrics used for ',
+                                                         'title': '',
+                                                         'type': 'text'},
+                                                        {'content__start': '[actu url=http://actu.epfl.ch/webservice?channel=71&lang=en&template=3&project=115&sticker=no]', 'title': 'NEWS', 'type': 'actu'}],
+                                              'language': 'en',
+                                              'last_update': datetime.datetime(2016, 12, 6, 16, 38, 27),
+                                              'path': '/EPFLcampus.html',
+                                              'sidebar__boxes': [{'content__start': "<ul>  <li><strong>10'281 Students (of which 2'077 PhD)</strong></li>  <li><strong>338 Faculty members</strong></li>  <li><strong>340 Laboratories</str",
+                                                                  'title': 'Facts & Figures (2014-2015)',
+                                                                  'type': 'coloredText'},
+                                                                 {'content__start': '<p style="text-align: left;">In case of questions, please contact the student helpdesk:</p> <div class="button mail"><a href="mailto:student.services@',
+                                                                  'title': 'Contact',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p><a href="http://virtualtour.epfl.ch" target="_blank"><img width="300" height="157" src="/files/buttons/virtual tour thumbnail.png?uuid=default:1ecf',
+                                                                  'title': 'Discover the campus',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p style="text-align: left;"><a target="_blank" href="http://www.youtube.com/EPFLstudents"><img width="25" height="25" alt="EPFL on YouTube" src="/fil',
+                                                                  'title': 'FOLLOW EPFL',
+                                                                  'type': 'text'}],
+                                              'title': 'Why choose EPFL?'},
+                                       'fr': {'boxes': [{'content__start': '<iframe width="648" height="365" src="https://www.youtube.com/embed/2LwFg8_YARI" frameborder="0" allowfullscreen></iframe> <p>Dans toutes les statisti',
+                                                         'title': '',
+                                                         'type': 'text'},
+                                                        {'content__start': '[actu url=http://actu.epfl.ch/webservice?channel=71&lang=fr&template=3&project=115&sticker=no]', 'title': 'NEWS', 'type': 'actu'}],
+                                              'language': 'fr',
+                                              'last_update': datetime.datetime(2016, 12, 6, 16, 38, 27),
+                                              'path': '/campus.html',
+                                              'sidebar__boxes': [{'content__start': "<ul>  <li><strong>10'281 &Eacute;tudiants (dont 2077 doctorants)</strong></li>  <li><strong>338 Professeurs</strong></li>  <li><strong>350 Laboratoire",
+                                                                  'title': "L'EPFL en chiffres (2014-2015)",
+                                                                  'type': 'coloredText'},
+                                                                 {'content__start': '<p style="text-align: left;">Pour des questions d\'ordre g&eacute;n&eacute;ral, vous pouvez contacter les services aux &eacute;tudiants:</p> <div style',
+                                                                  'title': 'Contact',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p><a href="http://virtualtour.epfl.ch" target="_blank"><img width="300" height="157" src="/files/buttons/virtual tour thumbnail.png?uuid=default:1ecf',
+                                                                  'title': 'Découvrir le campus',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p style="text-align: left;"><a target="_blank" href="http://www.youtube.com/EPFLstudents"><img width="25" height="25" alt="EPFL on YouTube" src="/fil',
+                                                                  'title': "Suivre l'EPFL",
+                                                                  'type': 'text'}],
+                                              'title': "Pourquoi l'EPFL?"}},
+                          'contents__keys': ['en', 'fr'],
+                          'level': 1,
+                          'pid': '94567',
+                          'template': 'simple'},
+                '94569': {'children__len': 28,
+                          'contents': {'en': {'boxes': [{'content__start': '<p><img width="600" height="227" src="/files/key-visuals/covers-master-WEB.jpg?uuid=default:c5d59d4e-346d-4931-9a03-99183e87ceb5" alt="Master\'s progra',
+                                                         'title': '',
+                                                         'type': 'text'}],
+                                              'language': 'en',
+                                              'last_update': datetime.datetime(2016, 12, 6, 9, 43, 35),
+                                              'path': '/programs.html',
+                                              'sidebar__boxes': [{'content__start': '<p><strong><a href="https://isa.epfl.ch/imoniteur_ISAP/!farforms.htm?x=master">Applications</a> for starting a Master\'s program are open from mid-Nove',
+                                                                  'title': 'Application',
+                                                                  'type': 'coloredText'},
+                                                                 {'content__start': '<p style="text-align: left;">In case of questions, please contact the student helpdesk:</p> <div class="button mail"><a href="mailto:student.services@',
+                                                                  'title': 'Contact',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p><a href="http://virtualtour.epfl.ch" target="_blank"><img width="300" height="157" src="/files/buttons/virtual tour thumbnail.png?uuid=default:1ecf',
+                                                                  'title': 'Discover the campus',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p style="text-align: left;"><a target="_blank" href="http://www.youtube.com/EPFLstudents"><img width="25" height="25" alt="EPFL on YouTube" src="/fil',
+                                                                  'title': 'FOLLOW EPFL',
+                                                                  'type': 'text'}],
+                                              'title': "Master's Programs"},
+                                       'fr': {'boxes': [{'content__start': '<p style="text-align: left;"><img width="600" height="227" src="/files/key-visuals/covers-master-WEB.jpg?uuid=default:c5d59d4e-346d-4931-9a03-99183e87',
+                                                         'title': '',
+                                                         'type': 'text'}],
+                                              'language': 'fr',
+                                              'last_update': datetime.datetime(2016, 12, 6, 9, 43, 35),
+                                              'path': '/programmes.html',
+                                              'sidebar__boxes': [{'content__start': '<p><strong><a href="https://isa.epfl.ch/imoniteur_ISAP/!farforms.htm?x=master">Les inscriptions</a> pour d&eacute;buter un master sont ouvertes de mi-',
+                                                                  'title': 'Inscription',
+                                                                  'type': 'coloredText'},
+                                                                 {'content__start': '<p style="text-align: left;">Pour des questions d\'ordre g&eacute;n&eacute;ral, vous pouvez contacter les services aux &eacute;tudiants:</p> <div style',
+                                                                  'title': 'Contact',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p><a href="http://virtualtour.epfl.ch" target="_blank"><img width="300" height="157" src="/files/buttons/virtual tour thumbnail.png?uuid=default:1ecf',
+                                                                  'title': 'Découvrir le campus',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p style="text-align: left;"><a target="_blank" href="http://www.youtube.com/EPFLstudents"><img width="25" height="25" alt="EPFL on YouTube" src="/fil',
+                                                                  'title': "Suivre l'EPFL",
+                                                                  'type': 'text'}],
+                                              'title': 'Programmes Master'}},
+                          'contents__keys': ['en', 'fr'],
+                          'level': 1,
+                          'pid': '94569',
+                          'template': 'simple'},
+                '94570': {'children__len': 1,
+                          'contents': {'en': {'boxes': [{'content__start': '<p><img width="652" height="69" src="/files/key-visuals/admission_MA.jpg?uuid=default:07366c69-ab21-44ef-9ca2-b237470751ef" alt="admission" /></p> <p>',
+                                                         'title': '',
+                                                         'type': 'text'},
+                                                        {'content__start': '', 'title': '', 'type': 'text'}],
+                                              'language': 'en',
+                                              'last_update': datetime.datetime(2017, 2, 21, 15, 15, 17),
+                                              'path': '/entryrequirements.html',
+                                              'sidebar__boxes': [{'content__start': '<p><strong><a href="https://isa.epfl.ch/imoniteur_ISAP/!farforms.htm?x=master">Applications</a> for starting a Master\'s program are open from mid-Nove',
+                                                                  'title': 'Application',
+                                                                  'type': 'coloredText'},
+                                                                 {'content__start': '<p style="text-align: left;">In case of questions, please contact the student helpdesk:</p> <div class="button mail"><a href="mailto:student.services@',
+                                                                  'title': 'Contact',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p><a href="http://virtualtour.epfl.ch" target="_blank"><img width="300" height="157" src="/files/buttons/virtual tour thumbnail.png?uuid=default:1ecf',
+                                                                  'title': 'Discover the campus',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p style="text-align: left;"><a target="_blank" href="http://www.youtube.com/EPFLstudents"><img width="25" height="25" alt="EPFL on YouTube" src="/fil',
+                                                                  'title': 'FOLLOW EPFL',
+                                                                  'type': 'text'}],
+                                              'title': 'Admission Criteria & Application'},
+                                       'fr': {'boxes': [{'content__start': '<p><img width="652" height="69" src="/files/key-visuals/admission_MA.jpg?uuid=default:07366c69-ab21-44ef-9ca2-b237470751ef" alt="admission" /></p> <p>',
+                                                         'title': '',
+                                                         'type': 'text'},
+                                                        {'content__start': '', 'title': '', 'type': 'text'}],
+                                              'language': 'fr',
+                                              'last_update': datetime.datetime(2017, 2, 21, 15, 15, 17),
+                                              'path': '/admission.html',
+                                              'sidebar__boxes': [{'content__start': '<p><strong><a href="https://isa.epfl.ch/imoniteur_ISAP/!farforms.htm?x=master">Les inscriptions</a> pour d&eacute;buter un master sont ouvertes de mi-',
+                                                                  'title': 'Inscription',
+                                                                  'type': 'coloredText'},
+                                                                 {'content__start': '<p style="text-align: left;">Pour des questions d\'ordre g&eacute;n&eacute;ral, vous pouvez contacter les services aux &eacute;tudiants:</p> <div style',
+                                                                  'title': 'Contact',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p><a href="http://virtualtour.epfl.ch" target="_blank"><img width="300" height="157" src="/files/buttons/virtual tour thumbnail.png?uuid=default:1ecf',
+                                                                  'title': 'Découvrir le campus',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p style="text-align: left;"><a target="_blank" href="http://www.youtube.com/EPFLstudents"><img width="25" height="25" alt="EPFL on YouTube" src="/fil',
+                                                                  'title': "Suivre l'EPFL",
+                                                                  'type': 'text'}],
+                                              'title': "Conditions d'admission & inscription"}},
+                          'contents__keys': ['en', 'fr'],
+                          'level': 1,
+                          'pid': '94570',
+                          'template': 'simple'},
+                '94571': {'children__len': 3,
+                          'contents': {'en': {'boxes': [{'content__start': '<p><img width="652" height="69" src="/files/key-visuals/etudiants_MA.jpg?uuid=default:467a3975-ed92-4171-aab2-425a954ae74a" alt="&eacute;tudiants" /><',
+                                                         'title': '',
+                                                         'type': 'text'}],
+                                              'language': 'en',
+                                              'last_update': datetime.datetime(2017, 2, 23, 10, 53, 33),
+                                              'path': '/practical_info.html',
+                                              'sidebar__boxes': [{'content__start': '<p><a href="http://virtualtour.epfl.ch" target="_blank"><img width="300" height="157" src="/files/buttons/virtual tour thumbnail.png?uuid=default:1ecf',
+                                                                  'title': 'Discover the campus',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p style="text-align: center;"><a target="_blank" onClick="_gaq.push([\'_trackEvent\', \'generale_MA_eng\', \'download\']);" href="/files/SPE_BrochGén_LowCo',
+                                                                  'title': 'Brochure',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p style="text-align: left;">In case of questions, please contact the student helpdesk:</p> <div class="button mail"><a href="mailto:student.services@',
+                                                                  'title': 'Contact',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p style="text-align: left;"><a target="_blank" href="http://www.youtube.com/EPFLstudents"><img width="25" height="25" alt="EPFL on YouTube" src="/fil',
+                                                                  'title': 'FOLLOW EPFL',
+                                                                  'type': 'text'}],
+                                              'title': 'Practical Info & Useful Links'},
+                                       'fr': {'boxes': [{'content__start': '<p><strong><img width="652" height="69" src="/files/key-visuals/etudiants_MA.jpg?uuid=default:467a3975-ed92-4171-aab2-425a954ae74a" alt="&eacute;tudia',
+                                                         'title': '',
+                                                         'type': 'text'}],
+                                              'language': 'fr',
+                                              'last_update': datetime.datetime(2017, 2, 23, 10, 53, 33),
+                                              'path': '/infos_pratiques.html',
+                                              'sidebar__boxes': [{'content__start': '<p><a href="http://virtualtour.epfl.ch" target="_blank"><img width="300" height="157" src="/files/buttons/virtual tour thumbnail.png?uuid=default:1ecf',
+                                                                  'title': 'Découvrir le campus',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p style="text-align: center;"><a href="/files/SPE_BrochGén_LowCost_2017_FR_prod_internet.pdf?uuid=default:3ec37a41-6f40-426f-a2b7-0613e90b37db" onCli',
+                                                                  'title': 'Brochure',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p style="text-align: left;">Pour des questions d\'ordre g&eacute;n&eacute;ral, vous pouvez contacter les services aux &eacute;tudiants:</p> <div style',
+                                                                  'title': 'Contact',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p style="text-align: left;"><a target="_blank" href="http://www.youtube.com/EPFLstudents"><img width="25" height="25" alt="EPFL on YouTube" src="/fil',
+                                                                  'title': "Suivre l'EPFL",
+                                                                  'type': 'text'}],
+                                              'title': 'Infos pratiques & liens utiles'}},
+                          'contents__keys': ['en', 'fr'],
+                          'level': 1,
+                          'pid': '94571',
+                          'template': 'simple'},
+                '94577': {'children__len': 1,
+                          'contents': {'en': {'boxes': [{'content__start': '<p><img width="652" height="69" src="/files/key-visuals/test2.jpg?uuid=default:de2fe5cc-611c-4933-a371-736e893423db" alt="" /></p> <p><span class="sou',
+                                                         'title': '',
+                                                         'type': 'text'}],
+                                              'language': 'en',
+                                              'last_update': datetime.datetime(2014, 10, 8, 10, 7, 14),
+                                              'path': '/financialissues.html',
+                                              'sidebar__boxes': [{'content__start': '<p><strong><a href="https://isa.epfl.ch/imoniteur_ISAP/!farforms.htm?x=master">Applications</a> for starting a Master\'s program are open from mid-Nove',
+                                                                  'title': 'Application',
+                                                                  'type': 'coloredText'},
+                                                                 {'content__start': '<p style="text-align: left;">In case of questions, please contact the student helpdesk:</p> <div class="button mail"><a href="mailto:student.services@',
+                                                                  'title': 'Contact',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p><a href="http://virtualtour.epfl.ch" target="_blank"><img width="300" height="157" src="/files/buttons/virtual tour thumbnail.png?uuid=default:1ecf',
+                                                                  'title': 'Discover the campus',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p style="text-align: left;"><a target="_blank" href="http://www.youtube.com/EPFLstudents"><img width="25" height="25" alt="EPFL on YouTube" src="/fil',
+                                                                  'title': 'FOLLOW EPFL',
+                                                                  'type': 'text'}],
+                                              'title': 'Tuition Fees & Excellence Fellowships'},
+                                       'fr': {'boxes': [{'content__start': '<p><img width="652" height="69" src="/files/key-visuals/test2.jpg?uuid=default:de2fe5cc-611c-4933-a371-736e893423db" alt="" /></p> <p><span class="sou',
+                                                         'title': '',
+                                                         'type': 'text'}],
+                                              'language': 'fr',
+                                              'last_update': datetime.datetime(2014, 10, 8, 10, 7, 14),
+                                              'path': '/questionsfinancieres.html',
+                                              'sidebar__boxes': [{'content__start': '<p><strong><a href="https://isa.epfl.ch/imoniteur_ISAP/!farforms.htm?x=master">Les inscriptions</a> pour d&eacute;buter un master sont ouvertes de mi-',
+                                                                  'title': 'Inscription',
+                                                                  'type': 'coloredText'},
+                                                                 {'content__start': '<p style="text-align: left;">Pour des questions d\'ordre g&eacute;n&eacute;ral, vous pouvez contacter les services aux &eacute;tudiants:</p> <div style',
+                                                                  'title': 'Contact',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p><a href="http://virtualtour.epfl.ch" target="_blank"><img width="300" height="157" src="/files/buttons/virtual tour thumbnail.png?uuid=default:1ecf',
+                                                                  'title': 'Découvrir le campus',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p style="text-align: left;"><a target="_blank" href="http://www.youtube.com/EPFLstudents"><img width="25" height="25" alt="EPFL on YouTube" src="/fil',
+                                                                  'title': "Suivre l'EPFL",
+                                                                  'type': 'text'}],
+                                              'title': "Taxes et bourses d'études"}},
+                          'contents__keys': ['en', 'fr'],
+                          'level': 1,
+                          'pid': '94577',
+                          'template': 'simple'},
+                '94578': {'children__len': 0,
+                          'contents': {'en': {'boxes': [{'content__start': '<p>&nbsp;</p> <table cellspacing="0" border="0" style="width: 640px;">  <tbody>   <tr>    <td width="240" bgcolor="#990000" style="color: rgb(255, 255',
+                                                         'title': '',
+                                                         'type': 'text'}],
+                                              'language': 'en',
+                                              'last_update': datetime.datetime(2016, 3, 18, 22, 10, 22),
+                                              'path': '/educationalorganization.html',
+                                              'sidebar__boxes': [{'content__start': '<p><strong><a href="https://isa.epfl.ch/imoniteur_ISAP/!farforms.htm?x=master">Applications</a> for starting a Master\'s program are open from mid-Nove',
+                                                                  'title': 'Application',
+                                                                  'type': 'coloredText'},
+                                                                 {'content__start': '<p style="text-align: left;">In case of questions, please contact the student helpdesk:</p> <div class="button mail"><a href="mailto:student.services@',
+                                                                  'title': 'Contact',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p><a href="http://virtualtour.epfl.ch" target="_blank"><img width="300" height="157" src="/files/buttons/virtual tour thumbnail.png?uuid=default:1ecf',
+                                                                  'title': 'Discover the campus',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p style="text-align: left;"><a target="_blank" href="http://www.youtube.com/EPFLstudents"><img width="25" height="25" alt="EPFL on YouTube" src="/fil',
+                                                                  'title': 'FOLLOW EPFL',
+                                                                  'type': 'text'}],
+                                              'title': 'Programs Overview'},
+                                       'fr': {'boxes': [{'content__start': '<p>&nbsp;</p> <table cellspacing="0" border="0" style="width: 640px;">  <tbody>   <tr>    <td width="240" bgcolor="#990000" colspan="2" style="color: ',
+                                                         'title': '',
+                                                         'type': 'text'}],
+                                              'language': 'fr',
+                                              'last_update': datetime.datetime(2016, 3, 18, 22, 10, 22),
+                                              'path': '/organisationenseignement.html',
+                                              'sidebar__boxes': [{'content__start': '<p><strong><a href="https://isa.epfl.ch/imoniteur_ISAP/!farforms.htm?x=master">Les inscriptions</a> pour d&eacute;buter un master sont ouvertes de mi-',
+                                                                  'title': 'Inscription',
+                                                                  'type': 'coloredText'},
+                                                                 {'content__start': '<p style="text-align: left;">Pour des questions d\'ordre g&eacute;n&eacute;ral, vous pouvez contacter les services aux &eacute;tudiants:</p> <div style',
+                                                                  'title': 'Contact',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p><a href="http://virtualtour.epfl.ch" target="_blank"><img width="300" height="157" src="/files/buttons/virtual tour thumbnail.png?uuid=default:1ecf',
+                                                                  'title': 'Découvrir le campus',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p style="text-align: left;"><a target="_blank" href="http://www.youtube.com/EPFLstudents"><img width="25" height="25" alt="EPFL on YouTube" src="/fil',
+                                                                  'title': "Suivre l'EPFL",
+                                                                  'type': 'text'}],
+                                              'title': "Vue d'ensemble des programmes"}},
+                          'contents__keys': ['en', 'fr'],
+                          'level': 2,
+                          'pid': '94578',
+                          'template': 'simple'},
+                '94579': {'children__len': 0,
+                          'contents': {'en': {'boxes': [{'content__start': '<p><img width="480" height="124" src="/files/schemas/graphic_Major_Minor.jpg?uuid=default:69646102-15f0-4ae9-8504-96773caa88bb" alt="Program\'s structu',
+                                                         'title': '',
+                                                         'type': 'text'}],
+                                              'language': 'en',
+                                              'last_update': datetime.datetime(2016, 9, 20, 11, 48, 18),
+                                              'path': '/minors.html',
+                                              'sidebar__boxes': [{'content__start': '<p><strong><a href="https://isa.epfl.ch/imoniteur_ISAP/!farforms.htm?x=master">Applications</a> for starting a Master\'s program are open from mid-Nove',
+                                                                  'title': 'Application',
+                                                                  'type': 'coloredText'},
+                                                                 {'content__start': '<p style="text-align: left;">In case of questions, please contact the student helpdesk:</p> <div class="button mail"><a href="mailto:student.services@',
+                                                                  'title': 'Contact',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p><a href="http://virtualtour.epfl.ch" target="_blank"><img width="300" height="157" src="/files/buttons/virtual tour thumbnail.png?uuid=default:1ecf',
+                                                                  'title': 'Discover the campus',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p style="text-align: left;"><a target="_blank" href="http://www.youtube.com/EPFLstudents"><img width="25" height="25" alt="EPFL on YouTube" src="/fil',
+                                                                  'title': 'FOLLOW EPFL',
+                                                                  'type': 'text'}],
+                                              'title': 'Minors and Specializations'},
+                                       'fr': {'boxes': [{'content__start': '<p><img width="480" height="124" alt="program\'s structure" src="/files/schemas/graphic_Major_Minor.jpg?uuid=default:69646102-15f0-4ae9-8504-96773caa88',
+                                                         'title': '',
+                                                         'type': 'text'}],
+                                              'language': 'fr',
+                                              'last_update': datetime.datetime(2016, 9, 20, 11, 48, 18),
+                                              'path': '/mineurs.html',
+                                              'sidebar__boxes': [{'content__start': '<p><strong><a href="https://isa.epfl.ch/imoniteur_ISAP/!farforms.htm?x=master">Les inscriptions</a> pour d&eacute;buter un master sont ouvertes de mi-',
+                                                                  'title': 'Inscription',
+                                                                  'type': 'coloredText'},
+                                                                 {'content__start': '<p style="text-align: left;">Pour des questions d\'ordre g&eacute;n&eacute;ral, vous pouvez contacter les services aux &eacute;tudiants:</p> <div style',
+                                                                  'title': 'Contact',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p><a href="http://virtualtour.epfl.ch" target="_blank"><img width="300" height="157" src="/files/buttons/virtual tour thumbnail.png?uuid=default:1ecf',
+                                                                  'title': 'Découvrir le campus',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p style="text-align: left;"><a target="_blank" href="http://www.youtube.com/EPFLstudents"><img width="25" height="25" alt="EPFL on YouTube" src="/fil',
+                                                                  'title': "Suivre l'EPFL",
+                                                                  'type': 'text'}],
+                                              'title': 'Mineurs et Spécialisations'}},
+                          'contents__keys': ['en', 'fr'],
+                          'level': 2,
+                          'pid': '94579',
+                          'template': 'simple'},
+                '94587': {'children__len': 0,
+                          'contents': {'en': {'boxes': [{'content__start': '<p>The application process is done entirely online, in French or English from mid-Novembre to January 15th or from January 16th to April 15th. Documen',
+                                                         'title': '',
+                                                         'type': 'text'},
+                                                        {'content__start': '<h2>Preparing your application</h2><p><p>The application process being completely electronic, you will first  have to digitize the requested documents',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Required documents</h2><p><p><font color="#ff0000"><strong>All documents and diplomas should be in  English, French, German or Italian. Please joi',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': "<h2>Recommendation letters</h2><p><p>Holders of an <strong>EPFL Bachelor's degree</strong> applying <strong>in another field</strong> than  their orig",
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Statement of purpose</h2><p><p>The statement of purpose should not exceed 1000 words. You are required  to describe your academic background and y',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Application fee</h2><p><p>For EPFL to handle your application file, the processing fee required is:</p> <ul>  <li>CHF 150.- if you hold a foreign ',
+                                                         'title': '',
+                                                         'type': 'faq'}],
+                                              'language': 'en',
+                                              'last_update': datetime.datetime(2017, 5, 5, 11, 13, 36),
+                                              'path': '/application.html',
+                                              'sidebar__boxes': [{'content__start': '<p><strong><a href="https://isa.epfl.ch/imoniteur_ISAP/!farforms.htm?x=master">Applications</a> for starting a Master\'s program are open from mid-Nove',
+                                                                  'title': 'Application',
+                                                                  'type': 'coloredText'},
+                                                                 {'content__start': '<p style="text-align: left;">In case of questions, please contact the student helpdesk:</p> <div class="button mail"><a href="mailto:student.services@',
+                                                                  'title': 'Contact',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p><a href="http://virtualtour.epfl.ch" target="_blank"><img width="300" height="157" src="/files/buttons/virtual tour thumbnail.png?uuid=default:1ecf',
+                                                                  'title': 'Discover the campus',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p style="text-align: left;"><a target="_blank" href="http://www.youtube.com/EPFLstudents"><img width="25" height="25" alt="EPFL on YouTube" src="/fil',
+                                                                  'title': 'FOLLOW EPFL',
+                                                                  'type': 'text'}],
+                                              'title': 'Online application'},
+                                       'fr': {'boxes': [{'content__start': '<p>La candidature se fait <strong>enti&egrave;rement en ligne</strong>, en fran&ccedil;ais ou en  anglais de mi-novembre au 15 janvier ou du 16 janvie',
+                                                         'title': '',
+                                                         'type': 'text'},
+                                                        {'content__start': "<h2>Préparez votre candidature</h2><p><p>La proc&eacute;dure de candidature se d&eacute;roulant enti&egrave;rement en ligne, il  vous faudra tout d'ab",
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Documents requis</h2><p><p><strong>Tous les documents fournis devraient &ecirc;tre r&eacute;dig&eacute;s en anglais,  fran&ccedil;ais, allemand ou',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': "<h2>Lettres de recommandation</h2><p><p><strong>Les candidats en possession d'un Bachelor EPFL</strong> qui se pr&eacute;sentent &agrave; un Master<st",
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Lettre de motivation</h2><p><p>La lettre de motivation ne devrait pas d&eacute;passer 1000 mots. Nous vous  demandons de d&eacute;crire votre parc',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': "<h2>Taxe d'inscription</h2><p><p>Afin de procéder à l’examen de votre candidature, les frais de traitement de votre dossier s’élèvent à :</p> <ul>  <l",
+                                                         'title': '',
+                                                         'type': 'faq'}],
+                                              'language': 'fr',
+                                              'last_update': datetime.datetime(2017, 5, 5, 11, 13, 36),
+                                              'path': '/candidature.html',
+                                              'sidebar__boxes': [{'content__start': '<p><strong><a href="https://isa.epfl.ch/imoniteur_ISAP/!farforms.htm?x=master">Les inscriptions</a> pour d&eacute;buter un master sont ouvertes de mi-',
+                                                                  'title': 'Inscription',
+                                                                  'type': 'coloredText'},
+                                                                 {'content__start': '<p style="text-align: left;">Pour des questions d\'ordre g&eacute;n&eacute;ral, vous pouvez contacter les services aux &eacute;tudiants:</p> <div style',
+                                                                  'title': 'Contact',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p><a href="http://virtualtour.epfl.ch" target="_blank"><img width="300" height="157" src="/files/buttons/virtual tour thumbnail.png?uuid=default:1ecf',
+                                                                  'title': 'Découvrir le campus',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p style="text-align: left;"><a target="_blank" href="http://www.youtube.com/EPFLstudents"><img width="25" height="25" alt="EPFL on YouTube" src="/fil',
+                                                                  'title': "Suivre l'EPFL",
+                                                                  'type': 'text'}],
+                                              'title': 'Candidature en ligne'}},
+                          'contents__keys': ['en', 'fr'],
+                          'level': 2,
+                          'pid': '94587',
+                          'template': 'simple'},
+                '94605': {'children__len': 0,
+                          'contents': {'en': {'boxes': [{'content__start': '<h3>Do I need a visa to study in Lausanne?</h3> <p>It is important that you deal with the immigration formalities before entering Switzerland. Dependi',
+                                                         'title': '',
+                                                         'type': 'text'}],
+                                              'language': 'en',
+                                              'last_update': datetime.datetime(2013, 8, 28, 14, 28, 41),
+                                              'path': '/visa.html',
+                                              'sidebar__boxes': [{'content__start': '<p><a href="http://virtualtour.epfl.ch" target="_blank"><img width="300" height="157" src="/files/buttons/virtual tour thumbnail.png?uuid=default:1ecf',
+                                                                  'title': 'Discover the campus',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p style="text-align: center;"><a target="_blank" onClick="_gaq.push([\'_trackEvent\', \'generale_MA_eng\', \'download\']);" href="/files/SPE_BrochGén_LowCo',
+                                                                  'title': 'Brochure',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p style="text-align: left;">In case of questions, please contact the student helpdesk:</p> <div class="button mail"><a href="mailto:student.services@',
+                                                                  'title': 'Contact',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p style="text-align: left;"><a target="_blank" href="http://www.youtube.com/EPFLstudents"><img width="25" height="25" alt="EPFL on YouTube" src="/fil',
+                                                                  'title': 'FOLLOW EPFL',
+                                                                  'type': 'text'}],
+                                              'title': 'Coming from abroad'},
+                                       'fr': {'boxes': [{'content__start': '<div style="" class="  textBox">  <h3>Ai-je besoin d\'un visa pour &eacute;tudier &agrave; Lausanne?</h3>  <p>Il est important de vous occuper des form',
+                                                         'title': '',
+                                                         'type': 'text'}],
+                                              'language': 'fr',
+                                              'last_update': datetime.datetime(2013, 8, 28, 14, 28, 41),
+                                              'path': '/immigration.html',
+                                              'sidebar__boxes': [{'content__start': '<p><a href="http://virtualtour.epfl.ch" target="_blank"><img width="300" height="157" src="/files/buttons/virtual tour thumbnail.png?uuid=default:1ecf',
+                                                                  'title': 'Découvrir le campus',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p style="text-align: center;"><a href="/files/SPE_BrochGén_LowCost_2017_FR_prod_internet.pdf?uuid=default:3ec37a41-6f40-426f-a2b7-0613e90b37db" onCli',
+                                                                  'title': 'Brochure',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p style="text-align: left;">Pour des questions d\'ordre g&eacute;n&eacute;ral, vous pouvez contacter les services aux &eacute;tudiants:</p> <div style',
+                                                                  'title': 'Contact',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p style="text-align: left;"><a target="_blank" href="http://www.youtube.com/EPFLstudents"><img width="25" height="25" alt="EPFL on YouTube" src="/fil',
+                                                                  'title': "Suivre l'EPFL",
+                                                                  'type': 'text'}],
+                                              'title': "Venir de l'étranger"}},
+                          'contents__keys': ['en', 'fr'],
+                          'level': 2,
+                          'pid': '94605',
+                          'template': 'simple'},
+                '94609': {'children__len': 0,
+                          'contents': {'en': {'boxes': [{'content__start': '<div style="" class="  textBox">  <p>The official teaching languages at EPFL are French and English.  Masters programs are taught in English or French',
+                                                         'title': '',
+                                                         'type': 'text'}],
+                                              'language': 'en',
+                                              'last_update': datetime.datetime(2016, 3, 8, 14, 31, 47),
+                                              'path': '/teachinglanguage.html',
+                                              'sidebar__boxes': [{'content__start': '<p><a href="http://virtualtour.epfl.ch" target="_blank"><img width="300" height="157" src="/files/buttons/virtual tour thumbnail.png?uuid=default:1ecf',
+                                                                  'title': 'Discover the campus',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p style="text-align: center;"><a target="_blank" onClick="_gaq.push([\'_trackEvent\', \'generale_MA_eng\', \'download\']);" href="/files/SPE_BrochGén_LowCo',
+                                                                  'title': 'Brochure',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p style="text-align: left;">In case of questions, please contact the student helpdesk:</p> <div class="button mail"><a href="mailto:student.services@',
+                                                                  'title': 'Contact',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p style="text-align: left;"><a target="_blank" href="http://www.youtube.com/EPFLstudents"><img width="25" height="25" alt="EPFL on YouTube" src="/fil',
+                                                                  'title': 'FOLLOW EPFL',
+                                                                  'type': 'text'}],
+                                              'title': 'Teaching Languages'},
+                                       'fr': {'boxes': [{'content__start': '<div style="" class="  textBox">  <h3>Langues d\'enseignement</h3>  <p>Les langues d\'enseignement &agrave; l\'EPFL sont le fran&ccedil;ais et l\'anglais.',
+                                                         'title': '',
+                                                         'type': 'text'}],
+                                              'language': 'fr',
+                                              'last_update': datetime.datetime(2016, 3, 8, 14, 31, 47),
+                                              'path': '/langues.html',
+                                              'sidebar__boxes': [{'content__start': '<p><a href="http://virtualtour.epfl.ch" target="_blank"><img width="300" height="157" src="/files/buttons/virtual tour thumbnail.png?uuid=default:1ecf',
+                                                                  'title': 'Découvrir le campus',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p style="text-align: center;"><a href="/files/SPE_BrochGén_LowCost_2017_FR_prod_internet.pdf?uuid=default:3ec37a41-6f40-426f-a2b7-0613e90b37db" onCli',
+                                                                  'title': 'Brochure',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p style="text-align: left;">Pour des questions d\'ordre g&eacute;n&eacute;ral, vous pouvez contacter les services aux &eacute;tudiants:</p> <div style',
+                                                                  'title': 'Contact',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p style="text-align: left;"><a target="_blank" href="http://www.youtube.com/EPFLstudents"><img width="25" height="25" alt="EPFL on YouTube" src="/fil',
+                                                                  'title': "Suivre l'EPFL",
+                                                                  'type': 'text'}],
+                                              'title': "Langues d'enseignement"}},
+                          'contents__keys': ['en', 'fr'],
+                          'level': 2,
+                          'pid': '94609',
+                          'template': 'simple'},
+                '94611': {'children__len': 0,
+                          'contents': {'en': {'boxes': [{'content__start': '<h2>May I apply to more than one program?</h2><p><p>No, you should choose one program and apply to this one only.</p> </p>', 'title': '', 'type': 'faq'},
+                                                        {'content__start': '<h2>When can I expect an answer regarding my application?</h2><p><p>Decisions are sent early April for applications registered by the 15th of January ',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>If my application is rejected in January can I apply in April again ? For a different program?</h2><p><p>No, you cannot. You can apply to only one',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Is there a difference between the two application deadlines?</h2><p><p>No, whether you apply in January or April does not matter: all Masters  pro',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': "<h2>Can I transfer credits to EPFL from another Master's program?</h2><p><p>No. The entire program must be completed through EPFL.</p> </p>", 'title': '', 'type': 'faq'},
+                                                        {'content__start': "<h2>At Master's level, what does EPFL propose to students interested in management?</h2><p><p>The EPFL Masters curriculums offer all students the poss",
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>When does the academic year start?</h2><p><p>The academic year is divided into two semesters. Each semester lasts  14  weeks and runs from mid-Sep',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': "<h2>When and where can I get my student card?</h2><p><p>You should collect your student card by the Registrar's Office (SAC) at your arrival.</p> </p>",
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Am I allowed to work part-time in Switzerland while studying?</h2><p><p>If you are a student from outside the EU, Swiss Law does not allow  you  t',
+                                                         'title': '',
+                                                         'type': 'faq'}],
+                                              'language': 'en',
+                                              'last_update': datetime.datetime(2017, 3, 10, 11, 43, 11),
+                                              'path': '/FAQs.html',
+                                              'sidebar__boxes': [{'content__start': '<p><a href="http://virtualtour.epfl.ch" target="_blank"><img width="300" height="157" src="/files/buttons/virtual tour thumbnail.png?uuid=default:1ecf',
+                                                                  'title': 'Discover the campus',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p style="text-align: center;"><a target="_blank" onClick="_gaq.push([\'_trackEvent\', \'generale_MA_eng\', \'download\']);" href="/files/SPE_BrochGén_LowCo',
+                                                                  'title': 'Brochure',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p style="text-align: left;">In case of questions, please contact the student helpdesk:</p> <div class="button mail"><a href="mailto:student.services@',
+                                                                  'title': 'Contact',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p style="text-align: left;"><a target="_blank" href="http://www.youtube.com/EPFLstudents"><img width="25" height="25" alt="EPFL on YouTube" src="/fil',
+                                                                  'title': 'FOLLOW EPFL',
+                                                                  'type': 'text'}],
+                                              'title': 'FAQ'},
+                                       'fr': {'boxes': [{'content__start': '<h2>Puis-je présenter ma candidature à plusieurs programmes ?</h2><p><p>Non, vous devez choisir un seul programme auquel vous porter candidat.</p> </p',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': "<h2>Quand aurai-je une réponse concernant ma demande d'admission ?</h2><p><p>Les d&eacute;cisions sont ensuite communiqu&eacute;es d&eacute;but avril ",
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Ma candidature est rejetée. Puis-je à nouveau déposer un dossier pour le prochain délai ? Pour une section différente ?</h2><p><p>Non, un m&ecirc;',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Y a-t-il une différence entre les deux délais de dépôt de candidature ?</h2><p><p>Non, que vous soyez candidat en janvier ou en avril, les program',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': "<h2>Puis-je transférer à l'EPFL des crédits obtenus dans un autre programme master, dans une autre université ?</h2><p><p>Non, vous devez suivre l'ent",
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Au niveau du master, que propose l\'EPFL comme formation dans le domaine du management ?</h2><p><p>Il est possible d\'effectuer un <a target="_blank',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': "<h2>Quand l'année académique commence-t-elle ?</h2><p><p>L'ann&eacute;e acad&eacute;mique est partag&eacute;e en 2 semestres de 14 semaines, de mi-sep",
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': "<h2>Quand et où vais-je obtenir ma carte d'étudiant ?</h2><p><p>La carte d'&eacute;tudiant vous sera fournie par le Service Acad&eacute;mique, d&egrav",
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': "<h2>Suis-je autorisé à travailler en Suisse, en plus de mes études ?</h2><p><p>Si vous &ecirc;tes d'un pays hors de l'UE, la Loi suisse ne vous autori",
+                                                         'title': '',
+                                                         'type': 'faq'}],
+                                              'language': 'fr',
+                                              'last_update': datetime.datetime(2017, 3, 10, 11, 43, 11),
+                                              'path': '/FAQ.html',
+                                              'sidebar__boxes': [{'content__start': '<p><a href="http://virtualtour.epfl.ch" target="_blank"><img width="300" height="157" src="/files/buttons/virtual tour thumbnail.png?uuid=default:1ecf',
+                                                                  'title': 'Découvrir le campus',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p style="text-align: center;"><a href="/files/SPE_BrochGén_LowCost_2017_FR_prod_internet.pdf?uuid=default:3ec37a41-6f40-426f-a2b7-0613e90b37db" onCli',
+                                                                  'title': 'Brochure',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p style="text-align: left;">Pour des questions d\'ordre g&eacute;n&eacute;ral, vous pouvez contacter les services aux &eacute;tudiants:</p> <div style',
+                                                                  'title': 'Contact',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p style="text-align: left;"><a target="_blank" href="http://www.youtube.com/EPFLstudents"><img width="25" height="25" alt="EPFL on YouTube" src="/fil',
+                                                                  'title': "Suivre l'EPFL",
+                                                                  'type': 'text'}],
+                                              'title': 'FAQ'}},
+                          'contents__keys': ['en', 'fr'],
+                          'level': 2,
+                          'pid': '94611',
+                          'template': 'simple'},
+                '94769': {'children__len': 0,
+                          'contents': {'en': {'boxes': [{'content__start': '<p><img width="640" height="147" alt="Master\'s in environmental engineering" src="/files/key-visuals/ENAC_SIE.png?uuid=default:c56eb399-a3f4-461a-8af1',
+                                                         'title': '',
+                                                         'type': 'text'},
+                                                        {'content__start': '<h2>Protecting the environment for a sustainable future.</h2><p><p>The major future challenges for planet earth are climate change,  limited resources',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Program\'s Objectives</h2><p><p><span lang="en" id="result_box"><span class="hps">The Master</span> <span class="hps">in Environmental Sciences and',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Entry Requirements</h2><p><p>Candidates must have a Bachelor&rsquo;s degree in environmental engineering or related areas. Students with knowledge',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Teaching Language</h2><p><p>French and English. It is possible to complete this program in English entirely.</p> </p>', 'title': '', 'type': 'faq'},
+                                                        {'content__start': '<h2>Program\'s Structure</h2><p><p><a href="###file:/content/sites/master/files/pdfs/ENAC_SIE_MA.pdf?uuid=default:efb7ec7d-7061-4f2e-9b6a-f19073fbc429"',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Accreditations</h2><p><table width="200" cellspacing="1" cellpadding="1" border="1">  <tbody>   <tr>    <td style="text-align: center;"><a target=',
+                                                         'title': '',
+                                                         'type': 'faq'}],
+                                              'language': 'en',
+                                              'last_update': datetime.datetime(2017, 2, 7, 15, 54, 40),
+                                              'path': '/environment.html',
+                                              'sidebar__boxes': [{'content__start': '<p>In case of specific questions about this program, please contact the Environmental Engineering Section:</p> <div class="button mail"><a href="mailt',
+                                                                  'title': 'Contact',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p style="text-align: center;"><a target="_blank" onclick="_gaq.push([\'_trackEvent\', \'ENAC_SIE_MA\', \'download\']);" href="/files/brochures/ENAC_SIE_MA.',
+                                                                  'title': 'Download',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p><a href="http://phd.epfl.ch/home" target="_blank"><span class="fleche">phd.epfl.ch</span></a></p> ', 'title': 'Also interested in a PhD? ', 'type': 'text'},
+                                                                 {'content__start': '<p style="text-align: left;"><a target="_blank" href="http://www.youtube.com/EPFLstudents"><img width="25" height="25" alt="EPFL on YouTube" src="/fil',
+                                                                  'title': 'FOLLOW EPFL',
+                                                                  'type': 'text'}],
+                                              'title': 'Environmental Sciences and Engineering'},
+                                       'fr': {'boxes': [{'content__start': '<p><img width="640" height="147" alt="Master\'s in environmental engineering" src="/files/key-visuals/ENAC_SIE.png?uuid=default:c56eb399-a3f4-461a-8af1',
+                                                         'title': '',
+                                                         'type': 'text'},
+                                                        {'content__start': "<h2>Maîtrisons notre futur, protégeons notre environnement</h2><p><p>Notre plan&egrave;te doit faire face &agrave; des d&eacute;fis majeurs pour l'ave",
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Objectifs du programme</h2><p><p>Le Master SIE propose une vaste palette de cours regroup&eacute;s au sein de 3 sp&eacute;cialisations: Chimie et ',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': "<h2>Conditions d'admission</h2><p><p>Les candidats doivent avoir un certificat de Bachelor en sciences et ing&eacute;nierie de l'environnement ou en u",
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': "<h2>Langue d'enseignement</h2><p><p>Fran&ccedil;ais et anglais. Possibilit&eacute; d'effectuer ce master totalement en anglais.</p> </p>", 'title': '', 'type': 'faq'},
+                                                        {'content__start': '<h2>Structure du programme</h2><p><p><a href="###file:/content/sites/master/files/pdfs/ENAC_SIE_MA.pdf?uuid=default:efb7ec7d-7061-4f2e-9b6a-f19073fbc4',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Accréditations</h2><p><table width="200" cellspacing="1" cellpadding="1" border="1">  <tbody>   <tr>    <td style="text-align: center;"><a target=',
+                                                         'title': '',
+                                                         'type': 'faq'}],
+                                              'language': 'fr',
+                                              'last_update': datetime.datetime(2017, 2, 7, 15, 54, 40),
+                                              'path': '/environnement.html',
+                                              'sidebar__boxes': [{'content__start': "<p>En cas de questions sp&eacute;cifiques au sujet de ce programme, vous pouvez  vous adresser &agrave; la section Sciences et Ing&eacute;nierie de l'",
+                                                                  'title': 'Contact',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p style="text-align: center;"><a target="_blank" onclick="_gaq.push([\'_trackEvent\', \'ENAC_SIE_MA\', \'download\']);" href="/files/brochures/ENAC_SIE_MA.',
+                                                                  'title': 'Brochure à télécharger',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p><a href="http://phd.epfl.ch" target="_blank"><span class="fleche">phd.epfl.ch</span></a></p> ', 'title': 'Et le doctorat ?', 'type': 'text'},
+                                                                 {'content__start': '<p style="text-align: left;"><a target="_blank" href="http://www.youtube.com/EPFLstudents"><img width="25" height="25" alt="EPFL on YouTube" src="/fil',
+                                                                  'title': "Suivre l'EPFL",
+                                                                  'type': 'text'}],
+                                              'title': "Sciences et Ingénierie de l'Environnement"}},
+                          'contents__keys': ['en', 'fr'],
+                          'level': 2,
+                          'pid': '94769',
+                          'template': 'simple'},
+                '94947': {'children__len': 0,
+                          'contents': {'en': {'boxes': [{'content__start': '<p><img width="640" height="147" alt="Master\'s in civil engineering" src="/files/key-visuals/ENAC_CE.png?uuid=default:349b3bb3-06ac-44c7-80c0-3aa2c98d',
+                                                         'title': '',
+                                                         'type': 'text'},
+                                                        {'content__start': '<h2>Project, link and build the future.</h2><p><p>The welfare of a society has always been and still is strongly related with the development of infra',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Video: Olivia Künzli, testimonial</h2><p><p><iframe width="640" height="360" frameborder="0" allowfullscreen="" src="//www.youtube.com/embed/Tqr9j',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': "<h2>Program's Objectives</h2><p><p>The two-year master's program in civil engineering will give the students the required knowledge to face a big chal",
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Entry Requirements</h2><p><p>Candidates should have a Bachelor\'s degree in civil engineering from a reputable university.</p> <p><a href="http://m',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Teaching Language</h2><p><p>French and English. A good command of French is recommended to be able to follow this program.</p> </p>', 'title': '', 'type': 'faq'},
+                                                        {'content__start': '<h2>Program\'s Structure</h2><p><p><a href="###file:/content/sites/master/files/pdfs/ENAC_CE_MA.pdf?uuid=default:1d78f020-327d-453b-b5da-a81c2b954524" ',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Accreditations</h2><p><table width="200" cellspacing="1" cellpadding="1" border="1">  <tbody>   <tr>    <td style="text-align: center;"><a target=',
+                                                         'title': '',
+                                                         'type': 'faq'}],
+                                              'language': 'en',
+                                              'last_update': datetime.datetime(2016, 2, 15, 14, 11, 47),
+                                              'path': '/civilengineering.html',
+                                              'sidebar__boxes': [{'content__start': '<p>In case of specific questions about this program, please contact the Civil Engineering Section:</p> <div class="button mail"><a href="http://enac.e',
+                                                                  'title': 'Contact',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p style="text-align: center;"><a target="_blank" onclick="_gaq.push([\'_trackEvent\', \'ENAC_CE_MA\', \'download\']);" href="/files/brochures/ENAC_CE_MA.pd',
+                                                                  'title': 'Download',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p><a href="http://phd.epfl.ch/home" target="_blank"><span class="fleche">phd.epfl.ch</span></a></p> ', 'title': 'Also interested in a PhD? ', 'type': 'text'},
+                                                                 {'content__start': '<p style="text-align: left;"><a href="http://www.youtube.com/EPFLstudents" target="_blank"><img width="25" height="25" alt="EPFL on YouTube" src="/fil',
+                                                                  'title': 'FOLLOW EPFL',
+                                                                  'type': 'text'}],
+                                              'title': 'Civil Engineering'},
+                                       'fr': {'boxes': [{'content__start': '<p><img width="640" height="147" alt="Master\'s in civil engineering" src="/files/key-visuals/ENAC_CE.png?uuid=default:349b3bb3-06ac-44c7-80c0-3aa2c98d',
+                                                         'title': '',
+                                                         'type': 'text'},
+                                                        {'content__start': "<h2>Projeter, relier et construire l'avenir</h2><p><p>Le bien-&ecirc;tre de la soci&eacute;t&eacute; a toujours &eacute;t&eacute; &eacute;troitement l",
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Vidéo (en anglais): témoignage d\'Olivia Künzli</h2><p><p><iframe width="640" height="360" frameborder="0" allowfullscreen="" src="//www.youtube.co',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Objectifs du programme</h2><p><p>Le programme de master en deux ans donne aux &eacute;tudiants les connaissances n&eacute;cessaires pour relever u',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': "<h2>Conditions d'admission</h2><p><p>Les candidats doivent avoir un certificat de Bachelor en G&eacute;nie Civil d'une universit&eacute; reconnue.</p>",
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': "<h2>Langue d'enseignement</h2><p><p>Fran&ccedil;ais et anglais. Il est recommand&eacute; de poss&eacute;der une bonne maitrise du fran&ccedil;ais pour",
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Structure du programme</h2><p><p><a href="###file:/content/sites/master/files/pdfs/ENAC_CE_MA.pdf?uuid=default:1d78f020-327d-453b-b5da-a81c2b95452',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Accréditations</h2><p><table width="200" cellspacing="1" cellpadding="1" border="1">  <tbody>   <tr>    <td style="text-align: center;"><a target=',
+                                                         'title': '',
+                                                         'type': 'faq'}],
+                                              'language': 'fr',
+                                              'last_update': datetime.datetime(2016, 2, 15, 14, 11, 47),
+                                              'path': '/geniecivil.html',
+                                              'sidebar__boxes': [{'content__start': '<p>En cas de questions sp&eacute;cifiques au sujet de ce programme, vous pouvez  vous adresser &agrave; la section G&eacute;nie Civil:</p> <div class=',
+                                                                  'title': 'Contact',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p style="text-align: center;"><a target="_blank" onclick="_gaq.push([\'_trackEvent\', \'ENAC_CE_MA\', \'download\']);" href="/files/brochures/ENAC_CE_MA.pd',
+                                                                  'title': 'Brochure à télécharger',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p><a href="http://phd.epfl.ch" target="_blank"><span class="fleche">phd.epfl.ch</span></a></p> ', 'title': 'Et le doctorat ?', 'type': 'text'},
+                                                                 {'content__start': '<p style="text-align: left;"><a target="_blank" href="http://www.youtube.com/EPFLstudents"><img width="25" height="25" alt="EPFL on YouTube" src="/fil',
+                                                                  'title': "Suivre l'EPFL",
+                                                                  'type': 'text'}],
+                                              'title': 'Génie Civil'}},
+                          'contents__keys': ['en', 'fr'],
+                          'level': 2,
+                          'pid': '94947',
+                          'template': 'simple'},
+                '94953': {'children__len': 0,
+                          'contents': {'en': {'boxes': [{'content__start': '<p><img width="640" height="147" src="/files/key-visuals/ENAC_ARCHI.png?uuid=default:faa234e1-65c4-462a-a500-d72a53339248" alt="Master\'s in Architectu',
+                                                         'title': '',
+                                                         'type': 'text'},
+                                                        {'content__start': "<h2>A Master's degree FOR Architecture</h2><p><p>EPFL's Master degree in architecture perpetuates the tradition of polytechnic training for design and",
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': "<h2>Program's Objectives</h2><p><p>A solid and methodical theoretical, scientific and applied training at the bachelor level, is followed at the time ",
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Video (in French): Nicolas Pierret, testimonial</h2><p><p><iframe width="640" height="360" frameborder="0" allowfullscreen="" src="//www.youtube.c',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Entry Requirements</h2><p><ul>  <li>Bachelor in Architectur</li>  <li>Practical experience of 12 months, of which 6 consecutive months at least in',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Teaching Language</h2><p><p>French</p> </p>', 'title': '', 'type': 'faq'},
+                                                        {'content__start': '<h2>Program\'s Structure</h2><p><p><a href="###file:/content/sites/master/files/pdfs/ENAC_ARCHI_MA.pdf?uuid=default:10d7a1b9-55da-47ad-8450-5ee11357d73',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Video (in French): student\'s project, Adrien Alberti</h2><p><p><iframe width="640" height="360" frameborder="0" allowfullscreen="" src="//www.yout',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Accreditations</h2><p><table width="200" cellspacing="1" cellpadding="1" border="1">  <tbody>   <tr>    <td style="text-align: center;">&nbsp;</td',
+                                                         'title': '',
+                                                         'type': 'faq'}],
+                                              'language': 'en',
+                                              'last_update': datetime.datetime(2016, 6, 17, 8, 56, 32),
+                                              'path': '/architecture.html',
+                                              'sidebar__boxes': [{'content__start': '<p>In case of specific questions about this program, please contact the Architecture Section:</p> <div class="button mail"><a href="mailto:laure.pallu',
+                                                                  'title': 'Contact',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p style="text-align: center;"><a target="_blank" onclick="_gaq.push([\'_trackEvent\', \'ENAC_ARCHI_MA\', \'download\']);" href="/files/brochures/ENAC_ARCHI',
+                                                                  'title': 'Download',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p><a href="http://phd.epfl.ch/home" target="_blank"><span class="fleche">phd.epfl.ch</span></a></p> ', 'title': 'Also interested in a PhD? ', 'type': 'text'},
+                                                                 {'content__start': '<p style="text-align: left;"><a target="_blank" href="http://www.youtube.com/EPFLstudents"><img width="25" height="25" alt="EPFL on YouTube" src="/fil',
+                                                                  'title': 'FOLLOW EPFL',
+                                                                  'type': 'text'}],
+                                              'title': 'Architecture'},
+                                       'fr': {'boxes': [{'content__start': '<p><img width="640" height="147" src="/files/key-visuals/ENAC_ARCHI.png?uuid=default:faa234e1-65c4-462a-a500-d72a53339248" alt="Master\'s in Architectu',
+                                                         'title': '',
+                                                         'type': 'text'},
+                                                        {'content__start': "<h2>Un Master POUR l'Architecture.</h2><p><p>Le Master en architecture de l'EPFL s'inscrit dans la tradition de formation polytechnique d'architectes ",
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Objectifs du programme</h2><p><p>A une solide formation de base syst&eacute;matique &agrave; la fois th&eacute;orique, scientifique et appliqu&eac',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Vidéo: témoignage de Nicolas Pierret</h2><p><p><iframe width="640" height="360" frameborder="0" allowfullscreen="" src="//www.youtube.com/embed/du',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': "<h2>Conditions d'admission</h2><p><ul>  <li>Bachelor en Architecture;</li>  <li>Exp&eacute;rience pratique professionnelle de 12 mois, dont 6 mois con",
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': "<h2>Langue d'enseignement</h2><p><p>Fran&ccedil;ais</p> </p>", 'title': '', 'type': 'faq'},
+                                                        {'content__start': '<h2>Structure du programme</h2><p><p><a target="_blank" href="###file:/content/sites/master/files/pdfs/ENAC_ARCHI_MA.pdf?uuid=default:10d7a1b9-55da-47',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Vidéo: projet d\'étudiant, Adrien Alberti</h2><p><p><iframe width="640" height="360" frameborder="0" allowfullscreen="" src="//www.youtube.com/embe',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Accréditations</h2><p><table width="200" cellspacing="1" cellpadding="1" border="1">  <tbody>   <tr>    <td style="text-align: center;">&nbsp;</td',
+                                                         'title': '',
+                                                         'type': 'faq'}],
+                                              'language': 'fr',
+                                              'last_update': datetime.datetime(2016, 6, 17, 8, 56, 32),
+                                              'path': '/archi.html',
+                                              'sidebar__boxes': [{'content__start': '<p>En cas de questions sp&eacute;cifiques au sujet de ce programme, vous pouvez  vous adresser &agrave; la section Architecture:</p> <div class="butto',
+                                                                  'title': 'Contact',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p style="text-align: center;"><a target="_blank" onclick="_gaq.push([\'_trackEvent\', \'ENAC_ARCHI_MA\', \'download\']);" href="/files/brochures/ENAC_ARCHI',
+                                                                  'title': 'Brochure à télécharger',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p><a href="http://phd.epfl.ch" target="_blank"><span class="fleche">phd.epfl.ch</span></a></p> ', 'title': 'Et le doctorat ?', 'type': 'text'},
+                                                                 {'content__start': '<p style="text-align: left;"><a target="_blank" href="http://www.youtube.com/EPFLstudents"><img width="25" height="25" alt="EPFL on YouTube" src="/fil',
+                                                                  'title': "Suivre l'EPFL",
+                                                                  'type': 'text'}],
+                                              'title': 'Architecture'}},
+                          'contents__keys': ['en', 'fr'],
+                          'level': 2,
+                          'pid': '94953',
+                          'template': 'simple'},
+                '94956': {'children__len': 0,
+                          'contents': {'en': {'boxes': [{'content__start': '<p><img width="640" height="147" alt="Master\'s in mechanical engineering" src="/files/key-visuals/STI_SGM.png?uuid=default:681da13e-d3c1-40b6-b298-658',
+                                                         'title': '',
+                                                         'type': 'text'},
+                                                        {'content__start': '<h2>Give form to your dreams</h2><p><p>Building up on a thorough and multidisciplinary curriculum,  the teaching provided within the Mechanical Engine',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Video (in French): Mechanical Engineering at EPFL</h2><p><iframe width="640" height="360" src="//www.youtube.com/embed/lICkAeOgtSk?rel=0" framebor',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': "<h2>Program's Objectives</h2><p><p>Based on fundamental scientific knowledge and engineering know-how, the program develops competences in fluid and s",
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Video: Bertrand Cardis, EPFL Alumni</h2><p><p><iframe width="640" height="360" frameborder="0" allowfullscreen="" src="//www.youtube.com/embed/FRm',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Entry Requirements</h2><p><p>Candidates should have a Bachelor\'s degree in Mechanical Engineering from a reputable university.</p> <p><a href="htt',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Teaching Language</h2><p><p>English, with some optional courses taught in French.</p> </p>', 'title': '', 'type': 'faq'},
+                                                        {'content__start': '<h2>Program\'s Structure</h2><p><p><a href="###file:/content/sites/master/files/pdfs/STI_SGM_MA.pdf?uuid=default:5ee8c2f7-4345-4c10-aead-bf251f28fb2c" ',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Accreditations</h2><p><table width="200" cellspacing="1" cellpadding="1" border="1">  <tbody>   <tr>    <td style="text-align: center;"><a target=',
+                                                         'title': '',
+                                                         'type': 'faq'}],
+                                              'language': 'en',
+                                              'last_update': datetime.datetime(2016, 2, 15, 15, 15, 8),
+                                              'path': '/mechanicalengineering.html',
+                                              'sidebar__boxes': [{'content__start': '<p>In case of specific questions about this program, please contact the Mechanical Engineering section:</p> <div class="button mail"><a href="mailto:s',
+                                                                  'title': 'Contact',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p style="text-align: center;"><a href="/files/brochures/STI_SGM_MA.pdf?uuid=default:40ebea13-3f7f-48e5-a673-2757ffed5867" onclick="_gaq.push([\'_track',
+                                                                  'title': 'Download',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p><a href="http://phd.epfl.ch/home" target="_blank"><span class="fleche">phd.epfl.ch</span></a></p> ', 'title': 'Also interested in a PhD? ', 'type': 'text'},
+                                                                 {'content__start': '<p style="text-align: left;"><a target="_blank" href="http://www.youtube.com/EPFLstudents"><img width="25" height="25" alt="EPFL on YouTube" src="/fil',
+                                                                  'title': 'FOLLOW EPFL',
+                                                                  'type': 'text'}],
+                                              'title': 'Mechanical Engineering'},
+                                       'fr': {'boxes': [{'content__start': '<p><img width="640" height="147" alt="Master\'s in mechanical engineering" src="/files/key-visuals/STI_SGM.png?uuid=default:681da13e-d3c1-40b6-b298-658',
+                                                         'title': '',
+                                                         'type': 'text'},
+                                                        {'content__start': "<h2>Concrétisez vos rêves</h2><p><p>En s'appuyant sur une formation pr&eacute;liminaire solide et pluridisciplinaire, l'enseignement en Master de G&ea",
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Vidéo: présentation de la section de Génie Mécanique</h2><p><iframe width="640" height="360" src="//www.youtube.com/embed/lICkAeOgtSk?rel=0" frame',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': "<h2>Objectifs du programme</h2><p><p>Le programme permet d'aborder des &eacute;tudes de pointe comme le calcul de l'&eacute;coulement autour d'un avio",
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Vidéo: Bertrand Cardis, alumni EPFL</h2><p><iframe width="640" height="360" src="//www.youtube.com/embed/-szGSAmZBP8?rel=0" frameborder="0" allowf',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': "<h2>Conditions d'admission</h2><p><p>Les candidats doivent avoir un certificat de Bachelor en G&eacute;nie M&eacute;canique d'une universit&eacute; re",
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': "<h2>Langue d'enseignement</h2><p><p>Anglais et fran&ccedil;ais. Un faible pourcentage des cours sont en fran&ccedil;ais.</p> </p>", 'title': '', 'type': 'faq'},
+                                                        {'content__start': '<h2>Structure du programme</h2><p><p><a href="###file:/content/sites/master/files/pdfs/STI_SGM_MA.pdf?uuid=default:5ee8c2f7-4345-4c10-aead-bf251f28fb2',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Accréditations</h2><p><table width="200" cellspacing="1" cellpadding="1" border="1">  <tbody>   <tr>    <td style="text-align: center;"><a target=',
+                                                         'title': '',
+                                                         'type': 'faq'}],
+                                              'language': 'fr',
+                                              'last_update': datetime.datetime(2016, 2, 15, 15, 15, 8),
+                                              'path': '/genie-mecanique.html',
+                                              'sidebar__boxes': [{'content__start': '<p>En cas de questions sp&eacute;cifiques au sujet de ce programme, vous pouvez  vous adresser &agrave; la section G&eacute;nie M&eacute;canique:</p> ',
+                                                                  'title': 'Contact',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p style="text-align: center;"><a href="/files/brochures/STI_SGM_MA.pdf?uuid=default:40ebea13-3f7f-48e5-a673-2757ffed5867" onclick="_gaq.push([\'_track',
+                                                                  'title': 'Brochure à télécharger',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p><a href="http://phd.epfl.ch" target="_blank"><span class="fleche">phd.epfl.ch</span></a></p> ', 'title': 'Et le doctorat ?', 'type': 'text'},
+                                                                 {'content__start': '<p style="text-align: left;"><a target="_blank" href="http://www.youtube.com/EPFLstudents"><img width="25" height="25" alt="EPFL on YouTube" src="/fil',
+                                                                  'title': "Suivre l'EPFL",
+                                                                  'type': 'text'}],
+                                              'title': 'Génie Mécanique'}},
+                          'contents__keys': ['en', 'fr'],
+                          'level': 2,
+                          'pid': '94956',
+                          'template': 'simple'},
+                '94997': {'children__len': 0,
+                          'contents': {'en': {'boxes': [{'content__start': '<p><img width="640" height="147" alt="Master\'s in Microengineering" src="/files/key-visuals/STI_SMT.png?uuid=default:6abce476-88f8-4e09-8169-0612d4be3',
+                                                         'title': '',
+                                                         'type': 'text'},
+                                                        {'content__start': '<h2>Making small smaller.</h2><p><p>Microengineering is the art and science of creating, designing, integrating and manufacturing miniature components',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Video (in French): Microengineering at EPFL</h2><p><p><iframe width="640" height="360" frameborder="0" allowfullscreen="" src="//www.youtube.com/e',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': "<h2>Program's Objectives</h2><p><p>The EPFL Master of Science in Microengineering offers four orientations&thinsp;: <strong>Robotics and Autonomous Sy",
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': "<h2>Entry Requirements</h2><p><p>Candidates should have a Bachelor's degree in Microengineering (or closely related field) from a reputable university",
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Video (in French): student\'s project, David Mansolino</h2><p><iframe width="640" height="360" src="//www.youtube.com/embed/lIRe4adQ3uE?rel=0" fram',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Teaching Language</h2><p><p>English and French.</p> </p>', 'title': '', 'type': 'faq'},
+                                                        {'content__start': '<h2>Program\'s Structure</h2><p><p><a href="###file:/content/sites/master/files/pdfs/STI_SMT_MA_RV.pdf?uuid=default:76b3de18-c6c9-4e73-a030-785fbdc5bfc',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Accreditations</h2><p><table width="200" cellspacing="1" cellpadding="1" border="1">  <tbody>   <tr>    <td style="text-align: center;"><a target=',
+                                                         'title': '',
+                                                         'type': 'faq'}],
+                                              'language': 'en',
+                                              'last_update': datetime.datetime(2016, 9, 12, 16, 36, 54),
+                                              'path': '/microengineering.html',
+                                              'sidebar__boxes': [{'content__start': '<p>In case of specific questions about this program, please contact the Microengineering section:</p> <div class="button mail"><a href="mailto:guy.del',
+                                                                  'title': 'Contact',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p><a href="http://phd.epfl.ch/home" target="_blank"><span class="fleche">phd.epfl.ch</span></a></p> ', 'title': 'Also interested in a PhD? ', 'type': 'text'},
+                                                                 {'content__start': '<p style="text-align: left;"><a target="_blank" href="http://www.youtube.com/EPFLstudents"><img width="25" height="25" alt="EPFL on YouTube" src="/fil',
+                                                                  'title': 'FOLLOW EPFL',
+                                                                  'type': 'text'}],
+                                              'title': 'Microengineering'},
+                                       'fr': {'boxes': [{'content__start': '<p><img width="640" height="147" alt="Master\'s in Microengineering" src="/files/key-visuals/STI_SMT.png?uuid=default:6abce476-88f8-4e09-8169-0612d4be3',
+                                                         'title': '',
+                                                         'type': 'text'},
+                                                        {'content__start': "<h2>Petit, plus petit, toujours plus petit !</h2><p><p>La microtechnique est l'art de cr&eacute;er, concevoir, int&eacute;grer ou fabriquer des compos",
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Vidéo: présentation de la section de Microtechnique</h2><p><p><iframe width="640" height="360" frameborder="0" allowfullscreen="" src="//www.youtu',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': "<h2>Objectifs du programme</h2><p><p>Le Master en Microtechnique de l'EPFL, avec ses quatre orientations en <strong>Robotique et Syst&egrave;mes Auton",
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': "<h2>Conditions d'admission</h2><p><p>Les candidats doivent avoir un certificat de Bachelor en Microtechnique (ou discipline apparent&eacute;e) d'une u",
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Vidéo: témoignage de David Mansolino</h2><p><iframe width="640" height="360" src="//www.youtube.com/embed/lIRe4adQ3uE?rel=0" frameborder="0" allow',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': "<h2>Langue d'enseignement</h2><p><p>Anglais et fran&ccedil;ais.</p> </p>", 'title': '', 'type': 'faq'},
+                                                        {'content__start': '<h2>Structure du programme</h2><p><p><a href="###file:/content/sites/master/files/pdfs/STI_SMT_MA_RV.pdf?uuid=default:76b3de18-c6c9-4e73-a030-785fbdc5',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Accréditations</h2><p><table width="200" cellspacing="1" cellpadding="1" border="1">  <tbody>   <tr>    <td style="text-align: center;"><a target=',
+                                                         'title': '',
+                                                         'type': 'faq'}],
+                                              'language': 'fr',
+                                              'last_update': datetime.datetime(2016, 9, 12, 16, 36, 54),
+                                              'path': '/microtechnique.html',
+                                              'sidebar__boxes': [{'content__start': '<p>En cas de questions sp&eacute;cifiques au sujet de ce programme, vous pouvez  vous adresser &agrave; la section Microtechnique:</p> <div class="but',
+                                                                  'title': 'Contact',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p><a href="http://phd.epfl.ch" target="_blank"><span class="fleche">phd.epfl.ch</span></a></p> ', 'title': 'Et le doctorat ?', 'type': 'text'},
+                                                                 {'content__start': '<p style="text-align: left;"><a target="_blank" href="http://www.youtube.com/EPFLstudents"><img width="25" height="25" alt="EPFL on YouTube" src="/fil',
+                                                                  'title': "Suivre l'EPFL",
+                                                                  'type': 'text'}],
+                                              'title': 'Microtechnique'}},
+                          'contents__keys': ['en', 'fr'],
+                          'level': 2,
+                          'pid': '94997',
+                          'template': 'simple'},
+                '95005': {'children__len': 0,
+                          'contents': {'en': {'boxes': [{'content__start': '<p><img width="640" height="147" alt="Master\'s in materials science" src="/files/key-visuals/STI_MX.png?uuid=default:bdcb517a-9394-45c9-b085-09d8a62c2',
+                                                         'title': '',
+                                                         'type': 'text'},
+                                                        {'content__start': '<h2>Mastering Matter</h2><p><p>The Master in Materials Science and Engineering integrates fundamental knowledge of materials synthesis and processing,',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Video: testimonial from Brigitte Greenwood (in French)</h2><p><p><iframe width="640" height="360" frameborder="0" allowfullscreen="" src="//www.yo',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': "<h2>Program's Objectives</h2><p><p>This Master&rsquo;s program provides students with deep scientific and technical knowledge that will allow them to ",
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Video: testimonial from Hamed Kazemi</h2><p><p><iframe width="640" height="360" frameborder="0" allowfullscreen="" src="//www.youtube.com/embed/9H',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': "<h2>Entry Requirements</h2><p><p>Candidates should have a Bachelor 's degree in  Materials Science from a reputable university, with excellent academi",
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Teaching Language</h2><p><p>English, some optional courses in French.</p> </p>', 'title': '', 'type': 'faq'},
+                                                        {'content__start': '<h2>Program\'s Structure</h2><p><p><a href="###file:/content/sites/master/files/pdfs/STI_MX_MA.pdf?uuid=default:d807e70e-4c64-499a-830b-15d1764b8d36" t',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Accreditations</h2><p><table width="200" cellspacing="1" cellpadding="1" border="1">  <tbody>   <tr>    <td style="text-align: center;"><a href="h',
+                                                         'title': '',
+                                                         'type': 'faq'}],
+                                              'language': 'en',
+                                              'last_update': datetime.datetime(2016, 9, 5, 11, 11, 15),
+                                              'path': '/materials.html',
+                                              'sidebar__boxes': [{'content__start': '<p>In case of specific questions about this program, please contact the Materials section:</p> <div class="button mail"><a href="mailto:homeira.sunder',
+                                                                  'title': 'Contact',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p style="text-align: center;"><a href="/files/brochures/STI_MX_MA.pdf?uuid=default:abb5bc5c-a6ca-449f-a81c-2251dcdbb32c" onclick="_gaq.push([\'_trackE',
+                                                                  'title': 'Download',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p><a href="http://phd.epfl.ch/home" target="_blank"><span class="fleche">phd.epfl.ch</span></a></p> ', 'title': 'Also interested in a PhD? ', 'type': 'text'},
+                                                                 {'content__start': '<p style="text-align: left;"><a target="_blank" href="http://www.youtube.com/EPFLstudents"><img width="25" height="25" alt="EPFL on YouTube" src="/fil',
+                                                                  'title': 'FOLLOW EPFL',
+                                                                  'type': 'text'}],
+                                              'title': 'Materials Science and Engineering'},
+                                       'fr': {'boxes': [{'content__start': '<p><img width="640" height="147" alt="Master\'s in materials science" src="/files/key-visuals/STI_MX.png?uuid=default:bdcb517a-9394-45c9-b085-09d8a62c2',
+                                                         'title': '',
+                                                         'type': 'text'},
+                                                        {'content__start': "<h2>De la matière à la performance</h2><p><p>La Science et G&eacute;nie des Mat&eacute;riaux &eacute;tudie l'&eacute;laboration et la mise en oeuvre d",
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Vidéo: témoignage de Brigitte Greenwood</h2><p><p><iframe width="640" height="360" frameborder="0" allowfullscreen="" src="//www.youtube.com/embed',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': "<h2>Objectifs du programme</h2><p><p>L'approche moderne de la science des mat&eacute;riaux, telle qu'elle est pratiqu&eacute;e &agrave; l'EPFL, repose",
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Vidéo: témoignage de Hamed Kazemi (en anglais)</h2><p><p><iframe width="640" height="360" frameborder="0" allowfullscreen="" src="//www.youtube.co',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': "<h2>Conditions d'admission</h2><p><!--[if gte mso 9]><xml>  <o:OfficeDocumentSettings>  <o:AllowPNG />  </o:OfficeDocumentSettings>  </xml><![endif]--",
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': "<h2>Langue d'enseignement</h2><p><p>Anglais, quelques cours optionnels en fran&ccedil;ais.</p> </p>", 'title': '', 'type': 'faq'},
+                                                        {'content__start': '<h2>Structure du programme</h2><p><p><a target="_blank" href="###file:/content/sites/master/files/pdfs/STI_MX_MA.pdf?uuid=default:d807e70e-4c64-499a-8',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Accréditations</h2><p><table width="200" cellspacing="1" cellpadding="1" border="1">  <tbody>   <tr>    <td style="text-align: center;"><a href="h',
+                                                         'title': '',
+                                                         'type': 'faq'}],
+                                              'language': 'fr',
+                                              'last_update': datetime.datetime(2016, 9, 5, 11, 11, 15),
+                                              'path': '/materiaux.html',
+                                              'sidebar__boxes': [{'content__start': '<p>En cas de questions sp&eacute;cifiques au sujet de ce programme, vous pouvez  vous adresser &agrave; la section Mat&eacute;riaux :</p> <div class="',
+                                                                  'title': 'Contact',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p style="text-align: center;"><a target="_blank" href="/files/brochures/STI_MX_MA.pdf?uuid=default:abb5bc5c-a6ca-449f-a81c-2251dcdbb32c"><img width="',
+                                                                  'title': 'Brochure à télécharger',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p><a href="http://phd.epfl.ch" target="_blank"><span class="fleche">phd.epfl.ch</span></a></p> ', 'title': 'Et le doctorat ?', 'type': 'text'},
+                                                                 {'content__start': '<p style="text-align: left;"><a target="_blank" href="http://www.youtube.com/EPFLstudents"><img width="25" height="25" alt="EPFL on YouTube" src="/fil',
+                                                                  'title': "Suivre l'EPFL",
+                                                                  'type': 'text'}],
+                                              'title': 'Science et Génie des Matériaux'}},
+                          'contents__keys': ['en', 'fr'],
+                          'level': 2,
+                          'pid': '95005',
+                          'template': 'simple'},
+                '95013': {'children__len': 0,
+                          'contents': {'en': {'boxes': [{'content__start': '<p><img width="640" height="147" alt="Master\'s in electrical engineering" src="/files/key-visuals/STI_EL.png?uuid=default:ca8c207a-2d3a-4a65-9e17-0214',
+                                                         'title': '',
+                                                         'type': 'text'},
+                                                        {'content__start': "<h2>The ability to dream, the power to create.</h2><p><p>The master's program in electrical and electronic engineering responds to the growing needs o",
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Video: Mina Bjelogrlic, testimonial</h2><p><p><iframe width="640" height="360" frameborder="0" allowfullscreen="" src="//www.youtube.com/embed/hhn',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': "<h2>Program's Objectives</h2><p><p>Three orientations are offered&thinsp;: Electronics and Microelectronics, Information Technologies and Power and En",
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Entry Requirements</h2><p><p>Candidates should have excellent academic records and a Bachelor&rsquo;s degree in electrical engineering, electronic',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Teaching Language</h2><p><p>English, some optional courses in French.</p> </p>', 'title': '', 'type': 'faq'},
+                                                        {'content__start': '<h2>Program\'s Structure</h2><p><p><a href="###file:/content/sites/master/files/pdfs/STI_EL_MA.pdf?uuid=default:9d08bbd0-998f-497f-bc48-1b89273121ce" t',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Accreditations</h2><p><table width="200" cellspacing="1" cellpadding="1" border="1">  <tbody>   <tr>    <td style="text-align: center;"><a target=',
+                                                         'title': '',
+                                                         'type': 'faq'}],
+                                              'language': 'en',
+                                              'last_update': datetime.datetime(2016, 2, 15, 14, 24, 58),
+                                              'path': '/electricalengineering.html',
+                                              'sidebar__boxes': [{'content__start': '<p>In case of specific questions about this program, please contact the Electrical Engineering section:</p> <div class="button mail"><a href="mailto:p',
+                                                                  'title': 'Contact',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p style="text-align: center;"><a target="_blank" onclick="_gaq.push([\'_trackEvent\', \'STI_EL_MA\', \'download\']);" href="/files/brochures/STI_EL_MA.pdf?',
+                                                                  'title': 'Download',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p><a href="http://phd.epfl.ch/home" target="_blank"><span class="fleche">phd.epfl.ch</span></a></p> ', 'title': 'Also interested in a PhD? ', 'type': 'text'},
+                                                                 {'content__start': '<p style="text-align: left;"><a target="_blank" href="http://www.youtube.com/EPFLstudents"><img width="25" height="25" alt="EPFL on YouTube" src="/fil',
+                                                                  'title': 'FOLLOW EPFL',
+                                                                  'type': 'text'}],
+                                              'title': 'Electrical and Electronic Engineering'},
+                                       'fr': {'boxes': [{'content__start': '<p><img width="640" height="147" alt="Master\'s in electrical engineering" src="/files/key-visuals/STI_EL.png?uuid=default:ca8c207a-2d3a-4a65-9e17-0214',
+                                                         'title': '',
+                                                         'type': 'text'},
+                                                        {'content__start': '<h2>La capacité de rêver, la puissance de créer.</h2><p><p>Ce master en g&eacute;nie &eacute;lectrique et &eacute;lectronique r&eacute;pond &agrave; d',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Vidéo (en anglais): témoignage de Mina Bjelogrlic</h2><p><p><iframe width="640" height="360" frameborder="0" allowfullscreen="" src="//www.youtube',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Objectifs du programme</h2><p><p>Ce programme propose trois grandes orientations:<strong> &eacute;lectronique et micro&eacute;lectronique, technol',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': "<h2>Conditions d'admission</h2><p><p>Les candidats doivent poss&eacute;der un certificat de Bachelor en &Eacute;lectricit&eacute;, &Eacute;lectronique",
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': "<h2>Langue d'enseignement</h2><p><p>Anglais, quelques cours optionnels en fran&ccedil;ais.</p> </p>", 'title': '', 'type': 'faq'},
+                                                        {'content__start': '<h2>Structure du programme</h2><p><p><a target="_blank" href="###file:/content/sites/master/files/pdfs/STI_EL_MA.pdf?uuid=default:9d08bbd0-998f-497f-b',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Accréditations</h2><p><table width="200" cellspacing="1" cellpadding="1" border="1">  <tbody>   <tr>    <td style="text-align: center;"><a target=',
+                                                         'title': '',
+                                                         'type': 'faq'}],
+                                              'language': 'fr',
+                                              'last_update': datetime.datetime(2016, 2, 15, 14, 24, 58),
+                                              'path': '/genie-electrique.html',
+                                              'sidebar__boxes': [{'content__start': '<p>En cas de questions sp&eacute;cifiques au sujet de ce programme, vous pouvez  vous adresser &agrave; la section G&eacute;nie &Eacute;lectrique et &',
+                                                                  'title': 'Contact',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p style="text-align: center;"><a target="_blank" onclick="_gaq.push([\'_trackEvent\', \'STI_EL_MA\', \'download\']);" href="/files/brochures/STI_EL_MA.pdf?',
+                                                                  'title': 'Brochure à télécharger',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p><a href="http://phd.epfl.ch" target="_blank"><span class="fleche">phd.epfl.ch</span></a></p> ', 'title': 'Et le doctorat ?', 'type': 'text'},
+                                                                 {'content__start': '<p style="text-align: left;"><a target="_blank" href="http://www.youtube.com/EPFLstudents"><img width="25" height="25" alt="EPFL on YouTube" src="/fil',
+                                                                  'title': "Suivre l'EPFL",
+                                                                  'type': 'text'}],
+                                              'title': 'Génie Électrique et Électronique'}},
+                          'contents__keys': ['en', 'fr'],
+                          'level': 2,
+                          'pid': '95013',
+                          'template': 'simple'},
+                '95030': {'children__len': 0,
+                          'contents': {'en': {'boxes': [{'content__start': '<p><img width="640" height="147" src="/files/key-visuals/IC_COM.png?uuid=default:cbe2800e-e1fd-4273-95ad-5444510e4eb3" alt="Master\'s in communication ',
+                                                         'title': '',
+                                                         'type': 'text'},
+                                                        {'content__start': "<h2>Creating a connected world</h2><p><p>The Master's Program in Communication Systems offers prospective candidates a unique education emphasizing th",
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': "<h2>Program's Objectives</h2><p><p>The internationally diverse faculty is composed of world-renowned visionaries in their fields. The research program",
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Video: presentation of the Communication Systems section</h2><p><iframe width="640" height="360" src="//www.youtube.com/embed/T0VT3EVIKog?rel=0" f',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Entry Requirements</h2><p><p><span lang="en">Candidates must have a certificate of Bachelor in  Computer Science from a recognized university , wi',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Teaching Language</h2><p><p>English</p> </p>', 'title': '', 'type': 'faq'},
+                                                        {'content__start': '<h2>Program\'s Structure</h2><p><p><a target="_blank" href="###file:/content/sites/master/files/pdfs/IC_COM_MA.pdf?uuid=default:7d435d98-05c2-44a6-ac59',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Accreditations</h2><p><table width="200" cellspacing="1" cellpadding="1" border="1">  <tbody>   <tr>    <td style="text-align: center;"><a target=',
+                                                         'title': '',
+                                                         'type': 'faq'}],
+                                              'language': 'en',
+                                              'last_update': datetime.datetime(2016, 4, 19, 16, 3, 45),
+                                              'path': '/communicationsystems.html',
+                                              'sidebar__boxes': [{'content__start': '<p>In case of specific questions about this program, please contact the Communication Systems section:</p> <div class="button mail"><a href="mailto:sy',
+                                                                  'title': 'Contact',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p style="text-align: center;"><a target="_blank" onclick="_gaq.push([\'_trackEvent\', \'IC_SYSCOM_MA\', \'download\']);" href="/files/brochures/IC_COM_MA.p',
+                                                                  'title': 'Download',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p><a href="http://phd.epfl.ch/home" target="_blank"><span class="fleche">phd.epfl.ch</span></a></p> ', 'title': 'Also interested in a PhD? ', 'type': 'text'},
+                                                                 {'content__start': '<p style="text-align: left;"><a target="_blank" href="http://www.youtube.com/EPFLstudents"><img width="25" height="25" alt="EPFL on YouTube" src="/fil',
+                                                                  'title': 'FOLLOW EPFL',
+                                                                  'type': 'text'}],
+                                              'title': 'Communication Systems'},
+                                       'fr': {'boxes': [{'content__start': '<p><img width="640" height="147" src="/files/key-visuals/IC_COM.png?uuid=default:cbe2800e-e1fd-4273-95ad-5444510e4eb3" alt="Master\'s in communication ',
+                                                         'title': '',
+                                                         'type': 'text'},
+                                                        {'content__start': '<h2>Créer un monde connecté.</h2><p><p>Le Master en Syst&egrave;mes de Communication propose au futur &eacute;tudiant une formation unique, ax&eacute;',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': "<h2>Objectifs du programme</h2><p><p>Nous disposons d'un corps enseignant international et vari&eacute;, compos&eacute; des sp&eacute;cialistes les pl",
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Vidéo: présentation de la section Systèmes de Communication</h2><p><iframe width="640" height="360" src="//www.youtube.com/embed/T0VT3EVIKog?rel=0',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': "<h2>Conditions d'admission</h2><p><p>Les candidats doivent poss&eacute;der un certificat de Bachelor en Informatique  d'une universit&eacute; reconnue",
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': "<h2>Langue d'enseignement</h2><p><p>Anglais</p> </p>", 'title': '', 'type': 'faq'},
+                                                        {'content__start': '<h2>Structure du programme</h2><p><p><a target="_blank" href="###file:/content/sites/master/files/pdfs/IC_COM_MA.pdf?uuid=default:7d435d98-05c2-44a6-a',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Accréditations</h2><p><table width="200" cellspacing="1" cellpadding="1" border="1">  <tbody>   <tr>    <td style="text-align: center;"><a target=',
+                                                         'title': '',
+                                                         'type': 'faq'}],
+                                              'language': 'fr',
+                                              'last_update': datetime.datetime(2016, 4, 19, 16, 3, 45),
+                                              'path': '/syscom.html',
+                                              'sidebar__boxes': [{'content__start': '<p>En cas de questions sp&eacute;cifiques au sujet de ce programme, vous pouvez  vous adresser &agrave; la section Informatique et Communication :</p>',
+                                                                  'title': 'Contact',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p style="text-align: center;"><a target="_blank" onclick="_gaq.push([\'_trackEvent\', \'IC_SYSCOM_MA\', \'download\']);" href="/files/brochures/IC_COM_MA.p',
+                                                                  'title': 'Brochure à télécharger',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p><a href="http://phd.epfl.ch" target="_blank"><span class="fleche">phd.epfl.ch</span></a></p> ', 'title': 'Et le doctorat ?', 'type': 'text'},
+                                                                 {'content__start': '<p style="text-align: left;"><a target="_blank" href="http://www.youtube.com/EPFLstudents"><img width="25" height="25" alt="EPFL on YouTube" src="/fil',
+                                                                  'title': "Suivre l'EPFL",
+                                                                  'type': 'text'}],
+                                              'title': 'Systèmes de Communication'}},
+                          'contents__keys': ['en', 'fr'],
+                          'level': 2,
+                          'pid': '95030',
+                          'template': 'simple'},
+                '95033': {'children__len': 0,
+                          'contents': {'en': {'boxes': [{'content__start': '<p><img width="640" height="147" alt="Master\'s in Computer science" src="/files/key-visuals/IC_INFO.png?uuid=default:e3176417-6f29-4e6e-8295-8b6c5420d',
+                                                         'title': '',
+                                                         'type': 'text'},
+                                                        {'content__start': "<h2>Ubiquitous Computing</h2><p><p>The Master's Program in Computer Science offers a unique choice of courses that covers all aspects of the disciplin",
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': "<h2>Program's Objectives</h2><p><p>This program will train excellent scientists who will become top professionals in their own specific domain and dri",
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Video: presentation of the Computer Science section</h2><p><iframe width="640" height="360" src="//www.youtube.com/embed/AziqdC3QBMI?rel=0" frameb',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Entry Requirements</h2><p><p><span lang="en">Candidates must have a certificate of Bachelor in Computer Science from a recognized university , wit',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Teaching Language</h2><p><p>English</p> </p>', 'title': '', 'type': 'faq'},
+                                                        {'content__start': '<h2>Program\'s Structure</h2><p><p><a target="_blank" href="###file:/content/sites/master/files/pdfs/IC_INFO_MA.pdf?uuid=default:afec3cae-b508-4017-bf1',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Accreditations</h2><p><table width="200" cellspacing="1" cellpadding="1" border="1">  <tbody>   <tr>    <td style="text-align: center;"><a target=',
+                                                         'title': '',
+                                                         'type': 'faq'}],
+                                              'language': 'en',
+                                              'last_update': datetime.datetime(2016, 9, 12, 15, 55, 49),
+                                              'path': '/computerscience.html',
+                                              'sidebar__boxes': [{'content__start': '<p>In case of specific questions about this program, please contact the Communication Systems section:</p> <div class="button mail"><a href="mailto:sy',
+                                                                  'title': 'Contact',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p style="text-align: center;"><a href="/files/brochures/IC_INFO_MA.pdf?uuid=default:7832962d-54ba-4111-9d08-00d4b4925d0e" onclick="_gaq.push([\'_track',
+                                                                  'title': 'Download',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p><a href="http://phd.epfl.ch/home" target="_blank"><span class="fleche">phd.epfl.ch</span></a></p> ', 'title': 'Also interested in a PhD? ', 'type': 'text'},
+                                                                 {'content__start': '<p style="text-align: left;"><a target="_blank" href="http://www.youtube.com/EPFLstudents"><img width="25" height="25" alt="EPFL on YouTube" src="/fil',
+                                                                  'title': 'FOLLOW EPFL',
+                                                                  'type': 'text'}],
+                                              'title': 'Computer Science'},
+                                       'fr': {'boxes': [{'content__start': '<p><img width="640" height="147" alt="Master\'s in Computer science" src="/files/key-visuals/IC_INFO.png?uuid=default:e3176417-6f29-4e6e-8295-8b6c5420d',
+                                                         'title': '',
+                                                         'type': 'text'},
+                                                        {'content__start': '<h2>Rester omniprésent.</h2><p><p>Le programme de Master en informatique offre un choix de cours unique englobant tous les aspects de cette discipline',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': "<h2>Objectifs du programme</h2><p><p>La section d'informatique s'est r&eacute;cemment renforc&eacute;e par l'arriv&eacute;e de  nouveaux professeurs d",
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Vidéo: présentation de la section Informatique</h2><p><iframe width="640" height="360" src="//www.youtube.com/embed/AziqdC3QBMI?rel=0" frameborder',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': "<h2>Conditions d'admission</h2><p><!--[if gte mso 9]><xml>  <o:OfficeDocumentSettings>  <o:AllowPNG />  </o:OfficeDocumentSettings>  </xml><![endif]--",
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': "<h2>Langue d'enseignement</h2><p><p>Anglais</p> </p>", 'title': '', 'type': 'faq'},
+                                                        {'content__start': '<h2>Structure du programme</h2><p><p><a target="_blank" href="###file:/content/sites/master/files/pdfs/IC_INFO_MA.pdf?uuid=default:afec3cae-b508-4017-',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Accréditations</h2><p><table width="200" cellspacing="1" cellpadding="1" border="1">  <tbody>   <tr>    <td style="text-align: center;"><a target=',
+                                                         'title': '',
+                                                         'type': 'faq'}],
+                                              'language': 'fr',
+                                              'last_update': datetime.datetime(2016, 9, 12, 15, 55, 49),
+                                              'path': '/informatique.html',
+                                              'sidebar__boxes': [{'content__start': '<p>En cas de questions sp&eacute;cifiques au sujet de ce programme, vous pouvez  vous adresser &agrave; la section Informatique et Communication :</p>',
+                                                                  'title': 'Contact',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p style="text-align: center;"><a href="/files/brochures/IC_INFO_MA.pdf?uuid=default:7832962d-54ba-4111-9d08-00d4b4925d0e" onclick="_gaq.push([\'_track',
+                                                                  'title': 'Brochure à télécharger',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p><a href="http://phd.epfl.ch" target="_blank"><span class="fleche">phd.epfl.ch</span></a></p> ', 'title': 'Et le doctorat ?', 'type': 'text'},
+                                                                 {'content__start': '<p style="text-align: left;"><a target="_blank" href="http://www.youtube.com/EPFLstudents"><img width="25" height="25" alt="EPFL on YouTube" src="/fil',
+                                                                  'title': "Suivre l'EPFL",
+                                                                  'type': 'text'}],
+                                              'title': 'Informatique'}},
+                          'contents__keys': ['en', 'fr'],
+                          'level': 2,
+                          'pid': '95033',
+                          'template': 'simple'},
+                '95037': {'children__len': 0,
+                          'contents': {'en': {'boxes': [{'content__start': '<p><img width="640" height="147" alt="Master\'s in Life Sciences and technology" src="/files/key-visuals/SV_LST.png?uuid=default:69e35331-470d-4506-844',
+                                                         'title': '',
+                                                         'type': 'text'},
+                                                        {'content__start': '<h2>Where Life Sciences meet with Technology</h2><p><p>The Master of Science in Life Sciences and Technology focuses on important aspects of current b',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Video: Nils Rettby, testimonial</h2><p><iframe width="640" height="360" src="//www.youtube.com/embed/dQunFldEWww?rel=0" frameborder="0" allowfulls',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': "<h2>Program's Objectives</h2><p><p>Neurosciences and molecular medicine courses deepen the knowledge acquired during the bachelor such as the understa",
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Video: Julie, about the program in Life Sciences and Technology</h2><p><iframe width="640" height="360" src="//www.youtube.com/embed/c7A4xLV-HtA?r',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Entry Requirements</h2><p><p>Candidates should have a Bachelor&rsquo;s degree from a reputable university and excellent academic records. The curr',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Teaching Language</h2><p><p>English</p> </p>', 'title': '', 'type': 'faq'},
+                                                        {'content__start': '<h2>Program\'s Structure</h2><p><p><a href="###file:/content/sites/master/files/pdfs/SV_LST_MA.pdf?uuid=default:5fc1586c-560b-4203-be76-fb86e03ef18d" t',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Accreditations</h2><p><table width="200" cellspacing="1" cellpadding="1" border="1">  <tbody>   <tr>    <td style="text-align: center;"><a target=',
+                                                         'title': '',
+                                                         'type': 'faq'}],
+                                              'language': 'en',
+                                              'last_update': datetime.datetime(2016, 2, 15, 14, 57, 34),
+                                              'path': '/lifesciences.html',
+                                              'sidebar__boxes': [{'content__start': '<p>In case of specific questions about this program, please contact the Life Sciences and Technology section:</p> <div class="button mail"><a href="ma',
+                                                                  'title': 'Contact',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p><a href="http://phd.epfl.ch/home" target="_blank"><span class="fleche">phd.epfl.ch</span></a></p> ', 'title': 'Also interested in a PhD? ', 'type': 'text'},
+                                                                 {'content__start': '<p style="text-align: left;"><a target="_blank" href="http://www.youtube.com/EPFLstudents"><img width="25" height="25" alt="EPFL on YouTube" src="/fil',
+                                                                  'title': 'FOLLOW EPFL',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p style="text-align: center;"><a target="_blank" onclick="_gaq.push([\'_trackEvent\', \'SV_LST_MA\', \'download\']);" href="/files/brochures/SV_LST_MA.pdf?',
+                                                                  'title': 'Download',
+                                                                  'type': 'text'}],
+                                              'title': 'Life Sciences and Technology'},
+                                       'fr': {'boxes': [{'content__start': '<p><img width="640" height="147" alt="Master\'s in Life Sciences and technology" src="/files/key-visuals/SV_LST.png?uuid=default:69e35331-470d-4506-844',
+                                                         'title': '',
+                                                         'type': 'text'},
+                                                        {'content__start': "<h2>Où les Sciences de la Vie rencontrent la Technologie.</h2><p><p>L'avenir de la recherche biom&eacute;dicale se trouve &agrave; la fronti&egrave;re",
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Vidéo (en anglais): témoignage de Nils Rettby</h2><p><iframe width="640" height="360" src="//www.youtube.com/embed/dQunFldEWww?rel=0" frameborder=',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': "<h2>Objectifs du programme</h2><p><p>Le Master en Sciences et technologies du vivant de l'EPFL a pour but de former de jeunes scientifiques capables d",
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Vidéo (en anglais): Julie, au sujet du master en Sciences etTechnologies du Vivant</h2><p><iframe width="640" height="360" src="//www.youtube.com/',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': "<h2>Conditions d'admission</h2><p><p>Pour &ecirc;tre admis, les candidats devront &ecirc;tre titulaires d'un dipl&ocirc;me de  Bachelor d'une universi",
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': "<h2>Langue d'enseignement</h2><p><p>Anglais</p> </p>", 'title': '', 'type': 'faq'},
+                                                        {'content__start': '<h2>Structure du programme</h2><p><p><a href="###file:/content/sites/master/files/pdfs/SV_LST_MA.pdf?uuid=default:5fc1586c-560b-4203-be76-fb86e03ef18d',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Accréditations</h2><p><table width="200" cellspacing="1" cellpadding="1" border="1">  <tbody>   <tr>    <td style="text-align: center;"><a target=',
+                                                         'title': '',
+                                                         'type': 'faq'}],
+                                              'language': 'fr',
+                                              'last_update': datetime.datetime(2016, 2, 15, 14, 57, 34),
+                                              'path': '/sciences-technologies-vivant.html',
+                                              'sidebar__boxes': [{'content__start': '<p>En cas de questions sp&eacute;cifiques au sujet de ce programme, vous pouvez  vous adresser &agrave; la section Sciences et Technologies du Vivant ',
+                                                                  'title': 'Contact',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p><a href="http://phd.epfl.ch" target="_blank"><span class="fleche">phd.epfl.ch</span></a></p> ', 'title': 'Et le doctorat ?', 'type': 'text'},
+                                                                 {'content__start': '<p style="text-align: left;"><a target="_blank" href="http://www.youtube.com/EPFLstudents"><img width="25" height="25" alt="EPFL on YouTube" src="/fil',
+                                                                  'title': "Suivre l'EPFL",
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p style="text-align: center;"><a target="_blank" onclick="_gaq.push([\'_trackEvent\', \'SV_LST_MA\', \'download\']);" href="/files/brochures/SV_LST_MA.pdf?',
+                                                                  'title': 'Télécharger',
+                                                                  'type': 'text'}],
+                                              'title': 'Sciences et Technologies du Vivant'}},
+                          'contents__keys': ['en', 'fr'],
+                          'level': 2,
+                          'pid': '95037',
+                          'template': 'simple'},
+                '95040': {'children__len': 0,
+                          'contents': {'en': {'boxes': [{'content__start': '<p><img width="640" height="147" src="/files/key-visuals/SV_BE.png?uuid=default:32799c9e-a3aa-42c8-842e-476f920a7285" alt="Master\'s in Bioengineering"',
+                                                         'title': '',
+                                                         'type': 'text'},
+                                                        {'content__start': '<h2>Engineering solutions for life</h2><p><p>Training in the Master of Science in Bioengineering focuses on research and development of technologies a',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Video: Stéphanie Martin, testimonial</h2><p><iframe width="640" height="360" src="//www.youtube.com/embed/OMTTlhiLUa4?rel=0" frameborder="0" allow',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': "<h2>Program's Objectives</h2><p><p>Specializations of bioengineering include the disciplines of <strong>mechanics of </strong><strong>biological syste",
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Entry Requirements</h2><p><p>Candidates should have a Bachelor&rsquo;s degree from a reputable university and excellent academic records. The curr',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Teaching Language</h2><p><p>English</p> </p>', 'title': '', 'type': 'faq'},
+                                                        {'content__start': '<h2>Video: Solange Richter, testimonial</h2><p><iframe width="640" height="360" src="//www.youtube.com/embed/IMMAX3mJpOA?rel=0" frameborder="0" allowf',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Program\'s Structure</h2><p><p><a target="_blank" href="###file:/content/sites/master/files/pdfs/SV_BE_MA_RV.pdf?uuid=default:79222c16-ef21-4fff-a8',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Accreditations</h2><p><table width="200" cellspacing="1" cellpadding="1" border="1">  <tbody>   <tr>    <td style="text-align: center;"><a href="h',
+                                                         'title': '',
+                                                         'type': 'faq'}],
+                                              'language': 'en',
+                                              'last_update': datetime.datetime(2016, 9, 12, 16, 40, 36),
+                                              'path': '/bioengineering.html',
+                                              'sidebar__boxes': [{'content__start': '<p>In case of specific questions about this program, please contact the Life Sciences and Technology section:</p> <div class="button mail"><a href="ma',
+                                                                  'title': 'Contact',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p><a href="http://phd.epfl.ch/home" target="_blank"><span class="fleche">phd.epfl.ch</span></a></p> ', 'title': 'Also interested in a PhD? ', 'type': 'text'},
+                                                                 {'content__start': '<p style="text-align: left;"><a target="_blank" href="http://www.youtube.com/EPFLstudents"><img width="25" height="25" alt="EPFL on YouTube" src="/fil',
+                                                                  'title': 'FOLLOW EPFL',
+                                                                  'type': 'text'}],
+                                              'title': 'Bioengineering'},
+                                       'fr': {'boxes': [{'content__start': '<p><img width="640" height="147" src="/files/key-visuals/SV_BE.png?uuid=default:32799c9e-a3aa-42c8-842e-476f920a7285" alt="Master\'s in Bioengineering"',
+                                                         'title': '',
+                                                         'type': 'text'},
+                                                        {'content__start': "<h2>Des solutions d'ingénieur pour la vie.</h2><p><p>Ce master en Bioing&eacute;nierie se concentre sur la recherche et d&eacute;veloppement de techno",
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Vidéo (en anglais): témoignage de Stéphanie Martin</h2><p><iframe width="640" height="360" src="//www.youtube.com/embed/OMTTlhiLUa4?rel=0" framebo',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Objectifs du programme</h2><p><p>Les sp&eacute;cialisations de la Bioing&eacute;nierie incluent les disciplines de <strong>M&eacute;canique des Sy',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': "<h2>Conditions d'admission</h2><p><p>Pour &ecirc;tre admis, les candidats devront &ecirc;tre titulaires d'un dipl&ocirc;me de  Bachelor d'une universi",
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': "<h2>Langue d'enseignement</h2><p><p>Anglais</p> </p>", 'title': '', 'type': 'faq'},
+                                                        {'content__start': '<h2>Vidéo (en anglais): témoignage de Solange Richter</h2><p><iframe width="640" height="360" src="//www.youtube.com/embed/IMMAX3mJpOA?rel=0" framebor',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Structure du programme</h2><p><p><a target="_blank" href="###file:/content/sites/master/files/pdfs/SV_BE_MA_RV.pdf?uuid=default:79222c16-ef21-4fff',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Accréditations</h2><p><table width="200" cellspacing="1" cellpadding="1" border="1">  <tbody>   <tr>    <td style="text-align: center;"><a href="h',
+                                                         'title': '',
+                                                         'type': 'faq'}],
+                                              'language': 'fr',
+                                              'last_update': datetime.datetime(2016, 9, 12, 16, 40, 36),
+                                              'path': '/bioingenierie.html',
+                                              'sidebar__boxes': [{'content__start': '<p>En cas de questions sp&eacute;cifiques au sujet de ce programme, vous pouvez  vous adresser &agrave; la section Sciences et Technologies du Vivant ',
+                                                                  'title': 'Contact',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p><a href="http://phd.epfl.ch" target="_blank"><span class="fleche">phd.epfl.ch</span></a></p> ', 'title': 'Et le doctorat ?', 'type': 'text'},
+                                                                 {'content__start': '<p style="text-align: left;"><a target="_blank" href="http://www.youtube.com/EPFLstudents"><img width="25" height="25" alt="EPFL on YouTube" src="/fil',
+                                                                  'title': "Suivre l'EPFL",
+                                                                  'type': 'text'}],
+                                              'title': 'Bioingénierie'}},
+                          'contents__keys': ['en', 'fr'],
+                          'level': 2,
+                          'pid': '95040',
+                          'template': 'simple'},
+                '95042': {'children__len': 0,
+                          'contents': {'en': {'boxes': [{'content__start': '<p><img width="640" height="147" alt="Master\'s in Management of technology" src="/files/key-visuals/CDM_MTE.png?uuid=default:bec7c423-d118-4f73-9d8c-9',
+                                                         'title': '',
+                                                         'type': 'text'},
+                                                        {'content__start': "<h2>Connecting knowledge</h2><p><p>To meet today's business challenges successfully, professionals must be able to bridge the worlds of technology and",
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Video: Adrian Cachinero Vasiljevic, testimonial</h2><p><p><iframe width="640" height="360" frameborder="0" src="//www.youtube.com/embed/fSih0mcrdF',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': "<h2>Program's Objectives</h2><p><p>The Master in Management, Technology and Entrepreneurship is a new and exciting curriculum for scientists and engin",
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Entry Requirements</h2><p><p>Candidates should have a Bachelor&rsquo;s degree in engineering or natural sciences from a reputable university with ',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Teaching Language</h2><p><p>English</p> </p>', 'title': '', 'type': 'faq'},
+                                                        {'content__start': '<h2>Program\'s Structure</h2><p><p><a href="###file:/content/sites/master/files/pdfs/CDM_MTE_MA.pdf?uuid=default:a4f7afa5-ce1f-409d-9a17-551c55028fd4" ',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Video: Gayatri Kondepudi, testimonial</h2><p><iframe width="640" height="360" src="//www.youtube.com/embed/YrkdKVKKzXQ?rel=0" frameborder="0" allo',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Accreditations</h2><p><table width="200" cellspacing="1" cellpadding="1" border="1">  <tbody>   <tr>    <td style="text-align: center;"><a target=',
+                                                         'title': '',
+                                                         'type': 'faq'}],
+                                              'language': 'en',
+                                              'last_update': datetime.datetime(2016, 2, 25, 10, 49, 19),
+                                              'path': '/management.html',
+                                              'sidebar__boxes': [{'content__start': '<p>In case of specific questions about this program, please contact the Management of Technology Institute:</p> <div class="button mail"><a href="mail',
+                                                                  'title': 'Contact',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p style="text-align: center;"><a target="_blank" onclick="_gaq.push([\'_trackEvent\', \'CDM_MTE_MA\', \'download\']);" href="/files/brochures/CDM_MTE_MA.pd',
+                                                                  'title': 'Download',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p><a href="http://phd.epfl.ch/home" target="_blank"><span class="fleche">phd.epfl.ch</span></a></p> ', 'title': 'Also interested in a PhD? ', 'type': 'text'},
+                                                                 {'content__start': '<p style="text-align: left;"><a target="_blank" href="http://www.youtube.com/EPFLstudents"><img width="25" height="25" alt="EPFL on YouTube" src="/fil',
+                                                                  'title': 'FOLLOW EPFL',
+                                                                  'type': 'text'}],
+                                              'title': 'Management, technology and entrepreneurship'},
+                                       'fr': {'boxes': [{'content__start': '<p><img width="640" height="147" alt="Master\'s in Management of technology" src="/files/key-visuals/CDM_MTE.png?uuid=default:bec7c423-d118-4f73-9d8c-9',
+                                                         'title': '',
+                                                         'type': 'text'},
+                                                        {'content__start': '<h2>Connecter les savoirs.</h2><p><p>Pour r&eacute;pondre aux nouveaux besoins de notre &eacute;conomie, des professionnels doivent &ecirc;tre capable',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Vidéo (en anglais): témoignage d\'Adrian Cachinero Vasiljevic</h2><p><p><iframe width="640" height="360" frameborder="0" src="//www.youtube.com/emb',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': "<h2>Objectifs du programme</h2><p><p>Il s'agit d'un programme unique en Europe offrant une formation de base  en strat&eacute;gie, finance, comptabili",
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': "<h2>Conditions d'admission</h2><p><p>Pour &ecirc;tre admis, les candidats doivent &ecirc;tre titulaires d'un Bachelor en Ing&eacute;nierie ou en Scien",
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': "<h2>Langue d'enseignement</h2><p><p>Anglais</p> </p>", 'title': '', 'type': 'faq'},
+                                                        {'content__start': '<h2>Structure du programme</h2><p><p><a href="###file:/content/sites/master/files/pdfs/CDM_MTE_MA.pdf?uuid=default:a4f7afa5-ce1f-409d-9a17-551c55028fd',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Vidéo (en anglais): témoignage de Gayatri Kondepudi</h2><p><iframe width="640" height="360" src="//www.youtube.com/embed/YrkdKVKKzXQ?rel=0" frameb',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Accréditations</h2><p><table width="200" cellspacing="1" cellpadding="1" border="1">  <tbody>   <tr>    <td style="text-align: center;"><a target=',
+                                                         'title': '',
+                                                         'type': 'faq'}],
+                                              'language': 'fr',
+                                              'last_update': datetime.datetime(2016, 2, 25, 10, 49, 19),
+                                              'path': '/gestion.html',
+                                              'sidebar__boxes': [{'content__start': "<p>En cas de questions sp&eacute;cifiques au sujet de ce programme, vous pouvez  vous adresser &agrave; l'institut de Management de la Technologie :</",
+                                                                  'title': 'Contact',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p style="text-align: center;"><a target="_blank" onclick="_gaq.push([\'_trackEvent\', \'CDM_MTE_MA\', \'download\']);" href="/files/brochures/CDM_MTE_MA.pd',
+                                                                  'title': 'Brochure à télécharger',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p><a href="http://phd.epfl.ch" target="_blank"><span class="fleche">phd.epfl.ch</span></a></p> ', 'title': 'Et le doctorat ?', 'type': 'text'},
+                                                                 {'content__start': '<p style="text-align: left;"><a target="_blank" href="http://www.youtube.com/EPFLstudents"><img width="25" height="25" alt="EPFL on YouTube" src="/fil',
+                                                                  'title': "Suivre l'EPFL",
+                                                                  'type': 'text'}],
+                                              'title': 'Management, technologie et entrepreneuriat'}},
+                          'contents__keys': ['en', 'fr'],
+                          'level': 2,
+                          'pid': '95042',
+                          'template': 'simple'},
+                '95046': {'children__len': 0,
+                          'contents': {'en': {'boxes': [{'content__start': '<p><img width="640" height="147" alt="Master\'s in Financial Engineering" src="/files/key-visuals/CDM_FE.png?uuid=default:cbaa9111-acbf-48ef-9680-713b3',
+                                                         'title': '',
+                                                         'type': 'text'},
+                                                        {'content__start': '<h2>Finance and Innovation</h2><p><p>Over the past decade the financial industry has become increasingly complex and volatile. Specialists with a soli',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': "<h2>Program's Objectives</h2><p><p>The Master&rsquo;s program in Financial Engineering (MFE) provides financial education at the forefront of both aca",
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Entry Requirements</h2><p><p>Holders of a Bachelor&rsquo;s degree in a technical discipline such as mathematics, physics, computer science, engine',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Teaching Language</h2><p><p>English</p> </p>', 'title': '', 'type': 'faq'},
+                                                        {'content__start': '<h2>Program\'s Structure</h2><p><p><a href="###file:/content/sites/master/files/pdfs/CDM_FE_MA.pdf?uuid=default:47f4bf90-4a47-489e-9a51-8d1630f0fe3b" t',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Accreditations</h2><p><table width="200" cellspacing="1" cellpadding="1" border="1">  <tbody>   <tr>    <td style="text-align: center;"><a target=',
+                                                         'title': '',
+                                                         'type': 'faq'}],
+                                              'language': 'en',
+                                              'last_update': datetime.datetime(2016, 2, 25, 10, 56, 15),
+                                              'path': '/financial.html',
+                                              'sidebar__boxes': [{'content__start': '<p>In case of specific questions about this program, please contact the Swiss Finance Institute:</p> <div class="button mail"><a href="mailto:julien.h',
+                                                                  'title': 'Contact',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p style="text-align: center;"><a target="_blank" onclick="_gaq.push([\'_trackEvent\', \'CDM_FE_MA\', \'download\']);" href="/files/brochures/CDM_FE_MA.pdf?',
+                                                                  'title': 'Download',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p><a href="http://phd.epfl.ch/home" target="_blank"><span class="fleche">phd.epfl.ch</span></a></p> ', 'title': 'Also interested in a PhD? ', 'type': 'text'},
+                                                                 {'content__start': '<p style="text-align: left;"><a target="_blank" href="http://www.youtube.com/EPFLstudents"><img width="25" height="25" alt="EPFL on YouTube" src="/fil',
+                                                                  'title': 'FOLLOW EPFL',
+                                                                  'type': 'text'}],
+                                              'title': 'Financial Engineering'},
+                                       'fr': {'boxes': [{'content__start': '<p><img width="640" height="147" alt="Master\'s in Financial Engineering" src="/files/key-visuals/CDM_FE.png?uuid=default:cbaa9111-acbf-48ef-9680-713b3',
+                                                         'title': '',
+                                                         'type': 'text'},
+                                                        {'content__start': '<h2>Finance et Innovation</h2><p><p>Durant les dix derni&egrave;res ann&eacute;es, le monde de la finance est devenu de plus en plus complexe et volat',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Objectifs du programme</h2><p><p>Ce programme propose une formation financi&egrave;re &agrave; la pointe de la pens&eacute;e acad&eacute;mique et ',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': "<h2>Conditions d'admission</h2><p><p>Peuvent se porter candidats &agrave; ce programme les dipl&ocirc;m&eacute;s de Bachelor d'une discipline techniqu",
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': "<h2>Langue d'enseignement</h2><p><p>Anglais</p> </p>", 'title': '', 'type': 'faq'},
+                                                        {'content__start': '<h2>Structure du programme</h2><p><p><a href="###file:/content/sites/master/files/pdfs/CDM_FE_MA.pdf?uuid=default:47f4bf90-4a47-489e-9a51-8d1630f0fe3b',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Accréditations</h2><p><table width="200" cellspacing="1" cellpadding="1" border="1">  <tbody>   <tr>    <td style="text-align: center;"><a target=',
+                                                         'title': '',
+                                                         'type': 'faq'}],
+                                              'language': 'fr',
+                                              'last_update': datetime.datetime(2016, 2, 25, 10, 56, 15),
+                                              'path': '/finance.html',
+                                              'sidebar__boxes': [{'content__start': '<p>En cas de questions sp&eacute;cifiques au sujet de ce programme, vous pouvez  vous adresser au Swiss Finance Institute :</p> <div class="button mai',
+                                                                  'title': 'Contact',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p style="text-align: center;"><a target="_blank" onclick="_gaq.push([\'_trackEvent\', \'CDM_FE_MA\', \'download\']);" href="/files/brochures/CDM_FE_MA.pdf?',
+                                                                  'title': 'Brochure à télécharger',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p><a href="http://phd.epfl.ch" target="_blank"><span class="fleche">phd.epfl.ch</span></a></p> ', 'title': 'Et le doctorat ?', 'type': 'text'},
+                                                                 {'content__start': '<p style="text-align: left;"><a target="_blank" href="http://www.youtube.com/EPFLstudents"><img width="25" height="25" alt="EPFL on YouTube" src="/fil',
+                                                                  'title': "Suivre l'EPFL",
+                                                                  'type': 'text'}],
+                                              'title': 'Ingénierie Financière'}},
+                          'contents__keys': ['en', 'fr'],
+                          'level': 2,
+                          'pid': '95046',
+                          'template': 'simple'},
+                '95060': {'children__len': 0,
+                          'contents': {'en': {'boxes': [{'content__start': '<p><img width="640" height="147" alt="Master\'s in energy management" src="/files/key-visuals/STI_MES.png?uuid=default:833e71ca-260b-4a36-b540-a5845cfa',
+                                                         'title': '',
+                                                         'type': 'text'},
+                                                        {'content__start': '<h2>The future is sustainable.</h2><p><p>The degree in Energy Management and Sustainability (MES) is an interdisciplinary program built to provide wor',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Video: program\'s presentation</h2><p><iframe width="640" height="480" src="//www.youtube.com/embed/qb_CQYt96ew?rel=0" frameborder="0" allowfullscr',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': "<h2>Program's Objectives</h2><p><p>This project-focused curriculum has been created, built on scientific rigor and professional practice, to provide a",
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Entry Requirements</h2><p><p>Holders of a Bachelor&rsquo;s degree in a engineering discipline such as Mechanics, Physics, Electrical Engineering, ',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Teaching Language</h2><p><p>English</p> </p>', 'title': '', 'type': 'faq'},
+                                                        {'content__start': '<h2>Program\'s Structure</h2><p><p><a target="_blank" href="###file:/content/sites/master/files/pdfs/STI_MES_MA.pdf?uuid=default:5993116e-d9d2-4030-a28',
+                                                         'title': '',
+                                                         'type': 'faq'}],
+                                              'language': 'en',
+                                              'last_update': datetime.datetime(2016, 2, 15, 14, 43, 14),
+                                              'path': '/mes.html',
+                                              'sidebar__boxes': [{'content__start': '<p>In case of specific questions about this program, please contact EPFL Middle East:</p> <div class="button mail"><a href="mailto:suzanne.buffat@epfl',
+                                                                  'title': 'Contact',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p style="text-align: center;"><a target="_blank" onclick="_gaq.push([\'_trackEvent\', \'STI_MES_MA\', \'download\']);" href="/files/brochures/STI_MES_MA.pd',
+                                                                  'title': 'Download',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p><a href="http://phd.epfl.ch/home" target="_blank"><span class="fleche">phd.epfl.ch</span></a></p> ', 'title': 'Also interested in a PhD? ', 'type': 'text'},
+                                                                 {'content__start': '<p style="text-align: left;"><a href="http://www.youtube.com/EPFLstudents" target="_blank"><img width="25" height="25" alt="EPFL on YouTube" src="/fil',
+                                                                  'title': 'FOLLOW EPFL',
+                                                                  'type': 'text'}],
+                                              'title': 'Energy Management and Sustainability'},
+                                       'fr': {'boxes': [{'content__start': '<p><img width="640" height="147" alt="Master\'s in energy management" src="/files/key-visuals/STI_MES.png?uuid=default:833e71ca-260b-4a36-b540-a5845cfa',
+                                                         'title': '',
+                                                         'type': 'text'},
+                                                        {'content__start': "<h2>Futur et durabilité</h2><p><p>Le programme en gestion de l'&eacute;nergie et durabilit&eacute; est un cursus interdisciplinaire cr&eacute;&eacute;",
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Vidéo: présentation du programme (en anglais)</h2><p><iframe width="640" height="480" src="//www.youtube.com/embed/qb_CQYt96ew?rel=0" frameborder=',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Objectifs du programme</h2><p><p>Ce programme, orient&eacute; &quot;projets&quot;, a &eacute;t&eacute; cr&eacute;&eacute; pour offrir une formatio',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': "<h2>Conditions d'admission</h2><p><p>Peuvent se porter candidats &agrave; ce programme les dipl&ocirc;m&eacute;s de Bachelor d'une discipline techniqu",
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': "<h2>Langue d'enseignement</h2><p><p>Anglais</p> </p>", 'title': '', 'type': 'faq'},
+                                                        {'content__start': '<h2>Structure du programme</h2><p><p><a target="_blank" href="###file:/content/sites/master/files/pdfs/STI_MES_MA.pdf?uuid=default:5993116e-d9d2-4030-',
+                                                         'title': '',
+                                                         'type': 'faq'}],
+                                              'language': 'fr',
+                                              'last_update': datetime.datetime(2016, 2, 15, 14, 43, 14),
+                                              'path': '/energie.html',
+                                              'sidebar__boxes': [{'content__start': '<p>En cas de questions sp&eacute;cifiques au sujet de ce programme, vous pouvez  vous adresser &agrave; EPFL Middle East :</p> <div class="button mail',
+                                                                  'title': 'Contact',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p style="text-align: center;"><a target="_blank" onclick="_gaq.push([\'_trackEvent\', \'STI_MES_MA\', \'download\']);" href="/files/brochures/STI_MES_MA.pd',
+                                                                  'title': 'Brochure à télécharger',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p><a href="http://phd.epfl.ch" target="_blank"><span class="fleche">phd.epfl.ch</span></a></p> ', 'title': 'Et le doctorat ?', 'type': 'text'},
+                                                                 {'content__start': '<p style="text-align: left;"><a target="_blank" href="http://www.youtube.com/EPFLstudents"><img width="25" height="25" alt="EPFL on YouTube" src="/fil',
+                                                                  'title': "Suivre l'EPFL",
+                                                                  'type': 'text'}],
+                                              'title': "Gestion de l'énergie et durabilité"}},
+                          'contents__keys': ['en', 'fr'],
+                          'level': 2,
+                          'pid': '95060',
+                          'template': 'simple'},
+                '95075': {'children__len': 0,
+                          'contents': {'en': {'boxes': [{'content__start': '<p><img width="640" height="147" src="/files/key-visuals/SB_MATH.png?uuid=default:d65f9e61-fea9-4c99-aa57-6f44a52bba91" alt="Master\'s in Mathematics" ',
+                                                         'title': '',
+                                                         'type': 'text'},
+                                                        {'content__start': '<h2>Master of Science in Mathematics, 90 ECTS</h2><p><p>EPFL is a leading center for mathematical education and research. It compromises three institu',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': "<h2>Program's Objectives</h2><p><p>The level and variety of subjects studied provide mathematicians with an excellent command of fundamental mathemati",
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Entry Requirements</h2><p><p>  <!--[if gte mso 9]><xml>   <o:OfficeDocumentSettings>   <o:AllowPNG />   </o:OfficeDocumentSettings>   </xml><![end',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Teaching Language</h2><p><p>English, with a few optional courses in French.</p> </p>', 'title': '', 'type': 'faq'},
+                                                        {'content__start': '<h2>Program\'s Structure</h2><p><p><a href="###file:/content/sites/master/files/pdfs/SB_MATH_MA_RV.pdf?uuid=default:6c4d4a90-0f89-4833-90ab-de690c29283',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Accreditations</h2><p><table width="200" cellspacing="1" cellpadding="1" border="1">  <tbody>   <tr>    <td style="text-align: center;">&nbsp;</td',
+                                                         'title': '',
+                                                         'type': 'faq'}],
+                                              'language': 'en',
+                                              'last_update': datetime.datetime(2016, 9, 12, 16, 25, 29),
+                                              'path': '/maths.html',
+                                              'sidebar__boxes': [{'content__start': '<p>In case of specific questions about this program, please contact the Mathematics section:</p> <div class="button mail"><a href="mailto:simone.depar',
+                                                                  'title': 'Contact',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p><a href="http://phd.epfl.ch/home" target="_blank"><span class="fleche">phd.epfl.ch</span></a></p> ', 'title': 'Also interested in a PhD? ', 'type': 'text'},
+                                                                 {'content__start': '<p style="text-align: left;"><a target="_blank" href="http://www.youtube.com/EPFLstudents"><img width="25" height="25" alt="EPFL on YouTube" src="/fil',
+                                                                  'title': 'FOLLOW EPFL',
+                                                                  'type': 'text'}],
+                                              'title': 'Mathematics'},
+                                       'fr': {'boxes': [{'content__start': '<p><img width="640" height="147" src="/files/key-visuals/SB_MATH.png?uuid=default:d65f9e61-fea9-4c99-aa57-6f44a52bba91" alt="Master\'s in Mathematics" ',
+                                                         'title': '',
+                                                         'type': 'text'},
+                                                        {'content__start': "<h2>Master en Mathématiques, 90 ECTS</h2><p><p>L'EPFL est l'un des principaux centres d'enseignement et de recherche  dans le domaine des math&eacute;",
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': "<h2>Objectifs du programme</h2><p><p>Le Master en Math&eacute;matiques fournit un haut niveau d'&eacute;ducation, orient&eacute; soit vers les <strong",
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': "<h2>Conditions d'admission</h2><p><p>  <!--[if gte mso 9]><xml>   <o:OfficeDocumentSettings>   <o:AllowPNG />   </o:OfficeDocumentSettings>   </xml><!",
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': "<h2>Langue d'enseignement</h2><p><p>Anglais. Quelques cours optionnels en fran&ccedil;ais.</p> </p>", 'title': '', 'type': 'faq'},
+                                                        {'content__start': '<h2>Structure du programme</h2><p><p><a href="###file:/content/sites/master/files/pdfs/SB_MATH_MA_RV.pdf?uuid=default:6c4d4a90-0f89-4833-90ab-de690c29',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Accréditations</h2><p><table width="200" cellspacing="1" cellpadding="1" border="1">  <tbody>   <tr>    <td style="text-align: center;">&nbsp;</td',
+                                                         'title': '',
+                                                         'type': 'faq'}],
+                                              'language': 'fr',
+                                              'last_update': datetime.datetime(2016, 9, 12, 16, 25, 29),
+                                              'path': '/mathematiques.html',
+                                              'sidebar__boxes': [{'content__start': '<p>En cas de questions sp&eacute;cifiques au sujet de ce programme, vous pouvez  vous adresser &agrave; la section Math&eacute;matiques :</p> <div cla',
+                                                                  'title': 'Contact',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p><a href="http://phd.epfl.ch" target="_blank"><span class="fleche">phd.epfl.ch</span></a></p> ', 'title': 'Et le doctorat ?', 'type': 'text'},
+                                                                 {'content__start': '<p style="text-align: left;"><a target="_blank" href="http://www.youtube.com/EPFLstudents"><img width="25" height="25" alt="EPFL on YouTube" src="/fil',
+                                                                  'title': "Suivre l'EPFL",
+                                                                  'type': 'text'}],
+                                              'title': 'Mathématiques'}},
+                          'contents__keys': ['en', 'fr'],
+                          'level': 2,
+                          'pid': '95075',
+                          'template': 'simple'},
+                '95076': {'children__len': 0,
+                          'contents': {'en': {'boxes': [{'content__start': '<h2>Master of Science in Applied Mathematics, 120 ECTS</h2><p><p>EPFL is a leading center for mathematical education and research. It compromises thre',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': "<h2>Program's Objectives</h2><p><p>This program concentrates on learning advanced mathematical methods and applications of mathematics. The core subje",
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Entry Requirements</h2><p><p>Candidate must hold a Bachelor degree in mathematics by a recognized University with excellent results. Holder of a P',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Teaching Language</h2><p><p>Mainly English, a few optional courses are taught in French.</p> </p>', 'title': '', 'type': 'faq'},
+                                                        {'content__start': '<h2>Program\'s Structure</h2><p><p><a target="_blank" href="###file:/content/sites/master/files/pdfs/SB_MATH_AMA_RV.pdf?uuid=default:b93ae488-8a5b-428c',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Accreditations</h2><p><table width="200" cellspacing="1" cellpadding="1" border="1">  <tbody>   <tr>    <td style="text-align: center;"><a href="h',
+                                                         'title': '',
+                                                         'type': 'faq'}],
+                                              'language': 'en',
+                                              'last_update': datetime.datetime(2016, 9, 12, 16, 26, 27),
+                                              'path': '/applied_maths.html',
+                                              'sidebar__boxes': [{'content__start': '<p>In case of specific questions about this program, please contact the Mathematics section:</p> <div class="button mail"><a href="mailto:simone.depar',
+                                                                  'title': 'Contact',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p><a href="http://phd.epfl.ch/home" target="_blank"><span class="fleche">phd.epfl.ch</span></a></p> ', 'title': 'Also interested in a PhD? ', 'type': 'text'},
+                                                                 {'content__start': '<p style="text-align: left;"><a target="_blank" href="http://www.youtube.com/EPFLstudents"><img width="25" height="25" alt="EPFL on YouTube" src="/fil',
+                                                                  'title': 'FOLLOW EPFL',
+                                                                  'type': 'text'}],
+                                              'title': 'Applied Mathematics'},
+                                       'fr': {'boxes': [{'content__start': "<h2>Master en Ingénierie Mathématique, 120 ECTS</h2><p><p>L'EPFL est l'un des principaux centres d'enseignement et de recherche  dans le domaine des m",
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': "<h2>Objectifs du programme</h2><p><p>Le Master en<strong> Ing&eacute;nierie math&eacute;matique</strong> met l'accent sur les<strong> math&eacute;mati",
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': "<h2>Conditions d'admission</h2><p><p>  <!--[if gte mso 9]><xml>   <o:OfficeDocumentSettings>   <o:AllowPNG />   </o:OfficeDocumentSettings>   </xml><!",
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': "<h2>Langue d'enseignement</h2><p><p>Anglais. Quelques cours optionnels sont enseign&eacute;s en fran&ccedil;ais.</p> </p>", 'title': '', 'type': 'faq'},
+                                                        {'content__start': '<h2>Structure du programme</h2><p><p><a target="_blank" href="###file:/content/sites/master/files/pdfs/SB_MATH_AMA_RV.pdf?uuid=default:b93ae488-8a5b-4',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Accréditations</h2><p><table width="200" cellspacing="1" cellpadding="1" border="1">  <tbody>   <tr>    <td style="text-align: center;"><a href="h',
+                                                         'title': '',
+                                                         'type': 'faq'}],
+                                              'language': 'fr',
+                                              'last_update': datetime.datetime(2016, 9, 12, 16, 26, 27),
+                                              'path': '/ingenierie_mathematique.html',
+                                              'sidebar__boxes': [{'content__start': '<p>En cas de questions sp&eacute;cifiques au sujet de ce programme, vous pouvez  vous adresser &agrave; la section Math&eacute;matiques :</p> <div cla',
+                                                                  'title': 'Contact',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p><a href="http://phd.epfl.ch" target="_blank"><span class="fleche">phd.epfl.ch</span></a></p> ', 'title': 'Et le doctorat ?', 'type': 'text'},
+                                                                 {'content__start': '<p style="text-align: left;"><a target="_blank" href="http://www.youtube.com/EPFLstudents"><img width="25" height="25" alt="EPFL on YouTube" src="/fil',
+                                                                  'title': "Suivre l'EPFL",
+                                                                  'type': 'text'}],
+                                              'title': 'Ingénierie Mathématique'}},
+                          'contents__keys': ['en', 'fr'],
+                          'level': 2,
+                          'pid': '95076',
+                          'template': 'simple'},
+                '95077': {'children__len': 0,
+                          'contents': {'en': {'boxes': [{'content__start': '<p><img width="640" height="147" alt="Master\'s in computational sciences" src="/files/key-visuals/SB_CSE.png?uuid=default:105e1ec3-88d5-46c9-9d2f-5cc7',
+                                                         'title': '',
+                                                         'type': 'text'},
+                                                        {'content__start': '<h2>A new paradigm in R&D.</h2><p><p>Computer simulation has revolutionized the research tools of engineeers and is nowadays, besides theory and exper',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Video: Vincent Zimmern, testimonial</h2><p><p><iframe width="640" height="360" frameborder="0" allowfullscreen="" src="//www.youtube.com/embed/MhJ',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': "<h2>Program's Objectives</h2><p><p>This Master's is an inter-disciplinary program which is designed to provide the students a combination of skills in",
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Video: Dana Christen, testimonial</h2><p><p><iframe width="640" height="360" frameborder="0" allowfullscreen="" src="//www.youtube.com/embed/XFWIG',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': "<h2>Entry Requirements</h2><p><p>The Master in CSE is open to holders of a Bachelor's degree in natural sciences or engineering with strong interest t",
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Teaching Language</h2><p><p>English</p> </p>', 'title': '', 'type': 'faq'},
+                                                        {'content__start': '<h2>Program\'s Structure</h2><p><p><a target="_blank" href="###file:/content/sites/master/files/pdfs/SB_CSE_MA.pdf?uuid=default:ded18231-a574-40b3-b8c4',
+                                                         'title': '',
+                                                         'type': 'faq'}],
+                                              'language': 'en',
+                                              'last_update': datetime.datetime(2016, 2, 15, 14, 18, 28),
+                                              'path': '/cse.html',
+                                              'sidebar__boxes': [{'content__start': '<p>In case of specific questions about this program, please contact the Computational Science and Enginnering group:</p> <div class="button mail"><a h',
+                                                                  'title': 'Contact',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p style="text-align: center;"><a href="/files/brochures/SB_CSE_MA.pdf?uuid=default:5c1725f9-299a-41be-a5cb-209268733032" onclick="_gaq.push([\'_trackE',
+                                                                  'title': 'Download',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p><a href="http://phd.epfl.ch/home" target="_blank"><span class="fleche">phd.epfl.ch</span></a></p> ', 'title': 'Also interested in a PhD? ', 'type': 'text'},
+                                                                 {'content__start': '<p style="text-align: left;"><a target="_blank" href="http://www.youtube.com/EPFLstudents"><img width="25" height="25" alt="EPFL on YouTube" src="/fil',
+                                                                  'title': 'FOLLOW EPFL',
+                                                                  'type': 'text'}],
+                                              'title': 'Computational Science and Engineering'},
+                                       'fr': {'boxes': [{'content__start': '<p><img width="640" height="147" alt="Master\'s in computational sciences" src="/files/key-visuals/SB_CSE.png?uuid=default:105e1ec3-88d5-46c9-9d2f-5cc7',
+                                                         'title': '',
+                                                         'type': 'text'},
+                                                        {'content__start': '<h2>Un nouveau paradigme en recherche et développement</h2><p><p>La simulation par ordinateur a r&eacute;volutionn&eacute; les outils de recherche &ag',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Vidéo: témoignage de Vincent Zimmern (en anglais)</h2><p><p><iframe width="640" height="360" frameborder="0" allowfullscreen="" src="//www.youtube',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Objectifs du programme</h2><p><p>Ce master est un programme interdisciplinaire qui est con&ccedil;u pour que les &eacute;tudiants d&eacute;veloppe',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Vidéo (en anglais): témoignage de Dana Christen</h2><p><p><iframe width="640" height="360" frameborder="0" allowfullscreen="" src="//www.youtube.c',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': "<h2>Conditions d'admission</h2><p><p>Les candidats doivent &ecirc;tre titulaires d'un Bachelor en sciences de base ou en ing&eacute;nierie et avoir un",
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': "<h2>Langue d'enseignement</h2><p><p>Anglais</p> </p>", 'title': '', 'type': 'faq'},
+                                                        {'content__start': '<h2>Structure du programme</h2><p><p><a target="_blank" href="###file:/content/sites/master/files/pdfs/SB_CSE_MA.pdf?uuid=default:ded18231-a574-40b3-b',
+                                                         'title': '',
+                                                         'type': 'faq'}],
+                                              'language': 'fr',
+                                              'last_update': datetime.datetime(2016, 2, 15, 14, 18, 28),
+                                              'path': '/computationnelle.html',
+                                              'sidebar__boxes': [{'content__start': '<p>En cas de questions sp&eacute;cifiques au sujet de ce programme, vous pouvez  vous adresser au groupe de Science et Ing&eacute;nierie Computationne',
+                                                                  'title': 'Contact',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p style="text-align: center;"><a href="/files/brochures/SB_CSE_MA.pdf?uuid=default:5c1725f9-299a-41be-a5cb-209268733032" onclick="_gaq.push([\'_trackE',
+                                                                  'title': 'Brochure à télécharger',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p><a href="http://phd.epfl.ch" target="_blank"><span class="fleche">phd.epfl.ch</span></a></p> ', 'title': 'Et le doctorat ?', 'type': 'text'},
+                                                                 {'content__start': '<p style="text-align: left;"><a target="_blank" href="http://www.youtube.com/EPFLstudents"><img width="25" height="25" alt="EPFL on YouTube" src="/fil',
+                                                                  'title': "Suivre l'EPFL",
+                                                                  'type': 'text'}],
+                                              'title': 'Science et Ingénierie Computationnelles'}},
+                          'contents__keys': ['en', 'fr'],
+                          'level': 2,
+                          'pid': '95077',
+                          'template': 'simple'},
+                '95079': {'children__len': 0,
+                          'contents': {'en': {'boxes': [{'content__start': '<p><img width="640" height="147" alt="Master\'s in Physics" src="/files/key-visuals/SB_PH.png?uuid=default:ecbb5e81-2d53-4cbd-bfd6-c98ad0c272e4" /></p>',
+                                                         'title': '',
+                                                         'type': 'text'},
+                                                        {'content__start': '<h2>A comprehensive interrogation of the universe</h2><p><p>The training of a physicist is not limited to a list of specific subjects, but rather a se',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': "<h2>Program's Objectives</h2><p><p>Through basic training in mechanics, electromagnetism, thermodynamics, statistical mechanics and quantum mechanics,",
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Video (in French): student\'s project, Alexis Arnaudon</h2><p><iframe width="640" height="360" src="//www.youtube.com/embed/wZ8KzThTIPU?rel=0" fram',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Entry Requirements</h2><p><p>Candidates should have a Bachelor&rsquo;s degree in Physics from a reputable university and excellent academic record',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Teaching Language</h2><p><p>English with some optional courses taught in French</p> </p>', 'title': '', 'type': 'faq'},
+                                                        {'content__start': '<h2>Program\'s Structure</h2><p><p><a href="###file:/content/sites/master/files/pdfs/SB_PH_MA_RV.pdf?uuid=default:fa579ce1-737f-45c6-a170-05bd65235846"',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Accreditations</h2><p><table width="200" cellspacing="1" cellpadding="1" border="1">  <tbody>   <tr>    <td style="text-align: center;"><a href="h',
+                                                         'title': '',
+                                                         'type': 'faq'}],
+                                              'language': 'en',
+                                              'last_update': datetime.datetime(2016, 9, 12, 16, 28, 26),
+                                              'path': '/physics.html',
+                                              'sidebar__boxes': [{'content__start': '<p>In case of specific questions about these programs, please contact the Physics section:</p> <div class="button mail"><a href="mailto:daniele.mari@e',
+                                                                  'title': 'Contact',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p><a href="http://phd.epfl.ch/home" target="_blank"><span class="fleche">phd.epfl.ch</span></a></p> ', 'title': 'Also interested in a PhD? ', 'type': 'text'},
+                                                                 {'content__start': '<p style="text-align: left;"><a target="_blank" href="http://www.youtube.com/EPFLstudents"><img width="25" height="25" alt="EPFL on YouTube" src="/fil',
+                                                                  'title': 'FOLLOW EPFL',
+                                                                  'type': 'text'}],
+                                              'title': 'Physics and Applied Physics'},
+                                       'fr': {'boxes': [{'content__start': '<p><img width="640" height="147" alt="Master\'s in Physics" src="/files/key-visuals/SB_PH.png?uuid=default:ecbb5e81-2d53-4cbd-bfd6-c98ad0c272e4" /></p>',
+                                                         'title': '',
+                                                         'type': 'text'},
+                                                        {'content__start': "<h2>Une interrogation exhaustive de l'univers</h2><p><p>La formation du physicien ne se r&eacute;sume pas &agrave; une liste de sujets bien  d&eacute;",
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Objectifs du programme</h2><p><p>A travers une formation de base en m&eacute;canique, &eacute;lectromagn&eacute;tisme,  thermodynamique, m&eacute;',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Vidéo: projet d\'étudiant, Alexis Arnaudon</h2><p><iframe width="640" height="360" src="//www.youtube.com/embed/wZ8KzThTIPU?rel=0" frameborder="0" ',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': "<h2>Conditions d'admission</h2><p><p>Les candidats doivent avoir un certificat de bachelor en Physique, d'une universit&eacute; reconnue, accompagn&ea",
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': "<h2>Langue d'enseignement</h2><p><p>Anglais avec certains cours optionnels enseign&eacute;s en fran&ccedil;ais</p> </p>", 'title': '', 'type': 'faq'},
+                                                        {'content__start': '<h2>Structure du programme</h2><p><p><a href="###file:/content/sites/master/files/pdfs/SB_PH_MA_RV.pdf?uuid=default:fa579ce1-737f-45c6-a170-05bd652358',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Accréditations</h2><p><table width="200" cellspacing="1" cellpadding="1" border="1">  <tbody>   <tr>    <td style="text-align: center;"><a href="h',
+                                                         'title': '',
+                                                         'type': 'faq'}],
+                                              'language': 'fr',
+                                              'last_update': datetime.datetime(2016, 9, 12, 16, 28, 26),
+                                              'path': '/physique.html',
+                                              'sidebar__boxes': [{'content__start': '<p>En cas de questions sp&eacute;cifiques au sujet de ces programmes, vous pouvez  vous adresser &agrave; la section Physique :</p> <div class="button',
+                                                                  'title': 'Contact',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p><a href="http://phd.epfl.ch" target="_blank"><span class="fleche">phd.epfl.ch</span></a></p> ', 'title': 'Et le doctorat ?', 'type': 'text'},
+                                                                 {'content__start': '<p style="text-align: left;"><a target="_blank" href="http://www.youtube.com/EPFLstudents"><img width="25" height="25" alt="EPFL on YouTube" src="/fil',
+                                                                  'title': "Suivre l'EPFL",
+                                                                  'type': 'text'}],
+                                              'title': 'Physique et Physique Appliquée'}},
+                          'contents__keys': ['en', 'fr'],
+                          'level': 2,
+                          'pid': '95079',
+                          'template': 'simple'},
+                '95108': {'children__len': 0,
+                          'contents': {'en': {'boxes': [{'content__start': '<p><img width="640" height="147" alt="Master\'s in nuclear engineering" src="/files/key-visuals/SB_NE.png?uuid=default:707ec2d7-63eb-431f-a0b1-42ab06ad',
+                                                         'title': '',
+                                                         'type': 'text'},
+                                                        {'content__start': '<h2>Towards sustainable energy supply.</h2><p><p>Clean, affordable and reliably available energy is of paramount importance for the well-being of indu',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Video: Anne-Laurene Panadero, testimonial</h2><p><iframe width="640" height="360" src="//www.youtube.com/embed/fWvKY1dmcNs?rel=0" frameborder="0" ',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': "<h2>Program's Objectives</h2><p><p>The program in Nuclear Engineering aims to :</p> <ul>  <li>provide in-depth knowledge on the fundamentals and techn",
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Video: Mike MacMillan, testimonial</h2><p><p><iframe width="640" height="360" frameborder="0" src="//www.youtube.com/embed/mM1xM5pyWYs?rel=0" allo',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Entry Requirements</h2><p><p>Candidates should have a Bachelor&rsquo;s degree from a reputable university and excellent academic results. The stro',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Teaching Language</h2><p><p>English</p> </p>', 'title': '', 'type': 'faq'},
+                                                        {'content__start': '<h2>Program\'s Structure</h2><p><p><a target="_blank" href="###file:/content/sites/master/files/pdfs/SB_NE_MA.pdf?uuid=default:ec000f5a-5729-4857-8048-',
+                                                         'title': '',
+                                                         'type': 'faq'}],
+                                              'language': 'en',
+                                              'last_update': datetime.datetime(2016, 7, 8, 8, 41, 14),
+                                              'path': '/nuclearengineering.html',
+                                              'sidebar__boxes': [{'content__start': '<p>In case of specific questions about this program, please use the following contacts:</p> <div class="button mail"><a href="mailto:andreas.pautz@epf',
+                                                                  'title': 'Contact',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p style="text-align: center;"><a href="/files/brochures/SB_NE_MA.pdf?uuid=default:bc94efd1-c355-42e2-8c85-1c0a2ec067f8" onclick="_gaq.push([\'_trackEv',
+                                                                  'title': 'Download',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p><a href="http://phd.epfl.ch/home" target="_blank"><span class="fleche">phd.epfl.ch</span></a></p> ', 'title': 'Also interested in a PhD? ', 'type': 'text'},
+                                                                 {'content__start': '<p style="text-align: left;"><a target="_blank" href="http://www.youtube.com/EPFLstudents"><img width="25" height="25" alt="EPFL on YouTube" src="/fil',
+                                                                  'title': 'FOLLOW EPFL',
+                                                                  'type': 'text'}],
+                                              'title': 'Nuclear Engineering'},
+                                       'fr': {'boxes': [{'content__start': '<p><img width="640" height="147" alt="Master\'s in nuclear engineering" src="/files/key-visuals/SB_NE.png?uuid=default:707ec2d7-63eb-431f-a0b1-42ab06ad',
+                                                         'title': '',
+                                                         'type': 'text'},
+                                                        {'content__start': '<h2>Towards sustainable energy supply.</h2><p><p>Clean, affordable and reliably available energy is of paramount importance for the well-being of indu',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Vidéo (en anglais): témoignage d\'Anne-Laurene Panadero</h2><p><iframe width="640" height="360" src="//www.youtube.com/embed/fWvKY1dmcNs?rel=0" fra',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Objectifs du programme</h2><p><p>The program in Nuclear Engineering aims to :</p> <ul>  <li>provide in-depth knowledge on the fundamentals and tec',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Vidéo (en anglais): témoignage de Mike MacMillan</h2><p><p><iframe width="640" height="360" frameborder="0" src="//www.youtube.com/embed/mM1xM5pyW',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': "<h2>Conditions d'admission</h2><p><p>Candidates should have a Bachelor&rsquo;s degree from a reputable university and excellent academic results. The ",
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': "<h2>Langue d'enseignement</h2><p><p>Anglais.</p> </p>", 'title': '', 'type': 'faq'},
+                                                        {'content__start': '<h2>Structure du programme</h2><p><p><a target="_blank" href="###file:/content/sites/master/files/pdfs/SB_NE_MA.pdf?uuid=default:ec000f5a-5729-4857-80',
+                                                         'title': '',
+                                                         'type': 'faq'}],
+                                              'language': 'fr',
+                                              'last_update': datetime.datetime(2016, 7, 8, 8, 41, 14),
+                                              'path': '/nucleaire.html',
+                                              'sidebar__boxes': [{'content__start': '<p>In case of specific questions about this program, please use the following contacts:</p> <div class="button mail"><a href="mailto:andreas.pautz@epf',
+                                                                  'title': 'Contact',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p style="text-align: center;"><a href="/files/brochures/SB_NE_MA.pdf?uuid=default:bc94efd1-c355-42e2-8c85-1c0a2ec067f8" onclick="_gaq.push([\'_trackEv',
+                                                                  'title': 'Brochures à télécharger',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p><a href="http://phd.epfl.ch" target="_blank"><span class="fleche">phd.epfl.ch</span></a></p> ', 'title': 'Et le doctorat ?', 'type': 'text'},
+                                                                 {'content__start': '<p style="text-align: left;"><a target="_blank" href="http://www.youtube.com/EPFLstudents"><img width="25" height="25" alt="EPFL on YouTube" src="/fil',
+                                                                  'title': "Suivre l'EPFL",
+                                                                  'type': 'text'}],
+                                              'title': 'Génie Nucléaire'}},
+                          'contents__keys': ['en', 'fr'],
+                          'level': 2,
+                          'pid': '95108',
+                          'template': 'simple'},
+                '95135': {'children__len': 0,
+                          'contents': {'en': {'boxes': [{'content__start': '<p><img width="640" height="147" alt="Master\'s in molecular chemistry" src="/files/key-visuals/SB_MBC.png?uuid=default:bb157775-832f-4275-b3ab-ba4a6ec',
+                                                         'title': '',
+                                                         'type': 'text'},
+                                                        {'content__start': '<h2>From molecules to life</h2><p><p>Modern science is continuously leaning towards Chemistry. In Life Sciences, Materials or Environment, researchers',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Video: Aleksandar Salim, testimonial</h2><p><iframe width="640" height="360" src="//www.youtube.com/embed/RqXostaS9mQ?rel=0" frameborder="0" allow',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': "<h2>Program's Objectives</h2><p><p>The Master in Molecular and Biological Chemistry is a research program with a strong focus on practice in laborator",
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Entry Requirements</h2><p><p>Candidates should have a Bachelor&rsquo;s degree from a reputable university in chemistry and excellent academic resu',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Teaching Language</h2><p><p>English</p> </p>', 'title': '', 'type': 'faq'},
+                                                        {'content__start': '<h2>Program\'s Structure</h2><p><p><a target="_blank" href="###file:/content/sites/master/files/pdfs/SB_MBC_MA.pdf?uuid=default:ab73d033-8167-49ae-9fb3',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Accreditations</h2><p><table width="200" cellspacing="1" cellpadding="1" border="1">  <tbody>   <tr>    <td style="text-align: center;">&nbsp;</td',
+                                                         'title': '',
+                                                         'type': 'faq'}],
+                                              'language': 'en',
+                                              'last_update': datetime.datetime(2016, 2, 15, 15, 19, 41),
+                                              'path': '/chemistry.html',
+                                              'sidebar__boxes': [{'content__start': '<p>In case of specific questions about this program, please contact the Chemistry section:</p> <div class="button mail"><a href="mailto:scgc@epfl.ch">',
+                                                                  'title': 'Contact',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p style="text-align: center;"><a target="_blank" onclick="_gaq.push([\'_trackEvent\', \'SB_MBC_MA\', \'download\']);" href="/files/brochures/SB_MBC_MA.pdf?',
+                                                                  'title': 'Download',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p><a href="http://phd.epfl.ch/home" target="_blank"><span class="fleche">phd.epfl.ch</span></a></p> ', 'title': 'Also interested in a PhD? ', 'type': 'text'},
+                                                                 {'content__start': '<p style="text-align: left;"><a target="_blank" href="http://www.youtube.com/EPFLstudents"><img width="25" height="25" alt="EPFL on YouTube" src="/fil',
+                                                                  'title': 'FOLLOW EPFL',
+                                                                  'type': 'text'}],
+                                              'title': 'Molecular and Biological Chemistry'},
+                                       'fr': {'boxes': [{'content__start': '<p><img width="640" height="147" alt="Master\'s in molecular chemistry" src="/files/key-visuals/SB_MBC.png?uuid=default:bb157775-832f-4275-b3ab-ba4a6ec',
+                                                         'title': '',
+                                                         'type': 'text'},
+                                                        {'content__start': "<h2>De la molécule à la vie</h2><p><p>Les sciences contemporaines continuent de s'appuyer sur la Chimie. En Sciences du Vivant, des Mat&eacute;riaux o",
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Vidéo (en anglais): témoignage d\'Aleksandar Salim</h2><p><iframe width="640" height="360" src="//www.youtube.com/embed/RqXostaS9mQ?rel=0" framebor',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Objectifs du programme</h2><p><p>Le Master en Chimie Mol&eacute;culaire et Biologique est un programme de recherche avec une grande importance don',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': "<h2>Conditions d'admission</h2><p><p>Les candidats doivent poss&eacute;der un dipl&ocirc;me de Bachelor en Chimie, d'une universit&eacute; reconnue, a",
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': "<h2>Langue d'enseignement</h2><p><p>Anglais</p> </p>", 'title': '', 'type': 'faq'},
+                                                        {'content__start': '<h2>Structure du programme</h2><p><p><a target="_blank" href="###file:/content/sites/master/files/pdfs/SB_MBC_MA.pdf?uuid=default:ab73d033-8167-49ae-9',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Accréditations</h2><p><table width="200" cellspacing="1" cellpadding="1" border="1">  <tbody>   <tr>    <td style="text-align: center;">&nbsp;</td',
+                                                         'title': '',
+                                                         'type': 'faq'}],
+                                              'language': 'fr',
+                                              'last_update': datetime.datetime(2016, 2, 15, 15, 19, 41),
+                                              'path': '/chimie.html',
+                                              'sidebar__boxes': [{'content__start': '<p>En cas de questions sp&eacute;cifiques au sujet de ce programme, vous pouvez  vous adresser &agrave; la section Chimie :</p> <div class="button mai',
+                                                                  'title': 'Contact',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p style="text-align: center;"><a target="_blank" onclick="_gaq.push([\'_trackEvent\', \'SB_MBC_MA\', \'download\']);" href="/files/brochures/SB_MBC_MA.pdf?',
+                                                                  'title': 'Brochure à télécharger',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p><a href="http://phd.epfl.ch" target="_blank"><span class="fleche">phd.epfl.ch</span></a></p> ', 'title': 'Et le doctorat ?', 'type': 'text'},
+                                                                 {'content__start': '<p style="text-align: left;"><a target="_blank" href="http://www.youtube.com/EPFLstudents"><img width="25" height="25" alt="EPFL on YouTube" src="/fil',
+                                                                  'title': "Suivre l'EPFL",
+                                                                  'type': 'text'}],
+                                              'title': 'Chimie Moléculaire et Biologique'}},
+                          'contents__keys': ['en', 'fr'],
+                          'level': 2,
+                          'pid': '95135',
+                          'template': 'simple'},
+                '95166': {'children__len': 0,
+                          'contents': {'en': {'boxes': [{'content__start': '<p><img width="640" height="147" alt="Master\'s in Chemical Engineering" src="/files/key-visuals/SB_CBE.png?uuid=default:d1feaf7b-bbfa-4632-bf69-eedd9e',
+                                                         'title': '',
+                                                         'type': 'text'},
+                                                        {'content__start': '<h2>Innovative, better, safer and eco-friendly</h2><p><p>Scaling up from a laboratory reaction to an industrial process is the main challenge for chem',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Video: Andrés López, testimonial</h2><p><iframe width="640" height="360" src="//www.youtube.com/embed/8XwkI3sR9uk?rel=0" frameborder="0" allowfull',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': "<h2>Program's Objectives</h2><p><p>This Master&rsquo;s program focuses on several important tools such as innovative processes and separation techniqu",
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Entry Requirements</h2><p><p>Candidates should have a Bachelor&rsquo;s degree from a reputable university in chemical engineering and excellent ac',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Teaching Language</h2><p><p>English</p> </p>', 'title': '', 'type': 'faq'},
+                                                        {'content__start': '<h2>Program\'s Structure</h2><p><p><a href="###file:/content/sites/master/files/pdfs/SB_CBE_MA.pdf?uuid=default:7a233023-e178-4eff-aa40-63691c684d0d" t',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Accreditations</h2><p><table width="120" cellspacing="1" cellpadding="1" border="1">  <tbody>   <tr>    <td style="text-align: center;"><a href="h',
+                                                         'title': '',
+                                                         'type': 'faq'}],
+                                              'language': 'en',
+                                              'last_update': datetime.datetime(2016, 2, 15, 14, 10, 49),
+                                              'path': '/chemicalengineering.html',
+                                              'sidebar__boxes': [{'content__start': '<p>In case of specific questions about this program, please contact the Chemistry section:</p> <div class="button mail"><a href="mailto:scgc@epfl.ch">',
+                                                                  'title': 'Contact',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p style="text-align: center;"><a href="/files/brochures/SB_CBE_MA.pdf?uuid=default:8af788fd-df7a-4c8a-a91d-938422799246" onclick="_gaq.push([\'_trackE',
+                                                                  'title': 'Download',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p><a href="http://phd.epfl.ch/home" target="_blank"><span class="fleche">phd.epfl.ch</span></a></p> ', 'title': 'Also interested in a PhD? ', 'type': 'text'},
+                                                                 {'content__start': '<p style="text-align: left;"><a target="_blank" href="http://www.youtube.com/EPFLstudents"><img width="25" height="25" alt="EPFL on YouTube" src="/fil',
+                                                                  'title': 'FOLLOW EPFL',
+                                                                  'type': 'text'}],
+                                              'title': 'Chemical Engineering and Biotechnology'},
+                                       'fr': {'boxes': [{'content__start': '<p><img width="640" height="147" alt="Master\'s in Chemical Engineering" src="/files/key-visuals/SB_CBE.png?uuid=default:d1feaf7b-bbfa-4632-bf69-eedd9e',
+                                                         'title': '',
+                                                         'type': 'text'},
+                                                        {'content__start': "<h2>Innovant, meilleur, sûr et respectueux de l'environnement</h2><p><p>Amener &agrave; l'&eacute;chelle industrielle une r&eacute;action d&eacute;vel",
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Vidéo (en anglais): témoignage d\'Andrés López</h2><p><iframe width="640" height="360" src="//www.youtube.com/embed/8XwkI3sR9uk?rel=0" frameborder=',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Objectifs du programme</h2><p><p>Ce programme se concentre sur diff&eacute;rents outils importants comme les processus innovants et les techniques',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': "<h2>Conditions d'admission</h2><p><p>Les candidats doivent poss&eacute;der un dipl&ocirc;me de Bachelor en G&eacute;nie Chimique, d'une universit&eacu",
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': "<h2>Langue d'enseignement</h2><p><p>Anglais</p> </p>", 'title': '', 'type': 'faq'},
+                                                        {'content__start': '<h2>Structure du programme</h2><p><p><a href="###file:/content/sites/master/files/pdfs/SB_CBE_MA.pdf?uuid=default:7a233023-e178-4eff-aa40-63691c684d0d',
+                                                         'title': '',
+                                                         'type': 'faq'},
+                                                        {'content__start': '<h2>Accréditations</h2><p><table width="120" cellspacing="1" cellpadding="1" border="1">  <tbody>   <tr>    <td style="text-align: center;"><a href="h',
+                                                         'title': '',
+                                                         'type': 'faq'}],
+                                              'language': 'fr',
+                                              'last_update': datetime.datetime(2016, 2, 15, 14, 10, 49),
+                                              'path': '/genie_chimique.html',
+                                              'sidebar__boxes': [{'content__start': '<p>En cas de questions sp&eacute;cifiques au sujet de ce programme, vous pouvez  vous adresser &agrave; la section Chimie :</p> <div class="button mai',
+                                                                  'title': 'Contact',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p style="text-align: center;"><a href="/files/brochures/SB_CBE_MA.pdf?uuid=default:8af788fd-df7a-4c8a-a91d-938422799246" onclick="_gaq.push([\'_trackE',
+                                                                  'title': 'Brochure à télécharger',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p><a href="http://phd.epfl.ch" target="_blank"><span class="fleche">phd.epfl.ch</span></a></p> ', 'title': 'Et le doctorat ?', 'type': 'text'},
+                                                                 {'content__start': '<p style="text-align: left;"><a target="_blank" href="http://www.youtube.com/EPFLstudents"><img width="25" height="25" alt="EPFL on YouTube" src="/fil',
+                                                                  'title': "Suivre l'EPFL",
+                                                                  'type': 'text'}],
+                                              'title': 'Génie Chimique et Biotechnologie'}},
+                          'contents__keys': ['en', 'fr'],
+                          'level': 2,
+                          'pid': '95166',
+                          'template': 'simple'},
+                '95799': {'children__len': 0,
+                          'contents': {'en': {'boxes': [{'content__start': "<p>EPFL offers a limited number of fellowships at  the Master's level to students with outstanding academic records. Some of the fellowships are finan",
+                                                         'title': '',
+                                                         'type': 'text'}],
+                                              'language': 'en',
+                                              'last_update': datetime.datetime(2017, 3, 31, 11, 24, 16),
+                                              'path': '/excellence-fellowships.html',
+                                              'sidebar__boxes': [{'content__start': '<p><strong><a href="https://isa.epfl.ch/imoniteur_ISAP/!farforms.htm?x=master">Applications</a> for starting a Master\'s program are open from mid-Nove',
+                                                                  'title': 'Application',
+                                                                  'type': 'coloredText'},
+                                                                 {'content__start': '<p style="text-align: left;">In case of questions, please contact the student helpdesk:</p> <div class="button mail"><a href="mailto:student.services@',
+                                                                  'title': 'Contact',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p><a href="http://virtualtour.epfl.ch" target="_blank"><img width="300" height="157" src="/files/buttons/virtual tour thumbnail.png?uuid=default:1ecf',
+                                                                  'title': 'Discover the campus',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p style="text-align: left;"><a target="_blank" href="http://www.youtube.com/EPFLstudents"><img width="25" height="25" alt="EPFL on YouTube" src="/fil',
+                                                                  'title': 'FOLLOW EPFL',
+                                                                  'type': 'text'}],
+                                              'title': 'Excellence Fellowships'},
+                                       'fr': {'boxes': [{'content__start': "<p>L'EPFL offre un nombre limit&eacute; de bourses  d'excellence dans le cadre de ses programmes Master, &agrave; des &eacute;tudiants ayant d&eacute;",
+                                                         'title': '',
+                                                         'type': 'text'}],
+                                              'language': 'fr',
+                                              'last_update': datetime.datetime(2017, 3, 31, 11, 24, 16),
+                                              'path': '/bourses-excellence.html',
+                                              'sidebar__boxes': [{'content__start': '<p><strong><a href="https://isa.epfl.ch/imoniteur_ISAP/!farforms.htm?x=master">Les inscriptions</a> pour d&eacute;buter un master sont ouvertes de mi-',
+                                                                  'title': 'Inscription',
+                                                                  'type': 'coloredText'},
+                                                                 {'content__start': '<p style="text-align: left;">Pour des questions d\'ordre g&eacute;n&eacute;ral, vous pouvez contacter les services aux &eacute;tudiants:</p> <div style',
+                                                                  'title': 'Contact',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p><a href="http://virtualtour.epfl.ch" target="_blank"><img width="300" height="157" src="/files/buttons/virtual tour thumbnail.png?uuid=default:1ecf',
+                                                                  'title': 'Découvrir le campus',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p style="text-align: left;"><a target="_blank" href="http://www.youtube.com/EPFLstudents"><img width="25" height="25" alt="EPFL on YouTube" src="/fil',
+                                                                  'title': "Suivre l'EPFL",
+                                                                  'type': 'text'}],
+                                              'title': "Bourses d'excellence"}},
+                          'contents__keys': ['en', 'fr'],
+                          'level': 2,
+                          'pid': '95799',
+                          'template': 'simple'},
+                '96878': {'children__len': 0,
+                          'contents': {'en': {'boxes': [{'content__start': "<p>International Rankings regularly place EPFL within the world's best   schools in the fields of basic sciences, engineering and technology. The   po",
+                                                         'title': '',
+                                                         'type': 'text'}],
+                                              'language': 'en',
+                                              'last_update': datetime.datetime(2016, 10, 5, 11, 2, 44),
+                                              'path': '/rankings.html',
+                                              'sidebar__boxes': [{'content__start': "<ul>  <li><strong>10'281 Students (of which 2'077 PhD)</strong></li>  <li><strong>338 Faculty members</strong></li>  <li><strong>340 Laboratories</str",
+                                                                  'title': 'Facts & Figures (2014-2015)',
+                                                                  'type': 'coloredText'},
+                                                                 {'content__start': '<p style="text-align: left;">In case of questions, please contact the student helpdesk:</p> <div class="button mail"><a href="mailto:student.services@',
+                                                                  'title': 'Contact',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p><a href="http://virtualtour.epfl.ch" target="_blank"><img width="300" height="157" src="/files/buttons/virtual tour thumbnail.png?uuid=default:1ecf',
+                                                                  'title': 'Discover the campus',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p style="text-align: left;"><a target="_blank" href="http://www.youtube.com/EPFLstudents"><img width="25" height="25" alt="EPFL on YouTube" src="/fil',
+                                                                  'title': 'FOLLOW EPFL',
+                                                                  'type': 'text'}],
+                                              'title': 'International Rankings'},
+                                       'fr': {'boxes': [{'content__start': "<p>Les classements acad&eacute;miques internationaux placent r&eacute;guli&egrave;rement l'EPFL parmi les meilleures &eacute;coles du monde dans le do",
+                                                         'title': '',
+                                                         'type': 'text'}],
+                                              'language': 'fr',
+                                              'last_update': datetime.datetime(2016, 10, 5, 11, 2, 44),
+                                              'path': '/classements.html',
+                                              'sidebar__boxes': [{'content__start': "<ul>  <li><strong>10'281 &Eacute;tudiants (dont 2077 doctorants)</strong></li>  <li><strong>338 Professeurs</strong></li>  <li><strong>350 Laboratoire",
+                                                                  'title': "L'EPFL en chiffres (2014-2015)",
+                                                                  'type': 'coloredText'},
+                                                                 {'content__start': '<p style="text-align: left;">Pour des questions d\'ordre g&eacute;n&eacute;ral, vous pouvez contacter les services aux &eacute;tudiants:</p> <div style',
+                                                                  'title': 'Contact',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p><a href="http://virtualtour.epfl.ch" target="_blank"><img width="300" height="157" src="/files/buttons/virtual tour thumbnail.png?uuid=default:1ecf',
+                                                                  'title': 'Découvrir le campus',
+                                                                  'type': 'text'},
+                                                                 {'content__start': '<p style="text-align: left;"><a target="_blank" href="http://www.youtube.com/EPFLstudents"><img width="25" height="25" alt="EPFL on YouTube" src="/fil',
+                                                                  'title': "Suivre l'EPFL",
+                                                                  'type': 'text'}],
+                                              'title': 'Classements académiques'}},
+                          'contents__keys': ['en', 'fr'],
+                          'level': 2,
+                          'pid': '96878',
+                          'template': 'simple'}},
+ 'properties': {'acronym': {'en': 'EPFL', 'fr': 'EPFL'},
+                'base_path': 'build/master',
+                'breadcrumb_title': {'en': 'Prospective students', 'fr': 'Futurs étudiants'},
+                'breadcrumb_url': {'en': 'http://futuretudiant.epfl.ch/', 'fr': 'http://futuretudiant.epfl.ch/'},
+                'css_url': {'en': "//static.epfl.ch/v0.23.0/styles/{'en': 'epfl'}-built.css", 'fr': "//static.epfl.ch/v0.23.0/styles/{'en': 'epfl', 'fr': 'epfl'}-built.css"},
+                'export_files': {'en': 'build/master/export_en.xml', 'fr': 'build/master/export_fr.xml'},
+                'files__len': 171,
+                'homepage__pid': '94489',
                 'name': 'master',
-                'theme': 'epfl',
-                'title': "MASTER'S STUDIES"}}
+                'pages__ids': ['94489',
+                               '94567',
+                               '96878',
+                               '100358',
+                               '110995',
+                               '94569',
+                               '103766',
+                               '94578',
+                               '94579',
+                               '95076',
+                               '94953',
+                               '95040',
+                               '139831',
+                               '95166',
+                               '94947',
+                               '95030',
+                               '95077',
+                               '95033',
+                               '128190',
+                               '95013',
+                               '95060',
+                               '94769',
+                               '95046',
+                               '95037',
+                               '95042',
+                               '95005',
+                               '95075',
+                               '104644',
+                               '94956',
+                               '94997',
+                               '95135',
+                               '95108',
+                               '95079',
+                               '106847',
+                               '113825',
+                               '106849',
+                               '113973',
+                               '143834',
+                               '94570',
+                               '94587',
+                               '94577',
+                               '95799',
+                               '94571',
+                               '94605',
+                               '94609',
+                               '94611',
+                               '127116'],
+                'theme': {'en': 'epfl', 'fr': 'epfl'},
+                'title': {'en': "MASTER'S STUDIES", 'fr': 'ÉTUDES MASTER '}}}

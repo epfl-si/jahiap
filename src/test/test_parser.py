@@ -2,7 +2,7 @@ import os
 
 import pytest
 
-from settings import DATA_PATH
+from settings import DATA_PATH, LINE_LENGTH_ON_EXPORT
 from test import Data
 from jahiap import Site
 
@@ -42,6 +42,9 @@ class TestSiteProperties:
     def test_name(self, site, data):
         assert site.name == data['properties']['name']
 
+    def test_(self, site, data):
+        assert site.export_files == data['properties']['export_files']
+
     def test_title(self, site, data):
         assert site.title == data['properties']['title']
 
@@ -51,14 +54,17 @@ class TestSiteProperties:
     def test_theme(self, site, data):
         assert site.theme == data['properties']['theme']
 
-    def test_breadcrumb_title(self, site, data):
-        assert site.breadcrumb.title == data['properties']['breadcrumb_title']
-
-    def test_breadcrumb_url(self, site, data):
-        assert site.breadcrumb.url == data['properties']['breadcrumb_url']
-
     def test_css_url(self, site, data):
         assert site.css_url == data['properties']['css_url']
+
+    def test_breadcrumb_title(self, site, data):
+        assert site.breadcrumb_title == data['properties']['breadcrumb_title']
+
+    def test_breadcrumb_url(self, site, data):
+        assert site.breadcrumb_url == data['properties']['breadcrumb_url']
+
+    def test_(self, site, data):
+        assert site.homepage.pid == data['properties']['homepage__pid']
 
 
 class TestSiteStructure:
@@ -66,50 +72,47 @@ class TestSiteStructure:
       Check main elements of 'site' website
     """
 
+    def test_(self, site, data):
+        assert len(site.files) == data['properties']['files__len']
+
     def test_nb_pages(self, site, data):
-        assert len(site.pages) == len(data['pages'])
+        assert len(site.pages_dict) == len(data['pages_dict'])
 
-    def test_page_titles(self, site, data):
-        expected_titles = set([page['title'] for page in data['pages']])
-        titles = set([p.title for p in site.pages])
-        assert expected_titles == titles
-
-    def test_nb_boxes(self, site, data):
-        expected_boxes = sum([page['nb_boxes'] for page in data['pages']])
-        boxes = sum([len(p.boxes) for p in site.pages])
-        assert expected_boxes == boxes
-
-    def test_nb_files(self, site, data):
-        assert len(site.files) == data['files']
+    def test_page_ids(self, site, data):
+        assert [page.pid for page in site.pages] == data['properties']['pages__ids']
 
 
-class TestSidebar:
+class TestAllSidebars:
     """
       Check content of sidebar
     """
-    def test_box(self, site, data):
+    def test_boxes(self, site, data):
 
-        for data_page in data['pages']:
-            for page in site.pages:
-                if page.pid == data_page['pid']:
+        for pid, page in site.pages_dict.items():
 
-                    # Nb boxes
-                    assert len(data_page['sidebar']) == len(page.sidebar.boxes)
+            for language, page_content in page.contents.items():
 
-                    # Box title
-                    titles = [box.title for box in page.sidebar.boxes]
-                    expected_titles = [data_box['title'] for data_box in data_page['sidebar']]
-                    assert titles == expected_titles
+                # create shortcuts for sidebar boxes
+                boxes = page_content.sidebar.boxes
+                expected_boxes= data['pages_dict'][pid]['contents'][language]['sidebar__boxes']
 
-                    # Box content
-                    contents = [box.content for box in page.sidebar.boxes]
-                    expected_contents = [data_box['content'] for data_box in data_page['sidebar']]
-                    assert contents == expected_contents
+                # Nb boxes
+                assert  len(boxes) == len(expected_boxes)
 
-                    # Box type
-                    expected_type = [box.type for box in page.sidebar.boxes]
-                    type = [data_box['type'] for data_box in data_page['sidebar']]
-                    assert expected_type == type
+                # Box title
+                titles = [box.title for box in boxes]
+                expected_titles = [data_box['title'] for data_box in expected_boxes]
+                assert titles == expected_titles
+
+                # Box content
+                for index, box in enumerate(boxes):
+                    expected_content = expected_boxes[index]['content__start']
+                assert box.content.startswith(expected_content)
+
+                # Box type
+                box_type = [box.type for box in boxes]
+                expected_type = [data_box['type'] for data_box in expected_boxes]
+                assert box_type == expected_type
 
 
 # class TestHomepage:

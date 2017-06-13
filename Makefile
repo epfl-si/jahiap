@@ -1,5 +1,5 @@
-site_name=master
-zip_file=exports/master_export_2017-05-29-10-53.zip
+site_name=dcsl
+zip_file=exports/dcsl_export_2017-06-09-18-20.zip
 port=9090
 output_dir=build
 docker_name="demo-$(site_name)"
@@ -15,6 +15,9 @@ unzip:
 
 parse:
 	python src/jahiap.py -o $(output_dir) parse $(site_name)
+
+dict:
+	python jahiap.py -o $(output_dir) export $(site_name) -d
 
 static:
 	python src/jahiap.py -o $(output_dir) export $(site_name) -s
