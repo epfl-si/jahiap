@@ -16,6 +16,9 @@ unzip:
 parse:
 	python jahiap.py -o $(output_dir) parse $(site_name)
 
+dict:
+	python jahiap.py -o $(output_dir) export $(site_name) -d
+
 static:
 	python jahiap.py -o $(output_dir) export $(site_name) -s
 

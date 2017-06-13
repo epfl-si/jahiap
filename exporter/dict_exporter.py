@@ -37,7 +37,7 @@ class DictExporter:
                 'template': page.template,
                 'level': page.level,
                 'children__len': len(page.children),
-                'contents__keys': page.contents.keys(),
+                'contents__keys': list(page.contents.keys()),
             }
             pages_dict[pid] = page_properties
 
@@ -62,7 +62,7 @@ class DictExporter:
                     main_boxes.append({
                         'title': box.title,
                         'type': box.type,
-                        'content_50chars': box.content[:LINE_LENGTH_ON_PPRINT],
+                        'content__start': box.content[:LINE_LENGTH_ON_PPRINT],
                     })
 
                 # sidebar for this page_content
@@ -73,7 +73,7 @@ class DictExporter:
                     sidebar_boxes.append({
                         'title': box.title,
                         'type': box.type,
-                        'content_50chars': box.content[:LINE_LENGTH_ON_PPRINT],
+                        'content__start': box.content[:LINE_LENGTH_ON_PPRINT],
                     })
 
         return data
