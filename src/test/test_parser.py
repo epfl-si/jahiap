@@ -2,7 +2,7 @@ import os
 
 import pytest
 
-from settings import DATA_PATH, LINE_LENGTH_ON_EXPORT
+from settings import DATA_PATH
 from test import Data
 from jahiap import Site
 
@@ -11,7 +11,8 @@ def get_sites():
     """
     Return the list of jahia sites
     """
-    for top, dirs, files in os.walk(DATA_PATH):
+    path = os.path.join(os.getcwd(), DATA_PATH)
+    for top, dirs, files in os.walk(path):
         return dirs
 
 

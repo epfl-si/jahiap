@@ -3,7 +3,7 @@ DOMAIN = 'localhost'
 WP_USER = 'admin'
 WP_PASSWORD = 'passw0rd'
 JAHIA_DATE_FORMAT = '%Y-%m-%dT%H:%M:%S'
-DATA_PATH = "./test/jahiap-data/"
+DATA_PATH = "jahia-data/"
 
 LINE_LENGTH_ON_PPRINT = 150
 LINE_LENGTH_ON_EXPORT = LINE_LENGTH_ON_PPRINT + 100
