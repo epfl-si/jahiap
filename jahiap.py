@@ -568,14 +568,6 @@ class File:
         self.path = path
 
 
-class Link:
-    """A link"""
-
-    def __init__(self, url, title):
-        self.url = url
-        self.title = title
-
-
 def main(parser, args):
     """
         Setup context (e.g debug level) and forward to command-dedicated main function
