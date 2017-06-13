@@ -6,7 +6,8 @@ from importlib import reload
 
 import pytest
 
-from src import crawl
+import crawl
+
 
 JAHIA_HOST = "https://fake-jahia.epfl.ch"
 JAHIA_ROOT_USER = "root"

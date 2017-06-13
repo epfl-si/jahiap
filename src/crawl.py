@@ -18,7 +18,7 @@ from pathlib import Path
 import requests
 from clint.textui import progress
 
-from src.settings import JAHIA_SITES
+from settings import JAHIA_SITES
 
 # define HOST
 if not os.environ.get("JAHIA_HOST"):
