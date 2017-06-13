@@ -388,7 +388,7 @@ class PageContent:
                 for extra in child.childNodes:
                     if extra.ELEMENT_NODE != extra.nodeType:
                         continue
-                    box = Box(site=self.page.site, page_content=self, element=element, multibox=extra)
+                    box = Box(site=self.page.site, page_content=self, element=extra)
                     self.sidebar.boxes.append(box)
 
         # if not found, search the sidebar of a parent
