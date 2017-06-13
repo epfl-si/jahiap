@@ -62,7 +62,7 @@ def build_file_path(args, site):
 
 def already_downloaded(args, site):
     p = Path(args.output)
-    return list(p.glob("%s*" % site))
+    return list(p.glob("%s_export*" % site))
 
 
 def authenticate():
