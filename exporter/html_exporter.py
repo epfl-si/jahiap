@@ -84,7 +84,7 @@ class HTMLExporter:
 
     def generate_page(self, path, content):
         """Generate a page"""
-        path = "%s/%s" % (self.out_path, path)
+        path = "%s%s" % (self.out_path, path)
 
         file = open(path, "w")
 
