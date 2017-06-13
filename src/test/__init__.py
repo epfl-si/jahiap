@@ -3151,7 +3151,7 @@ class Data:
                 'breadcrumb_url': {'en': 'http://futuretudiant.epfl.ch/', 'fr': 'http://futuretudiant.epfl.ch/'},
                 'css_url': {'en': "//static.epfl.ch/v0.23.0/styles/{'en': 'epfl'}-built.css", 'fr': "//static.epfl.ch/v0.23.0/styles/{'en': 'epfl', 'fr': 'epfl'}-built.css"},
                 'export_files': {'en': 'build/master/export_en.xml', 'fr': 'build/master/export_fr.xml'},
-                'files__len': 171,
+                'files__len': 180,
                 'homepage__pid': '94489',
                 'name': 'master',
                 'pages__ids': ['94489',
