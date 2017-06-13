@@ -1,4 +1,5 @@
 import os
+
 import pytest
 
 from settings import DATA_PATH
@@ -18,7 +19,7 @@ def site(request):
     """
     Load site only once
     """
-    from jahiap import Site
+    from src.jahiap import Site
     site_name = request.param
     site_data_path = DATA_PATH + request.param
     return Site(site_data_path, site_name)

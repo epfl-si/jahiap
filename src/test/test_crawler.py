@@ -2,10 +2,11 @@
     Testing the crawl.py script
 """
 import os
-import pytest
-import crawl
-
 from importlib import reload
+
+import pytest
+
+from src import crawl
 
 JAHIA_HOST = "https://fake-jahia.epfl.ch"
 JAHIA_ROOT_USER = "root"

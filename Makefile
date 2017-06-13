@@ -1,5 +1,5 @@
 site_name=master
-zip_file=exports/dcsl_export_2017-06-07-08-08.zip
+zip_file=exports/master_export_2017-05-29-10-53.zip
 port=9090
 output_dir=build
 docker_name="demo-$(site_name)"
@@ -11,17 +11,17 @@ clean:
 	rm -rf $(output_dir)/parsed_$(site_name).pkl
 
 unzip:
-	python jahiap.py -o $(output_dir) unzip $(zip_file)
+	python src/jahiap.py -o $(output_dir) unzip $(zip_file)
 
 parse:
-	python jahiap.py -o $(output_dir) parse $(site_name)
+	python src/jahiap.py -o $(output_dir) parse $(site_name)
 
 static:
-	python jahiap.py -o $(output_dir) export $(site_name) -s
+	python src/jahiap.py -o $(output_dir) export $(site_name) -s
 
 generate:
-	python jahiap.py -o $(output_dir) unzip $(zip_file)
-	python jahiap.py -o $(output_dir) export $(site_name) -s
+	python src/jahiap.py -o $(output_dir) unzip $(zip_file)
+	python src/jahiap.py -o $(output_dir) export $(site_name) -s
 
 start:
 	docker run -d \
