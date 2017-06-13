@@ -14,7 +14,7 @@ from datetime import datetime
 from exporter.dict_exporter import DictExporter
 from exporter.html_exporter import HTMLExporter
 from exporter.wp_exporter import WPExporter
-from settings import DOMAIN, JAHIA_DATE_FORMAT
+from settings import DOMAIN, JAHIA_DATE_FORMAT, LINE_LENGTH_ON_EXPORT, LINE_LENGTH_ON_PPRINT
 
 
 class Utils:
@@ -77,6 +77,7 @@ class Site:
         # parse the data
         self.parse_data()
 
+        # TODO: move to dedicated exporter?
         # generate the report
         self.report = ""
 
@@ -601,10 +602,10 @@ def main_export(parser, args):
         export_path = os.path.join(
             args.output_dir, "%s_dict.py" % args.site_name)
         data = DictExporter.generate_data(site)
-        pprint(data)
+        pprint(data, width=LINE_LENGTH_ON_PPRINT)
         with open(export_path, 'w') as output:
             output.write("%s_data = " % args.site_name)
-            output.write(pformat(data))
+            output.write(pformat(data, width=LINE_LENGTH_ON_EXPORT))
             output.flush()
         logging.info("Site successfully exported to python dictionary")
 

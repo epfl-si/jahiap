@@ -68,10 +68,10 @@ class TestSiteStructure:
     def test_nb_pages(self, site, data):
         assert len(site.pages) == len(data['pages'])
 
-    def test_page_titles(self, site, data):
-        expected_titles = set([page['title'] for page in data['pages']])
-        titles = set([p.title for p in site.pages])
-        assert expected_titles == titles
+    def test_page_ids(self, site, data):
+        expected_pids = set([page['pid'] for page in data['pages']])
+        pids = set([p.pid for p in site.pages])
+        assert expected_pids == pids
 
     def test_nb_boxes(self, site, data):
         expected_boxes = sum([page['nb_boxes'] for page in data['pages']])

@@ -4,6 +4,9 @@ WP_PASSWORD = 'passw0rd'
 JAHIA_DATE_FORMAT = '%Y-%m-%dT%H:%M:%S'
 DATA_PATH = "./test/jahiap-data/"
 
+LINE_LENGTH_ON_PPRINT = 150
+LINE_LENGTH_ON_EXPORT = LINE_LENGTH_ON_PPRINT + 100
+
 # this list cames from a cross-match of:
 #  - all sites listed in Jahia administration (998), based on "site key"
 #  - all sites liste in  Natalie's inventory (682), based on sudomain

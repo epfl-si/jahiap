@@ -1,5 +1,5 @@
-site_name=master
-zip_file=exports/dcsl_export_2017-06-07-08-08.zip
+site_name=dcsl
+zip_file=exports/dcsl_export_2017-06-09-18-20.zip
 port=9090
 output_dir=build
 docker_name="demo-$(site_name)"
