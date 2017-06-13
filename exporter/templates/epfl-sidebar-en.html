@@ -110,7 +110,11 @@
       <nav class="nav nav-inline lang" role="navigation" aria-label="Language selector">
         <ul class="nav-list">
           {% if 'en' in page_content.page.contents %}
-          <li class="nav-item nav-item-active">
+          {% if 'en' == page_content.language %}
+            <li class="nav-item nav-item-active">
+          {% else %}
+            <li class="nav-item">
+          {% endif %}
             <a class="nav-link" href="{{ page_content.page.contents['en'].path }}" lang="en">
               <span class="visuallyhidden">Current language: </span>
               <span class="visuallyhidden-xxs visuallyhidden-xs">English</span>
@@ -118,7 +122,11 @@
           </li>
           {% endif %}
           {% if 'fr' in page_content.page.contents %}
-          <li class="nav-item">
+          {% if 'fr' == page_content.language %}
+            <li class="nav-item nav-item-active">
+          {% else %}
+            <li class="nav-item">
+          {% endif %}
             <a class="nav-link" href="{{ page_content.page.contents['fr'].path }}" lang="fr" ref="alternate">
               <span class="visuallyhidden">Passer au : </span>
               <span class="visuallyhidden-xxs visuallyhidden-xs">français</span>
