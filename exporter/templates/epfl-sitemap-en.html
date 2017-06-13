@@ -6,7 +6,7 @@
 <!--[if IE 9]><html lang="en" class="no-js ie9 lt-ie10"><![endif]-->
 <!--[if !IE]><!--><html xmlns="http://www.w3.org/1999/xhtml" lang="en" class="no-js"><!--<![endif]-->
 <head>
-  <title>{{ page.title}}</title>
+  <title>{{ page_content.title }}</title>
   <meta charset="utf-8" />
   <meta name="description" content="" />
 
@@ -17,7 +17,7 @@
   <link rel="shortcut icon" type="image/x-icon" href="//static.epfl.ch/v0.23.0/favicon.ico" />
   <link rel="icon" type="image/png" href="//static.epfl.ch/v0.23.0/favicon.png" />
   <link rel="stylesheet" href="//static.epfl.ch/v0.23.0/styles/epfl-built.css"/>
-  <link rel="stylesheet" href="{{ site.css_url }}"/>
+  <link rel="stylesheet" href="{{ site.css_url[page_content.language] }}"/>
 
   <!-- /build -->
 
@@ -86,7 +86,7 @@
       <h1 class="site-title" itemprop="isPartOf" itemscope itemtype="http://schema.org/CollectionPage">
         <a href="..." itemprop="url" accesskey="1" rel="home">
           <span itemprop="name">
-              {{ site.title }} <abbr>{{ site.acronym}}</abbr>
+              {{ site.title[page_content.language] }} <abbr>{{ site.acronym[page_content.language] }}</abbr>
           </span>
         </a>
       </h1>
@@ -103,7 +103,7 @@
           </li>
           -->
           <li class="nav-item nav-item-active">
-            <a class="nav-link" href="{{ page.url }}">{{ page.title}}</a>
+            <a class="nav-link" href="{{ page_content.url }}">{{ page_content.title}}</a>
           </li>
         </ol>
       </nav>
@@ -112,13 +112,13 @@
       <nav class="nav nav-inline lang" role="navigation" aria-label="Language selector">
         <ul class="nav-list">
           <li class="nav-item nav-item-active">
-            <a class="nav-link" href="..." lang="en">
+            <a class="nav-link" href="/sitemap-en.html" lang="en">
               <span class="visuallyhidden">Current language: </span>
               <span class="visuallyhidden-xxs visuallyhidden-xs">English</span>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="..." lang="fr" ref="alternate">
+            <a class="nav-link" href="/sitemap-fr.html" lang="fr" ref="alternate">
               <span class="visuallyhidden">Passer au : </span>
               <span class="visuallyhidden-xxs visuallyhidden-xs">français</span>
             </a>
@@ -265,9 +265,9 @@
       <div class="g-span-2_3 g-span-s-1_1">
 
         <!-- The page header -->
-        {% if page.template != 'home' %}
+        {% if page_content.template != 'home' %}
         <header class="page-header">
-          <h1 class="page-title">{{ page.title}}</h1>
+          <h1 class="page-title">{{ page_content.title}}</h1>
         </header>{% endif %}
 
         <!-- The page content -->
@@ -299,30 +299,9 @@
     </main>
 
     <!-- The site footer -->
-    <footer id="footer" class="site-footer" role="contentinfo">
-      <div class="g-span-1_1">
-        <nav class="nav nav-inline" role="navigation" aria-label="Footer links">
-          <ul class="nav-list">
-            <li class="nav-item">
-              <a class="nav-link" href="/sitemap.html" accesskey="3">Sitemap</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="http://www.epfl.ch/accessibility.en.shtml">Accessibility</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link"  title="Legal notice Legal notice" href="http://mediacom.epfl.ch/disclaimer-en">Legal notice</a>
-            </li>
-            <li class="visuallyhidden">
-              <a class="nav-link"  title="Jump to: Top of the page" href="#top">Top of the page</a>
-            </li>
-            <li class="nav-item secondary-content">
-              Updated&nbsp;{{ page.last_update }}
-            </li>
-            <li class="nav-item secondary-content"> &copy; <span itemprop="copyrightHolder">EPFL</span> <span itemprop="copyrightYear">2017</span></li>
-          </ul>
-        </nav>
-      </div>
-    </footer>
+    {% with page_content=page_content %}
+    {% include 'includes/footer.inc.html' %}
+    {% endwith %}
 
   </div>
 
