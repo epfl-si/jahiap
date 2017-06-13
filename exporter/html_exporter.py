@@ -14,22 +14,23 @@ class HTMLExporter:
     )
 
     def __init__(self, site, out_path):
-
-        # TODO handle site with multiple languages
-        self.language = "en"
-
         self.site = site
         self.out_path = out_path
-        self.sitemap_content = ""
-        self.navigation = "<!-- START NAVIGATION -->\n"
 
         # create the output path if necessary
         if not os.path.exists(self.out_path):
             os.mkdir(self.out_path)
 
-        self.generate_pages()
-
+        # extract all the files
         self.extract_files()
+
+        # generate the Pages for each language
+        for language in site.languages:
+            self.language = language
+            self.sitemap_content = ""
+            self.navigation = ""
+
+            self.generate_pages()
 
     def generate_pages(self):
         """Generate the pages & the sitemap"""
@@ -44,6 +45,10 @@ class HTMLExporter:
         template = self.env.get_template('epfl-sidebar-en.html')
 
         for page in self.site.pages:
+            # check if the page exists in this language
+            if self.language not in page.contents:
+                continue
+
             page_content = page.contents[self.language]
             content = template.render(page_content=page_content, site=self.site, exporter=self)
 
@@ -96,10 +101,17 @@ class HTMLExporter:
         """
         Generate the navigation content. This is a recursive method
         """
+
+        # check if the page exists in this language
+        if self.language not in page.contents:
+            return
+
         if not page.is_homepage():
             # current page
             self.navigation_spacer(page)
-            self.navigation += "<li class='nav-item'><a class='nav-link' href='%s'>%s</a>" % (page.contents[self.language].path, page.contents[self.language].title)
+            self.navigation += "<li class='nav-item'><a class='nav-link' href='%s'>%s</a>" %\
+                               (page.contents[self.language].path,
+                                page.contents[self.language].title)
 
         if page.has_children():
             if not page.is_homepage():
@@ -128,11 +140,18 @@ class HTMLExporter:
         Generate the sitemap content. This is a recursive method
         """
         # top <ul> for the homepage
+
+        # check if the page exists in this language
+        if self.language not in page.contents:
+            return
+
         if page.is_homepage():
             self.sitemap_content += "<ul>"
 
         # current page
-        self.sitemap_content += "<li><a href='%s'>%s</a>" % (page.contents[self.language].path, page.contents[self.language].title)
+        self.sitemap_content += "<li><a href='%s'>%s</a>" %\
+                                (page.contents[self.language].path,
+                                 page.contents[self.language].title)
 
         if page.has_children():
             self.sitemap_content += "<ul>"
