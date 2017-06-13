@@ -57,9 +57,14 @@ class HTMLExporter:
         # sitemap
         template = self.env.get_template('epfl-sitemap-en.html')
 
+        # the sitemap is not a real Page, we create a dict with
+        # the informations we need in the template
+        sitemap = {}
+        sitemap["language"] = self.language
+
         self.generate_sitemap_content(self.site.homepage)
 
-        content = template.render(page=None, site=self.site, exporter=self)
+        content = template.render(page_content=sitemap, site=self.site, exporter=self)
 
         self.generate_page(path="/sitemap-%s.html" % self.language, content=content)
 

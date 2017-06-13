@@ -17,7 +17,7 @@
   <link rel="shortcut icon" type="image/x-icon" href="//static.epfl.ch/v0.23.0/favicon.ico" />
   <link rel="icon" type="image/png" href="//static.epfl.ch/v0.23.0/favicon.png" />
   <link rel="stylesheet" href="//static.epfl.ch/v0.23.0/styles/epfl-built.css"/>
-  <link rel="stylesheet" href="{{ site.css_url }}"/>
+  <link rel="stylesheet" href="{{ site.css_url[page_content.language] }}"/>
 
   <!-- /build -->
 
@@ -86,7 +86,7 @@
       <h1 class="site-title" itemprop="isPartOf" itemscope itemtype="http://schema.org/CollectionPage">
         <a href="/" itemprop="url" accesskey="1" rel="home">
           <span itemprop="name">
-              {{ site.title }} <abbr>{{ site.acronym}}</abbr>
+              {{ site.title[page_content.language] }} <abbr>{{ site.acronym[page_content.language] }}</abbr>
           </span>
         </a>
       </h1>
@@ -98,7 +98,7 @@
             <a class="nav-link" href="http://www.epfl.ch" itemprop="url"><span itemprop="name">EPFL</span></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{ site.breadcrumb_url }}">{{ site.breadcrumb_title }}</a>
+            <a class="nav-link" href="{{ site.breadcrumb_url[page_content.language] }}">{{ site.breadcrumb_title[page_content.language] }}</a>
           </li>
           <li class="nav-item nav-item-active">
             <a class="nav-link" href="{{ page_content.path }}">{{ page_content.title}}</a>
@@ -109,18 +109,22 @@
       <!-- The language selector -->
       <nav class="nav nav-inline lang" role="navigation" aria-label="Language selector">
         <ul class="nav-list">
+          {% if 'en' in page_content.page.contents %}
           <li class="nav-item nav-item-active">
             <a class="nav-link" href="{{ page_content.page.contents['en'].path }}" lang="en">
               <span class="visuallyhidden">Current language: </span>
               <span class="visuallyhidden-xxs visuallyhidden-xs">English</span>
             </a>
           </li>
+          {% endif %}
+          {% if 'fr' in page_content.page.contents %}
           <li class="nav-item">
             <a class="nav-link" href="{{ page_content.page.contents['fr'].path }}" lang="fr" ref="alternate">
               <span class="visuallyhidden">Passer au : </span>
               <span class="visuallyhidden-xxs visuallyhidden-xs">français</span>
             </a>
           </li>
+          {% endif %}
         </ul>
       </nav>
 
