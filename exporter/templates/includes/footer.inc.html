@@ -11,7 +11,7 @@
         <li class="nav-item">
           <a class="nav-link"  title="Legal notice Legal notice" href="http://mediacom.epfl.ch/disclaimer-en">Legal notice</a>
         </li>
-        {% for element in site.footer %}
+        {% for element in site.footer[page_content.language] %}
         <li class="nav-item">
           <a class="nav-link"  title="{{ element.title }}" href="{{ element.url }}">{{ element.title }}</a>
         </li>

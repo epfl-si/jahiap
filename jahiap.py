@@ -86,7 +86,7 @@ class Site:
         self.breadcrumb_url = {}
 
         # footer
-        self.footer = []
+        self.footer = {}
 
         # the pages. We have a both list and a dict.
         # The dict key is the page id, and the dict value is the page itself
@@ -129,35 +129,40 @@ class Site:
             self.acronym[language] = Utils.get_tag_attribute(dom, "acronym", "jahia:value")
             self.css_url[language] = "//static.epfl.ch/v0.23.0/styles/%s-built.css" % self.theme
 
-    def parse_footer(self, dom):
+    def parse_footer(self):
         """parse site footer"""
 
-        # is positioned on children of main jahia:page element
-        elements = dom.firstChild.childNodes
+        for language, dom_path in self.export_files.items():
+            dom = Utils.get_dom(dom_path)
 
-        for child in elements:
+            # is positioned on children of main jahia:page element
+            elements = dom.firstChild.childNodes
 
-            if child.ELEMENT_NODE != child.nodeType:
-                continue
+            self.footer[language] = []
 
-            if "bottomLinksListList" == child.nodeName:
+            for child in elements:
 
-                nb_items_in_footer = len(child.getElementsByTagName("jahia:url"))
+                if child.ELEMENT_NODE != child.nodeType:
+                    continue
 
-                if nb_items_in_footer == 0:
-                    """ This site has the default footer"""
-                    break
+                if "bottomLinksListList" == child.nodeName:
 
-                elif nb_items_in_footer > 0:
+                    nb_items_in_footer = len(child.getElementsByTagName("jahia:url"))
 
-                    elements = child.getElementsByTagName("jahia:url")
-                    for element in elements:
-                        link = Link(
-                            url=element.getAttribute('jahia:value'),
-                            title=element.getAttribute('jahia:title')
-                        )
-                        self.footer.append(link)
-                    break
+                    if nb_items_in_footer == 0:
+                        """ This page has probably the default footer """
+                        break
+
+                    elif nb_items_in_footer > 0:
+
+                        elements = child.getElementsByTagName("jahia:url")
+                        for element in elements:
+                            link = Link(
+                                url=element.getAttribute('jahia:value'),
+                                title=element.getAttribute('jahia:title')
+                            )
+                            self.footer[language].append(link)
+                        break
 
     def parse_breadcrumb(self):
         """Parse the breadcrumb"""
@@ -429,6 +434,7 @@ class PageContent:
                     self.sidebar.boxes.append(box)
 
         # if not found, search the sidebar of a parent
+        # TODO by Greg: Fix the infinite loop
         nb_boxes = len(self.sidebar.boxes)
         if nb_boxes == 0:
             while nb_boxes == 0:
@@ -566,6 +572,14 @@ class File:
     def __init__(self, name, path):
         self.name = name
         self.path = path
+
+
+class Link:
+    """A link"""
+
+    def __init__(self, title, url):
+        self.title = title
+        self.url = url
 
 
 def main(parser, args):
