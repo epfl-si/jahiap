@@ -73,19 +73,15 @@ class Site:
                 self.export_files[language] = path
                 self.languages.append(language)
 
-        # TODO this will be removed
-        self.language = "en"
-        self.xml_path = base_path + "/export_%s.xml" % self.language
-
-        # site params that are parsed later
-        self.title = ""
-        self.acronym = ""
-        self.theme = ""
-        self.css_url = ""
-
-        # breadcrumb
-        self.breadcrumb_title = ""
-        self.breadcrumb_url = ""
+        # site params that are parsed later. There are dicts because
+        # we have a value for each language. The dict key is the language,
+        # and the dict value is the specific value
+        self.title = {}
+        self.acronym = {}
+        self.theme = {}
+        self.css_url = {}
+        self.breadcrumb_title = {}
+        self.breadcrumb_url = {}
 
         # the pages. We have a both list and a dict.
         # The dict key is the page id, and the dict value is the page itself
@@ -110,35 +106,38 @@ class Site:
     def parse_data(self):
         """Parse the Site data"""
 
-        # get the dom
-        dom = Utils.get_dom(self.xml_path)
-
         # do the parsing
-        self.parse_site_params(dom)
-        self.parse_breadcrumb(dom)
+        self.parse_site_params()
+        self.parse_breadcrumb()
         self.parse_pages()
         self.parse_pages_content()
         self.parse_files()
 
-    def parse_site_params(self, dom):
+    def parse_site_params(self,):
         """Parse the site params"""
-        self.title = Utils.get_tag_attribute(dom, "siteName", "jahia:value")
-        self.theme = Utils.get_tag_attribute(dom, "theme", "jahia:value")
-        self.acronym = Utils.get_tag_attribute(dom, "acronym", "jahia:value")
-        self.css_url = "//static.epfl.ch/v0.23.0/styles/%s-built.css" % self.theme
+        for language, dom_path in self.export_files.items():
+            dom = Utils.get_dom(dom_path)
 
-    def parse_breadcrumb(self, dom):
+            self.title[language] = Utils.get_tag_attribute(dom, "siteName", "jahia:value")
+            self.theme[language] = Utils.get_tag_attribute(dom, "theme", "jahia:value")
+            self.acronym[language] = Utils.get_tag_attribute(dom, "acronym", "jahia:value")
+            self.css_url[language] = "//static.epfl.ch/v0.23.0/styles/%s-built.css" % self.theme
+
+    def parse_breadcrumb(self):
         """Parse the breadcrumb"""
-        breadcrumb_link = dom.getElementsByTagName("breadCrumbLink")[0]
+        for language, dom_path in self.export_files.items():
+            dom = Utils.get_dom(dom_path)
 
-        for child in breadcrumb_link.childNodes:
-            if child.ELEMENT_NODE != child.nodeType:
-                continue
+            breadcrumb_link = dom.getElementsByTagName("breadCrumbLink")[0]
 
-            if 'jahia:url' == child.nodeName:
-                self.breadcrumb_url = child.getAttribute('jahia:value')
-                self.breadcrumb_title = child.getAttribute('jahia:title')
-                break
+            for child in breadcrumb_link.childNodes:
+                if child.ELEMENT_NODE != child.nodeType:
+                    continue
+
+                if 'jahia:url' == child.nodeName:
+                    self.breadcrumb_url[language] = child.getAttribute('jahia:value')
+                    self.breadcrumb_title[language] = child.getAttribute('jahia:title')
+                    break
 
     def parse_pages(self):
         """
