@@ -17,6 +17,7 @@ generate:
 start:
 	docker run -d \
 		--name $(docker_name) \
+		--restart=always \
 		-p $(port):80 \
 		-v $(PWD)/$(output_dir)/$(site_name)_html:/usr/share/nginx/html \
 		nginx
