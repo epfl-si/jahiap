@@ -1,9 +1,9 @@
 #!/usr/local/bin/python
 """(c) All rights reserved. ECOLE POLYTECHNIQUE FEDERALE DE LAUSANNE, Switzerland, VPSI, 2017"""
 
-from jinja2 import Environment, PackageLoader, select_autoescape
-
 import os
+
+from jinja2 import Environment, PackageLoader, select_autoescape
 
 
 class HTMLExporter:

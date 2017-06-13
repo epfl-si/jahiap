@@ -1,3 +1,4 @@
+"""(c) All rights reserved. ECOLE POLYTECHNIQUE FEDERALE DE LAUSANNE, Switzerland, VPSI, 2017"""
 """
     This script automates the crawling of Jahia website,
     in order to download zip exports.
@@ -6,15 +7,17 @@
         `python crawl.py -h`
     to get help on usage and available options
 """
-import os
-import logging
-import timeit
+
 import argparse
-from pathlib import Path
+import logging
+import os
+import timeit
 from datetime import datetime, timedelta
+from pathlib import Path
 
 import requests
 from clint.textui import progress
+
 from settings import JAHIA_SITES
 
 # define HOST
