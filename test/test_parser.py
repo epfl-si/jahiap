@@ -51,10 +51,10 @@ class TestSiteProperties:
         assert site.theme == data['properties']['theme']
 
     def test_breadcrumb_title(self, site, data):
-        assert site.breadcrumb_title == data['properties']['breadcrumb_title']
+        assert site.breadcrumb.title == data['properties']['breadcrumb_title']
 
     def test_breadcrumb_url(self, site, data):
-        assert site.breadcrumb_url == data['properties']['breadcrumb_url']
+        assert site.breadcrumb.url == data['properties']['breadcrumb_url']
 
     def test_css_url(self, site, data):
         assert site.css_url == data['properties']['css_url']
