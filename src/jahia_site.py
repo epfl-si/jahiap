@@ -1,7 +1,7 @@
 """(c) All rights reserved. ECOLE POLYTECHNIQUE FEDERALE DE LAUSANNE, Switzerland, VPSI, 2017"""
 
 """
-This file is named jahia_site to avoid a conflict with Site https://docs.python.org/3/library/site.html
+This file is named jahia_site to avoid a conflict with Site [https://docs.python.org/3/library/site.html]
 """
 import os
 
