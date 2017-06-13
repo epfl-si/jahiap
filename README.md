@@ -15,7 +15,7 @@ $ make all
 
 You now can access the content at [http://localhost:9090](http://localhost:9090).
 
-Again ?
+If you want to run it again, you have to call `make stop` first in order to stop the running container, and then call the `all` directive :
 
 ```
 $ make stop all
@@ -32,7 +32,8 @@ This one will be available at [http://localhost:9091](http://localhost:9091).
 
 The `make` command does a few things for you :
 
-* unzip a Jahia file
+* crawl one or many Jahia zip file
+* unzip it
 * parse it
 * export its content
 * run a nginx docker image to serve the exported content
@@ -40,9 +41,10 @@ The `make` command does a few things for you :
 The detailed commands look like this :
 
 ```
-python jahiap.py -o build unzip exports/dcsl_export_2017-05-30-09-44.zip
-python jahiap.py -o build parse dcsl -r
-python jahiap.py -o build export dcsl -s
+python src/jahiap.py -o exports crawl --site dcsl
+python src/jahiap.py -o build unzip exports/dcsl_export_2017-05-30-09-44.zip
+python src/jahiap.py -o build parse dcsl -r
+python src/jahiap.py -o build export dcsl -s
 docker run -d \
     --name docker-dcsl \
     -p 9090:80 \
@@ -77,7 +79,7 @@ make restart
 You might use the option `-h` on the jahiap script to get the following help:
 
 ```
-$ python jahiap.py  -h
+$ python src/jahiap.py  -h
 usage: jahiap.py [-h] [--debug] [--quiet] [-o OUTPUT_DIR]
                  {unzip,parse,export} ...
 
@@ -96,10 +98,45 @@ optional arguments:
 
 More help on each command can be displayed with the command name followed by `-h`. See next section for more details.
 
+## Crawl
+
+The command relies on the following environment variables :
+
+```
+export JAHIA_HOST="localhost"
+export JAHIA_ROOT_USER='root'
+export JAHIA_ROOT_PASSWORD=xxx
+```
+The third one is mandatory, i.e the script will not run if it is not set. For the two first ones, the values above are used by default.
+
+Quick example to download dcsl zip:
+
+```
+python src/jahiap.py -o exports crawl --site dcsl
+```
+
+More options are available to change the output directory, the date of the snapshot or the level of logs. Use option `-h` to get the following help :
+
+```
+$ python src/jahiap.py crawl -h
+usage: jahiap.py crawl [-h] [--site SITE] [-f] [-d DATE] [-n NUMBER]
+                       [-s START_AT]
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --site SITE           site name (in jahia admin) of site to get the zip for
+  -f, --force           Force download even if exisiting files for same site
+  -d DATE, --date DATE  date and time for the snapshot, e.g : 2017-01-15-23-00
+  -n NUMBER, --number NUMBER
+                        number of sites to crawl in JAHIA_SITES
+  -s START_AT, --start-at START_AT
+                        (zero-)index where to start in JAHIA_SITES
+```
+
 ### Unzip
 
 ```
-$ python jahiap.py unzip -h
+$ python src/jahiap.py unzip -h
 usage: jahiap.py unzip [-h] zip_file
 
 positional arguments:
@@ -112,7 +149,7 @@ optional arguments:
 ### Parse
 
 ```
-$ python jahiap.py parse -h
+$ python src/jahiap.py parse -h
 usage: jahiap.py parse [-h] [-r] site_name
 
 positional arguments:
@@ -126,7 +163,7 @@ optional arguments:
 ### Export
 
 ```
-$ python jahiap.py export -h
+$ python src/jahiap.py export -h
 usage: jahiap.py export [-h] [-w] [-s] [-u URL] site_name
 
 positional arguments:
@@ -138,42 +175,6 @@ optional arguments:
   -s, --to-static       export parsed data to static HTML files
   -u URL, --site-url URL
                         WordPress URL where to export parsed content
-```
-
-## Downloading zip files
-
-The script `crawl.py` is provided to download the Jahia zip files. It relies on the following environment variables :
-
-```
-export JAHIA_HOST="localhost"
-export JAHIA_ROOT_USER='root'
-export JAHIA_ROOT_PASSWORD=xxx
-```
-The third one is mandatory, i.e the script will not run if it is not set. For the two first ones, the values above are used by default.
-
-Quick example to download dcsl zip:
-
-```
-python crawl.py dcsl
-```
-
-More options are available to change the output directory, the date of the snapshot or the level of logs. Use option `-h` to get the following help :
-
-```
-usage: crawl.py [-h] [--debug] [--quiet] [-o OUTPUT] [-d DATE] SITE
-
-Crawl Jahia zip files
-
-positional arguments:
-  SITE                  site name (in jahia admin) of site to get the zip for
-
-optional arguments:
-  -h, --help            show this help message and exit
-  --debug               Set logging level to DEBUG (default is INFO)
-  --quiet               Set logging level to WARNING (default is INFO)
-  -o OUTPUT, --output OUTPUT
-                        path where to download files
-  -d DATE, --date DATE  date and time for the snapshot, e.g : 2017-01-15-23-00
 ```
 
 ## Testing
