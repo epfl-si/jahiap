@@ -32,21 +32,6 @@ class Utils:
 
         return elements[0].getAttribute(attribute)
 
-    @staticmethod
-    def search_child(dom, parent_tag, child_tag):
-        """
-        Search child element in the xml DOM.
-        The element 'parent_tag' is present only once.
-        """
-        element = dom.getElementsByTagName(parent_tag)[0]
-
-        for child in element.childNodes:
-            if child.ELEMENT_NODE != child.nodeType:
-                continue
-
-            if child_tag == child.nodeName:
-                return child
-
     @classmethod
     def get_dom(cls, path):
         """Returns the dom of the given XML file path"""
@@ -88,18 +73,17 @@ class Site:
                 self.export_files[language] = path
                 self.languages.append(language)
 
-        # TODO this will be removed
-        self.language = "en"
-        self.xml_path = base_path + "/export_%s.xml" % self.language
-
-        # site params that are parsed later
-        self.title = ""
-        self.acronym = ""
-        self.theme = ""
-        self.css_url = ""
+        # site params that are parsed later. There are dicts because
+        # we have a value for each language. The dict key is the language,
+        # and the dict value is the specific value
+        self.title = {}
+        self.acronym = {}
+        self.theme = {}
+        self.css_url = {}
 
         # breadcrumb
-        self.breadcrumb = None
+        self.breadcrumb_title = {}
+        self.breadcrumb_url = {}
 
         # footer
         self.footer = []
@@ -127,23 +111,23 @@ class Site:
     def parse_data(self):
         """Parse the Site data"""
 
-        # get the dom
-        dom = Utils.get_dom(self.xml_path)
-
         # do the parsing
-        self.parse_site_params(dom)
-        self.parse_breadcrumb(dom)
-        self.parse_footer(dom)
+        self.parse_site_params()
+        self.parse_breadcrumb()
+        self.parse_footer()
         self.parse_pages()
         self.parse_pages_content()
         self.parse_files()
 
-    def parse_site_params(self, dom):
+    def parse_site_params(self,):
         """Parse the site params"""
-        self.title = Utils.get_tag_attribute(dom, "siteName", "jahia:value")
-        self.theme = Utils.get_tag_attribute(dom, "theme", "jahia:value")
-        self.acronym = Utils.get_tag_attribute(dom, "acronym", "jahia:value")
-        self.css_url = "//static.epfl.ch/v0.23.0/styles/%s-built.css" % self.theme
+        for language, dom_path in self.export_files.items():
+            dom = Utils.get_dom(dom_path)
+
+            self.title[language] = Utils.get_tag_attribute(dom, "siteName", "jahia:value")
+            self.theme[language] = Utils.get_tag_attribute(dom, "theme", "jahia:value")
+            self.acronym[language] = Utils.get_tag_attribute(dom, "acronym", "jahia:value")
+            self.css_url[language] = "//static.epfl.ch/v0.23.0/styles/%s-built.css" % self.theme
 
     def parse_footer(self, dom):
         """parse site footer"""
@@ -175,19 +159,22 @@ class Site:
                         self.footer.append(link)
                     break
 
-    def parse_breadcrumb(self, dom):
+    def parse_breadcrumb(self):
         """Parse the breadcrumb"""
 
-        child = Utils.search_child(
-            dom=dom,
-            parent_tag="breadCrumbLink",
-            child_tag="jahia:url"
-        )
+        for language, dom_path in self.export_files.items():
+            dom = Utils.get_dom(dom_path)
 
-        self.breadcrumb = Link(
-            url=child.getAttribute('jahia:value'),
-            title=child.getAttribute('jahia:title')
-        )
+            breadcrumb_link = dom.getElementsByTagName("breadCrumbLink")[0]
+
+            for child in breadcrumb_link.childNodes:
+                if child.ELEMENT_NODE != child.nodeType:
+                    continue
+
+                if 'jahia:url' == child.nodeName:
+                    self.breadcrumb_url[language] = child.getAttribute('jahia:value')
+                    self.breadcrumb_title[language] = child.getAttribute('jahia:title')
+                    break
 
     def parse_pages(self):
         """
