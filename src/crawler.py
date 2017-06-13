@@ -11,7 +11,7 @@
 import logging
 import os
 import timeit
-from datetime import datetime, timedelta
+from datetime import timedelta
 from pathlib import Path
 
 import requests
@@ -95,6 +95,9 @@ class SiteCrawler(object):
             Download either the one site 'cmd_args.site'
             or all 'cmd_args.number' sites from JAHIA_SITES, starting at 'cmd_args.start_at'
         """
+        logging.debug("HOST set to %s", HOST)
+        logging.debug("DATE set to %s", cmd_args.date)
+
         if cmd_args.site:
             # download only given self.site
             cls(cmd_args.site, cmd_args).download_site()
@@ -109,7 +112,7 @@ class SiteCrawler(object):
     def __init__(self, site_name, cmd_args):
         self.site_name = site_name
         self.date = cmd_args.date
-        self.output = cmd_args.output
+        self.output = cmd_args.output_dir
         self.force = cmd_args.force
         self.elapsed = 0
 
@@ -187,76 +190,3 @@ class SiteCrawler(object):
             tracer.write(str(self))
             tracer.flush()
         return self.file_path
-
-
-import argparse
-
-
-def main(args):
-    logging.info("starting crawling...")
-    logging.debug("HOST set to %s", HOST)
-    logging.debug("DATE set to %s", args.date)
-    try:
-        SiteCrawler.download(args)
-    except requests.ConnectionError as err:
-        logging.error(err)
-
-
-if __name__ == '__main__':
-    # declare parsers for command line arguments
-    parser = argparse.ArgumentParser(
-        description="Crawl 'NUMBER' Jahia zip files from JAHIA_SITES, starting at 'START_AT' index. Or crawl given  'SITE'")
-
-    # logging-related agruments
-    parser.add_argument('--debug',
-                        dest='debug',
-                        action='store_true',
-                        help='Set logging level to DEBUG (default is INFO)')
-    parser.add_argument('--quiet',
-                        dest='quiet',
-                        action='store_true',
-                        help='Set logging level to WARNING (default is INFO)')
-
-    # Jahia related arguments
-    parser.add_argument('--site',
-                        action='store',
-                        help='site name (in jahia admin) of site to get the zip for')
-    parser.add_argument('-o', '--output',
-                        action='store',
-                        default='build',
-                        help='path where to download files')
-    parser.add_argument('-f', '--force',
-                        dest='force',
-                        action='store_true',
-                        help='Force download even if exisiting files for same site')
-    parser.add_argument('-d', '--date',
-                        action='store',
-                        default=datetime.today().strftime("%Y-%m-%d-%H-%M"),
-                        help='date and time for the snapshot, e.g : 2017-01-15-23-00')
-    parser.add_argument('-n', '--number',
-                        action='store',
-                        type=int,
-                        default=1,
-                        help='number of sites to crawl in JAHIA_SITES')
-    parser.add_argument('-s', '--start-at',
-                        action='store',
-                        dest='start_at',
-                        type=int,
-                        default=0,
-                        help='(zero-)index where to start in JAHIA_SITES')
-
-    args = parser.parse_args()
-
-    # set logging config before anything else
-    if args.quiet:
-        logging.basicConfig(level=logging.WARNING)
-    elif args.debug:
-        logging.basicConfig(level=logging.DEBUG)
-    else:
-        logging.basicConfig(level=logging.INFO)
-
-    # check output
-    if not os.path.isdir(args.output):
-        raise SystemExit("Ouput '%s' does not exist. Please create it first" % args.output)
-
-    main(args)

@@ -4,14 +4,16 @@ import argparse
 import logging
 import os
 import pickle
-import tempfile
 import zipfile
+import requests
 
 from pprint import pprint, pformat
+from datetime import datetime
 
 from exporter.html_exporter import HTMLExporter
 from exporter.wp_exporter import WPExporter
 from exporter.dict_exporter import DictExporter
+from crawler import SiteCrawler
 from jahia_site import Site
 
 from settings import DOMAIN
@@ -28,11 +30,18 @@ def main(parser, args):
         if not os.path.isdir(args.output_dir):
             os.mkdir(args.output_dir)
     else:
-        args.output_dir = tempfile.mkdtemp()
-        logging.warning("Created temporary directory %s, please remove it when done" % args.output_dir)
+        raise SystemExit("Ouput '%s' does not exist. Please create it first" % args.output_dir)
 
     # forward to appropriate main function
     args.command(parser, args)
+
+
+def main_crawl(parser, args):
+    logging.info("starting crawling...")
+    try:
+        SiteCrawler.download(args)
+    except requests.ConnectionError as err:
+        logging.error(err)
 
 
 def main_unzip(parser, args):
@@ -137,7 +146,7 @@ def main_export(parser, args):
 if __name__ == '__main__':
     # declare parsers for command line arguments
     parser = argparse.ArgumentParser(
-        description='Unzip, parse and export Jahia XML')
+        description='Crawl, unzip, parse and export Jahia XML')
     subparsers = parser.add_subparsers()
 
     # logging-related agruments
@@ -153,7 +162,34 @@ if __name__ == '__main__':
     # common arguments for all commands
     parser.add_argument('-o', '--output-dir',
                         dest='output_dir',
-                        help='directory where to unzip, parse, export Jahia XML')
+                        help='directory where to perform command')
+
+    # "crawl" command
+    parser_crawl = subparsers.add_parser('crawl')
+    parser_crawl.set_defaults(command=main_crawl)
+
+    parser_crawl.add_argument('--site',
+                        action='store',
+                        help='site name (in jahia admin) of site to get the zip for')
+    parser_crawl.add_argument('-f', '--force',
+                        dest='force',
+                        action='store_true',
+                        help='Force download even if exisiting files for same site')
+    parser_crawl.add_argument('-d', '--date',
+                        action='store',
+                        default=datetime.today().strftime("%Y-%m-%d-%H-%M"),
+                        help='date and time for the snapshot, e.g : 2017-01-15-23-00')
+    parser_crawl.add_argument('-n', '--number',
+                        action='store',
+                        type=int,
+                        default=1,
+                        help='number of sites to crawl in JAHIA_SITES')
+    parser_crawl.add_argument('-s', '--start-at',
+                        action='store',
+                        dest='start_at',
+                        type=int,
+                        default=0,
+                        help='(zero-)index where to start in JAHIA_SITES')
 
     # "unzip" command
     parser_unzip = subparsers.add_parser('unzip')

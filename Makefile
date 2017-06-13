@@ -2,6 +2,8 @@ site_name=dcsl
 zip_file=exports/dcsl_export_2017-06-09-18-20.zip
 port=9090
 output_dir=build
+export_dir=exports
+to_crawl=682
 docker_name="demo-$(site_name)"
 
 all: clean generate start
@@ -9,6 +11,12 @@ all: clean generate start
 clean:
 	rm -rf $(output_dir)/$(site_name)*
 	rm -rf $(output_dir)/parsed_$(site_name).pkl
+
+crawl_one:
+	python src/jahiap.py -o $(export_dir) crawl --site $(site_name)
+
+crawl_many:
+	python src/jahiap.py -o $(export_dir) crawl -n $(to_crawl)
 
 unzip:
 	python src/jahiap.py -o $(output_dir) unzip $(zip_file)

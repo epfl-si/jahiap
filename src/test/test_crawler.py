@@ -6,7 +6,7 @@ from importlib import reload
 
 import pytest
 
-import crawl
+import crawler
 
 
 JAHIA_HOST = "https://fake-jahia.epfl.ch"
@@ -22,7 +22,7 @@ def environment(request):
     os.environ["JAHIA_ROOT_PASSWORD"] = JAHIA_ROOT_PASSWORD
     os.environ["JAHIA_ROOT_USER"] = JAHIA_ROOT_USER
     os.environ["JAHIA_HOST"] = JAHIA_HOST
-    reload(crawl)
+    reload(crawler)
     return os.environ
 
 
@@ -43,7 +43,7 @@ class TestSetup:
         """
         delete_environment()
         with pytest.raises(SystemExit):
-            reload(crawl)
+            reload(crawler)
 
     def test_default_env(self, environment):
         """
@@ -51,17 +51,17 @@ class TestSetup:
         """
         delete_environment()
         os.environ["JAHIA_ROOT_PASSWORD"] = "TEST"
-        reload(crawl)
-        assert crawl.HOST == 'localhost'
-        assert crawl.ID_POST_PARAMS == {
+        reload(crawler)
+        assert crawler.HOST == 'localhost'
+        assert crawler.ID_POST_PARAMS == {
             'login_username': 'root',
             'login_password': "TEST",
         }
 
     def test_loaded_env(self, environment):
         # values have been set in os.environ by fixture
-        assert crawl.HOST == JAHIA_HOST
-        assert crawl.ID_POST_PARAMS == {
+        assert crawler.HOST == JAHIA_HOST
+        assert crawler.ID_POST_PARAMS == {
             'login_username': JAHIA_ROOT_USER,
             'login_password': JAHIA_ROOT_PASSWORD,
         }
