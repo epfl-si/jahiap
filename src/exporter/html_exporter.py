@@ -42,7 +42,7 @@ class HTMLExporter:
         self.generate_navigation(self.site.homepage)
 
         # regular pages
-        template = self.env.get_template('epfl-sidebar-en.html')
+        template = self.env.get_template('epfl-sidebar.html')
 
         for page in self.site.pages:
             # check if the page exists in this language
@@ -55,7 +55,7 @@ class HTMLExporter:
             self.generate_page(path=page_content.path, content=content)
 
         # sitemap
-        template = self.env.get_template('epfl-sitemap-en.html')
+        template = self.env.get_template('epfl-sitemap.html')
 
         # the sitemap is not a real Page, we create a dict with
         # the informations we need in the template
