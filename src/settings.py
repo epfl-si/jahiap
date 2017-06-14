@@ -1,9 +1,14 @@
 """(c) All rights reserved. ECOLE POLYTECHNIQUE FEDERALE DE LAUSANNE, Switzerland, VPSI, 2017"""
+import os
+
 DOMAIN = 'localhost'
 WP_USER = 'admin'
 WP_PASSWORD = 'passw0rd'
 JAHIA_DATE_FORMAT = '%Y-%m-%dT%H:%M:%S'
 DATA_PATH = "jahia-data/"
+EXPORT_PATH = os.path.abspath(os.path.join(
+    os.path.dirname(__file__),
+    "../exports"))
 
 LINE_LENGTH_ON_PPRINT = 150
 LINE_LENGTH_ON_EXPORT = LINE_LENGTH_ON_PPRINT + 100
