@@ -49,15 +49,21 @@ def main_unzip(args):
     zip_files = SiteCrawler.download(args)
 
     # to store paths of downloaded zips
-    unzipped_files = []
+    unzipped_files = {}
 
-    for zip_file in zip_files:
+    for site_name, zip_file in zip_files.items():
+
+        # create subdir in output_dir
+        output_subdir = os.path.join(args.output_dir, site_name)
+        if output_subdir:
+            if not os.path.isdir(output_subdir):
+                os.mkdir(output_subdir)
 
         # check if unzipped files already exists
-        unzip_path = os.path.join(args.output_dir, args.site_name)
+        unzip_path = os.path.join(output_subdir, site_name)
         if os.path.isdir(unzip_path):
             logging.info("Already unzipped %s" % unzip_path)
-            unzipped_files.append(unzip_path)
+            unzipped_files[site_name] = unzip_path
             continue
 
         logging.info("Unzipping %s..." % zip_file)
@@ -71,23 +77,23 @@ def main_unzip(args):
         export_zip = zipfile.ZipFile(zip_file, 'r')
 
         # make sure we have the zip containing the site
-        zip_name = "%s.zip" % args.site_name
+        zip_name = "%s.zip" % site_name
         if zip_name not in export_zip.namelist():
             logging.error("zip file %s not found in main zip" % zip_name)
             continue
 
         # extract the export zip file
-        export_zip.extractall(args.output_dir)
+        export_zip.extractall(output_subdir)
         export_zip.close()
 
         # unzip the zip with the files
-        zip_path = os.path.join(args.output_dir, zip_name)
+        zip_path = os.path.join(output_subdir, zip_name)
         zip_ref_with_files = zipfile.ZipFile(zip_path, 'r')
         zip_ref_with_files.extractall(unzip_path)
 
         # log success
         logging.info("Site successfully extracted in %s" % unzip_path)
-        unzipped_files.append(unzip_path)
+        unzipped_files[site_name] = unzip_path
 
     # return results
     return unzipped_files
@@ -98,20 +104,22 @@ def main_parse(args):
     site_dirs = main_unzip(args)
 
     # to store paths of parsed objects
-    parsed_sites = []
+    parsed_sites = {}
 
-    for site_dir in site_dirs:
+    for site_name, site_dir in site_dirs.items():
+        # create subdir in output_dir
+        output_subdir = os.path.join(args.output_dir, site_name)
 
         # check if already parsed
-        pickle_file = os.path.join(args.output_dir, 'parsed_%s.pkl' % args.site_name)
+        pickle_file = os.path.join(output_subdir, 'parsed_%s.pkl' % site_name)
         if os.path.exists(pickle_file):
             with open(pickle_file, 'rb') as input:
                 logging.info("Loaded parsed site from %s" % pickle_file)
-                parsed_sites.append(pickle.load(input))
+                parsed_sites[site_name] = pickle.load(input)
                 continue
 
         logging.info("Parsing %s...", site_dir)
-        site = Site(site_dir, args.site_name)
+        site = Site(site_dir, site_name)
 
         # TODO : move to exporter
         if args.print_report:
@@ -123,7 +131,7 @@ def main_parse(args):
 
         # log success
         logging.info("Site successfully parsed, and saved into %s" % pickle_file)
-        parsed_sites.append(site)
+        parsed_sites[site_name] = site
 
     # return results
     return parsed_sites
@@ -133,8 +141,10 @@ def main_export(args):
     # get list of parsed sites
     sites = main_parse(args)
 
-    for site in sites:
+    for site in sites.values():
         logging.info("Exporting %s ...", site.name)
+        # create subdir in output_dir
+        output_subdir = os.path.join(args.output_dir, site.name)
 
         if args.to_wordpress:
             wp_exporter = WPExporter(site=site, domain=args.site_url)
@@ -143,17 +153,17 @@ def main_export(args):
 
         if args.to_static:
             export_path = os.path.join(
-                args.output_dir, "%s_html" % args.site_name)
+                output_subdir, "%s_html" % site.name)
             HTMLExporter(site, export_path)
             logging.info("Site successfully exported to HTML files")
 
         if args.to_dictionary:
             export_path = os.path.join(
-                args.output_dir, "%s_dict.py" % args.site_name)
+                output_subdir, "%s_dict.py" % site.name)
             data = DictExporter.generate_data(site)
             pprint(data)
             with open(export_path, 'w') as output:
-                output.write("%s_data = " % args.site_name)
+                output.write("%s_data = " % site.name)
                 output.write(pformat(data))
                 output.flush()
             logging.info("Site successfully exported to python dictionary")

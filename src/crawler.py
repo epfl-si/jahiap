@@ -103,7 +103,7 @@ class SiteCrawler(object):
         logging.debug("DATE set to %s", cmd_args.date)
 
         # to store paths of downloaded zips
-        downloaded_files = []
+        downloaded_files = {}
 
         # compute list fo sites to download
         try:
@@ -115,11 +115,10 @@ class SiteCrawler(object):
 
         # download sites from JAHIA_SITES
         for site in sites:
-            downloaded_files.append(
-                cls(site, cmd_args).download_site())
+            downloaded_files[site] = str(cls(site, cmd_args).download_site())
 
         # return results, as strings
-        return map(str, downloaded_files)
+        return downloaded_files
 
     def __init__(self, site_name, cmd_args):
         self.site_name = site_name

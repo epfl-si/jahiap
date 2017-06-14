@@ -1,7 +1,7 @@
 site_name=dcsl
 port=9090
-to_crawl=10
-output_dir=build/$(site_name)
+number=1
+output_dir=build
 docker_name="demo-$(site_name)"
 
 all: clean static start
@@ -10,22 +10,19 @@ clean:
 	rm -rf $(output_dir)
 
 crawl:
-	python src/jahiap.py -o $(output_dir) crawl $(site_name)
-
-crawl_many:
-	python src/jahiap.py -o $(output_dir) crawl -n $(to_crawl) $(site_name)
+	python src/jahiap.py -o $(output_dir) -n $(number) crawl $(site_name)
 
 unzip:
-	python src/jahiap.py -o $(output_dir) unzip $(site_name)
+	python src/jahiap.py -o $(output_dir) -n $(number) unzip $(site_name)
 
 parse:
-	python src/jahiap.py -o $(output_dir) parse $(site_name)
+	python src/jahiap.py -o $(output_dir) -n $(number) parse $(site_name)
 
 dict:
-	python src/jahiap.py -o $(output_dir) export -d $(site_name)
+	python src/jahiap.py -o $(output_dir) -n $(number) export -d $(site_name)
 
 static:
-	python src/jahiap.py -o $(output_dir) export -s $(site_name)
+	python src/jahiap.py -o $(output_dir) -n $(number) export -s $(site_name)
 
 start:
 	docker run -d \
