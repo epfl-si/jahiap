@@ -28,7 +28,7 @@ def main(args):
     # mkdir from output_dir or as temporary dir
     if args.output_dir:
         if not os.path.isdir(args.output_dir):
-            os.mkdir(args.output_dir)
+            os.makedirs(args.output_dir)
     else:
         raise SystemExit("Ouput '%s' does not exist. Please create it first" % args.output_dir)
 

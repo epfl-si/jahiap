@@ -1,14 +1,13 @@
 site_name=dcsl
 port=9090
-output_dir=build
 to_crawl=10
+output_dir=build/$(site_name)
 docker_name="demo-$(site_name)"
 
 all: clean static start
 
 clean:
-	rm -rf $(output_dir)/$(site_name)*
-	rm -rf $(output_dir)/parsed_$(site_name).pkl
+	rm -rf $(output_dir)
 
 crawl:
 	python src/jahiap.py -o $(output_dir) crawl $(site_name)

@@ -45,8 +45,8 @@ class SiteCrawler(object):
         'cmd_args' drives the download logic, i.e:
         * '--site': what unic site to download
         * '-n' & '-s': or how many sites to download from JAHIA_SITES, where from
-        * '--date': what date should be asked Jahia
-        * '--force': if existing downloaded files should be overrident or not
+        * '--date': what date should be asked to Jahia
+        * '--force': if existing downloaded files should be overriden or not
      """
 
     FILE_PATTERN = "%s_export_%s.zip"
