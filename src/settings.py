@@ -3,7 +3,7 @@ import os
 
 DOMAIN = 'localhost'
 WP_USER = 'admin'
-WP_PASSWORD = 'passw0rd'
+WP_PASSWORD = 'admin'
 JAHIA_DATE_FORMAT = '%Y-%m-%dT%H:%M:%S'
 DATA_PATH = "jahia-data/"
 EXPORT_PATH = os.path.abspath(os.path.join(

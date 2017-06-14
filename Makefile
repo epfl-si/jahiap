@@ -1,4 +1,4 @@
-site_name=dcsl
+site_name=master
 port=9090
 number=1
 output_dir=build
@@ -23,6 +23,9 @@ dict:
 
 static:
 	python src/jahiap.py -o $(output_dir) -n $(number) export -s $(site_name)
+
+wp:
+	python src/jahiap.py -o $(output_dir) -n $(number) export -w $(site_name)
 
 start:
 	docker run -d \

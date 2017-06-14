@@ -247,7 +247,8 @@ if __name__ == '__main__':
         '-u', '--site-url',
         dest='site_url',
         metavar='URL',
-        default=DOMAIN,
+        # default=parser.parse_args().site_name + "." + DOMAIN,
+        default="localhost/monsiteweb",
         help='wordpress URL where to export parsed content')
     parser_export.add_argument(
         '-r', '--print-report',

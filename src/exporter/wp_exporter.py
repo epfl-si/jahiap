@@ -2,7 +2,7 @@
 import os
 
 from bs4 import BeautifulSoup
-from wordpress_json import WordpressJsonWrapper
+from wordpress_json import WordpressJsonWrapper, WordpressError
 
 from settings import WP_USER, WP_PASSWORD
 
@@ -52,7 +52,16 @@ class WPExporter:
         url = "http://%s/index.php/wp-json/wp/v2" % domain
         self.wp = WordpressJsonWrapper(url, WP_USER, WP_PASSWORD)
 
+    def delete_all(self):
+
+        "http://localhost/monsiteweb/index.php/wp-json/wp/v2/media/1761?force=true"
+        medias = self.wp.get_media()
+        for media in medias:
+            self.wp.delete_media()
+
     def import_all_data_in_wordpress(self):
+        #self.delete_all()
+
         self.import_medias()
         self.import_pages()
         self.set_frontpage()
@@ -63,90 +72,107 @@ class WPExporter:
 
         file_path = media.path + '/' + media.name
         file = open(file_path, 'rb')
-        files = {
-            'file': file
-        }
 
-        wp_media_info = {
-            # date
-            # date_gmt
-            'slug': media.path,
-            # status
-            'title': media.name,
-            # author
-            # comment_status
-            # ping_status
-            # meta
-            # template
-            # alt_text
-            # caption
-            # description
-            # post
-        }
-        return self.wp.post_media(data=wp_media_info, files=files)
+        extension = file.name.split('/')[-1].split('.')[-1]
+        if extension not in ['css', 'png', 'jpg', 'pdf', 'JPG', 'gif']:
+            pass
+        else:
+            files = {
+                'file': file
+            }
+
+            wp_media_info = {
+                # date
+                # date_gmt
+                'slug': media.path,
+                # status
+                'title': media.name,
+                # author
+                # comment_status
+                # ping_status
+                # meta
+                # template
+                # alt_text
+                # caption
+                # description
+                # post
+            }
+            files = files
+            try:
+                wp_media = self.wp.post_media(data=wp_media_info, files=files)
+                return wp_media
+            except WordpressError as e:
+                print(file.name)
+
+
 
     def replace_links(self, wp_media):
 
         url = wp_media['source_url']
 
         for page in self.site.pages:
-            for box in page.boxes:
-                if "<img" in box.content:
-                    soup = BeautifulSoup(box.content, 'html.parser')
-                    img_tags = soup.find_all('img')
-                    for tag in img_tags:
+            if 'en' in page.contents:
+                for box in page.contents['en'].boxes:
+                    if "<img" in box.content:
+                        soup = BeautifulSoup(box.content, 'html.parser')
+                        img_tags = soup.find_all('img')
+                        for tag in img_tags:
 
-                        extensions = ['.jpg', '.jpeg', '.png']
-                        for extension in extensions:
-                            elements = tag['src'].split(extension)[0].split('/')
-                            index = len(elements) - 1
-                            file_name = elements[index].replace(' ', '-') + extension
+                            extensions = ['.jpg', '.jpeg', '.png']
+                            for extension in extensions:
+                                elements = tag['src'].split(extension)[0].split('/')
+                                index = len(elements) - 1
+                                file_name = elements[index].replace(' ', '-') + extension
 
-                            if file_name in url:
-                                tag['src'] = url
-                                box.content = str(soup)
+                                if file_name in url:
+                                    tag['src'] = url
+                                    box.content = str(soup)
 
     def import_medias(self):
 
         for media in self.site.files:
             wp_media = self.import_media(media)
-            self.replace_links(wp_media)
-            self.report['files'] += 1
+            if wp_media:
+                self.replace_links(wp_media)
+                self.report['files'] += 1
+
+
 
     def import_pages(self):
 
         for page in self.site.pages:
 
             content = ""
-            for box in page.boxes:
-                content += box.content
+            if 'en' in page.contents:
+                for box in page.contents['en'].boxes:
+                    content += box.content
 
-            wp_page_info = {
-                # date: auto => date/heure du jour
-                # date_gmt: auto => date/heure du jour GMT
-                'slug': page.name,
-                'status': 'publish',
-                # password
-                'title': page.title,
-                'content': content,
-                # author
-                # excerpt
-                # featured_media
-                # comment_status: 'closed'
-                # ping_status: 'closed'
-                # format
-                # meta
-                # sticky
-                # template
-                # categories
-                # tags
-            }
+                wp_page_info = {
+                    # date: auto => date/heure du jour
+                    # date_gmt: auto => date/heure du jour GMT
+                    'slug': page.contents['en'].path,
+                    'status': 'publish',
+                    # password
+                    'title': page.contents['en'].title,
+                    'content': content,
+                    # author
+                    # excerpt
+                    # featured_media
+                    # comment_status: 'closed'
+                    # ping_status: 'closed'
+                    # format
+                    # meta
+                    # sticky
+                    # template
+                    # categories
+                    # tags
+                }
 
-            wp_page = self.wp.post_pages(data=wp_page_info)
+                wp_page = self.wp.post_pages(data=wp_page_info)
 
-            # keep wordpress ID for further usages
-            page.wp_id = wp_page['id']
-            self.report['pages'] += 1
+                # keep wordpress ID for further usages
+                page.wp_id = wp_page['id']
+                self.report['pages'] += 1
 
     def populate_menu(self, menu_name):
         """
