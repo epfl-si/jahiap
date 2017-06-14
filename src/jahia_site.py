@@ -56,6 +56,13 @@ class Site:
         self.pages_by_pid = {}
         self.pages_by_uuid = {}
 
+        # variables for the report
+        self.num_files = 0
+        self.num_pages = 0
+        self.internal_links = 0
+        self.num_boxes = {}
+        self.report = ""
+
         # set for convenience, to avoid:
         #   [p for p in self.pages if p.is_homepage()][0]
         self.homepage = None
@@ -67,8 +74,6 @@ class Site:
         self.parse_data()
 
         # generate the report
-        self.report = ""
-
         self.generate_report()
 
     def parse_data(self):
@@ -280,9 +285,12 @@ class Site:
             for link in links:
                 href = link.get('href')
 
+                if not href:
+                    continue
+
                 # search for internal links like :
                 # ###page:/lang/en/ref/d3bcd626-d2cd-46f6-8fdc-829a82c2f6c9
-                if href and href.startswith("###page"):
+                if href.startswith("###page"):
                     uuid = href[href.rfind('/') + 1:]
 
                     if uuid in self.pages_by_uuid:
@@ -293,24 +301,25 @@ class Site:
                         # change the link href
                         link['href'] = new_href
 
+                        self.internal_links += 1
+
             box.content = str(soup)
 
     def generate_report(self):
         """Generate the report of what has been parsed"""
 
-        num_files = len(self.files)
+        self.num_files = len(self.files)
 
-        num_pages = len(self.pages_by_pid.values())
+        self.num_pages = len(self.pages_by_pid.values())
 
         # calculate the total number of boxes by type
         # dict key is the box type, dict value is the number of boxes
-        num_boxes = {}
 
         for box in self.get_all_boxes():
-            if box.type in num_boxes:
-                num_boxes[box.type] = num_boxes[box.type] + 1
+            if box.type in self.num_boxes:
+                self.num_boxes[box.type] = self.num_boxes[box.type] + 1
             else:
-                num_boxes[box.type] = 1
+                self.num_boxes[box.type] = 1
 
         self.report = """
 Found :
@@ -319,7 +328,9 @@ Found :
 
   - %s pages :
 
-""" % (num_files, num_pages)
+""" % (self.num_files, self.num_pages)
 
-        for num, count in num_boxes.items():
+        for num, count in self.num_boxes.items():
             self.report += "    - %s %s boxes\n" % (count, num)
+
+        self.report += "    - %s internal links " % (self.internal_links)
