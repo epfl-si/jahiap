@@ -41,7 +41,7 @@ The `make` command does a few things for you :
 The detailed commands look like this :
 
 ```
-python src/jahiap.py -o exports crawl --site dcsl
+python src/jahiap.py -o build crawl --site dcsl
 python src/jahiap.py -o build unzip exports/dcsl_export_2017-05-30-09-44.zip
 python src/jahiap.py -o build parse dcsl -r
 python src/jahiap.py -o build export dcsl -s
@@ -81,12 +81,12 @@ You might use the option `-h` on the jahiap script to get the following help:
 ```
 $ python src/jahiap.py  -h
 usage: jahiap.py [-h] [--debug] [--quiet] [-o OUTPUT_DIR]
-                 {unzip,parse,export} ...
+                 {crawl,unzip,parse,export} ...
 
 Unzip, parse and export Jahia XML
 
 positional arguments:
-  {unzip,parse,export}
+  {crawl,unzip,parse,export}
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -112,7 +112,7 @@ The third one is mandatory, i.e the script will not run if it is not set. For th
 Quick example to download dcsl zip:
 
 ```
-python src/jahiap.py -o exports crawl --site dcsl
+python src/jahiap.py -o build crawl --site dcsl
 ```
 
 More options are available to change the output directory, the date of the snapshot or the level of logs. Use option `-h` to get the following help :

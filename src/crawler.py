@@ -17,7 +17,7 @@ from pathlib import Path
 import requests
 from clint.textui import progress
 
-from settings import JAHIA_SITES
+from settings import JAHIA_SITES, EXPORT_PATH
 
 # define HOST
 if not os.environ.get("JAHIA_HOST"):
@@ -113,9 +113,15 @@ class SiteCrawler(object):
 
     def __init__(self, site_name, cmd_args):
         self.site_name = site_name
+        # jahia download URI depends on date
         self.date = cmd_args.date
-        self.output = cmd_args.output_dir
+        # where to store zip files
+        self.export_path = EXPORT_PATH
+        # where to store output from the script (tracer)
+        self.output_path = cmd_args.output_dir
+        # whether overriding existing zip or not
         self.force = cmd_args.force
+        # to measure overall download time for given site
         self.elapsed = 0
 
         # adapt file_path to cmd_args
@@ -125,14 +131,14 @@ class SiteCrawler(object):
             self.file_name = os.path.basename(self.file_path)
         else:
             self.file_name = self.FILE_PATTERN % (self.site_name, self.date)
-            self.file_path = os.path.join(self.output, self.file_name)
+            self.file_path = os.path.join(self.export_path, self.file_name)
 
     def __str__(self):
         """ Format used for report"""
         return ";".join([self.site_name, self.file_path, str(self.elapsed)])
 
     def already_downloaded(self):
-        path = Path(self.output)
+        path = Path(self.export_path)
         return list(path.glob("%s_export*" % self.site_name))
 
     def download_site(self):
@@ -187,7 +193,7 @@ class SiteCrawler(object):
         # log execution time and return path to downloaded file
         self.elapsed = timedelta(seconds=timeit.default_timer() - start_time)
         logging.info("file downloaded in %s", self.elapsed)
-        tracer_path = os.path.join(self.output, self.TRACER)
+        tracer_path = os.path.join(self.output_path, self.TRACER)
         with open(tracer_path, 'a') as tracer:
             tracer.write(str(self))
             tracer.flush()
