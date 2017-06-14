@@ -43,7 +43,7 @@
   <div id="page" class="site site-wrapper" itemscope itemtype="http://schema.org/WebPage">
 
     <!-- The minimal EPFL header -->
-    <header id="epfl-header" class="site-header epfl" role="banner" aria-label="Global EPFL banner" data-ajax-header="//static.epfl.ch/v0.23.0/includes/epfl-header.en.html">
+    <header id="epfl-header" class="site-header epfl" role="banner" aria-label="Global EPFL banner" data-ajax-header="//static.epfl.ch/v0.23.0/includes/epfl-header.{{ page_content.language }}.html">
 
       <!-- The EPFL logo -->
       <div class="logo">
@@ -149,113 +149,6 @@
               </a>
             </li>
               {{ exporter.navigation|safe }}
-              <!-- TODO the navigation
-            <li class="nav-item">
-              <span class="nav-link" data-widget="collapse">Menu 1 [dropdown]</span>
-              <ul class="nav-list nav-vertical" data-widget="menu" data-items=".nav-link">
-                <li class="nav-item">
-                  <a class="nav-link" href="...">Menu 1.1</a>
-                  <ul class="nav-list">
-                    <li class="nav-item">
-                      <a class="nav-link" href="...">Menu 1.1.1</a>
-                    </li>
-                  </ul>
-                </li>
-              </ul>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="...">Menu 2 [combo]</a>
-              <span data-widget="collapse"></span>
-              <ul class="nav-list nav-vertical" data-widget="menu" data-items=".nav-link">
-                <li class="nav-item">
-                  <a class="nav-link" href="...">Menu 2.1</a>
-                  <ul class="nav-list">
-                    <li class="nav-item">
-                      <a class="nav-link" href="...">Menu 2.1.1</a>
-                    </li>
-                  </ul>
-                </li>
-              </ul>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="...">Menu 3 [combo]</a>
-              <span data-widget="collapse"></span>
-              <ul class="nav-list nav-vertical" data-widget="menu">
-                <li class="nav-item">
-                  <a class="nav-link" href="...">Menu 3.1</a>
-                  <span data-widget="collapse"></span>
-                  <ul class="nav-list" data-widget="menu">
-                    <li class="nav-item">
-                      <a class="nav-link" href="...">Menu 3.1.1</a>
-                      <span data-widget="collapse"></span>
-                      <ul class="nav-list" data-widget="menu">
-                        <li class="nav-item">
-                          <a class="nav-link" href="...">Menu 3.1.1.1</a>
-                          <span data-widget="collapse"></span>
-                          <ul class="nav-list" data-widget="menu">
-                            <li class="nav-item">
-                              <a class="nav-link" href="...">Menu 3.1.1.1.1</a>
-                            </li>
-                          </ul>
-                        </li>
-                      </ul>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="...">Menu 3.1.2</a>
-                      <span data-widget="collapse"></span>
-                      <ul class="nav-list" data-widget="menu">
-                        <li class="nav-item">
-                          <a class="nav-link" href="...">Menu 3.1.2.1</a>
-                          <span data-widget="collapse"></span>
-                          <ul class="nav-list" data-widget="menu">
-                              <li class="nav-item">
-                                  <a class="nav-link" href="...">Menu 3.1.2.1.1</a>
-                              </li>
-                          </ul>
-                        </li>
-                      </ul>
-                    </li>
-                  </ul>
-                </li>
-                <li class="nav-item">
-                   <a class="nav-link" href="...">Menu 3.2</a>
-                   <span data-widget="collapse"></span>
-                   <ul class="nav-list" data-widget="menu">
-                      <li class="nav-item">
-                          <a class="nav-link" href="...">Menu 3.2.1</a>
-                          <span data-widget="collapse"></span>
-                          <ul class="nav-list" data-widget="menu">
-                            <li class="nav-item">
-                              <a class="nav-link" href="...">Menu 3.2.1.1</a>
-                              <span data-widget="collapse"></span>
-                              <ul class="nav-list" data-widget="menu">
-                                  <li class="nav-item">
-                                      <a class="nav-link" href="...">Menu 3.2.1.1.1</a>
-                                  </li>
-                              </ul>
-                             </li>
-                          </ul>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link" href="...">Menu 3.2.2</a>
-                        <span data-widget="collapse"></span>
-                        <ul class="nav-list" data-widget="menu">
-                            <li class="nav-item">
-                              <a class="nav-link" href="...">Menu 3.2.2.1</a>
-                              <span data-widget="collapse"></span>
-                              <ul class="nav-list" data-widget="menu">
-                                 <li class="nav-item">
-                                     <a class="nav-link" href="...">Menu 3.2.2.1.1</a>
-                                 </li>
-                              </ul>
-                            </li>
-                        </ul>
-                      </li>
-                   </ul>
-                </li>
-              </ul>
-            </li>
-          -->
           </ul>
         </nav>
 
@@ -290,7 +183,6 @@
             {% endif %}
             {{ box.content|safe }}
           {% endfor %}
-
         </div>
 
         <!-- The page footer -->
