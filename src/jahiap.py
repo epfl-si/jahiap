@@ -121,9 +121,7 @@ def main_parse(args):
         logging.info("Parsing %s...", site_dir)
         site = Site(site_dir, site_name)
 
-        # TODO : move to exporter
-        if args.print_report:
-            print(site.report)
+        print(site.report)
 
         # save parsed site on file system
         with open(pickle_file, 'wb') as output:
