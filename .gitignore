@@ -1,10 +1,7 @@
 *.pyc
-
-# dev env
+.cache
 .idea
+build
 exports
 demo.md
-build
-
-# pytest
-.cache
+test.py

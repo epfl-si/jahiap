@@ -1,4 +1,4 @@
-site_name=dcsl
+site_name=master
 port=9090
 number=1
 output_dir=build
@@ -29,7 +29,7 @@ start:
 		--name $(docker_name) \
 		--restart=always \
 		-p $(port):80 \
-		-v $(PWD)/$(output_dir)/$(site_name)_html:/usr/share/nginx/html \
+		-v $(PWD)/$(output_dir)/$(site_name)/$(site_name)_html:/usr/share/nginx/html \
 		nginx
 
 stop:
