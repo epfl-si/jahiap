@@ -94,22 +94,32 @@ class SiteCrawler(object):
     @classmethod
     def download(cls, cmd_args):
         """
-            Download either the one site 'cmd_args.site'
+            Download either the one site 'cmd_args.site_name'
             or all 'cmd_args.number' sites from JAHIA_SITES, starting at 'cmd_args.start_at'
+
+            returns list of downloaded_files
         """
         logging.debug("HOST set to %s", HOST)
         logging.debug("DATE set to %s", cmd_args.date)
 
-        if cmd_args.site:
-            # download only given self.site
-            cls(cmd_args.site, cmd_args).download_site()
-        else:
-            # download sites from JAHIA_SITES
-            start = int(cmd_args.start_at)
-            end = int(cmd_args.start_at) + int(cmd_args.number)
-            sites = JAHIA_SITES[start:end]
-            for site in sites:
-                cls(site, cmd_args).download_site()
+        # to store paths of downloaded zips
+        downloaded_files = []
+
+        # compute list fo sites to download
+        try:
+            start_at = JAHIA_SITES.index(cmd_args.site_name)
+        except ValueError:
+            raise SystemExit("site name %s not found in JAHIA_SITES", cmd_args.site_name)
+        end = start_at + int(cmd_args.number)
+        sites = JAHIA_SITES[start_at:end]
+
+        # download sites from JAHIA_SITES
+        for site in sites:
+            downloaded_files.append(
+                cls(site, cmd_args).download_site())
+
+        # return results, as strings
+        return map(str, downloaded_files)
 
     def __init__(self, site_name, cmd_args):
         self.site_name = site_name
@@ -197,4 +207,6 @@ class SiteCrawler(object):
         with open(tracer_path, 'a') as tracer:
             tracer.write(str(self))
             tracer.flush()
+
+        # return PosixPath converted to string
         return self.file_path
