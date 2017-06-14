@@ -148,7 +148,8 @@ class SiteCrawler(object):
 
     def already_downloaded(self):
         path = Path(self.export_path)
-        return list(path.glob("%s_export*" % self.site_name))
+        
+        return [str(file_path) for file_path in path.glob("%s_export*" % self.site_name)]
 
     def download_site(self):
         # do not download twice if not --force
