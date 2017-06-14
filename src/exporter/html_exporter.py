@@ -44,7 +44,7 @@ class HTMLExporter:
         # regular pages
         template = self.env.get_template('epfl-sidebar.html')
 
-        for page in self.site.pages:
+        for page in self.site.pages_by_pid.values():
             # check if the page exists in this language
             if self.language not in page.contents:
                 continue
@@ -70,27 +70,21 @@ class HTMLExporter:
 
     def update_boxes_data(self):
         """Update the boxes data"""
-        for page in self.site.pages:
+        for box in self.site.get_all_boxes():
+            if box.type == "toggle":
+                # toggle title
+                content = "<h3 data-widget='collapse'>%s</h3>" % box.title
+                # toggle content
+                content += "<div>%s</div>" % box.content
 
-            if self.language not in page.contents:
-                continue
+                box.content = content
 
-            for box in page.contents[self.language].boxes:
-                # toggle box : add EPFL bootstrap specific code
-                if box.type == "toggle":
-                    # toggle title
-                    content = "<h3 data-widget='collapse'>%s</h3>" % box.title
-                    # toggle content
-                    content += "<div>%s</div>" % box.content
+                # we don't want to show the box title
+                box.title = None
 
-                    box.content = content
-
-                    # we don't want to show the box title
-                    box.title = None
-
-                # all other box types, we just enclose them in a div
-                else:
-                    box.content = "<div>" + box.content + "</div>"
+            # all other box types, we just enclose them in a div
+            else:
+                box.content = "<div>" + box.content + "</div>"
 
     def generate_page(self, path, content):
         """Generate a page"""
