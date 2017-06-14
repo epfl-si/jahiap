@@ -21,6 +21,12 @@ class Site:
     def __init__(self, base_path, name):
         self.base_path = base_path
         self.name = name
+        # the server name, e.g. "master.epfl.ch"
+        self.server_name = ""
+
+        # parse the properties at the beginning, we need the
+        # server_name for later
+        self.parse_properties()
 
         # the export files containing the pages data.
         # the dict key is the language code (e.g. "en") and
@@ -60,6 +66,7 @@ class Site:
         self.num_files = 0
         self.num_pages = 0
         self.internal_links = 0
+        self.absolute_links = 0
         self.num_boxes = {}
         self.report = ""
 
@@ -75,6 +82,26 @@ class Site:
 
         # generate the report
         self.generate_report()
+
+    def parse_properties(self):
+        """
+        Parse the properties found in site.properties
+        """
+
+        properties = {}
+
+        with open(self.base_path + "/site.properties") as file:
+            lines = file.readlines()
+
+            for line in lines:
+                if "=" not in line:
+                    continue
+
+                values = line.split("=")
+
+                properties[values[0].strip()] = values[1].strip()
+
+        self.server_name = properties["siteservername"]
 
     def parse_data(self):
         """Parse the Site data"""
@@ -288,7 +315,7 @@ class Site:
                 if not href:
                     continue
 
-                # search for internal links like :
+                # rewrite internal links like :
                 # ###page:/lang/en/ref/d3bcd626-d2cd-46f6-8fdc-829a82c2f6c9
                 if href.startswith("###page"):
                     uuid = href[href.rfind('/') + 1:]
@@ -302,6 +329,15 @@ class Site:
                         link['href'] = new_href
 
                         self.internal_links += 1
+                # rewrite absolute links as relative links
+                elif href.startswith("http://" + self.server_name) or \
+                        href.startswith("https://" + self.server_name):
+
+                    new_href = href[href.index(self.server_name) + len(self.server_name):]
+
+                    link['href'] = new_href
+
+                    self.absolute_links += 1
 
             box.content = str(soup)
 
@@ -322,15 +358,16 @@ class Site:
                 self.num_boxes[box.type] = 1
 
         self.report = """
-Found :
+Parsed for %s :
 
   - %s files
 
   - %s pages :
 
-""" % (self.num_files, self.num_pages)
+""" % (self.server_name, self.num_files, self.num_pages)
 
         for num, count in self.num_boxes.items():
             self.report += "    - %s %s boxes\n" % (count, num)
 
-        self.report += "    - %s internal links " % (self.internal_links)
+        self.report += "    - %s internal links\n" % self.internal_links
+        self.report += "    - %s absolute links\n" % self.absolute_links
