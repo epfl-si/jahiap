@@ -44,6 +44,7 @@ class TestSetup:
         delete_environment()
         with pytest.raises(SystemExit):
             reload(crawler)
+            crawler.SiteCrawler.get_credentials()
 
     def test_default_env(self, environment):
         """
@@ -53,7 +54,7 @@ class TestSetup:
         os.environ["JAHIA_ROOT_PASSWORD"] = "TEST"
         reload(crawler)
         assert crawler.HOST == 'localhost'
-        assert crawler.ID_POST_PARAMS == {
+        assert crawler.SiteCrawler.get_credentials() == {
             'login_username': 'root',
             'login_password': "TEST",
         }
@@ -61,7 +62,7 @@ class TestSetup:
     def test_loaded_env(self, environment):
         # values have been set in os.environ by fixture
         assert crawler.HOST == JAHIA_HOST
-        assert crawler.ID_POST_PARAMS == {
+        assert crawler.SiteCrawler.get_credentials() == {
             'login_username': JAHIA_ROOT_USER,
             'login_password': JAHIA_ROOT_PASSWORD,
         }

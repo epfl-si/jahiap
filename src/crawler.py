@@ -24,17 +24,6 @@ if not os.environ.get("JAHIA_HOST"):
     logging.warning("JAHIA_HOST not set, using 'localhost' as default")
 HOST = os.environ.get("JAHIA_HOST", "localhost")
 
-# define credentials
-if not os.environ.get("JAHIA_ROOT_PASSWORD"):
-    raise SystemExit("The script requires the environment variable JAHIA_ROOT_PASSWORD to be set")
-if not os.environ.get("JAHIA_ROOT_USER"):
-    logging.warning("JAHIA_ROOT_USER not set, using 'root' as default")
-
-ID_POST_PARAMS = {
-    'login_username': os.environ.get('JAHIA_ROOT_USER', 'root'),
-    'login_password': os.environ.get('JAHIA_ROOT_PASSWORD')
-}
-
 # define URLs and their parameters
 ID_URI = "administration"
 ID_GET_PARAMS = {
@@ -51,7 +40,7 @@ DWLD_GET_PARAMS = {
 
 class SiteCrawler(object):
     """
-        Call SiteCrawler(cmd_args).download()
+        Call SiteCrawler.download(cmd_args)
 
         'cmd_args' drives the download logic, i.e:
         * '--site': what unic site to download
@@ -78,7 +67,7 @@ class SiteCrawler(object):
             response = session.post(
                 "%s/%s" % (HOST, ID_URI),
                 params=ID_GET_PARAMS,
-                data=ID_POST_PARAMS
+                data=self.get_credentials()
             )
 
             # log and set session
@@ -88,6 +77,19 @@ class SiteCrawler(object):
 
         # cls.session is set, return it
         return self.__session
+
+    @staticmethod
+    def get_credentials():
+        # define credentials
+        if not os.environ.get("JAHIA_ROOT_PASSWORD"):
+            raise SystemExit("The script requires the environment variable JAHIA_ROOT_PASSWORD to be set")
+        if not os.environ.get("JAHIA_ROOT_USER"):
+            logging.warning("JAHIA_ROOT_USER not set, using 'root' as default")
+
+        return {
+            'login_username': os.environ.get('JAHIA_ROOT_USER', 'root'),
+            'login_password': os.environ.get('JAHIA_ROOT_PASSWORD')
+        }
 
     @classmethod
     def download(cls, cmd_args):
