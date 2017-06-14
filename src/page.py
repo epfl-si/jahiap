@@ -8,6 +8,7 @@ class Page:
         # common data for all languages
         self.pid = element.getAttribute("jahia:pid")
         self.uuid = element.getAttribute("jcr:uuid")
+        self.wp_id = None
         self.site = site
         self.template = element.getAttribute("jahia:template")
         self.parent = None

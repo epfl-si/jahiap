@@ -146,8 +146,13 @@ def main_export(args):
 
         if args.to_wordpress:
             wp_exporter = WPExporter(site=site, domain=args.site_url)
-            wp_exporter.import_all_data_in_wordpress()
+            wp_exporter.import_all_data_to_wordpress()
             logging.info("Site successfully exported to Wordpress")
+
+        if args.clean_wordpress:
+            wp_exporter = WPExporter(site=site, domain=args.site_url)
+            wp_exporter.delete_all_content()
+            logging.info("Site Wordpress successfully deleted")
 
         if args.to_static:
             export_path = os.path.join(
@@ -231,6 +236,11 @@ if __name__ == '__main__':
         dest='to_wordpress',
         action='store_true',
         help='export parsed data to Wordpress')
+    parser_export.add_argument(
+        '-c', '--clean-wordpress',
+        dest='clean_wordpress',
+        action='store_true',
+        help='delete all content of Wordpress site')
     parser_export.add_argument(
         '-s', '--to-static',
         dest='to_static',
