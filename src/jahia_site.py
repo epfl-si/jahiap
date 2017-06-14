@@ -2,6 +2,7 @@
 
 import os
 
+from bs4 import BeautifulSoup
 from box import Box
 from file import File
 from link import Link
@@ -20,6 +21,12 @@ class Site:
     def __init__(self, base_path, name):
         self.base_path = base_path
         self.name = name
+        # the server name, e.g. "master.epfl.ch"
+        self.server_name = ""
+
+        # parse the properties at the beginning, we need the
+        # server_name for later
+        self.parse_properties()
 
         # the export files containing the pages data.
         # the dict key is the language code (e.g. "en") and
@@ -51,10 +58,17 @@ class Site:
         # footer
         self.footer = {}
 
-        # the pages. We have a both list and a dict.
-        # The dict key is the page id, and the dict value is the page itself
-        self.pages = []
-        self.pages_dict = {}
+        # the pages
+        self.pages_by_pid = {}
+        self.pages_by_uuid = {}
+
+        # variables for the report
+        self.num_files = 0
+        self.num_pages = 0
+        self.internal_links = 0
+        self.absolute_links = 0
+        self.num_boxes = {}
+        self.report = ""
 
         # set for convenience, to avoid:
         #   [p for p in self.pages if p.is_homepage()][0]
@@ -67,9 +81,27 @@ class Site:
         self.parse_data()
 
         # generate the report
-        self.report = ""
-
         self.generate_report()
+
+    def parse_properties(self):
+        """
+        Parse the properties found in site.properties
+        """
+
+        properties = {}
+
+        with open(self.base_path + "/site.properties") as file:
+            lines = file.readlines()
+
+            for line in lines:
+                if "=" not in line:
+                    continue
+
+                values = line.split("=")
+
+                properties[values[0].strip()] = values[1].strip()
+
+        self.server_name = properties["siteservername"]
 
     def parse_data(self):
         """Parse the Site data"""
@@ -81,6 +113,7 @@ class Site:
         self.parse_pages()
         self.parse_pages_content()
         self.parse_files()
+        self.fix_links()
 
     def parse_site_params(self,):
         """Parse the site params"""
@@ -104,7 +137,6 @@ class Site:
             self.footer[language] = []
 
             for child in elements:
-
                 if child.ELEMENT_NODE != child.nodeType:
                     continue
 
@@ -166,7 +198,7 @@ class Site:
                     continue
 
                 # check if we already parsed this page
-                if pid in self.pages_dict:
+                if pid in self.pages_by_pid:
                     continue
 
                 page = Page(self, xml_page)
@@ -175,9 +207,10 @@ class Site:
                 if page.is_homepage():
                     self.homepage = page
 
-                # add the Page to the Site
-                self.pages.append(page)
-                self.pages_dict[page.pid] = page
+                # add the Page to the cache
+                self.pages_by_pid[page.pid] = page
+                self.pages_by_uuid[page.uuid] = page
+
 
     def parse_pages_content(self):
         """
@@ -199,7 +232,7 @@ class Site:
                     continue
 
                 # retrieve the Page definition that we already parsed
-                page = self.pages_dict[pid]
+                page = self.pages_by_pid[pid]
                 page_content = PageContent(page, language, xml_page)
 
                 # main tag is the parent of all boxes types
@@ -244,6 +277,19 @@ class Site:
 
                 self.files.append(File(name=file_name, path=path))
 
+    def get_all_boxes(self):
+        """
+        Returns all the Site boxes.
+        """
+        boxes = []
+
+        for page in self.pages_by_pid.values():
+            for page_content in page.contents.values():
+                for box in page_content.boxes:
+                    boxes.append(box)
+
+        return boxes
+
     def belongs_to(self, element, page):
         """Check if the given element belongs to the given page"""
         parent = element.parentNode
@@ -253,33 +299,75 @@ class Site:
 
         return page.pid == parent.getAttribute("jahia:pid")
 
+    def fix_links(self):
+        """
+        Fix the boxes links. This must be done at the end,
+        when all the pages have been parsed.
+        """
+        for box in self.get_all_boxes():
+            soup = BeautifulSoup(box.content, 'html.parser')
+
+            links = soup.find_all('a')
+
+            for link in links:
+                href = link.get('href')
+
+                if not href:
+                    continue
+
+                # rewrite internal links like :
+                # ###page:/lang/en/ref/d3bcd626-d2cd-46f6-8fdc-829a82c2f6c9
+                if href.startswith("###page"):
+                    uuid = href[href.rfind('/') + 1:]
+
+                    if uuid in self.pages_by_uuid:
+                        linked_page = self.pages_by_uuid[uuid]
+
+                        new_href = linked_page.contents[box.page_content.language].path
+
+                        # change the link href
+                        link['href'] = new_href
+
+                        self.internal_links += 1
+                # rewrite absolute links as relative links
+                elif href.startswith("http://" + self.server_name) or \
+                        href.startswith("https://" + self.server_name):
+
+                    new_href = href[href.index(self.server_name) + len(self.server_name):]
+
+                    link['href'] = new_href
+
+                    self.absolute_links += 1
+
+            box.content = str(soup)
+
     def generate_report(self):
         """Generate the report of what has been parsed"""
 
-        num_files = len(self.files)
+        self.num_files = len(self.files)
 
-        num_pages = len(self.pages)
+        self.num_pages = len(self.pages_by_pid.values())
 
         # calculate the total number of boxes by type
         # dict key is the box type, dict value is the number of boxes
-        num_boxes = {}
 
-        for page in self.pages:
-            for page_content in page.contents.values():
-                for box in page_content.boxes:
-                    if box.type in num_boxes:
-                        num_boxes[box.type] = num_boxes[box.type] + 1
-                    else:
-                        num_boxes[box.type] = 1
+        for box in self.get_all_boxes():
+            if box.type in self.num_boxes:
+                self.num_boxes[box.type] = self.num_boxes[box.type] + 1
+            else:
+                self.num_boxes[box.type] = 1
 
         self.report = """
-Found :
+Parsed for %s :
 
   - %s files
 
   - %s pages :
 
-""" % (num_files, num_pages)
+""" % (self.server_name, self.num_files, self.num_pages)
 
-        for num, count in num_boxes.items():
+        for num, count in self.num_boxes.items():
             self.report += "    - %s %s boxes\n" % (count, num)
+
+        self.report += "    - %s internal links\n" % self.internal_links
+        self.report += "    - %s absolute links\n" % self.absolute_links

@@ -7,6 +7,7 @@ class Page:
     def __init__(self, site, element):
         # common data for all languages
         self.pid = element.getAttribute("jahia:pid")
+        self.uuid = element.getAttribute("jcr:uuid")
         self.site = site
         self.template = element.getAttribute("jahia:template")
         self.parent = None
@@ -53,7 +54,7 @@ class Page:
                 break
 
         if element_parent:
-            self.parent = self.site.pages_dict[element_parent.getAttribute("jahia:pid")]
+            self.parent = self.site.pages_by_pid[element_parent.getAttribute("jahia:pid")]
             self.parent.children.append(self)
 
             # calculate the page level

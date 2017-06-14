@@ -112,18 +112,16 @@ def main_parse(args):
 
         # check if already parsed
         pickle_file = os.path.join(output_subdir, 'parsed_%s.pkl' % site_name)
-        if os.path.exists(pickle_file):
-            with open(pickle_file, 'rb') as input:
-                logging.info("Loaded parsed site from %s" % pickle_file)
-                parsed_sites[site_name] = pickle.load(input)
-                continue
+        # if os.path.exists(pickle_file):
+        #     with open(pickle_file, 'rb') as input:
+        #         logging.info("Loaded parsed site from %s" % pickle_file)
+        #         parsed_sites[site_name] = pickle.load(input)
+        #         continue
 
         logging.info("Parsing %s...", site_dir)
         site = Site(site_dir, site_name)
 
-        # TODO : move to exporter
-        if args.print_report:
-            print(site.report)
+        print(site.report)
 
         # save parsed site on file system
         with open(pickle_file, 'wb') as output:
