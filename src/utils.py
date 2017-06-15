@@ -44,7 +44,6 @@ class Utils:
         """
         env_var = 'WP_ADMIN_URL'
         if env_var not in os.environ:
-            print("You must set environment variable %s" % env_var)
-            raise sys.exit()
+            raise SystemExit("You must set environment variable %s" % env_var)
         else:
             return os.environ.get(env_var)
