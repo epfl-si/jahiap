@@ -27,14 +27,13 @@ class WPExporter:
                 return "%3.1f %s" % (num, x)
             num /= 1024.0
 
-    @classmethod
-    def wp_cli(cls, command):
+    def wp_cli(self, command):
         """
         Wrapper around the WP-CLI (wp-cli.org),
         official wordpress command line interface)
         available in the docker container wpcli
         """
-        os.system('docker exec wpcli %s' % command)
+        os.system('docker exec wp-cli-%s %s' % (self.site, command))
 
     @classmethod
     def file_size(cls, file_path):
