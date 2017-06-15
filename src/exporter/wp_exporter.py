@@ -190,11 +190,10 @@ class WPExporter:
         import sidebar via vpcli
         """
         for box in self.site.homepage.contents["en"].sidebar.boxes:
-            try:
-                content = Utils.escape_quotes(box.content)
-                self.wp_cli('wp widget add black-studio-tinymce page-widgets --title="%s" --text="%s"' % (box.title, content))
-            except:
-                pass
+            content = Utils.escape_quotes(box.content)
+            cmd = 'wp widget add black-studio-tinymce page-widgets ' \
+                  '--title="%s" --text="%s"' % (box.title, content)
+            self.wp_cli(cmd)
 
     def populate_menu(self, menu_name):
         """
