@@ -34,6 +34,6 @@ start:
 
 stop:
 	docker stop $(docker_name)
-	docker system prune -f
+	docker rm -f $(docker_name)
 
 restart: stop start
