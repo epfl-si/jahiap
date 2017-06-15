@@ -67,14 +67,6 @@ class Box:
                 content += element.getAttribute("jahia:value")
             self.content = content
 
-        if not self.content:
-            return
-
-        # fix the links
-        old = "###file:/content/sites/%s/files/" % self.site.name
-        new = "/files/"
-        self.content = self.content.replace(old, new)
-
     def set_box_actu(self, element):
         """set the attributes of an actu box"""
         url = Utils.get_tag_attribute(element, "url", "jahia:value")

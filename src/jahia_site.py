@@ -67,6 +67,11 @@ class Site:
         self.num_pages = 0
         self.internal_links = 0
         self.absolute_links = 0
+        self.external_links = 0
+        self.file_links = 0
+        self.data_links = 0
+        self.mailto_links = 0
+        self.unknown_links = 0
         self.num_boxes = {}
         self.report = ""
 
@@ -284,7 +289,11 @@ class Site:
 
         for page in self.pages_by_pid.values():
             for page_content in page.contents.values():
+                # boxes in the content
                 for box in page_content.boxes:
+                    boxes.append(box)
+                # boxes in the sidebar
+                for box in page_content.sidebar.boxes:
                     boxes.append(box)
 
         return boxes
@@ -300,45 +309,81 @@ class Site:
 
     def fix_links(self):
         """
-        Fix the boxes links. This must be done at the end,
+        Fix all the boxes links. This must be done at the end,
         when all the pages have been parsed.
         """
         for box in self.get_all_boxes():
             soup = BeautifulSoup(box.content, 'html.parser')
 
-            links = soup.find_all('a')
+            self.fix_links_in_tag(box=box, soup=soup, tag_name="a", attribute="href")
+            self.fix_links_in_tag(box=box, soup=soup, tag_name="img", attribute="src")
+            self.fix_links_in_tag(box=box, soup=soup, tag_name="script", attribute="src")
 
-            for link in links:
-                href = link.get('href')
+    def fix_links_in_tag(self, box, soup, tag_name, attribute):
+        """
+        Fix the links in the given type of tag
+        """
+        tags = soup.find_all(tag_name)
 
-                if not href:
-                    continue
+        for tag in tags:
+            link = tag.get(attribute)
 
-                # rewrite internal links like :
-                # ###page:/lang/en/ref/d3bcd626-d2cd-46f6-8fdc-829a82c2f6c9
-                if href.startswith("###page"):
-                    uuid = href[href.rfind('/') + 1:]
+            if not link:
+                continue
 
-                    if uuid in self.pages_by_uuid:
-                        linked_page = self.pages_by_uuid[uuid]
+            # internal Jahia links
+            if link.startswith("###page"):
+                uuid = link[link.rfind('/') + 1:]
 
-                        new_href = linked_page.contents[box.page_content.language].path
+                if uuid in self.pages_by_uuid:
+                    page = self.pages_by_uuid[uuid]
 
-                        # change the link href
-                        link['href'] = new_href
+                    new_link = page.contents[box.page_content.language].path
 
-                        self.internal_links += 1
-                # rewrite absolute links as relative links
-                elif href.startswith("http://" + self.server_name) or \
-                        href.startswith("https://" + self.server_name):
+                    # change the link href
+                    tag[attribute] = new_link
 
-                    new_href = href[href.index(self.server_name) + len(self.server_name):]
+                    self.internal_links += 1
+            # absolute links rewritten as relative links
+            elif link.startswith("http://" + self.server_name) or \
+                    link.startswith("https://" + self.server_name):
 
-                    link['href'] = new_href
+                new_link = link[link.index(self.server_name) + len(self.server_name):]
 
-                    self.absolute_links += 1
+                tag[attribute] = new_link
 
-            box.content = str(soup)
+                self.absolute_links += 1
+            # file links
+            elif link.startswith("###file"):
+                new_link = link[link.index('/files/'):]
+
+                if "?" in new_link:
+                    new_link = new_link[:new_link.index("?")]
+
+                tag[attribute] = new_link
+
+                self.file_links += 1
+            # those are files links we already fixed, so we pass
+            elif link.startswith("/files/"):
+                pass
+            # external links
+            elif link.startswith("http://") or link.startswith("https://"):
+                self.external_links += 1
+            # data links
+            elif link.startswith("data:"):
+                self.data_links += 1
+            # mailto links
+            elif link.startswith("mailto:"):
+                self.mailto_links += 1
+            # unknown links
+            else:
+                # TODO a few links start with :
+                # /cms/op/edit/PAGE_KEY or
+                # /cms/site/SITE_NAME/op/edit/lang/LANGUAGE/PAGE_KEY
+                # those are currently not supported
+                self.unknown_links += 1
+
+        box.content = str(soup)
 
     def generate_report(self):
         """Generate the report of what has been parsed"""
@@ -370,3 +415,8 @@ Parsed for %s :
 
         self.report += "    - %s internal links\n" % self.internal_links
         self.report += "    - %s absolute links\n" % self.absolute_links
+        self.report += "    - %s external links\n" % self.external_links
+        self.report += "    - %s file links\n" % self.file_links
+        self.report += "    - %s mailto links\n" % self.mailto_links
+        self.report += "    - %s data links\n" % self.data_links
+        self.report += "    - %s unknown links\n" % self.unknown_links
