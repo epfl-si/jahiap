@@ -17,6 +17,8 @@ class WPExporter:
         'failed_files': 0,
     }
 
+    urls_mapping = []
+
     @staticmethod
     def convert_bytes(num):
         """
@@ -64,6 +66,7 @@ class WPExporter:
         self.populate_menu(menu_name='Main')
         self.import_sidebar()
         self.display_report()
+        self.display_url_mapping_list()
 
     def import_medias(self):
         """
@@ -178,6 +181,13 @@ class WPExporter:
 
                 wp_page = self.wp.post_pages(data=wp_page_info)
                 wp_pages.append(wp_page)
+
+                mapping = {
+                    'jahia_url': page.contents["en"].path,
+                    'wp_url': wp_page.link
+                }
+
+                self.urls_mapping.append(mapping)
 
                 # keep wordpress ID for further usages
                 page.wp_id = wp_page['id']
@@ -294,3 +304,9 @@ Errors :
 """ % (self.report['files'], self.report['pages'], self.report['menus'], self.report['failed_files'])
 
         print(result)
+
+    def display_url_mapping_list(self):
+
+        for key, value in self.urls_mapping.items():
+            print(key)
+            print(value)
