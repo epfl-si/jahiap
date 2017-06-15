@@ -50,7 +50,7 @@ class WPExporter:
         Domain is the wordpress domain where to push the content
         """
         self.site = site
-        url = "http://%s/index.php/wp-json/wp/v2" % domain
+        url = "http://%s/?rest_route=/wp/v2" % domain
         self.wp = WordpressJsonWrapper(url, WP_USER, WP_PASSWORD)
 
     def import_all_data_to_wordpress(self):
