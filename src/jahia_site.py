@@ -211,7 +211,6 @@ class Site:
                 self.pages_by_pid[page.pid] = page
                 self.pages_by_uuid[page.uuid] = page
 
-
     def parse_pages_content(self):
         """
         Parse the PageContent. This is the content that is specific

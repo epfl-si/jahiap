@@ -137,6 +137,7 @@ def main_parse(args):
 
 def main_export(args):
     # get list of parsed sites
+
     sites = main_parse(args)
 
     for site in sites.values():
@@ -144,9 +145,14 @@ def main_export(args):
         # create subdir in output_dir
         output_subdir = os.path.join(args.output_dir, site.name)
 
+        if args.clean_wordpress:
+            wp_exporter = WPExporter(site=site, domain=args.site_url)
+            wp_exporter.delete_all_content()
+            logging.info("Data of Wordpress site successfully deleted")
+
         if args.to_wordpress:
             wp_exporter = WPExporter(site=site, domain=args.site_url)
-            wp_exporter.import_all_data_in_wordpress()
+            wp_exporter.import_all_data_to_wordpress()
             logging.info("Site successfully exported to Wordpress")
 
         if args.to_static:
@@ -231,6 +237,11 @@ if __name__ == '__main__':
         dest='to_wordpress',
         action='store_true',
         help='export parsed data to Wordpress')
+    parser_export.add_argument(
+        '-c', '--clean-wordpress',
+        dest='clean_wordpress',
+        action='store_true',
+        help='delete all content of Wordpress site')
     parser_export.add_argument(
         '-s', '--to-static',
         dest='to_static',

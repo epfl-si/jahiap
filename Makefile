@@ -24,6 +24,12 @@ dict:
 static:
 	python src/jahiap.py -o $(output_dir) -n $(number) export -s $(site_name)
 
+wp:
+	python src/jahiap.py -o $(output_dir) export -w $(site_name)
+
+clean_wordpress:
+	python src/jahiap.py -o $(output_dir) export -c $(site_name)
+
 start:
 	docker run -d \
 		--name $(docker_name) \
