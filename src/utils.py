@@ -1,6 +1,6 @@
 """(c) All rights reserved. ECOLE POLYTECHNIQUE FEDERALE DE LAUSANNE, Switzerland, VPSI, 2017"""
 import os
-import sys
+
 import xml.dom.minidom
 
 
@@ -47,3 +47,7 @@ class Utils:
             raise SystemExit("You must set environment variable %s" % env_var)
         else:
             return os.environ.get(env_var)
+
+    @staticmethod
+    def escape_quotes(str):
+        return str.replace('"', '\\"')
