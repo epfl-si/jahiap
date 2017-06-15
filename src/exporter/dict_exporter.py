@@ -24,14 +24,14 @@ class DictExporter:
             'breadcrumb_url': site.breadcrumb_url,
             'homepage__pid': site.homepage.pid,
             'files__len': len(site.files),
-            'pages__ids': [page.pid for page in site.pages],
+            'pages__ids': [page.pid for page in site.pages_by_pid.values()],
         }
 
         # pages properties (language independant)
         pages_dict = {}
         data['pages_dict'] = pages_dict
 
-        for pid, page in site.pages_dict.items():
+        for pid, page in site.pages_by_pid.items():
             page_properties = {
                 'pid': page.pid,
                 'template': page.template,
