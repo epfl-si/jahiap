@@ -5,6 +5,7 @@ from bs4 import BeautifulSoup
 from wordpress_json import WordpressJsonWrapper, WordpressError
 
 from settings import WP_USER, WP_PASSWORD
+from utils import Utils
 
 
 class WPExporter:
@@ -60,7 +61,8 @@ class WPExporter:
         self.import_medias()
         self.import_pages()
         self.set_frontpage()
-        self.populate_menu('Main')
+        self.populate_menu(menu_name='Main')
+        self.import_sidebar()
         self.display_report()
 
     def import_medias(self):
@@ -114,23 +116,21 @@ class WPExporter:
         """
         url = wp_media['source_url']
 
-        for page in self.site.pages_by_pid.values():
-            if 'en' in page.contents:
-                for box in page.contents['en'].boxes:
-                    if "<img" in box.content:
-                        soup = BeautifulSoup(box.content, 'html.parser')
-                        img_tags = soup.find_all('img')
-                        for tag in img_tags:
+        for box in self.site.get_all_boxes():
+            if "<img" in box.content:
+                soup = BeautifulSoup(box.content, 'html.parser')
+                img_tags = soup.find_all('img')
+                for tag in img_tags:
 
-                            extensions = ['.jpg', '.jpeg', '.png']
-                            for extension in extensions:
-                                elements = tag['src'].split(extension)[0].split('/')
-                                index = len(elements) - 1
-                                file_name = elements[index].replace(' ', '-') + extension
+                    extensions = ['.jpg', '.jpeg', '.png']
+                    for extension in extensions:
+                        elements = tag['src'].split(extension)[0].split('/')
+                        index = len(elements) - 1
+                        file_name = elements[index].replace(' ', '-') + extension
 
-                                if file_name in url:
-                                    tag['src'] = url
-                                    box.content = str(soup)
+                        if file_name in url:
+                            tag['src'] = url
+                            box.content = str(soup)
 
     def update_parent_id(self):
         """
@@ -147,7 +147,6 @@ class WPExporter:
         """
         Import all pages of jahia site to Wordpress
         """
-
         wp_pages = []
         for page in self.site.pages_by_pid.values():
 
@@ -186,14 +185,37 @@ class WPExporter:
 
         self.update_parent_id()
 
+    def import_sidebar(self):
+        """
+        import sidebar via vpcli
+        """
+        for box in self.site.homepage.contents["en"].sidebar.boxes:
+            try:
+                content = Utils.escape_quotes(box.content)
+                self.wp_cli('wp widget add black-studio-tinymce page-widgets --title="%s" --text="%s"' % (box.title, content))
+            except:
+                pass
+
     def populate_menu(self, menu_name):
         """
         Add pages into the menu in wordpress with given menu_name.
         This menu needs to be created before hand
         """
+
+        # Create homepage menu
+        page = self.site.homepage
+        self.wp_cli('wp menu item add-post %s %s' % (menu_name, page.wp_id))
+        self.report['menus'] += 1
+
+        # Create children homepage menu
+        for children in self.site.homepage.children:
+            self.wp_cli('wp menu item add-post %s %s' % (menu_name, children.wp_id))
+            self.report['menus'] += 1
+
+        # Create others menus
         for page in self.site.pages_by_pid.values():
-            # add page to menu
-            self.wp_cli('wp menu item add-post %s %s' % (menu_name, page.wp_id))
+            if page.parent and not page.parent.is_homepage():
+                self.wp_cli('wp menu item add-post %s %s --parent-id=%s' % (menu_name, page.wp_id, page.parent.wp_id))
             self.report['menus'] += 1
 
     def set_frontpage(self):
@@ -241,6 +263,16 @@ class WPExporter:
             for page in pages:
                 self.wp.delete_pages(page_id=page['id'], params={'force': 'true'})
             pages = self.wp.get_pages(params={'per_page': '100'})
+
+    def delete_widgets(self):
+        """
+        Delete all widgets
+        """
+        cmd = "wp widget list page-widgets --fields=id"
+        widgets_id_list = self.wp_cli(cmd)
+        for widget_id in widgets_id_list:
+            cmd = "wp widget delete " + widget_id
+            self.wp_cli(cmd)
 
     def display_report(self):
         """

@@ -47,3 +47,7 @@ class Utils:
             raise SystemExit("You must set environment variable %s" % env_var)
         else:
             return os.environ.get(env_var)
+
+    @staticmethod
+    def escape_quotes(str):
+        return str.replace('"', '\\"')
