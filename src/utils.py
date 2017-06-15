@@ -1,4 +1,6 @@
 """(c) All rights reserved. ECOLE POLYTECHNIQUE FEDERALE DE LAUSANNE, Switzerland, VPSI, 2017"""
+import os
+import sys
 import xml.dom.minidom
 
 
@@ -34,3 +36,15 @@ class Utils:
         cls.dom_cache[path] = dom
 
         return dom
+
+    @staticmethod
+    def get_domain():
+        """
+        Return the domain name
+        """
+        env_var = 'WP_ADMIN_URL'
+        if env_var not in os.environ:
+            print("You must set environment variable %s" % env_var)
+            raise sys.exit()
+        else:
+            return os.environ.get(env_var)

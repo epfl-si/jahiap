@@ -1,7 +1,9 @@
 """(c) All rights reserved. ECOLE POLYTECHNIQUE FEDERALE DE LAUSANNE, Switzerland, VPSI, 2017"""
 import os
 
-DOMAIN = 'localhost'
+from utils import Utils
+
+DOMAIN = Utils.get_domain()
 WP_USER = 'admin'
 WP_PASSWORD = 'passw0rd'
 JAHIA_DATE_FORMAT = '%Y-%m-%dT%H:%M:%S'
