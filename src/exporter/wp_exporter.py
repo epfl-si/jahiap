@@ -33,7 +33,7 @@ class WPExporter:
         official wordpress command line interface)
         available in the docker container wpcli
         """
-        os.system('docker exec wp-cli-%s %s' % (self.site, command))
+        os.system('docker exec wp-cli-%s %s' % (self.site.name, command))
 
     @classmethod
     def file_size(cls, file_path):
