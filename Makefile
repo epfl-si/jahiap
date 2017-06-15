@@ -33,6 +33,7 @@ start:
 		nginx
 
 stop:
-	docker rm -f $(docker_name);
+	docker stop $(docker_name)
+	docker system prune -f
 
 restart: stop start
