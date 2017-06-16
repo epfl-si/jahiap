@@ -307,6 +307,8 @@ Errors :
 
     def display_url_mapping_list(self):
 
-        for key, value in self.urls_mapping.items():
-            print(key)
-            print(value)
+        for element in self.urls_mapping:
+            result = ""
+            for key, value in element.items():
+                result += key + ": " + value + " "
+            print(result)
