@@ -184,7 +184,7 @@ class WPExporter:
 
                 mapping = {
                     'jahia_url': page.contents["en"].path,
-                    'wp_url': wp_page.link
+                    'wp_url': wp_page['link']
                 }
 
                 self.urls_mapping.append(mapping)
