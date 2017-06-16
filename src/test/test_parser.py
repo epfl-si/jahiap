@@ -43,8 +43,14 @@ class TestSiteProperties:
     def test_name(self, site, data):
         assert site.name == data['properties']['name']
 
-    def test_(self, site, data):
+    def test_server_name(self, site, data):
+        assert site.server_name == data['properties']['server_name']
+
+    def test_export_files(self, site, data):
         assert site.export_files == data['properties']['export_files']
+
+    def test_languages(self, site, data):
+        assert site.languages == data['properties']['languages']
 
     def test_title(self, site, data):
         assert site.title == data['properties']['title']
@@ -64,7 +70,13 @@ class TestSiteProperties:
     def test_breadcrumb_url(self, site, data):
         assert site.breadcrumb_url == data['properties']['breadcrumb_url']
 
-    def test_(self, site, data):
+    def test_footers(self, site, data):
+        footers = {}
+        for language, links in site.footer.items():
+            footers[language] = set([str(link) for link in links])
+        assert footers == data['properties']['footers']
+
+    def test_homepage__pid(self, site, data):
         assert site.homepage.pid == data['properties']['homepage__pid']
 
 
@@ -77,10 +89,10 @@ class TestSiteStructure:
         assert len(site.files) == data['properties']['files__len']
 
     def test_nb_pages(self, site, data):
-        assert len(site.pages_dict) == len(data['pages_dict'])
+        assert len(site.pages_by_pid) == len(data['pages_by_pid'])
 
     def test_page_ids(self, site, data):
-        assert [page.pid for page in site.pages] == data['properties']['pages__ids']
+        assert set(site.pages_by_pid.keys()) == data['properties']['pages__ids']
 
 
 class TestAllSidebars:
@@ -89,13 +101,13 @@ class TestAllSidebars:
     """
     def test_boxes(self, site, data):
 
-        for pid, page in site.pages_dict.items():
+        for pid, page in site.pages_by_pid.items():
 
             for language, page_content in page.contents.items():
 
                 # create shortcuts for sidebar boxes
                 boxes = page_content.sidebar.boxes
-                expected_boxes= data['pages_dict'][pid]['contents'][language]['sidebar__boxes']
+                expected_boxes= data['pages_by_pid'][pid]['contents'][language]['sidebar__boxes']
 
                 # Nb boxes
                 assert  len(boxes) == len(expected_boxes)

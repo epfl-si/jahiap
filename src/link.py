@@ -7,3 +7,6 @@ class Link:
     def __init__(self, title, url):
         self.title = title
         self.url = url
+
+    def __str__(self):
+        return "<a href='%s'>%s</a>" % (self.url, self.title)

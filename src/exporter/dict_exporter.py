@@ -13,8 +13,9 @@ class DictExporter:
         data['properties'] = {
             'base_path': site.base_path,
             'name': site.name,
+            'server_name': site.server_name,
             'export_files': site.export_files,
-            # ignored language -> move to pages
+            'languages': site.languages,
             # ignored xml_path -> replaced with export_files
             'title': site.title,
             'acronym': site.acronym,
@@ -24,12 +25,19 @@ class DictExporter:
             'breadcrumb_url': site.breadcrumb_url,
             'homepage__pid': site.homepage.pid,
             'files__len': len(site.files),
-            'pages__ids': [page.pid for page in site.pages_by_pid.values()],
+            'pages__ids': set(site.pages_by_pid.keys()),
         }
 
+        # site footer
+        footers = {}
+        data['properties']['footers'] = footers
+
+        for language, links in site.footer.items():
+            footers[language] = set([str(link) for link in links])
+
         # pages properties (language independant)
-        pages_dict = {}
-        data['pages_dict'] = pages_dict
+        pages_by_pid = {}
+        data['pages_by_pid'] = pages_by_pid
 
         for pid, page in site.pages_by_pid.items():
             page_properties = {
@@ -39,7 +47,7 @@ class DictExporter:
                 'children__len': len(page.children),
                 'contents__keys': list(page.contents.keys()),
             }
-            pages_dict[pid] = page_properties
+            pages_by_pid[pid] = page_properties
 
             # page_contents (translations)
             contents = {}
