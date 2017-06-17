@@ -127,7 +127,7 @@ class SiteCrawler(object):
         # where to store zip files
         self.export_path = EXPORT_PATH
         # where to store output from the script (tracer)
-        self.output_path = cmd_args['--output_dir']
+        self.output_path = cmd_args['--output-dir']
         # whether overriding existing zip or not
         self.force = cmd_args['--force']
         # to measure overall download time for given site

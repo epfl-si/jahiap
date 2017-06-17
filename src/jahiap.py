@@ -97,7 +97,7 @@ def main_unzip(args):
     for site_name, zip_file in zip_files.items():
 
         # create subdir in output_dir
-        output_subdir = os.path.join(args['--output_dir'], site_name)
+        output_subdir = os.path.join(args['--output-dir'], site_name)
         if output_subdir:
             if not os.path.isdir(output_subdir):
                 os.mkdir(output_subdir)
@@ -151,7 +151,7 @@ def main_parse(args):
 
     for site_name, site_dir in site_dirs.items():
         # create subdir in output_dir
-        output_subdir = os.path.join(args['--output_dir'], site_name)
+        output_subdir = os.path.join(args['--output-dir'], site_name)
 
         # check if already parsed
         pickle_file = os.path.join(output_subdir, 'parsed_%s.pkl' % site_name)
@@ -186,15 +186,15 @@ def main_export(args):
     for site in sites.values():
         logging.info("Exporting %s ...", site.name)
         # create subdir in output_dir
-        output_subdir = os.path.join(args['--output_dir'], site.name)
+        output_subdir = os.path.join(args['--output-dir'], site.name)
 
         if args['--clean_wordpress']:
-            wp_exporter = WPExporter(site=site, domain=args['--site_url'])
+            wp_exporter = WPExporter(site=site, domain=args['--site-url'])
             wp_exporter.delete_all_content()
             logging.info("Data of Wordpress site successfully deleted")
 
         if args['--to_wordpress']:
-            wp_exporter = WPExporter(site=site, domain=args['--site_url'])
+            wp_exporter = WPExporter(site=site, domain=args['--site-url'])
             wp_exporter.import_all_data_to_wordpress()
             logging.info("Site successfully exported to Wordpress")
 
