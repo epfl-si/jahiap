@@ -100,17 +100,17 @@ class SiteCrawler(object):
             returns list of downloaded_files
         """
         logging.debug("HOST set to %s", HOST)
-        logging.debug("DATE set to %s", cmd_args.date)
+        logging.debug("DATE set to %s", cmd_args['--date'])
 
         # to store paths of downloaded zips
         downloaded_files = {}
 
         # compute list fo sites to download
         try:
-            start_at = JAHIA_SITES.index(cmd_args.site_name)
+            start_at = JAHIA_SITES.index(cmd_args['<site>'])
         except ValueError:
-            raise SystemExit("site name %s not found in JAHIA_SITES", cmd_args.site_name)
-        end = start_at + int(cmd_args.number)
+            raise SystemExit("site name %s not found in JAHIA_SITES", cmd_args['<site>'])
+        end = start_at + int(cmd_args['--number'])
         sites = JAHIA_SITES[start_at:end]
 
         # download sites from JAHIA_SITES
@@ -123,13 +123,13 @@ class SiteCrawler(object):
     def __init__(self, site_name, cmd_args):
         self.site_name = site_name
         # jahia download URI depends on date
-        self.date = cmd_args.date
+        self.date = cmd_args['--date']
         # where to store zip files
         self.export_path = EXPORT_PATH
         # where to store output from the script (tracer)
-        self.output_path = cmd_args.output_dir
+        self.output_path = cmd_args['--output_dir']
         # whether overriding existing zip or not
-        self.force = cmd_args.force
+        self.force = cmd_args['--force']
         # to measure overall download time for given site
         self.elapsed = 0
 
