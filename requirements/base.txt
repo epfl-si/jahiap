@@ -6,3 +6,4 @@ git+https://github.com/epfl-idevelop/python-wordpress-json.git
 beautifulsoup4==4.6.0
 requests==2.17.3
 clint==0.5.1
+docopt==0.6.2
