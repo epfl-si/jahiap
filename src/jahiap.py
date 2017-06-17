@@ -4,8 +4,11 @@ jahiap: a wonderful tool
 Usage:
   jahiap.py crawl <site> [--output-dir=<OUTPUT_DIR>] [--number=<NUMBER>] [--date DATE] [--force] [--debug|--quiet]
   jahiap.py unzip <site> [--output-dir=<OUTPUT_DIR>] [--number=<NUMBER>] [--date DATE] [--force] [--debug|--quiet]
-  jahiap.py parse <site> [--output-dir=<OUTPUT_DIR>] [--number=<NUMBER>] [--print-report] [--date DATE] [--force] [--debug|--quiet]  
-  jahiap.py export <site> [--output-dir=<OUTPUT_DIR>] [--number=<NUMBER>] [--to-wordpress|--to-static|--to-dictionary|--clean-wordpress] [--site-url=<SITE_URL>] [--print-report] [--date DATE] [--force] [--debug|--quiet]
+  jahiap.py parse <site> [--output-dir=<OUTPUT_DIR>] [--number=<NUMBER>] [--print-report] [--date DATE] [--force]
+                         [--debug|--quiet]
+  jahiap.py export <site> [--to-wordpress|--to-static|--to-dictionary|--clean-wordpress] [--output-dir=<OUTPUT_DIR>]
+                          [--number=<NUMBER>] [--site-url=<SITE_URL>] [--print-report] [--date DATE] [--force]
+                          [--debug|--quiet]
 
 Options:
   -h --help                     Show this screen.
@@ -13,7 +16,7 @@ Options:
   -o --output-dir=<OUTPUT_DIR>  Directory where to perform command [default: build].
   -n --number=<NUMBER>          Number of sites to analyse (fetched in JAHIA_SITES, from given site name) [default: 1].
   --date DATE                   Date and time for the snapshot, e.g : 2017-01-15-23-00.
-  -f --force                    Force download even if exisiting files for same site.
+  -f --force                    Force download even if existing files for same site.
   -r --print-report             Print report with content.
   -w --to-wordpress             Export parsed data to Wordpress.
   -c --clean-wordpress          Delete all content of Wordpress site.
@@ -66,7 +69,7 @@ def main(args):
 
 def call_command(args):
     """
-    Forward to appropriate main function 
+    Forward to appropriate main function
     """
     for key, value in args.items():
         # filter options or arguments
@@ -222,9 +225,9 @@ def set_logging_config(args):
     """
     level = logging.INFO
     if args['--quiet']:
-        level=logging.WARNING
+        level = logging.WARNING
     elif args['--debug']:
-        level=logging.DEBUG
+        level = logging.DEBUG
     logging.basicConfig(level=level)
 
 
