@@ -179,10 +179,22 @@ class HTMLExporter:
         """Extract the files"""
 
         start = "%s/content/sites/%s/files" % (self.site.base_path, self.site.name)
+        dst = "%s/files" % self.out_path
         logging.debug("copying files from %s into %s", start, self.out_path)
 
-        if os.path.exists(self.out_path):
+        if os.path.exists(dst):
             logging.debug("output_dir already exists. Wiping it out...")
-            shutil.rmtree(self.out_path)
+            shutil.rmtree(dst)
 
-        shutil.copytree(start, self.out_path, ignore=HTMLExporter.files_to_ignore)
+        # copy all files as they are
+        shutil.copytree(start, dst, ignore=HTMLExporter.files_to_ignore)
+
+        # move all files one level up: out of the directory with same name
+        for (path, dirs, files) in os.walk(dst):
+            name = os.path.basename(path)
+            if len(files) == 1 and files[0] == name:
+                file_path = os.path.join(path, name)
+                tmp_path = os.path.normpath(os.path.join(path, '..', '_%s' % name))
+                shutil.move(file_path, tmp_path)
+                os.rmdir(path)
+                shutil.move(tmp_path, path)
