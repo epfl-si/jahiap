@@ -1,5 +1,4 @@
 site_name=master
-port=9090
 number=1
 output_dir=build
 docker_name="demo-$(site_name)"
@@ -39,7 +38,7 @@ start:
 		--label "traefik.enable=true" \
 		--label "traefik.backend=static-$(site_name)" \
 		--label "traefik.frontend=static-$(site_name)" \
-		--label "traefik.frontend.rule=$(WP_ADMIN_URL);PathPrefix:/static/$(site_name)" \
+		--label "traefik.frontend.rule=Host:$(WP_ADMIN_URL);PathPrefix:/static/$(site_name)" \
 		-v $(PWD)/$(output_dir)/$(site_name)/$(site_name)_html:/usr/share/nginx/html/static/$(site_name) \
 		nginx
 
