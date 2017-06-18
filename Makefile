@@ -39,7 +39,7 @@ start:
 		--label "traefik.enable=true" \
 		--label "traefik.backend=static-$(site_name)" \
 		--label "traefik.frontend=static-$(site_name)" \
-		--label "traefik.frontend.rule=Host:wordpress.localhost;PathPrefix:/static/$(site_name)" \
+		--label "traefik.frontend.rule=$(WP_ADMIN_URL);PathPrefix:/static/$(site_name)" \
 		-v $(PWD)/$(output_dir)/$(site_name)/$(site_name)_html:/usr/share/nginx/html/static/$(site_name) \
 		nginx
 
