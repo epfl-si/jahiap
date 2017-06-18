@@ -1,6 +1,7 @@
 """(c) All rights reserved. ECOLE POLYTECHNIQUE FEDERALE DE LAUSANNE, Switzerland, VPSI, 2017"""
 
 import os
+import logging
 
 from bs4 import BeautifulSoup
 from box import Box
@@ -170,7 +171,13 @@ class Site:
         for language, dom_path in self.export_files.items():
             dom = Utils.get_dom(dom_path)
 
-            breadcrumb_link = dom.getElementsByTagName("breadCrumbLink")[0]
+            breadcrumb_links = dom.getElementsByTagName("breadCrumbLink")
+            nb_found = len(breadcrumb_links)
+            if nb_found !=1:
+                logging.warning("Found %s breadcrumb link(s) instead of 1", nb_found)
+                if nb_found == 0:
+                    continue
+            breadcrumb_link = breadcrumb_links[0]
 
             for child in breadcrumb_link.childNodes:
                 if child.ELEMENT_NODE != child.nodeType:
