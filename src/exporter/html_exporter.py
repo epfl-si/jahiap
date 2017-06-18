@@ -113,8 +113,8 @@ class HTMLExporter:
             # current page
             self.navigation_spacer(page)
             self.navigation += "<li class='nav-item'><a class='nav-link' href='%s'>%s</a>" %\
-                               (page.contents[self.language].path,
-                                page.contents[self.language].title)
+               (page.site.root_link(page.contents[self.language].path),
+                page.contents[self.language].title)
 
         if page.has_children():
             if not page.is_homepage():
@@ -153,8 +153,8 @@ class HTMLExporter:
 
         # current page
         self.sitemap_content += "<li><a href='%s'>%s</a>" %\
-                                (page.contents[self.language].path,
-                                 page.contents[self.language].title)
+            (page.site.root_link(page.contents[self.language].path),
+             page.contents[self.language].title)
 
         if page.has_children():
             self.sitemap_content += "<ul>"
