@@ -2,6 +2,8 @@
 """(c) All rights reserved. ECOLE POLYTECHNIQUE FEDERALE DE LAUSANNE, Switzerland, VPSI, 2017"""
 
 import os
+import shutil
+import logging
 
 from jinja2 import Environment, PackageLoader, select_autoescape
 
@@ -19,6 +21,7 @@ class HTMLExporter:
 
         # create the output path if necessary
         if not os.path.exists(self.out_path):
+            logging.debug("created output dir %s", self.out_path)
             os.mkdir(self.out_path)
 
         # extract all the files
@@ -30,10 +33,11 @@ class HTMLExporter:
             self.sitemap_content = ""
             self.navigation = ""
 
-            self.generate_pages()
+            self.generate_pages(language)
 
-    def generate_pages(self):
+    def generate_pages(self, language):
         """Generate the pages & the sitemap"""
+        logging.debug("generating pages for langage %s", language)
 
         # update the boxes data
         self.update_boxes_data()
@@ -167,30 +171,18 @@ class HTMLExporter:
         if page.is_homepage():
             self.sitemap_content += "</ul>"
 
+    @staticmethod
+    def files_to_ignore(dirs, files):
+        return ["thumbnail", "thumbnail2"]
+
     def extract_files(self):
         """Extract the files"""
 
         start = "%s/content/sites/%s/files" % (self.site.base_path, self.site.name)
+        logging.debug("copying files from %s into %s", start, self.out_path)
 
-        for (path, dirs, files) in os.walk(start):
-            for file in files:
-                # we exclude the thumbnails
-                if "thumbnail" == file or "thumbnail2" == file:
-                    continue
+        if os.path.exists(self.out_path):
+            logging.debug("output_dir already exists. Wiping it out...")
+            shutil.rmtree(self.out_path)
 
-                src = "%s/%s" % (path, file)
-
-                dst = self.out_path + src[src.index("files/") - 1:]
-
-                dst = dst[:dst.rindex("/")]
-
-                parent = dst[:dst.rindex("/")]
-
-                # create the parent directory if necessary
-                if not os.path.exists(parent):
-                    cmd = "mkdir -p '%s'" % parent
-                    os.system(cmd)
-
-                # now copy the file
-                cmd = "cp '%s' '%s'" % (src, dst)
-                os.system(cmd)
+        shutil.copytree(start, self.out_path, ignore=HTMLExporter.files_to_ignore)
