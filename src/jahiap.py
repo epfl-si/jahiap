@@ -25,8 +25,7 @@ Options:
   -u --site-url=<SITE_URL>      Wordpress URL where to export parsed content.
   --debug                       Set logging level to DEBUG (default is INFO).
   --quiet                       Set logging level to WARNING (default is INFO).
-
-Morgon ouvert et Greg accélère :-)
+ 
 """
 
 import sys
@@ -191,23 +190,23 @@ def main_export(args):
         # create subdir in output_dir
         output_subdir = os.path.join(args['--output-dir'], site.name)
 
-        if args['--clean_wordpress']:
+        if args['--clean-wordpress']:
             wp_exporter = WPExporter(site=site, domain=args['--site-url'])
             wp_exporter.delete_all_content()
             logging.info("Data of Wordpress site successfully deleted")
 
-        if args['--to_wordpress']:
+        if args['--to-wordpress']:
             wp_exporter = WPExporter(site=site, domain=args['--site-url'])
             wp_exporter.import_all_data_to_wordpress()
             logging.info("Site successfully exported to Wordpress")
 
-        if args['--to_static']:
+        if args['--to-static']:
             export_path = os.path.join(
                 output_subdir, "%s_html" % site.name)
             HTMLExporter(site, export_path)
             logging.info("Site successfully exported to HTML files")
 
-        if args['--to_dictionary']:
+        if args['--to-dictionary']:
             export_path = os.path.join(
                 output_subdir, "%s_dict.py" % site.name)
             data = DictExporter.generate_data(site)
