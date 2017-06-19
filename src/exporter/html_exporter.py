@@ -33,11 +33,11 @@ class HTMLExporter:
             self.sitemap_content = ""
             self.navigation = ""
 
-            self.generate_pages(language)
+            self.generate_pages()
 
-    def generate_pages(self, language):
+    def generate_pages(self):
         """Generate the pages & the sitemap"""
-        logging.debug("generating pages for langage %s", language)
+        logging.debug("generating pages for langage %s", self.language)
 
         # update the boxes data
         self.update_boxes_data()
