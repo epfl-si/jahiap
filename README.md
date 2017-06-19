@@ -41,10 +41,10 @@ The `make` command does a few things for you :
 The detailed commands look like this :
 
 ```
-python src/jahiap.py -o build crawl --site dcsl
-python src/jahiap.py -o build unzip exports/dcsl_export_2017-05-30-09-44.zip
-python src/jahiap.py -o build parse dcsl -r
-python src/jahiap.py -o build export dcsl -s
+python src/jahiap.py crawl dcsl -o build
+python src/jahiap.py unzip dcsl -o build
+python src/jahiap.py parse dcsl -o build -r
+python src/jahiap.py export dcsl -o build -s
 docker run -d \
     --name docker-dcsl \
     -p 9090:80 \
@@ -80,25 +80,31 @@ You might use the option `-h` on the jahiap script to get the following help:
 
 ```
 $ python src/jahiap.py  -h
-usage: jahiap.py [-h] [--debug] [--quiet] [-o OUTPUT_DIR]
-                 {crawl,unzip,parse,export} ...
+Usage:
+  jahiap.py crawl <site> [--output-dir=<OUTPUT_DIR>] [--number=<NUMBER>] [--date DATE] [--force] [--debug|--quiet]
+  jahiap.py unzip <site> [--output-dir=<OUTPUT_DIR>] [--number=<NUMBER>] [--date DATE] [--force] [--debug|--quiet]
+  jahiap.py parse <site> [--output-dir=<OUTPUT_DIR>] [--number=<NUMBER>] [--print-report] [--date DATE] [--force]
+                         [--debug|--quiet]
+  jahiap.py export <site> [--to-wordpress|--to-static|--to-dictionary|--clean-wordpress] [--output-dir=<OUTPUT_DIR>]
+                          [--number=<NUMBER>] [--site-url=<SITE_URL>] [--print-report] [--date DATE] [--force]
+                          [--debug|--quiet]
 
-Unzip, parse and export Jahia XML
-
-positional arguments:
-  {crawl,unzip,parse,export}
-
-optional arguments:
-  -h, --help            show this help message and exit
-  --debug               Set logging level to DEBUG (default is INFO)
-  --quiet               Set logging level to WARNING (default is INFO)
-  -o OUTPUT_DIR, --output-dir OUTPUT_DIR
-                        directory where to unzip, parse, export Jahia XML
+Options:
+  -h --help                     Show this screen.
+  -v --version                  Show version.
+  -o --output-dir=<OUTPUT_DIR>  Directory where to perform command [default: build].
+  -n --number=<NUMBER>          Number of sites to analyse (fetched in JAHIA_SITES, from given site name) [default: 1].
+  --date DATE                   Date and time for the snapshot, e.g : 2017-01-15-23-00.
+  -f --force                    Force download even if existing files for same site.
+  -r --print-report             Print report with content.
+  -w --to-wordpress             Export parsed data to Wordpress.
+  -c --clean-wordpress          Delete all content of Wordpress site.
+  -s --to-static                Export parsed data to static HTML files.
+  -d --to-dictionary            Export parsed data to python dictionary.
+  -u --site-url=<SITE_URL>      Wordpress URL where to export parsed content.
+  --debug                       Set logging level to DEBUG (default is INFO).
+  --quiet                       Set logging level to WARNING (default is INFO).
 ```
-
-More help on each command can be displayed with the command name followed by `-h`. See next section for more details.
-
-## Crawl
 
 The command relies on the following environment variables :
 
@@ -112,69 +118,7 @@ The third one is mandatory, i.e the script will not run if it is not set. For th
 Quick example to download dcsl zip:
 
 ```
-python src/jahiap.py -o build crawl --site dcsl
-```
-
-More options are available to change the output directory, the date of the snapshot or the level of logs. Use option `-h` to get the following help :
-
-```
-$ python src/jahiap.py crawl -h
-usage: jahiap.py crawl [-h] [--site SITE] [-f] [-d DATE] [-n NUMBER]
-                       [-s START_AT]
-
-optional arguments:
-  -h, --help            show this help message and exit
-  --site SITE           site name (in jahia admin) of site to get the zip for
-  -f, --force           Force download even if exisiting files for same site
-  -d DATE, --date DATE  date and time for the snapshot, e.g : 2017-01-15-23-00
-  -n NUMBER, --number NUMBER
-                        number of sites to crawl in JAHIA_SITES
-  -s START_AT, --start-at START_AT
-                        (zero-)index where to start in JAHIA_SITES
-```
-
-### Unzip
-
-```
-$ python src/jahiap.py unzip -h
-usage: jahiap.py unzip [-h] zip_file
-
-positional arguments:
-  zip_file    path to Jahia zip file
-
-optional arguments:
-  -h, --help  show this help message and exit
-```
-
-### Parse
-
-```
-$ python src/jahiap.py parse -h
-usage: jahiap.py parse [-h] [-r] site_name
-
-positional arguments:
-  site_name           name of sub directories that contain the site files
-
-optional arguments:
-  -h, --help          show this help message and exit
-  -r, --print-report  print report with parsed content
-```
-
-### Export
-
-```
-$ python src/jahiap.py export -h
-usage: jahiap.py export [-h] [-w] [-s] [-u URL] site_name
-
-positional arguments:
-  site_name             name of sub directories that contain the site files
-
-optional arguments:
-  -h, --help            show this help message and exit
-  -w, --to-wordpress    export parsed data to WordPress
-  -s, --to-static       export parsed data to static HTML files
-  -u URL, --site-url URL
-                        WordPress URL where to export parsed content
+python src/jahiap.py crawl dcsl -o build
 ```
 
 ## Testing
