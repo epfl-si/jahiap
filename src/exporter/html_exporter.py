@@ -2,6 +2,8 @@
 """(c) All rights reserved. ECOLE POLYTECHNIQUE FEDERALE DE LAUSANNE, Switzerland, VPSI, 2017"""
 
 import os
+import shutil
+import logging
 
 from jinja2 import Environment, PackageLoader, select_autoescape
 
@@ -19,6 +21,7 @@ class HTMLExporter:
 
         # create the output path if necessary
         if not os.path.exists(self.out_path):
+            logging.debug("created output dir %s", self.out_path)
             os.mkdir(self.out_path)
 
         # extract all the files
@@ -34,6 +37,7 @@ class HTMLExporter:
 
     def generate_pages(self):
         """Generate the pages & the sitemap"""
+        logging.debug("generating pages for langage %s", self.language)
 
         # update the boxes data
         self.update_boxes_data()
@@ -109,8 +113,8 @@ class HTMLExporter:
             # current page
             self.navigation_spacer(page)
             self.navigation += "<li class='nav-item'><a class='nav-link' href='%s'>%s</a>" %\
-                               (page.contents[self.language].path,
-                                page.contents[self.language].title)
+               (page.site.root_link(page.contents[self.language].path),
+                page.contents[self.language].title)
 
         if page.has_children():
             if not page.is_homepage():
@@ -149,8 +153,8 @@ class HTMLExporter:
 
         # current page
         self.sitemap_content += "<li><a href='%s'>%s</a>" %\
-                                (page.contents[self.language].path,
-                                 page.contents[self.language].title)
+            (page.site.root_link(page.contents[self.language].path),
+             page.contents[self.language].title)
 
         if page.has_children():
             self.sitemap_content += "<ul>"
@@ -167,30 +171,30 @@ class HTMLExporter:
         if page.is_homepage():
             self.sitemap_content += "</ul>"
 
+    @staticmethod
+    def files_to_ignore(dirs, files):
+        return ["thumbnail", "thumbnail2"]
+
     def extract_files(self):
         """Extract the files"""
 
         start = "%s/content/sites/%s/files" % (self.site.base_path, self.site.name)
+        dst = "%s/files" % self.out_path
+        logging.debug("copying files from %s into %s", start, self.out_path)
 
-        for (path, dirs, files) in os.walk(start):
-            for file in files:
-                # we exclude the thumbnails
-                if "thumbnail" == file or "thumbnail2" == file:
-                    continue
+        if os.path.exists(dst):
+            logging.debug("output_dir already exists. Wiping it out...")
+            shutil.rmtree(dst)
 
-                src = "%s/%s" % (path, file)
+        # copy all files as they are
+        shutil.copytree(start, dst, ignore=HTMLExporter.files_to_ignore)
 
-                dst = self.out_path + src[src.index("files/") - 1:]
-
-                dst = dst[:dst.rindex("/")]
-
-                parent = dst[:dst.rindex("/")]
-
-                # create the parent directory if necessary
-                if not os.path.exists(parent):
-                    cmd = "mkdir -p '%s'" % parent
-                    os.system(cmd)
-
-                # now copy the file
-                cmd = "cp '%s' '%s'" % (src, dst)
-                os.system(cmd)
+        # move all files one level up: out of the directory with same name
+        for (path, dirs, files) in os.walk(dst):
+            name = os.path.basename(path)
+            if len(files) == 1 and files[0] == name:
+                file_path = os.path.join(path, name)
+                tmp_path = os.path.normpath(os.path.join(path, '..', '_%s' % name))
+                shutil.move(file_path, tmp_path)
+                os.rmdir(path)
+                shutil.move(tmp_path, path)

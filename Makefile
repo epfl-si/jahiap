@@ -1,5 +1,4 @@
 site_name=master
-port=9090
 number=1
 output_dir=build
 docker_name="demo-$(site_name)"
@@ -7,7 +6,8 @@ docker_name="demo-$(site_name)"
 all: clean static start
 
 clean:
-	rm -rf $(output_dir)
+	rm -rf $(output_dir)/$(site_name)*
+	rm -rf $(output_dir)/parsed_$(site_name).pkl
 
 crawl:
 	python src/jahiap.py -o $(output_dir) -n $(number) crawl $(site_name)
@@ -34,8 +34,12 @@ start:
 	docker run -d \
 		--name $(docker_name) \
 		--restart=always \
-		-p $(port):80 \
-		-v $(PWD)/$(output_dir)/$(site_name)/$(site_name)_html:/usr/share/nginx/html \
+		--net wp-net \
+		--label "traefik.enable=true" \
+		--label "traefik.backend=static-$(site_name)" \
+		--label "traefik.frontend=static-$(site_name)" \
+		--label "traefik.frontend.rule=Host:$(WP_ADMIN_URL);PathPrefix:/static/$(site_name)" \
+		-v $(PWD)/$(output_dir)/$(site_name)/$(site_name)_html:/usr/share/nginx/html/static/$(site_name) \
 		nginx
 
 stop:

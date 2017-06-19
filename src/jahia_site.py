@@ -1,6 +1,7 @@
 """(c) All rights reserved. ECOLE POLYTECHNIQUE FEDERALE DE LAUSANNE, Switzerland, VPSI, 2017"""
 
 import os
+import logging
 
 from bs4 import BeautifulSoup
 from box import Box
@@ -88,6 +89,11 @@ class Site:
         # generate the report
         self.generate_report()
 
+
+    def root_link(self, link):
+        return "/static/%s%s" % (self.name, link)
+
+
     def parse_properties(self):
         """
         Parse the properties found in site.properties
@@ -170,7 +176,13 @@ class Site:
         for language, dom_path in self.export_files.items():
             dom = Utils.get_dom(dom_path)
 
-            breadcrumb_link = dom.getElementsByTagName("breadCrumbLink")[0]
+            breadcrumb_links = dom.getElementsByTagName("breadCrumbLink")
+            nb_found = len(breadcrumb_links)
+            if nb_found !=1:
+                logging.warning("Found %s breadcrumb link(s) instead of 1", nb_found)
+                if nb_found == 0:
+                    continue
+            breadcrumb_link = breadcrumb_links[0]
 
             for child in breadcrumb_link.childNodes:
                 if child.ELEMENT_NODE != child.nodeType:
@@ -341,7 +353,7 @@ class Site:
                     new_link = page.contents[box.page_content.language].path
 
                     # change the link href
-                    tag[attribute] = new_link
+                    tag[attribute] = self.root_link(new_link)
 
                     self.internal_links += 1
             # absolute links rewritten as relative links
@@ -350,7 +362,7 @@ class Site:
 
                 new_link = link[link.index(self.server_name) + len(self.server_name):]
 
-                tag[attribute] = new_link
+                tag[attribute] = self.root_link(new_link)
 
                 self.absolute_links += 1
             # file links
@@ -360,7 +372,7 @@ class Site:
                 if "?" in new_link:
                     new_link = new_link[:new_link.index("?")]
 
-                tag[attribute] = new_link
+                tag[attribute] = self.root_link(new_link)
 
                 self.file_links += 1
             # those are files links we already fixed, so we pass
