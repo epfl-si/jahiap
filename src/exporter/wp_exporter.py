@@ -1,11 +1,12 @@
 """(c) All rights reserved. ECOLE POLYTECHNIQUE FEDERALE DE LAUSANNE, Switzerland, VPSI, 2017"""
 import os
+import subprocess
 
 from bs4 import BeautifulSoup
 from wordpress_json import WordpressJsonWrapper, WordpressError
 
+from exporter.utils import Utils
 from settings import WP_USER, WP_PASSWORD
-from utils import Utils
 
 
 class WPExporter:
@@ -16,6 +17,9 @@ class WPExporter:
         'menus': 0,
         'failed_files': 0,
     }
+
+    # Dictionary with the key 'wp_page_id' and the value 'wp_menu_id'
+    menu_id_dict = {}
 
     @staticmethod
     def convert_bytes(num):
@@ -33,7 +37,9 @@ class WPExporter:
         official wordpress command line interface)
         available in the docker container wpcli
         """
-        os.system('docker exec wp-cli-%s %s' % (self.site.name, command))
+        cmd = 'docker exec wp-cli-%s %s' % (self.site.name, command)
+        # cmd = 'docker exec wpcli %s ' % (command)
+        return subprocess.check_output(cmd, shell=True)
 
     @classmethod
     def file_size(cls, file_path):
@@ -60,7 +66,7 @@ class WPExporter:
         self.import_medias()
         self.import_pages()
         self.set_frontpage()
-        self.populate_menu(menu_name='Main')
+        self.populate_menu()
         self.import_sidebar()
         self.display_report()
 
@@ -194,27 +200,44 @@ class WPExporter:
                   '--title="%s" --text="%s"' % (box.title, content)
             self.wp_cli(cmd)
 
-    def populate_menu(self, menu_name):
+    def create_submenu(self, page):
         """
-        Add pages into the menu in wordpress with given menu_name.
-        This menu needs to be created before hand
+        Create recursively submenus.
+        """
+        if page.wp_id and page not in self.site.homepage.children and page.parent.wp_id in self.menu_id_dict:
+
+            parent_menu_id = self.menu_id_dict[page.parent.wp_id]
+
+            command = 'wp menu item add-post Main %s --parent-id=%s --porcelain' % (page.wp_id, parent_menu_id)
+            menu_id = self.wp_cli(command)
+            self.menu_id_dict[page.wp_id] = Utils.get_menu_id(menu_id)
+            self.report['menus'] += 1
+
+        if page.has_children():
+            for child in page.children:
+                self.create_submenu(child)
+
+    def populate_menu(self):
+        """
+        Add pages into the menu in wordpress.
+        This menu needs to be created before hand.
         """
 
         # Create homepage menu
         page = self.site.homepage
-        self.wp_cli('wp menu item add-post %s %s' % (menu_name, page.wp_id))
+        menu_id = self.wp_cli('wp menu item add-post Main %s --porcelain' % page.wp_id)
+        self.menu_id_dict[page.wp_id] = Utils.get_menu_id(menu_id)
         self.report['menus'] += 1
 
-        # Create children homepage menu
-        for children in self.site.homepage.children:
-            self.wp_cli('wp menu item add-post %s %s' % (menu_name, children.wp_id))
+        # Create children of homepage menu
+        for homepage_children in self.site.homepage.children:
+
+            menu_id = self.wp_cli('wp menu item add-post Main %s --porcelain' % homepage_children.wp_id)
+            self.menu_id_dict[homepage_children.wp_id] = Utils.get_menu_id(menu_id)
             self.report['menus'] += 1
 
-        # Create others menus
-        for page in self.site.pages_by_pid.values():
-            if page.parent and not page.parent.is_homepage():
-                self.wp_cli('wp menu item add-post %s %s --parent-id=%s' % (menu_name, page.wp_id, page.parent.wp_id))
-            self.report['menus'] += 1
+            # create recursively submenus
+            self.create_submenu(homepage_children)
 
     def set_frontpage(self):
         """
@@ -235,14 +258,15 @@ class WPExporter:
 
     def delete_all_content(self):
         """
-        Delete all content Worpress
+        Delete all content WordPress
         """
         self.delete_medias()
         self.delete_pages()
+        self.delete_widgets()
 
     def delete_medias(self):
         """
-        Delete medias in Wordpress via WP REST API
+        Delete medias in WordPress via WP REST API
         HTTP delete  http://.../wp-json/wp/v2/media/1761?force=true
         """
         medias = self.wp.get_media(params={'per_page': '100'})
@@ -266,8 +290,8 @@ class WPExporter:
         """
         Delete all widgets
         """
-        cmd = "wp widget list page-widgets --fields=id"
-        widgets_id_list = self.wp_cli(cmd)
+        cmd = "wp widget list page-widgets --fields=id --format=csv"
+        widgets_id_list = self.wp_cli(cmd).decode("UTF-8").split("\n")[1:-1]
         for widget_id in widgets_id_list:
             cmd = "wp widget delete " + widget_id
             self.wp_cli(cmd)
