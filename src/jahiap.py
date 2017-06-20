@@ -25,7 +25,6 @@ Options:
   -u --site-url=<SITE_URL>      Wordpress URL where to export parsed content.
   --debug                       Set logging level to DEBUG (default is INFO).
   --quiet                       Set logging level to WARNING (default is INFO).
- 
 """
 
 import sys
