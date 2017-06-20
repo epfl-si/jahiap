@@ -102,21 +102,21 @@
             <a class="nav-link" href="...">Parent page</a>
           </li>
           -->
-          <li class="nav-item nav-item-active">{% with link = site.root_link(page_content.url) %}
-            <a class="nav-link" href="{{ link }}">{{ page_content.title}}</a>{% endwith %}
+          <li class="nav-item nav-item-active">
+            <a class="nav-link" href="{{ page_content.path }}">{{ page_content.title}}</a>
           </li>
         </ol>
       </nav>
 
       <!-- The language selector -->
       <nav class="nav nav-inline lang" role="navigation" aria-label="Language selector">
-        <ul class="nav-list">{% with link = site.root_link('/sitemap') %}
+        <ul class="nav-list">
           {% if 'en' == page_content.language %}
             <li class="nav-item nav-item-active">
           {% else %}
              <li class="nav-item">
           {% endif %}
-            <a class="nav-link" href="{{ link }}-en.html" lang="en">
+            <a class="nav-link" href="{{ exporter.root_path }}/sitemap-en.html" lang="en">
               <span class="visuallyhidden">Current language: </span>
               <span class="visuallyhidden-xxs visuallyhidden-xs">English</span>
             </a>
@@ -126,12 +126,12 @@
           {% else %}
              <li class="nav-item">
           {% endif %}
-            <a class="nav-link" href="{{ link }}-fr.html" lang="fr" ref="alternate">
+            <a class="nav-link" href="{{ exporter.root_path }}/sitemap-fr.html" lang="fr" ref="alternate">
               <span class="visuallyhidden">Passer au : </span>
               <span class="visuallyhidden-xxs visuallyhidden-xs">français</span>
             </a>
           </li>
-        </ul>{% endwith %}
+        </ul>
       </nav>
 
       <!-- The main/horizontal navigation -->

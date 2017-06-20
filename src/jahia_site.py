@@ -19,11 +19,13 @@ This file is named jahia_site to avoid a conflict with Site [https://docs.python
 class Site:
     """A Jahia Site. Have 1 to N Pages"""
 
-    def __init__(self, base_path, name):
+    def __init__(self, base_path, name, root_path=""):
         self.base_path = base_path
         self.name = name
         # the server name, e.g. "master.epfl.ch"
         self.server_name = ""
+        # the root_path, by default it's empty
+        self.root_path = root_path
 
         # parse the properties at the beginning, we need the
         # server_name for later
@@ -89,10 +91,14 @@ class Site:
         # generate the report
         self.generate_report()
 
+    def full_path(self, path):
+        """
+        Return the page full, adding the site root_path at the beginning
+        """
+        return self.root_path + path
 
     def root_link(self, link):
         return "/static/%s%s" % (self.name, link)
-
 
     def parse_properties(self):
         """
@@ -164,7 +170,7 @@ class Site:
                         elements = child.getElementsByTagName("jahia:url")
                         for element in elements:
                             link = Link(
-                                url=element.getAttribute('jahia:value'),
+                                url=self.full_path(element.getAttribute('jahia:value')),
                                 title=element.getAttribute('jahia:title')
                             )
                             self.footer[language].append(link)
@@ -353,7 +359,7 @@ class Site:
                     new_link = page.contents[box.page_content.language].path
 
                     # change the link href
-                    tag[attribute] = self.root_link(new_link)
+                    tag[attribute] = self.full_path(new_link)
 
                     self.internal_links += 1
             # absolute links rewritten as relative links
@@ -362,7 +368,7 @@ class Site:
 
                 new_link = link[link.index(self.server_name) + len(self.server_name):]
 
-                tag[attribute] = self.root_link(new_link)
+                tag[attribute] = self.full_path(new_link)
 
                 self.absolute_links += 1
             # file links
@@ -372,7 +378,7 @@ class Site:
                 if "?" in new_link:
                     new_link = new_link[:new_link.index("?")]
 
-                tag[attribute] = self.root_link(new_link)
+                tag[attribute] = self.full_path(new_link)
 
                 self.file_links += 1
             # those are files links we already fixed, so we pass

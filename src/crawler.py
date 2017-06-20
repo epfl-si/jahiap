@@ -1,4 +1,19 @@
 """(c) All rights reserved. ECOLE POLYTECHNIQUE FEDERALE DE LAUSANNE, Switzerland, VPSI, 2017"""
+
+import logging
+import os
+import timeit
+import requests
+
+from utils import Utils
+from datetime import timedelta
+from pathlib import Path
+
+from clint.textui import progress
+
+from settings import JAHIA_SITES, EXPORT_PATH
+
+
 """
     This script automates the crawling of Jahia website,
     in order to download zip exports.
@@ -8,21 +23,8 @@
     to get help on usage and available options
 """
 
-import logging
-import os
-import timeit
-from datetime import timedelta
-from pathlib import Path
-
-import requests
-from clint.textui import progress
-
-from settings import JAHIA_SITES, EXPORT_PATH
-
 # define HOST
-if not os.environ.get("JAHIA_HOST"):
-    logging.warning("JAHIA_HOST not set, using 'localhost' as default")
-HOST = os.environ.get("JAHIA_HOST", "localhost")
+HOST = Utils.get_optional_env("JAHIA_HOST", "localhost")
 
 # define URLs and their parameters
 ID_URI = "administration"
@@ -81,14 +83,9 @@ class SiteCrawler(object):
     @staticmethod
     def get_credentials():
         # define credentials
-        if not os.environ.get("JAHIA_ROOT_PASSWORD"):
-            raise SystemExit("The script requires the environment variable JAHIA_ROOT_PASSWORD to be set")
-        if not os.environ.get("JAHIA_ROOT_USER"):
-            logging.warning("JAHIA_ROOT_USER not set, using 'root' as default")
-
         return {
-            'login_username': os.environ.get('JAHIA_ROOT_USER', 'root'),
-            'login_password': os.environ.get('JAHIA_ROOT_PASSWORD')
+            'login_username': Utils.get_optional_env('JAHIA_ROOT_USER', 'root'),
+            'login_password': Utils.get_required_env('JAHIA_ROOT_PASSWORD')
         }
 
     @classmethod
@@ -148,7 +145,7 @@ class SiteCrawler(object):
 
     def already_downloaded(self):
         path = Path(self.export_path)
-        
+
         return [str(file_path) for file_path in path.glob("%s_export*" % self.site_name)]
 
     def download_site(self):
@@ -156,7 +153,7 @@ class SiteCrawler(object):
         existing = self.already_downloaded()
         if existing and not self.force:
             logging.warning("%s already downloaded %sx. Last one is %s",
-                self.site_name, len(existing), self.file_path)
+                            self.site_name, len(existing), self.file_path)
             return self.file_path
 
         # pepare query
@@ -187,7 +184,7 @@ class SiteCrawler(object):
             def read_stream():
                 return progress.bar(
                     response.iter_content(chunk_size=4096),
-                    expected_size=(int(total_length)/4096) + 1)
+                    expected_size=(int(total_length) / 4096) + 1)
         else:
             def read_stream():
                 return response.iter_content(chunk_size=4096)

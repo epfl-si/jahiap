@@ -4,7 +4,7 @@
 class Link:
     """A link"""
 
-    def __init__(self, title, url):
+    def __init__(self, url, title):
         self.title = title
         self.url = url
 

@@ -1,4 +1,6 @@
 """(c) All rights reserved. ECOLE POLYTECHNIQUE FEDERALE DE LAUSANNE, Switzerland, VPSI, 2017"""
+
+import logging
 import os
 
 import xml.dom.minidom
@@ -37,13 +39,26 @@ class Utils:
 
         return dom
 
-    @staticmethod
-    def get_domain():
+    @classmethod
+    def get_optional_env(self, key, default):
         """
-        Return the domain name
+        Return the value of an optional environment variable, and use
+        the provided default if it's not set.
         """
-        env_var = 'WP_ADMIN_URL'
-        if env_var not in os.environ:
-            raise SystemExit("You must set environment variable %s" % env_var)
-        else:
-            return os.environ.get(env_var)
+
+        if not os.environ.get(key):
+            logging.warning("The optional environment variable %s is not set, using '%s' as default" % (key, default))
+
+        return os.environ.get(key, default)
+
+    @classmethod
+    def get_required_env(self, key):
+        """
+        Return the value of a required environment variable. If it's not
+        set an exception is raised.
+        """
+
+        if not os.environ.get(key):
+            raise SystemExit("The required environment variable %s is not set" % key)
+
+        return os.environ.get(key)

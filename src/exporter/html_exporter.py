@@ -18,6 +18,7 @@ class HTMLExporter:
     def __init__(self, site, out_path):
         self.site = site
         self.out_path = out_path
+        self.root_path = site.root_path
 
         # create the output path if necessary
         if not os.path.exists(self.out_path):
@@ -112,9 +113,9 @@ class HTMLExporter:
         if not page.is_homepage():
             # current page
             self.navigation_spacer(page)
-            self.navigation += "<li class='nav-item'><a class='nav-link' href='%s'>%s</a>" %\
-               (page.site.root_link(page.contents[self.language].path),
-                page.contents[self.language].title)
+            self.navigation += "<li class='nav-item'><a class='nav-link' href='%s'>%s</a>" % \
+                               (page.contents[self.language].path,
+                                page.contents[self.language].title)
 
         if page.has_children():
             if not page.is_homepage():
@@ -153,7 +154,7 @@ class HTMLExporter:
 
         # current page
         self.sitemap_content += "<li><a href='%s'>%s</a>" %\
-            (page.site.root_link(page.contents[self.language].path),
+            (page.contents[self.language].path,
              page.contents[self.language].title)
 
         if page.has_children():

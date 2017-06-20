@@ -200,8 +200,7 @@ def main_export(args):
             logging.info("Site successfully exported to Wordpress")
 
         if args['--to-static']:
-            export_path = os.path.join(
-                output_subdir, "%s_html" % site.name)
+            export_path = os.path.join(output_subdir, "html")
             HTMLExporter(site, export_path)
             logging.info("Site successfully exported to HTML files")
 
