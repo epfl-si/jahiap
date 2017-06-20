@@ -4,77 +4,68 @@ site).
 
 ## Install
 
-pip install -r requirements/base.txt
+If you wish to work on one of the following feature, multi sites / wordpress / proxy, you need to setup your environment as described in template-web-wordpress/[README](https://github.com/epfl-idevelop/template-web-wordpress/blob/master/README.md)
 
-## The 30-seconds tutorial (for dcsl)
+If you only want to crawl, unzip, parse, generate static HTML and serve it in a standalone container, you should only need:
+
+```
+pip install -r requirements/base.txt
+```
+
+## The 30-seconds tutorial (standalone, working on master.epfl.ch)
 
 ```
 $ cd jahiap
-$ make all
+$ make static standalone
 ```
 
 You now can access the content at [http://localhost:9090](http://localhost:9090).
 
-If you want to run it again, you have to call `make stop` first in order to stop the running container, and then call the `all` directive :
+For another website, e.g dcsl, you need to set a few variables
 
 ```
-$ make stop all
+$ make static standalone port=9091 site_name=dcsl
 ```
 
-For another website, e.g master?
-
-```
-$ make all port=9091 site_name=master zip_file=exports/master_export_2017-05-29-10-53.zip
-```
 This one will be available at [http://localhost:9091](http://localhost:9091).
+
+
+## The 2-mins-seconds tutorial (with the whole architecture, on master.epfl.ch)
+
+You first have to setup the environment as described in template-web-wordpress/[README](https://github.com/epfl-idevelop/template-web-wordpress/blob/master/README.md)
+
+```
+$ cd ~/git-repos/template-web-wordpress/helpers
+$ make restart
+...
+```
+
+You can check your DB on [phpmyadmin.localhost:8081](phpmyadmin.localhost:8081) and check that traefik is running on [http://localhost:8080](http://localhost:8080)
+
+```
+$ cd ~/git-repos/jahiap
+$ make all
+```
+
+The website is now accessible on $WP_HOST/$WP_PATH/master. With the default values from the setup instructions, it will be available at [http://static.localhost/labs/master](http://static.localhost/labs/master).
+
+
+For another website, e.g dcsl, you need to set the site_name
+
+```
+$ cd jahiap
+$ make all site_name=dcsl
+```
+
+With the default values from the setup instructions, it will be available at [http://static.localhost/labs/dcsl](http://static.localhost/labs/dcsl).
+
 
 ## More details on usage
 
-The `make` command does a few things for you :
+The `make` only wraps the calls to the script `src/jahiap.py`
 
-* crawl one or many Jahia zip file
-* unzip it
-* parse it
-* export its content
-* run a nginx docker image to serve the exported content
 
-The detailed commands look like this :
-
-```
-python src/jahiap.py crawl dcsl -o build
-python src/jahiap.py unzip dcsl -o build
-python src/jahiap.py parse dcsl -o build -r
-python src/jahiap.py export dcsl -o build -s
-docker run -d \
-    --name docker-dcsl \
-    -p 9090:80 \
-    -v $(PWD)/build/dcsl_html:/usr/share/nginx/html \
-    nginx
-```
-
-## nginx
-
-the `make` command starts docker nginx with optionals parameters site_name=dcsl, port=xxx (default=9090), docker_name=xxx (default=demo-dcsl) and static files from $(PWD)/$(output_dir)/$(site_name)_html (default=./build/dcsl_html)
-
-```
-make start
-make start site_name=dcsl port=9090 docker_name=demo-dcsl output_dir=build
-```
-
-stop and remove nginx container
-
-```
-make stop
-make stop docker_name=demo-dcsl
-```
-
-stop and restart nginx
-
-```
-make restart
-```
-
-## jahiap
+## jahiap.py
 
 You might use the option `-h` on the jahiap script to get the following help:
 
