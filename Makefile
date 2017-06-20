@@ -26,10 +26,10 @@ static:
 	python src/jahiap.py export $(site_name) --output-dir $(output_dir) --number $(number) --to-static
 
 wp:
-	python src/jahiap.py export $(site_name) --output-dir $(output_dir) --to-wordpress --site-url $WP_ADMIN_URL
+	python src/jahiap.py export $(site_name) --output-dir $(output_dir) --to-wordpress --site-url $(WP_ADMIN_URL) --wp-cli "wpcli"
 
 clean_wordpress:
-	python src/jahiap.py export $(site_name) --output-dir $(output_dir) --clean-wordpress --site-url $WP_ADMIN_URL
+	python src/jahiap.py export $(site_name) --output-dir $(output_dir) --clean-wordpress --site-url $(WP_ADMIN_URL) --wp-cli "wpcli"
 
 run:
 	python src/jahiap.py docker $(site_name) --output-dir $(output_dir) --number $(number)

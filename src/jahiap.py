@@ -8,7 +8,7 @@ Usage:
                          [--debug|--quiet] [--use-cache] [--root-path=<ROOT_PATH>]
   jahiap.py export <site> [--to-wordpress|--to-static|--to-dictionary|--clean-wordpress] [--output-dir=<OUTPUT_DIR>]
                           [--number=<NUMBER>] [--site-url=<SITE_URL>] [--print-report]
-                          [--debug|--quiet]
+                          [--wp-cli=<WP_CLI>] [--debug|--quiet]
   jahiap.py docker <site> [--output-dir=<OUTPUT_DIR>] [--number=<NUMBER>] [--debug|--quiet]
 
 Options:
@@ -19,13 +19,14 @@ Options:
   --date DATE                   (crawl) Date and time for the snapshot, e.g : 2017-01-15-23-00.
   -f --force                    (crawl) Force download even if existing snapshot for same site.
   -c --use-cache                (parse) Do not parse if pickle file found with a previous parsing result
-  --root-path=<ROOT_PATH>   (FIXME) Set base path for URLs (default is '' or WP_PATH on command 'docker')
+  --root-path=<ROOT_PATH>       (FIXME) Set base path for URLs (default is '' or $WP_PATH on command 'docker')
   -r --print-report             (FIXME) Print report with content.
   -w --to-wordpress             (export) Export parsed data to Wordpress.
   -c --clean-wordpress          (export) Delete all content of Wordpress site.
   -s --to-static                (export) Export parsed data to static HTML files.
   -d --to-dictionary            (export) Export parsed data to python dictionary.
-  -u --site-url=<SITE_URL>      (export) Wordpress URL where to export parsed content.
+  -u --site-url=<SITE_URL>      (export) Wordpress URL where to export parsed content. (default is $WP_ADMIN_URL)
+  --wp-cli=<WP_CLI>             (export) Name of wp-cli container to use with given wordpress URL. (default is set by WPExporter)
   --debug                       (*) Set logging level to DEBUG (default is INFO).
   --quiet                       (*) Set logging level to WARNING (default is INFO).
 """
@@ -49,7 +50,7 @@ from exporter.dict_exporter import DictExporter
 from crawler import SiteCrawler
 from jahia_site import Site
 
-from settings import WP_HOST, WP_PATH
+from settings import WP_ADMIN_URL, WP_HOST, WP_PATH
 
 
 def main(args):
@@ -210,12 +211,12 @@ def main_export(args):
         output_subdir = os.path.join(args['--output-dir'], site.name)
 
         if args['--clean-wordpress']:
-            wp_exporter = WPExporter(site=site, domain=args['--site-url'])
+            wp_exporter = WPExporter(site=site, domain=args['--site-url'], cli_container=args['--wp-cli'])
             wp_exporter.delete_all_content()
             logging.info("Data of Wordpress site successfully deleted")
 
         if args['--to-wordpress']:
-            wp_exporter = WPExporter(site=site, domain=args['--site-url'])
+            wp_exporter = WPExporter(site=site, domain=args['--site-url'], cli_container=args['--wp-cli'])
             wp_exporter.import_all_data_to_wordpress()
             exported_site['wordpress'] = args['--site-url']
             logging.info("Site successfully exported to Wordpress")
@@ -298,7 +299,9 @@ def set_default_values(args):
     if not args['--date']:
         args['--date'] = datetime.today().strftime("%Y-%m-%d-%H-%M")
     if not args['--site-url']:
-        args['--site-url'] = "%s/%s/%s"% (WP_HOST, WP_PATH, args['<site>'])
+        args['--site-url'] = WP_ADMIN_URL
+    if not args['--wp-cli']:
+        args['--wp-cli'] = None
     if not args['--root-path']:
         args['--root-path'] = ''
     return args
