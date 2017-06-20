@@ -3,11 +3,11 @@ jahiap: a wonderful tool
 
 Usage:
   jahiap.py crawl <site> [--output-dir=<OUTPUT_DIR>] [--number=<NUMBER>] [--date DATE] [--force] [--debug|--quiet]
-  jahiap.py unzip <site> [--output-dir=<OUTPUT_DIR>] [--number=<NUMBER>] [--date DATE] [--force] [--debug|--quiet]
-  jahiap.py parse <site> [--output-dir=<OUTPUT_DIR>] [--number=<NUMBER>] [--print-report] [--date DATE] [--force]
-                         [--debug|--quiet]
+  jahiap.py unzip <site> [--output-dir=<OUTPUT_DIR>] [--number=<NUMBER>] [--debug|--quiet]
+  jahiap.py parse <site> [--output-dir=<OUTPUT_DIR>] [--number=<NUMBER>] [--print-report]
+                         [--debug|--quiet] [--use-cache]
   jahiap.py export <site> [--to-wordpress|--to-static|--to-dictionary|--clean-wordpress] [--output-dir=<OUTPUT_DIR>]
-                          [--number=<NUMBER>] [--site-url=<SITE_URL>] [--print-report] [--date DATE] [--force]
+                          [--number=<NUMBER>] [--site-url=<SITE_URL>] [--print-report]
                           [--debug|--quiet]
   jahiap.py docker <site> [--output-dir=<OUTPUT_DIR>] [--number=<NUMBER>] [--debug|--quiet]
 
@@ -16,17 +16,19 @@ Options:
   -v --version                  Show version.
   -o --output-dir=<OUTPUT_DIR>  Directory where to perform command [default: build].
   -n --number=<NUMBER>          Number of sites to analyse (fetched in JAHIA_SITES, from given site name) [default: 1].
-  --date DATE                   Date and time for the snapshot, e.g : 2017-01-15-23-00.
-  -f --force                    Force download even if existing files for same site.
-  -r --print-report             Print report with content.
-  -w --to-wordpress             Export parsed data to Wordpress.
-  -c --clean-wordpress          Delete all content of Wordpress site.
-  -s --to-static                Export parsed data to static HTML files.
-  -d --to-dictionary            Export parsed data to python dictionary.
-  -u --site-url=<SITE_URL>      Wordpress URL where to export parsed content.
-  --debug                       Set logging level to DEBUG (default is INFO).
-  --quiet                       Set logging level to WARNING (default is INFO).
+  --date DATE                   (crawl) Date and time for the snapshot, e.g : 2017-01-15-23-00.
+  -f --force                    (crawl) Force download even if existing snapshot for same site.
+  -c --use-cache                (parse) Do not parse if pickle file found with a previous parsing result
+  -r --print-report             (FIXME) Print report with content.
+  -w --to-wordpress             (export) Export parsed data to Wordpress.
+  -c --clean-wordpress          (export) Delete all content of Wordpress site.
+  -s --to-static                (export) Export parsed data to static HTML files.
+  -d --to-dictionary            (export) Export parsed data to python dictionary.
+  -u --site-url=<SITE_URL>      (export) Wordpress URL where to export parsed content.
+  --debug                       (*) Set logging level to DEBUG (default is INFO).
+  --quiet                       (*) Set logging level to WARNING (default is INFO).
 """
+VERSION = "0.2"
 
 import sys
 import logging
@@ -46,7 +48,7 @@ from exporter.dict_exporter import DictExporter
 from crawler import SiteCrawler
 from jahia_site import Site
 
-from settings import DOMAIN
+from settings import WP_HOST, WP_PATH
 
 
 def main(args):
@@ -155,25 +157,28 @@ def main_parse(args):
         # create subdir in output_dir
         output_subdir = os.path.join(args['--output-dir'], site_name)
 
-        # check if already parsed
-        pickle_file = os.path.join(output_subdir, 'parsed_%s.pkl' % site_name)
-        # if os.path.exists(pickle_file):
-        #     with open(pickle_file, 'rb') as input:
-        #         logging.info("Loaded parsed site from %s" % pickle_file)
-        #         parsed_sites[site_name] = pickle.load(input)
-        #         continue
+        # when using-cache: check if already parsed
+        if args['--use-cache']:
+            pickle_file = os.path.join(output_subdir, 'parsed_%s.pkl' % site_name)
+            if os.path.exists(pickle_file):
+                with open(pickle_file, 'rb') as input:
+                    logging.info("Loaded parsed site from %s" % pickle_file)
+                    parsed_sites[site_name] = pickle.load(input)
+                    continue
 
         logging.info("Parsing %s...", site_dir)
         site = Site(site_dir, site_name)
 
         print(site.report)
 
-        # save parsed site on file system
-        with open(pickle_file, 'wb') as output:
-            pickle.dump(site, output, pickle.HIGHEST_PROTOCOL)
+        # when using-cache: save parsed site on file system
+        if args['--use-cache']:
+            with open(pickle_file, 'wb') as output:
+                logging.info("Parsed site saved into %s" % pickle_file)
+                pickle.dump(site, output, pickle.HIGHEST_PROTOCOL)
 
         # log success
-        logging.info("Site successfully parsed, and saved into %s" % pickle_file)
+        logging.info("Site successfully parsed")
         parsed_sites[site_name] = site
 
     # return results
@@ -240,24 +245,25 @@ def main_docker(args):
 
     for site_name, export_path in exported_sites.items():
         # stop running countainer first (if any)
-        os.system("docker rm -f demo-%s" % site_name)
+        os.system("docker rm -f %s" % site_name)
 
         # run new countainer
         docker_cmd = """docker run -d \
-        --name "demo-%(site_name)s" \
+        --name "%(site_name)s" \
         --restart=always \
         --net wp-net \
         --label "traefik.enable=true" \
         --label "traefik.backend=static-%(site_name)s" \
         --label "traefik.frontend=static-%(site_name)s" \
-        --label "traefik.frontend.rule=Host:%(WP_ADMIN_URL)s;PathPrefix:/static/%(site_name)s" \
-        -v %(output_path)s/%(site_name)s/%(site_name)s_html:/usr/share/nginx/html/static/%(site_name)s \
+        --label "traefik.frontend.rule=Host:%(WP_HOST)s;PathPrefix:/%(WP_PATH)s/%(site_name)s" \
+        -v %(output_path)s/%(site_name)s/html:/usr/share/nginx/html/%(WP_PATH)s/%(site_name)s \
         nginx
         """ % {
             'site_name': site_name,
             'export_path': export_path,
             'output_path': output_path,
-            'WP_ADMIN_URL': DOMAIN,
+            'WP_HOST': WP_HOST,
+            'WP_PATH': WP_PATH,
         }
         os.system(docker_cmd)
         logging.info("Docker launched for %s", site_name)
@@ -285,7 +291,7 @@ def set_default_values(args):
     if not args['--date']:
         args['--date'] = datetime.today().strftime("%Y-%m-%d-%H-%M")
     if not args['--site-url']:
-        args['--site-url'] = DOMAIN
+        args['--site-url'] = "%s/%s/%s"% (WP_HOST, WP_PATH, args['<site>'])
     return args
 
 
@@ -293,7 +299,7 @@ if __name__ == '__main__':
 
     # docopt return a dictionary with all arguments
     # __doc__ contains package docstring
-    args = set_default_values(docopt(__doc__, version='0.1'))
+    args = set_default_values(docopt(__doc__, version=VERSION))
     print(args)
 
     # set logging config before anything else
