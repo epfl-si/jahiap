@@ -25,6 +25,7 @@ class Site:
         # the server name, e.g. "master.epfl.ch"
         self.server_name = ""
         # the root_path, by default it's empty
+        # FIXME: would be better in exporter, or set by exporter
         self.root_path = root_path
 
         # parse the properties at the beginning, we need the
@@ -96,9 +97,6 @@ class Site:
         Return the page full, adding the site root_path at the beginning
         """
         return self.root_path + path
-
-    def root_link(self, link):
-        return "/static/%s%s" % (self.name, link)
 
     def parse_properties(self):
         """
