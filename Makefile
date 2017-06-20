@@ -26,10 +26,10 @@ static:
 	python src/jahiap.py export $(site_name) --output-dir $(output_dir) --number $(number) --to-static
 
 wp:
-	python src/jahiap.py export $(site_name) --output-dir $(output_dir) --to-wordpress
+	python src/jahiap.py export $(site_name) --output-dir $(output_dir) --to-wordpress --site-url $WP_ADMIN_URL
 
 clean_wordpress:
-	python src/jahiap.py export $(site_name) --output-dir $(output_dir) --clean-wordpress
+	python src/jahiap.py export $(site_name) --output-dir $(output_dir) --clean-wordpress --site-url $WP_ADMIN_URL
 
 run:
 	python src/jahiap.py docker $(site_name) --output-dir $(output_dir) --number $(number)
@@ -41,6 +41,6 @@ standalone:
 		-v $(PWD)/$(output_dir)/$(site_name)/html:/usr/share/nginx/html \
 		nginx
 
-stop-standalone:
+stop_standalone:
 	docker stop $(docker_name)
 	docker rm $(docker_name)

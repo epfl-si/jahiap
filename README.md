@@ -29,7 +29,7 @@ $ cd jahiap
 $ make static standalone
 ```
 
-You now can access the content at [http://localhost:9090](http://localhost:9090). If you want to stop the running container, you can use `make stop-standalone`.
+You now can access the content at [http://localhost:9090](http://localhost:9090). If you want to stop the running container, you can use `make stop_standalone`.
 
 For another website, e.g dcsl :
 
