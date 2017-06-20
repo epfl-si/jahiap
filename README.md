@@ -4,7 +4,7 @@ site).
 
 ## Install
 
-If you wish to work on one of the following features : *multi sites / wordpress / proxy*, you need to setup your environment as described in `template-web-wordpress/[README](https://github.com/epfl-idevelop/template-web-wordpress/blob/master/README.md)`
+If you wish to work on one of the following features : *sites on same.domain/different/paths*, *wordpress*,  *redirections and proxy*, you need to setup your environment as described in `template-web-wordpress/`[README](https://github.com/epfl-idevelop/template-web-wordpress/blob/master/README.md)
 
 If you only want to crawl, unzip, parse, generate static HTML and serve it in a standalone container, you should only need:
 
@@ -42,7 +42,7 @@ This one will be available at [http://localhost:9091](http://localhost:9091).
 
 ## The 2-mins-seconds tutorial (with the whole architecture, on master.epfl.ch)
 
-You first have to setup the environment as described in `template-web-wordpress/[README](https://github.com/epfl-idevelop/template-web-wordpress/blob/master/README.md)`
+You first have to setup the environment as described in `template-web-wordpress/`[README](https://github.com/epfl-idevelop/template-web-wordpress/blob/master/README.md)
 
 When you have your environment ready, you can start the helpers:
 
@@ -52,7 +52,7 @@ $ make restart
 ...
 ```
 
-You can check your DB on [phpmyadmin.localhost:8081](http://lphpmyadmin.localhost:8081) and check that traefik is running on [http://localhost:8080](http://localhost:8080)
+You can check your DB on [phpmyadmin.localhost:8081](http://phpmyadmin.localhost:8081) and check that traefik is running on [http://localhost:8080](http://localhost:8080)
 
 ```
 $ cd ~/git-repos/jahiap
