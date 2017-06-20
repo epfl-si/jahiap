@@ -5,7 +5,7 @@ Usage:
   jahiap.py crawl <site> [--output-dir=<OUTPUT_DIR>] [--number=<NUMBER>] [--date DATE] [--force] [--debug|--quiet]
   jahiap.py unzip <site> [--output-dir=<OUTPUT_DIR>] [--number=<NUMBER>] [--debug|--quiet]
   jahiap.py parse <site> [--output-dir=<OUTPUT_DIR>] [--number=<NUMBER>] [--print-report]
-                         [--debug|--quiet] [--use-cache]
+                         [--debug|--quiet] [--use-cache] [--root-path=<ROOT_PATH>]
   jahiap.py export <site> [--to-wordpress|--to-static|--to-dictionary|--clean-wordpress] [--output-dir=<OUTPUT_DIR>]
                           [--number=<NUMBER>] [--site-url=<SITE_URL>] [--print-report]
                           [--debug|--quiet]
@@ -19,6 +19,7 @@ Options:
   --date DATE                   (crawl) Date and time for the snapshot, e.g : 2017-01-15-23-00.
   -f --force                    (crawl) Force download even if existing snapshot for same site.
   -c --use-cache                (parse) Do not parse if pickle file found with a previous parsing result
+  --root-path=<ROOT_PATH>   (FIXME) Set base path for URLs (default is '' or WP_PATH on command 'docker')
   -r --print-report             (FIXME) Print report with content.
   -w --to-wordpress             (export) Export parsed data to Wordpress.
   -c --clean-wordpress          (export) Delete all content of Wordpress site.
@@ -166,8 +167,13 @@ def main_parse(args):
                     parsed_sites[site_name] = pickle.load(input)
                     continue
 
+        # FIXME : root-path should be given in exporter, not parser
+        root_path = ""
+        if args['--root-path']:
+            root_path = "/%s/%s" % (args['--root-path'], site_name)
+            logging.info("Parsing site for root_path %s", root_path)
         logging.info("Parsing %s...", site_dir)
-        site = Site(site_dir, site_name)
+        site = Site(site_dir, site_name, root_path=root_path)
 
         print(site.report)
 
@@ -238,10 +244,11 @@ def main_export(args):
 def main_docker(args):
     # get list of sites html static sites
     args['--to-static'] = True
+    args['--root-path'] = args['--root-path'] or WP_PATH
     exported_sites = main_export(args)
 
     # docker needs an absolute path in order to mount volumes
-    output_path = os.path.abspath(args['--output-dir'])
+    abs_output_dir = os.path.abspath(args['--output-dir'])
 
     for site_name, export_path in exported_sites.items():
         # stop running countainer first (if any)
@@ -256,12 +263,12 @@ def main_docker(args):
         --label "traefik.backend=static-%(site_name)s" \
         --label "traefik.frontend=static-%(site_name)s" \
         --label "traefik.frontend.rule=Host:%(WP_HOST)s;PathPrefix:/%(WP_PATH)s/%(site_name)s" \
-        -v %(output_path)s/%(site_name)s/html:/usr/share/nginx/html/%(WP_PATH)s/%(site_name)s \
+        -v %(abs_output_dir)s/%(site_name)s/html:/usr/share/nginx/html \
         nginx
         """ % {
             'site_name': site_name,
             'export_path': export_path,
-            'output_path': output_path,
+            'abs_output_dir': abs_output_dir,
             'WP_HOST': WP_HOST,
             'WP_PATH': WP_PATH,
         }
@@ -292,6 +299,8 @@ def set_default_values(args):
         args['--date'] = datetime.today().strftime("%Y-%m-%d-%H-%M")
     if not args['--site-url']:
         args['--site-url'] = "%s/%s/%s"% (WP_HOST, WP_PATH, args['<site>'])
+    if not args['--root-path']:
+        args['--root-path'] = ''
     return args
 
 

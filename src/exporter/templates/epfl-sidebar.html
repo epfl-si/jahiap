@@ -84,7 +84,7 @@
 
       <!-- The site title -->
       <h1 class="site-title" itemprop="isPartOf" itemscope itemtype="http://schema.org/CollectionPage">
-        <a href="/" itemprop="url" accesskey="1" rel="home">
+        <a href="{{ exporter.root_path }}/" itemprop="url" accesskey="1" rel="home">
           <span itemprop="name">
               {{ site.title[page_content.language] }} <abbr>{{ site.acronym[page_content.language] }}</abbr>
           </span>
@@ -143,7 +143,7 @@
         <nav id="main-navigation" class="nav nav-block nav-horizontal themed visible-s visible-m visible-l visible-xl visible-xxl" role="navigation" aria-labelledby="main-navigation-label">
           <ul class="nav-list" data-widget="menubar">
             <li class="nav-item hidden-xxs hidden-xs">
-              <a class="nav-link" href="{{ site.root_path }}/">
+              <a class="nav-link" href="{{ exporter.root_path }}/">
                 <span class="hidden-xxs hidden-xs icon icon-inline icon-big icon-home" role="presentation" hidden="hidden"></span>
                 <span class="hidden-s hidden-m hidden-l hidden-xl hidden-xxl">Homepage</span>
               </a>
