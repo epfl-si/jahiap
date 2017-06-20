@@ -1,6 +1,8 @@
 site_name=master
 number=1
 output_dir=build
+docker_name="demo-$(site_name)"
+port=9090
 
 all: clean static start
 
@@ -31,3 +33,10 @@ clean_wordpress:
 
 run:
 	python src/jahiap.py docker $(site_name) --output-dir $(output_dir) --number $(number)
+  
+standalone:
+	docker run -d \
+		--name $(docker_name) \
+		-p $(port):80 \
+		-v $(PWD)/$(output_dir)/$(site_name)/html:/usr/share/nginx/html \
+		nginx 

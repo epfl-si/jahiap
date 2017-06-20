@@ -12,6 +12,7 @@ class PageContent:
     """
     def __init__(self, page, language, element):
         self.page = page
+        self.site = page.site
         self.language = language
         # the relative path, e.g. /team.html
         self.path = ""
@@ -38,7 +39,7 @@ class PageContent:
                 for extra in child.childNodes:
                     if extra.ELEMENT_NODE != extra.nodeType:
                         continue
-                    box = Box(site=self.page.site, page_content=self, element=extra)
+                    box = Box(site=self.site, page_content=self, element=extra)
                     self.sidebar.boxes.append(box)
 
         # if not found, search the sidebar of a parent
@@ -65,7 +66,8 @@ class PageContent:
             if vanity_url:
                 self.path = vanity_url.split('$$$')[0] + ".html"
             else:
-                self.path = self.regular_path()
+                # use the old Jahia page id
+                self.path = "/page-%s-%s.html" % (self.page.pid, self.language)
 
-    def regular_path(self):
-        return "/page-%s-%s.html" % (self.page.pid, self.language)
+        # add the site root_path at the beginning
+        self.path = self.site.root_path + self.path

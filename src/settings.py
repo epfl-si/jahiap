@@ -3,7 +3,7 @@ import os
 
 from utils import Utils
 
-DOMAIN = Utils.get_domain()
+DOMAIN = Utils.get_optional_env("WP_ADMIN_URL", "localhost")
 WP_USER = 'admin'
 WP_PASSWORD = 'passw0rd'
 JAHIA_DATE_FORMAT = '%Y-%m-%dT%H:%M:%S'
