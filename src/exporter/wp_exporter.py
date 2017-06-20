@@ -11,6 +11,7 @@ from settings import WP_USER, WP_PASSWORD
 
 class WPExporter:
 
+    # TODO : passer en variable d'instance pour pouvoir exporter plusieurs WP dans meme script
     report = {
         'pages': 0,
         'files': 0,
