@@ -9,6 +9,7 @@ Usage:
   jahiap.py export <site> [--to-wordpress|--to-static|--to-dictionary|--clean-wordpress] [--output-dir=<OUTPUT_DIR>]
                           [--number=<NUMBER>] [--site-url=<SITE_URL>] [--print-report] [--date DATE] [--force]
                           [--debug|--quiet]
+  jahiap.py docker <site> [--output-dir=<OUTPUT_DIR>] [--number=<NUMBER>] [--debug|--quiet]
 
 Options:
   -h --help                     Show this screen.
@@ -184,8 +185,16 @@ def main_export(args):
 
     sites = main_parse(args)
 
-    for site in sites.values():
+    # to store results of exported parsed sites
+    exported_sites = {}
+
+    for site_name, site in sites.items():
         logging.info("Exporting %s ...", site.name)
+
+        # store results
+        exported_site = {}
+        exported_sites[site_name] = exported_site
+
         # create subdir in output_dir
         output_subdir = os.path.join(args['--output-dir'], site.name)
 
@@ -197,12 +206,14 @@ def main_export(args):
         if args['--to-wordpress']:
             wp_exporter = WPExporter(site=site, domain=args['--site-url'])
             wp_exporter.import_all_data_to_wordpress()
+            exported_site['wordpress'] = args['--site-url']
             logging.info("Site successfully exported to Wordpress")
 
         if args['--to-static']:
             export_path = os.path.join(
                 output_subdir, "%s_html" % site.name)
             HTMLExporter(site, export_path)
+            exported_site['static'] = export_path
             logging.info("Site successfully exported to HTML files")
 
         if args['--to-dictionary']:
@@ -214,7 +225,43 @@ def main_export(args):
                 output.write("%s_data = " % site.name)
                 output.write(pformat(data))
                 output.flush()
+            exported_site['dict'] = export_path
             logging.info("Site successfully exported to python dictionary")
+
+    # overall result : {site_name: {wordpress: URL, static: PATH, dict: PATH}, ...}
+    return exported_sites
+
+def main_docker(args):
+    # get list of sites html static sites
+    args['--to-static'] = True
+    exported_sites = main_export(args)
+
+    # docker needs an absolute path in order to mount volumes
+    output_path = os.path.abspath(args['--output-dir'])
+
+    for site_name, export_path in exported_sites.items():
+        # stop running countainer first (if any)
+        os.system("docker rm -f demo-%s" % site_name)
+
+        # run new countainer
+        docker_cmd = """docker run -d \
+        --name "demo-%(site_name)s" \
+        --restart=always \
+        --net wp-net \
+        --label "traefik.enable=true" \
+        --label "traefik.backend=static-%(site_name)s" \
+        --label "traefik.frontend=static-%(site_name)s" \
+        --label "traefik.frontend.rule=Host:%(WP_ADMIN_URL)s;PathPrefix:/static/%(site_name)s" \
+        -v %(output_path)s/%(site_name)s/%(site_name)s_html:/usr/share/nginx/html/static/%(site_name)s \
+        nginx
+        """ % {
+            'site_name': site_name,
+            'export_path': export_path,
+            'output_path': output_path,
+            'WP_ADMIN_URL': DOMAIN,
+        }
+        os.system(docker_cmd)
+        logging.info("Docker launched for %s", site_name)
 
 
 def set_logging_config(args):
