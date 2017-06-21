@@ -336,15 +336,15 @@ Errors :
 
         first_part = """
 server {
-    server_name SITE_NAME.epfl.ch ;
-    return 301 $scheme://test-web-static.epfl.ch/static/SITE_NAME$request_uri;
+    server_name %(site_name)s.epfl.ch ;
+    return 301 $scheme://test-web-static.epfl.ch/static/%(site_name)s$request_uri;
 }
 
 server {
     listen       80;
     listen       [::]:80;
     server_name  test-web-static.epfl.ch;
-"""
+""" % {'site_name': self.site.name}
 
         last_part = """
     location / {
@@ -353,18 +353,17 @@ server {
 }
 """
         # Add the first part of the content file
-        content = first_part.replace("SITE_NAME", self.site.name)
+        content = first_part
 
         # Add all rewrite jahia URI to WordPress URI
         for element in self.urls_mapping:
 
-            line = """    rewrite ^/static/%s/%s$ /static/%s/%s permanent;
-""" % (
-                self.site.name,
-                element['jahia_url'][1:],
-                self.site.name,
-                element['wp_url'][27:],
-            )
+            line = """    rewrite ^/static/%(site_name)s/%(jahia_url)s$ /static/%(site_name)s/%(wp_url)s permanent;
+""" % {
+                'site_name': self.site.name,
+                'jahia_url': element['jahia_url'][1:],
+                'wp_url': element['wp_url'][27:]
+            }
             content += line
 
         # Add the last part of the content file
@@ -376,4 +375,3 @@ server {
         # Open the file in write mode
         with open(file_name, 'a') as f:
             f.write(content)
-
