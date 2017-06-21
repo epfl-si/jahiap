@@ -2,6 +2,7 @@
 jahiap: a wonderful tool
 
 Usage:
+  jahiap.py generate
   jahiap.py crawl <site> [--output-dir=<OUTPUT_DIR>] [--number=<NUMBER>] [--date DATE] [--force] [--debug|--quiet]
   jahiap.py unzip <site> [--output-dir=<OUTPUT_DIR>] [--number=<NUMBER>] [--debug|--quiet]
   jahiap.py parse <site> [--output-dir=<OUTPUT_DIR>] [--number=<NUMBER>] [--print-report]
@@ -9,7 +10,7 @@ Usage:
   jahiap.py export <site> [--to-wordpress|--to-static|--to-dictionary|--clean-wordpress] [--output-dir=<OUTPUT_DIR>]
                           [--number=<NUMBER>] [--site-url=<SITE_URL>] [--print-report]
                           [--wp-cli=<WP_CLI>] [--debug|--quiet]
-  jahiap.py docker <site> [--output-dir=<OUTPUT_DIR>] [--number=<NUMBER>] [--debug|--quiet]
+  jahiap.py docker <site> [--output-dir=<OUTPUT_DIR>] [--number=<NUMBER>] [--debug|--quiet]  
 
 Options:
   -h --help                     Show this screen.
@@ -30,6 +31,8 @@ Options:
   --debug                       (*) Set logging level to DEBUG (default is INFO).
   --quiet                       (*) Set logging level to WARNING (default is INFO).
 """
+from generator.utils import Utils
+
 VERSION = "0.2"
 
 import sys
@@ -275,6 +278,10 @@ def main_docker(args):
         }
         os.system(docker_cmd)
         logging.info("Docker launched for %s", site_name)
+
+
+def main_generate(args):
+    sites = Utils.get_content_of_csv_file(filename="sites.csv")
 
 
 def set_logging_config(args):
