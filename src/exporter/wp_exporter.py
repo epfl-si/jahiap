@@ -328,9 +328,9 @@ Errors :
 
         print(result)
 
-    def generate_apache_conf_file(self):
+    def generate_nginx_conf_file(self):
         """
-        Generates an apache configuration file containing
+        Generates an nginx configuration file containing
         the rewrites of the pages jahia in WordPress page.
         """
 
