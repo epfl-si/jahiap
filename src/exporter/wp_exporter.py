@@ -38,7 +38,7 @@ class WPExporter:
         official wordpress command line interface)
         available in the docker container wpcli
         """
-        cmd = 'docker exec wp-cli-%s %s' % (self.site.name, command)
+        cmd = 'docker exec %s %s' % (self.cli_container, command)
         # cmd = 'docker exec wpcli %s ' % (command)
         return subprocess.check_output(cmd, shell=True)
 
@@ -51,12 +51,13 @@ class WPExporter:
             file_info = os.stat(file_path)
             return cls.convert_bytes(file_info.st_size)
 
-    def __init__(self, site, domain):
+    def __init__(self, site, domain, cli_container=None):
         """
         Site is the python object resulting from the parsing of Jahia XML
         Domain is the wordpress domain where to push the content
         """
         self.site = site
+        self.cli_container = cli_container or "wp-cli-%s" % self.site.name
         url = "http://%s/?rest_route=/wp/v2" % domain
         self.wp = WordpressJsonWrapper(url, WP_USER, WP_PASSWORD)
 

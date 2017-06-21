@@ -18,12 +18,15 @@ class HTMLExporter:
     def __init__(self, site, out_path):
         self.site = site
         self.out_path = out_path
+        self.full_path = out_path + site.root_path
+
+        # to use in templates
         self.root_path = site.root_path
 
-        # create the output path if necessary
-        if not os.path.exists(self.out_path):
-            logging.debug("created output dir %s", self.out_path)
-            os.mkdir(self.out_path)
+        # create output path if necessary
+        if not os.path.exists(self.full_path):
+            logging.debug("created output dir %s", self.full_path)
+            os.makedirs(self.full_path)
 
         # extract all the files
         self.extract_files()
@@ -71,7 +74,9 @@ class HTMLExporter:
 
         content = template.render(page_content=sitemap, site=self.site, exporter=self)
 
-        self.generate_page(path="/sitemap-%s.html" % self.language, content=content)
+        self.generate_page(
+            path="%s/sitemap-%s.html" % (self.site.root_path, self.language),
+            content=content)
 
     def update_boxes_data(self):
         """Update the boxes data"""
@@ -180,8 +185,8 @@ class HTMLExporter:
         """Extract the files"""
 
         start = "%s/content/sites/%s/files" % (self.site.base_path, self.site.name)
-        dst = "%s/files" % self.out_path
-        logging.debug("copying files from %s into %s", start, self.out_path)
+        dst = "%s/files" % self.full_path
+        logging.debug("copying files from %s into %s", start, self.full_path)
 
         if os.path.exists(dst):
             logging.debug("output_dir already exists. Wiping it out...")

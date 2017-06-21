@@ -25,6 +25,7 @@ class Site:
         # the server name, e.g. "master.epfl.ch"
         self.server_name = ""
         # the root_path, by default it's empty
+        # FIXME: would be better in exporter, or set by exporter
         self.root_path = root_path
 
         # parse the properties at the beginning, we need the
@@ -97,9 +98,6 @@ class Site:
         """
         return self.root_path + path
 
-    def root_link(self, link):
-        return "/static/%s%s" % (self.name, link)
-
     def parse_properties(self):
         """
         Parse the properties found in site.properties
@@ -170,7 +168,7 @@ class Site:
                         elements = child.getElementsByTagName("jahia:url")
                         for element in elements:
                             link = Link(
-                                url=self.full_path(element.getAttribute('jahia:value')),
+                                url=element.getAttribute('jahia:value'),
                                 title=element.getAttribute('jahia:title')
                             )
                             self.footer[language].append(link)
@@ -358,8 +356,8 @@ class Site:
 
                     new_link = page.contents[box.page_content.language].path
 
-                    # change the link href
-                    tag[attribute] = self.full_path(new_link)
+                    # no need to change the link href, already done in page_content
+                    tag[attribute] = new_link
 
                     self.internal_links += 1
             # absolute links rewritten as relative links
@@ -382,7 +380,7 @@ class Site:
 
                 self.file_links += 1
             # those are files links we already fixed, so we pass
-            elif link.startswith("/files/"):
+            elif link.startswith(self.root_path + "/files/"):
                 pass
             # external links
             elif link.startswith("http://") or link.startswith("https://"):
@@ -399,6 +397,7 @@ class Site:
                 # /cms/op/edit/PAGE_KEY or
                 # /cms/site/SITE_NAME/op/edit/lang/LANGUAGE/PAGE_KEY
                 # those are currently not supported
+                logging.debug("found unknown link %s", link)
                 self.unknown_links += 1
 
         box.content = str(soup)
