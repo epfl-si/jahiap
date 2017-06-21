@@ -330,7 +330,7 @@ Errors :
 
     def generate_nginx_conf_file(self):
         """
-        Generates an nginx configuration file containing
+        Generates a nginx configuration file containing
         the rewrites of the pages jahia in WordPress page.
         """
 
