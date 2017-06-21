@@ -38,6 +38,7 @@ standalone:
 	docker run -d \
 		--name $(docker_name) \
 		-p $(port):80 \
+		-v $(PWD)/nginx/nginx.conf:/etc/nginx/conf.d/default.conf \
 		-v $(PWD)/$(output_dir)/$(site_name)/html:/usr/share/nginx/html \
 		nginx
 
