@@ -268,7 +268,6 @@ def main_docker(args):
         nginx
         """ % {
             'site_name': site_name,
-            'export_path': export_path,
             'abs_output_dir': abs_output_dir,
             'WP_HOST': WP_HOST,
             'WP_PATH': WP_PATH,
