@@ -356,10 +356,20 @@ class Site:
 
                     new_link = page.contents[box.page_content.language].path
 
-                    # no need to change the link href, already done in page_content
                     tag[attribute] = new_link
 
                     self.internal_links += 1
+            # some weird internal links look like :
+            # /cms/op/edit/PAGE_NAME or
+            # /cms/site/SITE_NAME/op/edit/lang/LANGUAGE/PAGE_NAME
+            elif "/op/edit/" in link:
+                new_link = link[link.index("/op/edit") + 8:]
+
+                if new_link.startswith("/lang/"):
+                    new_link = new_link[8:]
+
+                tag[attribute] = new_link
+
             # absolute links rewritten as relative links
             elif link.startswith("http://" + self.server_name) or \
                     link.startswith("https://" + self.server_name):
@@ -393,10 +403,6 @@ class Site:
                 self.mailto_links += 1
             # unknown links
             else:
-                # TODO a few links start with :
-                # /cms/op/edit/PAGE_KEY or
-                # /cms/site/SITE_NAME/op/edit/lang/LANGUAGE/PAGE_KEY
-                # those are currently not supported
                 logging.debug("found unknown link %s", link)
                 self.unknown_links += 1
 
