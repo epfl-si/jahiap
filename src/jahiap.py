@@ -206,6 +206,7 @@ def main_export(args):
         if args['--to-wordpress']:
             wp_exporter = WPExporter(site=site, domain=args['--site-url'])
             wp_exporter.import_all_data_to_wordpress()
+            wp_exporter.generate_apache_conf_file()
             exported_site['wordpress'] = args['--site-url']
             logging.info("Site successfully exported to Wordpress")
 

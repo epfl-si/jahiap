@@ -19,6 +19,8 @@ class WPExporter:
         'failed_files': 0,
     }
 
+    urls_mapping = []
+
     # Dictionary with the key 'wp_page_id' and the value 'wp_menu_id'
     menu_id_dict = {}
 
@@ -185,6 +187,13 @@ class WPExporter:
                 wp_page = self.wp.post_pages(data=wp_page_info)
                 wp_pages.append(wp_page)
 
+                mapping = {
+                    'jahia_url': page.contents["en"].path,
+                    'wp_url': wp_page['link']
+                }
+
+                self.urls_mapping.append(mapping)
+
                 # keep wordpress ID for further usages
                 page.wp_id = wp_page['id']
                 self.report['pages'] += 1
@@ -318,3 +327,53 @@ Errors :
 """ % (self.report['files'], self.report['pages'], self.report['menus'], self.report['failed_files'])
 
         print(result)
+
+    def generate_apache_conf_file(self):
+        """
+        Generates an apache configuration file containing
+        the rewrites of the pages jahia in WordPress page.
+        """
+
+        first_part = """
+server {
+    server_name SITE_NAME.epfl.ch ;
+    return 301 $scheme://test-web-static.epfl.ch/static/SITE_NAME$request_uri;
+}
+
+server {
+    listen       80;
+    listen       [::]:80;
+    server_name  test-web-static.epfl.ch;
+"""
+
+        last_part = """
+    location / {
+        proxy_pass   http://traefik/;
+    }
+}
+"""
+        # Add the first part of the content file
+        content = first_part.replace("SITE_NAME", self.site.name)
+
+        # Add all rewrite jahia URI to WordPress URI
+        for element in self.urls_mapping:
+
+            line = """    rewrite ^/static/%s/%s$ /static/%s/%s permanent;
+""" % (
+                self.site.name,
+                element['jahia_url'][1:],
+                self.site.name,
+                element['wp_url'][27:],
+            )
+            content += line
+
+        # Add the last part of the content file
+        content += last_part
+
+        # Set the file name
+        file_name = 'jahia-%s.conf' % self.site.name
+
+        # Open the file in write mode
+        with open(file_name, 'a') as f:
+            f.write(content)
+
