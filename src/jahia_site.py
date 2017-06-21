@@ -62,9 +62,12 @@ class Site:
         # footer
         self.footer = {}
 
-        # the pages
+        # the Pages indexed by their pid and uuid
         self.pages_by_pid = {}
         self.pages_by_uuid = {}
+
+        # the PageContents indexed by their path
+        self.pages_content_by_path = {}
 
         # variables for the report
         self.num_files = 0
@@ -75,6 +78,7 @@ class Site:
         self.file_links = 0
         self.data_links = 0
         self.mailto_links = 0
+        self.anchor_links = 0
         self.unknown_links = 0
         self.num_boxes = {}
         self.report = ""
@@ -356,10 +360,26 @@ class Site:
 
                     new_link = page.contents[box.page_content.language].path
 
-                    # no need to change the link href, already done in page_content
                     tag[attribute] = new_link
 
                     self.internal_links += 1
+            # some weird internal links look like :
+            # /cms/op/edit/PAGE_NAME or
+            # /cms/site/SITE_NAME/op/edit/lang/LANGUAGE/PAGE_NAME
+            elif "/op/edit/" in link:
+                new_link = link[link.index("/op/edit") + 8:]
+
+                if new_link.startswith("/lang/"):
+                    new_link = new_link[8:]
+
+                tag[attribute] = new_link
+
+                self.internal_links += 1
+            # internal links written by hand, e.g.
+            # /team
+            # /page-92507-fr.html
+            elif link in self.pages_content_by_path:
+                self.internal_links += 1
             # absolute links rewritten as relative links
             elif link.startswith("http://" + self.server_name) or \
                     link.startswith("https://" + self.server_name):
@@ -391,13 +411,12 @@ class Site:
             # mailto links
             elif link.startswith("mailto:"):
                 self.mailto_links += 1
+            # HTML anchors
+            elif link.startswith("#"):
+                self.anchor_links += 1
             # unknown links
             else:
-                # TODO a few links start with :
-                # /cms/op/edit/PAGE_KEY or
-                # /cms/site/SITE_NAME/op/edit/lang/LANGUAGE/PAGE_KEY
-                # those are currently not supported
-                logging.debug("found unknown link %s", link)
+                logging.debug("Found unknown link %s", link)
                 self.unknown_links += 1
 
         box.content = str(soup)
@@ -436,4 +455,5 @@ Parsed for %s :
         self.report += "    - %s file links\n" % self.file_links
         self.report += "    - %s mailto links\n" % self.mailto_links
         self.report += "    - %s data links\n" % self.data_links
+        self.report += "    - %s anchor links\n" % self.anchor_links
         self.report += "    - %s unknown links\n" % self.unknown_links

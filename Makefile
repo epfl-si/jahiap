@@ -1,4 +1,4 @@
-site_name=master
+site_name=bachelor2
 number=1
 output_dir=build
 docker_name="demo-$(site_name)"
@@ -38,6 +38,7 @@ standalone:
 	docker run -d \
 		--name $(docker_name) \
 		-p $(port):80 \
+		-v $(PWD)/nginx/nginx.conf:/etc/nginx/conf.d/default.conf \
 		-v $(PWD)/$(output_dir)/$(site_name)/html:/usr/share/nginx/html \
 		nginx
 

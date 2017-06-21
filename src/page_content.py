@@ -29,6 +29,9 @@ class PageContent:
         # path
         self.set_path(element)
 
+        # add to the site PageContents
+        self.site.pages_content_by_path[self.path] = self
+
     def parse_sidebar(self, element):
         """ Parse sidebar """
 
@@ -64,7 +67,7 @@ class PageContent:
         else:
             vanity_url = element.getAttribute("jahia:urlMappings")
             if vanity_url:
-                self.path = vanity_url.split('$$$')[0] + ".html"
+                self.path = vanity_url.split('$$$')[0]
             else:
                 # use the old Jahia page id
                 self.path = "/page-%s-%s.html" % (self.page.pid, self.language)
