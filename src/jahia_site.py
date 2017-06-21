@@ -351,6 +351,13 @@ class Site:
             if not link:
                 continue
 
+            # links we are ignoring
+            ignore = ["javascript", "tel://", "smb://", "file://"]
+
+            for element in ignore:
+                if link.startswith(element):
+                    return
+
             # internal Jahia links
             if link.startswith("###page"):
                 uuid = link[link.rfind('/') + 1:]
@@ -399,11 +406,14 @@ class Site:
                 tag[attribute] = self.full_path(new_link)
 
                 self.file_links += 1
+            # broken file links, we do nothing for now, maybe later log them somewhere?
+            elif link.startswith("/fileNotFound###"):
+                pass
             # those are files links we already fixed, so we pass
             elif link.startswith(self.root_path + "/files/"):
                 pass
             # external links
-            elif link.startswith("http://") or link.startswith("https://"):
+            elif link.startswith("http://") or link.startswith("https://") or link.startswith("//"):
                 self.external_links += 1
             # data links
             elif link.startswith("data:"):
@@ -414,7 +424,6 @@ class Site:
             # HTML anchors
             elif link.startswith("#"):
                 self.anchor_links += 1
-            # unknown links
             else:
                 logging.debug("Found unknown link %s", link)
                 self.unknown_links += 1
