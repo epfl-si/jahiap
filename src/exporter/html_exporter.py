@@ -100,6 +100,21 @@ class HTMLExporter:
         """Generate a page"""
         path = "%s%s" % (self.out_path, path)
 
+        relative_path_index = len("build/%s/html/" % self.site.name)
+
+        relative_path = path[relative_path_index:]
+
+        # TODO support pages that are in a subdirectory.
+        #
+        # There is a problem with overlapping paths, e.g.
+        #
+        # /team
+        # /team/more
+        #
+        # Here "team" is both a page and a directory
+        if "/" in relative_path:
+            return
+
         file = open(path, "w")
 
         file.write(content)

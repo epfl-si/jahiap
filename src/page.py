@@ -33,7 +33,7 @@ class Page:
         """
         Return True if the page is the homepage
         """
-        return self.template == "home"
+        return self.parent is None
 
     def has_children(self):
         """
