@@ -401,6 +401,9 @@ class Site:
             # mailto links
             elif link.startswith("mailto:"):
                 self.mailto_links += 1
+            # HTML anchors, nothing to do
+            elif link.startswith("#"):
+                pass
             # unknown links
             else:
                 logging.debug("found unknown link %s", link)
