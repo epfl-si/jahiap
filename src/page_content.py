@@ -29,6 +29,9 @@ class PageContent:
         # path
         self.set_path(element)
 
+        # add to the site PageContents
+        self.site.pages_content_by_path[self.path] = self
+
     def parse_sidebar(self, element):
         """ Parse sidebar """
 

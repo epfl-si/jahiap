@@ -62,9 +62,12 @@ class Site:
         # footer
         self.footer = {}
 
-        # the pages
+        # the Pages indexed by their pid and uuid
         self.pages_by_pid = {}
         self.pages_by_uuid = {}
+
+        # the PageContents indexed by their path
+        self.pages_content_by_path = {}
 
         # variables for the report
         self.num_files = 0
@@ -75,6 +78,7 @@ class Site:
         self.file_links = 0
         self.data_links = 0
         self.mailto_links = 0
+        self.anchor_links = 0
         self.unknown_links = 0
         self.num_boxes = {}
         self.report = ""
@@ -370,6 +374,12 @@ class Site:
 
                 tag[attribute] = new_link
 
+                self.internal_links += 1
+            # internal links written by hand, e.g.
+            # /team
+            # /page-92507-fr.html
+            elif link in self.pages_content_by_path:
+                self.internal_links += 1
             # absolute links rewritten as relative links
             elif link.startswith("http://" + self.server_name) or \
                     link.startswith("https://" + self.server_name):
@@ -401,12 +411,12 @@ class Site:
             # mailto links
             elif link.startswith("mailto:"):
                 self.mailto_links += 1
-            # HTML anchors, nothing to do
+            # HTML anchors
             elif link.startswith("#"):
-                pass
+                self.anchor_links += 1
             # unknown links
             else:
-                logging.debug("found unknown link %s", link)
+                logging.debug("Found unknown link %s", link)
                 self.unknown_links += 1
 
         box.content = str(soup)
@@ -445,4 +455,5 @@ Parsed for %s :
         self.report += "    - %s file links\n" % self.file_links
         self.report += "    - %s mailto links\n" % self.mailto_links
         self.report += "    - %s data links\n" % self.data_links
+        self.report += "    - %s anchor links\n" % self.anchor_links
         self.report += "    - %s unknown links\n" % self.unknown_links

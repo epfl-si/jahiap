@@ -1,4 +1,4 @@
-site_name=master
+site_name=bachelor2
 number=1
 output_dir=build
 docker_name="demo-$(site_name)"
