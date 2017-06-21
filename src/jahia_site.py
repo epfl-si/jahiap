@@ -79,6 +79,7 @@ class Site:
         self.data_links = 0
         self.mailto_links = 0
         self.anchor_links = 0
+        self.broken_links = 0
         self.unknown_links = 0
         self.num_boxes = {}
         self.report = ""
@@ -406,9 +407,10 @@ class Site:
                 tag[attribute] = self.full_path(new_link)
 
                 self.file_links += 1
-            # broken file links, we do nothing for now, maybe later log them somewhere?
+            # broken file links
             elif link.startswith("/fileNotFound###"):
-                pass
+                self.broken_links += 1
+                logging.debug("Found broken link %s", link)
             # those are files links we already fixed, so we pass
             elif link.startswith(self.root_path + "/files/"):
                 pass
@@ -465,4 +467,5 @@ Parsed for %s :
         self.report += "    - %s mailto links\n" % self.mailto_links
         self.report += "    - %s data links\n" % self.data_links
         self.report += "    - %s anchor links\n" % self.anchor_links
+        self.report += "    - %s broken links\n" % self.broken_links
         self.report += "    - %s unknown links\n" % self.unknown_links
