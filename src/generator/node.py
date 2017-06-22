@@ -5,6 +5,10 @@ from abc import ABCMeta, abstractclassmethod
 
 from jinja2 import Environment, PackageLoader, select_autoescape
 
+from crawler import SiteCrawler
+from unzipper.unzip import unzip_one
+from exporter.html_exporter import HTMLExporter
+from jahia_site import Site
 from generator.utils import Utils
 from settings import WP_HOST
 
@@ -49,11 +53,11 @@ class Node(metaclass=ABCMeta):
         --label "traefik.backend=generated-%(site_name)s" \
         --label "traefik.frontend=generated-%(site_name)s" \
         --label "traefik.frontend.rule=Host:%(WP_HOST)s;PathPrefix:%(full_name)s" \
-        -v %(absolute_path_to_html)s:/usr/share/nginx/html \
+        -v %(absolute_path_to_html)s:/usr/share/nginx/html%(full_name)s \
         nginx
         """ % {
             'site_name': self.name,
-            'absolute_path_to_html': os.path.abspath(self.output_path()),
+            'absolute_path_to_html': self.absolute_path_to_html(),
             'full_name' : self.full_name(),
             'WP_HOST': WP_HOST,
         }
@@ -65,13 +69,19 @@ class Node(metaclass=ABCMeta):
         dir_path = os.path.join(self.generator.output_path, self.name)
         return os.path.join(dir_path, file_path)
 
-    def full_name(self):
+    def absolute_path_to_html(self):
+        return os.path.abspath(self.output_path())
+
+    def full_name(self, relative=False):
         """ Construct the concatenation of all parents' names """
         nodes = [self.name]
         parent = self.parent
         while parent is not None:
             nodes.insert(0, parent.name)
             parent = parent.parent
+        # getting the RootNode out of the way if relative
+        if relative:
+            return "/".join(nodes).strip('/')
         return "/".join(nodes)
 
     def set_children(self, nodes):
@@ -99,7 +109,9 @@ class RootNode(Node):
     def __init__(self, name):
         super().__init__(name)
 
-    def full_name(self):
+    def full_name(self, relative=False):
+        if relative:
+            self.name
         return "/" + self.name
 
     def create_html(self):
@@ -136,11 +148,14 @@ class SiteNode(Node):
     def __init__(self, name):
         super().__init__(name)
 
-    def create_html(self):
-        pass
+    def absolute_path_to_html(self):
+        return os.path.join(os.path.abspath(self.output_path()), self.full_name(relative=True))
 
-    def run(self, generator):
-        pass
+    def create_html(self):
+        zip_file = SiteCrawler(self.name, self.generator.args).download_site()
+        site_dir = unzip_one(self.generator.args['--output-dir'], self.name, zip_file)
+        site = Site(site_dir, self.name, root_path=self.full_name())
+        HTMLExporter(site, self.output_path())
 
 
 class Generator(object):

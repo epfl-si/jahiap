@@ -48,6 +48,7 @@ from exporter.dict_exporter import DictExporter
 from exporter.html_exporter import HTMLExporter
 from exporter.wp_exporter import WPExporter
 from generator.node import Generator
+from unzipper.unzip import unzip_one
 from jahia_site import Site
 from settings import VERSION, WP_ADMIN_URL, WP_HOST, WP_PATH
 
@@ -100,48 +101,7 @@ def main_unzip(args):
     unzipped_files = {}
 
     for site_name, zip_file in zip_files.items():
-
-        # create subdir in output_dir
-        output_subdir = os.path.join(args['--output-dir'], site_name)
-        if output_subdir:
-            if not os.path.isdir(output_subdir):
-                os.mkdir(output_subdir)
-
-        # check if unzipped files already exists
-        unzip_path = os.path.join(output_subdir, site_name)
-        if os.path.isdir(unzip_path):
-            logging.info("Already unzipped %s" % unzip_path)
-            unzipped_files[site_name] = unzip_path
-            continue
-
-        logging.info("Unzipping %s..." % zip_file)
-
-        # make sure we have an input file
-        if not zip_file or not os.path.isfile(zip_file):
-            logging.error("Jahia zip file %s not found", zip_file)
-            continue
-
-        # create zipFile to manipulate / extract zip content
-        export_zip = zipfile.ZipFile(zip_file, 'r')
-
-        # make sure we have the zip containing the site
-        zip_name = "%s.zip" % site_name
-        if zip_name not in export_zip.namelist():
-            logging.error("zip file %s not found in main zip" % zip_name)
-            continue
-
-        # extract the export zip file
-        export_zip.extractall(output_subdir)
-        export_zip.close()
-
-        # unzip the zip with the files
-        zip_path = os.path.join(output_subdir, zip_name)
-        zip_ref_with_files = zipfile.ZipFile(zip_path, 'r')
-        zip_ref_with_files.extractall(unzip_path)
-
-        # log success
-        logging.info("Site successfully extracted in %s" % unzip_path)
-        unzipped_files[site_name] = unzip_path
+        unzipped_files[site_name] = unzip_one(args['--output-dir'], site_name, zip_file)
 
     # return results
     return unzipped_files
