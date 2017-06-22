@@ -2,7 +2,7 @@
 jahiap: a wonderful tool
 
 Usage:
-  jahiap.py generate
+  jahiap.py generate [--output-dir=<OUTPUT_DIR>] [--debug|--quiet]
   jahiap.py crawl <site> [--output-dir=<OUTPUT_DIR>] [--number=<NUMBER>] [--date DATE] [--force] [--debug|--quiet]
   jahiap.py unzip <site> [--output-dir=<OUTPUT_DIR>] [--number=<NUMBER>] [--debug|--quiet]
   jahiap.py parse <site> [--output-dir=<OUTPUT_DIR>] [--number=<NUMBER>] [--print-report]
@@ -302,7 +302,7 @@ def main_docker(args):
 
 
 def main_generate(args):
-    Generator.run(args)
+    Generator(args).run()
 
 
 def set_logging_config(args):

@@ -138,9 +138,9 @@
 
         <!-- The page content -->
         <div class="page-content">
-          Welcome to EPF
+          Welcome to EPFL
             <ul>
-                {% for link in full_names %}
+                {% for name, link in children_list.items() %}
                 <li><a href="{{ link }}">{{ name }}></a></li>
                 {% endfor %}
             </ul>

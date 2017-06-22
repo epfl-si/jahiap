@@ -6,6 +6,7 @@ from abc import ABCMeta, abstractclassmethod
 from jinja2 import Environment, PackageLoader, select_autoescape
 
 from generator.utils import Utils
+from settings import WP_HOST
 
 
 class Node(metaclass=ABCMeta):
@@ -15,46 +16,76 @@ class Node(metaclass=ABCMeta):
         autoescape=select_autoescape(['html', 'xml'])
     )
 
-    def __init__(self, name, parent=None):
+    def __init__(self, name):
         self.name = name
         self.parent = None
         self.children = []
-        if parent is not None:
-            if not isinstance(parent, Node):
-                raise ValueError("Parent nodes must be instances of Node")
-            parent.add_child(self)
+        self.generator = None
 
     @abstractclassmethod
-    def run(self, args):
-        pass
+    def create_html(self):
+        raise NotImplementedError()
 
-    @abstractclassmethod
-    def create_html(self, args):
-        pass
+    def set_generator(self, generator):
+        self.generator = generator
+
+        if not os.path.exists(self.output_path()):
+            os.makedirs(self.output_path())
+
+    def run(self, generator):
+
+        self.set_generator(generator)
+        self.create_html()
+
+        # stop running container first (if any)
+        os.system("docker rm -f generated-%s" % self.name)
+
+        # run new countainer
+        docker_cmd = """docker run -d \
+        --name "generated-%(site_name)s" \
+        --restart=always \
+        --net wp-net \
+        --label "traefik.enable=true" \
+        --label "traefik.backend=generated-%(site_name)s" \
+        --label "traefik.frontend=generated-%(site_name)s" \
+        --label "traefik.frontend.rule=Host:%(WP_HOST)s;PathPrefix:%(full_name)s" \
+        -v %(absolute_path_to_html)s:/usr/share/nginx/html \
+        nginx
+        """ % {
+            'site_name': self.name,
+            'absolute_path_to_html': os.path.abspath(self.output_path()),
+            'full_name' : self.full_name(),
+            'WP_HOST': WP_HOST,
+        }
+        os.system(docker_cmd)
+        logging.debug(docker_cmd)
+        logging.info("Docker launched for %s", self.name)
+
+
+    def output_path(self, file_path=""):
+        dir_path = os.path.join(self.generator.output_path, self.name)
+        return os.path.join(dir_path, file_path)
+
 
     def full_name(self):
         """ Construct the concatenation of all parents' names """
-        pointer = self
         nodes = [self.name]
-        while pointer.parent is not None:
-            nodes.insert(0, pointer.parent.name)
-            pointer = pointer.parent
+        parent = self.parent
+        while parent is not None:
+            nodes.insert(0, parent.name)
+            parent = parent.parent
         return "/".join(nodes)
 
-    def add_child(self, node):
-        """ Set both children and parent """
-        self.children.append(node)
-        node.parent = self
-        return self
 
     def set_children(self, nodes):
 
         children = []
         for current_node in nodes:
-            if current_node.name != 'root' and current_node.parent.name == self.name:
+            if current_node.parent and current_node.parent.name == self.name:
                 children.append(current_node)
 
         self.children = children
+
 
     def set_parent(self, nodes, name):
         """
@@ -67,91 +98,59 @@ class Node(metaclass=ABCMeta):
 
 
 class RootNode(Node):
-    def __init__(self, name, parent=None):
-        super().__init__(name, parent=parent)
+    def __init__(self, name):
+        super().__init__(name)
 
-    def create_html(self, args):
+    def full_name(self):
+        return "/" + self.name
+
+    def create_html(self):
         # load and render template
         template = self.env.get_template('root.html')
         content = template.render()
 
         # create file
-        with open(Generator.output_path("index.html"), 'w') as output:
+        file_path = self.output_path("index.html")
+        with open(file_path, 'w') as output:
             output.write(content)
             output.flush()
-
-    def run(self, args):
-
-        abs_output_dir = args['--output-dir']
-
-        # stop running countainer first (if any)
-        os.system("docker rm -f %s" % self.name)
-
-        # run new countainer
-        docker_cmd = """docker run -d \
-        --name "%(site_name)s" \
-        --restart=always \
-        --net wp-net \
-        --label "traefik.enable=true" \
-        --label "traefik.backend=static-%(site_name)s" \
-        --label "traefik.frontend=static-%(site_name)s" \
-        --label "traefik.frontend.rule=Host:%(WP_HOST)s;PathPrefix:/%(WP_PATH)s/%(site_name)s" \
-        -v %(abs_output_dir)s/%(site_name)s/html:/usr/share/nginx/html \
-        nginx
-        """ % {
-            'site_name': self.name,
-            'abs_output_dir': abs_output_dir,
-            'WP_HOST': WP_HOST,
-            'WP_PATH': WP_PATH,
-        }
-        os.system(docker_cmd)
-        logging.info("Docker launched for %s", self.name)
 
 
 class ListNode(Node):
 
-    def __init__(self, name, parent=None):
-        super().__init__(name, parent=parent)
+    def __init__(self, name):
+        super().__init__(name)
 
-    def children_links(self):
 
-        full_names = []
-        for child in self.children:
-            full_names.append(child.full_name())
-        return full_names
-
-    def create_html(self, args):
+    def create_html(self):
 
         template = self.env.get_template('list.html')
-        index= {
-            'full_names': self.children_links(),
-            'name': self.name,
-        }
-        content = template.render(index)
+        children_list = dict([(child.name, child.full_name()) for child in self.children])
+        content = template.render(children_list=children_list)
 
         # create file
-        with open("index.html", 'w') as output:
+        file_path = self.output_path("index.html")
+        with open(file_path, 'w') as output:
             output.write(content)
             output.flush()
 
-    def run(self, args):
-        super().run(args)
-
-        self.create_html(args)
-
 
 class SiteNode(Node):
-    def __init__(self, name, parent=None):
-        super().__init__(name, parent=parent)
+    def __init__(self, name):
+        super().__init__(name)
 
-    def create_html(self, args):
+    def create_html(self):
         pass
 
-    def run(self, args):
+    def run(self, generator):
         pass
 
 
 class Generator(object):
+
+    def __init__(self, args):
+        self.args = args
+        self.output_path = os.path.join(args['--output-dir'], "generator")
 
     @staticmethod
     def create_all_nodes(sites):
@@ -160,16 +159,17 @@ class Generator(object):
         """
         nodes = []
 
-        # Create the root node
-        root = RootNode(name="root")
-        nodes.append(root)
-
         # Create the list and site nodes
+        # TODO: replace by factory ?
         for site in sites:
             if site['type'] == 'list':
                 node = ListNode(name=site['name'])
             elif site['type'] == 'site':
                 node = SiteNode(name=site['name'])
+            elif site['type'] == 'root':
+                node = RootNode(name="")
+            else:
+                logging.error("unsupported type")
             nodes.append(node)
         return nodes
 
@@ -195,32 +195,24 @@ class Generator(object):
                     break
         return nodes
 
-
-    @staticmethod
-    def output_path(args, filename):
-        output_dir = os.path.join(args['--output-dir'], "generator")
-        return os.path.join(output_dir, filename)
-
-    @classmethod
-    def run(cls, args):
+    def run(self):
         """
         Create all docker container for all sites
         """
 
         # parse csv file and get all sites information
         sites = Utils.get_content_of_csv_file(filename="sites.csv")
-        sites.append({'name': 'root', 'parent': '', 'type': 'root'})
+        sites.append({'name': '', 'parent': '', 'type': 'root'})
 
         # create all nodes without relationship
-        nodes = cls.create_all_nodes(sites)
+        nodes = self.create_all_nodes(sites)
 
         # set the parent for all nodes
-        nodes = cls.set_all_parents(sites, nodes)
+        nodes = self.set_all_parents(sites, nodes)
 
         # set children
-        nodes = cls.set_all_children(sites, nodes)
+        nodes = self.set_all_children(sites, nodes)
 
         # run all nodes
         for node in nodes:
-            if isinstance(node, ListNode):
-                node.run(args)
+            node.run(self)
