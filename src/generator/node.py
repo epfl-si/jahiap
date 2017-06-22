@@ -1,13 +1,19 @@
 """(c) All rights reserved. ECOLE POLYTECHNIQUE FEDERALE DE LAUSANNE, Switzerland, VPSI, 2017"""
-import os
 import logging
-
+import os
 from abc import ABCMeta, abstractclassmethod
+
+from jinja2 import Environment, PackageLoader, select_autoescape
 
 from generator.utils import Utils
 
 
 class Node(metaclass=ABCMeta):
+
+    env = Environment(
+        loader=PackageLoader('exporter', 'templates'),
+        autoescape=select_autoescape(['html', 'xml'])
+    )
 
     def __init__(self, name, parent=None):
         self.name = name
@@ -104,7 +110,7 @@ class ListNode(Node):
         super().__init__(name, parent=parent)
 
     def create_html(self, args):
-        pass
+        template = self.env.get_template('list.html')
 
     def run(self, args):
         pass
