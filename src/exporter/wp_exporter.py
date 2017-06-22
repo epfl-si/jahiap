@@ -236,7 +236,7 @@ class WPExporter:
 
         # Create homepage menu
         page = self.site.homepage
-        menu_id = self.wp_cli('wp menu item add-post Main %s --porcelain' % page.wp_id)
+        menu_id = self.wp_cli('wp menu item add-post Main %s --classes=link-home --porcelain' % page.wp_id)
         self.menu_id_dict[page.wp_id] = Utils.get_menu_id(menu_id)
         self.report['menus'] += 1
 
