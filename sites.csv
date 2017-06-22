@@ -1,8 +1,8 @@
 name,parent,type
-vpsi,si,site
+si,vpsi,site
 labs,root,list
 master,labs,site
 dcsl,labs,site
-si,root,list
+vpsi,root,list
 ic,root,list
 lsi,ic,site

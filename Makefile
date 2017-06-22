@@ -48,3 +48,7 @@ standalone:
 stop_standalone:
 	docker stop $(docker_name)
 	docker rm $(docker_name)
+
+generate:
+	python src/jahiap.py generate
+
