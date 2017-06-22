@@ -41,6 +41,24 @@ class Node(metaclass=ABCMeta):
         node.parent = self
         return self
 
+    def set_children(self, nodes):
+
+        children = []
+        for current_node in nodes:
+            if current_node.name != 'root' and current_node.parent.name == self.name:
+                children.append(current_node)
+
+        self.children = children
+
+    def set_parent(self, nodes, name):
+        """
+        Set parent node
+        """
+        for node in nodes:
+            if node.name == name:
+                self.parent = node
+                break
+
 
 class RootNode(Node):
     def __init__(self, name, parent=None):
@@ -96,15 +114,6 @@ class SiteNode(Node):
         pass
 
 
-def get_node(nodes, name):
-    """
-    Get parent node
-    """
-    for node in nodes:
-        if node.name == name:
-            return node
-
-
 def create_all_nodes(sites):
     """
     Create all nodes without relationship
@@ -132,7 +141,17 @@ def set_all_parents(sites, nodes):
     for site in sites:
         for node in nodes:
             if site['name'] == node.name:
-                node.parent = get_node(nodes, name=site['parent'])
+                node.set_parent(nodes, name=site['parent'])
+                break
+    return nodes
+
+
+def set_all_children(sites, nodes):
+
+    for site in sites:
+        for node in nodes:
+            if site['name'] == node.name:
+                node.set_children(nodes)
                 break
     return nodes
 
@@ -144,12 +163,16 @@ def create_the_world():
 
     # parse csv file and get all sites information
     sites = Utils.get_content_of_csv_file(filename="sites.csv")
+    sites.append({'name': 'root', 'parent': '', 'type': 'root'})
 
     # create all nodes without relationship
     nodes = create_all_nodes(sites)
 
     # set the parent for all nodes
     nodes = set_all_parents(sites, nodes)
+
+    # set children
+    nodes = set_all_children(sites, nodes)
 
     # run all nodes
     for node in nodes:
