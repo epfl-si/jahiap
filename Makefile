@@ -4,7 +4,7 @@ output_dir=build
 docker_name="demo-$(site_name)"
 port=9090
 
-all: clean static run
+all: clean run
 
 clean:
 	rm -rf $(output_dir)/$(site_name)*
@@ -28,7 +28,7 @@ static:
 wp:
 	python src/jahiap.py export $(site_name) --output-dir $(output_dir) --to-wordpress --site-url $(WP_ADMIN_URL) --wp-cli "wpcli"
 
-nginx:
+nginx_conf:
 	python src/jahiap.py export $(site_name) --output-dir $(output_dir) --nginx-conf --site-url $(WP_ADMIN_URL) --wp-cli "wpcli"
 
 clean_wordpress:

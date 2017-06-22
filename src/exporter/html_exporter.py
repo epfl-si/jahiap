@@ -112,8 +112,8 @@ class HTMLExporter:
         # /team/more
         #
         # Here "team" is both a page and a directory
-        if "/" in relative_path:
-            return
+        # if "/" in relative_path:
+        #     return
 
         file = open(path, "w")
 

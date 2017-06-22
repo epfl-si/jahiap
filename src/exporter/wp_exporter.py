@@ -198,7 +198,7 @@ class WPExporter:
                 }
 
                 self.urls_mapping.append(mapping)
-                logging.info("WP page '%s' created".wp_page['link'])
+                logging.info("WP page '%s' created", wp_page['link'])
 
                 # keep wordpress ID for further usages
                 page.wp_id = wp_page['id']

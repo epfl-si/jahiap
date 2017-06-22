@@ -8,7 +8,7 @@ Usage:
   jahiap.py parse <site> [--output-dir=<OUTPUT_DIR>] [--number=<NUMBER>] [--print-report]
                          [--debug|--quiet] [--use-cache] [--root-path=<ROOT_PATH>]
   jahiap.py export <site> [--clean-wordpress|--to-wordpress|--nginx-conf|--to-static|--to-dictionary] [--output-dir=<OUTPUT_DIR>]
-                          [--number=<NUMBER>] [--site-url=<SITE_URL>] [--print-report]
+                          [--number=<NUMBER>] [--site-url=<SITE_URL>] [--print-report] [--root-path=<ROOT_PATH>]
                           [--wp-cli=<WP_CLI>] [--debug|--quiet]
   jahiap.py docker <site> [--output-dir=<OUTPUT_DIR>] [--number=<NUMBER>] [--debug|--quiet]
 
@@ -158,9 +158,11 @@ def main_parse(args):
         # create subdir in output_dir
         output_subdir = os.path.join(args['--output-dir'], site_name)
 
+        # where to cache our parsing
+        pickle_file = os.path.join(output_subdir, 'parsed_%s.pkl' % site_name)
+
         # when using-cache: check if already parsed
         if args['--use-cache']:
-            pickle_file = os.path.join(output_subdir, 'parsed_%s.pkl' % site_name)
             if os.path.exists(pickle_file):
                 with open(pickle_file, 'rb') as input:
                     logging.info("Loaded parsed site from %s" % pickle_file)
@@ -171,17 +173,16 @@ def main_parse(args):
         root_path = ""
         if args['--root-path']:
             root_path = "/%s/%s" % (args['--root-path'], site_name)
-            logging.info("Parsing site for root_path %s", root_path)
-        logging.info("Parsing %s...", site_dir)
+            logging.info("Setting root_path %s", root_path)
+        logging.info("Parsing jahia xml files from %s...", site_dir)
         site = Site(site_dir, site_name, root_path=root_path)
 
         print(site.report)
 
-        # when using-cache: save parsed site on file system
-        if args['--use-cache']:
-            with open(pickle_file, 'wb') as output:
-                logging.info("Parsed site saved into %s" % pickle_file)
-                pickle.dump(site, output, pickle.HIGHEST_PROTOCOL)
+        # save parsed site on file system to allow --use-cache option
+        with open(pickle_file, 'wb') as output:
+            logging.info("Parsed site saved into %s" % pickle_file)
+            pickle.dump(site, output, pickle.HIGHEST_PROTOCOL)
 
         # log success
         logging.info("Site successfully parsed")
@@ -271,6 +272,7 @@ def main_docker(args):
 
     # docker needs an absolute path in order to mount volumes
     abs_output_dir = os.path.abspath(args['--output-dir'])
+    abs_nginx_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "nginx"))
 
     for site_name, export_path in exported_sites.items():
         # stop running countainer first (if any)
@@ -286,10 +288,12 @@ def main_docker(args):
         --label "traefik.frontend=static-%(site_name)s" \
         --label "traefik.frontend.rule=Host:%(WP_HOST)s;PathPrefix:/%(WP_PATH)s/%(site_name)s" \
         -v %(abs_output_dir)s/%(site_name)s/html:/usr/share/nginx/html \
+        -v %(abs_nginx_dir)s/nginx.conf:/etc/nginx/conf.d/default.conf \
         nginx
         """ % {
             'site_name': site_name,
             'abs_output_dir': abs_output_dir,
+            'abs_nginx_dir' : abs_nginx_dir,
             'WP_HOST': WP_HOST,
             'WP_PATH': WP_PATH,
         }
