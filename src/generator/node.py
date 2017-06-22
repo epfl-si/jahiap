@@ -25,11 +25,11 @@ class Node(metaclass=ABCMeta):
             parent.add_child(self)
 
     @abstractclassmethod
-    def run(self):
+    def run(self, args):
         pass
 
     @abstractclassmethod
-    def create_html(self):
+    def create_html(self, args):
         pass
 
     def full_name(self):
@@ -70,10 +70,17 @@ class RootNode(Node):
     def __init__(self, name, parent=None):
         super().__init__(name, parent=parent)
 
-    def create_html(self):
-        pass
+    def create_html(self, args):
+        # load and render template
+        template = self.env.get_template('root.html')
+        content = template.render()
 
-    def run(self):
+        # create file
+        with open("index.html", 'w') as output:
+            output.write(content)
+            output.flush()
+
+    def run(self, args):
         # stop running countainer first (if any)
         os.system("docker rm -f %s" % self.name)
 
@@ -99,18 +106,31 @@ class RootNode(Node):
 
 
 class ListNode(Node):
+
     def __init__(self, name, parent=None):
         super().__init__(name, parent=parent)
 
-    def create_html(self):
+    def children_links(self):
+
+        full_names = []
+        for child in self.children:
+            full_names.append(child.full_name)
+        return full_names
+
+    def create_html(self, args):
 
         template = self.env.get_template('list.html')
         index= {
-
+            'full_names': self.children_links(),
         }
-        content = template.render(page_content=index, site=self.site, exporter=self)
+        content = template.render(index)
 
-    def run(self):
+        # create file
+        with open("index.html", 'w') as output:
+            output.write(content)
+            output.flush()
+
+    def run(self, args):
         pass
 
 
@@ -118,10 +138,10 @@ class SiteNode(Node):
     def __init__(self, name, parent=None):
         super().__init__(name, parent=parent)
 
-    def create_html(self):
+    def create_html(self, args):
         pass
 
-    def run(self):
+    def run(self, args):
         pass
 
 
@@ -167,7 +187,7 @@ def set_all_children(sites, nodes):
     return nodes
 
 
-def create_the_world():
+def create_the_world(args):
     """
     Create all docker container for all sites
     """
@@ -187,4 +207,4 @@ def create_the_world():
 
     # run all nodes
     for node in nodes:
-        node.run()
+        node.run(args)
