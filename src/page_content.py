@@ -4,6 +4,7 @@ from datetime import datetime
 from box import Box
 from settings import JAHIA_DATE_FORMAT
 from sidebar import Sidebar
+import logging
 
 
 class PageContent:
@@ -19,9 +20,10 @@ class PageContent:
         self.title = element.getAttribute("jahia:title")
         self.boxes = []
         self.sidebar = Sidebar()
-        self.last_update = datetime.strptime(
-            element.getAttribute("jcr:lastModified"),
-            JAHIA_DATE_FORMAT)
+        self.last_update = ""
+
+        # last update
+        self.parse_last_update(element)
 
         # sidebar
         self.parse_sidebar(element)
@@ -31,6 +33,17 @@ class PageContent:
 
         # add to the site PageContents
         self.site.pages_content_by_path[self.path] = self
+
+    def parse_last_update(self, element):
+        """Parse the last update information"""
+        date = element.getAttribute("jcr:lastModified")
+
+        try:
+            self.last_update = datetime.strptime(
+                date,
+                JAHIA_DATE_FORMAT)
+        except ValueError:
+            logging.debug("Invalid last update date for page %s : %s" % (self.page.pid, date))
 
     def parse_sidebar(self, element):
         """ Parse sidebar """
@@ -45,14 +58,22 @@ class PageContent:
                     box = Box(site=self.site, page_content=self, element=extra)
                     self.sidebar.boxes.append(box)
 
-        # if not found, search the sidebar of a parent
-        # TODO by Greg: Fix the infinite loop
         nb_boxes = len(self.sidebar.boxes)
+
+        # if we don't have boxes in this sidebar we check the parents
         if nb_boxes == 0:
-            while nb_boxes == 0:
-                sidebar = self.page.parent.contents[self.language].sidebar
-                nb_boxes = len(sidebar.boxes)
-            self.sidebar = sidebar
+            parent = self.page.parent
+
+            while parent:
+                sidebar = parent.contents[self.language].sidebar
+
+                # we found a sidebar with boxes, we stop
+                if len(sidebar.boxes) > 0:
+                    self.sidebar = sidebar
+                    break
+
+                # otherwise we continue in the hierarchy
+                parent = parent.parent
 
     def set_path(self, element):
         """

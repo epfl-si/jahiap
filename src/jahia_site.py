@@ -353,7 +353,7 @@ class Site:
                 continue
 
             # links we are ignoring
-            ignore = ["javascript", "tel://", "smb://", "file://"]
+            ignore = ["javascript", "tel://", "tel:", "callto:", "smb://", "file://"]
 
             for element in ignore:
                 if link.startswith(element):
@@ -363,14 +363,24 @@ class Site:
             if link.startswith("###page"):
                 uuid = link[link.rfind('/') + 1:]
 
+                # check if we have a Page with this uuid
                 if uuid in self.pages_by_uuid:
                     page = self.pages_by_uuid[uuid]
 
-                    new_link = page.contents[box.page_content.language].path
+                    # check if we have a PageContent with this language
+                    if box.page_content.language in page.contents:
+                        new_link = page.contents[box.page_content.language].path
 
-                    tag[attribute] = new_link
+                        tag[attribute] = new_link
 
-                    self.internal_links += 1
+                        self.internal_links += 1
+                    else:
+                        logging.debug("Found a broken link : " + link)
+                        self.broken_links += 1
+                else:
+                    logging.debug("Found a broken link : " + link)
+                    self.broken_links += 1
+
             # some weird internal links look like :
             # /cms/op/edit/PAGE_NAME or
             # /cms/site/SITE_NAME/op/edit/lang/LANGUAGE/PAGE_NAME
