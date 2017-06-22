@@ -4,6 +4,8 @@ import logging
 
 from abc import ABCMeta, abstractclassmethod
 
+from generator.utils import Utils
+
 
 class Node(metaclass=ABCMeta):
 
@@ -18,6 +20,10 @@ class Node(metaclass=ABCMeta):
 
     @abstractclassmethod
     def run(self):
+        pass
+
+    @abstractclassmethod
+    def create_html(self):
         pass
 
     def full_name(self):
@@ -39,6 +45,9 @@ class Node(metaclass=ABCMeta):
 class RootNode(Node):
     def __init__(self, name, parent=None):
         super().__init__(name, parent=parent)
+
+    def create_html(self):
+        pass
 
     def run(self):
         # stop running countainer first (if any)
@@ -69,6 +78,9 @@ class ListNode(Node):
     def __init__(self, name, parent=None):
         super().__init__(name, parent=parent)
 
+    def create_html(self):
+        pass
+
     def run(self):
         pass
 
@@ -77,5 +89,68 @@ class SiteNode(Node):
     def __init__(self, name, parent=None):
         super().__init__(name, parent=parent)
 
+    def create_html(self):
+        pass
+
     def run(self):
         pass
+
+
+def get_node(nodes, name):
+    """
+    Get parent node
+    """
+    for node in nodes:
+        if node.name == name:
+            return node
+
+
+def create_all_nodes(sites):
+    """
+    Create all nodes without relationship
+    """
+    nodes = []
+
+    # Create the root node
+    root = RootNode(name="root")
+    nodes.append(root)
+
+    # Create the list and site nodes
+    for site in sites:
+        if site['type'] == 'list':
+            node = ListNode(name=site['name'])
+        elif site['type'] == 'site':
+            node = SiteNode(name=site['name'])
+        nodes.append(node)
+    return nodes
+
+
+def set_all_parents(sites, nodes):
+    """
+    Set the parent for all nodes
+    """
+    for site in sites:
+        for node in nodes:
+            if site['name'] == node.name:
+                node.parent = get_node(nodes, name=site['parent'])
+                break
+    return nodes
+
+
+def create_the_world():
+    """
+    Create all docker container for all sites
+    """
+
+    # parse csv file and get all sites information
+    sites = Utils.get_content_of_csv_file(filename="sites.csv")
+
+    # create all nodes without relationship
+    nodes = create_all_nodes(sites)
+
+    # set the parent for all nodes
+    nodes = set_all_parents(sites, nodes)
+
+    # run all nodes
+    for node in nodes:
+        node.run()

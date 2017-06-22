@@ -187,7 +187,7 @@ class Site:
 
             breadcrumb_links = dom.getElementsByTagName("breadCrumbLink")
             nb_found = len(breadcrumb_links)
-            if nb_found !=1:
+            if nb_found != 1:
                 logging.warning("Found %s breadcrumb link(s) instead of 1", nb_found)
                 if nb_found == 0:
                     continue

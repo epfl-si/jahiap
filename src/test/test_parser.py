@@ -107,10 +107,10 @@ class TestAllSidebars:
 
                 # create shortcuts for sidebar boxes
                 boxes = page_content.sidebar.boxes
-                expected_boxes= data['pages_by_pid'][pid]['contents'][language]['sidebar__boxes']
+                expected_boxes = data['pages_by_pid'][pid]['contents'][language]['sidebar__boxes']
 
                 # Nb boxes
-                assert  len(boxes) == len(expected_boxes)
+                assert len(boxes) == len(expected_boxes)
 
                 # Box title
                 titles = [box.title for box in boxes]

@@ -1,6 +1,8 @@
-Name,Parent
-labs,root
-master,labs
-dcsl,labs
-si,root
-vpsi,si
+name,parent,type
+labs,root,list
+master,labs,site
+dcsl,labs,site
+si,root,list
+vpsi,si,site
+ic,root,site
+blabla,ic,site

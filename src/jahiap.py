@@ -10,7 +10,7 @@ Usage:
   jahiap.py export <site> [--to-wordpress|--to-static|--to-dictionary|--clean-wordpress] [--output-dir=<OUTPUT_DIR>]
                           [--number=<NUMBER>] [--site-url=<SITE_URL>] [--print-report]
                           [--wp-cli=<WP_CLI>] [--debug|--quiet]
-  jahiap.py docker <site> [--output-dir=<OUTPUT_DIR>] [--number=<NUMBER>] [--debug|--quiet]  
+  jahiap.py docker <site> [--output-dir=<OUTPUT_DIR>] [--number=<NUMBER>] [--debug|--quiet]
 
 Options:
   -h --help                     Show this screen.
@@ -19,7 +19,7 @@ Options:
   -n --number=<NUMBER>          Number of sites to analyse (fetched in JAHIA_SITES, from given site name) [default: 1].
   --date DATE                   (crawl) Date and time for the snapshot, e.g : 2017-01-15-23-00.
   -f --force                    (crawl) Force download even if existing snapshot for same site.
-  -c --use-cache                (parse) Do not parse if pickle file found with a previous parsing result
+  --use-cache                   (parse) Do not parse if pickle file found with a previous parsing result
   --root-path=<ROOT_PATH>       (FIXME) Set base path for URLs (default is '' or $WP_PATH on command 'docker')
   -r --print-report             (FIXME) Print report with content.
   -w --to-wordpress             (export) Export parsed data to Wordpress.
@@ -27,33 +27,29 @@ Options:
   -s --to-static                (export) Export parsed data to static HTML files.
   -d --to-dictionary            (export) Export parsed data to python dictionary.
   -u --site-url=<SITE_URL>      (export) Wordpress URL where to export parsed content. (default is $WP_ADMIN_URL)
-  --wp-cli=<WP_CLI>             (export) Name of wp-cli container to use with given wordpress URL. (default is set by WPExporter)
+  --wp-cli=<WP_CLI>             (export) Name of wp-cli container to use with given wordpress URL. (default WPExporter)
   --debug                       (*) Set logging level to DEBUG (default is INFO).
   --quiet                       (*) Set logging level to WARNING (default is INFO).
 """
-from generator.utils import Utils
-
-VERSION = "0.2"
-
-import sys
 import logging
 import os
 import pickle
+import sys
 import zipfile
-import requests
-
-from pprint import pprint, pformat
 from datetime import datetime
+from pprint import pprint, pformat
 
+import requests
 from docopt import docopt
 
+from crawler import SiteCrawler
+from exporter.dict_exporter import DictExporter
 from exporter.html_exporter import HTMLExporter
 from exporter.wp_exporter import WPExporter
-from exporter.dict_exporter import DictExporter
-from crawler import SiteCrawler
+from generator.node import create_the_world
 from jahia_site import Site
-
 from settings import WP_ADMIN_URL, WP_HOST, WP_PATH
+from src import VERSION
 
 
 def main(args):
@@ -246,6 +242,7 @@ def main_export(args):
     # overall result : {site_name: {wordpress: URL, static: PATH, dict: PATH}, ...}
     return exported_sites
 
+
 def main_docker(args):
     # get list of sites html static sites
     args['--to-static'] = True
@@ -281,7 +278,7 @@ def main_docker(args):
 
 
 def main_generate(args):
-    sites = Utils.get_content_of_csv_file(filename="sites.csv")
+    create_the_world()
 
 
 def set_logging_config(args):

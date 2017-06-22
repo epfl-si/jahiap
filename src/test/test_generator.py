@@ -2,7 +2,6 @@
 """
     Testing the crawl.py script
 """
-import os
 import pytest
 
 from generator.node import RootNode, ListNode, SiteNode
@@ -41,6 +40,7 @@ def tree(request):
     labs_node.add_child(dcsl_node).add_child(master_node)
 
     return root, ic_node, blabla_node, vpsi_node, labs_node, dcsl_node
+
 
 class TestTreeStructure(object):
 
