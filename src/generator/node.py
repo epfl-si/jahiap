@@ -92,7 +92,9 @@ class Node(metaclass=ABCMeta):
         Set parent node
         """
         for node in nodes:
-            if node.name == name:
+            if node.name == '' and name == 'root':
+                self.parent = node
+            elif node.name == name:
                 self.parent = node
                 break
 
@@ -180,7 +182,7 @@ class Generator(object):
         """
         for site in sites:
             for node in nodes:
-                if site['name'] == node.name:
+                if node.name != '' and site['name'] == node.name:
                     node.set_parent(nodes, name=site['parent'])
                     break
         return nodes
