@@ -138,7 +138,12 @@
 
         <!-- The page content -->
         <div class="page-content">
-          Welcome to EPFL
+          Welcome to EPF
+            <ul>
+                {% for link in full_names %}
+                <li><a href="{{ link }}">{{ name }}></a></li>
+                {% endfor %}
+            </ul>
         </div>
 
         <!-- The page footer -->

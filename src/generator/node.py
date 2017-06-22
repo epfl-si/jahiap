@@ -81,6 +81,9 @@ class RootNode(Node):
             output.flush()
 
     def run(self, args):
+
+        abs_output_dir = args['--output-dir']
+
         # stop running countainer first (if any)
         os.system("docker rm -f %s" % self.name)
 
@@ -102,7 +105,7 @@ class RootNode(Node):
             'WP_PATH': WP_PATH,
         }
         os.system(docker_cmd)
-        logging.info("Docker launched for %s", site_name)
+        logging.info("Docker launched for %s", self.name)
 
 
 class ListNode(Node):
@@ -122,6 +125,7 @@ class ListNode(Node):
         template = self.env.get_template('list.html')
         index= {
             'full_names': self.children_links(),
+            'name': self.name,
         }
         content = template.render(index)
 
