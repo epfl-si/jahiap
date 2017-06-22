@@ -43,7 +43,7 @@ class PageContent:
                 date,
                 JAHIA_DATE_FORMAT)
         except ValueError:
-            logging.debug("Invalid last update date for page %s : %s" % (self.page.pid, date))
+            logging.error("Invalid last update date for page %s : %s" % (self.page.pid, date))
 
     def parse_sidebar(self, element):
         """ Parse sidebar """
