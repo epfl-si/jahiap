@@ -11,7 +11,7 @@ from generator.utils import Utils
 class Node(metaclass=ABCMeta):
 
     env = Environment(
-        loader=PackageLoader('exporter', 'templates'),
+        loader=PackageLoader('generator', 'templates'),
         autoescape=select_autoescape(['html', 'xml'])
     )
 
@@ -114,7 +114,7 @@ class ListNode(Node):
 
         full_names = []
         for child in self.children:
-            full_names.append(child.full_name)
+            full_names.append(child.full_name())
         return full_names
 
     def create_html(self, args):
@@ -131,7 +131,9 @@ class ListNode(Node):
             output.flush()
 
     def run(self, args):
-        pass
+        super().run(args)
+
+        self.create_html(args)
 
 
 class SiteNode(Node):
@@ -195,8 +197,8 @@ class Generator(object):
         output_dir = os.path.join(args['--output-dir'], "generator")
         return os.path.join(output_dir, filename)
 
-    @staticmethod
-    def run(args):
+    @classmethod
+    def run(cls, args):
         """
         Create all docker container for all sites
         """
@@ -206,14 +208,15 @@ class Generator(object):
         sites.append({'name': 'root', 'parent': '', 'type': 'root'})
 
         # create all nodes without relationship
-        nodes = create_all_nodes(sites)
+        nodes = cls.create_all_nodes(sites)
 
         # set the parent for all nodes
-        nodes = set_all_parents(sites, nodes)
+        nodes = cls.set_all_parents(sites, nodes)
 
         # set children
-        nodes = set_all_children(sites, nodes)
+        nodes = cls.set_all_children(sites, nodes)
 
         # run all nodes
         for node in nodes:
-            node.run(args)
+            if isinstance(node, ListNode):
+                node.run(args)
