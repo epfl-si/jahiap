@@ -3,6 +3,8 @@ import os
 
 from utils import Utils
 
+VERSION = "0.2"
+
 WP_HOST = Utils.get_optional_env("WP_HOST", "localhost")
 WP_PATH = Utils.get_optional_env("WP_PATH", "/")
 

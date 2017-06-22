@@ -7,7 +7,7 @@ Usage:
   jahiap.py unzip <site> [--output-dir=<OUTPUT_DIR>] [--number=<NUMBER>] [--debug|--quiet]
   jahiap.py parse <site> [--output-dir=<OUTPUT_DIR>] [--number=<NUMBER>] [--print-report]
                          [--debug|--quiet] [--use-cache] [--root-path=<ROOT_PATH>]
-  jahiap.py export <site> [--to-wordpress|--to-static|--to-dictionary|--clean-wordpress] [--output-dir=<OUTPUT_DIR>]
+  jahiap.py export <site> [--clean-wordpress|--to-wordpress|--nginx-conf|--to-static|--to-dictionary] [--output-dir=<OUTPUT_DIR>]
                           [--number=<NUMBER>] [--site-url=<SITE_URL>] [--print-report]
                           [--wp-cli=<WP_CLI>] [--debug|--quiet]
   jahiap.py docker <site> [--output-dir=<OUTPUT_DIR>] [--number=<NUMBER>] [--debug|--quiet]
@@ -22,8 +22,9 @@ Options:
   --use-cache                   (parse) Do not parse if pickle file found with a previous parsing result
   --root-path=<ROOT_PATH>       (FIXME) Set base path for URLs (default is '' or $WP_PATH on command 'docker')
   -r --print-report             (FIXME) Print report with content.
-  -w --to-wordpress             (export) Export parsed data to Wordpress.
   -c --clean-wordpress          (export) Delete all content of Wordpress site.
+  -w --to-wordpress             (export) Export parsed data to Wordpress and generate nginx conf
+  --nginx-conf                  (export) Only export pages to Wordpress in order to generate nginx conf
   -s --to-static                (export) Export parsed data to static HTML files.
   -d --to-dictionary            (export) Export parsed data to python dictionary.
   -u --site-url=<SITE_URL>      (export) Wordpress URL where to export parsed content. (default is $WP_ADMIN_URL)
@@ -48,8 +49,7 @@ from exporter.html_exporter import HTMLExporter
 from exporter.wp_exporter import WPExporter
 from generator.node import create_the_world
 from jahia_site import Site
-from settings import WP_ADMIN_URL, WP_HOST, WP_PATH
-from src import VERSION
+from settings import VERSION, WP_ADMIN_URL, WP_HOST, WP_PATH
 
 
 def main(args):
@@ -200,7 +200,6 @@ def main_export(args):
     exported_sites = {}
 
     for site_name, site in sites.items():
-        logging.info("Exporting %s ...", site.name)
 
         # store results
         exported_site = {}
@@ -210,24 +209,45 @@ def main_export(args):
         output_subdir = os.path.join(args['--output-dir'], site.name)
 
         if args['--clean-wordpress']:
-            wp_exporter = WPExporter(site=site, domain=args['--site-url'], cli_container=args['--wp-cli'])
+            logging.info("Cleaning wordpress %s ...", site.name)
+            wp_exporter = WPExporter(site=site,
+                                                        domain=args['--site-url'],
+                                                        output_dir=output_subdir,
+                                                        cli_container=args['--wp-cli'])
             wp_exporter.delete_all_content()
             logging.info("Data of Wordpress site successfully deleted")
 
         if args['--to-wordpress']:
-            wp_exporter = WPExporter(site=site, domain=args['--site-url'], cli_container=args['--wp-cli'])
+            logging.info("Exporting to wordpress %s ...", site.name)
+            wp_exporter = WPExporter(site=site,
+                                                        domain=args['--site-url'],
+                                                        output_dir=output_subdir,
+                                                        cli_container=args['--wp-cli'])
             wp_exporter.import_all_data_to_wordpress()
             wp_exporter.generate_nginx_conf_file()
             exported_site['wordpress'] = args['--site-url']
             logging.info("Site successfully exported to Wordpress")
 
+        if args['--nginx-conf']:
+            logging.info("Creating nginx conf for %s ...", site.name)
+            wp_exporter = WPExporter(site=site,
+                                                        domain=args['--site-url'],
+                                                        output_dir=output_subdir,
+                                                        cli_container=args['--wp-cli'])
+            wp_exporter.import_pages()
+            wp_exporter.generate_nginx_conf_file()
+            exported_site['wordpress'] = args['--site-url']
+            logging.info("Nginx conf successfully generated")
+
         if args['--to-static']:
+            logging.info("Exporting to static files for %s ...", site.name)
             export_path = os.path.join(output_subdir, "html")
             HTMLExporter(site, export_path)
             exported_site['static'] = export_path
             logging.info("Site successfully exported to HTML files")
 
         if args['--to-dictionary']:
+            logging.info("Exporting to python dictionnary %s ...", site.name)
             export_path = os.path.join(
                 output_subdir, "%s_dict.py" % site.name)
             data = DictExporter.generate_data(site)
