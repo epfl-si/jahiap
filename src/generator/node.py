@@ -103,7 +103,12 @@ class ListNode(Node):
         super().__init__(name, parent=parent)
 
     def create_html(self):
+
         template = self.env.get_template('list.html')
+        index= {
+
+        }
+        content = template.render(page_content=index, site=self.site, exporter=self)
 
     def run(self):
         pass
