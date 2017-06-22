@@ -101,9 +101,6 @@ class RootNode(Node):
     def __init__(self, name):
         super().__init__(name)
 
-    def full_name(self):
-        return "/" + self.name
-
     def create_html(self):
         # load and render template
         template = self.env.get_template('root.html')

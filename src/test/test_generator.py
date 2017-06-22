@@ -26,18 +26,27 @@ def tree(request):
     blabla_node = SiteNode("blabla")
 
     # creating instances with explicit parents
-    si_node = ListNode("SI", parent=root)
-    vpsi_node = SiteNode("VPSI", parent=si_node)
+    si_node = ListNode("SI")
+    vpsi_node = SiteNode("VPSI")
 
-    labs_node = ListNode("labs", parent=root)
+    labs_node = ListNode("labs")
     dcsl_node = SiteNode("DCSL")
     master_node = SiteNode("master")
 
-    # settings parents which were not set above
-    root.add_child(ic_node)
-    ic_node.add_child(blabla_node)
-    # chained setting of children
-    labs_node.add_child(dcsl_node).add_child(master_node)
+    # setting all parents
+    ic_node.parent = root
+    si_node.parent = root
+    labs_node.parent = root
+    blabla_node.parent = ic_node
+    vpsi_node.parent = si_node
+    dcsl_node.parent = labs_node
+    master_node.parent = labs_node
+
+    # setting all children
+    root.children = [si_node, ic_node, labs_node]
+    si_node.children = [vpsi_node]
+    ic_node.children = [blabla_node]
+    labs_node.children = [dcsl_node, master_node]
 
     return root, ic_node, blabla_node, vpsi_node, labs_node, dcsl_node
 
@@ -59,10 +68,6 @@ class TestTreeStructure(object):
 
 
 class TestBasicFunctions(object):
-
-    def test_exception_on_creation(self, tree):
-        with pytest.raises(ValueError):
-            SiteNode("fails", parent="not a node")
 
     def test_full_name(self, tree):
         root, ic_node, blabla_node, vpsi_node, labs_node, dcsl_node = tree
