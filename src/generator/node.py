@@ -76,7 +76,7 @@ class RootNode(Node):
         content = template.render()
 
         # create file
-        with open("index.html", 'w') as output:
+        with open(Generator.output_path("index.html"), 'w') as output:
             output.write(content)
             output.flush()
 
@@ -127,66 +127,75 @@ class SiteNode(Node):
         pass
 
 
-def create_all_nodes(sites):
-    """
-    Create all nodes without relationship
-    """
-    nodes = []
+class Generator(object):
 
-    # Create the root node
-    root = RootNode(name="root")
-    nodes.append(root)
+    @staticmethod
+    def create_all_nodes(sites):
+        """
+        Create all nodes without relationship
+        """
+        nodes = []
 
-    # Create the list and site nodes
-    for site in sites:
-        if site['type'] == 'list':
-            node = ListNode(name=site['name'])
-        elif site['type'] == 'site':
-            node = SiteNode(name=site['name'])
-        nodes.append(node)
-    return nodes
+        # Create the root node
+        root = RootNode(name="root")
+        nodes.append(root)
+
+        # Create the list and site nodes
+        for site in sites:
+            if site['type'] == 'list':
+                node = ListNode(name=site['name'])
+            elif site['type'] == 'site':
+                node = SiteNode(name=site['name'])
+            nodes.append(node)
+        return nodes
+
+    @staticmethod
+    def set_all_parents(sites, nodes):
+        """
+        Set the parent for all nodes
+        """
+        for site in sites:
+            for node in nodes:
+                if site['name'] == node.name:
+                    node.set_parent(nodes, name=site['parent'])
+                    break
+        return nodes
+
+    @staticmethod
+    def set_all_children(sites, nodes):
+
+        for site in sites:
+            for node in nodes:
+                if site['name'] == node.name:
+                    node.set_children(nodes)
+                    break
+        return nodes
 
 
-def set_all_parents(sites, nodes):
-    """
-    Set the parent for all nodes
-    """
-    for site in sites:
+    @staticmethod
+    def output_path(args, filename):
+        output_dir = os.path.join(args['--output-dir'], "generator")
+        return os.path.join(output_dir, filename)
+
+    @staticmethod
+    def run(args):
+        """
+        Create all docker container for all sites
+        """
+
+        # parse csv file and get all sites information
+        sites = Utils.get_content_of_csv_file(filename="sites.csv")
+        sites.append({'name': 'root', 'parent': '', 'type': 'root'})
+
+        # create all nodes without relationship
+        nodes = create_all_nodes(sites)
+
+        # set the parent for all nodes
+        nodes = set_all_parents(sites, nodes)
+
+        # set children
+        nodes = set_all_children(sites, nodes)
+
+        # run all nodes
         for node in nodes:
-            if site['name'] == node.name:
-                node.set_parent(nodes, name=site['parent'])
-                break
-    return nodes
-
-
-def set_all_children(sites, nodes):
-
-    for site in sites:
-        for node in nodes:
-            if site['name'] == node.name:
-                node.set_children(nodes)
-                break
-    return nodes
-
-
-def create_the_world(args):
-    """
-    Create all docker container for all sites
-    """
-
-    # parse csv file and get all sites information
-    sites = Utils.get_content_of_csv_file(filename="sites.csv")
-    sites.append({'name': 'root', 'parent': '', 'type': 'root'})
-
-    # create all nodes without relationship
-    nodes = create_all_nodes(sites)
-
-    # set the parent for all nodes
-    nodes = set_all_parents(sites, nodes)
-
-    # set children
-    nodes = set_all_children(sites, nodes)
-
-    # run all nodes
-    for node in nodes:
-        node.run(args)
+            node.run(args)

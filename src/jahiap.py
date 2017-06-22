@@ -47,7 +47,7 @@ from crawler import SiteCrawler
 from exporter.dict_exporter import DictExporter
 from exporter.html_exporter import HTMLExporter
 from exporter.wp_exporter import WPExporter
-from generator.node import create_the_world
+from generator.node import Generator
 from jahia_site import Site
 from settings import VERSION, WP_ADMIN_URL, WP_HOST, WP_PATH
 
@@ -302,7 +302,7 @@ def main_docker(args):
 
 
 def main_generate(args):
-    create_the_world()
+    Generator.run(args)
 
 
 def set_logging_config(args):
