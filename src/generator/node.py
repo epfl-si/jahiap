@@ -61,11 +61,9 @@ class Node(metaclass=ABCMeta):
         logging.debug(docker_cmd)
         logging.info("Docker launched for %s", self.name)
 
-
     def output_path(self, file_path=""):
         dir_path = os.path.join(self.generator.output_path, self.name)
         return os.path.join(dir_path, file_path)
-
 
     def full_name(self):
         """ Construct the concatenation of all parents' names """
@@ -76,7 +74,6 @@ class Node(metaclass=ABCMeta):
             parent = parent.parent
         return "/".join(nodes)
 
-
     def set_children(self, nodes):
 
         children = []
@@ -86,15 +83,12 @@ class Node(metaclass=ABCMeta):
 
         self.children = children
 
-
     def set_parent(self, nodes, name):
         """
         Set parent node
         """
         for node in nodes:
-            if node.name == '' and name == 'root':
-                self.parent = node
-            elif node.name == name:
+            if node.name == name:
                 self.parent = node
                 break
 
@@ -102,6 +96,9 @@ class Node(metaclass=ABCMeta):
 class RootNode(Node):
     def __init__(self, name):
         super().__init__(name)
+
+    def full_name(self):
+        return "/" + self.name
 
     def create_html(self):
         # load and render template
@@ -119,7 +116,6 @@ class ListNode(Node):
 
     def __init__(self, name):
         super().__init__(name)
-
 
     def create_html(self):
 
@@ -179,7 +175,7 @@ class Generator(object):
         """
         for site in sites:
             for node in nodes:
-                if node.name != '' and site['name'] == node.name:
+                if site['name'] == node.name:
                     node.set_parent(nodes, name=site['parent'])
                     break
         return nodes

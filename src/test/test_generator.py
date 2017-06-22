@@ -71,7 +71,7 @@ class TestBasicFunctions(object):
 
     def test_full_name(self, tree):
         root, ic_node, blabla_node, vpsi_node, labs_node, dcsl_node = tree
-        assert root.full_name() == ""
+        assert root.full_name() == "/"
         assert ic_node.full_name() == "/IC"
         assert blabla_node.full_name() == "/IC/blabla"
         assert labs_node.full_name() == "/labs"
