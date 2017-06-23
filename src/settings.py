@@ -17,6 +17,10 @@ PROJECT_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 DATA_PATH = os.path.join(PROJECT_PATH, "jahia-data")
 EXPORT_PATH = os.path.join(PROJECT_PATH, "exports")
 
+PROJECT_PATH = os.path.abspath(os.path.join(
+    os.path.dirname(__file__),
+    ".."))
+
 LINE_LENGTH_ON_PPRINT = 150
 LINE_LENGTH_ON_EXPORT = LINE_LENGTH_ON_PPRINT + 100
 

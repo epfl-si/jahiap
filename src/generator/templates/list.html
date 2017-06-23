@@ -85,7 +85,7 @@
       <h1 class="site-title" itemprop="isPartOf" itemscope itemtype="http://schema.org/CollectionPage">
         <a href="/" itemprop="url" accesskey="1" rel="home">
           <span itemprop="name">
-              École Polytechnique de Lausanne<abbr>EPFL</abbr>
+              École Polytechnique de Lausanne <abbr>EPFL</abbr>
           </span>
         </a>
       </h1>
@@ -133,7 +133,7 @@
 
         <!-- The page header -->
         <header class="page-header">
-          <h1 class="page-title">Root page</h1>
+          <h1 class="page-title">List page</h1>
         </header>
 
         <!-- The page content -->
@@ -141,7 +141,7 @@
           Welcome to EPFL
             <ul>
                 {% for name, link in children_list.items() %}
-                <li><a href="{{ link }}">{{ name }}></a></li>
+                <li><a href="{{ link }}">{{ name }}</a></li>
                 {% endfor %}
             </ul>
         </div>
