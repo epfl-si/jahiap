@@ -135,7 +135,7 @@ class ListNode(Node):
 
         template = self.env.get_template('list.html')
         children_list = dict([(child.name, child.full_name()) for child in self.children])
-        content = template.render(children_list=children_list)
+        content = template.render(name=self.name, children_list=children_list)
 
         # create file
         file_path = self.output_path("index.html")
@@ -207,13 +207,13 @@ class Generator(object):
                     break
         return nodes
 
-    def run(self):
+    def run(self, filename="sites.csv"):
         """
         Create all docker container for all sites
         """
 
         # parse csv file and get all sites information
-        sites = Utils.get_content_of_csv_file(filename="sites.csv")
+        sites = Utils.get_content_of_csv_file(filename=filename)
         sites.append({'name': '', 'parent': '', 'type': 'root'})
 
         # create all nodes without relationship

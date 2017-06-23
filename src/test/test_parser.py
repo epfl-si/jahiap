@@ -11,8 +11,7 @@ def get_sites():
     """
     Return the list of jahia sites
     """
-    path = os.path.join(os.getcwd(), DATA_PATH)
-    for top, dirs, files in os.walk(path):
+    for top, dirs, files in os.walk(DATA_PATH):
         return dirs
 
 
