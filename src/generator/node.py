@@ -117,7 +117,8 @@ class RootNode(Node):
     def create_html(self):
         # load and render template
         template = self.env.get_template('root.html')
-        content = template.render()
+        children_list = dict([(child.name, child.full_name()) for child in self.children])
+        content = template.render(children_list=children_list)
 
         # create file
         file_path = self.output_path("index.html")

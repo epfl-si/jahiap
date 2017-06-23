@@ -84,7 +84,7 @@
       <h1 class="site-title" itemprop="isPartOf" itemscope itemtype="http://schema.org/CollectionPage">
         <a href="/" itemprop="url" accesskey="1" rel="home">
           <span itemprop="name">
-              École Polytechnique de Lausanne<abbr>EPFL</abbr>
+              École Polytechnique de Lausanne <abbr>EPFL</abbr>
           </span>
         </a>
       </h1>
@@ -137,7 +137,21 @@
 
         <!-- The page content -->
         <div class="page-content">
-          Welcome to EPFL
+          Welcome to EPFL:
+            <img src="https://documents.epfl.ch/users/c/ch/charmier/www/Arbo-whiteBG.png">
+            <ul>
+                {% for name, link in children_list.items() %}
+                <li><a href="{{ link }}">{{ name }}</a></li>
+                {% endfor %}
+            </ul>
+            <div>
+                <h3>Demo redirections</h3>
+                <ul>
+                    <li>test <a href="http://dit.epfl.ch">http://dit.epfl.ch</a> -> vpsi</li>
+                    <li>test <a href="http://master.epfl.ch">http://master.epfl.ch</a> -> labs/master</li>
+                    <li>test <a href="http://dcsl.epfl.ch/page-145099-en.html">http://dcsl.epfl.ch/page-145099-en.html</a> -> labs/dcsl/page-145099-en.html</li>
+                </ul>
+            </div>
         </div>
 
         <!-- The page footer -->
