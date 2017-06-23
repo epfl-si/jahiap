@@ -18,6 +18,10 @@ EXPORT_PATH = os.path.abspath(os.path.join(
     os.path.dirname(__file__),
     "../exports"))
 
+PROJECT_PATH = os.path.abspath(os.path.join(
+    os.path.dirname(__file__),
+    ".."))
+
 LINE_LENGTH_ON_PPRINT = 150
 LINE_LENGTH_ON_EXPORT = LINE_LENGTH_ON_PPRINT + 100
 

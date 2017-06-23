@@ -10,7 +10,7 @@ from unzipper.unzip import unzip_one
 from exporter.html_exporter import HTMLExporter
 from jahia_site import Site
 from generator.utils import Utils
-from settings import WP_HOST
+from settings import WP_HOST, PROJECT_PATH
 
 
 class Node(metaclass=ABCMeta):
@@ -54,10 +54,12 @@ class Node(metaclass=ABCMeta):
         --label "traefik.frontend=generated-%(site_name)s" \
         --label "traefik.frontend.rule=Host:%(WP_HOST)s;PathPrefix:%(full_name)s" \
         -v %(absolute_path_to_html)s:/usr/share/nginx/html%(full_name)s \
+        -v %(absolute_project_path)s/nginx/nginx.conf:/etc/nginx/conf.d/default.conf \
         nginx
         """ % {
             'site_name': self.name,
             'absolute_path_to_html': self.absolute_path_to_html(),
+            'absolute_project_path': PROJECT_PATH,
             'full_name' : self.full_name(),
             'WP_HOST': WP_HOST,
         }
