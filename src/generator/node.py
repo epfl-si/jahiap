@@ -55,7 +55,7 @@ class Node(metaclass=ABCMeta):
             'site_name': self.name,
             'absolute_path_to_html': self.absolute_path_to_html(),
             'absolute_project_path': PROJECT_PATH,
-            'full_name' : self.full_name(),
+            'full_name': self.full_name(),
             'WP_HOST': WP_HOST,
         }
         os.system(docker_cmd)

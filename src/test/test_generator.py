@@ -77,15 +77,16 @@ class TestTreeStructure(object):
         assert vpsi_node.full_name() == "/SI/VPSI"
         assert dcsl_node.full_name() == "/labs/DCSL"
 
+
 @pytest.fixture(scope='module')
 def generated_tree(request):
         output_path = TestGenerator.ARGS['--output-dir']
         if os.path.exists(output_path):
             shutil.rmtree(output_path)
-        tree = Tree(TestGenerator.ARGS,
-                           filename=TestGenerator.DATA_FILE)
+        tree = Tree(TestGenerator.ARGS, filename=TestGenerator.DATA_FILE)
         tree.create_html()
         return tree
+
 
 class TestGenerator(object):
     """

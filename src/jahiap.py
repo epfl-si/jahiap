@@ -3,12 +3,14 @@ jahiap: a wonderful tool
 
 Usage:
   jahiap.py generate [--output-dir=<OUTPUT_DIR>] [--debug|--quiet]
-  jahiap.py crawl <site> [--output-dir=<OUTPUT_DIR>] [--number=<NUMBER>] [--export-path] [--date DATE] [--force] [--debug|--quiet]
+  jahiap.py crawl <site> [--output-dir=<OUTPUT_DIR>] [--export-path]
+  [--number=<NUMBER>] [--date DATE] [--force] [--debug|--quiet]
   jahiap.py unzip <site> [--output-dir=<OUTPUT_DIR>] [--number=<NUMBER>] [--debug|--quiet]
   jahiap.py parse <site> [--output-dir=<OUTPUT_DIR>] [--number=<NUMBER>] [--print-report]
                          [--debug|--quiet] [--use-cache] [--root-path=<ROOT_PATH>]
-  jahiap.py export <site> [--clean-wordpress|--to-wordpress|--nginx-conf|--to-static|--to-dictionary] [--output-dir=<OUTPUT_DIR>]
-                          [--number=<NUMBER>] [--site-url=<SITE_URL>] [--print-report] [--root-path=<ROOT_PATH>]
+  jahiap.py export <site> [--clean-wordpress|--to-wordpress|--nginx-conf|--to-static|--to-dictionary]
+                          [--output-dir=<OUTPUT_DIR>] [--root-path=<ROOT_PATH>]
+                          [--number=<NUMBER>] [--site-url=<SITE_URL>] [--print-report]
                           [--wp-cli=<WP_CLI>] [--debug|--quiet]
   jahiap.py docker <site> [--output-dir=<OUTPUT_DIR>] [--number=<NUMBER>] [--debug|--quiet]
 
@@ -37,7 +39,6 @@ import logging
 import os
 import pickle
 import sys
-import zipfile
 from datetime import datetime
 from pprint import pprint, pformat
 
@@ -92,6 +93,7 @@ def main_crawl(args):
         SiteCrawler.download(args)
     except requests.ConnectionError as err:
         logging.error(err)
+
 
 def main_unzip(args):
     # get zip files according to args
@@ -171,19 +173,21 @@ def main_export(args):
 
         if args['--clean-wordpress']:
             logging.info("Cleaning wordpress %s ...", site.name)
-            wp_exporter = WPExporter(site=site,
-                                                        domain=args['--site-url'],
-                                                        output_dir=output_subdir,
-                                                        cli_container=args['--wp-cli'])
+            wp_exporter = WPExporter(
+                site=site,
+                domain=args['--site-url'],
+                output_dir=output_subdir,
+                cli_container=args['--wp-cli'])
             wp_exporter.delete_all_content()
             logging.info("Data of Wordpress site successfully deleted")
 
         if args['--to-wordpress']:
             logging.info("Exporting to wordpress %s ...", site.name)
-            wp_exporter = WPExporter(site=site,
-                                                        domain=args['--site-url'],
-                                                        output_dir=output_subdir,
-                                                        cli_container=args['--wp-cli'])
+            wp_exporter = WPExporter(
+                site=site,
+                domain=args['--site-url'],
+                output_dir=output_subdir,
+                cli_container=args['--wp-cli'])
             wp_exporter.import_all_data_to_wordpress()
             wp_exporter.generate_nginx_conf_file()
             exported_site['wordpress'] = args['--site-url']
@@ -191,10 +195,11 @@ def main_export(args):
 
         if args['--nginx-conf']:
             logging.info("Creating nginx conf for %s ...", site.name)
-            wp_exporter = WPExporter(site=site,
-                                                        domain=args['--site-url'],
-                                                        output_dir=output_subdir,
-                                                        cli_container=args['--wp-cli'])
+            wp_exporter = WPExporter(
+                site=site,
+                domain=args['--site-url'],
+                output_dir=output_subdir,
+                cli_container=args['--wp-cli'])
             wp_exporter.import_pages()
             wp_exporter.generate_nginx_conf_file()
             exported_site['wordpress'] = args['--site-url']
@@ -253,7 +258,7 @@ def main_docker(args):
         """ % {
             'site_name': site_name,
             'abs_output_dir': abs_output_dir,
-            'abs_nginx_dir' : abs_nginx_dir,
+            'abs_nginx_dir': abs_nginx_dir,
             'WP_HOST': WP_HOST,
             'WP_PATH': WP_PATH,
         }
