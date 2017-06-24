@@ -20,26 +20,21 @@ class Node(metaclass=ABCMeta):
         autoescape=select_autoescape(['html', 'xml'])
     )
 
-    def __init__(self, name):
+    def __init__(self, name, tree=None):
         self.name = name
+        self.tree = tree
         self.parent = None
         self.children = []
-        self.generator = None
+
+        # make sure output_path exists
+        if tree and not os.path.exists(self.output_path()):
+            os.makedirs(self.output_path())
 
     @abstractclassmethod
     def create_html(self):
         raise NotImplementedError()
 
-    def set_generator(self, generator):
-        self.generator = generator
-
-        if not os.path.exists(self.output_path()):
-            os.makedirs(self.output_path())
-
-    def run(self, generator):
-
-        self.set_generator(generator)
-        self.create_html()
+    def run(self):
 
         # stop running container first (if any)
         os.system("docker rm -f generated-%s" % self.name)
@@ -68,7 +63,7 @@ class Node(metaclass=ABCMeta):
         logging.info("Docker launched for %s", self.name)
 
     def output_path(self, file_path=""):
-        dir_path = os.path.join(self.generator.output_path, self.name)
+        dir_path = os.path.join(self.tree.output_path, self.name)
         return os.path.join(dir_path, file_path)
 
     def absolute_path_to_html(self):
@@ -108,8 +103,8 @@ class Node(metaclass=ABCMeta):
 
 
 class RootNode(Node):
-    def __init__(self, name):
-        super().__init__(name)
+    def __init__(self, name, tree=None):
+        super().__init__(name, tree=tree)
 
     def full_name(self, relative=False):
         if relative:
@@ -131,8 +126,8 @@ class RootNode(Node):
 
 class ListNode(Node):
 
-    def __init__(self, name):
-        super().__init__(name)
+    def __init__(self, name, tree=None):
+        super().__init__(name, tree=tree)
 
     def create_html(self):
 
@@ -148,27 +143,40 @@ class ListNode(Node):
 
 
 class SiteNode(Node):
-    def __init__(self, name):
-        super().__init__(name)
+    def __init__(self, name, tree=None):
+        super().__init__(name, tree=tree)
 
     def absolute_path_to_html(self):
         return os.path.join(os.path.abspath(self.output_path()), self.full_name(relative=True))
 
     def create_html(self):
-        zip_file = SiteCrawler(self.name, self.generator.args).download_site()
-        site_dir = unzip_one(self.generator.args['--output-dir'], self.name, zip_file)
+        zip_file = SiteCrawler(self.name, self.tree.args).download_site()
+        site_dir = unzip_one(self.tree.args['--output-dir'], self.name, zip_file)
         site = Site(site_dir, self.name, root_path=self.full_name())
         HTMLExporter(site, self.output_path())
 
 
-class Generator(object):
+class Tree(object):
 
-    def __init__(self, args):
+    def __init__(self, args, filename="sites.csv"):
+        self.root = None
         self.args = args
         self.output_path = os.path.join(args['--output-dir'], "generator")
 
-    @staticmethod
-    def create_all_nodes(sites):
+        # parse csv file and get all sites information
+        sites = Utils.get_content_of_csv_file(filename=filename)
+        sites.append({'name': '', 'parent': '', 'type': 'root'})
+
+        # create all nodes without relationship
+        nodes = self.create_all_nodes(sites)
+
+        # set the parent for all nodes
+        nodes = self.set_all_parents(sites, nodes)
+
+        # set children
+        self.nodes = self.set_all_children(sites, nodes)
+
+    def create_all_nodes(self, sites):
         """
         Create all nodes without relationship
         """
@@ -178,11 +186,12 @@ class Generator(object):
         # TODO: replace by factory ?
         for site in sites:
             if site['type'] == 'list':
-                node = ListNode(name=site['name'])
+                node = ListNode(name=site['name'], tree=self)
             elif site['type'] == 'site':
-                node = SiteNode(name=site['name'])
+                node = SiteNode(name=site['name'], tree=self)
             elif site['type'] == 'root':
-                node = RootNode(name="")
+                node = RootNode(name="", tree=self)
+                self.root = node
             else:
                 logging.error("unsupported type")
             nodes.append(node)
@@ -210,24 +219,16 @@ class Generator(object):
                     break
         return nodes
 
-    def run(self, filename="sites.csv"):
+    def create_html(self):
+        """
+        Generate HTML files for all nodes
+        """
+        for node in self.nodes:
+            node.create_html()
+
+    def run(self):
         """
         Create all docker container for all sites
         """
-
-        # parse csv file and get all sites information
-        sites = Utils.get_content_of_csv_file(filename=filename)
-        sites.append({'name': '', 'parent': '', 'type': 'root'})
-
-        # create all nodes without relationship
-        nodes = self.create_all_nodes(sites)
-
-        # set the parent for all nodes
-        nodes = self.set_all_parents(sites, nodes)
-
-        # set children
-        nodes = self.set_all_children(sites, nodes)
-
-        # run all nodes
-        for node in nodes:
-            node.run(self)
+        for node in self.nodes:
+            node.run()

@@ -199,6 +199,14 @@ class HTMLExporter:
     def extract_files(self):
         """Extract the files"""
 
+        if not os.path.isdir(os.path.join(
+            self.site.base_path, "content")):
+            if len(self.site.files) == 0:
+                logging.info("no files found for %s", self.site.base_path)
+            else:
+                logging.warning("no files found for %s whereas %s expected" % (self.site.base_path, len(self.site.files)))
+            return
+
         start = "%s/content/sites/%s/files" % (self.site.base_path, self.site.name)
         dst = "%s/files" % self.full_path
         logging.debug("copying files from %s into %s", start, self.full_path)

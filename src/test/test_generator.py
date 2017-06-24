@@ -5,11 +5,12 @@
 import os
 import shutil
 import pytest
+import logging
 import requests
 from datetime import datetime
 
 from settings import DATA_PATH, WP_HOST
-from generator.node import Generator, RootNode, ListNode, SiteNode
+from generator.node import Tree, RootNode, ListNode, SiteNode
 
 
 @pytest.fixture(scope='module')
@@ -55,12 +56,6 @@ def basic_tree(request):
 
     return root, ic_node, blabla_node, vpsi_node, labs_node, dcsl_node
 
-@pytest.fixture(scope='module')
-def generated_tree(request):
-        output_path = TestGenerator.ARGS['--output-dir']
-        if os.path.exists(output_path):
-            shutil.rmtree(output_path)
-        return Generator(TestGenerator.ARGS).run(TestGenerator.DATA_FILE)
 
 class TestTreeStructure(object):
 
@@ -82,6 +77,16 @@ class TestTreeStructure(object):
         assert vpsi_node.full_name() == "/SI/VPSI"
         assert dcsl_node.full_name() == "/labs/DCSL"
 
+@pytest.fixture(scope='module')
+def generated_tree(request):
+        output_path = TestGenerator.ARGS['--output-dir']
+        if os.path.exists(output_path):
+            shutil.rmtree(output_path)
+        tree = Tree(TestGenerator.ARGS,
+                           filename=TestGenerator.DATA_FILE)
+        tree.create_html()
+        return tree
+
 class TestGenerator(object):
     """
     Using following tree structure:
@@ -95,58 +100,61 @@ class TestGenerator(object):
                   └── apml
     """
 
-    WORKING_PATH = os.path.join(DATA_PATH, "generator")
+    WORKING_PATH = os.path.join(DATA_PATH, "full-tree")
     DATA_FILE = os.path.join(WORKING_PATH, "sites.csv")
+    OUTPUT_DIR = os.path.join(WORKING_PATH, "output-by-test")
+    OUTPUT_PATH = os.path.join(OUTPUT_DIR, "generator")
 
     ARGS = {
-        '--output-dir': os.path.join(WORKING_PATH, "tmp"),
+        '--output-dir': OUTPUT_DIR,
+        '--export-path': WORKING_PATH,
         '--date': datetime.today().strftime("%Y-%m-%d-%H-%M"),
         '--force': False,
     }
 
     def test_output_path(self, generated_tree):
-        assert os.path.exists(TestGenerator.WORKING_PATH)
+        assert os.path.exists(TestGenerator.OUTPUT_PATH)
 
     def test_root_path(self, generated_tree):
-        root_path = os.path.join(TestGenerator.WORKING_PATH, "index.html")
+        root_path = os.path.join(TestGenerator.OUTPUT_PATH, "index.html")
         assert os.path.isfile(root_path)
 
     def test_list_paths(self, generated_tree):
-        administratif_path = os.path.join(TestGenerator.WORKING_PATH, "administratif")
-        labs_path = os.path.join(TestGenerator.WORKING_PATH, "labs")
+        administratif_path = os.path.join(TestGenerator.OUTPUT_PATH, "administratif")
+        labs_path = os.path.join(TestGenerator.OUTPUT_PATH, "labs")
         assert os.path.isdir(administratif_path)
         assert os.path.isfile(os.path.join(administratif_path, "index.html"))
         assert os.path.isdir(labs_path)
         assert os.path.isfile(os.path.join(labs_path, "index.html"))
 
     def test_apc_site_path(self, generated_tree):
-        apc_path = os.path.join(TestGenerator.WORKING_PATH, "apc")
-        assert os.path.isdir(os.path.join(apc_path, "apc"))
-        assert os.path.isfile(os.path.join(apc_path, "admnistratif/apc/index.html"))
+        apc_path = os.path.join(TestGenerator.OUTPUT_PATH, "apc")
+        assert os.path.isdir(apc_path)
+        assert os.path.isfile(os.path.join(apc_path, "administratif/apc/index-fr.html"))
 
     def test_ahead_site_path(self, generated_tree):
-        ahead_path = os.path.join(TestGenerator.WORKING_PATH, "ahead")
-        assert os.path.isdir(os.path.join(ahead_path, "ahead"))
+        ahead_path = os.path.join(TestGenerator.OUTPUT_PATH, "ahead")
+        assert os.path.isdir(ahead_path)
         assert os.path.isfile(os.path.join(ahead_path, "ahead/index.html"))
 
     def test_bioinspired_site_path(self, generated_tree):
-        bioinspired_path = os.path.join(TestGenerator.WORKING_PATH, "bioinspired")
-        assert os.path.isdir(os.path.join(bioinspired_path, "bioinspired"))
+        bioinspired_path = os.path.join(TestGenerator.OUTPUT_PATH, "bioinspired")
+        assert os.path.isdir(bioinspired_path)
         assert os.path.isfile(os.path.join(bioinspired_path, "ahead/bioinspired/index.html"))
 
+
+class TestDockerCreation(object):
+
     def test_root_url(self, generated_tree):
+        # run docker for the root node
+        logging.info("Running docker for %s", generated_tree.root.name)
+        generated_tree.root.run()
+
+        # test root URL
         root_url = "http://"+WP_HOST
         req = requests.get(root_url)
         assert req.status_code == 200
-        assert "<title>EPFL</title>" in req.content
+        assert b"<title>EPFL</title>" in req.content
 
-    def test_list_urls(self, generated_tree):
-        administratif_url = "http://"+WP_HOST+"/administratif"
-        administratif_req = requests.get(administratif_url)
-        assert administratif_req.status_code == 200
-        assert "<title>administratif</title>" in administratif_req.content
-        # labs
-        labs_url = "http://"+WP_HOST+"/administratif"
-        labs_req = requests.get(labs_url)
-        assert labs_req.status_code == 200
-        assert "<title>administratif</title>" in labs_req.content
+        # clean up a bit
+        os.system("docker rm -f generated-%s" % generated_tree.root.name)

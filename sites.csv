@@ -1,8 +1,8 @@
 name,parent,type
-si,vpsi,site
+administratif,root,list
 labs,root,list
-master,labs,site
-dcsl,labs,site
-vpsi,root,list
-ic,root,list
-lsi,ic,site
+ahead,root,site
+apc,administratif,site
+building2050,administratif,site
+apml,labs,site
+bioinspired,ahead,site

@@ -3,7 +3,7 @@ jahiap: a wonderful tool
 
 Usage:
   jahiap.py generate [--output-dir=<OUTPUT_DIR>] [--debug|--quiet]
-  jahiap.py crawl <site> [--output-dir=<OUTPUT_DIR>] [--number=<NUMBER>] [--date DATE] [--force] [--debug|--quiet]
+  jahiap.py crawl <site> [--output-dir=<OUTPUT_DIR>] [--number=<NUMBER>] [--export-path] [--date DATE] [--force] [--debug|--quiet]
   jahiap.py unzip <site> [--output-dir=<OUTPUT_DIR>] [--number=<NUMBER>] [--debug|--quiet]
   jahiap.py parse <site> [--output-dir=<OUTPUT_DIR>] [--number=<NUMBER>] [--print-report]
                          [--debug|--quiet] [--use-cache] [--root-path=<ROOT_PATH>]
@@ -17,6 +17,7 @@ Options:
   -v --version                  Show version.
   -o --output-dir=<OUTPUT_DIR>  Directory where to perform command [default: build].
   -n --number=<NUMBER>          Number of sites to analyse (fetched in JAHIA_SITES, from given site name) [default: 1].
+  --export-path                    (crawl) Directory where Jahia Zip files are stored
   --date DATE                   (crawl) Date and time for the snapshot, e.g : 2017-01-15-23-00.
   -f --force                    (crawl) Force download even if existing snapshot for same site.
   --use-cache                   (parse) Do not parse if pickle file found with a previous parsing result
@@ -47,10 +48,10 @@ from crawler import SiteCrawler
 from exporter.dict_exporter import DictExporter
 from exporter.html_exporter import HTMLExporter
 from exporter.wp_exporter import WPExporter
-from generator.node import Generator
+from generator.node import Tree
 from unzipper.unzip import unzip_one
 from jahia_site import Site
-from settings import VERSION, WP_ADMIN_URL, WP_HOST, WP_PATH
+from settings import VERSION, EXPORT_PATH, WP_ADMIN_URL, WP_HOST, WP_PATH
 
 
 def main(args):
@@ -91,7 +92,6 @@ def main_crawl(args):
         SiteCrawler.download(args)
     except requests.ConnectionError as err:
         logging.error(err)
-
 
 def main_unzip(args):
     # get zip files according to args
@@ -262,7 +262,8 @@ def main_docker(args):
 
 
 def main_generate(args):
-    Generator(args).run()
+    Tree(args).create_html()
+    Tree(args).run()
 
 
 def set_logging_config(args):
@@ -290,6 +291,8 @@ def set_default_values(args):
         args['--site-url'] = WP_ADMIN_URL
     if not args['--wp-cli']:
         args['--wp-cli'] = None
+    if not args['--export-path']:
+        args['--export-path'] = EXPORT_PATH
     if not args['--root-path']:
         args['--root-path'] = ''
     return args
@@ -300,9 +303,10 @@ if __name__ == '__main__':
     # docopt return a dictionary with all arguments
     # __doc__ contains package docstring
     args = set_default_values(docopt(__doc__, version=VERSION))
-    print(args)
 
     # set logging config before anything else
     set_logging_config(args)
+
+    logging.debug(args)
 
     main(args)
