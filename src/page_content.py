@@ -93,5 +93,6 @@ class PageContent:
                 # use the old Jahia page id
                 self.path = "/page-%s-%s.html" % (self.page.pid, self.language)
 
+        # FIXME, the prefixing part should be done in exporter
         # add the site root_path at the beginning
         self.path = self.site.root_path + self.path

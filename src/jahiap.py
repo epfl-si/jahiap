@@ -54,7 +54,8 @@ from wordpress_json import WordpressError
 from generator.node import Tree
 from unzipper.unzip import unzip_one
 from jahia_site import Site
-from settings import VERSION, EXPORT_PATH, WP_ADMIN_URL, WP_HOST, WP_PATH
+from settings import VERSION, EXPORT_PATH, WP_ADMIN_URL, WP_HOST, WP_PATH, \
+    LINE_LENGTH_ON_EXPORT, LINE_LENGTH_ON_PPRINT
 
 
 def main(args):
@@ -222,10 +223,10 @@ def main_export(args):
             export_path = os.path.join(
                 output_subdir, "%s_dict.py" % site.name)
             data = DictExporter.generate_data(site)
-            pprint(data)
+            pprint(data, width=LINE_LENGTH_ON_PPRINT)
             with open(export_path, 'w') as output:
                 output.write("%s_data = " % site.name)
-                output.write(pformat(data))
+                output.write(pformat(data, width=LINE_LENGTH_ON_EXPORT))
                 output.flush()
             exported_site['dict'] = export_path
             logging.info("Site successfully exported to python dictionary")
