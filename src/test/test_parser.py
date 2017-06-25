@@ -44,8 +44,8 @@ class TestSiteProperties:
     def test_server_name(self, site, data):
         assert site.server_name == data['properties']['server_name']
 
-    # FIXME : files are saved with the value of 'output-dir' at parsing time
-    #  which differs at testing time. The pathes should be relative...
+    # FIXME : file paths are saved with the value of 'output-dir' at parsing time
+    #  which differs from the one at testing time. The pathes should be relative...
     # def test_export_files(self, site, data):
     #     assert site.export_files == data['properties']['export_files']
 

@@ -2,34 +2,34 @@
 jahiap: a wonderful tool
 
 Usage:
-  jahiap.py generate [--output-dir=<OUTPUT_DIR>] [--debug|--quiet]
   jahiap.py crawl <site> [--output-dir=<OUTPUT_DIR>] [--export-path]
-  [--number=<NUMBER>] [--date DATE] [--force] [--debug|--quiet]
-  jahiap.py unzip <site> [--output-dir=<OUTPUT_DIR>] [--number=<NUMBER>] [--debug|--quiet]
+  [--number=<NUMBER>] [--date DATE] [--force] [--debug | --quiet]
+  jahiap.py unzip <site> [--output-dir=<OUTPUT_DIR>] [--number=<NUMBER>] [--debug | --quiet]
   jahiap.py parse <site> [--output-dir=<OUTPUT_DIR>] [--number=<NUMBER>] [--print-report]
-                         [--debug|--quiet] [--use-cache] [--root-path=<ROOT_PATH>]
-  jahiap.py export <site> [--clean-wordpress|--to-wordpress|--nginx-conf|--to-static|--to-dictionary]
+                         [--debug | --quiet] [--use-cache] [--root-path=<ROOT_PATH>]
+  jahiap.py export <site> [--clean-wordpress | --to-wordpress | --nginx-conf] [--to-static] [--to-dictionary]
                           [--output-dir=<OUTPUT_DIR>] [--root-path=<ROOT_PATH>]
                           [--number=<NUMBER>] [--site-url=<SITE_URL>] [--print-report]
-                          [--wp-cli=<WP_CLI>] [--debug|--quiet]
-  jahiap.py docker <site> [--output-dir=<OUTPUT_DIR>] [--number=<NUMBER>] [--debug|--quiet]
+                          [--wp-cli=<WP_CLI>] [--debug | --quiet]
+  jahiap.py docker <site> [--output-dir=<OUTPUT_DIR>] [--number=<NUMBER>] [--debug | --quiet]
+  jahiap.py generate [--output-dir=<OUTPUT_DIR>] [--debug | --quiet]
 
 Options:
   -h --help                     Show this screen.
   -v --version                  Show version.
   -o --output-dir=<OUTPUT_DIR>  Directory where to perform command [default: build].
   -n --number=<NUMBER>          Number of sites to analyse (fetched in JAHIA_SITES, from given site name) [default: 1].
-  --export-path                    (crawl) Directory where Jahia Zip files are stored
+  --export-path                 (crawl) Directory where Jahia Zip files are stored
   --date DATE                   (crawl) Date and time for the snapshot, e.g : 2017-01-15-23-00.
   -f --force                    (crawl) Force download even if existing snapshot for same site.
   --use-cache                   (parse) Do not parse if pickle file found with a previous parsing result
   --root-path=<ROOT_PATH>       (FIXME) Set base path for URLs (default is '' or $WP_PATH on command 'docker')
   -r --print-report             (FIXME) Print report with content.
-  -c --clean-wordpress          (export) Delete all content of Wordpress site.
-  -w --to-wordpress             (export) Export parsed data to Wordpress and generate nginx conf
   --nginx-conf                  (export) Only export pages to Wordpress in order to generate nginx conf
   -s --to-static                (export) Export parsed data to static HTML files.
   -d --to-dictionary            (export) Export parsed data to python dictionary.
+  -c --clean-wordpress          (export) Delete all content of Wordpress site.
+  -w --to-wordpress             (export) Export parsed data to Wordpress and generate nginx conf
   -u --site-url=<SITE_URL>      (export) Wordpress URL where to export parsed content. (default is $WP_ADMIN_URL)
   --wp-cli=<WP_CLI>             (export) Name of wp-cli container to use with given wordpress URL. (default WPExporter)
   --debug                       (*) Set logging level to DEBUG (default is INFO).
@@ -45,10 +45,12 @@ from pprint import pprint, pformat
 import requests
 from docopt import docopt
 
+from utils import Utils
 from crawler import SiteCrawler
 from exporter.dict_exporter import DictExporter
 from exporter.html_exporter import HTMLExporter
 from exporter.wp_exporter import WPExporter
+from wordpress_json import WordpressError
 from generator.node import Tree
 from unzipper.unzip import unzip_one
 from jahia_site import Site
@@ -171,39 +173,42 @@ def main_export(args):
         # create subdir in output_dir
         output_subdir = os.path.join(args['--output-dir'], site.name)
 
-        if args['--clean-wordpress']:
-            logging.info("Cleaning wordpress %s ...", site.name)
-            wp_exporter = WPExporter(
-                site=site,
-                domain=args['--site-url'],
-                output_dir=output_subdir,
-                cli_container=args['--wp-cli'])
-            wp_exporter.delete_all_content()
-            logging.info("Data of Wordpress site successfully deleted")
+        try:
+            if args['--clean-wordpress']:
+                logging.info("Cleaning wordpress %s ...", site.name)
+                wp_exporter = WPExporter(
+                    site=site,
+                    domain=args['--site-url'],
+                    output_dir=output_subdir,
+                    cli_container=args['--wp-cli'])
+                wp_exporter.delete_all_content()
+                logging.info("Data of Wordpress site successfully deleted")
 
-        if args['--to-wordpress']:
-            logging.info("Exporting to wordpress %s ...", site.name)
-            wp_exporter = WPExporter(
-                site=site,
-                domain=args['--site-url'],
-                output_dir=output_subdir,
-                cli_container=args['--wp-cli'])
-            wp_exporter.import_all_data_to_wordpress()
-            wp_exporter.generate_nginx_conf_file()
-            exported_site['wordpress'] = args['--site-url']
-            logging.info("Site successfully exported to Wordpress")
+            if args['--to-wordpress']:
+                logging.info("Exporting to wordpress %s ...", site.name)
+                wp_exporter = WPExporter(
+                    site=site,
+                    domain=args['--site-url'],
+                    output_dir=output_subdir,
+                    cli_container=args['--wp-cli'])
+                wp_exporter.import_all_data_to_wordpress()
+                wp_exporter.generate_nginx_conf_file()
+                exported_site['wordpress'] = args['--site-url']
+                logging.info("Site successfully exported to Wordpress")
 
-        if args['--nginx-conf']:
-            logging.info("Creating nginx conf for %s ...", site.name)
-            wp_exporter = WPExporter(
-                site=site,
-                domain=args['--site-url'],
-                output_dir=output_subdir,
-                cli_container=args['--wp-cli'])
-            wp_exporter.import_pages()
-            wp_exporter.generate_nginx_conf_file()
-            exported_site['wordpress'] = args['--site-url']
+            if args['--nginx-conf']:
+                logging.info("Creating nginx conf for %s ...", site.name)
+                wp_exporter = WPExporter(
+                    site=site,
+                    domain=args['--site-url'],
+                    output_dir=output_subdir,
+                    cli_container=args['--wp-cli'])
+                wp_exporter.import_pages()
+                wp_exporter.generate_nginx_conf_file()
+                exported_site['wordpress'] = args['--site-url']
             logging.info("Nginx conf successfully generated")
+        except WordpressError:
+            logging.error("Wordpress not available")
 
         if args['--to-static']:
             logging.info("Exporting to static files for %s ...", site.name)
@@ -230,6 +235,10 @@ def main_export(args):
 
 
 def main_docker(args):
+    # This command depends on traefik running
+    if not Utils.is_traefik_running():
+        raise SystemExit("You need to run treafik in order to spawn a container")
+
     # get list of sites html static sites
     args['--to-static'] = True
     args['--root-path'] = args['--root-path'] or WP_PATH
