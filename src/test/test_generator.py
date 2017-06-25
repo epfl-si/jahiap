@@ -13,6 +13,13 @@ from settings import DATA_PATH, WP_HOST
 from generator.node import Tree, RootNode, ListNode, SiteNode
 
 
+def is_traefik_running():
+    try:
+        return requests.get("http://%s:8080" % WP_HOST).status_code == 200
+    except requests.ConnectionError:
+        return False
+
+
 @pytest.fixture(scope='module')
 def basic_tree(request):
     """
@@ -147,6 +154,10 @@ class TestGenerator(object):
 class TestDockerCreation(object):
 
     def test_root_url(self, generated_tree):
+        # skip the test if traefik not running
+        if not is_traefik_running():
+            pytest.skip("not testing docker... needs traefik running from helpers module")
+
         # run docker for the root node
         logging.info("Running docker for %s", generated_tree.root.name)
         generated_tree.root.run()
