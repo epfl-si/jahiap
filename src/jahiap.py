@@ -8,7 +8,7 @@ Usage:
                          [--debug|--quiet] [--use-cache] [--root-path=<ROOT_PATH>]
   jahiap.py export <site> [--to-wordpress|--to-static|--to-dictionary|--clean-wordpress] [--output-dir=<OUTPUT_DIR>]
                           [--number=<NUMBER>] [--site-url=<SITE_URL>] [--print-report]
-                          [--wp-cli=<WP_CLI>] [--debug|--quiet]
+                          [--wp-cli=<WP_CLI>] [--debug|--quiet] [--use-cache]
   jahiap.py docker <site> [--output-dir=<OUTPUT_DIR>] [--number=<NUMBER>] [--debug|--quiet]
 
 Options:
@@ -159,9 +159,10 @@ def main_parse(args):
         # create subdir in output_dir
         output_subdir = os.path.join(args['--output-dir'], site_name)
 
+        pickle_file = os.path.join(output_subdir, 'parsed_%s.pkl' % site_name)
+
         # when using-cache: check if already parsed
         if args['--use-cache']:
-            pickle_file = os.path.join(output_subdir, 'parsed_%s.pkl' % site_name)
             if os.path.exists(pickle_file):
                 with open(pickle_file, 'rb') as input:
                     logging.info("Loaded parsed site from %s" % pickle_file)
@@ -178,11 +179,11 @@ def main_parse(args):
 
         print(site.report)
 
-        # when using-cache: save parsed site on file system
-        if args['--use-cache']:
-            with open(pickle_file, 'wb') as output:
-                logging.info("Parsed site saved into %s" % pickle_file)
-                pickle.dump(site, output, pickle.HIGHEST_PROTOCOL)
+        # always save the parsed data on disk, so we can use the
+        # cache later if we want
+        with open(pickle_file, 'wb') as output:
+            logging.info("Parsed site saved into %s" % pickle_file)
+            pickle.dump(site, output, pickle.HIGHEST_PROTOCOL)
 
         # log success
         logging.info("Site successfully parsed")
