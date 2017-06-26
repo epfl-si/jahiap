@@ -320,6 +320,7 @@ if __name__ == '__main__':
     args = set_default_values(docopt(__doc__, version=VERSION))
 
     # set logging config before anything else
+    # FIXME : do not call logging.warning is Utils.py
     set_logging_config(args)
 
     logging.debug(args)
