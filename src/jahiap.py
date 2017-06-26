@@ -2,7 +2,7 @@
 jahiap: a wonderful tool
 
 Usage:
-  jahiap.py crawl <site> [--output-dir=<OUTPUT_DIR>] [--export-path]
+  jahiap.py crawl <site> [--output-dir=<OUTPUT_DIR>] [--export-path=<EXPORT_PATH>]
   [--number=<NUMBER>] [--date DATE] [--force] [--debug | --quiet]
   jahiap.py unzip <site> [--output-dir=<OUTPUT_DIR>] [--number=<NUMBER>] [--debug | --quiet]
   jahiap.py parse <site> [--output-dir=<OUTPUT_DIR>] [--number=<NUMBER>] [--print-report]
@@ -10,7 +10,8 @@ Usage:
   jahiap.py export <site> [--clean-wordpress | --to-wordpress | --nginx-conf] [--to-static] [--to-dictionary]
                           [--output-dir=<OUTPUT_DIR>] [--root-path=<ROOT_PATH>]
                           [--number=<NUMBER>] [--site-url=<SITE_URL>] [--print-report]
-                          [--wp-cli=<WP_CLI>] [--debug | --quiet]
+                          [--wp-cli=<WP_CLI>] [--debug | --quiet] [--export-path=<EXPORT_PATH>]
+                          [--use-cache]
   jahiap.py docker <site> [--output-dir=<OUTPUT_DIR>] [--number=<NUMBER>] [--debug | --quiet]
   jahiap.py generate [--output-dir=<OUTPUT_DIR>] [--debug | --quiet]
 
@@ -19,7 +20,7 @@ Options:
   -v --version                  Show version.
   -o --output-dir=<OUTPUT_DIR>  Directory where to perform command [default: build].
   -n --number=<NUMBER>          Number of sites to analyse (fetched in JAHIA_SITES, from given site name) [default: 1].
-  --export-path                 (crawl) Directory where Jahia Zip files are stored
+  --export-path=<EXPORT_PATH>   (crawl) Directory where Jahia Zip files are stored
   --date DATE                   (crawl) Date and time for the snapshot, e.g : 2017-01-15-23-00.
   -f --force                    (crawl) Force download even if existing snapshot for same site.
   --use-cache                   (parse) Do not parse if pickle file found with a previous parsing result
