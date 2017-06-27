@@ -12,7 +12,9 @@ class Box:
         "epfl:infoscienceBox": "infoscience",
         "epfl:actuBox": "actu",
         "epfl:faqContainer": "faq",
-        "epfl:toggleBox": "toggle"
+        "epfl:toggleBox": "toggle",
+        "epfl:htmlBox": "html",
+        "epfl:contactBox": "contact"
     }
 
     def __init__(self, site, page_content, element, multibox=False):
@@ -53,6 +55,12 @@ class Box:
         # toggle
         elif "toggle" == self.type:
             self.set_box_toggle(element)
+        # html
+        elif "html" == self.type:
+            self.set_box_html(element)
+        # contact
+        elif "contact" == self.type:
+            self.set_box_contact(element)
 
     def set_box_text(self, element, multibox=False):
         """set the attributes of a text box"""
@@ -92,6 +100,18 @@ class Box:
         self.opened = Utils.get_tag_attribute(element, "opened", "jahia:value")
 
         self.content = Utils.get_tag_attribute(element, "content", "jahia:value")
+
+    def set_box_html(self, element):
+        """set the attributes of an html box"""
+        url = Utils.get_tag_attribute(element, "url", "jahia:value")
+
+        self.content = "[html url=%s]" % url
+
+    def set_box_contact(self, element):
+        """set the attributes of a contact box"""
+        text = Utils.get_tag_attribute(element, "text", "jahia:value")
+
+        self.content = text
 
     def __str__(self):
         return self.type + " " + self.title
