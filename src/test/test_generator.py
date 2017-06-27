@@ -35,6 +35,7 @@ def generated_tree(request):
     tree.create_html()
     return tree
 
+
 class TestTreeStructure(object):
 
     def test_children(self, generated_tree):
@@ -46,7 +47,7 @@ class TestTreeStructure(object):
         assert len(generated_tree.get_or_create('apml').children) == 0
 
     def test_parents(self, generated_tree):
-        assert generated_tree.root.parent == None
+        assert generated_tree.root.parent is None
         assert generated_tree.get_or_create('administratif').parent == generated_tree.root
         assert generated_tree.get_or_create('ahead').parent == generated_tree.root
         assert generated_tree.get_or_create('bioinspired').parent == generated_tree.get_or_create('ahead')

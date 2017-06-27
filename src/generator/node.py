@@ -9,7 +9,6 @@ from crawler import SiteCrawler
 from unzipper.unzip import unzip_one
 from exporter.html_exporter import HTMLExporter
 from jahia_site import Site
-from generator.utils import Utils
 from settings import WP_HOST, PROJECT_PATH
 
 

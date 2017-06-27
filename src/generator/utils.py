@@ -2,6 +2,7 @@
 import csv
 import logging
 
+
 class Utils:
 
     @staticmethod

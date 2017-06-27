@@ -4,6 +4,7 @@ import os
 from generator.utils import Utils
 from generator.node import Node, TypeNode, NoTypeNode, RootTypeNode
 
+
 class Tree(object):
 
     def __init__(self, args, root_name="root", file_path=None):
@@ -49,7 +50,7 @@ class Tree(object):
         node = self.nodes.setdefault(name, Node(name, type_class=type_class, tree=self))
 
         # update type if necessary
-        if  type_class is not NoTypeNode:
+        if type_class is not NoTypeNode:
             node.current_type = type_class(node)
 
         # set parent if given
