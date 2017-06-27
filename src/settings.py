@@ -155,6 +155,7 @@ JAHIA_SITES = [
     "dcsl",
     "dedis",
     "depalma-lab",
+    "demo-hd",
     "desl",
     "developpementdurable",
     "dhlab",

@@ -1,6 +1,9 @@
 """(c) All rights reserved. ECOLE POLYTECHNIQUE FEDERALE DE LAUSANNE, Switzerland, VPSI, 2017"""
+import logging
 import os
+import timeit
 import subprocess
+from datetime import timedelta
 
 from bs4 import BeautifulSoup
 from wordpress_json import WordpressJsonWrapper, WordpressError
@@ -11,13 +14,7 @@ from settings import WP_USER, WP_PASSWORD
 
 class WPExporter:
 
-    # TODO : passer en variable d'instance pour pouvoir exporter plusieurs WP dans meme script
-    report = {
-        'pages': 0,
-        'files': 0,
-        'menus': 0,
-        'failed_files': 0,
-    }
+    TRACER = "tracer_importing.csv"
 
     urls_mapping = []
 
@@ -53,36 +50,73 @@ class WPExporter:
             file_info = os.stat(file_path)
             return cls.convert_bytes(file_info.st_size)
 
-    def __init__(self, site, domain, cli_container=None):
+    def __init__(self, site, cmd_args):
         """
         Site is the python object resulting from the parsing of Jahia XML
         Domain is the wordpress domain where to push the content
         """
         self.site = site
-        self.cli_container = cli_container or "wp-cli-%s" % self.site.name
-        url = "http://%s/?rest_route=/wp/v2" % domain
+        self.domain = cmd_args['--site-url']
+        self.elapsed = 0
+        self.report = {
+            'pages': 0,
+            'files': 0,
+            'menus': 0,
+            'failed_files': 0,
+            'failed_menus': 0,
+            'failed_widgets': 0,
+        }
+        self.cli_container = cmd_args['--wp-cli'] or "wp-cli-%s" % self.site.name
+        url = "http://%s/?rest_route=/wp/v2" % self.domain
         self.wp = WordpressJsonWrapper(url, WP_USER, WP_PASSWORD)
+        self.output_path = cmd_args['--output-dir']
 
     def import_all_data_to_wordpress(self):
         """
         Import all data to worpdress via REST API and wp-cli
         """
-        self.import_medias()
-        self.import_pages()
-        self.set_frontpage()
-        self.populate_menu()
-        self.import_sidebar()
-        self.display_report()
+        try:
+            start_time = timeit.default_timer()
+            tracer_path = os.path.join(self.output_path, self.TRACER)
+
+            # self.import_medias()
+            self.import_pages()
+            self.set_frontpage()
+            self.populate_menu()
+            self.import_sidebar()
+            self.display_report()
+
+            # log execution time
+            elapsed = timedelta(seconds=timeit.default_timer() - start_time)
+            logging.info("Data imported in %s", elapsed)
+
+            with open(tracer_path, 'a', newline='\n') as tracer:
+                tracer.write("%s, %s, %s, %s, %s\n" % (
+                    self.site.name,
+                    str(elapsed),
+                    self.report['failed_files'],
+                    self.report['failed_menus'],
+                    self.report['failed_widgets'],
+                ))
+                tracer.flush()
+
+        except Exception as e:
+            with open(tracer_path, 'a', newline='\n') as tracer:
+                tracer.write("%s, ERROR %s\n" % (self.site.name, str(e)))
+                tracer.flush()
 
     def import_medias(self):
         """
         Import medias to Wordpress
         """
+        logging.info("WP medias import start")
         for media in self.site.files:
             wp_media = self.import_media(media)
             if wp_media:
                 self.replace_links(wp_media)
                 self.report['files'] += 1
+
+        logging.info("WP medias imported")
 
     def import_media(self, media):
         """
@@ -113,11 +147,12 @@ class WPExporter:
         }
         files = files
         try:
+            print(wp_media_info)
             wp_media = self.wp.post_media(data=wp_media_info, files=files)
             return wp_media
-        except WordpressError as e:
+        except Exception as e:
+            print(e.__traceback__)
             self.report['failed_files'] += 1
-            # print(file.name)
 
     def replace_links(self, wp_media):
         """
@@ -150,7 +185,8 @@ class WPExporter:
                 wp_page_info = {
                     'parent': page.parent.wp_id
                 }
-                self.wp.post_pages(page_id=page.wp_id, data=wp_page_info)
+                if page.wp_id:
+                    self.wp.post_pages(page_id=page.wp_id, data=wp_page_info)
 
     def import_pages(self):
         """
@@ -194,6 +230,7 @@ class WPExporter:
                 }
 
                 self.urls_mapping.append(mapping)
+                logging.info("WP page '%s' created", wp_page['link'])
 
                 # keep wordpress ID for further usages
                 page.wp_id = wp_page['id']
@@ -205,11 +242,16 @@ class WPExporter:
         """
         import sidebar via vpcli
         """
-        for box in self.site.homepage.contents["en"].sidebar.boxes:
-            content = Utils.escape_quotes(box.content)
-            cmd = 'wp widget add black-studio-tinymce page-widgets ' \
-                  '--title="%s" --text="%s"' % (box.title, content)
-            self.wp_cli(cmd)
+        try:
+            for box in self.site.homepage.contents["en"].sidebar.boxes:
+                content = Utils.escape_quotes(box.content)
+                cmd = 'wp widget add black-studio-tinymce page-widgets ' \
+                      '--title="%s" --text="%s"' % (box.title, content)
+                self.wp_cli(cmd)
+            logging.info("WP all sidebar imported")
+
+        except WordpressError as e:
+            self.report['failed_widgets'] += 1
 
     def create_submenu(self, page):
         """
@@ -233,22 +275,27 @@ class WPExporter:
         Add pages into the menu in wordpress.
         This menu needs to be created before hand.
         """
-
-        # Create homepage menu
-        page = self.site.homepage
-        menu_id = self.wp_cli('wp menu item add-post Main %s --classes=link-home --porcelain' % page.wp_id)
-        self.menu_id_dict[page.wp_id] = Utils.get_menu_id(menu_id)
-        self.report['menus'] += 1
-
-        # Create children of homepage menu
-        for homepage_children in self.site.homepage.children:
-
-            menu_id = self.wp_cli('wp menu item add-post Main %s --porcelain' % homepage_children.wp_id)
-            self.menu_id_dict[homepage_children.wp_id] = Utils.get_menu_id(menu_id)
+        try:
+            # Create homepage menu
+            page = self.site.homepage
+            menu_id = self.wp_cli('wp menu item add-post Main %s --classes=link-home --porcelain' % page.wp_id)
+            self.menu_id_dict[page.wp_id] = Utils.get_menu_id(menu_id)
             self.report['menus'] += 1
 
-            # create recursively submenus
-            self.create_submenu(homepage_children)
+            # Create children of homepage menu
+            for homepage_children in self.site.homepage.children:
+                if homepage_children.wp_id:
+                    menu_id = self.wp_cli('wp menu item add-post Main %s --porcelain' % homepage_children.wp_id)
+                    self.menu_id_dict[homepage_children.wp_id] = Utils.get_menu_id(menu_id)
+                    self.report['menus'] += 1
+
+                # create recursively submenus
+                self.create_submenu(homepage_children)
+
+            logging.info("WP menus populated")
+
+        except WordpressError as e:
+            self.report['failed_menus'] += 1
 
     def set_frontpage(self):
         """
@@ -266,6 +313,8 @@ class WPExporter:
         frontpage_id = self.site.homepage.wp_id
         self.wp_cli('wp option update show_on_front page')
         self.wp_cli('wp option update page_on_front %s' % frontpage_id)
+
+        logging.info("WP frontpage setted")
 
     def delete_all_content(self):
         """
@@ -285,6 +334,7 @@ class WPExporter:
             for media in medias:
                 self.wp.delete_media(media_id=media['id'], params={'force': 'true'})
             medias = self.wp.get_media(params={'per_page': '100'})
+        logging.info("All medias deleted")
 
     def delete_pages(self):
         """
@@ -296,6 +346,7 @@ class WPExporter:
             for page in pages:
                 self.wp.delete_pages(page_id=page['id'], params={'force': 'true'})
             pages = self.wp.get_pages(params={'per_page': '100'})
+        logging.info("All pages and menus deleted")
 
     def delete_widgets(self):
         """
@@ -306,6 +357,7 @@ class WPExporter:
         for widget_id in widgets_id_list:
             cmd = "wp widget delete " + widget_id
             self.wp_cli(cmd)
+        logging.info("All widgets deleted")
 
     def display_report(self):
         """
@@ -363,7 +415,7 @@ server {
 """ % {
                 'site_name': self.site.name,
                 'jahia_url': element['jahia_url'][1:],
-                'wp_url': element['wp_url'][27:]
+                'wp_url': element['wp_url'].split("/")[3]
             }
             content += line
 
@@ -376,3 +428,4 @@ server {
         # Open the file in write mode
         with open(file_name, 'a') as f:
             f.write(content)
+
