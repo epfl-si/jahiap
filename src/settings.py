@@ -16,8 +16,11 @@ JAHIA_DATE_FORMAT = '%Y-%m-%dT%H:%M:%S'
 
 PROJECT_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 DATA_PATH = os.path.join(PROJECT_PATH, "jahia-data")
-EXPORT_PATH = os.path.join(PROJECT_PATH, "exports")
 
+# by default the path for the export files is $PROJECT_ROOT/exports
+# but it can be overridden by an environment variable
+EXPORT_PATH_DEFAULT = os.path.join(PROJECT_PATH, "exports")
+EXPORT_PATH = Utils.get_optional_env("EXPORT_PATH", EXPORT_PATH_DEFAULT)
 
 LINE_LENGTH_ON_PPRINT = 150
 LINE_LENGTH_ON_EXPORT = LINE_LENGTH_ON_PPRINT + 100

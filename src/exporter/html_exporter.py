@@ -41,7 +41,7 @@ class HTMLExporter:
 
     def generate_pages(self):
         """Generate the pages & the sitemap"""
-        logging.debug("generating pages for langage %s", self.language)
+        logging.debug("Generating pages for language %s", self.language)
 
         # update the boxes data
         self.update_boxes_data()
@@ -99,9 +99,10 @@ class HTMLExporter:
     def generate_page(self, path, content):
         """Generate a page"""
         path = "%s%s" % (self.out_path, path)
+        
+        logging.debug("Generating page %s", path)
 
         # relative_path_index = len("build/%s/html/" % self.site.name)
-
         # relative_path = path[relative_path_index:]
         #
         # TODO support pages that are in a subdirectory.

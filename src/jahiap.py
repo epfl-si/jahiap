@@ -145,7 +145,8 @@ def main_parse(args):
 
         print(site.report)
 
-        # save parsed site on file system to allow --use-cache option
+        # always save the parsed data on disk, so we can use the
+        # cache later if we want
         with open(pickle_file, 'wb') as output:
             logging.info("Parsed site saved into %s" % pickle_file)
             pickle.dump(site, output, pickle.HIGHEST_PROTOCOL)
