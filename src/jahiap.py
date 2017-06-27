@@ -2,11 +2,11 @@
 jahiap: a wonderful tool
 
 Usage:
-  jahiap.py crawl <site> [--output-dir=<OUTPUT_DIR>] [--export-path=<EXPORT_PATH>]
-  [--number=<NUMBER>] [--date DATE] [--force] [--debug | --quiet]
-  jahiap.py unzip <site> [--output-dir=<OUTPUT_DIR>] [--number=<NUMBER>] [--debug | --quiet]
-  jahiap.py parse <site> [--output-dir=<OUTPUT_DIR>] [--number=<NUMBER>] [--print-report]
-                         [--debug | --quiet] [--use-cache] [--root-path=<ROOT_PATH>]
+  jahiap.py crawl <site>  [--output-dir=<OUTPUT_DIR>] [--export-path=<EXPORT_PATH>]
+                          [--number=<NUMBER>] [--date DATE] [--force] [--debug | --quiet]
+  jahiap.py unzip <site>  [--output-dir=<OUTPUT_DIR>] [--number=<NUMBER>] [--debug | --quiet]
+  jahiap.py parse <site>  [--output-dir=<OUTPUT_DIR>] [--number=<NUMBER>] [--print-report]
+                          [--debug | --quiet] [--use-cache] [--root-path=<ROOT_PATH>]
   jahiap.py export <site> [--clean-wordpress | --to-wordpress | --nginx-conf] [--to-static] [--to-dictionary]
                           [--output-dir=<OUTPUT_DIR>] [--root-path=<ROOT_PATH>]
                           [--number=<NUMBER>] [--site-url=<SITE_URL>] [--print-report]
