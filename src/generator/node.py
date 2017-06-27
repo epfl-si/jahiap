@@ -181,5 +181,5 @@ class SiteTypeNode(TypeNode):
     def create_html(self):
         zip_file = SiteCrawler(self.node.name, self.node.tree.args).download_site()
         site_dir = unzip_one(self.node.tree.args['--output-dir'], self.node.name, zip_file)
-        site = Site(site_dir, self.node.name, root_path=self.node.full_name())
+        site = Site(site_dir, self.node.name, root_path="/"+self.node.full_name())
         HTMLExporter(site, self.output_path())
