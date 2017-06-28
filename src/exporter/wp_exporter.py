@@ -51,7 +51,6 @@ class WPExporter:
             file_info = os.stat(file_path)
             return cls.convert_bytes(file_info.st_size)
 
-
     def __init__(self, site, cmd_args):
         """
         Site is the python object resulting from the parsing of Jahia XML
@@ -198,7 +197,7 @@ class WPExporter:
         for page in self.site.pages_by_pid.values():
 
             content = ""
-            
+
             for lang in page.contents.keys():
                 for box in page.contents[lang].boxes:
                     content += box.content

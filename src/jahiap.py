@@ -244,7 +244,6 @@ def main_export(args):
         except:
             logging.error("Error exporting site %s" % site_name)
 
-
         if args['--to-wordpress'] and int(args['--number']) > 1:
             wp_exporter = WPExporter(site, args)
             wp_exporter.delete_all_content()
