@@ -140,7 +140,6 @@ class Box:
 
     def set_box_unknown(self, element):
         """set the attributes of an unknown box"""
-        print(self.page_content.path)
         self.content = "[%s]" % element.getAttribute("jcr:primaryType")
 
     def __str__(self):
