@@ -40,7 +40,8 @@ import logging
 import os
 import pickle
 import sys
-from datetime import datetime
+import timeit
+from datetime import datetime, timedelta
 from pprint import pprint, pformat
 
 import requests
@@ -122,6 +123,9 @@ def main_parse(args):
 
     for site_name, site_dir in site_dirs.items():
         try:
+            # set timer to measure execution time
+            start_time = timeit.default_timer()
+
             # create subdir in output_dir
             output_subdir = os.path.join(args['--output-dir'], site_name)
 
@@ -136,7 +140,7 @@ def main_parse(args):
                         parsed_sites[site_name] = pickle.load(input)
                         continue
 
-                # FIXME : root-path should be given in exporter, not parser
+            # FIXME : root-path should be given in exporter, not parser
             root_path = ""
             if args['--root-path']:
                 root_path = "/%s/%s" % (args['--root-path'], site_name)
@@ -155,6 +159,19 @@ def main_parse(args):
                 # log success
             logging.info("Site %s successfully parsed" % site_name)
             parsed_sites[site_name] = site
+
+            elapsed = timedelta(seconds=timeit.default_timer() - start_time)
+
+            # a csv line for stats
+            csv_dict = {
+                "name": site.name,
+                "pages": site.num_pages,
+                "files": site.num_files,
+                "time": elapsed
+            }
+
+            csv_line = "%(name)s;%(pages)s;%(files)s;%(time)s" % csv_dict
+
         except:
             logging.error("Error parsing site %s" % site_name)
 
@@ -171,70 +188,72 @@ def main_export(args):
     exported_sites = {}
 
     for site_name, site in sites.items():
-
-        # store results
-        exported_site = {}
-        exported_sites[site_name] = exported_site
-
-        # create subdir in output_dir
-        output_subdir = os.path.join(args['--output-dir'], site.name)
-
         try:
-            if args['--clean-wordpress']:
-                logging.info("Cleaning WordPress %s ...", site.name)
-                wp_exporter = WPExporter(
-                    site=site,
-                    domain=args['--site-url'],
-                    output_dir=output_subdir,
-                    cli_container=args['--wp-cli'])
-                wp_exporter.delete_all_content()
-                logging.info("Data of WordPress site successfully deleted")
+            # store results
+            exported_site = {}
+            exported_sites[site_name] = exported_site
 
-            if args['--to-wordpress']:
-                logging.info("Exporting to WordPress %s ...", site.name)
-                wp_exporter = WPExporter(
-                    site=site,
-                    domain=args['--site-url'],
-                    output_dir=output_subdir,
-                    cli_container=args['--wp-cli'])
-                wp_exporter.import_all_data_to_wordpress()
-                wp_exporter.generate_nginx_conf_file()
-                exported_site['wordpress'] = args['--site-url']
-                logging.info("Site successfully exported to WordPress")
+            # create subdir in output_dir
+            output_subdir = os.path.join(args['--output-dir'], site.name)
 
-            if args['--nginx-conf']:
-                logging.info("Creating nginx conf for %s ...", site.name)
-                wp_exporter = WPExporter(
-                    site=site,
-                    domain=args['--site-url'],
-                    output_dir=output_subdir,
-                    cli_container=args['--wp-cli'])
-                wp_exporter.import_pages()
-                wp_exporter.generate_nginx_conf_file()
-                exported_site['wordpress'] = args['--site-url']
-            logging.info("Nginx conf successfully generated")
-        except WordpressError:
-            logging.error("WordPress not available")
+            try:
+                if args['--clean-wordpress']:
+                    logging.info("Cleaning WordPress for %s...", site.name)
+                    wp_exporter = WPExporter(
+                        site=site,
+                        domain=args['--site-url'],
+                        output_dir=output_subdir,
+                        cli_container=args['--wp-cli'])
+                    wp_exporter.delete_all_content()
+                    logging.info("Data of WordPress site %s successfully deleted", site.name)
 
-        if args['--to-static']:
-            logging.info("Exporting to static files for %s ...", site.name)
-            export_path = os.path.join(output_subdir, "html")
-            HTMLExporter(site, export_path)
-            exported_site['static'] = export_path
-            logging.info("Site successfully exported to HTML files")
+                if args['--to-wordpress']:
+                    logging.info("Exporting %s to WordPress...", site.name)
+                    wp_exporter = WPExporter(
+                        site=site,
+                        domain=args['--site-url'],
+                        output_dir=output_subdir,
+                        cli_container=args['--wp-cli'])
+                    wp_exporter.import_all_data_to_wordpress()
+                    wp_exporter.generate_nginx_conf_file()
+                    exported_site['wordpress'] = args['--site-url']
+                    logging.info("Site %s successfully exported to WordPress", site.name)
 
-        if args['--to-dictionary']:
-            logging.info("Exporting to python dictionnary %s ...", site.name)
-            export_path = os.path.join(
-                output_subdir, "%s_dict.py" % site.name)
-            data = DictExporter.generate_data(site)
-            pprint(data, width=LINE_LENGTH_ON_PPRINT)
-            with open(export_path, 'w') as output:
-                output.write("%s_data = " % site.name)
-                output.write(pformat(data, width=LINE_LENGTH_ON_EXPORT))
-                output.flush()
-            exported_site['dict'] = export_path
-            logging.info("Site successfully exported to python dictionary")
+                if args['--nginx-conf']:
+                    logging.info("Creating nginx conf for %s...", site.name)
+                    wp_exporter = WPExporter(
+                        site=site,
+                        domain=args['--site-url'],
+                        output_dir=output_subdir,
+                        cli_container=args['--wp-cli'])
+                    wp_exporter.import_pages()
+                    wp_exporter.generate_nginx_conf_file()
+                    exported_site['wordpress'] = args['--site-url']
+                    logging.info("Nginx conf for %s successfully generated", site.name)
+            except WordpressError:
+                logging.error("WordPress not available")
+
+            if args['--to-static']:
+                logging.info("Exporting %s to static website...", site.name)
+                export_path = os.path.join(output_subdir, "html")
+                HTMLExporter(site, export_path)
+                exported_site['static'] = export_path
+                logging.info("Site %s successfully exported to static website", site.name)
+
+            if args['--to-dictionary']:
+                logging.info("Exporting %s to python dictionary...", site.name)
+                export_path = os.path.join(
+                    output_subdir, "%s_dict.py" % site.name)
+                data = DictExporter.generate_data(site)
+                pprint(data, width=LINE_LENGTH_ON_PPRINT)
+                with open(export_path, 'w') as output:
+                    output.write("%s_data = " % site.name)
+                    output.write(pformat(data, width=LINE_LENGTH_ON_EXPORT))
+                    output.flush()
+                exported_site['dict'] = export_path
+                logging.info("Site %s successfully exported to python dictionary", site.name)
+        except:
+            logging.error("Error exporting site %s" % site_name)
 
     # overall result : {site_name: {wordpress: URL, static: PATH, dict: PATH}, ...}
     return exported_sites
