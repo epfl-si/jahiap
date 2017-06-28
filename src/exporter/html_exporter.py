@@ -19,7 +19,9 @@ class HTMLExporter:
     def __init__(self, site, out_path):
 
         # if True we add an .html extension to pages without an extension
-        self.add_html_extension = True
+        self.option_add_html_extension = True
+        # if True we extract the site files. Set to False to speed up the export
+        self.option_extract_files = True
 
         self.site = site
         self.out_path = out_path
@@ -28,8 +30,9 @@ class HTMLExporter:
         # to use in templates
         self.root_path = site.root_path
 
-        if self.add_html_extension:
-            self.fix_html_extension()
+        # add the .html extension
+        if self.option_add_html_extension:
+            self.add_html_extension()
 
         # create output path if necessary
         if not os.path.exists(self.full_path):
@@ -37,7 +40,8 @@ class HTMLExporter:
             os.makedirs(self.full_path)
 
         # extract all the files
-        self.extract_files()
+        if self.option_extract_files:
+            self.extract_files()
 
         # generate the Pages for each language
         for language in site.languages:
@@ -47,7 +51,7 @@ class HTMLExporter:
 
             self.generate_pages()
 
-    def fix_html_extension(self):
+    def add_html_extension(self):
         """Add an .html extension to pages without an extension"""
         logging.debug("Adding .html extension to pages without extension")
 
