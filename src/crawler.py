@@ -11,7 +11,7 @@ from pathlib import Path
 
 from clint.textui import progress
 
-from settings import JAHIA_SITES, EXPORT_PATH
+from settings import JAHIA_SITES
 
 
 """
@@ -122,7 +122,7 @@ class SiteCrawler(object):
         # jahia download URI depends on date
         self.date = cmd_args['--date']
         # where to store zip files
-        self.export_path = EXPORT_PATH
+        self.export_path = cmd_args['--export-path']
         # where to store output from the script (tracer)
         self.output_path = cmd_args['--output-dir']
         # whether overriding existing zip or not

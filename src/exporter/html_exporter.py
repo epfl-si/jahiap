@@ -41,7 +41,7 @@ class HTMLExporter:
 
     def generate_pages(self):
         """Generate the pages & the sitemap"""
-        logging.debug("generating pages for langage %s", self.language)
+        logging.debug("Generating pages for language %s", self.language)
 
         # update the boxes data
         self.update_boxes_data()
@@ -100,20 +100,19 @@ class HTMLExporter:
         """Generate a page"""
         path = "%s%s" % (self.out_path, path)
 
-        relative_path_index = len("build/%s/html/" % self.site.name)
+        directory = path[0:path.rfind("/")]
+        filename = path[path.rfind("/") + 1:]
 
-        relative_path = path[relative_path_index:]
+        # create the destination directory if necessary
+        if not os.path.isdir(directory):
+            os.makedirs(directory, exist_ok=True)
 
-        # TODO support pages that are in a subdirectory.
-        #
-        # There is a problem with overlapping paths, e.g.
-        #
-        # /team
-        # /team/more
-        #
-        # Here "team" is both a page and a directory
-        if "/" in relative_path:
-            return
+        # if the page has no extension we add a .html
+        if "." not in filename:
+            filename += ".html"
+            path = os.path.join(directory, filename)
+
+        logging.debug("Generating page %s", path)
 
         file = open(path, "w")
 
@@ -199,13 +198,22 @@ class HTMLExporter:
     def extract_files(self):
         """Extract the files"""
 
+        if not os.path.isdir(os.path.join(self.site.base_path, "content")):
+            if len(self.site.files) == 0:
+                logging.info("no files found for %s", self.site.base_path)
+            else:
+                logging.warning("no files found for %s whereas %s expected" %
+                                (self.site.base_path, len(self.site.files)))
+            return
+
         start = "%s/content/sites/%s/files" % (self.site.base_path, self.site.name)
         dst = "%s/files" % self.full_path
-        logging.debug("copying files from %s into %s", start, self.full_path)
 
         if os.path.exists(dst):
-            logging.debug("output_dir already exists. Wiping it out...")
+            logging.debug("%s dir already exists. Wiping it out..." % dst)
             shutil.rmtree(dst)
+
+        logging.debug("Copying files from %s to %s", start, dst)
 
         # copy all files as they are
         shutil.copytree(start, dst, ignore=HTMLExporter.files_to_ignore)

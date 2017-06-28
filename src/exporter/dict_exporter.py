@@ -26,6 +26,21 @@ class DictExporter:
             'homepage__pid': site.homepage.pid,
             'files__len': len(site.files),
             'pages__ids': set(site.pages_by_pid.keys()),
+            'pages__uuids': set(site.pages_by_uuid.keys()),
+            'pages_content__paths': set(site.pages_content_by_path.keys()),
+            'report': {
+                'num_files': site.num_files,
+                'num_pages': site.num_pages,
+                'internal_links': site.internal_links,
+                'absolute_links': site.absolute_links,
+                'external_links': site.external_links,
+                'file_links': site.file_links,
+                'data_links': site.data_links,
+                'mailto_links': site.mailto_links,
+                'anchor_links': site.anchor_links,
+                'broken_links': site.broken_links,
+                'unknown_links': site.unknown_links,
+            }
         }
 
         # site footer
@@ -42,10 +57,11 @@ class DictExporter:
         for pid, page in site.pages_by_pid.items():
             page_properties = {
                 'pid': page.pid,
+                'uuid': page.uuid,
                 'template': page.template,
                 'level': page.level,
                 'children__len': len(page.children),
-                'contents__keys': list(page.contents.keys()),
+                'contents__keys': set(page.contents.keys()),
             }
             pages_by_pid[pid] = page_properties
 

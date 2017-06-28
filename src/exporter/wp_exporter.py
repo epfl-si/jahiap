@@ -1,7 +1,8 @@
 """(c) All rights reserved. ECOLE POLYTECHNIQUE FEDERALE DE LAUSANNE, Switzerland, VPSI, 2017"""
-import logging
 import os
 import timeit
+import logging
+
 import subprocess
 from datetime import timedelta
 
@@ -9,7 +10,7 @@ from bs4 import BeautifulSoup
 from wordpress_json import WordpressJsonWrapper, WordpressError
 
 from exporter.utils import Utils
-from settings import WP_USER, WP_PASSWORD
+from settings import WP_USER, WP_PASSWORD, WP_PATH
 
 
 class WPExporter:
@@ -49,6 +50,7 @@ class WPExporter:
         if os.path.isfile(file_path):
             file_info = os.stat(file_path)
             return cls.convert_bytes(file_info.st_size)
+
 
     def __init__(self, site, cmd_args):
         """
@@ -392,14 +394,14 @@ Errors :
         first_part = """
 server {
     server_name %(site_name)s.epfl.ch ;
-    return 301 $scheme://test-web-static.epfl.ch/static/%(site_name)s$request_uri;
+    return 301 $scheme://test-web-static.epfl.ch/%(WP_PATH)s/%(site_name)s$request_uri;
 }
 
 server {
     listen       80;
     listen       [::]:80;
-    server_name  test-web-static.epfl.ch;
-""" % {'site_name': self.site.name}
+
+""" % {'site_name': self.site.name, "WP_PATH": WP_PATH}
 
         last_part = """
     location / {
@@ -413,11 +415,12 @@ server {
         # Add all rewrite jahia URI to WordPress URI
         for element in self.urls_mapping:
 
-            line = """    rewrite ^/static/%(site_name)s/%(jahia_url)s$ /static/%(site_name)s/%(wp_url)s permanent;
+            line = """    rewrite ^/%(WP_PATH)s/%(site_name)s/%(jahia_url)s$ /%(WP_PATH)s/%(site_name)s/%(wp_url)s permanent;
 """ % {
                 'site_name': self.site.name,
                 'jahia_url': element['jahia_url'][1:],
-                'wp_url': element['wp_url'].split("/")[3]
+                'wp_url': element['wp_url'].split("/")[3],
+                "WP_PATH": WP_PATH,
             }
             content += line
 
@@ -425,9 +428,8 @@ server {
         content += last_part
 
         # Set the file name
-        file_name = 'jahia-%s.conf' % self.site.name
+        file_name = os.path.join(self.output_path, 'jahia-%s.conf' % self.site.name)
 
         # Open the file in write mode
         with open(file_name, 'a') as f:
             f.write(content)
-

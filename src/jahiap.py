@@ -2,55 +2,61 @@
 jahiap: a wonderful tool
 
 Usage:
-  jahiap.py crawl <site> [--output-dir=<OUTPUT_DIR>] [--number=<NUMBER>] [--date DATE] [--force] [--debug|--quiet]
-  jahiap.py unzip <site> [--output-dir=<OUTPUT_DIR>] [--number=<NUMBER>] [--debug|--quiet]
-  jahiap.py parse <site> [--output-dir=<OUTPUT_DIR>] [--number=<NUMBER>] [--print-report]
-                         [--debug|--quiet] [--use-cache] [--root-path=<ROOT_PATH>]
-  jahiap.py export <site> [--to-wordpress|--to-static|--to-dictionary|--clean-wordpress] [--output-dir=<OUTPUT_DIR>]
+  jahiap.py crawl <site>  [--output-dir=<OUTPUT_DIR>] [--export-path=<EXPORT_PATH>]
+                          [--number=<NUMBER>] [--date DATE] [--force] [--debug | --quiet]
+  jahiap.py unzip <site>  [--output-dir=<OUTPUT_DIR>] [--number=<NUMBER>] [--debug | --quiet]
+  jahiap.py parse <site>  [--output-dir=<OUTPUT_DIR>] [--number=<NUMBER>] [--print-report]
+                          [--debug | --quiet] [--use-cache] [--root-path=<ROOT_PATH>]
+  jahiap.py export <site> [--clean-wordpress | --to-wordpress | --nginx-conf] [--to-static] [--to-dictionary]
+                          [--output-dir=<OUTPUT_DIR>] [--root-path=<ROOT_PATH>]
                           [--number=<NUMBER>] [--site-url=<SITE_URL>] [--print-report]
-                          [--wp-cli=<WP_CLI>] [--debug|--quiet]
-  jahiap.py docker <site> [--output-dir=<OUTPUT_DIR>] [--number=<NUMBER>] [--debug|--quiet]
+                          [--wp-cli=<WP_CLI>] [--debug | --quiet] [--export-path=<EXPORT_PATH>]
+                          [--use-cache]
+  jahiap.py docker <site> [--output-dir=<OUTPUT_DIR>] [--number=<NUMBER>] [--debug | --quiet]
+  jahiap.py generate [--output-dir=<OUTPUT_DIR>] [--debug | --quiet]
 
 Options:
   -h --help                     Show this screen.
   -v --version                  Show version.
   -o --output-dir=<OUTPUT_DIR>  Directory where to perform command [default: build].
   -n --number=<NUMBER>          Number of sites to analyse (fetched in JAHIA_SITES, from given site name) [default: 1].
+  --export-path=<EXPORT_PATH>   (crawl) Directory where Jahia Zip files are stored
   --date DATE                   (crawl) Date and time for the snapshot, e.g : 2017-01-15-23-00.
   -f --force                    (crawl) Force download even if existing snapshot for same site.
-  -c --use-cache                (parse) Do not parse if pickle file found with a previous parsing result
+  --use-cache                   (parse) Do not parse if pickle file found with a previous parsing result
   --root-path=<ROOT_PATH>       (FIXME) Set base path for URLs (default is '' or $WP_PATH on command 'docker')
   -r --print-report             (FIXME) Print report with content.
-  -w --to-wordpress             (export) Export parsed data to Wordpress.
-  -c --clean-wordpress          (export) Delete all content of Wordpress site.
+  --nginx-conf                  (export) Only export pages to WordPress in order to generate nginx conf
   -s --to-static                (export) Export parsed data to static HTML files.
   -d --to-dictionary            (export) Export parsed data to python dictionary.
-  -u --site-url=<SITE_URL>      (export) Wordpress URL where to export parsed content. (default is $WP_ADMIN_URL)
-  --wp-cli=<WP_CLI>             (export) Name of wp-cli container to use with given wordpress URL. (default is set by WPExporter)
+  -c --clean-wordpress          (export) Delete all content of WordPress site.
+  -w --to-wordpress             (export) Export parsed data to WordPress and generate nginx conf
+  -u --site-url=<SITE_URL>      (export) WordPress URL where to export parsed content. (default is $WP_ADMIN_URL)
+  --wp-cli=<WP_CLI>             (export) Name of wp-cli container to use with given WordPress URL. (default WPExporter)
   --debug                       (*) Set logging level to DEBUG (default is INFO).
   --quiet                       (*) Set logging level to WARNING (default is INFO).
 """
-VERSION = "0.2"
-
-import sys
 import logging
 import os
 import pickle
-import zipfile
-import requests
-
-from pprint import pprint, pformat
+import sys
 from datetime import datetime
+from pprint import pprint, pformat
 
+import requests
 from docopt import docopt
 
+from utils import Utils
+from crawler import SiteCrawler
+from exporter.dict_exporter import DictExporter
 from exporter.html_exporter import HTMLExporter
 from exporter.wp_exporter import WPExporter
-from exporter.dict_exporter import DictExporter
-from crawler import SiteCrawler
+from wordpress_json import WordpressError
+from generator.tree import Tree
+from unzipper.unzip import unzip_one
 from jahia_site import Site
-
-from settings import WP_ADMIN_URL, WP_HOST, WP_PATH
+from settings import VERSION, EXPORT_PATH, WP_ADMIN_URL, WP_HOST, WP_PATH, \
+    LINE_LENGTH_ON_EXPORT, LINE_LENGTH_ON_PPRINT
 
 
 def main(args):
@@ -101,48 +107,7 @@ def main_unzip(args):
     unzipped_files = {}
 
     for site_name, zip_file in zip_files.items():
-
-        # create subdir in output_dir
-        output_subdir = os.path.join(args['--output-dir'], site_name)
-        if output_subdir:
-            if not os.path.isdir(output_subdir):
-                os.mkdir(output_subdir)
-
-        # check if unzipped files already exists
-        unzip_path = os.path.join(output_subdir, site_name)
-        if os.path.isdir(unzip_path):
-            logging.info("Already unzipped %s" % unzip_path)
-            unzipped_files[site_name] = unzip_path
-            continue
-
-        logging.info("Unzipping %s..." % zip_file)
-
-        # make sure we have an input file
-        if not zip_file or not os.path.isfile(zip_file):
-            logging.error("Jahia zip file %s not found", zip_file)
-            continue
-
-        # create zipFile to manipulate / extract zip content
-        export_zip = zipfile.ZipFile(zip_file, 'r')
-
-        # make sure we have the zip containing the site
-        zip_name = "%s.zip" % site_name
-        if zip_name not in export_zip.namelist():
-            logging.error("zip file %s not found in main zip" % zip_name)
-            continue
-
-        # extract the export zip file
-        export_zip.extractall(output_subdir)
-        export_zip.close()
-
-        # unzip the zip with the files
-        zip_path = os.path.join(output_subdir, zip_name)
-        zip_ref_with_files = zipfile.ZipFile(zip_path, 'r')
-        zip_ref_with_files.extractall(unzip_path)
-
-        # log success
-        logging.info("Site successfully extracted in %s" % unzip_path)
-        unzipped_files[site_name] = unzip_path
+        unzipped_files[site_name] = unzip_one(args['--output-dir'], site_name, zip_file)
 
     # return results
     return unzipped_files
@@ -156,37 +121,42 @@ def main_parse(args):
     parsed_sites = {}
 
     for site_name, site_dir in site_dirs.items():
-        # create subdir in output_dir
-        output_subdir = os.path.join(args['--output-dir'], site_name)
+        try:
+            # create subdir in output_dir
+            output_subdir = os.path.join(args['--output-dir'], site_name)
 
-        # when using-cache: check if already parsed
-        if args['--use-cache']:
+            # where to cache our parsing
             pickle_file = os.path.join(output_subdir, 'parsed_%s.pkl' % site_name)
-            if os.path.exists(pickle_file):
-                with open(pickle_file, 'rb') as input:
-                    logging.info("Loaded parsed site from %s" % pickle_file)
-                    parsed_sites[site_name] = pickle.load(input)
-                    continue
 
-        # FIXME : root-path should be given in exporter, not parser
-        root_path = ""
-        if args['--root-path']:
-            root_path = "/%s/%s" % (args['--root-path'], site_name)
-            logging.info("Parsing site for root_path %s", root_path)
-        logging.info("Parsing %s...", site_dir)
-        site = Site(site_dir, site_name, root_path=root_path)
+            # when using-cache: check if already parsed
+            if args['--use-cache']:
+                if os.path.exists(pickle_file):
+                    with open(pickle_file, 'rb') as input:
+                        logging.info("Loaded parsed site from %s" % pickle_file)
+                        parsed_sites[site_name] = pickle.load(input)
+                        continue
 
-        print(site.report)
+                # FIXME : root-path should be given in exporter, not parser
+            root_path = ""
+            if args['--root-path']:
+                root_path = "/%s/%s" % (args['--root-path'], site_name)
+                logging.info("Setting root_path %s", root_path)
+            logging.info("Parsing Jahia xml files from %s...", site_dir)
+            site = Site(site_dir, site_name, root_path=root_path)
 
-        # when using-cache: save parsed site on file system
-        if args['--use-cache']:
+            print(site.report)
+
+            # always save the parsed data on disk, so we can use the
+            # cache later if we want
             with open(pickle_file, 'wb') as output:
                 logging.info("Parsed site saved into %s" % pickle_file)
                 pickle.dump(site, output, pickle.HIGHEST_PROTOCOL)
 
-        # log success
-        logging.info("Site successfully parsed")
-        parsed_sites[site_name] = site
+                # log success
+            logging.info("Site %s successfully parsed" % site_name)
+            parsed_sites[site_name] = site
+        except:
+            logging.error("Error parsing site %s" % site_name)
 
     # return results
     return parsed_sites
@@ -201,7 +171,6 @@ def main_export(args):
     exported_sites = {}
 
     for site_name, site in sites.items():
-        logging.info("Exporting %s ...", site.name)
 
         # store results
         exported_site = {}
@@ -210,32 +179,47 @@ def main_export(args):
         # create subdir in output_dir
         output_subdir = os.path.join(args['--output-dir'], site.name)
 
-        if args['--clean-wordpress']:
-            wp_exporter = WPExporter(site, args)
-            wp_exporter.delete_all_content()
-            logging.info("Data of Wordpress site successfully deleted")
+        try:
+            if args['--clean-wordpress']:
+                logging.info("Cleaning WordPress %s ...", site.name)
+                wp_exporter = WPExporter(site, args)
+                wp_exporter.delete_all_content()
+                logging.info("Data of WordPress site successfully deleted")
 
-        if args['--to-wordpress']:
-            wp_exporter = WPExporter(site, args)
-            wp_exporter.import_all_data_to_wordpress()
-            wp_exporter.generate_nginx_conf_file()
-            exported_site['wordpress'] = args['--site-url']
-            logging.info("Site successfully exported to Wordpress")
+            if args['--to-wordpress']:
+                logging.info("Exporting to WordPress %s ...", site.name)
+                wp_exporter = WPExporter(site, args)
+                wp_exporter.import_all_data_to_wordpress()
+                wp_exporter.generate_nginx_conf_file()
+                exported_site['wordpress'] = args['--site-url']
+                logging.info("Site successfully exported to WordPress")
+
+            if args['--nginx-conf']:
+                logging.info("Creating nginx conf for %s ...", site.name)
+                wp_exporter = WPExporter(site, args['--site-url'])
+                wp_exporter.import_pages()
+                wp_exporter.generate_nginx_conf_file()
+                exported_site['wordpress'] = args['--site-url']
+            logging.info("Nginx conf successfully generated")
+        except WordpressError:
+            logging.error("WordPress not available")
 
         if args['--to-static']:
+            logging.info("Exporting to static files for %s ...", site.name)
             export_path = os.path.join(output_subdir, "html")
             HTMLExporter(site, export_path)
             exported_site['static'] = export_path
             logging.info("Site successfully exported to HTML files")
 
         if args['--to-dictionary']:
+            logging.info("Exporting to python dictionnary %s ...", site.name)
             export_path = os.path.join(
                 output_subdir, "%s_dict.py" % site.name)
             data = DictExporter.generate_data(site)
-            pprint(data)
+            pprint(data, width=LINE_LENGTH_ON_PPRINT)
             with open(export_path, 'w') as output:
                 output.write("%s_data = " % site.name)
-                output.write(pformat(data))
+                output.write(pformat(data, width=LINE_LENGTH_ON_EXPORT))
                 output.flush()
             exported_site['dict'] = export_path
             logging.info("Site successfully exported to python dictionary")
@@ -248,7 +232,12 @@ def main_export(args):
     # overall result : {site_name: {wordpress: URL, static: PATH, dict: PATH}, ...}
     return exported_sites
 
+
 def main_docker(args):
+    # This command depends on traefik running
+    if not Utils.is_traefik_running():
+        raise SystemExit("You need to run treafik in order to spawn a container")
+
     # get list of sites html static sites
     args['--to-static'] = True
     args['--root-path'] = args['--root-path'] or WP_PATH
@@ -256,6 +245,7 @@ def main_docker(args):
 
     # docker needs an absolute path in order to mount volumes
     abs_output_dir = os.path.abspath(args['--output-dir'])
+    abs_nginx_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "nginx"))
 
     for site_name, export_path in exported_sites.items():
         # stop running countainer first (if any)
@@ -271,15 +261,23 @@ def main_docker(args):
         --label "traefik.frontend=static-%(site_name)s" \
         --label "traefik.frontend.rule=Host:%(WP_HOST)s;PathPrefix:/%(WP_PATH)s/%(site_name)s" \
         -v %(abs_output_dir)s/%(site_name)s/html:/usr/share/nginx/html \
+        -v %(abs_nginx_dir)s/nginx.conf:/etc/nginx/conf.d/default.conf \
         nginx
         """ % {
             'site_name': site_name,
             'abs_output_dir': abs_output_dir,
+            'abs_nginx_dir': abs_nginx_dir,
             'WP_HOST': WP_HOST,
             'WP_PATH': WP_PATH,
         }
         os.system(docker_cmd)
         logging.info("Docker launched for %s", site_name)
+
+
+def main_generate(args):
+    tree = Tree(args, file_path="sites.csv")
+    tree.create_html()
+    tree.run()
 
 
 def set_logging_config(args):
@@ -308,6 +306,8 @@ def set_default_values(args):
         args['--site-url'] = WP_ADMIN_URL
     if not args['--wp-cli']:
         args['--wp-cli'] = None
+    if not args['--export-path']:
+        args['--export-path'] = EXPORT_PATH
     if not args['--root-path']:
         args['--root-path'] = ''
     return args
@@ -318,9 +318,11 @@ if __name__ == '__main__':
     # docopt return a dictionary with all arguments
     # __doc__ contains package docstring
     args = set_default_values(docopt(__doc__, version=VERSION))
-    print(args)
 
     # set logging config before anything else
+    # FIXME : do not call logging.warning is Utils.py
     set_logging_config(args)
+
+    logging.debug(args)
 
     main(args)

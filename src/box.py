@@ -11,8 +11,12 @@ class Box:
         "epfl:coloredTextBox": "coloredText",
         "epfl:infoscienceBox": "infoscience",
         "epfl:actuBox": "actu",
+        "epfl:mementoBox": "memento",
         "epfl:faqContainer": "faq",
-        "epfl:toggleBox": "toggle"
+        "epfl:toggleBox": "toggle",
+        "epfl:htmlBox": "include",
+        "epfl:contactBox": "contact",
+        "epfl:xmlBox": "xml"
     }
 
     def __init__(self, site, page_content, element, multibox=False):
@@ -47,12 +51,28 @@ class Box:
         # actu
         elif "actu" == self.type:
             self.set_box_actu(element)
+        # memento
+        elif "memento" == self.type:
+            self.set_box_memento(element)
         # faq
         elif "faq" == self.type:
             self.set_box_faq(element)
         # toggle
         elif "toggle" == self.type:
             self.set_box_toggle(element)
+        # include
+        elif "include" == self.type:
+            self.set_box_include(element)
+        # contact
+        elif "contact" == self.type:
+            self.set_box_contact(element)
+        # xml
+        elif "xml" == self.type:
+            self.set_box_xml(element)
+        # unknown
+        else:
+            self.set_box_unknown(element)
+
 
     def set_box_text(self, element, multibox=False):
         """set the attributes of a text box"""
@@ -73,6 +93,12 @@ class Box:
 
         self.content = "[actu url=%s]" % url
 
+    def set_box_memento(self, element):
+        """set the attributes of a memento box"""
+        url = Utils.get_tag_attribute(element, "url", "jahia:value")
+
+        self.content = "[memento url=%s]" % url
+
     def set_box_infoscience(self, element):
         """set the attributes of a infoscience box"""
         url = Utils.get_tag_attribute(element, "url", "jahia:value")
@@ -92,6 +118,29 @@ class Box:
         self.opened = Utils.get_tag_attribute(element, "opened", "jahia:value")
 
         self.content = Utils.get_tag_attribute(element, "content", "jahia:value")
+
+    def set_box_include(self, element):
+        """set the attributes of an include box"""
+        url = Utils.get_tag_attribute(element, "url", "jahia:value")
+
+        self.content = "[include url=%s]" % url
+
+    def set_box_contact(self, element):
+        """set the attributes of a contact box"""
+        text = Utils.get_tag_attribute(element, "text", "jahia:value")
+
+        self.content = text
+
+    def set_box_xml(self, element):
+        """set the attributes of a xml box"""
+        xml = Utils.get_tag_attribute(element, "xml", "jahia:value")
+        xslt = Utils.get_tag_attribute(element, "xslt", "jahia:value")
+
+        self.content = "[xml xml=%s xslt=%s]" % (xml, xslt)
+
+    def set_box_unknown(self, element):
+        """set the attributes of an unknown box"""
+        self.content = "[%s]" % element.getAttribute("jcr:primaryType")
 
     def __str__(self):
         return self.type + " " + self.title
