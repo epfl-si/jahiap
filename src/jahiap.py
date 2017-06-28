@@ -26,13 +26,13 @@ Options:
   --use-cache                   (parse) Do not parse if pickle file found with a previous parsing result
   --root-path=<ROOT_PATH>       (FIXME) Set base path for URLs (default is '' or $WP_PATH on command 'docker')
   -r --print-report             (FIXME) Print report with content.
-  --nginx-conf                  (export) Only export pages to Wordpress in order to generate nginx conf
+  --nginx-conf                  (export) Only export pages to WordPress in order to generate nginx conf
   -s --to-static                (export) Export parsed data to static HTML files.
   -d --to-dictionary            (export) Export parsed data to python dictionary.
-  -c --clean-wordpress          (export) Delete all content of Wordpress site.
-  -w --to-wordpress             (export) Export parsed data to Wordpress and generate nginx conf
-  -u --site-url=<SITE_URL>      (export) Wordpress URL where to export parsed content. (default is $WP_ADMIN_URL)
-  --wp-cli=<WP_CLI>             (export) Name of wp-cli container to use with given wordpress URL. (default WPExporter)
+  -c --clean-wordpress          (export) Delete all content of WordPress site.
+  -w --to-wordpress             (export) Export parsed data to WordPress and generate nginx conf
+  -u --site-url=<SITE_URL>      (export) WordPress URL where to export parsed content. (default is $WP_ADMIN_URL)
+  --wp-cli=<WP_CLI>             (export) Name of wp-cli container to use with given WordPress URL. (default WPExporter)
   --debug                       (*) Set logging level to DEBUG (default is INFO).
   --quiet                       (*) Set logging level to WARNING (default is INFO).
 """
@@ -121,39 +121,42 @@ def main_parse(args):
     parsed_sites = {}
 
     for site_name, site_dir in site_dirs.items():
-        # create subdir in output_dir
-        output_subdir = os.path.join(args['--output-dir'], site_name)
+        try:
+            # create subdir in output_dir
+            output_subdir = os.path.join(args['--output-dir'], site_name)
 
-        # where to cache our parsing
-        pickle_file = os.path.join(output_subdir, 'parsed_%s.pkl' % site_name)
+            # where to cache our parsing
+            pickle_file = os.path.join(output_subdir, 'parsed_%s.pkl' % site_name)
 
-        # when using-cache: check if already parsed
-        if args['--use-cache']:
-            if os.path.exists(pickle_file):
-                with open(pickle_file, 'rb') as input:
-                    logging.info("Loaded parsed site from %s" % pickle_file)
-                    parsed_sites[site_name] = pickle.load(input)
-                    continue
+            # when using-cache: check if already parsed
+            if args['--use-cache']:
+                if os.path.exists(pickle_file):
+                    with open(pickle_file, 'rb') as input:
+                        logging.info("Loaded parsed site from %s" % pickle_file)
+                        parsed_sites[site_name] = pickle.load(input)
+                        continue
 
-        # FIXME : root-path should be given in exporter, not parser
-        root_path = ""
-        if args['--root-path']:
-            root_path = "/%s/%s" % (args['--root-path'], site_name)
-            logging.info("Setting root_path %s", root_path)
-        logging.info("Parsing jahia xml files from %s...", site_dir)
-        site = Site(site_dir, site_name, root_path=root_path)
+                # FIXME : root-path should be given in exporter, not parser
+            root_path = ""
+            if args['--root-path']:
+                root_path = "/%s/%s" % (args['--root-path'], site_name)
+                logging.info("Setting root_path %s", root_path)
+            logging.info("Parsing Jahia xml files from %s...", site_dir)
+            site = Site(site_dir, site_name, root_path=root_path)
 
-        print(site.report)
+            print(site.report)
 
-        # always save the parsed data on disk, so we can use the
-        # cache later if we want
-        with open(pickle_file, 'wb') as output:
-            logging.info("Parsed site saved into %s" % pickle_file)
-            pickle.dump(site, output, pickle.HIGHEST_PROTOCOL)
+            # always save the parsed data on disk, so we can use the
+            # cache later if we want
+            with open(pickle_file, 'wb') as output:
+                logging.info("Parsed site saved into %s" % pickle_file)
+                pickle.dump(site, output, pickle.HIGHEST_PROTOCOL)
 
-        # log success
-        logging.info("Site successfully parsed")
-        parsed_sites[site_name] = site
+                # log success
+            logging.info("Site %s successfully parsed" % site_name)
+            parsed_sites[site_name] = site
+        except:
+            logging.error("Error parsing site %s" % site_name)
 
     # return results
     return parsed_sites
@@ -178,17 +181,17 @@ def main_export(args):
 
         try:
             if args['--clean-wordpress']:
-                logging.info("Cleaning wordpress %s ...", site.name)
+                logging.info("Cleaning WordPress %s ...", site.name)
                 wp_exporter = WPExporter(
                     site=site,
                     domain=args['--site-url'],
                     output_dir=output_subdir,
                     cli_container=args['--wp-cli'])
                 wp_exporter.delete_all_content()
-                logging.info("Data of Wordpress site successfully deleted")
+                logging.info("Data of WordPress site successfully deleted")
 
             if args['--to-wordpress']:
-                logging.info("Exporting to wordpress %s ...", site.name)
+                logging.info("Exporting to WordPress %s ...", site.name)
                 wp_exporter = WPExporter(
                     site=site,
                     domain=args['--site-url'],
@@ -197,7 +200,7 @@ def main_export(args):
                 wp_exporter.import_all_data_to_wordpress()
                 wp_exporter.generate_nginx_conf_file()
                 exported_site['wordpress'] = args['--site-url']
-                logging.info("Site successfully exported to Wordpress")
+                logging.info("Site successfully exported to WordPress")
 
             if args['--nginx-conf']:
                 logging.info("Creating nginx conf for %s ...", site.name)
@@ -211,7 +214,7 @@ def main_export(args):
                 exported_site['wordpress'] = args['--site-url']
             logging.info("Nginx conf successfully generated")
         except WordpressError:
-            logging.error("Wordpress not available")
+            logging.error("WordPress not available")
 
         if args['--to-static']:
             logging.info("Exporting to static files for %s ...", site.name)
