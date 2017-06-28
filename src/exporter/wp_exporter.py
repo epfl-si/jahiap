@@ -79,7 +79,7 @@ class WPExporter:
             start_time = timeit.default_timer()
             tracer_path = os.path.join(self.output_path, self.TRACER)
 
-            # self.import_medias()
+            self.import_medias()
             self.import_pages()
             self.set_frontpage()
             self.populate_menu()
@@ -196,17 +196,18 @@ class WPExporter:
         for page in self.site.pages_by_pid.values():
 
             content = ""
-            if 'en' in page.contents:
-                for box in page.contents['en'].boxes:
+            
+            for lang in page.contents.keys():
+                for box in page.contents[lang].boxes:
                     content += box.content
 
                 wp_page_info = {
                     # date: auto => date/heure du jour
                     # date_gmt: auto => date/heure du jour GMT
-                    'slug': page.contents['en'].path,
+                    'slug': page.contents[lang].path,
                     'status': 'publish',
                     # password
-                    'title': page.contents['en'].title,
+                    'title': page.contents[lang].title,
                     'content': content,
                     # author
                     # excerpt
@@ -225,7 +226,7 @@ class WPExporter:
                 wp_pages.append(wp_page)
 
                 mapping = {
-                    'jahia_url': page.contents["en"].path,
+                    'jahia_url': page.contents[lang].path,
                     'wp_url': wp_page['link']
                 }
 
@@ -243,11 +244,12 @@ class WPExporter:
         import sidebar via vpcli
         """
         try:
-            for box in self.site.homepage.contents["en"].sidebar.boxes:
-                content = Utils.escape_quotes(box.content)
-                cmd = 'wp widget add black-studio-tinymce page-widgets ' \
-                      '--title="%s" --text="%s"' % (box.title, content)
-                self.wp_cli(cmd)
+            for lang in self.site.homepage.contents.keys():
+                for box in self.site.homepage.contents[lang].sidebar.boxes:
+                    content = Utils.escape_quotes(box.content)
+                    cmd = 'wp widget add black-studio-tinymce page-widgets ' \
+                        '--title="%s" --text="%s"' % (box.title, content)
+                    self.wp_cli(cmd)
             logging.info("WP all sidebar imported")
 
         except WordpressError as e:
