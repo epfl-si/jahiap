@@ -2,6 +2,7 @@
 
 import os
 import logging
+import collections
 
 from bs4 import BeautifulSoup
 from box import Box
@@ -262,35 +263,42 @@ class Site:
                 page = self.pages_by_pid[pid]
                 page_content = PageContent(page, language, xml_page)
 
-                # main tag is the parent of all boxes types
-                main_elements = xml_page.getElementsByTagName("main")
+                # the tags that can contain boxes. Sidebar boxes that are in <extra> tags
+                # are parsed separately
+                tags = ["banner", "main", "col4", "col5" "col6", "col7", "col8"]
 
-                boxes = []
+                for tag in tags:
+                    self.add_boxes(xml_page=xml_page,
+                                   page_content=page_content,
+                                   tag=tag)
 
-                for main_element in main_elements:
-                    # check if the box belongs to the current page
-                    if not self.belongs_to(main_element, page):
-                        continue
-
-                    type = main_element.getAttribute("jcr:primaryType")
-
-                    # the "epfl:faqBox" element contains one or more "epfl:faqList"
-                    if "epfl:faqBox" == type:
-                        faq_list_elements = main_element.getElementsByTagName("faqList")
-
-                        for faq_list_element in faq_list_elements:
-                            box = Box(site=self, page_content=page_content, element=faq_list_element)
-                            boxes.append(box)
-
-                    else:
-                        # TODO remove the multibox parameter and check for combo boxes instead
-                        # Check if xml_box contains many boxes
-                        multibox = main_element.getElementsByTagName("text").length > 1
-                        box = Box(site=self, page_content=page_content, element=main_element, multibox=multibox)
-                        boxes.append(box)
-
-                page_content.boxes = boxes
                 page.contents[language] = page_content
+
+    def add_boxes(self, xml_page, page_content, tag):
+        # add the boxes contained in the given tag to the given page_content
+        elements = xml_page.getElementsByTagName(tag)
+
+        for element in elements:
+            # check if the box belongs to the current page
+            if not self.belongs_to(element, page_content.page):
+                continue
+
+            type = element.getAttribute("jcr:primaryType")
+
+            # the "epfl:faqBox" element contains one or more "epfl:faqList"
+            if "epfl:faqBox" == type:
+                faq_list_elements = element.getElementsByTagName("faqList")
+
+                for faq_list_element in faq_list_elements:
+                    box = Box(site=self, page_content=page_content, element=faq_list_element)
+                    page_content.boxes.append(box)
+
+            else:
+                # TODO remove the multibox parameter and check for combo boxes instead
+                # Check if xml_box contains many boxes
+                multibox = element.getElementsByTagName("text").length > 1
+                box = Box(site=self, page_content=page_content, element=element, multibox=multibox)
+                page_content.boxes.append(box)
 
     def parse_files(self):
         """Parse the files"""
@@ -470,7 +478,10 @@ Parsed for %s :
 
 """ % (self.server_name, self.num_files, self.num_pages)
 
-        for num, count in self.num_boxes.items():
+        # order the dict so it's always presented in the same order
+        num_boxes_ordered = collections.OrderedDict(sorted(self.num_boxes.items()))
+
+        for num, count in num_boxes_ordered.items():
             self.report += "    - %s %s boxes\n" % (count, num)
 
         self.report += "    - %s internal links\n" % self.internal_links

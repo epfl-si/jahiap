@@ -26,13 +26,13 @@ Options:
   --use-cache                   (parse) Do not parse if pickle file found with a previous parsing result
   --root-path=<ROOT_PATH>       (FIXME) Set base path for URLs (default is '' or $WP_PATH on command 'docker')
   -r --print-report             (FIXME) Print report with content.
-  --nginx-conf                  (export) Only export pages to Wordpress in order to generate nginx conf
+  --nginx-conf                  (export) Only export pages to WordPress in order to generate nginx conf
   -s --to-static                (export) Export parsed data to static HTML files.
   -d --to-dictionary            (export) Export parsed data to python dictionary.
-  -c --clean-wordpress          (export) Delete all content of Wordpress site.
-  -w --to-wordpress             (export) Export parsed data to Wordpress and generate nginx conf
-  -u --site-url=<SITE_URL>      (export) Wordpress URL where to export parsed content. (default is $WP_ADMIN_URL)
-  --wp-cli=<WP_CLI>             (export) Name of wp-cli container to use with given wordpress URL. (default WPExporter)
+  -c --clean-wordpress          (export) Delete all content of WordPress site.
+  -w --to-wordpress             (export) Export parsed data to WordPress and generate nginx conf
+  -u --site-url=<SITE_URL>      (export) WordPress URL where to export parsed content. (default is $WP_ADMIN_URL)
+  --wp-cli=<WP_CLI>             (export) Name of wp-cli container to use with given WordPress URL. (default WPExporter)
   --debug                       (*) Set logging level to DEBUG (default is INFO).
   --quiet                       (*) Set logging level to WARNING (default is INFO).
 """
@@ -178,17 +178,17 @@ def main_export(args):
 
         try:
             if args['--clean-wordpress']:
-                logging.info("Cleaning wordpress %s ...", site.name)
+                logging.info("Cleaning WordPress %s ...", site.name)
                 wp_exporter = WPExporter(
                     site=site,
                     domain=args['--site-url'],
                     output_dir=output_subdir,
                     cli_container=args['--wp-cli'])
                 wp_exporter.delete_all_content()
-                logging.info("Data of Wordpress site successfully deleted")
+                logging.info("Data of WordPress site successfully deleted")
 
             if args['--to-wordpress']:
-                logging.info("Exporting to wordpress %s ...", site.name)
+                logging.info("Exporting to WordPress %s ...", site.name)
                 wp_exporter = WPExporter(
                     site=site,
                     domain=args['--site-url'],
@@ -197,7 +197,7 @@ def main_export(args):
                 wp_exporter.import_all_data_to_wordpress()
                 wp_exporter.generate_nginx_conf_file()
                 exported_site['wordpress'] = args['--site-url']
-                logging.info("Site successfully exported to Wordpress")
+                logging.info("Site successfully exported to WordPress")
 
             if args['--nginx-conf']:
                 logging.info("Creating nginx conf for %s ...", site.name)
@@ -211,7 +211,7 @@ def main_export(args):
                 exported_site['wordpress'] = args['--site-url']
             logging.info("Nginx conf successfully generated")
         except WordpressError:
-            logging.error("Wordpress not available")
+            logging.error("WordPress not available")
 
         if args['--to-static']:
             logging.info("Exporting to static files for %s ...", site.name)

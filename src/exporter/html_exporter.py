@@ -99,22 +99,20 @@ class HTMLExporter:
     def generate_page(self, path, content):
         """Generate a page"""
         path = "%s%s" % (self.out_path, path)
-        
-        logging.debug("Generating page %s", path)
 
-        # relative_path_index = len("build/%s/html/" % self.site.name)
-        # relative_path = path[relative_path_index:]
-        #
-        # TODO support pages that are in a subdirectory.
-        #
-        # There is a problem with overlapping paths, e.g.
-        #
-        # /team
-        # /team/more
-        #
-        # Here "team" is both a page and a directory
-        # if "/" in relative_path:
-        #     return
+        directory = path[0:path.rfind("/")]
+        filename = path[path.rfind("/") + 1:]
+
+        # create the destination directory if necessary
+        if not os.path.isdir(directory):
+            os.makedirs(directory, exist_ok=True)
+
+        # if the page has no extension we add a .html
+        if "." not in filename:
+            filename += ".html"
+            path = os.path.join(directory, filename)
+
+        logging.debug("Generating page %s", path)
 
         file = open(path, "w")
 
@@ -210,11 +208,12 @@ class HTMLExporter:
 
         start = "%s/content/sites/%s/files" % (self.site.base_path, self.site.name)
         dst = "%s/files" % self.full_path
-        logging.debug("copying files from %s into %s", start, self.full_path)
 
         if os.path.exists(dst):
-            logging.debug("output_dir already exists. Wiping it out...")
+            logging.debug("%s dir already exists. Wiping it out..." % dst)
             shutil.rmtree(dst)
+
+        logging.debug("Copying files from %s to %s", start, dst)
 
         # copy all files as they are
         shutil.copytree(start, dst, ignore=HTMLExporter.files_to_ignore)
