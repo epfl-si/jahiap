@@ -40,7 +40,8 @@ import logging
 import os
 import pickle
 import sys
-from datetime import datetime
+import timeit
+from datetime import datetime, timedelta
 from pprint import pprint, pformat
 
 import requests
@@ -122,6 +123,9 @@ def main_parse(args):
 
     for site_name, site_dir in site_dirs.items():
         try:
+            # set timer to measure execution time
+            start_time = timeit.default_timer()
+
             # create subdir in output_dir
             output_subdir = os.path.join(args['--output-dir'], site_name)
 
@@ -136,7 +140,7 @@ def main_parse(args):
                         parsed_sites[site_name] = pickle.load(input)
                         continue
 
-                # FIXME : root-path should be given in exporter, not parser
+            # FIXME : root-path should be given in exporter, not parser
             root_path = ""
             if args['--root-path']:
                 root_path = "/%s/%s" % (args['--root-path'], site_name)
@@ -155,6 +159,19 @@ def main_parse(args):
                 # log success
             logging.info("Site %s successfully parsed" % site_name)
             parsed_sites[site_name] = site
+
+            elapsed = timedelta(seconds=timeit.default_timer() - start_time)
+
+            # a csv line for stats
+            csv_dict = {
+                "name": site.name,
+                "pages": site.num_pages,
+                "files": site.num_files,
+                "time": elapsed
+            }
+
+            csv_line = "%(name)s;%(pages)s;%(files)s;%(time)s" % csv_dict
+
         except:
             logging.error("Error parsing site %s" % site_name)
 
