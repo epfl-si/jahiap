@@ -420,18 +420,24 @@ class Site:
                 self.absolute_links += 1
             # file links
             elif link.startswith("###file"):
-                new_link = link[link.index('/files/'):]
+                if "/files/" in link:
+                    new_link = link[link.index('/files/'):]
 
-                if "?" in new_link:
-                    new_link = new_link[:new_link.index("?")]
+                    if "?" in new_link:
+                        new_link = new_link[:new_link.index("?")]
 
-                tag[attribute] = self.full_path(new_link)
+                    tag[attribute] = self.full_path(new_link)
 
-                self.file_links += 1
+                    self.file_links += 1
+                # if we don't have /files/ in the path the link is broken (happen
+                # only in 3 sites)
+                else:
+                    self.broken_links += 1
+                    logging.debug("Found broken file link %s", link)
             # broken file links
             elif link.startswith("/fileNotFound###"):
                 self.broken_links += 1
-                logging.debug("Found broken link %s", link)
+                logging.debug("Found broken file link %s", link)
             # those are files links we already fixed, so we pass
             elif link.startswith(self.root_path + "/files/"):
                 pass
