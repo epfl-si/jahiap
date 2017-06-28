@@ -10,98 +10,60 @@ import time
 import requests
 from datetime import datetime
 
-from generator.node import Tree, RootNode, ListNode, SiteNode
+from generator.tree import Tree
 from utils import Utils
 from settings import DATA_PATH, WP_HOST
 
 
 @pytest.fixture(scope='module')
-def basic_tree(request):
-    """
-    Prepare a basic tree structure for the tests:
-        root/
-        ├── IC
-        │      └── blabla
-        ├── SI
-        │      └── VPSI
-        └── labs
-                  ├── DCSL
-                  └── master
-    """
-    root = RootNode("")
-
-    ic_node = SiteNode("IC")
-    blabla_node = SiteNode("blabla")
-
-    # creating instances with explicit parents
-    si_node = ListNode("SI")
-    vpsi_node = SiteNode("VPSI")
-
-    labs_node = ListNode("labs")
-    dcsl_node = SiteNode("DCSL")
-    master_node = SiteNode("master")
-
-    # setting all parents
-    ic_node.parent = root
-    si_node.parent = root
-    labs_node.parent = root
-    blabla_node.parent = ic_node
-    vpsi_node.parent = si_node
-    dcsl_node.parent = labs_node
-    master_node.parent = labs_node
-
-    # setting all children
-    root.children = [si_node, ic_node, labs_node]
-    si_node.children = [vpsi_node]
-    ic_node.children = [blabla_node]
-    labs_node.children = [dcsl_node, master_node]
-
-    return root, ic_node, blabla_node, vpsi_node, labs_node, dcsl_node
-
-
-class TestTreeStructure(object):
-
-    def test_children(self, basic_tree):
-        root, ic_node, blabla_node, vpsi_node, labs_node, dcsl_node = basic_tree
-        assert len(root.children) == 3
-        assert len(ic_node.children) == 1
-        assert len(blabla_node.children) == 0
-        assert len(labs_node.children) == 2
-        assert len(vpsi_node.children) == 0
-        assert len(dcsl_node.children) == 0
-
-    def test_full_name(self, basic_tree):
-        root, ic_node, blabla_node, vpsi_node, labs_node, dcsl_node = basic_tree
-        assert root.full_name() == "/"
-        assert ic_node.full_name() == "/IC"
-        assert blabla_node.full_name() == "/IC/blabla"
-        assert labs_node.full_name() == "/labs"
-        assert vpsi_node.full_name() == "/SI/VPSI"
-        assert dcsl_node.full_name() == "/labs/DCSL"
-
-
-@pytest.fixture(scope='module')
 def generated_tree(request):
-        output_path = TestGenerator.ARGS['--output-dir']
-        if os.path.exists(output_path):
-            shutil.rmtree(output_path)
-        tree = Tree(TestGenerator.ARGS, filename=TestGenerator.DATA_FILE)
-        tree.create_html()
-        return tree
-
-
-class TestGenerator(object):
     """
     Using following tree structure:
         root
         ├── administratif (list)
-        │      ├── building2050
-        │      └── apc
+        │      ├── building2050 (site)
+        │      └── apc (site)
         ├── ahead (site)
-        │      └── bioinspired
+        │      └── bioinspired (site)
         └── labs (list)
-                  └── apml
+                  └── apml (site)
     """
+    output_path = TestGenerator.ARGS['--output-dir']
+    if os.path.exists(output_path):
+        shutil.rmtree(output_path)
+    tree = Tree(TestGenerator.ARGS, file_path=TestGenerator.DATA_FILE)
+    tree.create_html()
+    return tree
+
+
+class TestTreeStructure(object):
+
+    def test_children(self, generated_tree):
+        assert len(generated_tree.root.children) == 3
+        assert len(generated_tree.get_or_create('administratif').children) == 2
+        assert len(generated_tree.get_or_create('ahead').children) == 1
+        assert len(generated_tree.get_or_create('bioinspired').children) == 0
+        assert len(generated_tree.get_or_create('labs').children) == 1
+        assert len(generated_tree.get_or_create('apml').children) == 0
+
+    def test_parents(self, generated_tree):
+        assert generated_tree.root.parent is None
+        assert generated_tree.get_or_create('administratif').parent == generated_tree.root
+        assert generated_tree.get_or_create('ahead').parent == generated_tree.root
+        assert generated_tree.get_or_create('bioinspired').parent == generated_tree.get_or_create('ahead')
+        assert generated_tree.get_or_create('labs').parent == generated_tree.root
+        assert generated_tree.get_or_create('apml').parent == generated_tree.get_or_create('labs')
+
+    def test_full_name(self, generated_tree):
+        assert generated_tree.root.full_name() == ""
+        assert generated_tree.get_or_create('administratif').full_name() == "administratif"
+        assert generated_tree.get_or_create('ahead').full_name() == "ahead"
+        assert generated_tree.get_or_create('bioinspired').full_name() == "ahead/bioinspired"
+        assert generated_tree.get_or_create('labs').full_name() == "labs"
+        assert generated_tree.get_or_create('apml').full_name() == "labs/apml"
+
+
+class TestGenerator(object):
 
     WORKING_PATH = os.path.join(DATA_PATH, "full-tree")
     DATA_FILE = os.path.join(WORKING_PATH, "sites.csv")

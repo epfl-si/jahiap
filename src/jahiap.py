@@ -52,7 +52,7 @@ from exporter.dict_exporter import DictExporter
 from exporter.html_exporter import HTMLExporter
 from exporter.wp_exporter import WPExporter
 from wordpress_json import WordpressError
-from generator.node import Tree
+from generator.tree import Tree
 from unzipper.unzip import unzip_one
 from jahia_site import Site
 from settings import VERSION, EXPORT_PATH, WP_ADMIN_URL, WP_HOST, WP_PATH, \
@@ -279,8 +279,9 @@ def main_docker(args):
 
 
 def main_generate(args):
-    Tree(args).create_html()
-    Tree(args).run()
+    tree = Tree(args, file_path="sites.csv")
+    tree.create_html()
+    tree.run()
 
 
 def set_logging_config(args):
