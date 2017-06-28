@@ -1,0 +1,8 @@
+name,parent,type
+administratif,root,ListTypeNode
+labs,root,ListTypeNode
+ahead,root,SiteTypeNode
+apc,administratif,SiteTypeNode
+building2050,administratif,SiteTypeNode
+apml,labs,SiteTypeNode
+bioinspired,ahead,SiteTypeNode

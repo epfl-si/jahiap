@@ -2,9 +2,11 @@
 
 import logging
 import os
-from bs4 import BeautifulSoup
+import requests
 
 import xml.dom.minidom
+
+from bs4 import BeautifulSoup
 
 
 class Utils:
@@ -42,6 +44,14 @@ class Utils:
         cls.dom_cache[path] = dom
 
         return dom
+
+    @classmethod
+    def is_traefik_running(cls):
+        try:
+            from settings import WP_HOST
+            return requests.get("http://%s:8080" % WP_HOST).status_code == 200
+        except requests.ConnectionError:
+            return False
 
     @classmethod
     def get_optional_env(self, key, default):

@@ -1,10 +1,10 @@
-site_name=bachelor2
+site_name=dcsl
 number=1
 output_dir=build
 docker_name="demo-$(site_name)"
 port=9090
 
-all: clean static run
+all: clean run
 
 clean:
 	rm -rf $(output_dir)/$(site_name)*
@@ -28,6 +28,9 @@ static:
 wp:
 	python src/jahiap.py export $(site_name) --output-dir $(output_dir) --to-wordpress --site-url $(WP_ADMIN_URL) --wp-cli "wpcli"
 
+nginx_conf:
+	python src/jahiap.py export $(site_name) --output-dir $(output_dir) --nginx-conf --site-url $(WP_ADMIN_URL) --wp-cli "wpcli"
+
 clean_wordpress:
 	python src/jahiap.py export $(site_name) --output-dir $(output_dir) --clean-wordpress --site-url $(WP_ADMIN_URL) --wp-cli "wpcli"
 
@@ -45,3 +48,7 @@ standalone:
 stop_standalone:
 	docker stop $(docker_name)
 	docker rm $(docker_name)
+
+generate:
+	python src/jahiap.py generate
+

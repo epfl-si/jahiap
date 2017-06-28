@@ -1,12 +1,13 @@
 """(c) All rights reserved. ECOLE POLYTECHNIQUE FEDERALE DE LAUSANNE, Switzerland, VPSI, 2017"""
 import os
+import logging
 import subprocess
 
 from bs4 import BeautifulSoup
 from wordpress_json import WordpressJsonWrapper, WordpressError
 
 from exporter.utils import Utils
-from settings import WP_USER, WP_PASSWORD
+from settings import WP_USER, WP_PASSWORD, WP_PATH
 
 
 class WPExporter:
@@ -53,15 +54,18 @@ class WPExporter:
             file_info = os.stat(file_path)
             return cls.convert_bytes(file_info.st_size)
 
-    def __init__(self, site, domain, cli_container=None):
+    def __init__(self, site, domain, output_dir, cli_container=None):
         """
         Site is the python object resulting from the parsing of Jahia XML
         Domain is the wordpress domain where to push the content
         """
         self.site = site
+        self.output_dir = output_dir
         self.cli_container = cli_container or "wp-cli-%s" % self.site.name
-        url = "http://%s/?rest_route=/wp/v2" % domain
-        self.wp = WordpressJsonWrapper(url, WP_USER, WP_PASSWORD)
+        self.wp = WordpressJsonWrapper(
+            "http://%s/?rest_route=/wp/v2" % domain,
+            WP_USER,
+            WP_PASSWORD)
 
     def import_all_data_to_wordpress(self):
         """
@@ -194,6 +198,7 @@ class WPExporter:
                 }
 
                 self.urls_mapping.append(mapping)
+                logging.info("WP page '%s' created", wp_page['link'])
 
                 # keep wordpress ID for further usages
                 page.wp_id = wp_page['id']
@@ -338,14 +343,14 @@ Errors :
         first_part = """
 server {
     server_name %(site_name)s.epfl.ch ;
-    return 301 $scheme://test-web-static.epfl.ch/static/%(site_name)s$request_uri;
+    return 301 $scheme://test-web-static.epfl.ch/%(WP_PATH)s/%(site_name)s$request_uri;
 }
 
 server {
     listen       80;
     listen       [::]:80;
-    server_name  test-web-static.epfl.ch;
-""" % {'site_name': self.site.name}
+
+""" % {'site_name': self.site.name, "WP_PATH": WP_PATH}
 
         last_part = """
     location / {
@@ -359,11 +364,12 @@ server {
         # Add all rewrite jahia URI to WordPress URI
         for element in self.urls_mapping:
 
-            line = """    rewrite ^/static/%(site_name)s/%(jahia_url)s$ /static/%(site_name)s/%(wp_url)s permanent;
+            line = """    rewrite ^/%(WP_PATH)s/%(site_name)s/%(jahia_url)s$ /%(WP_PATH)s/%(site_name)s/%(wp_url)s permanent;
 """ % {
                 'site_name': self.site.name,
                 'jahia_url': element['jahia_url'][1:],
-                'wp_url': element['wp_url'][27:]
+                'wp_url': element['wp_url'][27:],
+                "WP_PATH": WP_PATH,
             }
             content += line
 
@@ -371,7 +377,7 @@ server {
         content += last_part
 
         # Set the file name
-        file_name = 'jahia-%s.conf' % self.site.name
+        file_name = os.path.join(self.output_dir, 'jahia-%s.conf' % self.site.name)
 
         # Open the file in write mode
         with open(file_name, 'a') as f:

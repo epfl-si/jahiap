@@ -20,6 +20,7 @@ class Site:
     """A Jahia Site. Have 1 to N Pages"""
 
     def __init__(self, base_path, name, root_path=""):
+        # FIXME: base_path should not depend on output-dir
         self.base_path = base_path
         self.name = name
         # the server name, e.g. "master.epfl.ch"
@@ -99,7 +100,8 @@ class Site:
 
     def full_path(self, path):
         """
-        Return the page full, adding the site root_path at the beginning
+        FIXME : should be done in Exporter
+        Prefix the given path with the site root_path
         """
         return self.root_path + path
 
@@ -187,7 +189,7 @@ class Site:
 
             breadcrumb_links = dom.getElementsByTagName("breadCrumbLink")
             nb_found = len(breadcrumb_links)
-            if nb_found !=1:
+            if nb_found != 1:
                 logging.warning("Found %s breadcrumb link(s) instead of 1", nb_found)
                 if nb_found == 0:
                     continue
@@ -396,6 +398,7 @@ class Site:
             # internal links written by hand, e.g.
             # /team
             # /page-92507-fr.html
+            # FIXME : will not work it root_path is set to a subdir
             elif link in self.pages_content_by_path:
                 self.internal_links += 1
             # absolute links rewritten as relative links

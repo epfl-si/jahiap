@@ -102,10 +102,9 @@ class HTMLExporter:
 
         logging.debug("Generating page %s", path)
 
-        relative_path_index = len("build/%s/html/" % self.site.name)
-
-        relative_path = path[relative_path_index:]
-
+        # relative_path_index = len("build/%s/html/" % self.site.name)
+        # relative_path = path[relative_path_index:]
+        #
         # TODO support pages that are in a subdirectory.
         #
         # There is a problem with overlapping paths, e.g.
@@ -114,8 +113,8 @@ class HTMLExporter:
         # /team/more
         #
         # Here "team" is both a page and a directory
-        if "/" in relative_path:
-            return
+        # if "/" in relative_path:
+        #     return
 
         file = open(path, "w")
 
@@ -200,6 +199,14 @@ class HTMLExporter:
 
     def extract_files(self):
         """Extract the files"""
+
+        if not os.path.isdir(os.path.join(self.site.base_path, "content")):
+            if len(self.site.files) == 0:
+                logging.info("no files found for %s", self.site.base_path)
+            else:
+                logging.warning("no files found for %s whereas %s expected" %
+                                (self.site.base_path, len(self.site.files)))
+            return
 
         start = "%s/content/sites/%s/files" % (self.site.base_path, self.site.name)
         dst = "%s/files" % self.full_path
