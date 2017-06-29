@@ -189,6 +189,7 @@ def main_export(args):
 
     for site_name, site in sites.items():
         try:
+
             # store results
             exported_site = {}
             exported_sites[site_name] = exported_site
@@ -199,21 +200,13 @@ def main_export(args):
             try:
                 if args['--clean-wordpress']:
                     logging.info("Cleaning WordPress for %s...", site.name)
-                    wp_exporter = WPExporter(
-                        site=site,
-                        domain=args['--site-url'],
-                        output_dir=output_subdir,
-                        cli_container=args['--wp-cli'])
+                    wp_exporter = WPExporter(site, args)
                     wp_exporter.delete_all_content()
                     logging.info("Data of WordPress site %s successfully deleted", site.name)
 
                 if args['--to-wordpress']:
                     logging.info("Exporting %s to WordPress...", site.name)
-                    wp_exporter = WPExporter(
-                        site=site,
-                        domain=args['--site-url'],
-                        output_dir=output_subdir,
-                        cli_container=args['--wp-cli'])
+                    wp_exporter = WPExporter(site, args)
                     wp_exporter.import_all_data_to_wordpress()
                     wp_exporter.generate_nginx_conf_file()
                     exported_site['wordpress'] = args['--site-url']
@@ -221,11 +214,7 @@ def main_export(args):
 
                 if args['--nginx-conf']:
                     logging.info("Creating nginx conf for %s...", site.name)
-                    wp_exporter = WPExporter(
-                        site=site,
-                        domain=args['--site-url'],
-                        output_dir=output_subdir,
-                        cli_container=args['--wp-cli'])
+                    wp_exporter = WPExporter(site, args)
                     wp_exporter.import_pages()
                     wp_exporter.generate_nginx_conf_file()
                     exported_site['wordpress'] = args['--site-url']
@@ -254,6 +243,11 @@ def main_export(args):
                 logging.info("Site %s successfully exported to python dictionary", site.name)
         except:
             logging.error("Error exporting site %s" % site_name)
+
+        if args['--to-wordpress'] and int(args['--number']) > 1:
+            wp_exporter = WPExporter(site, args)
+            wp_exporter.delete_all_content()
+            logging.info("Data of Wordpress site successfully deleted")
 
     # overall result : {site_name: {wordpress: URL, static: PATH, dict: PATH}, ...}
     return exported_sites
@@ -316,6 +310,7 @@ def set_logging_config(args):
     elif args['--debug']:
         level = logging.DEBUG
     logging.basicConfig(level=level)
+    logging.getLogger().setLevel(level)
 
 
 def set_default_values(args):
