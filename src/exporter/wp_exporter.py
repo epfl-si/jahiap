@@ -39,7 +39,6 @@ class WPExporter:
         available in the docker container wpcli
         """
         cmd = 'docker exec %s %s' % (self.cli_container, command)
-        # cmd = 'docker exec wpcli %s ' % (command)
         return subprocess.check_output(cmd, shell=True)
 
     @classmethod

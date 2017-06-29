@@ -3,16 +3,15 @@
 import logging
 import os
 import timeit
-import requests
-
-from utils import Utils
+from collections import OrderedDict
 from datetime import timedelta
 from pathlib import Path
 
+import requests
 from clint.textui import progress
 
 from settings import JAHIA_SITES
-
+from utils import Utils
 
 """
     This script automates the crawling of Jahia website,
@@ -100,7 +99,7 @@ class SiteCrawler(object):
         logging.debug("DATE set to %s", cmd_args['--date'])
 
         # to store paths of downloaded zips
-        downloaded_files = {}
+        downloaded_files = OrderedDict()
 
         # compute list fo sites to download
         try:

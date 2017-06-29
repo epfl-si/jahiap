@@ -41,6 +41,7 @@ import os
 import pickle
 import sys
 import timeit
+from collections import OrderedDict
 from datetime import datetime, timedelta
 from pprint import pprint, pformat
 
@@ -105,7 +106,7 @@ def main_unzip(args):
     zip_files = SiteCrawler.download(args)
 
     # to store paths of downloaded zips
-    unzipped_files = {}
+    unzipped_files = OrderedDict()
 
     for site_name, zip_file in zip_files.items():
         unzipped_files[site_name] = unzip_one(args['--output-dir'], site_name, zip_file)
@@ -119,7 +120,7 @@ def main_parse(args):
     site_dirs = main_unzip(args)
 
     # to store paths of parsed objects
-    parsed_sites = {}
+    parsed_sites = OrderedDict()
 
     for site_name, site_dir in site_dirs.items():
         try:
@@ -185,7 +186,7 @@ def main_export(args):
     sites = main_parse(args)
 
     # to store results of exported parsed sites
-    exported_sites = {}
+    exported_sites = OrderedDict()
 
     for site_name, site in sites.items():
         try:
