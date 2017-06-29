@@ -148,11 +148,11 @@ class WPExporter:
         }
         files = files
         try:
-            print(wp_media_info)
+            logging.debug("WP media information '%s'", wp_media_info)
             wp_media = self.wp.post_media(data=wp_media_info, files=files)
             return wp_media
         except Exception as e:
-            print(e.__traceback__)
+            logging.error("Import WP media failed: %s", e.__traceback__)
             self.report['failed_files'] += 1
 
     def replace_links(self, wp_media):
