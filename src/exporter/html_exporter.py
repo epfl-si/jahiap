@@ -5,6 +5,7 @@ import os
 import shutil
 import logging
 
+from bs4 import BeautifulSoup
 from jinja2 import Environment, PackageLoader, select_autoescape
 
 
@@ -16,6 +17,12 @@ class HTMLExporter:
     )
 
     def __init__(self, site, out_path):
+
+        # if True we add an .html extension to pages without an extension
+        self.option_add_html_extension = True
+        # if True we extract the site files. Set to False to speed up the export
+        self.option_extract_files = True
+
         self.site = site
         self.out_path = out_path
         self.full_path = out_path + site.root_path
@@ -23,13 +30,18 @@ class HTMLExporter:
         # to use in templates
         self.root_path = site.root_path
 
+        # add the .html extension
+        if self.option_add_html_extension:
+            self.add_html_extension()
+
         # create output path if necessary
         if not os.path.exists(self.full_path):
             logging.debug("created output dir %s", self.full_path)
             os.makedirs(self.full_path)
 
         # extract all the files
-        self.extract_files()
+        if self.option_extract_files:
+            self.extract_files()
 
         # generate the Pages for each language
         for language in site.languages:
@@ -38,6 +50,44 @@ class HTMLExporter:
             self.navigation = ""
 
             self.generate_pages()
+
+    def add_html_extension(self):
+        """Add an .html extension to pages without an extension"""
+        logging.debug("Adding .html extension to pages without extension")
+
+        # first fix all the page_content paths
+        for page in self.site.pages_by_pid.values():
+            for page_content in page.contents.values():
+                dirname = os.path.dirname(page_content.path)
+                basename = os.path.basename(page_content.path)
+
+                if "." not in basename:
+                    basename += ".html"
+                    page_content.path = os.path.join(dirname, basename)
+
+        # next fix all the links in the boxes
+        for box in self.site.get_all_boxes():
+            soup = BeautifulSoup(box.content, 'html.parser')
+
+            tags = soup.find_all("a")
+
+            for tag in tags:
+                link = tag.get("href")
+
+                if not link:
+                    continue
+
+                # we change only relative links
+                if link.startswith("/"):
+                    dirname = os.path.dirname(link)
+                    basename = os.path.basename(link)
+
+                    if "." not in basename:
+                        basename += ".html"
+
+                        tag["href"] = os.path.join(dirname, basename)
+
+            box.content = str(soup)
 
     def generate_pages(self):
         """Generate the pages & the sitemap"""
@@ -80,6 +130,8 @@ class HTMLExporter:
 
     def update_boxes_data(self):
         """Update the boxes data"""
+        logging.debug("Updating boxes data")
+
         for box in self.site.get_all_boxes():
             if box.type == "toggle":
                 # toggle title
@@ -100,17 +152,11 @@ class HTMLExporter:
         """Generate a page"""
         path = "%s%s" % (self.out_path, path)
 
-        directory = path[0:path.rfind("/")]
-        filename = path[path.rfind("/") + 1:]
+        directory = os.path.dirname(path)
 
         # create the destination directory if necessary
         if not os.path.isdir(directory):
             os.makedirs(directory, exist_ok=True)
-
-        # if the page has no extension we add a .html
-        if "." not in filename:
-            filename += ".html"
-            path = os.path.join(directory, filename)
 
         logging.debug("Generating page %s", path)
 
