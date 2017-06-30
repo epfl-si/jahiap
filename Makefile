@@ -29,7 +29,6 @@ wp:
 	python src/jahiap.py export $(site_name) --output-dir $(output_dir) --to-wordpress --site-url $(WP_ADMIN_URL) --wp-cli "wpcli"
 
 wp_all:
-	screen -RD wpimport
 	python src/jahiap.py export $(site_name) -w --wp-cli=wp-cli-wp-import --number=$(number) --output-dir=/mnt/export/build --use-cache --debug >> /home/team/import-wp.log
 
 nginx_conf:
