@@ -60,12 +60,12 @@ class Tree(object):
 
         return node
 
-    def create_html(self):
+    def prepare_run_cmd(self):
         """
         Generate HTML files for all nodes
         """
         for node in self.nodes.values():
-            node.create_html()
+            node.prepare_run_cmd()
 
     def run(self):
         """

@@ -32,7 +32,7 @@ def generated_tree(request):
     if os.path.exists(output_path):
         shutil.rmtree(output_path)
     tree = Tree(TestGenerator.ARGS, file_path=TestGenerator.DATA_FILE)
-    tree.create_html()
+    tree.prepare_run_cmd()
     return tree
 
 

@@ -53,8 +53,8 @@ class Utils:
         except requests.ConnectionError:
             return False
 
-    @classmethod
-    def get_optional_env(self, key, default):
+    @staticmethod
+    def get_optional_env(key, default):
         """
         Return the value of an optional environment variable, and use
         the provided default if it's not set.
@@ -76,3 +76,17 @@ class Utils:
             raise SystemExit("The required environment variable %s is not set" % key)
 
         return os.environ.get(key)
+
+
+    @staticmethod
+    def set_logging_config(args):
+        """
+        Set logging with the 'good' level
+        """
+        level = logging.INFO
+        if args['--quiet']:
+            level = logging.WARNING
+        elif args['--debug']:
+            level = logging.DEBUG
+        logging.basicConfig(level=level)
+        logging.getLogger().setLevel(level)

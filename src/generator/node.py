@@ -6,6 +6,7 @@ from abc import ABCMeta, abstractclassmethod
 from jinja2 import Environment, PackageLoader, select_autoescape
 
 from crawler import SiteCrawler
+from generator.cooking import cook_one_site, prepare_ingredients
 from unzipper.unzip import unzip_one
 from exporter.html_exporter import HTMLExporter
 from jahia_site import Site
@@ -60,8 +61,8 @@ class Node():
     def absolute_path_to_html(self):
         return self.current_type.absolute_path_to_html()
 
-    def create_html(self):
-        return self.current_type.create_html()
+    def prepare_run_cmd(self):
+        return self.current_type.prepare_run_cmd()
 
     def run(self):
 
@@ -98,7 +99,7 @@ class TypeNode(metaclass=ABCMeta):
         self.node = node
 
     @abstractclassmethod
-    def create_html(self):
+    def prepare_run_cmd(self):
         raise NotImplementedError()
 
     @classmethod
@@ -130,7 +131,7 @@ class TypeNode(metaclass=ABCMeta):
 
 class NoTypeNode(TypeNode):
 
-    def create_html(self):
+    def prepare_run_cmd(self):
         raise NotImplementedError()
 
 
@@ -143,7 +144,10 @@ class RootTypeNode(TypeNode):
     def output_path(self, file_path=""):
         return os.path.join(self.node.tree.output_path, file_path)
 
-    def create_html(self):
+    def prepare_run_cmd(self):
+        """
+        In this case we create only a index.html file with the children links.
+        """
         # load and render template
         template = self.node.env.get_template('root.html')
         children_list = dict([(child.name, child.full_name()) for child in self.node.children])
@@ -158,7 +162,10 @@ class RootTypeNode(TypeNode):
 
 class ListTypeNode(TypeNode):
 
-    def create_html(self):
+    def prepare_run_cmd(self):
+        """
+        In this case we create only a index.html file with the children links.
+        """
 
         template = self.node.env.get_template('list.html')
         children_list = dict([(child.name, child.full_name()) for child in self.node.children])
@@ -178,8 +185,30 @@ class SiteTypeNode(TypeNode):
             os.path.abspath(self.output_path()),
             self.node.full_name())
 
-    def create_html(self):
+    def prepare_run_cmd(self):
         zip_file = SiteCrawler(self.node.name, self.node.tree.args).download_site()
         site_dir = unzip_one(self.node.tree.args['--output-dir'], self.node.name, zip_file)
         site = Site(site_dir, self.node.name, root_path="/"+self.node.full_name())
         HTMLExporter(site, self.output_path())
+
+
+class WordPressTypeNode(TypeNode):
+
+    def absolute_path_to_html(self):
+        return os.path.join(
+            os.path.abspath(self.output_path()),
+            self.node.full_name())
+
+    def prepare_run_cmd(self):
+
+        args = {}
+        args['<CSV_FILE>'] = 'wp-sites.csv'
+        args['--conf-path'] = 'build/generate/yaml'
+        args['--force'] = True
+
+
+        prepare_ingredients_one_site()
+
+
+        config_file=''
+        cook_one_site(args, config_file)
