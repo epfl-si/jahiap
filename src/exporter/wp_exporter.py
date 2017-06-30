@@ -39,6 +39,7 @@ class WPExporter:
         available in the docker container wpcli
         """
         cmd = 'docker exec %s %s' % (self.cli_container, command)
+        logging.debug("exec '%s'", cmd)
         return subprocess.check_output(cmd, shell=True)
 
     @classmethod
@@ -56,7 +57,8 @@ class WPExporter:
         Domain is the wordpress domain where to push the content
         """
         self.site = site
-        self.domain = cmd_args['--site-url']
+        self.host = cmd_args['--site-host']
+        self.path = cmd_args['--site-path']
         self.elapsed = 0
         self.report = {
             'pages': 0,
@@ -67,7 +69,8 @@ class WPExporter:
             'failed_widgets': 0,
         }
         self.cli_container = cmd_args['--wp-cli'] or "wp-cli-%s" % self.site.name
-        url = "http://%s/?rest_route=/wp/v2" % self.domain
+        url = "http://%s/%s/?rest_route=/wp/v2" % (self.host, self.path)
+        logging.info("setting up API on '%s', with %s:xxxxxx", url, WP_USER)
         self.wp = WordpressJsonWrapper(url, WP_USER, WP_PASSWORD)
         self.output_path = cmd_args['--output-dir']
 
