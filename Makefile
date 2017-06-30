@@ -4,6 +4,9 @@ output_dir=build
 docker_name="demo-$(site_name)"
 port=9090
 
+wp_cli_import=wp-cli-wp-import
+output_dir_import=/mnt/export/build
+
 all: clean run
 
 clean:
@@ -29,7 +32,7 @@ wp:
 	python src/jahiap.py export $(site_name) --output-dir $(output_dir) --to-wordpress --site-url $(WP_ADMIN_URL) --wp-cli "wpcli"
 
 wp_all:
-	python src/jahiap.py export $(site_name) -w --wp-cli=wp-cli-wp-import --number=$(number) --output-dir=/mnt/export/build --use-cache --debug >> /home/team/import-wp.log
+	python src/jahiap.py export $(site_name) -w --wp-cli=$(wp_cli_import) --number=$(number) --output-dir=$(output_dir_import) --use-cache --debug >> /home/team/import-wp.log
 
 nginx_conf:
 	python src/jahiap.py export $(site_name) --output-dir $(output_dir) --nginx-conf --site-url $(WP_ADMIN_URL) --wp-cli "wpcli"
