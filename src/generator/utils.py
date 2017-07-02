@@ -12,12 +12,10 @@ class Utils:
         """
         with open(file_path, newline='') as csvfile:
             has_header = csv.Sniffer().has_header(csvfile.read(1024))
-
-        with open(file_path, newline='') as csvfile:
+            csvfile.seek(0)  # rewind
             reader = csv.reader(csvfile, delimiter=',', quotechar='|')
+            if has_header:
+                next(reader)  # skip header row
             rows = list(reader)
-
-        logging.debug("Parsed CSV %s", rows)
-        if has_header:
-            return rows[1:]
-        return rows
+            logging.debug("Parsed CSV %s", rows)
+            return rows
