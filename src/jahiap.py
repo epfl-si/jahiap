@@ -326,7 +326,7 @@ def set_default_values(args):
         args['--wp-cli'] = None
     if not args['--export-path']:
         args['--export-path'] = EXPORT_PATH
-    if not args['--site-path']:
+    if not isinstance(args['--site-path'], str):
         args['--site-path'] = WP_PATH
     if not args['--site-host']:
         args['--site-host'] = WP_HOST
