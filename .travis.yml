@@ -10,3 +10,11 @@ install:
 
 script:
 - pytest src/test
+
+# Handle git submodules ourselves
+git:
+    submodules: false
+# Use sed to replace the SSH URL with the public URL, then initialize submodules
+before_install:
+    - sed -i 's/git@github.com:/https:\/\/github.com\//' .gitmodules
+    - git submodule update --init --recursive
