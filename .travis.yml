@@ -17,5 +17,5 @@ install:
 - pip install -r requirements/base.txt
 
 script:
-- pytest src/test
+- pytest
 - bin/flake8.sh
