@@ -18,8 +18,9 @@ class Node:
         autoescape=select_autoescape(['html', 'xml'])
     )
 
-    def __init__(self, name, tree=None):
+    def __init__(self, name, data=None, tree=None):
         self.name = name
+        self.data = data
         self.tree = tree
         self.__parent = None
         self.__children = []
@@ -32,15 +33,15 @@ class Node:
         return "<%s %s>" % (self.__class__.__name__, self.name)
 
     @staticmethod
-    def factory(name, type, tree):
+    def factory(name, type, data, tree):
         if type == "RootNode":
-            return RootNode(name, tree)
+            return RootNode(name, data, tree)
         if type == "ListNode":
-            return ListNode(name, tree)
+            return ListNode(name, data, tree)
         if type == "SiteNode":
-            return SiteNode(name, tree)
+            return SiteNode(name, data, tree)
         if type == "WordPressNode":
-            return WordPressNode(name, tree)
+            return WordPressNode(name, data, tree)
         raise Exception("Unknown node type")
 
     @classmethod
@@ -175,14 +176,38 @@ class WordPressNode(Node):
             os.path.abspath(self.output_path()),
             self.full_name())
 
+    def prepare_ingredients(self, args):
+
+        # row is a dictionnary with the following keys:
+        # site_name;parent;type_name;site_url;site_title;email;username;pwd;db_name
+        site_name = self.name
+        parent = self.parent
+
+        # build yml file
+        template = self.env.get_template('conf.yaml')
+        content = template.render(wp_host=WP_HOST, **self.data)
+
+        # build file path
+        if parent == 'root':
+            dir_path = args['--conf-path']
+        else:
+            dir_path = os.path.join(args['--conf-path'], parent)
+            if not os.path.exists(dir_path):
+                os.mkdir(dir_path)
+        file_path = os.path.join(dir_path, site_name) + ".yaml"
+
+        # write yml file
+        with open(file_path, 'w') as output:
+            output.write(content)
+            output.flush()
+            logging.info("(ok) %s", file_path)
+
     def prepare_run(self):
 
-        args = {}
-        args['<CSV_FILE>'] = 'wp-sites.csv'
-        args['--conf-path'] = 'build/generate/yaml'
-        args['--force'] = True
+        args = self.tree.args
 
-        # prepare_ingredients_one_site()
+        self.prepare_ingredients(args)
 
+        # FIX : config_file
         config_file = ''
         cook_one_site(args, config_file)

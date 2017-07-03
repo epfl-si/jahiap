@@ -43,35 +43,6 @@ def main(args):
         cook_all_sites(args)
 
 
-def prepare_ingredients_one_site(csv_info):
-
-    # load template
-    env = Environment(
-        loader=PackageLoader('generator', 'templates'))
-
-    site_name = csv_info['site_name']
-    parent = csv_info['parent']
-
-    # build yml file
-    template = env.get_template('conf.yaml')
-    content = template.render(wp_host=WP_HOST, **csv_info)
-
-    # build file path
-    if parent == 'root':
-        dir_path = args['--conf-path']
-    else:
-        dir_path = os.path.join(args['--conf-path'], parent)
-        if not os.path.exists(dir_path):
-            os.mkdir(dir_path)
-    file_path = os.path.join(dir_path, site_name) + ".yaml"
-
-    # write yml file
-    with open(file_path, 'w') as output:
-        output.write(content)
-        output.flush()
-        logging.info("(ok) %s", file_path)
-
-
 def prepare_ingredients(args):
     # check config
     GeneratorUtils.validate_dir(args['--conf-path'], args['--force'])
