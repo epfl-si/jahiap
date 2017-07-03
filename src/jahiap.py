@@ -24,7 +24,7 @@ Options:
   --date DATE                   (crawl) Date and time for the snapshot, e.g : 2017-01-15-23-00.
   -f --force                    (crawl) Force download even if existing snapshot for same site.
   --use-cache                   (parse) Do not parse if pickle file found with a previous parsing result
-  --site-path=<SITE_PATH>       (parse, export) sub dir where to export parsed content. (default is '' or $WP_PATH on command 'docker')
+  --site-path=<SITE_PATH>       (parse, export) sub dir where to export parsed content
   -r --print-report             (FIXME) Print report with content.
   --nginx-conf                  (export) Only export pages to WordPress in order to generate nginx conf
   -s --to-static                (export) Export parsed data to static HTML files.
@@ -57,7 +57,7 @@ from wordpress_json import WordpressError
 from generator.tree import Tree
 from unzipper.unzip import unzip_one
 from jahia_site import Site
-from settings import VERSION, EXPORT_PATH, WP_ADMIN_URL, WP_HOST, WP_PATH, \
+from settings import VERSION, EXPORT_PATH, WP_HOST, WP_PATH, \
     LINE_LENGTH_ON_EXPORT, LINE_LENGTH_ON_PPRINT
 
 
@@ -157,7 +157,7 @@ def main_parse(args):
                 logging.info("Parsed site saved into %s" % pickle_file)
                 pickle.dump(site, output, pickle.HIGHEST_PROTOCOL)
 
-                # log success
+            # log success
             logging.info("Site %s successfully parsed" % site_name)
             parsed_sites[site_name] = site
 
@@ -171,7 +171,9 @@ def main_parse(args):
                 "time": elapsed
             }
 
+            # TODO: use csv_line
             csv_line = "%(name)s;%(pages)s;%(files)s;%(time)s" % csv_dict
+            logging.debug("performance info: %s", csv_line)
 
         except:
             logging.error("Error parsing site %s" % site_name)

@@ -18,3 +18,4 @@ install:
 
 script:
 - pytest src/test
+- bin/flake8.sh
