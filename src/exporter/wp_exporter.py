@@ -38,7 +38,9 @@ class WPExporter:
         official wordpress command line interface)
         available in the docker container wpcli
         """
-        cmd = 'docker exec %s %s' % (self.cli_container, command)
+        cmd = "docker exec %s wp --allow-root --path='%s' %s" \
+            % (self.cli_container, self.path, command)
+        logging.debug("exec '%s'", cmd)
         return subprocess.check_output(cmd, shell=True)
 
     @classmethod
@@ -56,7 +58,8 @@ class WPExporter:
         Domain is the wordpress domain where to push the content
         """
         self.site = site
-        self.domain = cmd_args['--site-url']
+        self.host = cmd_args['--site-host']
+        self.path = cmd_args['--site-path']
         self.elapsed = 0
         self.report = {
             'pages': 0,
@@ -67,7 +70,8 @@ class WPExporter:
             'failed_widgets': 0,
         }
         self.cli_container = cmd_args['--wp-cli'] or "wp-cli-%s" % self.site.name
-        url = "http://%s/?rest_route=/wp/v2" % self.domain
+        url = "http://%s/%s/?rest_route=/wp/v2" % (self.host, self.path)
+        logging.info("setting up API on '%s', with %s:xxxxxx", url, WP_USER)
         self.wp = WordpressJsonWrapper(url, WP_USER, WP_PASSWORD)
         self.output_path = cmd_args['--output-dir']
 
@@ -151,7 +155,7 @@ class WPExporter:
             wp_media = self.wp.post_media(data=wp_media_info, files=files)
             return wp_media
         except Exception as e:
-            logging.error("Import WP media failed: %s", e.__traceback__)
+            logging.error("Import WP media failed: %s", e)
             self.report['failed_files'] += 1
 
     def replace_links(self, wp_media):
@@ -247,7 +251,7 @@ class WPExporter:
             for lang in self.site.homepage.contents.keys():
                 for box in self.site.homepage.contents[lang].sidebar.boxes:
                     content = Utils.escape_quotes(box.content)
-                    cmd = 'wp widget add black-studio-tinymce page-widgets ' \
+                    cmd = 'widget add black-studio-tinymce page-widgets ' \
                         '--title="%s" --text="%s"' % (box.title, content)
                     self.wp_cli(cmd)
             logging.info("WP all sidebar imported")
@@ -263,7 +267,7 @@ class WPExporter:
 
             parent_menu_id = self.menu_id_dict[page.parent.wp_id]
 
-            command = 'wp menu item add-post Main %s --parent-id=%s --porcelain' % (page.wp_id, parent_menu_id)
+            command = 'menu item add-post Main %s --parent-id=%s --porcelain' % (page.wp_id, parent_menu_id)
             menu_id = self.wp_cli(command)
             self.menu_id_dict[page.wp_id] = Utils.get_menu_id(menu_id)
             self.report['menus'] += 1
@@ -280,14 +284,14 @@ class WPExporter:
         try:
             # Create homepage menu
             page = self.site.homepage
-            menu_id = self.wp_cli('wp menu item add-post Main %s --classes=link-home --porcelain' % page.wp_id)
+            menu_id = self.wp_cli('menu item add-post Main %s --classes=link-home --porcelain' % page.wp_id)
             self.menu_id_dict[page.wp_id] = Utils.get_menu_id(menu_id)
             self.report['menus'] += 1
 
             # Create children of homepage menu
             for homepage_children in self.site.homepage.children:
                 if homepage_children.wp_id:
-                    menu_id = self.wp_cli('wp menu item add-post Main %s --porcelain' % homepage_children.wp_id)
+                    menu_id = self.wp_cli('menu item add-post Main %s --porcelain' % homepage_children.wp_id)
                     self.menu_id_dict[homepage_children.wp_id] = Utils.get_menu_id(menu_id)
                     self.report['menus'] += 1
 
@@ -313,8 +317,8 @@ class WPExporter:
 
         # call wp-cli
         frontpage_id = self.site.homepage.wp_id
-        self.wp_cli('wp option update show_on_front page')
-        self.wp_cli('wp option update page_on_front %s' % frontpage_id)
+        self.wp_cli('option update show_on_front page')
+        self.wp_cli('option update page_on_front %s' % frontpage_id)
 
         logging.info("WP frontpage setted")
 
@@ -354,10 +358,10 @@ class WPExporter:
         """
         Delete all widgets
         """
-        cmd = "wp widget list page-widgets --fields=id --format=csv"
+        cmd = "widget list page-widgets --fields=id --format=csv"
         widgets_id_list = self.wp_cli(cmd).decode("UTF-8").split("\n")[1:-1]
         for widget_id in widgets_id_list:
-            cmd = "wp widget delete " + widget_id
+            cmd = "widget delete " + widget_id
             self.wp_cli(cmd)
         logging.info("All widgets deleted")
 

@@ -73,7 +73,6 @@ class Box:
         else:
             self.set_box_unknown(element)
 
-
     def set_box_text(self, element, multibox=False):
         """set the attributes of a text box"""
 

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-    Testing the crawl.py script
+    Testing the generator script
 """
 import os
 import shutil
@@ -17,8 +17,7 @@ from settings import DATA_PATH, WP_HOST
 
 @pytest.fixture(scope='module')
 def generated_tree(request):
-    """
-    Using following tree structure:
+    """ Using following tree structure:
         root
         ├── administratif (list)
         │      ├── building2050 (site)
