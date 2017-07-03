@@ -13,7 +13,7 @@ Usage:
                           [--output-dir=<OUTPUT_DIR> --export-path=<EXPORT_PATH>]
                           [--use-cache] [--debug | --quiet]
   jahiap.py docker <site> [--output-dir=<OUTPUT_DIR>] [--number=<NUMBER>] [--debug | --quiet]
-  jahiap.py generate [--output-dir=<OUTPUT_DIR>] [--debug | --quiet]
+  jahiap.py generate <csv_file> [--output-dir=<OUTPUT_DIR>] [--debug | --quiet]
 
 Options:
   -h --help                     Show this screen.
@@ -295,7 +295,7 @@ def main_docker(args):
 
 
 def main_generate(args):
-    tree = Tree(args, file_path="sites.csv")
+    tree = Tree(args, file_path=args['<csv_file>'])
     tree.create_html()
     tree.run()
 
