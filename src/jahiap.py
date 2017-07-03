@@ -56,7 +56,7 @@ from exporter.wp_exporter import WPExporter
 from wordpress_json import WordpressError
 from generator.tree import Tree
 from unzipper.unzip import unzip_one
-from jahia_site import Site
+from parser.jahia_site import Site
 from settings import VERSION, EXPORT_PATH, WP_HOST, WP_PATH, \
     LINE_LENGTH_ON_EXPORT, LINE_LENGTH_ON_PPRINT
 
@@ -144,7 +144,7 @@ def main_parse(args):
             # FIXME : site-path should be given in exporter, not parser
             root_path = ""
             if args['--site-path']:
-                root_path = "/%s/%s" % (args['--site-path'], site_name)
+                #root_path = "/%s/%s" % (args['--site-path'], site_name)
                 logging.info("Setting root_path %s", root_path)
             logging.info("Parsing Jahia xml files from %s...", site_dir)
             site = Site(site_dir, site_name, root_path=root_path)
