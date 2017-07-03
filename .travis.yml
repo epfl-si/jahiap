@@ -1,0 +1,21 @@
+# (c) All rights reserved. ECOLE POLYTECHNIQUE FEDERALE DE LAUSANNE, Switzerland, VPSI, 2017
+---
+language: python
+
+python:
+- '3.6'
+
+# Handle git submodules ourselves
+git:
+    submodules: false
+# Use sed to replace the SSH URL with the public URL, then initialize submodules
+before_install:
+    - sed -i 's/git@github.com:/https:\/\/github.com\//' .gitmodules
+    - git submodule update --init --recursive
+
+install:
+- pip install -r requirements/base.txt
+
+script:
+- pytest src/test
+- bin/flake8.sh
