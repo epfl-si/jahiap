@@ -20,6 +20,7 @@ class Node:
 
     def __init__(self, name, tree=None):
         self.name = name
+        self.tree = tree
         self.__parent = None
         self.__children = []
 
@@ -31,15 +32,15 @@ class Node:
         return "<%s %s>" % (self.__class__.__name__, self.name)
 
     @staticmethod
-    def factory(name, type):
+    def factory(name, type, tree):
         if type == "RootNode":
-            return RootNode(name)
+            return RootNode(name, tree)
         if type == "ListNode":
-            return ListNode(name)
+            return ListNode(name, tree)
         if type == "SiteNode":
-            return SiteNode(name)
+            return SiteNode(name, tree)
         if type == "WordPressNode":
-            return WordPressNode(name)
+            return WordPressNode(name, tree)
         raise Exception("Unknown node type")
 
     @classmethod
@@ -62,12 +63,12 @@ class Node:
 
     def full_name(self):
         """ Construct the concatenation of all parents' names """
-        nodes = [self.node.name]
-        parent = self.node.parent
+        nodes = [self.name]
+        parent = self.parent
 
         # loop  through all parents, but ignoring tree.root :
         # we do not want the rootname in the full_name
-        while parent != self.node.tree.root:
+        while parent != self.tree.root:
             nodes.insert(0, parent.name)
             parent = parent.parent
 
@@ -75,14 +76,11 @@ class Node:
         return "/".join(nodes)
 
     def output_path(self, file_path=""):
-        dir_path = os.path.join(self.node.tree.output_path, self.node.name)
+        dir_path = os.path.join(self.tree.output_path, self.name)
         return os.path.join(dir_path, file_path)
 
     def absolute_path_to_html(self):
         return os.path.abspath(self.output_path())
-
-    def prepare_run(self):
-        return self.current_type.prepare_run_cmd()
 
     def run(self):
 
@@ -120,15 +118,15 @@ class RootNode(Node):
         return ""
 
     def output_path(self, file_path=""):
-        return os.path.join(self.node.tree.output_path, file_path)
+        return os.path.join(self.tree.output_path, file_path)
 
     def prepare_run(self):
         """
         In this case we create only a index.html file with the children links.
         """
         # load and render template
-        template = self.node.env.get_template('root.html')
-        children_list = dict([(child.name, child.full_name()) for child in self.node.children])
+        template = self.env.get_template('root.html')
+        children_list = dict([(child.name, child.full_name()) for child in self.children])
         content = template.render(children_list=children_list)
 
         # create file
@@ -145,9 +143,9 @@ class ListNode(Node):
         In this case we create only a index.html file with the children links.
         """
 
-        template = self.node.env.get_template('list.html')
-        children_list = dict([(child.name, child.full_name()) for child in self.node.children])
-        content = template.render(name=self.node.name, children_list=children_list)
+        template = self.env.get_template('list.html')
+        children_list = dict([(child.name, child.full_name()) for child in self.children])
+        content = template.render(name=self.name, children_list=children_list)
 
         # create file
         file_path = self.output_path("index.html")
@@ -161,12 +159,12 @@ class SiteNode(Node):
     def absolute_path_to_html(self):
         return os.path.join(
             os.path.abspath(self.output_path()),
-            self.node.full_name())
+            self.full_name())
 
     def prepare_run(self):
-        zip_file = SiteCrawler(self.node.name, self.node.tree.args).download_site()
-        site_dir = unzip_one(self.node.tree.args['--output-dir'], self.node.name, zip_file)
-        site = Site(site_dir, self.node.name, root_path="/"+self.node.full_name())
+        zip_file = SiteCrawler(self.name, self.tree.args).download_site()
+        site_dir = unzip_one(self.tree.args['--output-dir'], self.name, zip_file)
+        site = Site(site_dir, self.name, root_path="/"+self.full_name())
         HTMLExporter(site, self.output_path())
 
 
@@ -175,7 +173,7 @@ class WordPressNode(Node):
     def absolute_path_to_html(self):
         return os.path.join(
             os.path.abspath(self.output_path()),
-            self.node.full_name())
+            self.full_name())
 
     def prepare_run(self):
 

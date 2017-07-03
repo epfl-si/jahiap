@@ -1,6 +1,6 @@
 import os
 
-from generator.node import Node
+from generator.node import Node, RootNode
 
 
 class Tree:
@@ -14,12 +14,12 @@ class Tree:
             "generator")
 
         # create root
-        root = Node(name="root")
-        self.nodes = {root.name: root}
+        self.root = RootNode(name="root", tree=self)
+        self.nodes = {self.root.name: self.root}
 
         # create all nodes
         for site in self.sites:
-            node = Node.factory(name=site['name'], type=site['type'])
+            node = Node.factory(name=site['name'], type=site['type'], tree=self)
             self.nodes[node.name] = node
 
         # create all relation
@@ -30,7 +30,7 @@ class Tree:
 
     def __repr__(self):
         return "<Tree root=%s #nodes=%s path=%s>" \
-            % (self.root.name, len(self.nodes), self.output_path)
+               % (self.root.name, len(self.nodes), self.output_path)
 
     def prepare_run(self):
         """
