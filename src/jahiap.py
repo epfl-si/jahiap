@@ -144,7 +144,7 @@ def main_parse(args):
             # FIXME : site-path should be given in exporter, not parser
             root_path = ""
             if args['--site-path']:
-                #root_path = "/%s/%s" % (args['--site-path'], site_name)
+                root_path = "/%s/%s" % (args['--site-path'], site_name)
                 logging.info("Setting root_path %s", root_path)
             logging.info("Parsing Jahia xml files from %s...", site_dir)
             site = Site(site_dir, site_name, root_path=root_path)
