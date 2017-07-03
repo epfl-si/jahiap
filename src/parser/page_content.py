@@ -1,9 +1,9 @@
 """(c) All rights reserved. ECOLE POLYTECHNIQUE FEDERALE DE LAUSANNE, Switzerland, VPSI, 2017"""
 from datetime import datetime
 
-from box import Box
+from parser.box import Box
 from settings import JAHIA_DATE_FORMAT
-from sidebar import Sidebar
+from parser.sidebar import Sidebar
 import logging
 
 
