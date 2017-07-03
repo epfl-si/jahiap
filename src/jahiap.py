@@ -6,14 +6,14 @@ Usage:
                           [--number=<NUMBER>] [--date DATE] [--force] [--debug | --quiet]
   jahiap.py unzip <site>  [--output-dir=<OUTPUT_DIR>] [--number=<NUMBER>] [--debug | --quiet]
   jahiap.py parse <site>  [--output-dir=<OUTPUT_DIR>] [--number=<NUMBER>] [--print-report]
-                          [--debug | --quiet] [--use-cache] [--root-path=<ROOT_PATH>]
-  jahiap.py export <site> [--clean-wordpress | --to-wordpress | --nginx-conf] [--to-static] [--to-dictionary]
-                          [--output-dir=<OUTPUT_DIR>] [--root-path=<ROOT_PATH>]
-                          [--number=<NUMBER>] [--site-url=<SITE_URL>] [--print-report]
-                          [--wp-cli=<WP_CLI>] [--debug | --quiet] [--export-path=<EXPORT_PATH>]
-                          [--use-cache]
+                          [--debug | --quiet] [--use-cache] [--site-path=<SITE_PATH>]
+  jahiap.py export <site> [--clean-wordpress | --to-wordpress | --nginx-conf]
+                          [--wp-cli=<WP_CLI> --site-host=<SITE_HOST> --site-path=<SITE_PATH>]
+                          [--to-static --to-dictionary --number=<NUMBER> --print-report]
+                          [--output-dir=<OUTPUT_DIR> --export-path=<EXPORT_PATH>]
+                          [--use-cache] [--debug | --quiet]
   jahiap.py docker <site> [--output-dir=<OUTPUT_DIR>] [--number=<NUMBER>] [--debug | --quiet]
-  jahiap.py generate [--output-dir=<OUTPUT_DIR>] [--debug | --quiet]
+  jahiap.py generate <csv_file> [--output-dir=<OUTPUT_DIR>] [--debug | --quiet]
 
 Options:
   -h --help                     Show this screen.
@@ -24,15 +24,15 @@ Options:
   --date DATE                   (crawl) Date and time for the snapshot, e.g : 2017-01-15-23-00.
   -f --force                    (crawl) Force download even if existing snapshot for same site.
   --use-cache                   (parse) Do not parse if pickle file found with a previous parsing result
-  --root-path=<ROOT_PATH>       (FIXME) Set base path for URLs (default is '' or $WP_PATH on command 'docker')
+  --site-path=<SITE_PATH>       (parse, export) sub dir where to export parsed content
   -r --print-report             (FIXME) Print report with content.
   --nginx-conf                  (export) Only export pages to WordPress in order to generate nginx conf
   -s --to-static                (export) Export parsed data to static HTML files.
   -d --to-dictionary            (export) Export parsed data to python dictionary.
   -c --clean-wordpress          (export) Delete all content of WordPress site.
   -w --to-wordpress             (export) Export parsed data to WordPress and generate nginx conf
-  -u --site-url=<SITE_URL>      (export) WordPress URL where to export parsed content. (default is $WP_ADMIN_URL)
   --wp-cli=<WP_CLI>             (export) Name of wp-cli container to use with given WordPress URL. (default WPExporter)
+  --site-host=<SITE_HOST>       (export) WordPress HOST where to export parsed content. (default is $WP_ADMIN_URL)
   --debug                       (*) Set logging level to DEBUG (default is INFO).
   --quiet                       (*) Set logging level to WARNING (default is INFO).
 """
@@ -57,7 +57,7 @@ from wordpress_json import WordpressError
 from generator.tree import Tree
 from unzipper.unzip import unzip_one
 from jahia_site import Site
-from settings import VERSION, EXPORT_PATH, WP_ADMIN_URL, WP_HOST, WP_PATH, \
+from settings import VERSION, EXPORT_PATH, WP_HOST, WP_PATH, \
     LINE_LENGTH_ON_EXPORT, LINE_LENGTH_ON_PPRINT
 
 
@@ -141,10 +141,10 @@ def main_parse(args):
                         parsed_sites[site_name] = pickle.load(input)
                         continue
 
-            # FIXME : root-path should be given in exporter, not parser
+            # FIXME : site-path should be given in exporter, not parser
             root_path = ""
-            if args['--root-path']:
-                root_path = "/%s/%s" % (args['--root-path'], site_name)
+            if args['--site-path']:
+                root_path = "/%s/%s" % (args['--site-path'], site_name)
                 logging.info("Setting root_path %s", root_path)
             logging.info("Parsing Jahia xml files from %s...", site_dir)
             site = Site(site_dir, site_name, root_path=root_path)
@@ -157,7 +157,7 @@ def main_parse(args):
                 logging.info("Parsed site saved into %s" % pickle_file)
                 pickle.dump(site, output, pickle.HIGHEST_PROTOCOL)
 
-                # log success
+            # log success
             logging.info("Site %s successfully parsed" % site_name)
             parsed_sites[site_name] = site
 
@@ -171,7 +171,9 @@ def main_parse(args):
                 "time": elapsed
             }
 
+            # TODO: use csv_line
             csv_line = "%(name)s;%(pages)s;%(files)s;%(time)s" % csv_dict
+            logging.debug("performance info: %s", csv_line)
 
         except:
             logging.error("Error parsing site %s" % site_name)
@@ -210,7 +212,7 @@ def main_export(args):
                     wp_exporter = WPExporter(site, args)
                     wp_exporter.import_all_data_to_wordpress()
                     wp_exporter.generate_nginx_conf_file()
-                    exported_site['wordpress'] = args['--site-url']
+                    exported_site['wordpress'] = args['--site-path']
                     logging.info("Site %s successfully exported to WordPress", site.name)
 
                 if args['--nginx-conf']:
@@ -218,7 +220,7 @@ def main_export(args):
                     wp_exporter = WPExporter(site, args)
                     wp_exporter.import_pages()
                     wp_exporter.generate_nginx_conf_file()
-                    exported_site['wordpress'] = args['--site-url']
+                    exported_site['wordpress'] = args['--site-path']
                     logging.info("Nginx conf for %s successfully generated", site.name)
             except WordpressError:
                 logging.error("WordPress not available")
@@ -261,7 +263,6 @@ def main_docker(args):
 
     # get list of sites html static sites
     args['--to-static'] = True
-    args['--root-path'] = args['--root-path'] or WP_PATH
     exported_sites = main_export(args)
 
     # docker needs an absolute path in order to mount volumes
@@ -296,7 +297,7 @@ def main_docker(args):
 
 
 def main_generate(args):
-    tree = Tree(args, file_path="sites.csv")
+    tree = Tree(args, file_path=args['<csv_file>'])
     tree.create_html()
     tree.run()
 
@@ -323,14 +324,14 @@ def set_default_values(args):
     # Set default values
     if not args['--date']:
         args['--date'] = datetime.today().strftime("%Y-%m-%d-%H-%M")
-    if not args['--site-url']:
-        args['--site-url'] = WP_ADMIN_URL
     if not args['--wp-cli']:
         args['--wp-cli'] = None
     if not args['--export-path']:
         args['--export-path'] = EXPORT_PATH
-    if not args['--root-path']:
-        args['--root-path'] = ''
+    if not isinstance(args['--site-path'], str):
+        args['--site-path'] = WP_PATH
+    if not args['--site-host']:
+        args['--site-host'] = WP_HOST
     return args
 
 
