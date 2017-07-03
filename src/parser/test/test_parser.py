@@ -2,9 +2,9 @@ import os
 
 import pytest
 
+from parser.jahia_site import Site
+from parser.test import Data
 from settings import DATA_PATH
-from test import Data
-from jahiap import Site
 
 
 def get_sites():

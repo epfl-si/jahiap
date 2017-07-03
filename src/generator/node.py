@@ -7,13 +7,13 @@ from jinja2 import Environment, PackageLoader, select_autoescape
 
 from crawler import SiteCrawler
 from generator.cooking import cook_one_site, prepare_ingredients
+from parser.jahia_site import Site
 from unzipper.unzip import unzip_one
 from exporter.html_exporter import HTMLExporter
-from jahia_site import Site
 from settings import WP_HOST, PROJECT_PATH
 
 
-class Node():
+class Node:
 
     env = Environment(
         loader=PackageLoader('generator', 'templates'),
