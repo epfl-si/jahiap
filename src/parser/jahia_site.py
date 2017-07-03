@@ -5,11 +5,11 @@ import logging
 import collections
 
 from bs4 import BeautifulSoup
-from box import Box
-from file import File
-from link import Link
-from page import Page
-from page_content import PageContent
+from parser.box import Box
+from parser.file import File
+from parser.link import Link
+from parser.page import Page
+from parser.page_content import PageContent
 from utils import Utils
 
 """
