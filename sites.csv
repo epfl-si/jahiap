@@ -1,8 +1,0 @@
-name,parent,type
-administratif,root,ListTypeNode
-labs,root,ListTypeNode
-ahead,root,WordPressTypeNode
-apc,administratif,SiteTypeNode
-building2050,administratif,SiteTypeNode
-apml,labs,SiteTypeNode
-bioinspired,ahead,SiteTypeNode
