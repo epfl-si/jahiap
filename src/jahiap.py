@@ -56,7 +56,7 @@ from exporter.wp_exporter import WPExporter
 from wordpress_json import WordpressError
 from generator.tree import Tree
 from unzipper.unzip import unzip_one
-from jahia_site import Site
+from parser.jahia_site import Site
 from settings import VERSION, EXPORT_PATH, WP_HOST, WP_PATH, \
     LINE_LENGTH_ON_EXPORT, LINE_LENGTH_ON_PPRINT
 
