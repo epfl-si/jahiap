@@ -77,7 +77,6 @@ class Utils:
 
         return os.environ.get(key)
 
-
     @staticmethod
     def set_logging_config(args):
         """

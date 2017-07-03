@@ -28,7 +28,6 @@ from jinja2 import Environment, PackageLoader
 from generator.utils import Utils as GeneratorUtils
 
 
-
 VERSION = 0.2
 
 WP_HOST = os.environ.get("WP_HOST")
@@ -42,6 +41,7 @@ def main(args):
         prepare_ingredients(args)
     if args['cook']:
         cook_all_sites(args)
+
 
 def prepare_ingredients_one_site(csv_info):
 
@@ -70,6 +70,7 @@ def prepare_ingredients_one_site(csv_info):
         output.write(content)
         output.flush()
         logging.info("(ok) %s", file_path)
+
 
 def prepare_ingredients(args):
     # check config
@@ -154,6 +155,7 @@ def cook_one_site(args, config_file):
         logging.info("Site generated into %s", site_path)
     except OutputDirExistsException:
         logging.error("%s already exists. Use --force to override", config_file)
+
 
 def set_default_values(args):
     """

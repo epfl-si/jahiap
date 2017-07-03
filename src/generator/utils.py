@@ -1,9 +1,6 @@
 """(c) All rights reserved. ECOLE POLYTECHNIQUE FEDERALE DE LAUSANNE, Switzerland, VPSI, 2017"""
-import os
 import csv
 import logging
-
-from compose.cli.main import TopLevelCommand, project_from_options
 
 
 class Utils:
@@ -42,3 +39,13 @@ class Utils:
 
             logging.debug("Parsed CSV %s", rows)
             return rows
+
+    @staticmethod
+    def csv_to_sites(file_path):
+
+        sites = []
+        with open(file_path) as csvfile:
+            reader = csv.DictReader(csvfile)
+            for row in reader:
+                sites.append(row)
+        return sites

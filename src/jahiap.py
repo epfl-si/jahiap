@@ -15,7 +15,7 @@ Usage:
   jahiap.py docker <site> [--output-dir=<OUTPUT_DIR>] [--number=<NUMBER>] [--debug | --quiet]
   jahiap.py compose_up <BUILD_PATH> [--force] [--recurse] [--debug | --quiet]
   jahiap.py compose_down <BUILD_PATH> [--recurse] [--debug | --quiet]
-  jahiap.py generate [--output-dir=<OUTPUT_DIR>] [--debug | --quiet]
+  jahiap.py generate <csv_file> [--output-dir=<OUTPUT_DIR>] [--debug | --quiet]
 
 
 Options:
@@ -61,7 +61,7 @@ from exporter.wp_exporter import WPExporter
 from wordpress_json import WordpressError
 from generator.tree import Tree
 from unzipper.unzip import unzip_one
-from jahia_site import Site
+from parser.jahia_site import Site
 from settings import VERSION, EXPORT_PATH, WP_HOST, WP_PATH, \
     LINE_LENGTH_ON_EXPORT, LINE_LENGTH_ON_PPRINT
 
@@ -309,9 +309,10 @@ def main_compose_down(args):
 
 
 def main_generate(args):
-    tree = Tree(args, file_path="sites.csv")
-    tree.prepare_run_cmd()
+    tree = Tree(args, sites=UtilsGenerator.csv_to_sites(file_path=args['<csv_file>']))
+    tree.prepare_run()
     tree.run()
+
 
 def set_default_values(args):
     """
