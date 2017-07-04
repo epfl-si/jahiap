@@ -3,9 +3,16 @@
 Code to add before **&lt;/body&gt;** :
 
 ~~~
+<!-- Code for Usersnap -->
 <script type="text/javascript">
-(function() { var s = document.createElement("script"); s.type = "text/javascript"; s.async = true; s.src = '//api.usersnap.com/load/a0a37883-1812-41bf-9389-b4116433a67c.js';
-var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(s, x); })();
+  var _usersnapconfig = {
+    emailRequired: true,
+    hideTour: true
+  };
+
+  (function() { var s = document.createElement("script"); s.type = "text/javascript"; s.async = true; s.src = '//api.usersnap.com/load/a0a37883-1812-41bf-9389-b4116433a67c.js';
+
+  var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(s, x); })();
 </script>
 ~~~
 
