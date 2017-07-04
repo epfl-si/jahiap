@@ -2,6 +2,8 @@
 import logging
 import os
 from jinja2 import Environment, PackageLoader, select_autoescape
+from cookiecutter.main import cookiecutter
+from cookiecutter.exceptions import OutputDirExistsException
 
 from crawler import SiteCrawler
 from generator.cooking import cook_one_site
@@ -172,26 +174,19 @@ class WordPressNode(Node):
             os.path.abspath(self.output_path()),
             self.full_name())
 
-    def prepare_ingredients(self, args):
-        """
-        --conf-path
-        """
-
-        # row is a dictionnary with the following keys:
-        # site_name;parent;type_name;site_url;site_title;email;username;pwd;db_name
-        parent = self.parent
-
+    def prepare_yaml(self, conf_path):
         # build yml file
         template = self.env.get_template('conf.yaml')
         content = template.render(wp_host=WP_HOST, **self.data)
 
         # build file path
+        parent = self.parent
         if parent == 'root':
-            dir_path = args['--conf-path']
+            dir_path = conf_path
         else:
-            dir_path = os.path.join(args['--conf-path'], parent.full_name())
+            dir_path = os.path.join(conf_path, parent.full_name())
             if not os.path.exists(dir_path):
-                os.mkdir(dir_path)
+                os.makedirs(dir_path)
         file_path = os.path.join(dir_path, self.name) + ".yaml"
 
         # write yml file
@@ -202,10 +197,27 @@ class WordPressNode(Node):
 
         return file_path
 
+    def prepare_composition(self, args, yaml_path):
+        """
+            Create project from the template. See API reference online:
+            https://cookiecutter.readthedocs.io/en/latest/cookiecutter.html#module-cookiecutter.main
+        """
+        logging.info("Starting cookiecutter...")
+        try:
+            site_path = cookiecutter(
+                args['--cookie-path'],
+                no_input=True,
+                overwrite_if_exists=args['--force'],
+                config_file=yaml_path,
+                output_dir=args['--output-path'])
+            logging.info("Site generated into %s", site_path)
+        except OutputDirExistsException:
+            logging.warning("%s already exists. Use --force to override", yaml_path)
+
     def prepare_run(self):
-        args = self.tree.args
-        config_file = self.prepare_ingredients(args)
-        cook_one_site(args, config_file)
+        yaml_path = self.prepare_yaml(self.tree.args['--conf-path'])
+        self.prepare_composition(self.tree.args, yaml_path)
 
     def run(self):
-        UtilsGenerator.docker(self.tree.args, up=True)
+        raise SystemExit("Done")
+        UtilsGenerator.docker(path, up=True)

@@ -13,8 +13,6 @@ Usage:
                           [--output-dir=<OUTPUT_DIR> --export-path=<EXPORT_PATH>]
                           [--use-cache] [--debug | --quiet]
   jahiap.py docker <site> [--output-dir=<OUTPUT_DIR>] [--number=<NUMBER>] [--debug | --quiet]
-  jahiap.py compose_up <BUILD_PATH> [--force] [--recurse] [--debug | --quiet]
-  jahiap.py compose_down <BUILD_PATH> [--recurse] [--debug | --quiet]
   jahiap.py generate <csv_file> [--output-dir=<OUTPUT_DIR>] [--conf-path=<CONF_PATH>]
                                 [--output-path=<OUTPUT_PATH>] [--cookie-path=<COOKIE_PATH>]
                                 [--force] [--debug | --quiet]
@@ -41,7 +39,7 @@ Options:
   --site-host=<SITE_HOST>       (export) WordPress HOST where to export parsed content. (default is $WP_ADMIN_URL)
   --conf-path=<CONF_PATH>       (generate) Path where to export yaml files [default: build/etc]
   --output-path=<OUTPUT_PATH>   (generate) Path where to create compositions [default: build/sites]
-  --cookie-path=<COOKIE_PATH>   (generate) Path where to create compositions
+  --cookie-path=<COOKIE_PATH>   (generate) Path where {{ cookiecutter project }} is located [default is $COOKIE_PATH]
   --debug                       (*) Set logging level to DEBUG (default is INFO).
   --quiet                       (*) Set logging level to WARNING (default is INFO).
 """
@@ -303,14 +301,6 @@ def main_docker(args):
         }
         os.system(docker_cmd)
         logging.info("Docker launched for %s", site_name)
-
-
-def main_compose_up(path):
-    UtilsGenerator.docker(path, up=True)
-
-
-def main_compose_down(args):
-    UtilsGenerator.docker(args, up=False)
 
 
 def main_generate(args):
