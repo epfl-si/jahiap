@@ -1,6 +1,9 @@
 """(c) All rights reserved. ECOLE POLYTECHNIQUE FEDERALE DE LAUSANNE, Switzerland, VPSI, 2017"""
 import logging
 import os
+import time
+import timeit
+from datetime import timedelta
 from jinja2 import Environment, PackageLoader, select_autoescape
 from cookiecutter.main import cookiecutter
 from cookiecutter.exceptions import OutputDirExistsException
@@ -9,7 +12,8 @@ from crawler import SiteCrawler
 from parser.jahia_site import Site
 from unzipper.unzip import unzip_one
 from exporter.html_exporter import HTMLExporter
-from settings import WP_HOST, PROJECT_PATH
+from exporter.wp_exporter import WPExporter
+from settings import WP_HOST, PROJECT_PATH, MAX_WORDPRESS_STARTING_TIME
 from generator.utils import Utils as UtilsGenerator
 
 
@@ -227,7 +231,31 @@ class WordPressNode(Node):
     def run(self):
         composition_path = os.path.join(self.tree.args['--output-dir'], self.name)
         UtilsGenerator.docker(composition_path, up=True)
+        # built up Wordpress URL
+        wp_url = "%s/%s" % (WP_HOST, self.full_name())
+        # set timer not to lock the process
+        start_time = timeit.default_timer()
+        # wait fot Apache to start
+        while not UtilsGenerator.is_apache_up(wp_url):
+            # give more time to apache to start
+            time.sleep(10)
+            # check execution time
+            elapsed = timedelta(seconds=timeit.default_timer() - start_time)
+            if elapsed > MAX_WORDPRESS_STARTING_TIME:
+                break
+        # do export
+        if UtilsGenerator.is_apache_up(wp_url):
+            # FIXME : do not pass args in Objects
+            self.tree.args['--site-path'] = self.full_name()
+            zip_file = SiteCrawler(self.name, self.tree.args).download_site()
+            site_dir = unzip_one(self.tree.args['--output-dir'], self.name, zip_file)
+            site = Site(site_dir, self.name, root_path="/"+self.full_name())
+            wp_exporter = WPExporter(site, self.tree.args)
+            wp_exporter.import_all_data_to_wordpress()
+        else:
+            logging.error("Could not start Apache in %s", MAX_WORDPRESS_STARTING_TIME)
 
     def cleanup(self):
         composition_path = os.path.join(self.tree.args['--output-dir'], self.name)
         UtilsGenerator.docker(composition_path, up=False)
+        # TODO: remove DB

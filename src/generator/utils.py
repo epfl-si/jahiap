@@ -2,6 +2,7 @@
 import csv
 import logging
 import os
+import requests
 
 from compose.cli.main import TopLevelCommand, project_from_options
 
@@ -85,3 +86,11 @@ class Utils:
             cmd.down(cls.DOCKER_OPTIONS)
 
         return cmd
+
+    @classmethod
+    def is_apache_up(cls, wp_url):
+        try:
+            logging.info("Checking Apache on %s", wp_url)
+            return requests.get("http://%s/wp-login.php" % wp_url).status_code == 200
+        except requests.ConnectionError:
+            return False

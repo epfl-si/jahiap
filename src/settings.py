@@ -2,10 +2,13 @@
 import os
 
 from utils import Utils as MainUtils
+from datetime import timedelta
 
 VERSION = "0.3"
 
 CONFIGURED_LANGUAGES = set(['fr', 'en'])
+
+MAX_WORDPRESS_STARTING_TIME = timedelta(minutes=1, seconds=30)
 
 WP_HOST = MainUtils.get_optional_env("WP_HOST", "localhost")
 WP_PATH = MainUtils.get_optional_env("WP_PATH", "/")
