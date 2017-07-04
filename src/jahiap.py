@@ -14,6 +14,7 @@ Usage:
                           [--use-cache] [--debug | --quiet]
   jahiap.py docker <site> [--output-dir=<OUTPUT_DIR>] [--number=<NUMBER>] [--debug | --quiet]
   jahiap.py generate <csv_file> [--output-dir=<OUTPUT_DIR>] [--debug | --quiet]
+  jahiap.py global_report <site> [--output-dir=<OUTPUT_DIR>] [--number=<NUMBER>] [--use-cache] [--debug | --quiet]
 
 Options:
   -h --help                     Show this screen.
@@ -40,9 +41,9 @@ import logging
 import os
 import pickle
 import sys
-import timeit
+import csv
 from collections import OrderedDict
-from datetime import datetime, timedelta
+from datetime import datetime
 from pprint import pprint, pformat
 
 import requests
@@ -124,9 +125,6 @@ def main_parse(args):
 
     for site_name, site_dir in site_dirs.items():
         try:
-            # set timer to measure execution time
-            start_time = timeit.default_timer()
-
             # create subdir in output_dir
             output_subdir = os.path.join(args['--output-dir'], site_name)
 
@@ -143,9 +141,9 @@ def main_parse(args):
 
             # FIXME : site-path should be given in exporter, not parser
             root_path = ""
-            if args['--site-path']:
-                root_path = "/%s/%s" % (args['--site-path'], site_name)
-                logging.info("Setting root_path %s", root_path)
+            # if args['--site-path']:
+            #   root_path = "/%s/%s" % (args['--site-path'], site_name)
+            #   logging.info("Setting root_path %s", root_path)
             logging.info("Parsing Jahia xml files from %s...", site_dir)
             site = Site(site_dir, site_name, root_path=root_path)
 
@@ -161,25 +159,45 @@ def main_parse(args):
             logging.info("Site %s successfully parsed" % site_name)
             parsed_sites[site_name] = site
 
-            elapsed = timedelta(seconds=timeit.default_timer() - start_time)
-
-            # a csv line for stats
-            csv_dict = {
-                "name": site.name,
-                "pages": site.num_pages,
-                "files": site.num_files,
-                "time": elapsed
-            }
-
-            # TODO: use csv_line
-            csv_line = "%(name)s;%(pages)s;%(files)s;%(time)s" % csv_dict
-            logging.debug("performance info: %s", csv_line)
-
-        except:
-            logging.error("Error parsing site %s" % site_name)
+        except Exception as e:
+            logging.error("Error parsing site %s : %s" % (site_name, e))
 
     # return results
     return parsed_sites
+
+
+def main_global_report(args):
+    "Generate a global report with stats like the number of pages, files and boxes"
+    path = os.path.join(args['--output-dir'], "global-report.csv")
+
+    logging.debug("Generating global report at %s" % path)
+
+    sites = main_parse(args)
+
+    # retrieve all the box types
+    box_types = set()
+
+    for site_name, site in sites.items():
+        for key in site.num_boxes.keys():
+            if key:
+                box_types.add(key)
+
+    # the base field names for the csv
+    fieldnames = ["name", "pages", "files"]
+
+    # add all the box types
+    fieldnames.extend(sorted(box_types))
+
+    # write the csv file
+    with open(path, 'w') as csvfile:
+        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+
+        # header
+        writer.writeheader()
+
+        # content
+        for site_name, site in sites.items():
+            writer.writerow(site.get_report_info(box_types))
 
 
 def main_export(args):
