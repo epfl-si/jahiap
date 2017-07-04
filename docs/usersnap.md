@@ -1,3 +1,7 @@
+## API key
+
+a0a37883-1812-41bf-9389-b4116433a67c
+
 ## Integration
 
 Code to add before **&lt;/body&gt;** :
@@ -16,16 +20,16 @@ Code to add before **&lt;/body&gt;** :
 </script>
 ~~~
 
-### Integration example :
+### Integration example
 
 http://test-web-wordpress.epfl.ch:9090
 
-## Issues
+## Issue
 
 Usersnap's rendering engine needs access to the site's static resources (images + stylesheets)
 to be able to render the screens accurately.
 
-### Workaround 1 :
+### Workaround
 
 Use the browser extensions.
 
@@ -36,17 +40,3 @@ https://chrome.google.com/webstore/detail/usersnap-visual-feedback/khehmhbaabkep
 Firefox :
 
 https://addons.mozilla.org/en-US/firefox/addon/usersnap/
-
-### Workaround 2 :
-
-Configure the server to let usernap access :
-
-https://usersnap.com/help/troubleshooting/protected
-
-For nginx :
-
-~~~
-allow 144.76.224.70;
-allow 78.46.60.85;
-allow 136.243.88.28;
-~~~
