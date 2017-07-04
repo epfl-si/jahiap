@@ -14,9 +14,8 @@ Usage:
                           [--use-cache] [--debug | --quiet]
   jahiap.py docker <site> [--output-dir=<OUTPUT_DIR>] [--number=<NUMBER>] [--debug | --quiet]
   jahiap.py generate <csv_file> [--output-dir=<OUTPUT_DIR>] [--conf-path=<CONF_PATH>]
-                                [--output-path=<OUTPUT_PATH>] [--cookie-path=<COOKIE_PATH>]
-                                [--force] [--debug | --quiet]
-
+                                [--cookie-path=<COOKIE_PATH>] [--force] [--debug | --quiet]
+  jahiap.py cleanup <csv_file>  [--debug | --quiet]
 
 Options:
   -h --help                     Show this screen.
@@ -38,7 +37,6 @@ Options:
   --recurse                     (compose|cleanup) Search in all the tree of directories
   --site-host=<SITE_HOST>       (export) WordPress HOST where to export parsed content. (default is $WP_ADMIN_URL)
   --conf-path=<CONF_PATH>       (generate) Path where to export yaml files [default: build/etc]
-  --output-path=<OUTPUT_PATH>   (generate) Path where to create compositions [default: build/sites]
   --cookie-path=<COOKIE_PATH>   (generate) Path where {{ cookiecutter project }} is located [default is $COOKIE_PATH]
   --debug                       (*) Set logging level to DEBUG (default is INFO).
   --quiet                       (*) Set logging level to WARNING (default is INFO).
@@ -310,6 +308,12 @@ def main_generate(args):
     tree.run()
 
 
+def main_cleanup(args):
+
+    tree = Tree(args, sites=UtilsGenerator.csv_to_dict(file_path=args['<csv_file>']))
+    tree.cleanup()
+
+
 def set_default_values(args):
     """
     Set default values of arguments 'args'
@@ -331,8 +335,6 @@ def set_default_values(args):
         logging.warning("You are using --force option to overwrite existing file.")
     if not args['--conf-path']:
         args['--conf-path'] = "build/etc"
-    if not args['--output-path']:
-        args['--output-path'] = "build/sites"
     if not args['--cookie-path']:
         args['--cookie-path'] = Utils.get_required_env('COOKIE_PATH')
 

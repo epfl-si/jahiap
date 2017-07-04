@@ -110,6 +110,13 @@ class Node:
         logging.info("Docker launched for %s", self.name)
 
 
+    def cleanup(self):
+        docker_cmd = 'docker rm -f generated-%s' % self.name
+        os.system(docker_cmd)
+        logging.debug(docker_cmd)
+        logging.info("Docker '%s' stopped and removed", self.name)
+
+
 class RootNode(Node):
 
     def full_name(self):
@@ -177,7 +184,7 @@ class WordPressNode(Node):
     def prepare_yaml(self, conf_path):
         # build yml file
         template = self.env.get_template('conf.yaml')
-        content = template.render(wp_host=WP_HOST, **self.data)
+        content = template.render(wp_host=WP_HOST, full_name=self.full_name(), **self.data)
 
         # build file path
         parent = self.parent
@@ -209,8 +216,9 @@ class WordPressNode(Node):
                 no_input=True,
                 overwrite_if_exists=args['--force'],
                 config_file=yaml_path,
-                output_dir=args['--output-path'])
+                output_dir=args['--output-dir'])
             logging.info("Site generated into %s", site_path)
+            return site_path
         except OutputDirExistsException:
             logging.warning("%s already exists. Use --force to override", yaml_path)
 
@@ -219,5 +227,9 @@ class WordPressNode(Node):
         self.prepare_composition(self.tree.args, yaml_path)
 
     def run(self):
-        raise SystemExit("Done")
-        UtilsGenerator.docker(path, up=True)
+        composition_path = os.path.join(self.tree.args['--output-dir'], self.name)
+        UtilsGenerator.docker(composition_path, up=True)
+
+    def cleanup(self):
+        composition_path = os.path.join(self.tree.args['--output-dir'], self.name)
+        UtilsGenerator.docker(composition_path, up=False)

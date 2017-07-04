@@ -46,3 +46,10 @@ class Tree:
         """
         for node in self.nodes.values():
             node.run()
+
+    def cleanup(self):
+        """
+        Create all docker container for all sites
+        """
+        for node in self.nodes.values():
+            node.cleanup()

@@ -4,7 +4,8 @@
 
 default_context:
     project_name: "{{ name }}"
-    wp_url: "http://{{ wp_host }}/{{ parent }}/{{ name }}"
+    wp_host: "{{ wp_host }}"
+    wp_path: "{{ full_name }}"
     wp_title: "{{ site_title }}"
     wp_db_host: "db:3306"
     wp_db_user: "root"
