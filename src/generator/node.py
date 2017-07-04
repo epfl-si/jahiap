@@ -6,7 +6,6 @@ from cookiecutter.main import cookiecutter
 from cookiecutter.exceptions import OutputDirExistsException
 
 from crawler import SiteCrawler
-from generator.cooking import cook_one_site
 from parser.jahia_site import Site
 from unzipper.unzip import unzip_one
 from exporter.html_exporter import HTMLExporter
@@ -108,7 +107,6 @@ class Node:
         os.system(docker_cmd)
         logging.debug(docker_cmd)
         logging.info("Docker launched for %s", self.name)
-
 
     def cleanup(self):
         docker_cmd = 'docker rm -f generated-%s' % self.name
