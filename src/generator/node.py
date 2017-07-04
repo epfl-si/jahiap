@@ -178,6 +178,10 @@ class SiteNode(Node):
 
 class WordPressNode(Node):
 
+    @classmethod
+    def get_composition_dir(cls, args):
+        return os.path.join(args['--output-dir'], 'compositions')
+
     def absolute_path_to_html(self):
         return os.path.join(
             os.path.abspath(self.output_path()),
@@ -218,7 +222,7 @@ class WordPressNode(Node):
                 no_input=True,
                 overwrite_if_exists=args['--force'],
                 config_file=yaml_path,
-                output_dir=args['--output-dir'])
+                output_dir=self.get_composition_dir(args))
             logging.info("Site generated into %s", site_path)
             return site_path
         except OutputDirExistsException:
@@ -229,7 +233,7 @@ class WordPressNode(Node):
         self.prepare_composition(self.tree.args, yaml_path)
 
     def run(self):
-        composition_path = os.path.join(self.tree.args['--output-dir'], self.name)
+        composition_path = os.path.join(self.get_composition_dir(self.tree.args), self.name)
         UtilsGenerator.docker(composition_path, up=True)
         # built up Wordpress URL
         wp_url = "%s/%s" % (WP_HOST, self.full_name())
@@ -256,6 +260,6 @@ class WordPressNode(Node):
             logging.error("Could not start Apache in %s", MAX_WORDPRESS_STARTING_TIME)
 
     def cleanup(self):
-        composition_path = os.path.join(self.tree.args['--output-dir'], self.name)
+        composition_path = os.path.join(self.get_composition_dir(self.tree.args), self.name)
         UtilsGenerator.docker(composition_path, up=False)
         # TODO: remove DB
