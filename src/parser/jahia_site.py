@@ -126,6 +126,32 @@ class Site:
 
         self.server_name = properties["siteservername"]
 
+    def get_report_info(self, box_types):
+        """
+        Return the report info as a dict. As an argument you can
+        pass an array of box types to have their count number.
+        """
+
+        # common info
+        info = {
+            "name": self.name,
+            "pages": self.num_pages,
+            "files": self.num_files,
+        }
+
+        # add the number of boxes for each type
+        for type in box_types:
+            info[type] = self.get_num_boxes(type)
+
+        return info
+
+    def get_num_boxes(self, type):
+        """Return the number of boxes for the given type"""
+        if type in self.num_boxes:
+            return self.num_boxes[type]
+        else:
+            return 0
+
     def parse_data(self):
         """Parse the Site data"""
 

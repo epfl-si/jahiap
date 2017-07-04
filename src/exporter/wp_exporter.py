@@ -255,7 +255,7 @@ class WPExporter:
 
                 # Set page language
                 result = self.wp_cli('polylang set post %s %s' % (page.wp_id, lang))
-                if not result is None:
+                if result is not None:
                     logging.debug("page.%s lang set to '%s'", page.wp_id, lang)
 
         self.update_parent_id()
@@ -337,7 +337,7 @@ class WPExporter:
         self.wp_cli('option update show_on_front page')
 
         result = self.wp_cli('option update page_on_front %s' % frontpage_id)
-        if not result is None:
+        if result is not None:
             logging.info("WP frontpage setted")
 
     def delete_all_content(self):
