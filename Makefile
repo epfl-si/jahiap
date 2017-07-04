@@ -1,9 +1,9 @@
-site_name=dcsl
+site_name=apml
 number=1
 output_dir=build
 docker_name="demo-$(site_name)"
 port=9090
-csv_file=csv-data/mini-sites.csv
+csv_file=csv-data/sites.csv
 
 all: clean run
 
@@ -55,4 +55,5 @@ generate:
 
 cleanup:
 	python src/jahiap.py cleanup $(csv_file)
+	docker system prune
 
