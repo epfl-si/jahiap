@@ -30,7 +30,8 @@ def generated_tree(request):
     output_path = TestGenerator.ARGS['--output-dir']
     if os.path.exists(output_path):
         shutil.rmtree(output_path)
-    tree = Tree(TestGenerator.ARGS, file_path=TestGenerator.DATA_FILE)
+    sites = Utils.csv_to_dict(file_path=TestGenerator.DATA_FILE)
+    tree = Tree(TestGenerator.ARGS, sites=sites)
     tree.prepare_run_cmd()
     return tree
 
