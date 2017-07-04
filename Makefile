@@ -3,13 +3,7 @@ number=1
 output_dir=build
 docker_name="demo-$(site_name)"
 port=9090
-
-# used for command wp_all: specify to which WP import data
-wp_cli_import=wp-cli-wp-import
-wp_host_import=wordpress.localhost
-wp_path_import=admin/wp-import
-output_dir_import=build
-logs_import=build/import-wp.log
+csv_file=csv-data/sites-csv
 
 all: clean run
 
@@ -35,14 +29,11 @@ static:
 wp:
 	python src/jahiap.py export $(site_name) --output-dir $(output_dir) --to-wordpress --site-host $(WP_ADMIN_HOST) --site-path $(WP_ADMIN_PATH) --wp-cli "wpcli"
 
-wp_all:
-	python src/jahiap.py export $(site_name) -w --site-host $(wp_host_import) --site-path $(wp_path_import) --wp-cli=$(wp_cli_import) --number=$(number) --output-dir=$(output_dir_import) --use-cache --debug >> $(logs_import)
+clean_wordpress:
+	python src/jahiap.py export $(site_name) --output-dir $(output_dir) --clean-wordpress --site-host $(WP_ADMIN_HOST) --site-path $(WP_ADMIN_PATH) --wp-cli "wpcli"
 
 nginx_conf:
 	python src/jahiap.py export $(site_name) --output-dir $(output_dir) --nginx-conf --site-host $(WP_ADMIN_HOST) --site-path $(WP_ADMIN_PATH) --wp-cli "wpcli"
-
-clean_wordpress:
-	python src/jahiap.py export $(site_name) --output-dir $(output_dir) --clean-wordpress --site-host $(WP_ADMIN_HOST) --site-path $(WP_ADMIN_PATH) --wp-cli "wpcli"
 
 run:
 	python src/jahiap.py docker $(site_name) --output-dir $(output_dir) --number $(number)
@@ -60,5 +51,5 @@ stop_standalone:
 	docker rm $(docker_name)
 
 generate:
-	python src/jahiap.py generate
+	python src/jahiap.py generate $(csv_file)
 

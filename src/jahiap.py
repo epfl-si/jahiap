@@ -180,8 +180,8 @@ def main_parse(args):
             csv_line = "%(name)s;%(pages)s;%(files)s;%(time)s" % csv_dict
             logging.debug("performance info: %s", csv_line)
 
-        except:
-            logging.error("Error parsing site %s" % site_name)
+        except Exception as err:
+            logging.error("Error parsing site %s: %s", site_name, err, stack_info=True)
 
     # return results
     return parsed_sites
@@ -227,8 +227,8 @@ def main_export(args):
                     wp_exporter.generate_nginx_conf_file()
                     exported_site['wordpress'] = args['--site-path']
                     logging.info("Nginx conf for %s successfully generated", site.name)
-            except WordpressError:
-                logging.error("WordPress not available")
+            except WordpressError as err:
+                logging.error("WordPress not available: %s", err, stack_info=True)
 
             if args['--to-static']:
                 logging.info("Exporting %s to static website...", site.name)
@@ -249,8 +249,8 @@ def main_export(args):
                     output.flush()
                 exported_site['dict'] = export_path
                 logging.info("Site %s successfully exported to python dictionary", site.name)
-        except:
-            logging.error("Error exporting site %s" % site_name)
+        except Exception as err:
+            logging.error("Error exporting site %s: %s", site_name, err, stack_info=True)
 
         if args['--to-wordpress'] and int(args['--number']) > 1:
             wp_exporter = WPExporter(site, args)

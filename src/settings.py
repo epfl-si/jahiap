@@ -3,7 +3,9 @@ import os
 
 from utils import Utils as MainUtils
 
-VERSION = "0.2"
+VERSION = "0.3"
+
+CONFIGURED_LANGUAGES = set(['fr', 'en'])
 
 WP_HOST = MainUtils.get_optional_env("WP_HOST", "localhost")
 WP_PATH = MainUtils.get_optional_env("WP_PATH", "/")
