@@ -13,7 +13,9 @@ Usage:
                           [--output-dir=<OUTPUT_DIR> --export-path=<EXPORT_PATH>]
                           [--use-cache] [--debug | --quiet]
   jahiap.py docker <site> [--output-dir=<OUTPUT_DIR>] [--number=<NUMBER>] [--debug | --quiet]
-  jahiap.py generate <csv_file> [--output-dir=<OUTPUT_DIR>] [--debug | --quiet]
+  jahiap.py generate <csv_file> [--output-dir=<OUTPUT_DIR>] [--conf-path=<CONF_PATH>]
+                                [--cookie-path=<COOKIE_PATH>] [--force] [--debug | --quiet]
+  jahiap.py cleanup <csv_file>  [--debug | --quiet]
   jahiap.py global_report <site> [--output-dir=<OUTPUT_DIR>] [--number=<NUMBER>] [--use-cache] [--debug | --quiet]
 
 Options:
@@ -33,7 +35,10 @@ Options:
   -c --clean-wordpress          (export) Delete all content of WordPress site.
   -w --to-wordpress             (export) Export parsed data to WordPress and generate nginx conf
   --wp-cli=<WP_CLI>             (export) Name of wp-cli container to use with given WordPress URL. (default WPExporter)
+  --recurse                     (compose|cleanup) Search in all the tree of directories
   --site-host=<SITE_HOST>       (export) WordPress HOST where to export parsed content. (default is $WP_ADMIN_URL)
+  --conf-path=<CONF_PATH>       (generate) Path where to export yaml files [default: build/etc]
+  --cookie-path=<COOKIE_PATH>   (generate) Path where {{ cookiecutter project }} is located [default is $COOKIE_PATH]
   --debug                       (*) Set logging level to DEBUG (default is INFO).
   --quiet                       (*) Set logging level to WARNING (default is INFO).
 """
@@ -50,6 +55,7 @@ import requests
 from docopt import docopt
 
 from utils import Utils
+from generator.utils import Utils as UtilsGenerator
 from crawler import SiteCrawler
 from exporter.dict_exporter import DictExporter
 from exporter.html_exporter import HTMLExporter
@@ -89,7 +95,6 @@ def call_command(args):
             continue
         # search command
         elif value:
-            # call main_<command> method
             method_name = 'main_' + str(key)
             return getattr(sys.modules[__name__], method_name)(args)
 
@@ -159,8 +164,8 @@ def main_parse(args):
             logging.info("Site %s successfully parsed" % site_name)
             parsed_sites[site_name] = site
 
-        except Exception as e:
-            logging.error("Error parsing site %s : %s" % (site_name, e))
+        except Exception as err:
+            logging.error("Error parsing site %s: %s", site_name, err, stack_info=True)
 
     # return results
     return parsed_sites
@@ -240,8 +245,8 @@ def main_export(args):
                     wp_exporter.generate_nginx_conf_file()
                     exported_site['wordpress'] = args['--site-path']
                     logging.info("Nginx conf for %s successfully generated", site.name)
-            except WordpressError:
-                logging.error("WordPress not available")
+            except WordpressError as err:
+                logging.error("WordPress not available: %s", err, stack_info=True)
 
             if args['--to-static']:
                 logging.info("Exporting %s to static website...", site.name)
@@ -262,8 +267,8 @@ def main_export(args):
                     output.flush()
                 exported_site['dict'] = export_path
                 logging.info("Site %s successfully exported to python dictionary", site.name)
-        except:
-            logging.error("Error exporting site %s" % site_name)
+        except Exception as err:
+            logging.error("Error exporting site %s: %s", site_name, err, stack_info=True)
 
         if args['--to-wordpress'] and int(args['--number']) > 1:
             wp_exporter = WPExporter(site, args)
@@ -315,22 +320,16 @@ def main_docker(args):
 
 
 def main_generate(args):
-    tree = Tree(args, file_path=args['<csv_file>'])
-    tree.create_html()
+
+    tree = Tree(args, sites=UtilsGenerator.csv_to_dict(file_path=args['<csv_file>']))
+    tree.prepare_run()
     tree.run()
 
 
-def set_logging_config(args):
-    """
-    Set logging with the 'good' level
-    """
-    level = logging.INFO
-    if args['--quiet']:
-        level = logging.WARNING
-    elif args['--debug']:
-        level = logging.DEBUG
-    logging.basicConfig(level=level)
-    logging.getLogger().setLevel(level)
+def main_cleanup(args):
+
+    tree = Tree(args, sites=UtilsGenerator.csv_to_dict(file_path=args['<csv_file>']))
+    tree.cleanup()
 
 
 def set_default_values(args):
@@ -350,6 +349,13 @@ def set_default_values(args):
         args['--site-path'] = WP_PATH
     if not args['--site-host']:
         args['--site-host'] = WP_HOST
+    if args['--force']:
+        logging.warning("You are using --force option to overwrite existing file.")
+    if not args['--conf-path']:
+        args['--conf-path'] = "build/etc"
+    if not args['--cookie-path']:
+        args['--cookie-path'] = Utils.get_required_env('COOKIE_PATH')
+
     return args
 
 
@@ -360,8 +366,7 @@ if __name__ == '__main__':
     args = set_default_values(docopt(__doc__, version=VERSION))
 
     # set logging config before anything else
-    # FIXME : do not call logging.warning is Utils.py
-    set_logging_config(args)
+    Utils.set_logging_config(args)
 
     logging.debug(args)
 

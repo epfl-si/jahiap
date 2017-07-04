@@ -10,7 +10,7 @@ from bs4 import BeautifulSoup
 from wordpress_json import WordpressJsonWrapper, WordpressError
 
 from exporter.utils import Utils
-from settings import WP_USER, WP_PASSWORD, WP_PATH
+from settings import WP_USER, WP_PASSWORD, WP_PATH, CONFIGURED_LANGUAGES
 
 
 class WPExporter:
@@ -38,10 +38,14 @@ class WPExporter:
         official wordpress command line interface)
         available in the docker container wpcli
         """
-        cmd = "docker exec %s wp --allow-root --path='%s' %s" \
-            % (self.cli_container, self.path, command)
-        logging.debug("exec '%s'", cmd)
-        return subprocess.check_output(cmd, shell=True)
+        try:
+            cmd = "docker exec %s wp --allow-root --path='%s' %s" \
+                % (self.cli_container, self.path, command)
+            logging.debug("exec '%s'", cmd)
+            return subprocess.check_output(cmd, shell=True)
+        except subprocess.CalledProcessError as err:
+            logging.error("wp command failed : %s", cmd, stack_info=True)
+            return None
 
     @classmethod
     def file_size(cls, file_path):
@@ -83,6 +87,7 @@ class WPExporter:
             start_time = timeit.default_timer()
             tracer_path = os.path.join(self.output_path, self.TRACER)
 
+            self.align_languages()
             self.import_medias()
             self.import_pages()
             self.set_frontpage()
@@ -104,10 +109,17 @@ class WPExporter:
                 ))
                 tracer.flush()
 
-        except Exception as e:
+        except WordpressError as err:
+            logging.error("Exception while importing all data for %s: %s" % self.site, err, stack_info=True)
             with open(tracer_path, 'a', newline='\n') as tracer:
-                tracer.write("%s, ERROR %s\n" % (self.site.name, str(e)))
+                tracer.write("%s, ERROR %s\n" % (self.site.name, str(err)))
                 tracer.flush()
+
+    def align_languages(self):
+        if len(self.site.languages) == 1:
+            for lang in (CONFIGURED_LANGUAGES - set(self.site.languages)):
+                logging.info("Deleting language %s", lang)
+                self.wp_cli('pll lang delete %s' % lang)
 
     def import_medias(self):
         """
@@ -241,6 +253,11 @@ class WPExporter:
                 page.wp_id = wp_page['id']
                 self.report['pages'] += 1
 
+                # Set page language
+                result = self.wp_cli('polylang set post %s %s' % (page.wp_id, lang))
+                if result is not None:
+                    logging.debug("page.%s lang set to '%s'", page.wp_id, lang)
+
         self.update_parent_id()
 
     def import_sidebar(self):
@@ -318,9 +335,10 @@ class WPExporter:
         # call wp-cli
         frontpage_id = self.site.homepage.wp_id
         self.wp_cli('option update show_on_front page')
-        self.wp_cli('option update page_on_front %s' % frontpage_id)
 
-        logging.info("WP frontpage setted")
+        result = self.wp_cli('option update page_on_front %s' % frontpage_id)
+        if result is not None:
+            logging.info("WP frontpage setted")
 
     def delete_all_content(self):
         """
@@ -335,6 +353,7 @@ class WPExporter:
         Delete medias in WordPress via WP REST API
         HTTP delete  http://.../wp-json/wp/v2/media/1761?force=true
         """
+        logging.info("Deleting medias...")
         medias = self.wp.get_media(params={'per_page': '100'})
         while len(medias) != 0:
             for media in medias:

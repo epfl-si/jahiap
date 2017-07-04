@@ -1,14 +1,19 @@
 """(c) All rights reserved. ECOLE POLYTECHNIQUE FEDERALE DE LAUSANNE, Switzerland, VPSI, 2017"""
 import os
 
-from utils import Utils
+from utils import Utils as MainUtils
+from datetime import timedelta
 
-VERSION = "0.2"
+VERSION = "0.3"
 
-WP_HOST = Utils.get_optional_env("WP_HOST", "localhost")
-WP_PATH = Utils.get_optional_env("WP_PATH", "/")
+CONFIGURED_LANGUAGES = set(['fr', 'en'])
 
-WP_ADMIN_URL = Utils.get_optional_env("WP_ADMIN_URL", "wordpress.localhost")
+MAX_WORDPRESS_STARTING_TIME = timedelta(minutes=1, seconds=30)
+
+WP_HOST = MainUtils.get_optional_env("WP_HOST", "localhost")
+WP_PATH = MainUtils.get_optional_env("WP_PATH", "/")
+
+WP_ADMIN_URL = MainUtils.get_optional_env("WP_ADMIN_URL", "wordpress.localhost")
 WP_USER = 'admin'
 WP_PASSWORD = 'passw0rd'
 
@@ -20,7 +25,7 @@ DATA_PATH = os.path.join(PROJECT_PATH, "jahia-data")
 # by default the path for the export files is $PROJECT_ROOT/exports
 # but it can be overridden by an environment variable
 EXPORT_PATH_DEFAULT = os.path.join(PROJECT_PATH, "exports")
-EXPORT_PATH = Utils.get_optional_env("EXPORT_PATH", EXPORT_PATH_DEFAULT)
+EXPORT_PATH = MainUtils.get_optional_env("EXPORT_PATH", EXPORT_PATH_DEFAULT)
 
 LINE_LENGTH_ON_PPRINT = 150
 LINE_LENGTH_ON_EXPORT = LINE_LENGTH_ON_PPRINT + 100

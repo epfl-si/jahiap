@@ -22,22 +22,6 @@ from utils import Utils
     to get help on usage and available options
 """
 
-# define HOST
-HOST = Utils.get_optional_env("JAHIA_HOST", "localhost")
-
-# define URLs and their parameters
-ID_URI = "administration"
-ID_GET_PARAMS = {
-    'do': 'processlogin',
-    'redirectTo': '/administration?null'
-}
-DWLD_URI = "site/2dmaterials2016/op/edit/page-131253.html/engineName/export"
-DWLD_GET_PARAMS = {
-    'do': 'sites',
-    'sub': 'multipledelete',
-    'exportformat': 'site'
-}
-
 
 class SiteCrawler(object):
     """
@@ -49,6 +33,22 @@ class SiteCrawler(object):
         * '--date': what date should be asked to Jahia
         * '--force': if existing downloaded files should be overriden or not
      """
+
+    # define HOST
+    HOST = Utils.get_optional_env("JAHIA_HOST", "localhost")
+
+    # define URLs and their parameters
+    ID_URI = "administration"
+    ID_GET_PARAMS = {
+        'do': 'processlogin',
+        'redirectTo': '/administration?null'
+    }
+    DWLD_URI = "site/2dmaterials2016/op/edit/page-131253.html/engineName/export"
+    DWLD_GET_PARAMS = {
+        'do': 'sites',
+        'sub': 'multipledelete',
+        'exportformat': 'site'
+    }
 
     FILE_PATTERN = "%s_export_%s.zip"
     TRACER = "tracer_crawling.csv"
@@ -66,8 +66,8 @@ class SiteCrawler(object):
             logging.info("authenticating...")
             session = requests.Session()
             response = session.post(
-                "%s/%s" % (HOST, ID_URI),
-                params=ID_GET_PARAMS,
+                "%s/%s" % (self.HOST, self.ID_URI),
+                params=self.ID_GET_PARAMS,
                 data=self.get_credentials()
             )
 
@@ -95,7 +95,7 @@ class SiteCrawler(object):
 
             returns list of downloaded_files
         """
-        logging.debug("HOST set to %s", HOST)
+        logging.debug("HOST set to %s", cls.HOST)
         logging.debug("DATE set to %s", cmd_args['--date'])
 
         # to store paths of downloaded zips
@@ -156,7 +156,7 @@ class SiteCrawler(object):
             return self.file_path
 
         # pepare query
-        params = DWLD_GET_PARAMS.copy()
+        params = self.DWLD_GET_PARAMS.copy()
         params['sitebox'] = self.site_name
 
         # set timer to measure execution time
@@ -165,7 +165,7 @@ class SiteCrawler(object):
         # make query
         logging.debug("downloading %s...", self.file_name)
         response = self.session.post(
-            "%s/%s/%s" % (HOST, DWLD_URI, self.file_name),
+            "%s/%s/%s" % (self.HOST, self.DWLD_URI, self.file_name),
             params=params,
             stream=True
         )
