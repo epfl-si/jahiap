@@ -25,7 +25,7 @@ class Utils:
     }
 
     @staticmethod
-    def get_content_of_csv_file(file_path):
+    def csv_to_list(file_path):
         """
         Get content of csv file 'filename'.
         """
@@ -41,7 +41,7 @@ class Utils:
             return rows
 
     @staticmethod
-    def csv_to_sites(file_path):
+    def csv_to_dict(file_path):
 
         sites = []
         with open(file_path) as csvfile:

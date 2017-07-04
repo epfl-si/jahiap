@@ -44,11 +44,6 @@ class Node:
             return WordPressNode(name, data, tree)
         raise Exception("Unknown node type")
 
-    @classmethod
-    def get_subclass_from_string(cls, type_name):
-        classes = dict([(class_obj.__name__, class_obj) for class_obj in cls.__subclasses__()])
-        return classes[type_name]
-
     @property
     def children(self):
         return self.__children

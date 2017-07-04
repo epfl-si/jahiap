@@ -1,5 +1,5 @@
+"""(c) All rights reserved. ECOLE POLYTECHNIQUE FEDERALE DE LAUSANNE, Switzerland, VPSI, 2017"""
 import os
-import copy
 
 from generator.node import Node, RootNode
 
@@ -18,12 +18,9 @@ class Tree:
         self.root = RootNode(name="root", tree=self)
         self.nodes = {self.root.name: self.root}
 
-        copy_sites = copy.deepcopy(sites)
         # create all nodes
-        for site in copy_sites:
-            node_name = site.pop('name')
-            node_type = site.pop('type')
-            node = Node.factory(name=node_name, type=node_type, data=site, tree=self)
+        for site in sites:
+            node = Node.factory(name=site['name'], type=site['type'], data=site, tree=self)
             self.nodes[node.name] = node
 
         # create all relation

@@ -309,7 +309,7 @@ def main_compose_down(args):
 
 
 def main_generate(args):
-    tree = Tree(args, sites=UtilsGenerator.csv_to_sites(file_path=args['<csv_file>']))
+    tree = Tree(args, sites=UtilsGenerator.csv_to_dict(file_path=args['<csv_file>']))
     tree.prepare_run()
     tree.run()
 
