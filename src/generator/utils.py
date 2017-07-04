@@ -1,6 +1,9 @@
 """(c) All rights reserved. ECOLE POLYTECHNIQUE FEDERALE DE LAUSANNE, Switzerland, VPSI, 2017"""
 import csv
 import logging
+import os
+
+from compose.cli.main import TopLevelCommand, project_from_options
 
 
 class Utils:
@@ -49,3 +52,36 @@ class Utils:
             for row in reader:
                 sites.append(row)
         return sites
+
+    @staticmethod
+    def validate_dir(path, force_create=False):
+        if not os.path.isdir(path):
+            if force_create:
+                os.makedirs(path)
+                logging.info("created output dir %s", path)
+            else:
+                raise SystemExit("'%s' does not exist. Please create it first or use --force" % path)
+        return True
+
+    @staticmethod
+    def validate_composition(path):
+        if not os.path.isdir(path):
+            return False
+
+        compose_path = os.path.join(path, "docker-compose.yml")
+        if not os.path.isfile(compose_path):
+            return False
+
+        return True
+
+    @classmethod
+    def docker(cls, path, up=True):
+
+        project = project_from_options(path, cls.DOCKER_OPTIONS)
+        cmd = TopLevelCommand(project)
+        if up:
+            cmd.up(cls.DOCKER_OPTIONS)
+        else:
+            cmd.down(cls.DOCKER_OPTIONS)
+
+        return cmd

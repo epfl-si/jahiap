@@ -118,7 +118,7 @@ def cook_one_site(args, config_file):
     logging.info("Starting cookiecutter...")
     try:
         site_path = cookiecutter(
-            '.',
+            args['--cookie-path'],
             no_input=True,
             overwrite_if_exists=args['--force'],
             config_file=config_file,

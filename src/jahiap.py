@@ -15,7 +15,9 @@ Usage:
   jahiap.py docker <site> [--output-dir=<OUTPUT_DIR>] [--number=<NUMBER>] [--debug | --quiet]
   jahiap.py compose_up <BUILD_PATH> [--force] [--recurse] [--debug | --quiet]
   jahiap.py compose_down <BUILD_PATH> [--recurse] [--debug | --quiet]
-  jahiap.py generate <csv_file> [--output-dir=<OUTPUT_DIR>] [--debug | --quiet]
+  jahiap.py generate <csv_file> [--output-dir=<OUTPUT_DIR>] [--conf-path=<CONF_PATH>]
+                                [--output-path=<OUTPUT_PATH>] [--cookie-path=<COOKIE_PATH>]
+                                [--force] [--debug | --quiet]
 
 
 Options:
@@ -37,6 +39,9 @@ Options:
   --wp-cli=<WP_CLI>             (export) Name of wp-cli container to use with given WordPress URL. (default WPExporter)
   --recurse                     (compose|cleanup) Search in all the tree of directories
   --site-host=<SITE_HOST>       (export) WordPress HOST where to export parsed content. (default is $WP_ADMIN_URL)
+  --conf-path=<CONF_PATH>       (generate) Path where to export yaml files [default: build/etc]
+  --output-path=<OUTPUT_PATH>   (generate) Path where to create compositions [default: build/sites]
+  --cookie-path=<COOKIE_PATH>   (generate) Path where to create compositions
   --debug                       (*) Set logging level to DEBUG (default is INFO).
   --quiet                       (*) Set logging level to WARNING (default is INFO).
 """
@@ -300,8 +305,8 @@ def main_docker(args):
         logging.info("Docker launched for %s", site_name)
 
 
-def main_compose_up(args):
-    UtilsGenerator.docker(args, up=True)
+def main_compose_up(path):
+    UtilsGenerator.docker(path, up=True)
 
 
 def main_compose_down(args):
@@ -309,6 +314,7 @@ def main_compose_down(args):
 
 
 def main_generate(args):
+
     tree = Tree(args, sites=UtilsGenerator.csv_to_dict(file_path=args['<csv_file>']))
     tree.prepare_run()
     tree.run()
@@ -331,6 +337,15 @@ def set_default_values(args):
         args['--site-path'] = WP_PATH
     if not args['--site-host']:
         args['--site-host'] = WP_HOST
+    if args['--force']:
+        logging.warning("You are using --force option to overwrite existing file.")
+    if not args['--conf-path']:
+        args['--conf-path'] = "build/etc"
+    if not args['--output-path']:
+        args['--output-path'] = "build/sites"
+    if not args['--cookie-path']:
+        args['--cookie-path'] = Utils.get_required_env('COOKIE_PATH')
+
     return args
 
 

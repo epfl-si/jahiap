@@ -3,8 +3,8 @@
 # values specified here will override the default ones in cookiecutter.json
 
 default_context:
-    project_name: "{{ site_name }}"
-    wp_url: "http://{{ wp_host }}/{{ parent }}/{{ site_name }}"
+    project_name: "{{ name }}"
+    wp_url: "http://{{ wp_host }}/{{ parent }}/{{ name }}"
     wp_title: "{{ site_title }}"
     wp_db_host: "db:3306"
     wp_db_user: "root"

@@ -9,6 +9,7 @@ from parser.jahia_site import Site
 from unzipper.unzip import unzip_one
 from exporter.html_exporter import HTMLExporter
 from settings import WP_HOST, PROJECT_PATH
+from generator.utils import Utils as UtilsGenerator
 
 
 class Node:
@@ -172,10 +173,12 @@ class WordPressNode(Node):
             self.full_name())
 
     def prepare_ingredients(self, args):
+        """
+        --conf-path
+        """
 
         # row is a dictionnary with the following keys:
         # site_name;parent;type_name;site_url;site_title;email;username;pwd;db_name
-        site_name = self.name
         parent = self.parent
 
         # build yml file
@@ -186,10 +189,10 @@ class WordPressNode(Node):
         if parent == 'root':
             dir_path = args['--conf-path']
         else:
-            dir_path = os.path.join(args['--conf-path'], parent)
+            dir_path = os.path.join(args['--conf-path'], parent.full_name())
             if not os.path.exists(dir_path):
                 os.mkdir(dir_path)
-        file_path = os.path.join(dir_path, site_name) + ".yaml"
+        file_path = os.path.join(dir_path, self.name) + ".yaml"
 
         # write yml file
         with open(file_path, 'w') as output:
@@ -197,12 +200,12 @@ class WordPressNode(Node):
             output.flush()
             logging.info("(ok) %s", file_path)
 
+        return file_path
+
     def prepare_run(self):
-
         args = self.tree.args
-
-        self.prepare_ingredients(args)
-
-        # FIX : config_file
-        config_file = ''
+        config_file = self.prepare_ingredients(args)
         cook_one_site(args, config_file)
+
+    def run(self):
+        UtilsGenerator.docker(self.tree.args, up=True)
