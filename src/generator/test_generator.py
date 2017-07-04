@@ -121,11 +121,12 @@ class TestDockerCreation(object):
         generated_tree.root.run()
 
         # allow nginx to start up
-        time.sleep(0.3)
+        time.sleep(0.5)
 
         # test root URL
         root_url = "http://"+WP_HOST
         req = requests.get(root_url)
+
         assert req.status_code == 200
         assert b"<title>EPFL</title>" in req.content
 
