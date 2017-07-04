@@ -1,4 +1,5 @@
-# -*- coding: utf-8 -*-
+"""(c) All rights reserved. ECOLE POLYTECHNIQUE FEDERALE DE LAUSANNE, Switzerland, VPSI, 2017"""
+
 """
     Testing the generator script
 """
@@ -31,7 +32,7 @@ def generated_tree(request):
     if os.path.exists(output_path):
         shutil.rmtree(output_path)
     tree = Tree(TestGenerator.ARGS, file_path=TestGenerator.DATA_FILE)
-    tree.create_html()
+    tree.prepare_run_cmd()
     return tree
 
 

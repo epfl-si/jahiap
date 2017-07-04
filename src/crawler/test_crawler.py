@@ -1,4 +1,5 @@
-"""
+"""(c) All rights reserved. ECOLE POLYTECHNIQUE FEDERALE DE LAUSANNE, Switzerland, VPSI, 2017
+
     Testing the crawl.py script
 """
 import os

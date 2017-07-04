@@ -5,8 +5,27 @@ import logging
 
 class Utils:
 
+    DOCKER_OPTIONS = {
+        "--no-deps": False,
+        "--abort-on-container-exit": False,
+        "SERVICE": "",
+        "--remove-orphans": False,
+        "--no-recreate": True,
+        "--force-recreate": False,
+        "--build": False,
+        '--no-build': False,
+        '--no-color': False,
+        "--rmi": "none",
+        "--volumes": "",
+        "--follow": False,
+        "--timestamps": False,
+        "--tail": "all",
+        "--scale": [],
+        "-d": True,
+    }
+
     @staticmethod
-    def get_content_of_csv_file(file_path):
+    def csv_to_list(file_path):
         """
         Get content of csv file 'filename'.
         """
@@ -17,5 +36,16 @@ class Utils:
             if has_header:
                 next(reader)  # skip header row
             rows = list(reader)
+
             logging.debug("Parsed CSV %s", rows)
             return rows
+
+    @staticmethod
+    def csv_to_dict(file_path):
+
+        sites = []
+        with open(file_path) as csvfile:
+            reader = csv.DictReader(csvfile)
+            for row in reader:
+                sites.append(row)
+        return sites

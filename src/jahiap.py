@@ -13,7 +13,10 @@ Usage:
                           [--output-dir=<OUTPUT_DIR> --export-path=<EXPORT_PATH>]
                           [--use-cache] [--debug | --quiet]
   jahiap.py docker <site> [--output-dir=<OUTPUT_DIR>] [--number=<NUMBER>] [--debug | --quiet]
+  jahiap.py compose_up <BUILD_PATH> [--force] [--recurse] [--debug | --quiet]
+  jahiap.py compose_down <BUILD_PATH> [--recurse] [--debug | --quiet]
   jahiap.py generate <csv_file> [--output-dir=<OUTPUT_DIR>] [--debug | --quiet]
+
 
 Options:
   -h --help                     Show this screen.
@@ -32,6 +35,7 @@ Options:
   -c --clean-wordpress          (export) Delete all content of WordPress site.
   -w --to-wordpress             (export) Export parsed data to WordPress and generate nginx conf
   --wp-cli=<WP_CLI>             (export) Name of wp-cli container to use with given WordPress URL. (default WPExporter)
+  --recurse                     (compose|cleanup) Search in all the tree of directories
   --site-host=<SITE_HOST>       (export) WordPress HOST where to export parsed content. (default is $WP_ADMIN_URL)
   --debug                       (*) Set logging level to DEBUG (default is INFO).
   --quiet                       (*) Set logging level to WARNING (default is INFO).
@@ -49,6 +53,7 @@ import requests
 from docopt import docopt
 
 from utils import Utils
+from generator.utils import Utils as UtilsGenerator
 from crawler import SiteCrawler
 from exporter.dict_exporter import DictExporter
 from exporter.html_exporter import HTMLExporter
@@ -88,7 +93,6 @@ def call_command(args):
             continue
         # search command
         elif value:
-            # call main_<command> method
             method_name = 'main_' + str(key)
             return getattr(sys.modules[__name__], method_name)(args)
 
@@ -296,23 +300,18 @@ def main_docker(args):
         logging.info("Docker launched for %s", site_name)
 
 
+def main_compose_up(args):
+    UtilsGenerator.docker(args, up=True)
+
+
+def main_compose_down(args):
+    UtilsGenerator.docker(args, up=False)
+
+
 def main_generate(args):
-    tree = Tree(args, file_path=args['<csv_file>'])
-    tree.create_html()
+    tree = Tree(args, sites=UtilsGenerator.csv_to_dict(file_path=args['<csv_file>']))
+    tree.prepare_run()
     tree.run()
-
-
-def set_logging_config(args):
-    """
-    Set logging with the 'good' level
-    """
-    level = logging.INFO
-    if args['--quiet']:
-        level = logging.WARNING
-    elif args['--debug']:
-        level = logging.DEBUG
-    logging.basicConfig(level=level)
-    logging.getLogger().setLevel(level)
 
 
 def set_default_values(args):
@@ -342,8 +341,7 @@ if __name__ == '__main__':
     args = set_default_values(docopt(__doc__, version=VERSION))
 
     # set logging config before anything else
-    # FIXME : do not call logging.warning is Utils.py
-    set_logging_config(args)
+    Utils.set_logging_config(args)
 
     logging.debug(args)
 
