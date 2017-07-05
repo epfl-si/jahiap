@@ -178,7 +178,7 @@ def main_global_report(args):
     "Generate a global report with stats like the number of pages, files and boxes"
     path = os.path.join(args['--output-dir'], "global-report.csv")
 
-    logging.debug("Generating global report at %s" % path)
+    logging.info("Generating global report at %s" % path)
 
     sites = main_parse(args)
 
