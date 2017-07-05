@@ -13,7 +13,10 @@ Usage:
                           [--output-dir=<OUTPUT_DIR> --export-path=<EXPORT_PATH>]
                           [--use-cache] [--debug | --quiet]
   jahiap.py docker <site> [--output-dir=<OUTPUT_DIR>] [--number=<NUMBER>] [--debug | --quiet]
-  jahiap.py generate <csv_file> [--output-dir=<OUTPUT_DIR>] [--debug | --quiet]
+  jahiap.py generate <csv_file> [--output-dir=<OUTPUT_DIR>] [--conf-path=<CONF_PATH>]
+                                [--cookie-path=<COOKIE_PATH>] [--force] [--debug | --quiet]
+  jahiap.py cleanup <csv_file>  [--debug | --quiet]
+  jahiap.py global_report <site> [--output-dir=<OUTPUT_DIR>] [--number=<NUMBER>] [--use-cache] [--debug | --quiet]
 
 Options:
   -h --help                     Show this screen.
@@ -32,7 +35,10 @@ Options:
   -c --clean-wordpress          (export) Delete all content of WordPress site.
   -w --to-wordpress             (export) Export parsed data to WordPress and generate nginx conf
   --wp-cli=<WP_CLI>             (export) Name of wp-cli container to use with given WordPress URL. (default WPExporter)
+  --recurse                     (compose|cleanup) Search in all the tree of directories
   --site-host=<SITE_HOST>       (export) WordPress HOST where to export parsed content. (default is $WP_ADMIN_URL)
+  --conf-path=<CONF_PATH>       (generate) Path where to export yaml files [default: build/etc]
+  --cookie-path=<COOKIE_PATH>   (generate) Path where {{ cookiecutter project }} is located [default is $COOKIE_PATH]
   --debug                       (*) Set logging level to DEBUG (default is INFO).
   --quiet                       (*) Set logging level to WARNING (default is INFO).
 """
@@ -40,15 +46,16 @@ import logging
 import os
 import pickle
 import sys
-import timeit
+import csv
 from collections import OrderedDict
-from datetime import datetime, timedelta
+from datetime import datetime
 from pprint import pprint, pformat
 
 import requests
 from docopt import docopt
 
 from utils import Utils
+from generator.utils import Utils as UtilsGenerator
 from crawler import SiteCrawler
 from exporter.dict_exporter import DictExporter
 from exporter.html_exporter import HTMLExporter
@@ -88,7 +95,6 @@ def call_command(args):
             continue
         # search command
         elif value:
-            # call main_<command> method
             method_name = 'main_' + str(key)
             return getattr(sys.modules[__name__], method_name)(args)
 
@@ -109,7 +115,10 @@ def main_unzip(args):
     unzipped_files = OrderedDict()
 
     for site_name, zip_file in zip_files.items():
-        unzipped_files[site_name] = unzip_one(args['--output-dir'], site_name, zip_file)
+        try:
+            unzipped_files[site_name] = unzip_one(args['--output-dir'], site_name, zip_file)
+        except Exception as err:
+            logging.error("Could not unzip file for %s", site_name, stack_info=True)
 
     # return results
     return unzipped_files
@@ -124,9 +133,6 @@ def main_parse(args):
 
     for site_name, site_dir in site_dirs.items():
         try:
-            # set timer to measure execution time
-            start_time = timeit.default_timer()
-
             # create subdir in output_dir
             output_subdir = os.path.join(args['--output-dir'], site_name)
 
@@ -143,9 +149,9 @@ def main_parse(args):
 
             # FIXME : site-path should be given in exporter, not parser
             root_path = ""
-            if args['--site-path']:
-                root_path = "/%s/%s" % (args['--site-path'], site_name)
-                logging.info("Setting root_path %s", root_path)
+            # if args['--site-path']:
+            #   root_path = "/%s/%s" % (args['--site-path'], site_name)
+            #   logging.info("Setting root_path %s", root_path)
             logging.info("Parsing Jahia xml files from %s...", site_dir)
             site = Site(site_dir, site_name, root_path=root_path)
 
@@ -161,25 +167,45 @@ def main_parse(args):
             logging.info("Site %s successfully parsed" % site_name)
             parsed_sites[site_name] = site
 
-            elapsed = timedelta(seconds=timeit.default_timer() - start_time)
-
-            # a csv line for stats
-            csv_dict = {
-                "name": site.name,
-                "pages": site.num_pages,
-                "files": site.num_files,
-                "time": elapsed
-            }
-
-            # TODO: use csv_line
-            csv_line = "%(name)s;%(pages)s;%(files)s;%(time)s" % csv_dict
-            logging.debug("performance info: %s", csv_line)
-
-        except:
-            logging.error("Error parsing site %s" % site_name)
+        except Exception as err:
+            logging.error("Error parsing site %s: %s", site_name, err, stack_info=True)
 
     # return results
     return parsed_sites
+
+
+def main_global_report(args):
+    "Generate a global report with stats like the number of pages, files and boxes"
+    path = os.path.join(args['--output-dir'], "global-report.csv")
+
+    logging.debug("Generating global report at %s" % path)
+
+    sites = main_parse(args)
+
+    # retrieve all the box types
+    box_types = set()
+
+    for site_name, site in sites.items():
+        for key in site.num_boxes.keys():
+            if key:
+                box_types.add(key)
+
+    # the base field names for the csv
+    fieldnames = ["name", "pages", "files"]
+
+    # add all the box types
+    fieldnames.extend(sorted(box_types))
+
+    # write the csv file
+    with open(path, 'w') as csvfile:
+        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+
+        # header
+        writer.writeheader()
+
+        # content
+        for site_name, site in sites.items():
+            writer.writerow(site.get_report_info(box_types))
 
 
 def main_export(args):
@@ -222,8 +248,8 @@ def main_export(args):
                     wp_exporter.generate_nginx_conf_file()
                     exported_site['wordpress'] = args['--site-path']
                     logging.info("Nginx conf for %s successfully generated", site.name)
-            except WordpressError:
-                logging.error("WordPress not available")
+            except WordpressError as err:
+                logging.error("WordPress not available: %s", err, stack_info=True)
 
             if args['--to-static']:
                 logging.info("Exporting %s to static website...", site.name)
@@ -244,8 +270,8 @@ def main_export(args):
                     output.flush()
                 exported_site['dict'] = export_path
                 logging.info("Site %s successfully exported to python dictionary", site.name)
-        except:
-            logging.error("Error exporting site %s" % site_name)
+        except Exception as err:
+            logging.error("Error exporting site %s: %s", site_name, err, stack_info=True)
 
         if args['--to-wordpress'] and int(args['--number']) > 1:
             wp_exporter = WPExporter(site, args)
@@ -297,22 +323,16 @@ def main_docker(args):
 
 
 def main_generate(args):
-    tree = Tree(args, file_path=args['<csv_file>'])
-    tree.create_html()
+
+    tree = Tree(args, sites=UtilsGenerator.csv_to_dict(file_path=args['<csv_file>']))
+    tree.prepare_run()
     tree.run()
 
 
-def set_logging_config(args):
-    """
-    Set logging with the 'good' level
-    """
-    level = logging.INFO
-    if args['--quiet']:
-        level = logging.WARNING
-    elif args['--debug']:
-        level = logging.DEBUG
-    logging.basicConfig(level=level)
-    logging.getLogger().setLevel(level)
+def main_cleanup(args):
+
+    tree = Tree(args, sites=UtilsGenerator.csv_to_dict(file_path=args['<csv_file>']))
+    tree.cleanup()
 
 
 def set_default_values(args):
@@ -332,6 +352,13 @@ def set_default_values(args):
         args['--site-path'] = WP_PATH
     if not args['--site-host']:
         args['--site-host'] = WP_HOST
+    if args['--force']:
+        logging.warning("You are using --force option to overwrite existing file.")
+    if not args['--conf-path']:
+        args['--conf-path'] = "build/etc"
+    if not args['--cookie-path']:
+        args['--cookie-path'] = Utils.get_required_env('COOKIE_PATH')
+
     return args
 
 
@@ -342,8 +369,7 @@ if __name__ == '__main__':
     args = set_default_values(docopt(__doc__, version=VERSION))
 
     # set logging config before anything else
-    # FIXME : do not call logging.warning is Utils.py
-    set_logging_config(args)
+    Utils.set_logging_config(args)
 
     logging.debug(args)
 

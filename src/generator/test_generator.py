@@ -1,5 +1,5 @@
-# -*- coding: utf-8 -*-
-"""
+"""(c) All rights reserved. ECOLE POLYTECHNIQUE FEDERALE DE LAUSANNE, Switzerland, VPSI, 2017
+
     Testing the generator script
 """
 import os
@@ -11,6 +11,7 @@ import requests
 from datetime import datetime
 
 from generator.tree import Tree
+from generator.utils import Utils as GeneratorUtils
 from utils import Utils
 from settings import DATA_PATH, WP_HOST
 
@@ -30,8 +31,9 @@ def generated_tree(request):
     output_path = TestGenerator.ARGS['--output-dir']
     if os.path.exists(output_path):
         shutil.rmtree(output_path)
-    tree = Tree(TestGenerator.ARGS, file_path=TestGenerator.DATA_FILE)
-    tree.create_html()
+    sites = GeneratorUtils.csv_to_dict(file_path=TestGenerator.DATA_FILE)
+    tree = Tree(TestGenerator.ARGS, sites=sites)
+    tree.prepare_run()
     return tree
 
 
@@ -39,27 +41,27 @@ class TestTreeStructure(object):
 
     def test_children(self, generated_tree):
         assert len(generated_tree.root.children) == 3
-        assert len(generated_tree.get_or_create('administratif').children) == 2
-        assert len(generated_tree.get_or_create('ahead').children) == 1
-        assert len(generated_tree.get_or_create('bioinspired').children) == 0
-        assert len(generated_tree.get_or_create('labs').children) == 1
-        assert len(generated_tree.get_or_create('apml').children) == 0
+        assert len(generated_tree.nodes['administratif'].children) == 2
+        assert len(generated_tree.nodes['ahead'].children) == 1
+        assert len(generated_tree.nodes['bioinspired'].children) == 0
+        assert len(generated_tree.nodes['labs'].children) == 1
+        assert len(generated_tree.nodes['apml'].children) == 0
 
     def test_parents(self, generated_tree):
         assert generated_tree.root.parent is None
-        assert generated_tree.get_or_create('administratif').parent == generated_tree.root
-        assert generated_tree.get_or_create('ahead').parent == generated_tree.root
-        assert generated_tree.get_or_create('bioinspired').parent == generated_tree.get_or_create('ahead')
-        assert generated_tree.get_or_create('labs').parent == generated_tree.root
-        assert generated_tree.get_or_create('apml').parent == generated_tree.get_or_create('labs')
+        assert generated_tree.nodes['administratif'].parent == generated_tree.root
+        assert generated_tree.nodes['ahead'].parent == generated_tree.root
+        assert generated_tree.nodes['bioinspired'].parent == generated_tree.nodes['ahead']
+        assert generated_tree.nodes['labs'].parent == generated_tree.root
+        assert generated_tree.nodes['apml'].parent == generated_tree.nodes['labs']
 
     def test_full_name(self, generated_tree):
         assert generated_tree.root.full_name() == ""
-        assert generated_tree.get_or_create('administratif').full_name() == "administratif"
-        assert generated_tree.get_or_create('ahead').full_name() == "ahead"
-        assert generated_tree.get_or_create('bioinspired').full_name() == "ahead/bioinspired"
-        assert generated_tree.get_or_create('labs').full_name() == "labs"
-        assert generated_tree.get_or_create('apml').full_name() == "labs/apml"
+        assert generated_tree.nodes['administratif'].full_name() == "administratif"
+        assert generated_tree.nodes['ahead'].full_name() == "ahead"
+        assert generated_tree.nodes['bioinspired'].full_name() == "ahead/bioinspired"
+        assert generated_tree.nodes['labs'].full_name() == "labs"
+        assert generated_tree.nodes['apml'].full_name() == "labs/apml"
 
 
 class TestGenerator(object):
@@ -119,11 +121,12 @@ class TestDockerCreation(object):
         generated_tree.root.run()
 
         # allow nginx to start up
-        time.sleep(0.3)
+        time.sleep(0.5)
 
         # test root URL
         root_url = "http://"+WP_HOST
         req = requests.get(root_url)
+
         assert req.status_code == 200
         assert b"<title>EPFL</title>" in req.content
 

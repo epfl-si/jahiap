@@ -37,7 +37,7 @@ class Box:
         if type in self.types:
             self.type = self.types[type]
         else:
-            self.type = "unknown '" + type + "'"
+            self.type = type
 
     def set_content(self, element, multibox=False):
         """set the box attributes"""
