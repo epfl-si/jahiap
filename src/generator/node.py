@@ -265,7 +265,7 @@ class WordPressNode(Node):
             self.tree.args['--site-path'] = self.full_name()
             zip_file = SiteCrawler(self.name, self.tree.args).download_site()
             site_dir = unzip_one(self.tree.args['--output-dir'], self.name, zip_file)
-            site = Site(site_dir, self.name, root_path="/"+self.full_name())
+            site = Site(site_dir, self.name)
             wp_exporter = WPExporter(site, self.tree.args)
             wp_exporter.import_all_data_to_wordpress()
         else:
