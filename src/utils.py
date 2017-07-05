@@ -89,6 +89,7 @@ class Utils:
             level = logging.DEBUG
         logging.basicConfig()
         logger = logging.getLogger()
+        logger.setLevel(level)
         # set up logging to file
         fh = logging.FileHandler(Utils.get_optional_env('LOGGING_FILE', 'jahiap.log'))
         fh.setLevel(logging.DEBUG)
