@@ -241,7 +241,7 @@ class WordPressNode(Node):
     def run(self):
         # built up Wordpress URL and composition_path
         wp_url = "%s/%s" % (WP_HOST, self.full_name())
-        composition_path = os.path.join(self.get_composition_dir(self.tree.args), self.name)
+        composition_path = os.path.join(self.get_composition_dir(self.tree.args), self.container_name)
 
         # check if site already running
         if UtilsGenerator.is_apache_up(wp_url):
@@ -279,6 +279,6 @@ class WordPressNode(Node):
             logging.error("Could not start Apache in %s", MAX_WORDPRESS_STARTING_TIME)
 
     def cleanup(self):
-        composition_path = os.path.join(self.get_composition_dir(self.tree.args), self.name)
+        composition_path = os.path.join(self.get_composition_dir(self.tree.args), self.container_name)
         UtilsGenerator.docker(composition_path, up=False)
         # TODO: remove DB
