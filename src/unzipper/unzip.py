@@ -21,7 +21,7 @@ def unzip_one(output_dir, site_name, zip_file):
 
     # make sure we have an input file
     if not zip_file or not os.path.isfile(zip_file):
-        logging.error("Jahia zip file %s not found", zip_file)
+        logging.error("%s - unzip - Jahia zip file %s not found", site_name, zip_file)
         raise ValueError("Jahia zip file not found")
 
     # create zipFile to manipulate / extract zip content
@@ -30,7 +30,7 @@ def unzip_one(output_dir, site_name, zip_file):
     # make sure we have the zip containing the site
     zip_name = "%s.zip" % site_name
     if zip_name not in export_zip.namelist():
-        logging.error("zip file %s not found in main zip" % zip_name)
+        logging.error("%s - unzip - zip file %s not found in main zip", site_name, zip_name)
         raise ValueError("Jahia zip file does not contain site file")
 
     # extract the export zip file

@@ -278,7 +278,7 @@ class WordPressNode(Node):
             wp_exporter = WPExporter(site, self.tree.args)
             wp_exporter.import_all_data_to_wordpress()
         else:
-            logging.error("Could not start Apache in %s", MAX_WORDPRESS_STARTING_TIME)
+            logging.error("%s - generate - Could not start Apache in %s", self.name, MAX_WORDPRESS_STARTING_TIME)
 
     def cleanup(self):
         # stop container

@@ -44,7 +44,7 @@ class WPExporter:
             logging.debug("exec '%s'", cmd)
             return subprocess.check_output(cmd, shell=True)
         except subprocess.CalledProcessError as err:
-            logging.error("wp command failed : %s", cmd, stack_info=True)
+            logging.error("%s - WP export - wp_cli failed : %s", self.site.name, err)
             return None
 
     @classmethod
@@ -110,7 +110,7 @@ class WPExporter:
                 tracer.flush()
 
         except WordpressError as err:
-            logging.error("Exception while importing all data for %s: %s", self.site.name, err, stack_info=True)
+            logging.error("%s - WP export - Exception while importing all data: %s", self.site.name, err)
             with open(tracer_path, 'a', newline='\n') as tracer:
                 tracer.write("%s, ERROR %s\n" % (self.site.name, str(err)))
                 tracer.flush()
@@ -167,7 +167,7 @@ class WPExporter:
             wp_media = self.wp.post_media(data=wp_media_info, files=files)
             return wp_media
         except Exception as e:
-            logging.error("Import WP media failed: %s", e)
+            logging.error("%s - WP export - media failed: %s", self.site.name, e)
             self.report['failed_files'] += 1
 
     def replace_links(self, wp_media):
@@ -274,6 +274,7 @@ class WPExporter:
             logging.info("WP all sidebar imported")
 
         except WordpressError as e:
+            logging.error("%s - WP export - widget failed: %s", self.site.name, e)
             self.report['failed_widgets'] += 1
 
     def create_submenu(self, page):
@@ -318,6 +319,7 @@ class WPExporter:
             logging.info("WP menus populated")
 
         except WordpressError as e:
+            logging.error("%s - WP export - menu failed: %s", self.site.name, e)
             self.report['failed_menus'] += 1
 
     def set_frontpage(self):
@@ -392,17 +394,21 @@ class WPExporter:
         result = """
 Imported in WordPress :
 
-  - %s files
+  - %(files)s files
 
-  - %s pages
+  - %(pages)s pages
 
-  - %s menus
+  - %(menus)s menus
 
 Errors :
 
-  - %s files
+  - %(failed_files)s files
 
-""" % (self.report['files'], self.report['pages'], self.report['menus'], self.report['failed_files'])
+  - %(failed_menus)s menus
+
+  - %(failed_widgets)s widgets
+
+""" % self.report
 
         print(result)
 
