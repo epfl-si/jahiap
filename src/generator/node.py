@@ -28,8 +28,13 @@ class Node:
         self.name = name
         self.data = data
         self.tree = tree
+        self.container_name = "container-%s" % name
         self.__parent = None
         self.__children = []
+
+        # data given for WordPress sites -> set container_name accordingly
+        if data is not None:
+            self.container_name = self.data.get("container_name", "wp-%s" % name)
 
         # make sure output_path exists
         if tree and not os.path.exists(self.output_path()):
@@ -87,21 +92,22 @@ class Node:
     def run(self):
 
         # stop running container first (if any)
-        os.system("docker rm -f generated-%s" % self.name)
+        os.system("docker rm -f %s" % self.container_name)
 
         # run new countainer
         docker_cmd = """docker run -d \
-        --name "generated-%(site_name)s" \
+        --name "%(container_name)s" \
         --restart=always \
         --net wp-net \
         --label "traefik.enable=true" \
-        --label "traefik.backend=generated-%(site_name)s" \
-        --label "traefik.frontend=generated-%(site_name)s" \
+        --label "traefik.backend=%(container_name)s" \
+        --label "traefik.frontend=%(container_name)s" \
         --label "traefik.frontend.rule=Host:%(WP_HOST)s;PathPrefix:/%(full_name)s" \
         -v %(absolute_path_to_html)s:/usr/share/nginx/html/%(full_name)s \
         -v %(absolute_project_path)s/nginx/nginx.conf:/etc/nginx/conf.d/default.conf \
         nginx
         """ % {
+            'container_name': self.container_name,
             'site_name': self.name,
             'absolute_path_to_html': self.absolute_path_to_html(),
             'absolute_project_path': PROJECT_PATH,
@@ -113,7 +119,7 @@ class Node:
         logging.info("Docker launched for %s", self.name)
 
     def cleanup(self):
-        docker_cmd = 'docker rm -f generated-%s' % self.name
+        docker_cmd = 'docker rm -f %s' % self.container_name
         os.system(docker_cmd)
         logging.debug(docker_cmd)
         logging.info("Docker '%s' stopped and removed", self.name)
@@ -263,6 +269,7 @@ class WordPressNode(Node):
         if UtilsGenerator.is_apache_up(wp_url):
             # FIXME : do not pass args in Objects
             self.tree.args['--site-path'] = self.full_name()
+            self.tree.args['--wp-cli'] = self.container_name
             zip_file = SiteCrawler(self.name, self.tree.args).download_site()
             site_dir = unzip_one(self.tree.args['--output-dir'], self.name, zip_file)
             site = Site(site_dir, self.name)
