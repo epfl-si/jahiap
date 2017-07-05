@@ -29,12 +29,14 @@ class Node:
         self.data = data
         self.tree = tree
         self.container_name = "container-%s" % name
+        self.db_name = None
         self.__parent = None
         self.__children = []
 
         # data given for WordPress sites -> set container_name accordingly
         if data is not None:
             self.container_name = self.data.get("container_name", "wp-%s" % name)
+            self.db_name = self.data.get("db_name")
 
         # make sure output_path exists
         if tree and not os.path.exists(self.output_path()):
@@ -279,6 +281,13 @@ class WordPressNode(Node):
             logging.error("Could not start Apache in %s", MAX_WORDPRESS_STARTING_TIME)
 
     def cleanup(self):
+        # stop container
         composition_path = os.path.join(self.get_composition_dir(self.tree.args), self.container_name)
         UtilsGenerator.docker(composition_path, up=False)
-        # TODO: remove DB
+
+        # remove Database
+        if self.db_name is not None:
+            cmd = r'docker exec wp-mariadb sh -c "mysql -u root' \
+                r' --password=\"\$MYSQL_ROOT_PASSWORD\" --execute=\"DROP DATABASE %s;\""' % self.db_name
+            logging.info(cmd)
+            os.system(cmd)
