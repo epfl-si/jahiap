@@ -7,6 +7,7 @@ import requests
 from compose.cli.main import TopLevelCommand, project_from_options
 from compose.config.errors import ComposeFileNotFound
 
+
 class Utils:
 
     DOCKER_OPTIONS = {
