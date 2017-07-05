@@ -233,12 +233,23 @@ class WordPressNode(Node):
         self.prepare_composition(self.tree.args, yaml_path)
 
     def run(self):
-        composition_path = os.path.join(self.get_composition_dir(self.tree.args), self.name)
-        UtilsGenerator.docker(composition_path, up=True)
-        # built up Wordpress URL
+        # built up Wordpress URL and composition_path
         wp_url = "%s/%s" % (WP_HOST, self.full_name())
-        # set timer not to lock the process
+        composition_path = os.path.join(self.get_composition_dir(self.tree.args), self.name)
+
+        # check if site already running
+        if UtilsGenerator.is_apache_up(wp_url):
+            if not self.tree.args['--force']:
+                logging.warning("Apache is already running on %s. Use --force to restart it", wp_url)
+                return
+            else:
+                logging.info("Apache is already running on %s. Stopping container...", wp_url)
+                UtilsGenerator.docker(composition_path, up=False)
+
+        # start container & set timer limit the waiting time
+        UtilsGenerator.docker(composition_path, up=True)
         start_time = timeit.default_timer()
+
         # wait fot Apache to start
         while not UtilsGenerator.is_apache_up(wp_url):
             # give more time to apache to start
@@ -247,6 +258,7 @@ class WordPressNode(Node):
             elapsed = timedelta(seconds=timeit.default_timer() - start_time)
             if elapsed > MAX_WORDPRESS_STARTING_TIME:
                 break
+
         # do export
         if UtilsGenerator.is_apache_up(wp_url):
             # FIXME : do not pass args in Objects
