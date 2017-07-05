@@ -115,7 +115,10 @@ def main_unzip(args):
     unzipped_files = OrderedDict()
 
     for site_name, zip_file in zip_files.items():
-        unzipped_files[site_name] = unzip_one(args['--output-dir'], site_name, zip_file)
+        try:
+            unzipped_files[site_name] = unzip_one(args['--output-dir'], site_name, zip_file)
+        except Exception as err:
+            logging.error("Could not unzip file for %s", site_name, stack_info=True)
 
     # return results
     return unzipped_files
