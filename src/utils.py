@@ -87,5 +87,16 @@ class Utils:
             level = logging.WARNING
         elif args['--debug']:
             level = logging.DEBUG
-        logging.basicConfig(level=level)
-        logging.getLogger().setLevel(level)
+        logging.basicConfig()
+        logger = logging.getLogger()
+        # set up logging to file
+        fh = logging.FileHandler(Utils.get_optional_env('LOGGING_FILE', 'jahiap.log'))
+        fh.setLevel(logging.DEBUG)
+        formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+        fh.setFormatter(formatter)
+        # set up logging to stream
+        ch = logging.StreamHandler()
+        ch.setLevel(level)
+        # add the handlers to the logger
+        logger.addHandler(fh)
+        logger.addHandler(ch)

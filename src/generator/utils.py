@@ -5,7 +5,7 @@ import os
 import requests
 
 from compose.cli.main import TopLevelCommand, project_from_options
-
+from compose.config.errors import ComposeFileNotFound
 
 class Utils:
 
@@ -77,15 +77,17 @@ class Utils:
 
     @classmethod
     def docker(cls, path, up=True):
+        try:
+            project = project_from_options(path, cls.DOCKER_OPTIONS)
+            cmd = TopLevelCommand(project)
+            if up:
+                cmd.up(cls.DOCKER_OPTIONS)
+            else:
+                cmd.down(cls.DOCKER_OPTIONS)
 
-        project = project_from_options(path, cls.DOCKER_OPTIONS)
-        cmd = TopLevelCommand(project)
-        if up:
-            cmd.up(cls.DOCKER_OPTIONS)
-        else:
-            cmd.down(cls.DOCKER_OPTIONS)
-
-        return cmd
+            return cmd
+        except ComposeFileNotFound as err:
+            logging.error("No docker-compose on %s", path, stack_info=True)
 
     @classmethod
     def is_apache_up(cls, wp_url):
