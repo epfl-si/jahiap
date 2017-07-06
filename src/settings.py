@@ -711,7 +711,6 @@ JAHIA_SITES = [
     "vnlausanne",
     "vpaa",
     "vpiv",
-    "vpsi",
     "vtm",
     "web2010",
     "wio2017",
