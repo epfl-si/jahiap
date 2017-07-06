@@ -10,12 +10,16 @@ CONFIGURED_LANGUAGES = set(['fr', 'en'])
 
 MAX_WORDPRESS_STARTING_TIME = timedelta(minutes=1, seconds=30)
 
+MYSQL_ROOT_USER=MainUtils.get_optional_env("MYSQL_ROOT_USER", "root")
+MYSQL_ROOT_PASSWORD=MainUtils.get_required_env("MYSQL_ROOT_PASSWORD")
+
 WP_HOST = MainUtils.get_optional_env("WP_HOST", "localhost")
 WP_PATH = MainUtils.get_optional_env("WP_PATH", "/")
 
 WP_ADMIN_URL = MainUtils.get_optional_env("WP_ADMIN_URL", "wordpress.localhost")
-WP_USER = 'admin'
-WP_PASSWORD = 'passw0rd'
+WP_SUPERADMIN_USER = MainUtils.get_optional_env("WP_ADMIN_USER", "admin")
+WP_SUPERADMIN_EMAIL = MainUtils.get_optional_env("WP_ADMIN_EMAIL", "admin@email.com")
+WP_SUPERADMIN_PASSWORD = MainUtils.get_required_env("WP_ADMIN_PASSWORD")
 
 JAHIA_DATE_FORMAT = '%Y-%m-%dT%H:%M:%S'
 

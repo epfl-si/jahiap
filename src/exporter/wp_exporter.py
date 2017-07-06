@@ -12,7 +12,7 @@ from bs4 import BeautifulSoup
 from wordpress_json import WordpressJsonWrapper, WordpressError
 
 from exporter.utils import Utils
-from settings import WP_USER, WP_PASSWORD, WP_PATH, CONFIGURED_LANGUAGES
+from settings import WP_SUPERADMIN_USER, WP_SUPERADMIN_PASSWORD, WP_PATH, CONFIGURED_LANGUAGES
 
 
 class WPExporter:
@@ -84,8 +84,8 @@ class WPExporter:
         }
         self.cli_container = cmd_args['--wp-cli'] or "wp-cli-%s" % self.site.name
         url = "http://%s/%s/?rest_route=/wp/v2" % (self.host, self.path)
-        logging.info("setting up API on '%s', with %s:xxxxxx", url, WP_USER)
-        self.wp = WordpressJsonWrapper(url, WP_USER, WP_PASSWORD)
+        logging.info("setting up API on '%s', with %s:xxxxxx", url, WP_SUPERADMIN_USER)
+        self.wp = WordpressJsonWrapper(url, WP_SUPERADMIN_USER, WP_SUPERADMIN_PASSWORD)
         self.output_path = cmd_args['--output-dir']
 
     def import_all_data_to_wordpress(self):

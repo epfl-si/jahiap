@@ -13,7 +13,8 @@ from parser.jahia_site import Site
 from unzipper.unzip import unzip_one
 from exporter.html_exporter import HTMLExporter
 from exporter.wp_exporter import WPExporter
-from settings import WP_HOST, PROJECT_PATH, MAX_WORDPRESS_STARTING_TIME
+from settings import WP_HOST, PROJECT_PATH, MAX_WORDPRESS_STARTING_TIME, \
+    MYSQL_ROOT_USER, WP_SUPERADMIN_EMAIL, MYSQL_ROOT_PASSWORD, WP_SUPERADMIN_USER, WP_SUPERADMIN_PASSWORD
 from generator.utils import Utils as UtilsGenerator
 
 
@@ -198,7 +199,15 @@ class WordPressNode(Node):
     def prepare_yaml(self, conf_path):
         # build yml file
         template = self.env.get_template('conf.yaml')
-        content = template.render(wp_host=WP_HOST, full_name=self.full_name(), **self.data)
+        content = template.render(
+            wp_host=WP_HOST,
+            mysql_root_user=MYSQL_ROOT_USER,
+            mysql_root_password=MYSQL_ROOT_PASSWORD,
+            username_superadmin=WP_SUPERADMIN_USER,
+            email_superadmin=WP_SUPERADMIN_EMAIL,
+            pwd_superadmin=WP_SUPERADMIN_PASSWORD,
+            full_name=self.full_name(),
+            **self.data)
 
         # build file path
         parent = self.parent
