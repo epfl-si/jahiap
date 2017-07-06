@@ -97,7 +97,7 @@ class WPExporter:
             tracer_path = os.path.join(self.output_path, self.TRACER)
 
             self.align_languages()
-            # self.import_medias()
+            self.import_medias()
             self.import_pages()
             self.set_frontpage()
             self.populate_menu()
