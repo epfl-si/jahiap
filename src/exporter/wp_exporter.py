@@ -139,7 +139,7 @@ class WPExporter:
             wp_media = self.import_media(file)
 
             if wp_media:
-                self.fix_links(file, wp_media)
+                self.fix_file_links(file, wp_media)
                 self.report['files'] += 1
 
         logging.info("WP medias imported")
@@ -180,10 +180,16 @@ class WPExporter:
             logging.error("%s - WP export - media failed: %s", self.site.name, e)
             self.report['failed_files'] += 1
 
-    def fix_links(self, file, wp_media):
+    def fix_file_links(self, file, wp_media):
         """Fix the links pointing to the given file"""
 
-        # the new url to the wp media
+        if "/files" not in file.path:
+            return
+
+        # the old url is the file relative path
+        old_url = file.path[file.path.rfind("/files"):]
+
+        # the new url is the wp media source url
         new_url = wp_media['source_url']
 
         for box in self.site.get_all_boxes():
@@ -192,7 +198,7 @@ class WPExporter:
             # <a>
             self.fix_links_in_tag(
                 soup=soup,
-                file=file,
+                old_url=old_url,
                 new_url=new_url,
                 tag_name="a",
                 tag_attribute="href")
@@ -200,7 +206,7 @@ class WPExporter:
             # <img>
             self.fix_links_in_tag(
                 soup=soup,
-                file=file,
+                old_url=old_url,
                 new_url=new_url,
                 tag_name="img",
                 tag_attribute="src")
@@ -208,7 +214,7 @@ class WPExporter:
             # script
             self.fix_links_in_tag(
                 soup=soup,
-                file=file,
+                old_url=old_url,
                 new_url=new_url,
                 tag_name="script",
                 tag_attribute="src")
@@ -216,21 +222,39 @@ class WPExporter:
             # save the new box content
             box.content = str(soup)
 
+    def fix_page_content_links(self, page_content, wp_page):
+        """Fix the links pointing to the given page_content"""
 
-    def fix_links_in_tag(self, soup, file, new_url, tag_name, tag_attribute):
+        # the old url is the page_content path
+        old_url = page_content.path
+
+        # the new url is the wp page link
+        new_url = wp_page['link']
+
+        for box in self.site.get_all_boxes():
+            soup = BeautifulSoup(box.content, 'html.parser')
+
+            # <a>
+            self.fix_links_in_tag(
+                soup=soup,
+                old_url=old_url,
+                new_url=new_url,
+                tag_name="a",
+                tag_attribute="href")
+
+    def fix_links_in_tag(self, soup, old_url, new_url, tag_name, tag_attribute):
         """Fix the links in the given tag"""
         tags = soup.find_all(tag_name)
 
         for tag in tags:
-            link =  tag.get(tag_attribute)
+            link = tag.get(tag_attribute)
 
             if not link:
                 continue
 
-            if file.name in link:
-                logging.debug("Changing link from %s to %s" % (file.path, new_url))
+            if link == old_url:
+                logging.debug("Changing link from %s to %s" % (old_url, new_url))
                 tag[tag_attribute] = new_url
-
 
     def update_page(self, page_id, title, content):
         """
@@ -330,6 +354,10 @@ class WPExporter:
                    'jahia_url': page.contents[lang].path,
                    'wp_url': wp_page['link']
                 }
+
+                # fix the links
+                self.fix_page_content_links(page_content=page.contents[lang], wp_page=wp_page)
+
                 self.urls_mapping.append(mapping)
                 logging.info("WP page '%s' created", wp_page['link'])
 
