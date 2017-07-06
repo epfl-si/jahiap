@@ -14,6 +14,7 @@ class PageContent:
     def __init__(self, page, language, element):
         self.page = page
         self.site = page.site
+        self.wp_id = None
         self.language = language
         # the relative path, e.g. /team.html
         self.path = ""

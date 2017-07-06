@@ -2,9 +2,11 @@
 import os
 import timeit
 import logging
+import simplejson
 
 import subprocess
 from datetime import timedelta
+from collections import OrderedDict
 
 from bs4 import BeautifulSoup
 from wordpress_json import WordpressJsonWrapper, WordpressError
@@ -32,15 +34,22 @@ class WPExporter:
                 return "%3.1f %s" % (num, x)
             num /= 1024.0
 
-    def wp_cli(self, command):
+    def wp_cli(self, command, stdin=None):
         """
         Wrapper around the WP-CLI (wp-cli.org),
         official wordpress command line interface)
         available in the docker container wpcli
         """
         try:
-            cmd = "docker exec %s wp --allow-root --path='%s' %s" \
-                % (self.cli_container, self.path, command)
+            cmd = "docker exec %s" % self.cli_container
+
+            if stdin:
+                cmd += " sh -c 'echo '\"'\"'"
+                cmd += stdin
+                cmd += "'\"'\"' |"
+            cmd += " wp --allow-root --path='%s' %s" % (self.path, command)
+            if stdin:
+                cmd += "'"
             logging.debug("exec '%s'", cmd)
             return subprocess.check_output(cmd, shell=True)
         except subprocess.CalledProcessError as err:
@@ -93,7 +102,7 @@ class WPExporter:
             self.set_frontpage()
             self.populate_menu()
             self.import_sidebar()
-            self.display_report()
+            # self.display_report()
 
             # log execution time
             elapsed = timedelta(seconds=timeit.default_timer() - start_time)
@@ -192,77 +201,159 @@ class WPExporter:
                             tag['src'] = url
                             box.content = str(soup)
 
-    def update_parent_id(self):
+    def update_page(self, page_id, title, content):
         """
-        Update all pages to define the pages hierarchy
+        Import a page to Wordpress
         """
-        for page in self.site.pages_by_pid.values():
-            if page.parent:
-                wp_page_info = {
-                    'parent': page.parent.wp_id
-                }
-                if page.wp_id:
-                    self.wp.post_pages(page_id=page.wp_id, data=wp_page_info)
+        wp_page_info = {
+            # date: auto => date/heure du jour
+            # date_gmt: auto => date/heure du jour GMT
+            # 'slug': slug,
+            # 'status': 'publish',
+            # password
+            'title': title,
+            'content': content,
+            # author
+            # excerpt
+            # featured_media
+            # comment_status: 'closed'
+            # ping_status: 'closed'
+            # format
+            # meta
+            # sticky
+            # template
+            # categories
+            # tags
+        }
+        return self.wp.post_pages(page_id=page_id, data=wp_page_info)
+
+    def import_page(self, slug, title, content):
+
+        wp_page_info = {
+            # date: auto => date/heure du jour
+            # date_gmt: auto => date/heure du jour GMT
+            'slug': slug,
+            'status': 'publish',
+            # password
+            'title': title,
+            'content': content,
+            # author
+            # excerpt
+            # featured_media
+            # comment_status: 'closed'
+            # ping_status: 'closed'
+            # format
+            # meta
+            # sticky
+            # template
+            # categories
+            # tags
+        }
+
+        return self.wp.post_pages(data=wp_page_info)
 
     def import_pages(self):
         """
         Import all pages of jahia site to Wordpress
         """
-        wp_pages = []
+        # create all pages from python object (parser)
         for page in self.site.pages_by_pid.values():
 
-            content = ""
+            contents = {}
+            info_page = OrderedDict()
 
             for lang in page.contents.keys():
+
+                contents[lang] = ""
+
+                # create the page content
                 for box in page.contents[lang].boxes:
-                    content += box.content
+                    contents[lang] += box.content
 
-                wp_page_info = {
-                    # date: auto => date/heure du jour
-                    # date_gmt: auto => date/heure du jour GMT
-                    'slug': page.contents[lang].path,
-                    'status': 'publish',
-                    # password
-                    'title': page.contents[lang].title,
-                    'content': content,
-                    # author
-                    # excerpt
-                    # featured_media
-                    # comment_status: 'closed'
-                    # ping_status: 'closed'
-                    # format
-                    # meta
-                    # sticky
-                    # template
-                    # categories
-                    # tags
+                info_page[lang] = {
+                    'post_name': page.contents[lang].path,
+                    'post_status': 'publish',
                 }
 
-                wp_page = self.wp.post_pages(data=wp_page_info)
-                wp_pages.append(wp_page)
+            cmd = "pll post create --post_type=page --stdin --porcelain"
+            stdin = simplejson.dumps(info_page)
+            result = self.wp_cli(command=cmd, stdin=stdin)
+            if not result:
+                error_msg = "Could not created page"
+                logging.error(error_msg)
+                raise ValueError(error_msg)
 
+            wp_ids = result.decode("utf-8").split()
+
+            if len(wp_ids) != len(contents):
+                error_msg = "%s page created is not expected : %s" % (len(wp_ids), len(contents))
+                logging.error(error_msg)
+                raise ValueError(error_msg)
+
+            for wp_id, (lang, content) in zip(wp_ids, contents.items()):
+
+                wp_page = self.update_page(page_id=wp_id, title=page.contents[lang].title, content=content)
+
+                # prepare mapping for the nginx conf generation
                 mapping = {
-                    'jahia_url': page.contents[lang].path,
-                    'wp_url': wp_page['link']
+                   'jahia_url': page.contents[lang].path,
+                   'wp_url': wp_page['link']
                 }
-
                 self.urls_mapping.append(mapping)
                 logging.info("WP page '%s' created", wp_page['link'])
 
                 # keep wordpress ID for further usages
-                page.wp_id = wp_page['id']
-                self.report['pages'] += 1
+                page.contents[lang].wp_id = wp_page['id']
 
-                # Set page language
-                result = self.wp_cli('polylang set post %s %s' % (page.wp_id, lang))
-                if result is not None:
-                    logging.debug("page.%s lang set to '%s'", page.wp_id, lang)
+            self.report['pages'] += 1
 
-        self.update_parent_id()
+        self.create_sitemaps()
+
+        self.update_parent_ids()
+
+    def update_parent_ids(self):
+        """
+        Update all pages to define the pages hierarchy
+        """
+        for page in self.site.pages_by_pid.values():
+            for lang, page_content in page.contents.items():
+
+                if page.parent and page_content.wp_id:
+                    parent_id = page.parent.contents[lang].wp_id
+                    wp_page_info = {
+                        'parent': parent_id
+                    }
+                    self.wp.post_pages(page_id=page.contents[lang].wp_id, data=wp_page_info)
+
+    def create_sitemaps(self):
+
+        info_page = OrderedDict()
+
+        for lang in self.site.homepage.contents.keys():
+
+            # create sitemap page
+
+            info_page[lang] = {
+                'post_name': 'sitemap',
+                'post_status': 'publish',
+            }
+
+        cmd = "pll post create --post_type=page --stdin --porcelain"
+        stdin = simplejson.dumps(info_page)
+        result = self.wp_cli(command=cmd, stdin=stdin)
+
+        sitemap_ids = result.decode("utf-8").split()
+        for sitemap_wp_id in sitemap_ids:
+            wp_page = self.update_page(
+                page_id=sitemap_wp_id,
+                title='sitemap',
+                content='[simple-sitemap show_label="false" types="page orderby="menu_order"]'
+            )
+            self.create_footer_menu_for_sitemap(sitemap_wp_id=wp_page['id'])
 
     def import_sidebar(self):
         """
-        import sidebar via vpcli
+        import sidebar via wpcli
         """
         try:
             for lang in self.site.homepage.contents.keys():
@@ -275,6 +366,12 @@ class WPExporter:
 
         except WordpressError as e:
             self.report['failed_widgets'] += 1
+
+    def create_footer_menu_for_sitemap(self, sitemap_wp_id):
+        """
+        Create footer menu for sitemap page
+        """
+        return self.wp_cli('menu item add-post footer_nav %s --porcelain' % sitemap_wp_id)
 
     def create_submenu(self, page):
         """
@@ -300,22 +397,33 @@ class WPExporter:
         """
         try:
             # Create homepage menu
-            page = self.site.homepage
-            menu_id = self.wp_cli('menu item add-post Main %s --classes=link-home --porcelain' % page.wp_id)
-            self.menu_id_dict[page.wp_id] = Utils.get_menu_id(menu_id)
-            self.report['menus'] += 1
+            for lang, page in self.site.homepage.contents.items():
 
-            # Create children of homepage menu
-            for homepage_children in self.site.homepage.children:
-                if homepage_children.wp_id:
-                    menu_id = self.wp_cli('menu item add-post Main %s --porcelain' % homepage_children.wp_id)
-                    self.menu_id_dict[homepage_children.wp_id] = Utils.get_menu_id(menu_id)
-                    self.report['menus'] += 1
+                menu_id = self.wp_cli('menu item add-post Main %s --classes=link-home --porcelain' % page.wp_id)
+                self.menu_id_dict[page.wp_id] = Utils.get_menu_id(menu_id)
+                self.report['menus'] += 1
 
-                # create recursively submenus
-                self.create_submenu(homepage_children)
+                # Create children of homepage menu
+                # for homepage_children in self.site.homepage.contents[lang].children:
+                #     if homepage_children.wp_id:
+                #         menu_id = self.wp_cli('menu item add-post Main %s --porcelain' % homepage_children.wp_id)
+                #         self.menu_id_dict[homepage_children.wp_id] = Utils.get_menu_id(menu_id)
+                #         self.report['menus'] += 1
+                #
+                #     # create recursively submenus
+                #     self.create_submenu(homepage_children)
 
-            logging.info("WP menus populated")
+                # Create footer menu
+                cmd = "wp menu item add-custom footer_nav Accessibility http://www.epfl.ch/accessibility.en.shtml​"
+                menu_id = self.wp_cli(cmd)
+
+                # legal notice
+                cmd = "wp menu item add-custom footer_nav 'Legal Notice' http://mediacom.epfl.ch/disclaimer-en​"
+                menu_id = self.wp_cli(cmd)
+
+                # Report
+                self.report['menus'] += 2
+                logging.info("WP menus populated")
 
         except WordpressError as e:
             self.report['failed_menus'] += 1
@@ -328,17 +436,16 @@ class WPExporter:
         if not self.site.homepage:
             raise Exception("No homepage defined for site")
 
-        # make sure that we have a worpress id
-        if not getattr(self.site.homepage, 'wp_id'):
-            raise Exception("Run 'import_pages' before 'set_frontpage'")
-
         # call wp-cli
-        frontpage_id = self.site.homepage.wp_id
         self.wp_cli('option update show_on_front page')
 
-        result = self.wp_cli('option update page_on_front %s' % frontpage_id)
-        if result is not None:
-            logging.info("WP frontpage setted")
+        for lang in self.site.homepage.contents.keys():
+            frontpage_id = self.site.homepage.contents[lang].wp_id
+            result = self.wp_cli('option update page_on_front %s' % frontpage_id)
+            if result is not None:
+                # Set on only one language is sufficient
+                logging.info("WP frontpage setted")
+                break
 
     def delete_all_content(self):
         """
