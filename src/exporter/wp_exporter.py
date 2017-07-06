@@ -135,10 +135,11 @@ class WPExporter:
         Import medias to Wordpress
         """
         logging.info("WP medias import start")
-        for media in self.site.files:
-            wp_media = self.import_media(media)
+        for file in self.site.files:
+            wp_media = self.import_media(file)
+
             if wp_media:
-                self.replace_links(wp_media)
+                self.fix_links(file, wp_media)
                 self.report['files'] += 1
 
         logging.info("WP medias imported")
@@ -179,27 +180,57 @@ class WPExporter:
             logging.error("%s - WP export - media failed: %s", self.site.name, e)
             self.report['failed_files'] += 1
 
-    def replace_links(self, wp_media):
-        """
-        Replace links of the media 'wp_media' in all boxes
-        """
-        url = wp_media['source_url']
+    def fix_links(self, file, wp_media):
+        """Fix the links pointing to the given file"""
+
+        # the new url to the wp media
+        new_url = wp_media['source_url']
 
         for box in self.site.get_all_boxes():
-            if "<img" in box.content:
-                soup = BeautifulSoup(box.content, 'html.parser')
-                img_tags = soup.find_all('img')
-                for tag in img_tags:
+            soup = BeautifulSoup(box.content, 'html.parser')
 
-                    extensions = ['.jpg', '.jpeg', '.png']
-                    for extension in extensions:
-                        elements = tag['src'].split(extension)[0].split('/')
-                        index = len(elements) - 1
-                        file_name = elements[index].replace(' ', '-') + extension
+            # <a>
+            self.fix_links_in_tag(
+                soup=soup,
+                file=file,
+                new_url=new_url,
+                tag_name="a",
+                tag_attribute="href")
 
-                        if file_name in url:
-                            tag['src'] = url
-                            box.content = str(soup)
+            # <img>
+            self.fix_links_in_tag(
+                soup=soup,
+                file=file,
+                new_url=new_url,
+                tag_name="img",
+                tag_attribute="src")
+
+            # script
+            self.fix_links_in_tag(
+                soup=soup,
+                file=file,
+                new_url=new_url,
+                tag_name="script",
+                tag_attribute="src")
+
+            # save the new box content
+            box.content = str(soup)
+
+
+    def fix_links_in_tag(self, soup, file, new_url, tag_name, tag_attribute):
+        """Fix the links in the given tag"""
+        tags = soup.find_all(tag_name)
+
+        for tag in tags:
+            link =  tag.get(tag_attribute)
+
+            if not link:
+                continue
+
+            if file.name in link:
+                logging.debug("Changing link from %s to %s" % (file.path, new_url))
+                tag[tag_attribute] = new_url
+
 
     def update_page(self, page_id, title, content):
         """
