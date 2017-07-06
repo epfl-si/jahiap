@@ -97,7 +97,7 @@ class WPExporter:
             tracer_path = os.path.join(self.output_path, self.TRACER)
 
             self.align_languages()
-            self.import_medias()
+            # self.import_medias()
             self.import_pages()
             self.set_frontpage()
             self.populate_menu()
@@ -404,21 +404,21 @@ class WPExporter:
                 self.report['menus'] += 1
 
                 # Create children of homepage menu
-                # for homepage_children in self.site.homepage.contents[lang].children:
-                #     if homepage_children.wp_id:
-                #         menu_id = self.wp_cli('menu item add-post Main %s --porcelain' % homepage_children.wp_id)
-                #         self.menu_id_dict[homepage_children.wp_id] = Utils.get_menu_id(menu_id)
-                #         self.report['menus'] += 1
-                #
-                #     # create recursively submenus
-                #     self.create_submenu(homepage_children)
+                for homepage_children in self.site.homepage.contents[lang].children:
+                    if homepage_children.wp_id:
+                        menu_id = self.wp_cli('menu item add-post Main %s --porcelain' % homepage_children.wp_id)
+                        self.menu_id_dict[homepage_children.wp_id] = Utils.get_menu_id(menu_id)
+                        self.report['menus'] += 1
+
+                    # create recursively submenus
+                    self.create_submenu(homepage_children)
 
                 # Create footer menu
-                cmd = "wp menu item add-custom footer_nav Accessibility http://www.epfl.ch/accessibility.en.shtml​"
+                cmd = "menu item add-custom footer_nav Accessibility http://www.epfl.ch/accessibility.en.shtml​"
                 menu_id = self.wp_cli(cmd)
 
                 # legal notice
-                cmd = "wp menu item add-custom footer_nav 'Legal Notice' http://mediacom.epfl.ch/disclaimer-en​"
+                cmd = "menu item add-custom footer_nav 'Legal Notice' http://mediacom.epfl.ch/disclaimer-en​"
                 menu_id = self.wp_cli(cmd)
 
                 # Report
