@@ -52,7 +52,6 @@ from collections import OrderedDict
 from datetime import datetime
 from pprint import pprint, pformat
 
-import requests
 from docopt import docopt
 
 from utils import Utils
@@ -102,10 +101,7 @@ def call_command(args):
 
 def main_crawl(args):
     logging.info("starting crawling...")
-    try:
-        SiteCrawler.download(args)
-    except requests.ConnectionError as err:
-        logging.error(err)
+    SiteCrawler.download(args)
 
 
 def main_unzip(args):
@@ -119,7 +115,7 @@ def main_unzip(args):
         try:
             unzipped_files[site_name] = unzip_one(args['--output-dir'], site_name, zip_file)
         except Exception as err:
-            logging.error("Could not unzip file for %s", site_name, stack_info=True)
+            logging.error("%s - unzip - Could not unzip file - Exception: %s", site_name, err)
 
     # return results
     return unzipped_files
@@ -169,7 +165,7 @@ def main_parse(args):
             parsed_sites[site_name] = site
 
         except Exception as err:
-            logging.error("Error parsing site %s: %s", site_name, err, stack_info=True)
+            logging.error("%s - parse - Exception: %s", site_name, err)
 
     # return results
     return parsed_sites
@@ -250,7 +246,7 @@ def main_export(args):
                     exported_site['wordpress'] = args['--site-path']
                     logging.info("Nginx conf for %s successfully generated", site.name)
             except WordpressError as err:
-                logging.error("WordPress not available: %s", err, stack_info=True)
+                logging.error("%s - WP export - WordPress not available: %s", site.name, err)
 
             if args['--to-static']:
                 logging.info("Exporting %s to static website...", site.name)
@@ -272,7 +268,7 @@ def main_export(args):
                 exported_site['dict'] = export_path
                 logging.info("Site %s successfully exported to python dictionary", site.name)
         except Exception as err:
-            logging.error("Error exporting site %s: %s", site_name, err, stack_info=True)
+            logging.error("%s - export - Error exporting site: %s", site_name, err)
 
         if args['--to-wordpress'] and int(args['--number']) > 1:
             wp_exporter = WPExporter(site, args)
