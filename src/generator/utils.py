@@ -88,7 +88,7 @@ class Utils:
 
             return cmd
         except ComposeFileNotFound as err:
-            logging.error("No docker-compose on %s", path, stack_info=True)
+            logging.error("%s - generate - No docker-compose", path)
 
     @classmethod
     def is_apache_up(cls, wp_url):

@@ -272,13 +272,16 @@ class WordPressNode(Node):
             # FIXME : do not pass args in Objects
             self.tree.args['--site-path'] = self.full_name()
             self.tree.args['--wp-cli'] = self.container_name
-            zip_file = SiteCrawler(self.name, self.tree.args).download_site()
-            site_dir = unzip_one(self.tree.args['--output-dir'], self.name, zip_file)
-            site = Site(site_dir, self.name)
-            wp_exporter = WPExporter(site, self.tree.args)
-            wp_exporter.import_all_data_to_wordpress()
+            try:
+                zip_file = SiteCrawler(self.name, self.tree.args).download_site()
+                site_dir = unzip_one(self.tree.args['--output-dir'], self.name, zip_file)
+                site = Site(site_dir, self.name)
+                wp_exporter = WPExporter(site, self.tree.args)
+                wp_exporter.import_all_data_to_wordpress()
+            except Exception as err:
+                logging.error("%s - generate - Could not run site: %s", self.name, err)
         else:
-            logging.error("Could not start Apache in %s", MAX_WORDPRESS_STARTING_TIME)
+            logging.error("%s - generate - Could not start Apache in %s", self.name, MAX_WORDPRESS_STARTING_TIME)
 
     def cleanup(self):
         # stop container

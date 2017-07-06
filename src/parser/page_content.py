@@ -40,11 +40,11 @@ class PageContent:
         date = element.getAttribute("jcr:lastModified")
 
         try:
-            self.last_update = datetime.strptime(
-                date,
-                JAHIA_DATE_FORMAT)
+            self.last_update = datetime.strptime(date, JAHIA_DATE_FORMAT)
         except ValueError:
-            logging.warning("Invalid last update date for page %s : '%s'" % (self.page.pid, date))
+            logging.error(
+                "%s - parse - Invalid last update date for page %s : '%s'",
+                self.site.name, self.page.pid, date)
 
     def parse_sidebar(self, element):
         """ Parse sidebar """
