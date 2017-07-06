@@ -124,6 +124,7 @@ class WPExporter:
                 tracer.write("%s, ERROR %s\n" % (self.site.name, str(err)))
                 tracer.flush()
 
+
     def align_languages(self):
         if len(self.site.languages) == 1:
             for lang in (CONFIGURED_LANGUAGES - set(self.site.languages)):
@@ -281,14 +282,14 @@ class WPExporter:
             if not result:
                 error_msg = "Could not created page"
                 logging.error(error_msg)
-                raise ValueError(error_msg)
+                continue
 
             wp_ids = result.decode("utf-8").split()
 
             if len(wp_ids) != len(contents):
                 error_msg = "%s page created is not expected : %s" % (len(wp_ids), len(contents))
                 logging.error(error_msg)
-                raise ValueError(error_msg)
+                continue
 
             for wp_id, (lang, content) in zip(wp_ids, contents.items()):
 
@@ -392,14 +393,17 @@ class WPExporter:
         """
         Create recursively submenus.
         """
-        if page not in self.site.homepage.children and page.parent.contents[lang].wp_id in self.menu_id_dict:
+        if page not in self.site.homepage.children and lang in page.contents and page.parent.contents[lang].wp_id in self.menu_id_dict:
 
             parent_menu_id = self.menu_id_dict[page.parent.contents[lang].wp_id]
 
-            command = 'menu item add-post %s %s --parent-id=%s --porcelain' % (menu_name, page.wp_id, parent_menu_id)
+            command = 'menu item add-post %s %s --parent-id=%s --porcelain' % (menu_name, page.contents[lang].wp_id, parent_menu_id)
             menu_id = self.wp_cli(command)
-            self.menu_id_dict[page.wp_id] = Utils.get_menu_id(menu_id)
-            self.report['menus'] += 1
+            if not menu_id:
+                logging.warning("Menu not created for page %s" % page.pid)
+            else:
+                self.menu_id_dict[page.contents[lang].wp_id] = Utils.get_menu_id(menu_id)
+                self.report['menus'] += 1
 
         if page.has_children():
             for child in page.children:
@@ -420,23 +424,34 @@ class WPExporter:
 
                 cmd = 'menu item add-post %s %s --classes=link-home --porcelain'
                 menu_id = self.wp_cli(cmd % (menu_name, page_content.wp_id))
-                self.menu_id_dict[page_content.wp_id] = Utils.get_menu_id(menu_id)
-                self.report['menus'] += 1
+                if not menu_id:
+                    logging.warning("Menu not created for page  %s" % homepage_child.pid)
+                else:
+                    self.menu_id_dict[page_content.wp_id] = Utils.get_menu_id(menu_id)
+                    self.report['menus'] += 1
 
                 # Create children of homepage menu
                 for homepage_child in self.site.homepage.children:
+
+                    if lang not in homepage_child.contents:
+                        logging.warning("Page not translated %s" % homepage_child.pid)
+                        continue
+
                     if homepage_child.contents[lang].wp_id:
                         cmd = 'menu item add-post %s %s --porcelain'
                         menu_id = self.wp_cli(cmd % (menu_name, homepage_child.contents[lang].wp_id))
-                        self.menu_id_dict[homepage_child.contents[lang].wp_id] = Utils.get_menu_id(menu_id)
-                        self.report['menus'] += 1
+                        if not menu_id:
+                            logging.warning("Menu not created %s for page " % homepage_child.pid)
+                        else:
+                            self.menu_id_dict[homepage_child.contents[lang].wp_id] = Utils.get_menu_id(menu_id)
+                            self.report['menus'] += 1
 
                     # create recursively submenus
                     self.create_submenu(homepage_child, lang, menu_name)
 
                 logging.info("WP menus populated")
 
-        except WordpressError as e:
+        except Exception as e:
             logging.error("%s - WP export - menu failed: %s", self.site.name, e)
             self.report['failed_menus'] += 1
 
