@@ -3,7 +3,7 @@ jahiap: a wonderful tool
 
 Usage:
   jahiap.py crawl <site>  [--output-dir=<OUTPUT_DIR>] [--export-path=<EXPORT_PATH>]
-                          [--number=<NUMBER>] [--date DATE] [--force] [--debug | --quiet]
+                          [--number=<NUMBER>] [--date DATE] [--force-crawl] [--debug | --quiet]
   jahiap.py unzip <site>  [--output-dir=<OUTPUT_DIR>] [--number=<NUMBER>] [--debug | --quiet]
   jahiap.py parse <site>  [--output-dir=<OUTPUT_DIR>] [--number=<NUMBER>] [--print-report]
                           [--debug | --quiet] [--use-cache] [--site-path=<SITE_PATH>]
@@ -25,7 +25,7 @@ Options:
   -n --number=<NUMBER>          Number of sites to analyse (fetched in JAHIA_SITES, from given site name) [default: 1].
   --export-path=<EXPORT_PATH>   (crawl) Directory where Jahia Zip files are stored
   --date DATE                   (crawl) Date and time for the snapshot, e.g : 2017-01-15-23-00.
-  -f --force                    (crawl) Force download even if existing snapshot for same site.
+  --force-crawl                 (crawl) Force download even if existing snapshot for same site [default: False].
   --use-cache                   (parse) Do not parse if pickle file found with a previous parsing result
   --site-path=<SITE_PATH>       (parse, export) sub dir where to export parsed content
   -r --print-report             (FIXME) Print report with content.
@@ -39,6 +39,7 @@ Options:
   --site-host=<SITE_HOST>       (export) WordPress HOST where to export parsed content. (default is $WP_ADMIN_URL)
   --conf-path=<CONF_PATH>       (generate) Path where to export yaml files [default: build/etc]
   --cookie-path=<COOKIE_PATH>   (generate) Path where {{ cookiecutter project }} is located [default is $COOKIE_PATH]
+  -f --force                    (*) Force unzip, export, generate
   --debug                       (*) Set logging level to DEBUG (default is INFO).
   --quiet                       (*) Set logging level to WARNING (default is INFO).
 """
@@ -178,7 +179,7 @@ def main_global_report(args):
     "Generate a global report with stats like the number of pages, files and boxes"
     path = os.path.join(args['--output-dir'], "global-report.csv")
 
-    logging.debug("Generating global report at %s" % path)
+    logging.info("Generating global report at %s" % path)
 
     sites = main_parse(args)
 

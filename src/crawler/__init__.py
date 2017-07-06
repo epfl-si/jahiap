@@ -125,7 +125,7 @@ class SiteCrawler(object):
         # where to store output from the script (tracer)
         self.output_path = cmd_args['--output-dir']
         # whether overriding existing zip or not
-        self.force = cmd_args['--force']
+        self.force = cmd_args['--force-crawl']
         # to measure overall download time for given site
         self.elapsed = 0
 

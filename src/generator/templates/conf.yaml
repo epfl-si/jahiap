@@ -4,6 +4,7 @@
 
 default_context:
     project_name: "{{ name }}"
+    container_name: "{{ container_name }}"
     wp_host: "{{ wp_host }}"
     wp_path: "{{ full_name }}"
     wp_title: "{{ site_title }}"
