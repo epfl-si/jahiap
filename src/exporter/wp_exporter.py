@@ -422,6 +422,10 @@ class WPExporter:
                     cmd = 'widget add black-studio-tinymce page-widgets ' \
                         '--title="%s" --text="%s"' % (box.title, content)
                     self.wp_cli(cmd)
+
+                # Import sidebar for one language only
+                break
+
             logging.info("WP all sidebar imported")
 
         except WordpressError as e:
