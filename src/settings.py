@@ -10,8 +10,8 @@ CONFIGURED_LANGUAGES = set(['fr', 'en'])
 
 MAX_WORDPRESS_STARTING_TIME = timedelta(minutes=1, seconds=30)
 
-MYSQL_ROOT_USER=MainUtils.get_optional_env("MYSQL_ROOT_USER", "root")
-MYSQL_ROOT_PASSWORD=MainUtils.get_required_env("MYSQL_ROOT_PASSWORD")
+MYSQL_ROOT_USER = MainUtils.get_optional_env("MYSQL_ROOT_USER", "root")
+MYSQL_ROOT_PASSWORD = MainUtils.get_required_env("MYSQL_ROOT_PASSWORD")
 
 WP_HOST = MainUtils.get_optional_env("WP_HOST", "localhost")
 WP_PATH = MainUtils.get_optional_env("WP_PATH", "/")
