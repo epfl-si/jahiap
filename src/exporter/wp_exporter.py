@@ -375,24 +375,35 @@ class WPExporter:
         footer_name = "footer_nav"
         if lang != 'fr':
             footer_name += "-%s" % lang
-        return self.wp_cli('menu item add-post %s %s --porcelain' % (footer_name, sitemap_wp_id))
+        self.wp_cli('menu item add-post %s %s --porcelain' % (footer_name, sitemap_wp_id))
 
-    def create_submenu(self, page):
+        # Create footer menu
+        cmd = "menu item add-custom %s Accessibility http://www.epfl.ch/accessibility.en.shtml​" % footer_name
+        self.wp_cli(cmd)
+
+        # legal notice
+        cmd = "menu item add-custom %s 'Legal Notice' http://mediacom.epfl.ch/disclaimer-en​" % footer_name
+        self.wp_cli(cmd)
+
+        # Report
+        self.report['menus'] += 2
+
+    def create_submenu(self, page, lang, menu_name):
         """
         Create recursively submenus.
         """
-        if page.wp_id and page not in self.site.homepage.children and page.parent.wp_id in self.menu_id_dict:
+        if page not in self.site.homepage.children and page.parent.contents[lang].wp_id in self.menu_id_dict:
 
-            parent_menu_id = self.menu_id_dict[page.parent.wp_id]
+            parent_menu_id = self.menu_id_dict[page.parent.contents[lang].wp_id]
 
-            command = 'menu item add-post Main %s --parent-id=%s --porcelain' % (page.wp_id, parent_menu_id)
+            command = 'menu item add-post %s %s --parent-id=%s --porcelain' % (menu_name, page.wp_id, parent_menu_id)
             menu_id = self.wp_cli(command)
             self.menu_id_dict[page.wp_id] = Utils.get_menu_id(menu_id)
             self.report['menus'] += 1
 
         if page.has_children():
             for child in page.children:
-                self.create_submenu(child)
+                self.create_submenu(child, lang, menu_name)
 
     def populate_menu(self):
         """
@@ -401,32 +412,28 @@ class WPExporter:
         """
         try:
             # Create homepage menu
-            for lang, page in self.site.homepage.contents.items():
+            for lang, page_content in self.site.homepage.contents.items():
 
-                menu_id = self.wp_cli('menu item add-post Main %s --classes=link-home --porcelain' % page.wp_id)
-                self.menu_id_dict[page.wp_id] = Utils.get_menu_id(menu_id)
+                menu_name = "Main"
+                if lang != 'fr':
+                    menu_name += '-%s' % lang
+
+                cmd = 'menu item add-post %s %s --classes=link-home --porcelain'
+                menu_id = self.wp_cli(cmd % (menu_name, page_content.wp_id))
+                self.menu_id_dict[page_content.wp_id] = Utils.get_menu_id(menu_id)
                 self.report['menus'] += 1
 
                 # Create children of homepage menu
-                for homepage_children in self.site.homepage.contents[lang].children:
-                    if homepage_children.wp_id:
-                        menu_id = self.wp_cli('menu item add-post Main %s --porcelain' % homepage_children.wp_id)
-                        self.menu_id_dict[homepage_children.wp_id] = Utils.get_menu_id(menu_id)
+                for homepage_child in self.site.homepage.children:
+                    if homepage_child.contents[lang].wp_id:
+                        cmd = 'menu item add-post %s %s --porcelain'
+                        menu_id = self.wp_cli(cmd % (menu_name, homepage_child.contents[lang].wp_id))
+                        self.menu_id_dict[homepage_child.contents[lang].wp_id] = Utils.get_menu_id(menu_id)
                         self.report['menus'] += 1
 
                     # create recursively submenus
-                    self.create_submenu(homepage_children)
+                    self.create_submenu(homepage_child, lang, menu_name)
 
-                # Create footer menu
-                cmd = "menu item add-custom footer_nav Accessibility http://www.epfl.ch/accessibility.en.shtml​"
-                menu_id = self.wp_cli(cmd)
-
-                # legal notice
-                cmd = "menu item add-custom footer_nav 'Legal Notice' http://mediacom.epfl.ch/disclaimer-en​"
-                menu_id = self.wp_cli(cmd)
-
-                # Report
-                self.report['menus'] += 2
                 logging.info("WP menus populated")
 
         except WordpressError as e:
