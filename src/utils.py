@@ -92,7 +92,7 @@ class Utils:
         logger.setLevel(level)
         # set up logging to file
         fh = logging.FileHandler(Utils.get_optional_env('LOGGING_FILE', 'jahiap.log'))
-        fh.setLevel(logging.DEBUG)
+        fh.setLevel(logging.ERROR)
         formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
         fh.setFormatter(formatter)
         # add the handlers to the logger

@@ -111,7 +111,10 @@ class SiteCrawler(object):
 
         # download sites from JAHIA_SITES
         for site in sites:
-            downloaded_files[site] = str(cls(site, cmd_args).download_site())
+            try:
+                downloaded_files[site] = str(cls(site, cmd_args).download_site())
+            except Exception as err:
+                logging.error("%s - crawl - Could not crawl Jahia - Exception: %s", site, err)
 
         # return results, as strings
         return downloaded_files
