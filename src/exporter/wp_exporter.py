@@ -343,13 +343,13 @@ class WPExporter:
         result = self.wp_cli(command=cmd, stdin=stdin)
 
         sitemap_ids = result.decode("utf-8").split()
-        for sitemap_wp_id in sitemap_ids:
+        for sitemap_wp_id, lang in zip(sitemap_ids, info_page.keys()):
             wp_page = self.update_page(
                 page_id=sitemap_wp_id,
                 title='sitemap',
                 content='[simple-sitemap show_label="false" types="page orderby="menu_order"]'
             )
-            self.create_footer_menu_for_sitemap(sitemap_wp_id=wp_page['id'])
+            self.create_footer_menu_for_sitemap(sitemap_wp_id=wp_page['id'], lang=lang)
 
     def import_sidebar(self):
         """
@@ -368,11 +368,14 @@ class WPExporter:
             logging.error("%s - WP export - widget failed: %s", self.site.name, e)
             self.report['failed_widgets'] += 1
 
-    def create_footer_menu_for_sitemap(self, sitemap_wp_id):
+    def create_footer_menu_for_sitemap(self, sitemap_wp_id, lang):
         """
         Create footer menu for sitemap page
         """
-        return self.wp_cli('menu item add-post footer_nav %s --porcelain' % sitemap_wp_id)
+        footer_name = "footer_nav"
+        if lang != 'fr':
+            footer_name += "-%s" % lang
+        return self.wp_cli('menu item add-post %s %s --porcelain' % (footer_name, sitemap_wp_id))
 
     def create_submenu(self, page):
         """
