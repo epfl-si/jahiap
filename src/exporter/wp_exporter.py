@@ -124,7 +124,6 @@ class WPExporter:
                 tracer.write("%s, ERROR %s\n" % (self.site.name, str(err)))
                 tracer.flush()
 
-
     def align_languages(self):
         if len(self.site.languages) == 1:
             for lang in (CONFIGURED_LANGUAGES - set(self.site.languages)):
@@ -456,11 +455,14 @@ class WPExporter:
         """
         Create recursively submenus.
         """
-        if page not in self.site.homepage.children and lang in page.contents and page.parent.contents[lang].wp_id in self.menu_id_dict:
+        if page not in self.site.homepage.children \
+                and lang in page.contents \
+                and page.parent.contents[lang].wp_id in self.menu_id_dict:
 
             parent_menu_id = self.menu_id_dict[page.parent.contents[lang].wp_id]
 
-            command = 'menu item add-post %s %s --parent-id=%s --porcelain' % (menu_name, page.contents[lang].wp_id, parent_menu_id)
+            command = 'menu item add-post %s %s --parent-id=%s --porcelain' \
+                % (menu_name, page.contents[lang].wp_id, parent_menu_id)
             menu_id = self.wp_cli(command)
             if not menu_id:
                 logging.warning("Menu not created for page %s" % page.pid)
@@ -488,7 +490,7 @@ class WPExporter:
                 cmd = 'menu item add-post %s %s --classes=link-home --porcelain'
                 menu_id = self.wp_cli(cmd % (menu_name, page_content.wp_id))
                 if not menu_id:
-                    logging.warning("Menu not created for page  %s" % homepage_child.pid)
+                    logging.warning("Menu not created for page  %s" % page_content.pid)
                 else:
                     self.menu_id_dict[page_content.wp_id] = Utils.get_menu_id(menu_id)
                     self.report['menus'] += 1
