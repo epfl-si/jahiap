@@ -75,6 +75,7 @@ class TestGenerator(object):
         '--output-dir': OUTPUT_DIR,
         '--export-path': WORKING_PATH,
         '--date': datetime.today().strftime("%Y-%m-%d-%H-%M"),
+        '--force-crawl': False,
         '--force': False,
     }
 

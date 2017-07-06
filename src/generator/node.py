@@ -28,8 +28,15 @@ class Node:
         self.name = name
         self.data = data
         self.tree = tree
+        self.container_name = "container-%s" % name
+        self.db_name = None
         self.__parent = None
         self.__children = []
+
+        # data given for WordPress sites -> set container_name accordingly
+        if data is not None:
+            self.container_name = self.data.get("container_name", "wp-%s" % name)
+            self.db_name = self.data.get("db_name")
 
         # make sure output_path exists
         if tree and not os.path.exists(self.output_path()):
@@ -87,21 +94,22 @@ class Node:
     def run(self):
 
         # stop running container first (if any)
-        os.system("docker rm -f generated-%s" % self.name)
+        os.system("docker rm -f %s" % self.container_name)
 
         # run new countainer
         docker_cmd = """docker run -d \
-        --name "generated-%(site_name)s" \
+        --name "%(container_name)s" \
         --restart=always \
         --net wp-net \
         --label "traefik.enable=true" \
-        --label "traefik.backend=generated-%(site_name)s" \
-        --label "traefik.frontend=generated-%(site_name)s" \
+        --label "traefik.backend=%(container_name)s" \
+        --label "traefik.frontend=%(container_name)s" \
         --label "traefik.frontend.rule=Host:%(WP_HOST)s;PathPrefix:/%(full_name)s" \
         -v %(absolute_path_to_html)s:/usr/share/nginx/html/%(full_name)s \
         -v %(absolute_project_path)s/nginx/nginx.conf:/etc/nginx/conf.d/default.conf \
         nginx
         """ % {
+            'container_name': self.container_name,
             'site_name': self.name,
             'absolute_path_to_html': self.absolute_path_to_html(),
             'absolute_project_path': PROJECT_PATH,
@@ -113,7 +121,7 @@ class Node:
         logging.info("Docker launched for %s", self.name)
 
     def cleanup(self):
-        docker_cmd = 'docker rm -f generated-%s' % self.name
+        docker_cmd = 'docker rm -f %s' % self.container_name
         os.system(docker_cmd)
         logging.debug(docker_cmd)
         logging.info("Docker '%s' stopped and removed", self.name)
@@ -233,12 +241,23 @@ class WordPressNode(Node):
         self.prepare_composition(self.tree.args, yaml_path)
 
     def run(self):
-        composition_path = os.path.join(self.get_composition_dir(self.tree.args), self.name)
-        UtilsGenerator.docker(composition_path, up=True)
-        # built up Wordpress URL
+        # built up Wordpress URL and composition_path
         wp_url = "%s/%s" % (WP_HOST, self.full_name())
-        # set timer not to lock the process
+        composition_path = os.path.join(self.get_composition_dir(self.tree.args), self.container_name)
+
+        # check if site already running
+        if UtilsGenerator.is_apache_up(wp_url):
+            if not self.tree.args['--force']:
+                logging.warning("Apache is already running on %s. Use --force to restart it", wp_url)
+                return
+            else:
+                logging.info("Apache is already running on %s. Stopping container...", wp_url)
+                UtilsGenerator.docker(composition_path, up=False)
+
+        # start container & set timer limit the waiting time
+        UtilsGenerator.docker(composition_path, up=True)
         start_time = timeit.default_timer()
+
         # wait fot Apache to start
         while not UtilsGenerator.is_apache_up(wp_url):
             # give more time to apache to start
@@ -247,19 +266,28 @@ class WordPressNode(Node):
             elapsed = timedelta(seconds=timeit.default_timer() - start_time)
             if elapsed > MAX_WORDPRESS_STARTING_TIME:
                 break
+
         # do export
         if UtilsGenerator.is_apache_up(wp_url):
             # FIXME : do not pass args in Objects
             self.tree.args['--site-path'] = self.full_name()
+            self.tree.args['--wp-cli'] = self.container_name
             zip_file = SiteCrawler(self.name, self.tree.args).download_site()
             site_dir = unzip_one(self.tree.args['--output-dir'], self.name, zip_file)
-            site = Site(site_dir, self.name, root_path="/"+self.full_name())
+            site = Site(site_dir, self.name)
             wp_exporter = WPExporter(site, self.tree.args)
             wp_exporter.import_all_data_to_wordpress()
         else:
             logging.error("Could not start Apache in %s", MAX_WORDPRESS_STARTING_TIME)
 
     def cleanup(self):
-        composition_path = os.path.join(self.get_composition_dir(self.tree.args), self.name)
+        # stop container
+        composition_path = os.path.join(self.get_composition_dir(self.tree.args), self.container_name)
         UtilsGenerator.docker(composition_path, up=False)
-        # TODO: remove DB
+
+        # remove Database
+        if self.db_name is not None:
+            cmd = r'docker exec wp-mariadb sh -c "mysql -u root' \
+                r' --password=\"\$MYSQL_ROOT_PASSWORD\" --execute=\"DROP DATABASE %s;\""' % self.db_name
+            logging.info(cmd)
+            os.system(cmd)

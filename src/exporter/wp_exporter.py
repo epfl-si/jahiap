@@ -119,7 +119,7 @@ class WPExporter:
                 tracer.flush()
 
         except WordpressError as err:
-            logging.error("Exception while importing all data for %s: %s" % self.site, err, stack_info=True)
+            logging.error("Exception while importing all data for %s: %s", self.site.name, err, stack_info=True)
             with open(tracer_path, 'a', newline='\n') as tracer:
                 tracer.write("%s, ERROR %s\n" % (self.site.name, str(err)))
                 tracer.flush()
