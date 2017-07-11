@@ -2,9 +2,9 @@
 import logging
 import os
 import subprocess
-import timeit
+from timeit import default_timer as timer
 from collections import OrderedDict
-from datetime import timedelta, datetime
+from datetime import datetime
 
 import simplejson
 from bs4 import BeautifulSoup
@@ -72,7 +72,7 @@ class WPExporter:
         self.site = site
         self.host = cmd_args['--site-host']
         self.path = cmd_args['--site-path']
-        self.elapsed = 0
+        self.elapsed_time = 0
         self.report = {
             'pages': 0,
             'files': 0,
@@ -92,7 +92,9 @@ class WPExporter:
         Import all data to worpdress via REST API and wp-cli
         """
         try:
-            start_time = timeit.default_timer()
+            # starts the timer to calculate the time to import data
+            start_time = timer()
+
             tracer_path = os.path.join(self.output_path, self.TRACER)
 
             self.align_languages()
@@ -103,15 +105,18 @@ class WPExporter:
             self.import_sidebar()
             # self.display_report()
 
+            # stop the timer to calculate the time to import data
+            end_time = timer()
+            elapsed_time = round(end_time - start_time)
+
             # log execution time
-            elapsed = timedelta(seconds=timeit.default_timer() - start_time)
-            logging.info("Data imported in %s", elapsed)
+            logging.info("Data imported in %s", elapsed_time)
 
             with open(tracer_path, 'a', newline='\n') as tracer:
                 tracer.write("%s, %s, %s, %s, %s, %s\n" % (
                     '{0:%d-%m-%Y %H:%M:%S}'.format(datetime.now()),
                     self.site.name,
-                    str(elapsed),
+                    str(elapsed_time),
                     self.report['failed_files'],
                     self.report['failed_menus'],
                     self.report['failed_widgets'],

@@ -2,8 +2,7 @@
 import logging
 import os
 import time
-import timeit
-from datetime import timedelta
+from timeit import default_timer as timer
 from jinja2 import Environment, PackageLoader, select_autoescape
 from cookiecutter.main import cookiecutter
 from cookiecutter.exceptions import OutputDirExistsException
@@ -266,15 +265,20 @@ class WordPressNode(Node):
 
         # start container & set timer limit the waiting time
         UtilsGenerator.docker(composition_path, up=True)
-        start_time = timeit.default_timer()
 
-        # wait fot Apache to start
+        # start the timer
+        start_time = timer()
+
+        # wait for Apache to start
         while not UtilsGenerator.is_apache_up(wp_url):
+
             # give more time to apache to start
             time.sleep(10)
+
             # check execution time
-            elapsed = timedelta(seconds=timeit.default_timer() - start_time)
-            if elapsed > MAX_WORDPRESS_STARTING_TIME:
+            end_time = timer()
+            elapsed_time = round(end_time - start_time)
+            if elapsed_time > MAX_WORDPRESS_STARTING_TIME:
                 break
 
         # do export

@@ -2,9 +2,8 @@
 
 import logging
 import os
-import timeit
+from timeit import default_timer as timer
 from collections import OrderedDict
-from datetime import timedelta
 from pathlib import Path
 
 import requests
@@ -130,7 +129,7 @@ class SiteCrawler(object):
         # whether overriding existing zip or not
         self.force = cmd_args['--force-crawl']
         # to measure overall download time for given site
-        self.elapsed = 0
+        self.elapsed_time = 0
 
         # adapt file_path to cmd_args
         existing = self.already_downloaded()
@@ -143,7 +142,7 @@ class SiteCrawler(object):
 
     def __str__(self):
         """ Format used for report"""
-        return ";".join([self.site_name, self.file_path, str(self.elapsed)])
+        return ";".join([self.site_name, self.file_path, str(self.elapsed_time)])
 
     def already_downloaded(self):
         path = Path(self.export_path)
@@ -163,7 +162,7 @@ class SiteCrawler(object):
         params['sitebox'] = self.site_name
 
         # set timer to measure execution time
-        start_time = timeit.default_timer()
+        start_time = timer()
 
         # make query
         logging.debug("downloading %s...", self.file_name)
@@ -200,8 +199,9 @@ class SiteCrawler(object):
                     output.flush()
 
         # log execution time and return path to downloaded file
-        self.elapsed = timedelta(seconds=timeit.default_timer() - start_time)
-        logging.info("file downloaded in %s", self.elapsed)
+        end_time = timer()
+        self.elapsed_time = round(end_time - start_time)
+        logging.info("file downloaded in %s", self.elapsed_time)
         tracer_path = os.path.join(self.output_path, self.TRACER)
         with open(tracer_path, 'a') as tracer:
             tracer.write(str(self))
