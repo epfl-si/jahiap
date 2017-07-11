@@ -19,7 +19,7 @@ class Tree:
         self.nodes = {self.root.name: self.root}
 
         # create all nodes
-        for site in sites:
+        for site in self.sites:
             node = Node.factory(name=site['name'], type=site['type'], data=site, tree=self)
             self.nodes[node.name] = node
 
