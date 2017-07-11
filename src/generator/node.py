@@ -161,6 +161,7 @@ class ListNode(Node):
         """
 
         template = self.env.get_template('list.html')
+        # FIXME : Replace dict by OrderedDict
         children_list = dict([(child.name, child.full_name()) for child in self.children])
         content = template.render(name=self.name, children_list=children_list)
 

@@ -1,13 +1,12 @@
 """(c) All rights reserved. ECOLE POLYTECHNIQUE FEDERALE DE LAUSANNE, Switzerland, VPSI, 2017"""
-import os
-import timeit
 import logging
-import simplejson
-
+import os
 import subprocess
-from datetime import timedelta
+import timeit
 from collections import OrderedDict
+from datetime import timedelta, datetime
 
+import simplejson
 from bs4 import BeautifulSoup
 from wordpress_json import WordpressJsonWrapper, WordpressError
 
@@ -109,7 +108,8 @@ class WPExporter:
             logging.info("Data imported in %s", elapsed)
 
             with open(tracer_path, 'a', newline='\n') as tracer:
-                tracer.write("%s, %s, %s, %s, %s\n" % (
+                tracer.write("%s, %s, %s, %s, %s, %s\n" % (
+                    '{0:%d-%m-%Y %H:%M:%S}'.format(datetime.now()),
                     self.site.name,
                     str(elapsed),
                     self.report['failed_files'],
