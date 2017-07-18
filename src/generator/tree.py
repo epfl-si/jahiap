@@ -2,6 +2,7 @@
 import os
 
 from generator.node import Node, RootNode
+from multiprocessing.pool import Pool
 
 
 class Tree:
@@ -40,12 +41,15 @@ class Tree:
         for node in self.nodes.values():
             node.prepare_run()
 
-    def run(self):
+    def run(self, nb_processes=4):
         """
         Create all docker container for all sites
         """
         for node in self.nodes.values():
             node.run()
+
+        with Pool(processes=int(nb_processes)) as pool:
+            pool.map(run, self.nodes.values())
 
     def cleanup(self):
         """
