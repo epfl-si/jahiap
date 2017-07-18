@@ -16,22 +16,41 @@ from settings import WP_SUPERADMIN_USER, WP_SUPERADMIN_PASSWORD, WP_PATH, CONFIG
 
 class WPExporter:
 
-    TRACER = "tracer_importing.csv"
+    # this file is used to save data for importing data
+    TRACER_FILE_NAME = "tracer_importing.csv"
 
+    # list of mapping Jahia url and Wordpress url
     urls_mapping = []
 
-    # Dictionary with the key 'wp_page_id' and the value 'wp_menu_id'
-    menu_id_dict = {}
+    def __init__(self, site, host, path, output_dir, wp_cli=None):
+        """
+        site is the python object resulting from the parsing of Jahia XML. 
+        host is the domain name.
+        path is the url part of the site without the site_name.
+        output_dir is the path where information files will be generated.
+        wp_cli is the name of the container docker which contains wpcli.
+        """
+        self.site = site
+        self.host = host
+        self.path = path
+        self.elapsed = 0
+        self.report = {
+            'pages': 0,
+            'files': 0,
+            'menus': 0,
+            'failed_files': 0,
+            'failed_menus': 0,
+            'failed_widgets': 0,
+        }
+        # dictionary with the key 'wp_page_id' and the value 'wp_menu_id'
+        self.menu_id_dict = {}
+        self.cli_container = wp_cli or "wp-cli-%s" % self.site.name
+        self.output_dir = output_dir
 
-    @staticmethod
-    def convert_bytes(num):
-        """
-        This function will convert bytes to MB.... GB... etc
-        """
-        for x in ['bytes', 'KB', 'MB', 'GB', 'TB']:
-            if num < 1024.0:
-                return "%3.1f %s" % (num, x)
-            num /= 1024.0
+        # we use the python-wordpress-json library to interact with the wordpress REST API
+        rest_api_url = "http://%s/%s/?rest_route=/wp/v2" % (self.host, self.path)
+        logging.info("setting up API on '%s', with %s:xxxxxx", rest_api_url, WP_SUPERADMIN_USER)
+        self.wp = WordpressJsonWrapper(rest_api_url, WP_SUPERADMIN_USER, WP_SUPERADMIN_PASSWORD)
 
     def wp_cli(self, command, stdin=None):
         """
@@ -55,45 +74,13 @@ class WPExporter:
             logging.error("%s - WP export - wp_cli failed : %s", self.site.name, err)
             return None
 
-    @classmethod
-    def file_size(cls, file_path):
-        """
-        This function will return the file size
-        """
-        if os.path.isfile(file_path):
-            file_info = os.stat(file_path)
-            return cls.convert_bytes(file_info.st_size)
-
-    def __init__(self, site, cmd_args):
-        """
-        Site is the python object resulting from the parsing of Jahia XML
-        Domain is the wordpress domain where to push the content
-        """
-        self.site = site
-        self.host = cmd_args['--site-host']
-        self.path = cmd_args['--site-path']
-        self.elapsed = 0
-        self.report = {
-            'pages': 0,
-            'files': 0,
-            'menus': 0,
-            'failed_files': 0,
-            'failed_menus': 0,
-            'failed_widgets': 0,
-        }
-        self.cli_container = cmd_args['--wp-cli'] or "wp-cli-%s" % self.site.name
-        url = "http://%s/%s/?rest_route=/wp/v2" % (self.host, self.path)
-        logging.info("setting up API on '%s', with %s:xxxxxx", url, WP_SUPERADMIN_USER)
-        self.wp = WordpressJsonWrapper(url, WP_SUPERADMIN_USER, WP_SUPERADMIN_PASSWORD)
-        self.output_path = cmd_args['--output-dir']
-
     def import_all_data_to_wordpress(self):
         """
         Import all data to worpdress via REST API and wp-cli
         """
         try:
             start_time = timeit.default_timer()
-            tracer_path = os.path.join(self.output_path, self.TRACER)
+            tracer_path = os.path.join(self.output_dir, self.TRACER_FILE_NAME)
 
             self.align_languages()
             self.import_medias()
@@ -692,7 +679,7 @@ server {
         content += last_part
 
         # Set the file name
-        file_name = os.path.join(self.output_path, 'jahia-%s.conf' % self.site.name)
+        file_name = os.path.join(self.output_dir, 'jahia-%s.conf' % self.site.name)
 
         # Open the file in write mode
         with open(file_name, 'a') as f:
