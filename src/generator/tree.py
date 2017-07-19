@@ -1,8 +1,8 @@
 """(c) All rights reserved. ECOLE POLYTECHNIQUE FEDERALE DE LAUSANNE, Switzerland, VPSI, 2017"""
 import os
+from multiprocessing.pool import Pool
 
 from generator.node import Node, RootNode
-from multiprocessing.pool import Pool
 
 
 class Tree:
@@ -41,15 +41,16 @@ class Tree:
         for node in self.nodes.values():
             node.prepare_run()
 
-    def run(self, nb_processes=4):
+    @staticmethod
+    def run_helper(node):
+        return node.run()
+
+    def run(self, processes=1):
         """
         Create all docker container for all sites
         """
-        for node in self.nodes.values():
-            node.run()
-
-        with Pool(processes=int(nb_processes)) as pool:
-            pool.map(run, self.nodes.values())
+        with Pool(processes=processes) as pool:
+            pool.map(Tree.run_helper, self.nodes.values())
 
     def cleanup(self):
         """
