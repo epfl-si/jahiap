@@ -250,7 +250,6 @@ def main_export(args):
                         wp_cli=wp_cli
                     )
                     wp_exporter.import_all_data_to_wordpress()
-                    wp_exporter.generate_nginx_conf_file()
                     exported_site['wordpress'] = args['--site-path']
                     logging.info("Site %s successfully exported to WordPress", site.name)
 
@@ -263,7 +262,7 @@ def main_export(args):
                         output_dir=args['--output-dir'],
                         wp_cli=wp_cli
                     )
-                    wp_exporter.import_pages()
+                    wp_exporter.import_all_data_to_wordpress()
                     wp_exporter.generate_nginx_conf_file()
                     exported_site['wordpress'] = args['--site-path']
                     logging.info("Nginx conf for %s successfully generated", site.name)

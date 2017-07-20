@@ -15,24 +15,23 @@ from settings import WP_SUPERADMIN_USER, WP_SUPERADMIN_PASSWORD, WP_PATH, CONFIG
 
 
 class WPExporter:
-
     # this file is used to save data for importing data
     TRACER_FILE_NAME = "tracer_importing.csv"
 
     # list of mapping Jahia url and Wordpress url
     urls_mapping = []
 
-    def __init__(self, site, host, path, output_dir, wp_cli=None):
+    def __init__(self, site, site_host, site_path, output_dir, wp_cli=None):
         """
         site is the python object resulting from the parsing of Jahia XML. 
-        host is the domain name.
-        path is the url part of the site without the site_name.
+        site_host is the domain name.
+        site_path is the url part of the site without the site_name.
         output_dir is the path where information files will be generated.
         wp_cli is the name of the container docker which contains wpcli.
         """
         self.site = site
-        self.host = host
-        self.path = path
+        self.host = site_host
+        self.path = site_path
         self.elapsed = 0
         self.report = {
             'pages': 0,
@@ -88,12 +87,13 @@ class WPExporter:
             self.set_frontpage()
             self.populate_menu()
             self.import_sidebar()
-            # self.display_report()
+            self.display_report()
 
             # log execution time
             elapsed = timedelta(seconds=timeit.default_timer() - start_time)
             logging.info("Data imported in %s", elapsed)
 
+            # write a csv file
             with open(tracer_path, 'a', newline='\n') as tracer:
                 tracer.write("%s, %s, %s, %s, %s, %s\n" % (
                     '{0:%d-%m-%Y %H:%M:%S}'.format(datetime.now()),
@@ -342,13 +342,12 @@ class WPExporter:
                 continue
 
             for wp_id, (lang, content) in zip(wp_ids, contents.items()):
-
                 wp_page = self.update_page(page_id=wp_id, title=page.contents[lang].title, content=content)
 
                 # prepare mapping for the nginx conf generation
                 mapping = {
-                   'jahia_url': page.contents[lang].path,
-                   'wp_url': wp_page['link']
+                    'jahia_url': page.contents[lang].path,
+                    'wp_url': wp_page['link']
                 }
 
                 self.urls_mapping.append(mapping)
@@ -416,7 +415,6 @@ class WPExporter:
         info_page = OrderedDict()
 
         for lang in self.site.homepage.contents.keys():
-
             # create sitemap page
 
             info_page[lang] = {
@@ -446,7 +444,7 @@ class WPExporter:
                 for box in self.site.homepage.contents[lang].sidebar.boxes:
                     content = Utils.escape_quotes(box.content)
                     cmd = 'widget add black-studio-tinymce page-widgets ' \
-                        '--title="%s" --text="%s"' % (box.title, content)
+                          '--title="%s" --text="%s"' % (box.title, content)
                     self.wp_cli(cmd)
 
                 # Import sidebar for one language only
@@ -489,7 +487,7 @@ class WPExporter:
             parent_menu_id = self.menu_id_dict[page.parent.contents[lang].wp_id]
 
             command = 'menu item add-post %s %s --parent-id=%s --porcelain' \
-                % (menu_name, page.contents[lang].wp_id, parent_menu_id)
+                      % (menu_name, page.contents[lang].wp_id, parent_menu_id)
             menu_id = self.wp_cli(command)
             if not menu_id:
                 logging.warning("Menu not created for page %s" % page.pid)
@@ -614,65 +612,54 @@ class WPExporter:
         """
         Display report
         """
-
-        result = """
-Imported in WordPress :
-
-  - %(files)s files
-
-  - %(pages)s pages
-
-  - %(menus)s menus
-
-Errors :
-
-  - %(failed_files)s files
-
-  - %(failed_menus)s menus
-
-  - %(failed_widgets)s widgets
-
-""" % self.report
-
-        print(result)
+        print("Imported in WordPress:\n"
+              "- {files}s files\n"
+              "- {pages}s pages\n"
+              "- {menus}s menus\n"
+              "\n"
+              "Errors:\n"
+              "- {failed_files}s files\n"
+              "- {failed_menus}s menus\n"
+              "- {failed_widgets}s widgets\n".format(**self.report))
 
     def generate_nginx_conf_file(self):
         """
         Generates a nginx configuration file containing
         the rewrites of the pages jahia in WordPress page.
         """
+        the_dict = {
+            'site_name': self.site.name,
+            'WP_PATH': WP_PATH,
+        }
 
-        first_part = """
-server {
-    server_name %(site_name)s.epfl.ch ;
-    return 301 $scheme://test-web-static.epfl.ch/%(WP_PATH)s/%(site_name)s$request_uri;
-}
+        first_part = "server {{\n" \
+                     "\tserver_name {site_name}.epfl.ch ;\n" \
+                     "\treturn 301 $scheme://test-web-static.epfl.ch/{WP_PATH}/{site_name}$request_uri;\n" \
+                     "}}\n" \
+                     "\n" \
+                     "server {{\n" \
+                     "\tlisten\t80;\n" \
+                     "\tlisten\t[::]:80;\n" \
+                     "\tserver_name\ttest-web-static.epfl.ch;\n" \
+                     "\n".format(**the_dict)
 
-server {
-    listen       80;
-    listen       [::]:80;
+        last_part = "\n" \
+                    "\tlocation / {\n" \
+                    "\t\tproxy_pass\thttp://traefik/;\n" \
+                    "\t}\n" \
+                    "}\n"
 
-""" % {'site_name': self.site.name, "WP_PATH": WP_PATH}
-
-        last_part = """
-    location / {
-        proxy_pass   http://traefik/;
-    }
-}
-"""
         # Add the first part of the content file
         content = first_part
 
         # Add all rewrite jahia URI to WordPress URI
         for element in self.urls_mapping:
 
-            line = """    rewrite ^/%(WP_PATH)s/%(site_name)s/%(jahia_url)s$ /%(WP_PATH)s/%(site_name)s/%(wp_url)s permanent;
-""" % {
-                'site_name': self.site.name,
-                'jahia_url': element['jahia_url'][1:],
-                'wp_url': element['wp_url'].split("/")[3],
-                "WP_PATH": WP_PATH,
-            }
+            the_dict['jahia_url'] = element['jahia_url'][1:]
+            the_dict['wp_url'] = element['wp_url'].split("/")[3]
+
+            line = "\trewrite ^/{WP_PATH}/{site_name}/{jahia_url}$ " \
+                   "/{WP_PATH}/{site_name}/{wp_url} permanent;\n".format(**the_dict)
             content += line
 
         # Add the last part of the content file
