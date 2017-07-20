@@ -112,6 +112,10 @@ class WPExporter:
                 tracer.flush()
 
     def align_languages(self):
+        """
+        In docker configuration we create 2 languages (fr, en) by default.
+        If the current site is only in 1 language we need to delete the 'bad' language.
+        """
         if len(self.site.languages) == 1:
             for lang in (CONFIGURED_LANGUAGES - set(self.site.languages)):
                 logging.info("Deleting language %s", lang)
@@ -124,11 +128,9 @@ class WPExporter:
         logging.info("WP medias import start")
         for file in self.site.files:
             wp_media = self.import_media(file)
-
             if wp_media:
                 self.fix_file_links(file, wp_media)
                 self.report['files'] += 1
-
         logging.info("WP medias imported")
 
     def import_media(self, media):
@@ -179,58 +181,82 @@ class WPExporter:
         # the new url is the wp media source url
         new_url = wp_media['source_url']
 
+        tag_attribute_tuples = [("a", "href"), ("img", "src"), ("script", "src")]
+
         for box in self.site.get_all_boxes():
+
             soup = BeautifulSoup(box.content, 'html.parser')
 
-            # <a>
-            self.fix_links_in_tag(
-                soup=soup,
-                old_url=old_url,
-                new_url=new_url,
-                tag_name="a",
-                tag_attribute="href")
+            for tag_name, tag_attribute in tag_attribute_tuples:
 
-            # <img>
-            self.fix_links_in_tag(
-                soup=soup,
-                old_url=old_url,
-                new_url=new_url,
-                tag_name="img",
-                tag_attribute="src")
-
-            # script
-            self.fix_links_in_tag(
-                soup=soup,
-                old_url=old_url,
-                new_url=new_url,
-                tag_name="script",
-                tag_attribute="src")
+                self.fix_links_in_tag(
+                    soup=soup,
+                    old_url=old_url,
+                    new_url=new_url,
+                    tag_name=tag_name,
+                    tag_attribute=tag_attribute)
 
             # save the new box content
             box.content = str(soup)
 
-    def fix_page_content_links(self, page_content, wp_page):
-        """Fix the links pointing to the given page_content"""
+    # def fix_page_content_links(self, page_content, wp_page):
+    #     """Fix the links pointing to the given page_content"""
+    #
+    #     # the old url is the page_content path
+    #     old_url = page_content.path
+    #
+    #     # the new url is the wp page link
+    #     new_url = wp_page['link']
+    #
+    #     for box in self.site.get_all_boxes():
+    #         soup = BeautifulSoup(box.content, 'html.parser')
+    #
+    #         # <a>
+    #         self.fix_links_in_tag(
+    #             soup=soup,
+    #             old_url=old_url,
+    #             new_url=new_url,
+    #             tag_name="a",
+    #             tag_attribute="href")
 
-        # the old url is the page_content path
-        old_url = page_content.path
+    def fix_page_content_links(self, wp_pages):
+        """
+        Fix all the links once we know all the WordPress pages urls
+        """
+        for wp_page in wp_pages:
 
-        # the new url is the wp page link
-        new_url = wp_page['link']
+            content = ""
 
-        for box in self.site.get_all_boxes():
-            soup = BeautifulSoup(box.content, 'html.parser')
+            if "content" in wp_page:
+                content = wp_page["content"]["raw"]
+            else:
+                logging.error("Expected content for page %s" % wp_page)
 
-            # <a>
-            self.fix_links_in_tag(
-                soup=soup,
-                old_url=old_url,
-                new_url=new_url,
-                tag_name="a",
-                tag_attribute="href")
+            soup = BeautifulSoup(content, 'html.parser')
+
+            for url_mapping in self.urls_mapping:
+
+                old_url = url_mapping["jahia_url"]
+                new_url = url_mapping["wp_url"]
+
+                self.fix_links_in_tag(
+                    soup=soup,
+                    old_url=old_url,
+                    new_url=new_url,
+                    tag_name="a",
+                    tag_attribute="href"
+                )
+
+            # update the page
+            wp_id = wp_page["id"]
+
+            content = str(soup)
+
+            self.update_page_content(page_id=wp_id, content=content)
 
     def fix_links_in_tag(self, soup, old_url, new_url, tag_name, tag_attribute):
         """Fix the links in the given tag"""
+
         tags = soup.find_all(tag_name)
 
         for tag in tags:
@@ -272,7 +298,6 @@ class WPExporter:
     def update_page_content(self, page_id, content):
         """Update the page content"""
         data = {"content": content}
-
         return self.wp.post_pages(page_id=page_id, data=data)
 
     def import_page(self, slug, title, content):
@@ -300,11 +325,11 @@ class WPExporter:
 
         return self.wp.post_pages(data=wp_page_info)
 
+
     def import_pages(self):
         """
         Import all pages of jahia site to Wordpress
         """
-        # create all pages from python object (parser)
 
         # keep the pages for fixing the links later
         wp_pages = []
@@ -328,6 +353,7 @@ class WPExporter:
 
             cmd = "pll post create --post_type=page --stdin --porcelain"
             stdin = simplejson.dumps(info_page)
+
             result = self.wp_cli(command=cmd, stdin=stdin)
             if not result:
                 error_msg = "Could not created page"
@@ -361,36 +387,7 @@ class WPExporter:
 
             self.report['pages'] += 1
 
-        # fix all the links once we know all the WordPress pages urls
-        for wp_page in wp_pages:
-
-            content = ""
-
-            if "content" in wp_page:
-                content = wp_page["content"]["raw"]
-            else:
-                logging.error("Expected content for page %s" % wp_page)
-
-            soup = BeautifulSoup(content, 'html.parser')
-
-            for url_mapping in self.urls_mapping:
-                old_url = url_mapping["jahia_url"]
-                new_url = url_mapping["wp_url"]
-
-                self.fix_links_in_tag(
-                    soup=soup,
-                    old_url=old_url,
-                    new_url=new_url,
-                    tag_name="a",
-                    tag_attribute="href"
-                )
-
-            # update the page
-            wp_id = wp_page["id"]
-
-            content = str(soup)
-
-            self.update_page_content(page_id=wp_id, content=content)
+        self.fix_page_content_links(wp_pages)
 
         self.create_sitemaps()
 
