@@ -49,8 +49,12 @@ class Tree:
         """
         Create all docker container for all sites
         """
-        with Pool(processes=processes) as pool:
-            pool.map(Tree.run_helper, self.nodes.values())
+        if processes == 1:
+            for node in self.nodes.values():
+                node.run()
+        else:
+            with Pool(processes=processes) as pool:
+                pool.map(Tree.run_helper, self.nodes.values())
 
     def cleanup(self):
         """
