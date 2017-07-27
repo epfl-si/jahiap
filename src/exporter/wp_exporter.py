@@ -199,26 +199,6 @@ class WPExporter:
             # save the new box content
             box.content = str(soup)
 
-    # def fix_page_content_links(self, page_content, wp_page):
-    #     """Fix the links pointing to the given page_content"""
-    #
-    #     # the old url is the page_content path
-    #     old_url = page_content.path
-    #
-    #     # the new url is the wp page link
-    #     new_url = wp_page['link']
-    #
-    #     for box in self.site.get_all_boxes():
-    #         soup = BeautifulSoup(box.content, 'html.parser')
-    #
-    #         # <a>
-    #         self.fix_links_in_tag(
-    #             soup=soup,
-    #             old_url=old_url,
-    #             new_url=new_url,
-    #             tag_name="a",
-    #             tag_attribute="href")
-
     def fix_page_content_links(self, wp_pages):
         """
         Fix all the links once we know all the WordPress pages urls
