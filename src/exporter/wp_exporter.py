@@ -15,23 +15,41 @@ from settings import WP_SUPERADMIN_USER, WP_SUPERADMIN_PASSWORD, WP_PATH, CONFIG
 
 
 class WPExporter:
+    # this file is used to save data for importing data
+    TRACER_FILE_NAME = "tracer_importing.csv"
 
-    TRACER = "tracer_importing.csv"
-
+    # list of mapping Jahia url and Wordpress url
     urls_mapping = []
 
-    # Dictionary with the key 'wp_page_id' and the value 'wp_menu_id'
-    menu_id_dict = {}
+    def __init__(self, site, site_host, site_path, output_dir, wp_cli=None):
+        """
+        site is the python object resulting from the parsing of Jahia XML.
+        site_host is the domain name.
+        site_path is the url part of the site without the site_name.
+        output_dir is the path where information files will be generated.
+        wp_cli is the name of the container docker which contains wpcli.
+        """
+        self.site = site
+        self.host = site_host
+        self.path = site_path
+        self.elapsed = 0
+        self.report = {
+            'pages': 0,
+            'files': 0,
+            'menus': 0,
+            'failed_files': 0,
+            'failed_menus': 0,
+            'failed_widgets': 0,
+        }
+        # dictionary with the key 'wp_page_id' and the value 'wp_menu_id'
+        self.menu_id_dict = {}
+        self.cli_container = wp_cli or "wp-cli-%s" % self.site.name
+        self.output_dir = output_dir
 
-    @staticmethod
-    def convert_bytes(num):
-        """
-        This function will convert bytes to MB.... GB... etc
-        """
-        for x in ['bytes', 'KB', 'MB', 'GB', 'TB']:
-            if num < 1024.0:
-                return "%3.1f %s" % (num, x)
-            num /= 1024.0
+        # we use the python-wordpress-json library to interact with the wordpress REST API
+        rest_api_url = "http://%s/%s/?rest_route=/wp/v2" % (self.host, self.path)
+        logging.info("setting up API on '%s', with %s:xxxxxx", rest_api_url, WP_SUPERADMIN_USER)
+        self.wp = WordpressJsonWrapper(rest_api_url, WP_SUPERADMIN_USER, WP_SUPERADMIN_PASSWORD)
 
     def wp_cli(self, command, stdin=None):
         """
@@ -55,45 +73,13 @@ class WPExporter:
             logging.error("%s - WP export - wp_cli failed : %s", self.site.name, err)
             return None
 
-    @classmethod
-    def file_size(cls, file_path):
-        """
-        This function will return the file size
-        """
-        if os.path.isfile(file_path):
-            file_info = os.stat(file_path)
-            return cls.convert_bytes(file_info.st_size)
-
-    def __init__(self, site, cmd_args):
-        """
-        Site is the python object resulting from the parsing of Jahia XML
-        Domain is the wordpress domain where to push the content
-        """
-        self.site = site
-        self.host = cmd_args['--site-host']
-        self.path = cmd_args['--site-path']
-        self.elapsed = 0
-        self.report = {
-            'pages': 0,
-            'files': 0,
-            'menus': 0,
-            'failed_files': 0,
-            'failed_menus': 0,
-            'failed_widgets': 0,
-        }
-        self.cli_container = cmd_args['--wp-cli'] or "wp-cli-%s" % self.site.name
-        url = "http://%s/%s/?rest_route=/wp/v2" % (self.host, self.path)
-        logging.info("setting up API on '%s', with %s:xxxxxx", url, WP_SUPERADMIN_USER)
-        self.wp = WordpressJsonWrapper(url, WP_SUPERADMIN_USER, WP_SUPERADMIN_PASSWORD)
-        self.output_path = cmd_args['--output-dir']
-
     def import_all_data_to_wordpress(self):
         """
         Import all data to worpdress via REST API and wp-cli
         """
         try:
             start_time = timeit.default_timer()
-            tracer_path = os.path.join(self.output_path, self.TRACER)
+            tracer_path = os.path.join(self.output_dir, self.TRACER_FILE_NAME)
 
             self.align_languages()
             self.import_medias()
@@ -101,12 +87,13 @@ class WPExporter:
             self.set_frontpage()
             self.populate_menu()
             self.import_sidebar()
-            # self.display_report()
+            self.display_report()
 
             # log execution time
             elapsed = timedelta(seconds=timeit.default_timer() - start_time)
             logging.info("Data imported in %s", elapsed)
 
+            # write a csv file
             with open(tracer_path, 'a', newline='\n') as tracer:
                 tracer.write("%s, %s, %s, %s, %s, %s\n" % (
                     '{0:%Y-%m-%d %H:%M:%S}'.format(datetime.now()),
@@ -125,6 +112,10 @@ class WPExporter:
                 tracer.flush()
 
     def align_languages(self):
+        """
+        In docker configuration we create 2 languages (fr, en) by default.
+        If the current site is only in 1 language we need to delete the 'bad' language.
+        """
         if len(self.site.languages) == 1:
             for lang in (CONFIGURED_LANGUAGES - set(self.site.languages)):
                 logging.info("Deleting language %s", lang)
@@ -137,11 +128,9 @@ class WPExporter:
         logging.info("{0:%Y-%m-%d %H:%M:%S} WP medias import start".format(datetime.now()))
         for file in self.site.files:
             wp_media = self.import_media(file)
-
             if wp_media:
                 self.fix_file_links(file, wp_media)
                 self.report['files'] += 1
-
         logging.info("{0:%Y-%m-%d %H:%M:%S} WP medias imported".format(datetime.now()))
 
     def import_media(self, media):
@@ -192,58 +181,62 @@ class WPExporter:
         # the new url is the wp media source url
         new_url = wp_media['source_url']
 
+        tag_attribute_tuples = [("a", "href"), ("img", "src"), ("script", "src")]
+
         for box in self.site.get_all_boxes():
+
             soup = BeautifulSoup(box.content, 'html.parser')
 
-            # <a>
-            self.fix_links_in_tag(
-                soup=soup,
-                old_url=old_url,
-                new_url=new_url,
-                tag_name="a",
-                tag_attribute="href")
+            for tag_name, tag_attribute in tag_attribute_tuples:
 
-            # <img>
-            self.fix_links_in_tag(
-                soup=soup,
-                old_url=old_url,
-                new_url=new_url,
-                tag_name="img",
-                tag_attribute="src")
-
-            # script
-            self.fix_links_in_tag(
-                soup=soup,
-                old_url=old_url,
-                new_url=new_url,
-                tag_name="script",
-                tag_attribute="src")
+                self.fix_links_in_tag(
+                    soup=soup,
+                    old_url=old_url,
+                    new_url=new_url,
+                    tag_name=tag_name,
+                    tag_attribute=tag_attribute)
 
             # save the new box content
             box.content = str(soup)
 
-    def fix_page_content_links(self, page_content, wp_page):
-        """Fix the links pointing to the given page_content"""
+    def fix_page_content_links(self, wp_pages):
+        """
+        Fix all the links once we know all the WordPress pages urls
+        """
+        for wp_page in wp_pages:
 
-        # the old url is the page_content path
-        old_url = page_content.path
+            content = ""
 
-        # the new url is the wp page link
-        new_url = wp_page['link']
+            if "content" in wp_page:
+                content = wp_page["content"]["raw"]
+            else:
+                logging.error("Expected content for page %s" % wp_page)
 
-        for box in self.site.get_all_boxes():
-            soup = BeautifulSoup(box.content, 'html.parser')
+            soup = BeautifulSoup(content, 'html.parser')
 
-            # <a>
-            self.fix_links_in_tag(
-                soup=soup,
-                old_url=old_url,
-                new_url=new_url,
-                tag_name="a",
-                tag_attribute="href")
+            for url_mapping in self.urls_mapping:
+
+                old_url = url_mapping["jahia_url"]
+                new_url = url_mapping["wp_url"]
+
+                self.fix_links_in_tag(
+                    soup=soup,
+                    old_url=old_url,
+                    new_url=new_url,
+                    tag_name="a",
+                    tag_attribute="href"
+                )
+
+            # update the page
+            wp_id = wp_page["id"]
+
+            content = str(soup)
+
+            self.update_page_content(page_id=wp_id, content=content)
 
     def fix_links_in_tag(self, soup, old_url, new_url, tag_name, tag_attribute):
         """Fix the links in the given tag"""
+
         tags = soup.find_all(tag_name)
 
         for tag in tags:
@@ -285,7 +278,6 @@ class WPExporter:
     def update_page_content(self, page_id, content):
         """Update the page content"""
         data = {"content": content}
-
         return self.wp.post_pages(page_id=page_id, data=data)
 
     def import_page(self, slug, title, content):
@@ -317,7 +309,6 @@ class WPExporter:
         """
         Import all pages of jahia site to Wordpress
         """
-        # create all pages from python object (parser)
 
         # keep the pages for fixing the links later
         wp_pages = []
@@ -341,6 +332,7 @@ class WPExporter:
 
             cmd = "pll post create --post_type=page --stdin --porcelain"
             stdin = simplejson.dumps(info_page)
+
             result = self.wp_cli(command=cmd, stdin=stdin)
             if not result:
                 error_msg = "Could not created page"
@@ -355,13 +347,12 @@ class WPExporter:
                 continue
 
             for wp_id, (lang, content) in zip(wp_ids, contents.items()):
-
                 wp_page = self.update_page(page_id=wp_id, title=page.contents[lang].title, content=content)
 
                 # prepare mapping for the nginx conf generation
                 mapping = {
-                   'jahia_url': page.contents[lang].path,
-                   'wp_url': wp_page['link']
+                    'jahia_url': page.contents[lang].path,
+                    'wp_url': wp_page['link']
                 }
 
                 self.urls_mapping.append(mapping)
@@ -375,36 +366,7 @@ class WPExporter:
 
             self.report['pages'] += 1
 
-        # fix all the links once we know all the WordPress pages urls
-        for wp_page in wp_pages:
-
-            content = ""
-
-            if "content" in wp_page:
-                content = wp_page["content"]["raw"]
-            else:
-                logging.error("Expected content for page %s" % wp_page)
-
-            soup = BeautifulSoup(content, 'html.parser')
-
-            for url_mapping in self.urls_mapping:
-                old_url = url_mapping["jahia_url"]
-                new_url = url_mapping["wp_url"]
-
-                self.fix_links_in_tag(
-                    soup=soup,
-                    old_url=old_url,
-                    new_url=new_url,
-                    tag_name="a",
-                    tag_attribute="href"
-                )
-
-            # update the page
-            wp_id = wp_page["id"]
-
-            content = str(soup)
-
-            self.update_page_content(page_id=wp_id, content=content)
+        self.fix_page_content_links(wp_pages)
 
         self.create_sitemaps()
 
@@ -429,7 +391,6 @@ class WPExporter:
         info_page = OrderedDict()
 
         for lang in self.site.homepage.contents.keys():
-
             # create sitemap page
 
             info_page[lang] = {
@@ -459,7 +420,7 @@ class WPExporter:
                 for box in self.site.homepage.contents[lang].sidebar.boxes:
                     content = Utils.escape_quotes(box.content)
                     cmd = 'widget add black-studio-tinymce page-widgets ' \
-                        '--title="%s" --text="%s"' % (box.title, content)
+                          '--title="%s" --text="%s"' % (box.title, content)
                     self.wp_cli(cmd)
 
                 # Import sidebar for one language only
@@ -502,7 +463,7 @@ class WPExporter:
             parent_menu_id = self.menu_id_dict[page.parent.contents[lang].wp_id]
 
             command = 'menu item add-post %s %s --parent-id=%s --porcelain' \
-                % (menu_name, page.contents[lang].wp_id, parent_menu_id)
+                      % (menu_name, page.contents[lang].wp_id, parent_menu_id)
             menu_id = self.wp_cli(command)
             if not menu_id:
                 logging.warning("Menu not created for page %s" % page.pid)
@@ -627,72 +588,61 @@ class WPExporter:
         """
         Display report
         """
-
-        result = """
-Imported in WordPress :
-
-  - %(files)s files
-
-  - %(pages)s pages
-
-  - %(menus)s menus
-
-Errors :
-
-  - %(failed_files)s files
-
-  - %(failed_menus)s menus
-
-  - %(failed_widgets)s widgets
-
-""" % self.report
-
-        print(result)
+        print("Imported in WordPress:\n"
+              "- {files}s files\n"
+              "- {pages}s pages\n"
+              "- {menus}s menus\n"
+              "\n"
+              "Errors:\n"
+              "- {failed_files}s files\n"
+              "- {failed_menus}s menus\n"
+              "- {failed_widgets}s widgets\n".format(**self.report))
 
     def generate_nginx_conf_file(self):
         """
         Generates a nginx configuration file containing
         the rewrites of the pages jahia in WordPress page.
         """
+        the_dict = {
+            'site_name': self.site.name,
+            'WP_PATH': WP_PATH,
+        }
 
-        first_part = """
-server {
-    server_name %(site_name)s.epfl.ch ;
-    return 301 $scheme://test-web-static.epfl.ch/%(WP_PATH)s/%(site_name)s$request_uri;
-}
+        first_part = "server {{\n" \
+                     "\tserver_name {site_name}.epfl.ch ;\n" \
+                     "\treturn 301 $scheme://test-web-static.epfl.ch/{WP_PATH}/{site_name}$request_uri;\n" \
+                     "}}\n" \
+                     "\n" \
+                     "server {{\n" \
+                     "\tlisten\t80;\n" \
+                     "\tlisten\t[::]:80;\n" \
+                     "\tserver_name\ttest-web-static.epfl.ch;\n" \
+                     "\n".format(**the_dict)
 
-server {
-    listen       80;
-    listen       [::]:80;
+        last_part = "\n" \
+                    "\tlocation / {\n" \
+                    "\t\tproxy_pass\thttp://traefik/;\n" \
+                    "\t}\n" \
+                    "}\n"
 
-""" % {'site_name': self.site.name, "WP_PATH": WP_PATH}
-
-        last_part = """
-    location / {
-        proxy_pass   http://traefik/;
-    }
-}
-"""
         # Add the first part of the content file
         content = first_part
 
         # Add all rewrite jahia URI to WordPress URI
         for element in self.urls_mapping:
 
-            line = """    rewrite ^/%(WP_PATH)s/%(site_name)s/%(jahia_url)s$ /%(WP_PATH)s/%(site_name)s/%(wp_url)s permanent;
-""" % {
-                'site_name': self.site.name,
-                'jahia_url': element['jahia_url'][1:],
-                'wp_url': element['wp_url'].split("/")[3],
-                "WP_PATH": WP_PATH,
-            }
+            the_dict['jahia_url'] = element['jahia_url'][1:]
+            the_dict['wp_url'] = element['wp_url'].split("/")[3]
+
+            line = "\trewrite ^/{WP_PATH}/{site_name}/{jahia_url}$ " \
+                   "/{WP_PATH}/{site_name}/{wp_url} permanent;\n".format(**the_dict)
             content += line
 
         # Add the last part of the content file
         content += last_part
 
         # Set the file name
-        file_name = os.path.join(self.output_path, 'jahia-%s.conf' % self.site.name)
+        file_name = os.path.join(self.output_dir, 'jahia-%s.conf' % self.site.name)
 
         # Open the file in write mode
         with open(file_name, 'a') as f:

@@ -286,7 +286,13 @@ class WordPressNode(Node):
                 zip_file = SiteCrawler(self.name, self.tree.args).download_site()
                 site_dir = unzip_one(self.tree.args['--output-dir'], self.name, zip_file)
                 site = Site(site_dir, self.name)
-                wp_exporter = WPExporter(site, self.tree.args)
+                wp_exporter = WPExporter(
+                    site,
+                    site_host=self.tree.args['--site-host'],
+                    site_path=self.full_name(),
+                    output_dir=self.tree.args['--output-dir'],
+                    wp_cli=self.container_name
+                )
                 wp_exporter.import_all_data_to_wordpress()
             except Exception as err:
                 logging.error("%s - generate - Could not run site: %s", self.name, err)
