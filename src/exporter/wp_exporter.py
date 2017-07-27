@@ -23,7 +23,7 @@ class WPExporter:
 
     def __init__(self, site, site_host, site_path, output_dir, wp_cli=None):
         """
-        site is the python object resulting from the parsing of Jahia XML. 
+        site is the python object resulting from the parsing of Jahia XML.
         site_host is the domain name.
         site_path is the url part of the site without the site_name.
         output_dir is the path where information files will be generated.
@@ -132,7 +132,6 @@ class WPExporter:
                 self.fix_file_links(file, wp_media)
                 self.report['files'] += 1
         logging.info("{0:%Y-%m-%d %H:%M:%S} WP medias imported".format(datetime.now()))
-
 
     def import_media(self, media):
         """
@@ -325,7 +324,6 @@ class WPExporter:
         }
 
         return self.wp.post_pages(data=wp_page_info)
-
 
     def import_pages(self):
         """
