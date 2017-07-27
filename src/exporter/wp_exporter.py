@@ -96,7 +96,7 @@ class WPExporter:
             # write a csv file
             with open(tracer_path, 'a', newline='\n') as tracer:
                 tracer.write("%s, %s, %s, %s, %s, %s\n" % (
-                    '{0:%d-%m-%Y %H:%M:%S}'.format(datetime.now()),
+                    '{0:%Y-%m-%d %H:%M:%S}'.format(datetime.now()),
                     self.site.name,
                     str(elapsed),
                     self.report['failed_files'],
@@ -125,13 +125,14 @@ class WPExporter:
         """
         Import medias to Wordpress
         """
-        logging.info("WP medias import start")
+        logging.info("{0:%Y-%m-%d %H:%M:%S} WP medias import start".format(datetime.now()))
         for file in self.site.files:
             wp_media = self.import_media(file)
             if wp_media:
                 self.fix_file_links(file, wp_media)
                 self.report['files'] += 1
-        logging.info("WP medias imported")
+        logging.info("{0:%Y-%m-%d %H:%M:%S} WP medias imported".format(datetime.now()))
+
 
     def import_media(self, media):
         """
