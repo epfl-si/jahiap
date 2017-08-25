@@ -7,6 +7,9 @@ import xml.dom.minidom
 import requests
 from bs4 import BeautifulSoup
 from fabric.api import env, cd, run
+from fabric.contrib.files import exists
+
+from urllib.parse import urlsplit
 
 
 class Utils:
@@ -99,7 +102,7 @@ class Utils:
         logger.addHandler(fh)
 
     @staticmethod
-    def create_static_site(site):
+    def create_static_site(site_url):
         """
         Create static site via wget command
         """
@@ -107,4 +110,15 @@ class Utils:
         env.static_root_dir = "/var/www/html"
 
         with cd(env.static_root_dir):
-            run("wget -p -k -E -m -e robots=off -w 2 --no-parent http://{}".format(site.server_name))
+
+            # extract the domain name
+            domain = urlsplit(site_url).netloc
+
+            # delete the old static site folder
+            if exists(domain):
+                logging.debug("Deleting the old static site folder")
+                run("rm -rf {}".format(domain))
+
+            # wget the static site
+            logging.debug("WGet the site {}".format(domain))
+            run("wget -p -k -E -m -e robots=off -w 2 --no-parent {}".format(site_url))

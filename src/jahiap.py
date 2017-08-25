@@ -48,8 +48,9 @@ import os
 import pickle
 import sys
 import csv
+import timeit
 from collections import OrderedDict
-from datetime import datetime
+from datetime import datetime, timedelta
 from pprint import pprint, pformat
 
 from docopt import docopt
@@ -100,8 +101,25 @@ def call_command(args):
 
 
 def main_crawl(args):
+    site = args['<site>']
+
     logging.info("starting crawling...")
+    start_time = timeit.default_timer()
     SiteCrawler.download(args)
+    elapsed = timedelta(seconds=timeit.default_timer() - start_time)
+    logging.info("Jahia ZIP {} downloaded in {}".format(site, elapsed))
+
+    logging.info("starting creating static site {}".format(site))
+    sites = UtilsGenerator.csv_to_dict("csv-data/all.csv", delimiter=";")
+    for current_site in sites:
+        if current_site['name'] == site:
+            site_url = current_site['site_url']
+            break
+
+    start_time = timeit.default_timer()
+    Utils.create_static_site(site_url)
+    elapsed = timedelta(seconds=timeit.default_timer() - start_time)
+    logging.info("Static Site {} created in {}".format(site_url, elapsed))
 
 
 def main_unzip(args):
@@ -242,9 +260,6 @@ def main_export(args):
 
                 if args['--to-wordpress']:
 
-                    logging.info("Creating static site http://idevingsrv4.epfl.ch/%s", site.server_name)
-                    Utils.create_static_site(site)
-
                     logging.info("Exporting %s to WordPress...", site.name)
                     wp_exporter = WPExporter(
                         site,
@@ -258,9 +273,6 @@ def main_export(args):
                     logging.info("Site %s successfully exported to WordPress", site.name)
 
                 if args['--nginx-conf']:
-
-                    logging.info("Creating static site http://idevingsrv4.epfl.ch/%s", site.server_name)
-                    Utils.create_static_site(site)
 
                     logging.info("Creating nginx conf for %s...", site.name)
                     wp_exporter = WPExporter(
