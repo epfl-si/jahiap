@@ -101,25 +101,40 @@ def call_command(args):
 
 
 def main_crawl(args):
+
+    def download_jahia_zip(site):
+
+        logging.info("starting crawling...")
+        start_time = timeit.default_timer()
+        args['<site>'] = site
+        SiteCrawler.download(args)
+        elapsed = timedelta(seconds=timeit.default_timer() - start_time)
+        logging.info("Jahia ZIP {} downloaded in {}".format(site, elapsed))
+
+    def create_static_site(site_url):
+
+        logging.info("starting creating static site {}".format(site))
+        start_time = timeit.default_timer()
+        Utils.create_static_site(site_url)
+        elapsed = timedelta(seconds=timeit.default_timer() - start_time)
+        logging.info("Static Site {} created in {}".format(site_url, elapsed))
+
+    sites = UtilsGenerator.csv_to_dict("csv-data/all.csv", delimiter=";")
+
     site = args['<site>']
 
-    logging.info("starting crawling...")
-    start_time = timeit.default_timer()
-    SiteCrawler.download(args)
-    elapsed = timedelta(seconds=timeit.default_timer() - start_time)
-    logging.info("Jahia ZIP {} downloaded in {}".format(site, elapsed))
-
-    logging.info("starting creating static site {}".format(site))
-    sites = UtilsGenerator.csv_to_dict("csv-data/all.csv", delimiter=";")
-    for current_site in sites:
-        if current_site['name'] == site:
+    if site == 'all':
+        for current_site in sites:
             site_url = current_site['site_url']
-            break
-
-    start_time = timeit.default_timer()
-    Utils.create_static_site(site_url)
-    elapsed = timedelta(seconds=timeit.default_timer() - start_time)
-    logging.info("Static Site {} created in {}".format(site_url, elapsed))
+            download_jahia_zip(site=current_site['name'])
+            create_static_site(site_url)
+    else:
+        download_jahia_zip(site)
+        for current_site in sites:
+            if current_site['name'] == site:
+                site_url = current_site['site_url']
+                break
+        create_static_site(site_url)
 
 
 def main_unzip(args):
