@@ -241,6 +241,10 @@ def main_export(args):
                     logging.info("Data of WordPress site %s successfully deleted", site.name)
 
                 if args['--to-wordpress']:
+
+                    logging.info("Creating static site http://idevingsrv4.epfl.ch/%s", site.server_name)
+                    Utils.create_static_site(site)
+
                     logging.info("Exporting %s to WordPress...", site.name)
                     wp_exporter = WPExporter(
                         site,
@@ -254,6 +258,10 @@ def main_export(args):
                     logging.info("Site %s successfully exported to WordPress", site.name)
 
                 if args['--nginx-conf']:
+
+                    logging.info("Creating static site http://idevingsrv4.epfl.ch/%s", site.server_name)
+                    Utils.create_static_site(site)
+
                     logging.info("Creating nginx conf for %s...", site.name)
                     wp_exporter = WPExporter(
                         site,

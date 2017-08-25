@@ -2,11 +2,11 @@
 
 import logging
 import os
-import requests
-
 import xml.dom.minidom
 
+import requests
 from bs4 import BeautifulSoup
+from fabric.api import env, cd, run
 
 
 class Utils:
@@ -97,3 +97,14 @@ class Utils:
         fh.setFormatter(formatter)
         # add the handlers to the logger
         logger.addHandler(fh)
+
+    @staticmethod
+    def create_static_site(site):
+        """
+        Create static site via wget command
+        """
+        env.host_string = "team@idevingsrv4.epfl.ch"
+        env.static_root_dir = "/var/www/html"
+
+        with cd(env.static_root_dir):
+            run("wget -p -k -E -m -e robots=off -w 2 --no-parent http://{}".format(site.server_name))

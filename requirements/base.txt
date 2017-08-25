@@ -11,3 +11,4 @@ lxml==3.8.0
 docker-compose==1.14.0
 cookiecutter==1.5.1
 simplejson==3.11.1
+Fabric3==1.13.1.post1
