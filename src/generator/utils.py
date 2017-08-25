@@ -46,11 +46,11 @@ class Utils:
             return rows
 
     @staticmethod
-    def csv_to_dict(file_path):
+    def csv_to_dict(file_path, delimiter=','):
 
         sites = []
         with open(file_path) as csvfile:
-            reader = csv.DictReader(csvfile)
+            reader = csv.DictReader(csvfile, delimiter=delimiter)
             for row in reader:
                 sites.append(row)
         return sites
