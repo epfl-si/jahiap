@@ -117,8 +117,14 @@ class Utils:
             # delete the old static site folder
             if exists(domain):
                 logging.debug("Deleting the old static site folder")
-                run("rm -rf {}".format(domain))
+                try:
+                    run("rm -rf {}".format(domain))
+                except:
+                    logging.error("Deleting static site {} failed".format(domain))
 
             # wget the static site
             logging.debug("WGet the site {}".format(domain))
-            run("wget -p -k -E -m -e robots=off -w 2 --no-parent {}".format(site_url))
+            try:
+                run("wget -p -k -E -m -e robots=off -w 2 --no-parent {}".format(site_url))
+            except:
+                logging.error("Creating static site {} failed".format(site_url))
