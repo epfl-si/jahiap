@@ -101,6 +101,12 @@ def call_command(args):
 
 
 def main_crawl(args):
+    """
+    This method has 2 aims:
+        - download jahia zip
+        - create a static site
+    We do these two actions at the same time so that the data are consistent
+    """
 
     def download_jahia_zip(site):
 
@@ -125,16 +131,19 @@ def main_crawl(args):
 
     if site == 'all':
         for current_site in sites:
-            site_url = current_site['site_url']
-            download_jahia_zip(site=current_site['name'])
-            create_static_site(site_url)
+            site_crawler = SiteCrawler(site_name=current_site['site_title'], cmd_args=args)
+            if not site_crawler.existing or site_crawler.force:
+                download_jahia_zip(site=current_site['name'])
+                create_static_site(current_site['site_url'])
     else:
-        download_jahia_zip(site)
-        for current_site in sites:
-            if current_site['name'] == site:
-                site_url = current_site['site_url']
-                break
-        create_static_site(site_url)
+        site_crawler = SiteCrawler(site_name=site, cmd_args=args)
+        if not site_crawler.existing or site_crawler.force:
+            download_jahia_zip(site)
+            for current_site in sites:
+                if current_site['name'] == site:
+                    site_url = current_site['site_url']
+                    break
+            create_static_site(site_url)
 
 
 def main_unzip(args):

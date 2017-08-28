@@ -133,9 +133,9 @@ class SiteCrawler(object):
         self.elapsed = 0
 
         # adapt file_path to cmd_args
-        existing = self.already_downloaded()
-        if existing and not self.force:
-            self.file_path = existing[-1]
+        self.existing = self.already_downloaded()
+        if self.existing and not self.force:
+            self.file_path = self.existing[-1]
             self.file_name = os.path.basename(self.file_path)
         else:
             self.file_name = self.FILE_PATTERN % (self.site_name, self.date)
@@ -152,10 +152,10 @@ class SiteCrawler(object):
 
     def download_site(self):
         # do not download twice if not --force
-        existing = self.already_downloaded()
-        if existing and not self.force:
+        self.existing = self.already_downloaded()
+        if self.existing and not self.force:
             logging.warning("%s already downloaded %sx. Last one is %s",
-                            self.site_name, len(existing), self.file_path)
+                            self.site_name, len(self.existing), self.file_path)
             return self.file_path
 
         # pepare query
