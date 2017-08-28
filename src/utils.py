@@ -126,5 +126,5 @@ class Utils:
             logging.debug("WGet the site {}".format(domain))
             try:
                 run("wget -p -k -E -m -e robots=off -w 2 --no-parent {}".format(site_url))
-            except Exception as e:
-                logging.error("Creating static site {} failed - Exception: {}".format(site_url, e))
+            except:
+                logging.error("Creating static site {} failed".format(site_url))
