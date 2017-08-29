@@ -82,6 +82,7 @@ JAHIA_SITES = [
     "atelierweb2",
     "aumonerie",
     "auwerxlab",
+    "bachelor", # Add by greg
     "bachelor2",
     "Baekkeskov",
     "benchmarking_achats",
