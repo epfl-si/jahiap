@@ -100,21 +100,13 @@ class SiteCrawler(object):
 
         # to store paths of downloaded zips
         downloaded_files = OrderedDict()
-
-        # compute list fo sites to download
-        try:
-            start_at = JAHIA_SITES.index(cmd_args['<site>'])
-        except ValueError:
-            raise SystemExit("site name %s not found in JAHIA_SITES", cmd_args['<site>'])
-        end = start_at + int(cmd_args['--number'])
-        sites = JAHIA_SITES[start_at:end]
+        site = cmd_args['<site>']
 
         # download sites from JAHIA_SITES
-        for site in sites:
-            try:
-                downloaded_files[site] = str(cls(site, cmd_args).download_site())
-            except Exception as err:
-                logging.error("%s - crawl - Could not crawl Jahia - Exception: %s", site, err)
+        try:
+            downloaded_files[site] = str(cls(site, cmd_args).download_site())
+        except Exception as err:
+            logging.error("%s - crawl - Could not crawl Jahia - Exception: %s", site, err)
 
         # return results, as strings
         return downloaded_files
