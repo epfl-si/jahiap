@@ -109,18 +109,6 @@ def main_crawl(args):
     elapsed = timedelta(seconds=timeit.default_timer() - start_time)
     logging.info("Jahia ZIP {} downloaded in {}".format(site, elapsed))
 
-    logging.info("starting creating static site {}".format(site))
-    sites = UtilsGenerator.csv_to_dict("csv-data/all.csv", delimiter=";")
-    for current_site in sites:
-        if current_site['name'] == site:
-            site_url = current_site['site_url']
-            break
-
-    start_time = timeit.default_timer()
-    Utils.create_static_site(site_url)
-    elapsed = timedelta(seconds=timeit.default_timer() - start_time)
-    logging.info("Static Site {} created in {}".format(site_url, elapsed))
-
 
 def main_unzip(args):
     # get zip files according to args
