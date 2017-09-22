@@ -2,10 +2,10 @@
 jahiap: a wonderful tool
 
 Usage:
-  jahiap.py crawl <site>  [--output-dir=<OUTPUT_DIR>] [--export-path=<EXPORT_PATH>]
-                          [--number=<NUMBER>] [--date DATE] [--force-crawl] [--debug | --quiet]
-  jahiap.py unzip <site>  [--output-dir=<OUTPUT_DIR>] [--number=<NUMBER>] [--debug | --quiet]
-  jahiap.py parse <site>  [--output-dir=<OUTPUT_DIR>] [--number=<NUMBER>] [--print-report]
+  jahiap.py crawl <site> [--output-dir=<OUTPUT_DIR>] [--export-path=<EXPORT_PATH>]
+                         [--number=<NUMBER>] [--date DATE] [--force-crawl] [--debug | --quiet]
+  jahiap.py unzip <site> [--output-dir=<OUTPUT_DIR>] [--number=<NUMBER>] [--debug | --quiet]
+  jahiap.py parse <site> [--output-dir=<OUTPUT_DIR>] [--number=<NUMBER>] [--print-report]
                           [--debug | --quiet] [--use-cache] [--site-path=<SITE_PATH>]
   jahiap.py export <site> [--clean-wordpress | --to-wordpress | --nginx-conf]
                           [--wp-cli=<WP_CLI> --site-host=<SITE_HOST> --site-path=<SITE_PATH>]
@@ -15,7 +15,7 @@ Usage:
   jahiap.py docker <site> [--output-dir=<OUTPUT_DIR>] [--number=<NUMBER>] [--debug | --quiet]
   jahiap.py generate <csv_file> [--output-dir=<OUTPUT_DIR>] [--conf-path=<CONF_PATH>]
                                 [--cookie-path=<COOKIE_PATH>] [--processes=<PROCESSES>] [--force] [--debug | --quiet]
-  jahiap.py cleanup <csv_file>  [--debug | --quiet]
+  jahiap.py cleanup <csv_file> [--debug | --quiet]
   jahiap.py global_report <site> [--output-dir=<OUTPUT_DIR>] [--number=<NUMBER>] [--use-cache] [--debug | --quiet]
 
 Options:
