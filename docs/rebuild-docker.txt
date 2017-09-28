@@ -1,0 +1,21 @@
+Reconstruire le tout :
+
+1. Lancer un rebuild pour clean la totalité des containers et recréer les helpers
+cd /home/team/git-repos/wp-utils/
+./rebuild.sh
+
+Note: si le script bloque, c'est peut-être parce que le service docker est un poil aux fraises. Dans ce cas-là, il faut le restart avec :
+sudo service docker restart
+
+
+2. Faire un CTRL-C à la fin du script quand il affiche "Apache FOREGROUND" ou un truc du style
+
+3. Effacer le contenu du dossier "build" qui va être utilisé
+cd /home/team/git-repos/jahiap/build/
+rm -rf *
+
+4. Lancer l'environnement virtuel (pas trop loin sinon faut marcher pour aller le chercher)
+vjahia
+
+5. Exécuter la ligne de commande suivante en adaptant les paramètres si besoin (fichier CSV, nombre de process)
+python src/jahiap.py generate csv-data/10-sites.csv --processes=4
