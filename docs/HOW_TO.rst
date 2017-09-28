@@ -46,15 +46,25 @@ Comment regénérer X sites wordpress ?
 
 Reconstruire le tout :
 
-0. Faire un "git pull" des 2 repos avec les sources
+0. Faire un "git pull" des 3 repos avec les sources
 cd /home/team/git-repos/jahiap/
 git pull
+
 cd /home/team/git-repos/template-web-wordpress
 git pull
-git submodule update
+
+cd /home/team/git-repos/template-web-wordpress/master-wp/container-wp-cli
+git pull origin master
+
+cd /home/team/git-repos/template-web-wordpress/master-wp/container-wp-volumes
+git pull origin master
+
+cd /home/team/git-repos/wp-utils/
+git pull
 
 
 1. Lancer un rebuild pour clean la totalité des containers et recréer les helpers
+
 cd /home/team/git-repos/wp-utils/
 ./rebuild.sh
 
