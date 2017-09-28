@@ -5,7 +5,7 @@ Comment re-downloader tous les zips jahia ?
 
 2. On active le virtualenv et on se place dans la racine du projet : vjahia
 
-3. On surpprime tous les zips : rm -rf exports/*.zip
+3. On supprime tous les zips : rm -rf exports/*.zip
 
 4. On lance un screen: screen -S greg
 
@@ -15,7 +15,8 @@ Comment re-downloader tous les zips jahia ?
 Remarques :
 -----------
 
-- Le téléchargement des zips doit se faire dans une partition NAS qui est partager entre les environnements qa1 et qa2.
+- Le téléchargement des zips doit se faire dans la partition NAS qui est partagée entre tous les environnements qa1, qa2, etc.
+
 Ce chemin c'est :
 
 /mnt/export
@@ -38,3 +39,40 @@ Si on veut reprendre le screen :
 2. On peut voir la liste des screen : screen -ls
 
 3. On se rattache à son screen : screen -r greg
+
+
+Comment regénérer X sites wordpress ?
+=====================================
+
+Reconstruire le tout :
+
+0. Faire un "git pull" des 2 repos avec les sources
+cd /home/team/git-repos/jahiap/
+git pull
+cd /home/team/git-repos/template-web-wordpress
+git pull
+git submodule update
+
+
+1. Lancer un rebuild pour clean la totalité des containers et recréer les helpers
+cd /home/team/git-repos/wp-utils/
+./rebuild.sh
+
+Note: si le script bloque, c'est peut-être parce que le service docker est un poil aux fraises. Dans ce cas-là, il faut le restart avec :
+sudo service docker restart
+
+
+2. Faire un CTRL-C à la fin du script quand il affiche "Apache FOREGROUND" ou un truc du style
+
+
+3. Effacer le contenu du dossier "build" qui va être utilisé
+cd /home/team/git-repos/jahiap/build/
+rm -rf *
+
+
+4. Lancer l'environnement virtuel (pas trop loin sinon faut marcher pour aller le chercher)
+vjahia
+
+
+5. Exécuter la ligne de commande suivante en adaptant les paramètres si besoin (fichier CSV, nombre de process)
+python src/jahiap.py generate csv-data/10-sites.csv --processes=4
