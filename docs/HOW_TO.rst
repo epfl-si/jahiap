@@ -46,7 +46,7 @@ Comment regénérer X sites wordpress ?
 
 Reconstruire le tout :
 
-0. Faire un "git pull" des 3 repos avec les sources
+1. Faire un "git pull" des repos avec les sources
 cd /home/team/git-repos/jahiap/
 git pull
 
@@ -54,16 +54,24 @@ cd /home/team/git-repos/template-web-wordpress
 git pull
 
 cd /home/team/git-repos/template-web-wordpress/master-wp/container-wp-cli
-git pull origin master
+git checkout master
+git pull 
 
 cd /home/team/git-repos/template-web-wordpress/master-wp/container-wp-volumes
-git pull origin master
+git checkout master
+git pull 
 
 cd /home/team/git-repos/wp-utils/
 git pull
 
 
-1. Lancer un rebuild pour clean la totalité des containers et recréer les helpers
+2. Si des bugs ont été corrigés dans le thème (ou que des plugins ou config de plugin ont été ajoutés/modifiés), il faut re-push les images sur DockerHub
+cd /home/team/git-repos/template-web-wordpress/master-wp/
+make login
+make push
+
+
+3. Lancer un rebuild pour clean la totalité des containers et recréer les helpers
 
 cd /home/team/git-repos/wp-utils/
 ./rebuild.sh
@@ -72,17 +80,17 @@ Note: si le script bloque, c'est peut-être parce que le service docker est un p
 sudo service docker restart
 
 
-2. Faire un CTRL-C à la fin du script quand il affiche "Apache FOREGROUND" ou un truc du style
+4. Faire un CTRL-C à la fin du script quand il affiche "Apache -D FOREGROUND" ou un truc du style
 
 
-3. Effacer le contenu du dossier "build" qui va être utilisé
+5. (facultatif) Effacer le contenu du dossier "build" qui va être utilisé
 cd /home/team/git-repos/jahiap/build/
 rm -rf *
 
 
-4. Lancer l'environnement virtuel (pas trop loin sinon faut marcher pour aller le chercher)
+6. Lancer l'environnement virtuel (pas trop loin sinon faut marcher pour aller le chercher)
 vjahia
 
 
-5. Exécuter la ligne de commande suivante en adaptant les paramètres si besoin (fichier CSV, nombre de process)
+7. Exécuter la ligne de commande suivante en adaptant les paramètres si besoin (fichier CSV, nombre de process)
 python src/jahiap.py generate csv-data/10-sites.csv --processes=4
