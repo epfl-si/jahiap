@@ -59,8 +59,14 @@ git pull origin master
 cd /home/team/git-repos/template-web-wordpress/master-wp/container-wp-volumes
 git pull origin master
 
+cd /home/team/git-repos/template-web-wordpress/
+git submodule update
+
 cd /home/team/git-repos/wp-utils/
 git pull
+
+
+
 
 
 1. Lancer un rebuild pour clean la totalité des containers et recréer les helpers
@@ -83,6 +89,14 @@ rm -rf *
 4. Lancer l'environnement virtuel (pas trop loin sinon faut marcher pour aller le chercher)
 vjahia
 
+5. Mettre à jour le virtualenv :
+sudo pip install -r requirements/base.txt
 
-5. Exécuter la ligne de commande suivante en adaptant les paramètres si besoin (fichier CSV, nombre de process)
+
+6. Exécuter la ligne de commande suivante en adaptant les paramètres si besoin (fichier CSV, nombre de process)
 python src/jahiap.py generate csv-data/10-sites.csv --processes=4
+
+7. Afin d'éviter des redémarrages en cas de problème :
+
+cd /home/team/git-repos/wp-utils/
+./disable-container-auto-restart.sh
