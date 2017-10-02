@@ -61,10 +61,15 @@ cd /home/team/git-repos/template-web-wordpress/master-wp/container-wp-volumes
 git checkout master
 git pull 
 
+cd /home/team/git-repos/template-web-wordpress/
+git submodule update
+
 cd /home/team/git-repos/wp-utils/
 git pull
 
 
+1. Lancer un rebuild pour clean la totalité des containers et recréer les helpers
+=======
 2. Si des bugs ont été corrigés dans le thème (ou que des plugins ou config de plugin ont été ajoutés/modifiés), il faut re-push les images sur DockerHub
 cd /home/team/git-repos/template-web-wordpress/master-wp/
 make login
@@ -72,6 +77,7 @@ make push
 
 
 3. Lancer un rebuild pour clean la totalité des containers et recréer les helpers
+
 
 cd /home/team/git-repos/wp-utils/
 ./rebuild.sh
@@ -91,13 +97,17 @@ rm -rf *
 6. Lancer l'environnement virtuel (pas trop loin sinon faut marcher pour aller le chercher)
 vjahia
 
+7. Mettre à jour le virtualenv :
+sudo pip install -r requirements/base.txt
 
-7. Exécuter la ligne de commande suivante en adaptant les paramètres si besoin (fichier CSV, nombre de process)
+
+8. Exécuter la ligne de commande suivante en adaptant les paramètres si besoin (fichier CSV, nombre de process)
 python src/jahiap.py generate csv-data/10-sites.csv --processes=4
 
 
-8. Une fois que tout a été déployé, exécuter les scripts suivants pour faire un peu de ménage/config
+9. Une fois que tout a été déployé, exécuter les scripts suivants pour faire un peu de ménage/config
 cd /home/team/git-repos/wp-utils
 ./del-volumes-containers.sh
 ./disable-container-auto-restart.sh
+
 
