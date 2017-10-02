@@ -94,3 +94,10 @@ vjahia
 
 7. Exécuter la ligne de commande suivante en adaptant les paramètres si besoin (fichier CSV, nombre de process)
 python src/jahiap.py generate csv-data/10-sites.csv --processes=4
+
+
+8. Une fois que tout a été déployé, exécuter les scripts suivants pour faire un peu de ménage/config
+cd /home/team/git-repos/wp-utils
+./del-volumes-containers.sh
+./disable-container-auto-restart.sh
+
