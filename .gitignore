@@ -2,6 +2,7 @@
 *.log
 .cache
 .idea
+.vscode
 .env
 build
 exports
