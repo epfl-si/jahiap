@@ -1,6 +1,6 @@
-site_name=apml
+site_name=cdm
 number=1
-output_dir=build
+output_dir=/mnt/export/build-dev
 docker_name="demo-$(site_name)"
 port=9090
 csv_file=csv-data/mini-sites.csv

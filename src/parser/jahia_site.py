@@ -4,12 +4,14 @@ import os
 import logging
 import collections
 
+from anytree import RenderTree
 from bs4 import BeautifulSoup
 from parser.box import Box
 from parser.file import File
 from parser.link import Link
 from parser.page import Page
 from parser.page_content import PageContent
+from parser.sitemap_node import SitemapNode
 from utils import Utils
 
 """
@@ -84,6 +86,8 @@ class Site:
         self.broken_links = 0
         self.unknown_links = 0
         self.num_boxes = {}
+        # we have a SitemapNode for each language
+        self.sitemaps = {}
         self.report = ""
 
         # set for convenience, to avoid:
@@ -95,6 +99,9 @@ class Site:
 
         # parse the data
         self.parse_data()
+
+        # build the sitemaps
+        self.build_sitemaps()
 
         # generate the report
         self.generate_report()
@@ -484,6 +491,37 @@ class Site:
                 self.unknown_links += 1
 
         box.content = str(soup)
+
+    def build_sitemaps(self):
+        """Build the sitemaps"""
+
+        for language in self.languages:
+            # the root node (the homepage)
+            root_node = SitemapNode(name=self.homepage.contents[language].title, page=self.homepage)
+
+            self._add_to_sitemap_node(root_node)
+
+            self.sitemaps[language] = root_node
+
+    def _add_to_sitemap_node(self, node):
+        """Add the given SitemapNode. This is a recursive method"""
+
+        # for each NavigationPages...
+        for child in node.page.navigation:
+            child_node = SitemapNode(name=child.title, page=child.page, parent=node)
+
+            # if we have an internal NavigationPage we add it's children
+            if child.type == "internal" and len(child.page.navigation) > 0:
+                # recursive call
+                self._add_to_sitemap_node(child_node)
+
+    def print_sitemap(self, language):
+        """Print the sitemap for the given language"""
+
+        root_node = self.sitemaps[language]
+
+        for pre, fill, node in RenderTree(root_node):
+            print("%s%s" % (pre, node.name))
 
     def generate_report(self):
         """Generate the report of what has been parsed"""
