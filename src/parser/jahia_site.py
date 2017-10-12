@@ -499,7 +499,10 @@ class Site:
 
         for language in self.languages:
             # the root node (the homepage)
-            root_node = SitemapNode(name=self.homepage.contents[language].title, page=self.homepage)
+            root_node = SitemapNode(
+                name=self.homepage.contents[language].title,
+                ref=self.homepage.uuid,
+                page=self.homepage)
 
             self._add_to_sitemap_node(root_node, language)
 
@@ -509,13 +512,13 @@ class Site:
         """Add the given SitemapNode. This is a recursive method"""
 
         # for each NavigationPages...
-        for child_navigation in node.page.contents[language].navigation:
-            child_node = SitemapNode(name=child_navigation.title, page=child_navigation.page, parent=node)
+        for navigation_page in node.page.contents[language].navigation:
+            child_node = SitemapNode.from_navigation_page(navigation_page=navigation_page, parent=node)
 
             # if we have an internal NavigationPage we add it's children
-            if child_navigation.type == "internal" \
-                    and language in child_navigation.page.contents \
-                    and len(child_navigation.page.contents[language].navigation) > 0:
+            if navigation_page.type == "internal" \
+                    and language in navigation_page.page.contents \
+                    and len(navigation_page.page.contents[language].navigation) > 0:
 
                 if child_node.page.pid == node.page.pid:
                     raise Exception("Invalid sitemap")
