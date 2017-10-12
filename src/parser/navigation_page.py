@@ -2,10 +2,15 @@
 
 
 class NavigationPage:
-    """A NavigationPage. Can be internal or external"""
+    """
+    A NavigationPage is a reference to another page. It can be internal (another Jahia Page),
+    or external (an URL, e.g. https://www.google.com). It is used to determine which pages
+    are directly below another one, so it's used by the sitemap and the navigation.
+
+    If a Page has 5 children, it will have 5 NavigationPages.
+    """
 
     def __init__(self, parent, type, ref, title):
-
         self.parent = parent
         self.type = type
         self.ref = ref
