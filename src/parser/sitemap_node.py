@@ -10,10 +10,10 @@ class SitemapNode(Node):
     A SitemapNode can reference two types of pages :
 
     1. Internal pages, in which case the "page" property is the Page itself and the
-       "ref" property is the Page's UUID
+       "ref" property is the Page's UUID.
 
     2. External pages, in which case the "page" property is None and the
-       "ref" property is the external URL, e.g. https://www.google.com
+       "ref" property is the external URL, e.g. https://www.google.com.
     """
 
     def __init__(self, name, page, ref, parent=None):

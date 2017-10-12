@@ -1,5 +1,4 @@
 """(c) All rights reserved. ECOLE POLYTECHNIQUE FEDERALE DE LAUSANNE, Switzerland, VPSI, 2017"""
-from parser.navigation_page import NavigationPage
 
 
 class Page:
@@ -7,7 +6,6 @@ class Page:
 
     def __init__(self, site, element):
         # common data for all languages
-        self.element = element
         self.pid = element.getAttribute("jahia:pid")
         self.uuid = element.getAttribute("jcr:uuid")
         self.site = site
