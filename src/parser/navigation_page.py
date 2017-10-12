@@ -4,10 +4,11 @@
 class NavigationPage:
     """
     A NavigationPage is a reference to another page. It can be internal (another Jahia Page),
-    or external (an URL, e.g. https://www.google.com). It is used to determine which pages
+    or external (a URL, e.g. https://www.google.com). It is used to determine which pages
     are directly below another one, so it's used by the sitemap and the navigation.
 
-    If a Page has 5 children, it will have 5 NavigationPages.
+    You will probably not want to use this class directly and instead use a SitemapNode
+    available as site.sitemaps["en"].
     """
 
     def __init__(self, parent, type, ref, title):

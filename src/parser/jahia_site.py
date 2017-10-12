@@ -102,9 +102,6 @@ class Site:
         # build the sitemaps
         self.build_sitemaps()
 
-        # print the sitemaps
-        self.print_sitemaps()
-
         # generate the report
         self.generate_report()
 
@@ -515,11 +512,12 @@ class Site:
         for navigation_page in node.page.contents[language].navigation:
             child_node = SitemapNode.from_navigation_page(navigation_page=navigation_page, parent=node)
 
-            # if we have an internal NavigationPage we add it's children
+            # if we have an internal NavigationPage, we add it's children
             if navigation_page.type == "internal" \
                     and language in navigation_page.page.contents \
                     and len(navigation_page.page.contents[language].navigation) > 0:
 
+                # integrity check
                 if child_node.page.pid == node.page.pid:
                     raise Exception("Invalid sitemap")
 
