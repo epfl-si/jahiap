@@ -1,4 +1,4 @@
-from anytree import Node
+from anytree import Node, RenderTree
 
 
 class SitemapNode(Node):
@@ -9,3 +9,9 @@ class SitemapNode(Node):
         super().__init__(name, parent)
 
         self.page = page
+
+    def print_node(self):
+        """Print the node"""
+
+        for pre, fill, node in RenderTree(self):
+            print("%s%s" % (pre, node.name))

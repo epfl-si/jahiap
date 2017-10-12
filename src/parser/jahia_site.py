@@ -4,7 +4,6 @@ import os
 import logging
 import collections
 
-from anytree import RenderTree
 from bs4 import BeautifulSoup
 from parser.box import Box
 from parser.file import File
@@ -102,6 +101,9 @@ class Site:
 
         # build the sitemaps
         self.build_sitemaps()
+
+        # print the sitemaps
+        self.print_sitemaps()
 
         # generate the report
         self.generate_report()
@@ -515,13 +517,18 @@ class Site:
                 # recursive call
                 self._add_to_sitemap_node(child_node)
 
-    def print_sitemap(self, language):
-        """Print the sitemap for the given language"""
+    def print_sitemaps(self):
+        """Print the sitemaps"""
 
-        root_node = self.sitemaps[language]
+        for language in self.languages:
+            print("")
+            print("Sitemap for %s" % language)
+            print("--------------------------")
+            print("")
 
-        for pre, fill, node in RenderTree(root_node):
-            print("%s%s" % (pre, node.name))
+            node = self.sitemaps[language]
+
+            node.print_node()
 
     def generate_report(self):
         """Generate the report of what has been parsed"""
