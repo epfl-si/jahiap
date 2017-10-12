@@ -2,6 +2,7 @@
 from datetime import datetime
 
 from parser.box import Box
+from parser.navigation_page import NavigationPage
 from settings import JAHIA_DATE_FORMAT
 from parser.sidebar import Sidebar
 import logging
@@ -12,6 +13,7 @@ class PageContent:
     The language specific data of a Page
     """
     def __init__(self, page, language, element):
+        self.element = element
         self.page = page
         self.site = page.site
         self.wp_id = None
@@ -22,22 +24,27 @@ class PageContent:
         self.boxes = []
         self.sidebar = Sidebar()
         self.last_update = ""
+        # a list of NavigationPages
+        self.navigation = []
 
         # last update
-        self.parse_last_update(element)
+        self.parse_last_update()
 
         # sidebar
-        self.parse_sidebar(element)
+        self.parse_sidebar()
 
         # path
-        self.set_path(element)
+        self.set_path()
+
+        # navigation
+        self.parse_navigation()
 
         # add to the site PageContents
         self.site.pages_content_by_path[self.path] = self
 
-    def parse_last_update(self, element):
+    def parse_last_update(self):
         """Parse the last update information"""
-        date = element.getAttribute("jcr:lastModified")
+        date = self.element.getAttribute("jcr:lastModified")
 
         try:
             self.last_update = datetime.strptime(date, JAHIA_DATE_FORMAT)
@@ -46,11 +53,11 @@ class PageContent:
                 "%s - parse - Invalid last update date for page %s : '%s'",
                 self.site.name, self.page.pid, date)
 
-    def parse_sidebar(self, element):
+    def parse_sidebar(self):
         """ Parse sidebar """
 
         # search the sidebar in the page xml content
-        children = element.childNodes
+        children = self.element.childNodes
         for child in children:
             if child.nodeName == "extraList":
                 for extra in child.childNodes:
@@ -76,7 +83,7 @@ class PageContent:
                 # otherwise we continue in the hierarchy
                 parent = parent.parent
 
-    def set_path(self, element):
+    def set_path(self):
         """
         Set the page path
         """
@@ -87,7 +94,7 @@ class PageContent:
             else:
                 self.path = "/index-%s.html" % self.language
         else:
-            vanity_url = element.getAttribute("jahia:urlMappings")
+            vanity_url = self.element.getAttribute("jahia:urlMappings")
             if vanity_url:
                 self.path = vanity_url.split('$$$')[0]
             else:
@@ -97,3 +104,46 @@ class PageContent:
         # FIXME, the prefixing part should be done in exporter
         # add the site root_path at the beginning
         self.path = self.site.root_path + self.path
+
+    def parse_navigation(self):
+        """Parse the navigation"""
+
+        navigation_pages = self.element.getElementsByTagName("navigationPage")
+
+        for navigation_page in navigation_pages:
+            # check if the <navigationPage> belongs to this page
+            if not self.site.belongs_to(element=navigation_page, page=self.page):
+                continue
+
+            for child in navigation_page.childNodes:
+                # internal page declared with <jahia:page>
+                if child.nodeName == "jahia:page":
+                    template = child.getAttribute("jahia:template")
+
+                    # we don't want the sitemap
+                    if not template == "sitemap":
+                        ref = child.getAttribute("jcr:uuid")
+                        title = child.getAttribute("jahia:title")
+
+                        self.add_navigation_page(type="internal", ref=ref, title=title)
+
+                # internal page declared with <jahia:link>
+                elif child.nodeName == "jahia:link":
+                    ref = child.getAttribute("jahia:reference")
+                    title = child.getAttribute("jahia:title")
+
+                    self.add_navigation_page(type="internal", ref=ref, title=title)
+
+                # external page
+                elif child.nodeName == "jahia:url":
+                    ref = child.getAttribute("jahia:value")
+                    title = child.getAttribute("jahia:title")
+
+                    self.add_navigation_page(type="external", ref=ref, title=title)
+
+    def add_navigation_page(self, type, ref, title):
+        """Add a NavigationPage with the given info"""
+
+        navigation_page = NavigationPage(parent=self, type=type, ref=ref, title=title)
+
+        self.navigation.append(navigation_page)

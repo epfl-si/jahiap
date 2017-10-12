@@ -172,6 +172,7 @@ def main_parse(args):
 
         except Exception as err:
             logging.error("%s - parse - Exception: %s", site_name, err)
+            raise err
 
     # return results
     return parsed_sites

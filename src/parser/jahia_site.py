@@ -501,29 +501,30 @@ class Site:
             # the root node (the homepage)
             root_node = SitemapNode(name=self.homepage.contents[language].title, page=self.homepage)
 
-            self._add_to_sitemap_node(root_node)
+            self._add_to_sitemap_node(root_node, language)
 
             self.sitemaps[language] = root_node
 
-    def _add_to_sitemap_node(self, node):
+    def _add_to_sitemap_node(self, node, language):
         """Add the given SitemapNode. This is a recursive method"""
 
         # for each NavigationPages...
-        for child in node.page.navigation:
+        for child in node.page.contents[language].navigation:
             child_node = SitemapNode(name=child.title, page=child.page, parent=node)
 
             # if we have an internal NavigationPage we add it's children
-            if child.type == "internal" and len(child.page.navigation) > 0:
+            if child.type == "internal" and len(child.page.contents[language].navigation) > 0:
                 # recursive call
-                self._add_to_sitemap_node(child_node)
+                self._add_to_sitemap_node(child_node, language)
 
     def print_sitemaps(self):
         """Print the sitemaps"""
 
         for language in self.languages:
             print("")
-            print("Sitemap for %s" % language)
-            print("--------------------------")
+            print("─────────────────────────────────────────────────")
+            print(" Sitemap for %s" % language)
+            print("─────────────────────────────────────────────────")
             print("")
 
             node = self.sitemaps[language]
