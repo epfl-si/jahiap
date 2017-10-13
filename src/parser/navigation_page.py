@@ -3,7 +3,7 @@
 
 class NavigationPage:
     """
-    Jahia uses NavigationPage to define which pages are directly below a given page.
+    Jahia uses NavigationPages to define which pages are directly below a given page.
     A NavigationPage can be internal (another Jahia Page), or external
     (a URL, e.g. https://www.google.com).
 
