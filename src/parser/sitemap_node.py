@@ -3,11 +3,14 @@ from anytree import Node, RenderTree
 
 class SitemapNode(Node):
     """
-    A SitemapNode represents a node of the sitemap. You will
-    probably want to work with the root node which is available
-    as a property of the Site class, e.g. site.sitemaps["en"].
+    A SitemapNode represents a node of the sitemap. The root node
+    (the homepage) is available as a property of the Site class,
+    e.g. site.sitemaps["en"] for the English sitemap. This class
+    is an extension of Node, from the anytree library:
 
-    A SitemapNode can reference two types of pages :
+    https://pypi.python.org/pypi/anytree/1.0.1
+
+    A SitemapNode can reference two types of pages:
 
     1. Internal pages, in which case the "page" property is the Page itself and the
        "ref" property is the Page's UUID.

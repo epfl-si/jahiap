@@ -3,12 +3,13 @@
 
 class NavigationPage:
     """
-    A NavigationPage is a reference to another page. It can be internal (another Jahia Page),
-    or external (a URL, e.g. https://www.google.com). It determines which pages are directly
-    below another one, so it's used by the sitemap and the navigation.
+    Jahia uses NavigationPage to define which pages are directly below a given page.
+    A NavigationPage can be internal (another Jahia Page), or external
+    (a URL, e.g. https://www.google.com).
 
-    You will probably not want to use this class directly, use instead a SitemapNode
-    available as e.g. site.sitemaps["en"] for the English sitemap.
+    NavigationPages are used by Jahia to build the sitemap and the navigation, however
+    you will probably want to use SitemapNode instead, e.g. site.sitemaps["en"] to get
+    the English sitemap as a Node.
     """
 
     def __init__(self, parent, type, ref, title):
