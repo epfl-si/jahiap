@@ -48,9 +48,11 @@ Reconstruire le tout :
 
 1. Faire un "git pull" des repos avec les sources
 cd /home/team/git-repos/jahiap/
+git checkout master
 git pull
 
 cd /home/team/git-repos/template-web-wordpress
+git checkout master
 git pull
 
 cd /home/team/git-repos/template-web-wordpress/master-wp/container-wp-cli
@@ -62,6 +64,7 @@ git checkout master
 git pull 
 
 cd /home/team/git-repos/wp-utils/
+git checkout master
 git pull
 
 
@@ -95,7 +98,9 @@ sudo pip install -r requirements/base.txt
 
 
 8. Exécuter la ligne de commande suivante en adaptant les paramètres si besoin (fichier CSV, nombre de process)
-python src/jahiap.py generate csv-data/10-sites.csv --processes=4
+
+On lance un screen: screen -S qa1generate
+python src/jahiap.py generate csv-data/qa1.csv --processes=10
 
 
 9. Une fois que tout a été déployé, exécuter les scripts suivants pour faire un peu de ménage/config
