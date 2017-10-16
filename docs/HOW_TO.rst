@@ -77,6 +77,7 @@ make push
 3. Lancer l'environnement virtuel (pas trop loin sinon faut marcher pour aller le chercher)
 vjahia
 
+
 4. Lancer un rebuild pour clean la totalité des containers et recréer les helpers
 cd /home/team/git-repos/wp-utils/
 ./rebuild.sh
@@ -87,25 +88,32 @@ sudo service docker restart
 
 5. Faire un CTRL-C à la fin du script quand il affiche "apache2 -D FOREGROUND" ou un truc du style
 
+6. Effacer les images locales pour forcer à les retélécharger depuis dockerHub
+docker image rm epflidevelop/container-wp-volumes
+docker image rm epflidevelop/container-wp-cli
 
-6. (facultatif) Effacer le contenu du dossier "build" qui va être utilisé
-cd /home/team/git-repos/jahiap/build/
-rm -rf *
+7. Récupérer les images mises à jour sur dockerHub
+docker image pull epflidevelop/container-wp-volumes
+docker image pull epflidevelop/container-wp-cli
 
 
-7. Mettre à jour le virtualenv :
+8. (facultatif) Effacer le contenu du dossier "build" qui va être utilisé
+cd /home/team/git-repos/wp-utils/
+./clean-build-folder.sh
+
+
+9. Mettre à jour le virtualenv :
+vjahia
 sudo pip install -r requirements/base.txt
 
 
-8. Exécuter la ligne de commande suivante en adaptant les paramètres si besoin (fichier CSV, nombre de process)
-
+10. Exécuter la ligne de commande suivante en adaptant les paramètres si besoin (fichier CSV, nombre de process)
 On lance un screen: screen -S qa1generate
+vjahia
 python src/jahiap.py generate csv-data/qa1.csv --processes=10
 
 
-9. Une fois que tout a été déployé, exécuter les scripts suivants pour faire un peu de ménage/config
+11. Une fois que tout a été déployé, exécuter les scripts suivants pour faire un peu de ménage/config
 cd /home/team/git-repos/wp-utils
 ./del-volumes-containers.sh
 ./disable-container-auto-restart.sh
-
-
