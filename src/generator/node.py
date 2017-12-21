@@ -7,6 +7,7 @@ from datetime import timedelta
 from jinja2 import Environment, PackageLoader, select_autoescape
 from cookiecutter.main import cookiecutter
 from cookiecutter.exceptions import OutputDirExistsException
+import shutil
 
 from crawler import SiteCrawler
 from parser.jahia_site import Site
@@ -298,6 +299,46 @@ class WordPressNode(Node):
                 logging.error("%s - generate - Could not run site: %s", self.name, err)
         else:
             logging.error("%s - generate - Could not start Apache in %s", self.name, MAX_WORDPRESS_STARTING_TIME)
+
+
+    def run_list_boxes(self, outfile_name):
+        # built up Wordpress URL and composition_path
+        #wp_url = "%s/%s" % (WP_HOST, self.full_name())
+        #   composition_path = os.path.join(self.get_composition_dir(self.tree.args), self.container_name)
+
+        outfile = open(outfile_name, 'a')
+
+        ignored_boxes = ['text', 'faq']
+        # FIXME : do not pass args in Objects
+        self.tree.args['--site-path'] = self.full_name()
+        self.tree.args['--wp-cli'] = self.container_name
+        try:
+            zip_file = SiteCrawler(self.name, self.tree.args).download_site()
+            site_dir = unzip_one(self.tree.args['--output-dir'], self.name, zip_file)
+            site = Site(site_dir, self.name)
+
+            for page in site.pages_by_pid.values():
+
+                #contents = {}
+                #info_page = OrderedDict()
+
+                for lang in page.contents.keys():
+                    #contents[lang] = ""
+
+                    # create the page content
+                    for box in page.contents[lang].boxes:
+                        #contents[lang] += box.content
+                        if box.type not in ignored_boxes:
+                            outfile.write("{};{};{}".format(box.type, box.content, page.url(lang)))
+                        #print(box)
+
+            shutil.rmtree(os.path.join(self.tree.args['--output-dir'], self.name))
+            outfile.close()
+
+        except Exception as err:
+            logging.error("%s - generate - Could not run site: %s", self.name, err)
+
+
 
     def cleanup(self):
         # stop container

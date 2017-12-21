@@ -67,5 +67,11 @@ class Page:
 
                 parent_page = parent_page.parent
 
+    def url(self, lang):
+        if self.level == 0:
+            return self.site.name
+        else:
+            return "{}{}".format(self.site.name, self.contents[lang].path)
+
     def __str__(self):
         return self.pid + " " + self.template

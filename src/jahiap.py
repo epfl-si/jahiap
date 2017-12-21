@@ -15,6 +15,8 @@ Usage:
   jahiap.py docker <site> [--output-dir=<OUTPUT_DIR>] [--number=<NUMBER>] [--debug | --quiet]
   jahiap.py generate <csv_file> [--output-dir=<OUTPUT_DIR>] [--conf-path=<CONF_PATH>]
                                 [--cookie-path=<COOKIE_PATH>] [--processes=<PROCESSES>] [--force] [--debug | --quiet]
+  jahiap.py list_boxes <csv_file> <out_csv_file> [--output-dir=<OUTPUT_DIR>] [--conf-path=<CONF_PATH>]
+                                [--cookie-path=<COOKIE_PATH>] [--debug | --quiet]
   jahiap.py cleanup <csv_file> [--debug | --quiet]
   jahiap.py global_report <site> [--output-dir=<OUTPUT_DIR>] [--number=<NUMBER>] [--use-cache] [--debug | --quiet]
 
@@ -360,6 +362,13 @@ def main_generate(args):
     tree.prepare_run()
     tree.run(processes=int(args["--processes"]))
 
+def main_list_boxes(args):
+
+    args['--force'] = True
+    tree = Tree(args, sites=UtilsGenerator.csv_to_dict(file_path=args['<csv_file>']))
+    tree.prepare_run()
+
+    tree.run_list_boxes(args['<out_csv_file>'])
 
 def main_cleanup(args):
 

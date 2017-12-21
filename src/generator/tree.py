@@ -2,7 +2,7 @@
 import os
 from multiprocessing.pool import Pool
 
-from generator.node import Node, RootNode
+from generator.node import Node, RootNode, WordPressNode
 
 
 class Tree:
@@ -55,6 +55,14 @@ class Tree:
         else:
             with Pool(processes=processes) as pool:
                 pool.map(Tree.run_helper, self.nodes.values())
+
+    def run_list_boxes(self, outfile_name):
+        """
+        Create all docker container for all sites
+        """
+        for node in self.nodes.values():
+            if isinstance(node, WordPressNode):
+                node.run_list_boxes(outfile_name=outfile_name)
 
     def cleanup(self):
         """
