@@ -316,7 +316,7 @@ class WordPressNode(Node):
             zip_file = SiteCrawler(self.name, self.tree.args).download_site()
             site_dir = unzip_one(self.tree.args['--output-dir'], self.name, zip_file)
             site = Site(site_dir, self.name)
-
+            logging.info("Listing boxes for {}...".format(self.name))
             for page in site.pages_by_pid.values():
 
                 #contents = {}
@@ -331,7 +331,7 @@ class WordPressNode(Node):
                         if box.type not in ignored_boxes:
                             outfile.write("{};{};{}".format(box.type, box.content, page.url(lang)))
                         #print(box)
-
+            
             shutil.rmtree(os.path.join(self.tree.args['--output-dir'], self.name))
             outfile.close()
 
