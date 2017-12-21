@@ -329,9 +329,9 @@ class WordPressNode(Node):
                     for box in page.contents[lang].boxes:
                         #contents[lang] += box.content
                         if box.type not in ignored_boxes:
-                            outfile.write("{};{};{}".format(box.type, box.content, page.url(lang)))
+                            outfile.write("{};{};{}\n".format(box.type, box.content, page.url(lang)))
                         #print(box)
-            
+
             shutil.rmtree(os.path.join(self.tree.args['--output-dir'], self.name))
             outfile.close()
 
