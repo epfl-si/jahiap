@@ -130,12 +130,14 @@ def main_unzip(args):
 
 
 def main_parse(args):
+
     # get list of sites to parse according to args
     site_dirs = main_unzip(args)
 
     # to store paths of parsed objects
     parsed_sites = OrderedDict()
 
+    lc = open('sidebar-boxes.csv', 'ab')
     for site_name, site_dir in site_dirs.items():
         try:
             # create subdir in output_dir
@@ -160,6 +162,11 @@ def main_parse(args):
             logging.info("Parsing Jahia xml files from %s...", site_dir)
             site = Site(site_dir, site_name, root_path=root_path)
 
+            for lang in site.homepage.contents.keys():
+                for box in site.homepage.contents[lang].sidebar.boxes:
+                    print("{};{};{}".format(site_name, lang, box.type))
+                    lc.write(("{};{};{}\n".format(site_name, lang, box.type)).encode('utf-8'))
+
             print(site.report)
 
             # always save the parsed data on disk, so we can use the
@@ -175,6 +182,7 @@ def main_parse(args):
         except Exception as err:
             logging.error("%s - parse - Exception: %s", site_name, err)
 
+    lc.close()
     # return results
     return parsed_sites
 
